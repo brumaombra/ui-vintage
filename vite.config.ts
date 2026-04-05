@@ -9,28 +9,28 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 export default defineConfig({
-  plugins: [
-    vue(),
-    tailwindcss(),
-    dts({
-      include: ["src/**/*"],
-      insertTypesEntry: true,
-    }),
-  ],
-  resolve: {
-    alias: {
-      "@": resolve(__dirname, "src"),
+    plugins: [
+        vue(),
+        tailwindcss(),
+        dts({
+            include: ["src/**/*"],
+            insertTypesEntry: true,
+        }),
+    ],
+    resolve: {
+        alias: {
+            "@": resolve(__dirname, "src"),
+        },
     },
-  },
-  build: {
-    lib: {
-      entry: resolve(__dirname, "src/index.ts"),
-      name: "ThemeVintage",
-      formats: ["es"],
-      fileName: () => "index.js",
+    build: {
+        lib: {
+            entry: resolve(__dirname, "src/index.ts"),
+            name: "ThemeVintage",
+            formats: ["es"],
+            fileName: () => "index.js",
+        },
+        rollupOptions: {
+            external: ["vue"],
+        },
     },
-    rollupOptions: {
-      external: ["vue"],
-    },
-  },
-})
+});
