@@ -45,6 +45,10 @@
             "types": "./dist/components/ui/command/index.d.ts",
             "import": "./dist/command.js"
         },
+        "./dashboard-shell": {
+            "types": "./dist/components/dashboard-shell/index.d.ts",
+            "import": "./dist/dashboard-shell.js"
+        },
         "./dialog": {
             "types": "./dist/components/ui/dialog/index.d.ts",
             "import": "./dist/dialog.js"

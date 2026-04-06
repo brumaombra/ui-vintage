@@ -31,5 +31,8 @@ export * from "./components/busy-indicator";
 // Backgrounds
 export * from "./components/background-grid";
 
+// Layouts
+export * from "./components/dashboard-shell";
+
 // Utils
 export { cn } from "./lib/utils";
