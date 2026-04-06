@@ -77,17 +77,12 @@ const handleOpenChange = (open: boolean) => {
 </script>
 
 <template>
-  <AlertDialog :open="Boolean(currentDialog)" @update:open="handleOpenChange">
+  <AlertDialog :open="messageDialogState.isOpen" @update:open="handleOpenChange">
     <AlertDialogContent v-if="currentDialog">
       <div class="px-5 pb-5 pt-5 sm:px-6 sm:pb-4 sm:pt-6">
         <div class="flex flex-col gap-4 sm:flex-row sm:items-start">
-          <div class="mx-auto flex size-12 shrink-0 items-center justify-center rounded border sm:mx-0 sm:size-10" :class="messageIconClasses">
-            <component
-              :is="messageIcon"
-              :stroke-width="1.8"
-              class="size-6"
-              :class="messageGlyphClasses"
-            />
+          <div class="flex size-12 shrink-0 self-center items-center justify-center rounded border sm:size-10 sm:self-start" :class="messageIconClasses">
+            <component :is="messageIcon" :stroke-width="1.8" class="size-6" :class="messageGlyphClasses" />
           </div>
 
           <AlertDialogHeader class="sm:pt-0">
@@ -102,7 +97,7 @@ const handleOpenChange = (open: boolean) => {
       </div>
 
       <AlertDialogFooter class="items-end">
-        <Button variant="outline" class="min-w-24 justify-center" :disabled="messageDialogState.busy" @click="resolveActiveMessageDialog">
+        <Button variant="outline" :disabled="messageDialogState.busy" @click="resolveActiveMessageDialog">
           {{ currentDialog.options.closeText }}
         </Button>
       </AlertDialogFooter>
