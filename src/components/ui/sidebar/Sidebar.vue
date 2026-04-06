@@ -34,7 +34,7 @@ function handleMobileSidebarClick(event: MouseEvent) {
   </div>
 
   <Sheet v-else-if="isMobile" :open="openMobile" v-bind="$attrs" @update:open="setOpenMobile">
-    <SheetContent data-sidebar="sidebar" data-slot="sidebar" data-mobile="true" :side="side" class="bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden" :style="{
+    <SheetContent data-sidebar="sidebar" data-slot="sidebar" data-mobile="true" :side="side" class="border-sidebar-border bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden" :style="{
       '--sidebar-width': SIDEBAR_WIDTH_MOBILE,
     }">
       <SheetHeader class="sr-only">

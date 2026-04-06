@@ -28,5 +28,8 @@ export * from "./components/message-dialog";
 // Indicators
 export * from "./components/busy-indicator";
 
+// Backgrounds
+export * from "./components/background-grid";
+
 // Utils
 export { cn } from "./lib/utils";
