@@ -13,6 +13,86 @@
             "types": "./dist/index.d.ts",
             "import": "./dist/index.js"
         },
+        "./alert": {
+            "types": "./dist/components/ui/alert/index.d.ts",
+            "import": "./dist/alert.js"
+        },
+        "./alert-dialog": {
+            "types": "./dist/components/ui/alert-dialog/index.d.ts",
+            "import": "./dist/alert-dialog.js"
+        },
+        "./busy": {
+            "types": "./dist/components/ui/busy/index.d.ts",
+            "import": "./dist/busy.js"
+        },
+        "./button": {
+            "types": "./dist/components/ui/button/index.d.ts",
+            "import": "./dist/button.js"
+        },
+        "./card": {
+            "types": "./dist/components/ui/card/index.d.ts",
+            "import": "./dist/card.js"
+        },
+        "./command": {
+            "types": "./dist/components/ui/command/index.d.ts",
+            "import": "./dist/command.js"
+        },
+        "./dialog": {
+            "types": "./dist/components/ui/dialog/index.d.ts",
+            "import": "./dist/dialog.js"
+        },
+        "./field": {
+            "types": "./dist/components/ui/field/index.d.ts",
+            "import": "./dist/field.js"
+        },
+        "./input": {
+            "types": "./dist/components/ui/input/index.d.ts",
+            "import": "./dist/input.js"
+        },
+        "./label": {
+            "types": "./dist/components/ui/label/index.d.ts",
+            "import": "./dist/label.js"
+        },
+        "./popover": {
+            "types": "./dist/components/ui/popover/index.d.ts",
+            "import": "./dist/popover.js"
+        },
+        "./select": {
+            "types": "./dist/components/ui/select/index.d.ts",
+            "import": "./dist/select.js"
+        },
+        "./separator": {
+            "types": "./dist/components/ui/separator/index.d.ts",
+            "import": "./dist/separator.js"
+        },
+        "./sheet": {
+            "types": "./dist/components/ui/sheet/index.d.ts",
+            "import": "./dist/sheet.js"
+        },
+        "./sidebar": {
+            "types": "./dist/components/ui/sidebar/index.d.ts",
+            "import": "./dist/sidebar.js"
+        },
+        "./skeleton": {
+            "types": "./dist/components/ui/skeleton/index.d.ts",
+            "import": "./dist/skeleton.js"
+        },
+        "./slider": {
+            "types": "./dist/components/ui/slider/index.d.ts",
+            "import": "./dist/slider.js"
+        },
+        "./switch": {
+            "types": "./dist/components/ui/switch/index.d.ts",
+            "import": "./dist/switch.js"
+        },
+        "./tooltip": {
+            "types": "./dist/components/ui/tooltip/index.d.ts",
+            "import": "./dist/tooltip.js"
+        },
+        "./utils": {
+            "types": "./dist/lib/utils.d.ts",
+            "import": "./dist/utils.js"
+        },
         "./style.css": "./dist/style.css"
     },
     "sideEffects": [

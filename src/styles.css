@@ -2,42 +2,40 @@
 @import "tw-animate-css";
 @custom-variant dark (&:where(.dark, .dark *));
 
-/********************** Global styles **********************/
-
 html {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 }
 
-/* Basic theme */
 :root {
     /*********************** Core custom colors ***********************/
-    --bg-main-light: #f4f6f8;
-    --bg-main-dark: #0f1318;
+
+    --bg-main-light: #f5f5f5;
+    --bg-main-dark: #121212;
     --bg-card-light: #ffffff;
-    --bg-card-dark: #171c23;
-    --bg-surface-light: #f6f8fa;
-    --bg-surface-dark: #1c222b;
-    --bg-selected-light: #edf1f5;
-    --bg-selected-dark: #202733;
+    --bg-card-dark: #1b1b1b;
+    --bg-surface-light: #f7f7f7;
+    --bg-surface-dark: #232323;
+    --bg-selected-light: #ececec;
+    --bg-selected-dark: #2c2c2c;
 
-    --text-primary-light: #1b222d;
-    --text-primary-dark: #eef3f8;
-    --text-secondary-light: #66707d;
-    --text-secondary-dark: #97a2b2;
+    --text-primary-light: #161616;
+    --text-primary-dark: #f5f5f5;
+    --text-secondary-light: #666666;
+    --text-secondary-dark: #a0a0a0;
 
-    --button-primary-light: #f7931a;
-    --button-primary-hover-light: #df8112;
-    --button-primary-dark: #f7a23c;
-    --button-primary-hover-dark: #ffb55b;
+    --button-primary-light: #1f6feb;
+    --button-primary-hover-light: #1757b7;
+    --button-primary-dark: #4c8dff;
+    --button-primary-hover-dark: #7aa8ff;
     --button-primary-foreground-light: #ffffff;
-    --button-primary-foreground-dark: #1b1307;
+    --button-primary-foreground-dark: #07162e;
     --button-secondary-light: #ffffff;
-    --button-secondary-dark: #171c23;
+    --button-secondary-dark: #1b1b1b;
 
-    --border-light: #d8dee7;
-    --border-dark: #313948;
-    --border-hover-light: #a7b0bd;
-    --border-hover-dark: #5d6878;
+    --border-light: #dddddd;
+    --border-dark: #3a3a3a;
+    --border-hover-light: #b5b5b5;
+    --border-hover-dark: #595959;
 
     /*********************** Shadcn UI variables ***********************/
 
@@ -74,79 +72,6 @@ html {
     --sidebar-border: var(--border-light);
     --sidebar-ring: var(--button-primary-light);
 }
-
-/* Bitcoin theme */
-:root[data-crypto-coin='bitcoin'] {
-    --button-primary-light: #f7931a;
-    --button-primary-hover-light: #df8112;
-    --button-primary-dark: #f7931a;
-    --button-primary-hover-dark: #df8112;
-    --button-primary-foreground-light: #ffffff;
-    --button-primary-foreground-dark: #1b1307;
-}
-
-/* Kaspa theme */
-:root[data-crypto-coin='kaspa'] {
-    --button-primary-light: #6fc7ba;
-    --button-primary-hover-light: #5bb7ab;
-    --button-primary-dark: #6fc7ba;
-    --button-primary-hover-dark: #5bb7ab;
-    --button-primary-foreground-light: #ffffff;
-    --button-primary-foreground-dark: #06211f;
-}
-
-body {
-    background: var(--bg-main-light);
-    color: var(--text-primary-light);
-}
-
-.dark body {
-    background: var(--bg-main-dark);
-    color: var(--text-primary-dark);
-}
-
-.page-enter-active,
-.page-leave-active {
-    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
-}
-
-.page-enter-from {
-    opacity: 0;
-    transform: translateY(4px);
-}
-
-.page-leave-to {
-    opacity: 0;
-    transform: translateY(-4px);
-}
-
-::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-}
-
-::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: var(--border-light);
-}
-
-.dark ::-webkit-scrollbar-thumb {
-    background-color: var(--border-dark);
-}
-
-* {
-    scrollbar-width: thin;
-    scrollbar-color: var(--border-light) transparent;
-}
-
-.dark * {
-    scrollbar-color: var(--border-dark) transparent;
-}
-
-/*---break---*/
 
 @theme inline {
     --radius-sm: calc(var(--radius) - 4px);
@@ -186,8 +111,6 @@ body {
     --color-sidebar-ring: var(--sidebar-ring);
 }
 
-/*---break---*/
-
 .dark {
     --background: var(--bg-main-dark);
     --foreground: var(--text-primary-dark);
@@ -221,8 +144,6 @@ body {
     --sidebar-border: var(--border-dark);
     --sidebar-ring: var(--button-primary-dark);
 }
-
-/*---break---*/
 
 @layer base {
     * {
