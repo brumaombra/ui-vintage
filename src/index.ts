@@ -21,5 +21,9 @@ export * from "./components/ui/slider";
 export * from "./components/ui/switch";
 export * from "./components/ui/tooltip";
 
+// Dialogs
+export * from "./components/dialogs/confirm-dialog";
+export * from "./components/dialogs/message-dialog";
+
 // Utils
 export { cn } from "./lib/utils";

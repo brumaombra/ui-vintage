@@ -41,6 +41,14 @@
             "types": "./dist/components/ui/dialog/index.d.ts",
             "import": "./dist/dialog.js"
         },
+        "./confirm-dialog": {
+            "types": "./dist/components/dialogs/confirm-dialog/index.d.ts",
+            "import": "./dist/confirm-dialog.js"
+        },
+        "./message-dialog": {
+            "types": "./dist/components/dialogs/message-dialog/index.d.ts",
+            "import": "./dist/message-dialog.js"
+        },
         "./field": {
             "types": "./dist/components/ui/field/index.d.ts",
             "import": "./dist/field.js"

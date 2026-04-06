@@ -1,0 +1,111 @@
+<script setup lang="ts">
+import { computed } from "vue"
+import { Check, CircleAlert, Info } from "lucide-vue-next"
+import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog"
+import { Button } from "@/components/ui/button"
+import {
+  closeMessageDialog,
+  messageDialogState,
+  resolveActiveMessageDialog,
+} from "./message-dialog-state"
+
+const currentDialog = computed(() => messageDialogState.current)
+
+const messageIcon = computed(() => {
+  const current = currentDialog.value
+
+  if (!current) {
+    return Info
+  }
+
+  if (current.options.icon) {
+    return current.options.icon
+  }
+
+  if (current.options.type === "Error") {
+    return CircleAlert
+  }
+
+  if (current.options.type === "Success") {
+    return Check
+  }
+
+  return Info
+})
+
+const messageIconClasses = computed(() => {
+  const current = currentDialog.value
+
+  if (!current) {
+    return "border-[var(--border)] bg-[var(--bg-surface-light)] dark:bg-[var(--bg-surface-dark)]"
+  }
+
+  if (current.options.type === "Error") {
+    return "border-red-200 bg-red-50 dark:border-red-900/50 dark:bg-red-950/30"
+  }
+
+  if (current.options.type === "Success") {
+    return "border-green-200 bg-green-50 dark:border-green-900/50 dark:bg-green-950/30"
+  }
+
+  return "border-[var(--border)] bg-[var(--bg-surface-light)] dark:bg-[var(--bg-surface-dark)]"
+})
+
+const messageGlyphClasses = computed(() => {
+  const current = currentDialog.value
+
+  if (!current) {
+    return "text-blue-600"
+  }
+
+  if (current.options.type === "Error") {
+    return "text-red-600"
+  }
+
+  if (current.options.type === "Success") {
+    return "text-green-600"
+  }
+
+  return "text-blue-600"
+})
+
+const handleOpenChange = (open: boolean) => {
+  if (!open) {
+    closeMessageDialog()
+  }
+}
+</script>
+
+<template>
+  <AlertDialog :open="Boolean(currentDialog)" @update:open="handleOpenChange">
+    <AlertDialogContent v-if="currentDialog">
+      <div class="px-5 pb-5 pt-5 sm:px-6 sm:pb-4 sm:pt-6">
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-start">
+          <div class="mx-auto flex size-12 shrink-0 items-center justify-center rounded border sm:mx-0 sm:size-10" :class="messageIconClasses">
+            <component
+              :is="messageIcon"
+              :stroke-width="1.8"
+              class="size-6"
+              :class="messageGlyphClasses"
+            />
+          </div>
+
+          <AlertDialogHeader class="sm:pt-0">
+            <AlertDialogTitle>
+              {{ currentDialog.options.title }}
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              {{ currentDialog.options.message }}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+        </div>
+      </div>
+
+      <AlertDialogFooter class="items-end">
+        <Button variant="outline" class="min-w-24 justify-center" :disabled="messageDialogState.busy" @click="resolveActiveMessageDialog">
+          {{ currentDialog.options.closeText }}
+        </Button>
+      </AlertDialogFooter>
+    </AlertDialogContent>
+  </AlertDialog>
+</template>
