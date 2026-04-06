@@ -25,6 +25,10 @@
             "types": "./dist/components/ui/busy/index.d.ts",
             "import": "./dist/busy.js"
         },
+        "./busy-indicator": {
+            "types": "./dist/components/busy-indicator/index.d.ts",
+            "import": "./dist/busy-indicator.js"
+        },
         "./button": {
             "types": "./dist/components/ui/button/index.d.ts",
             "import": "./dist/button.js"
@@ -42,11 +46,11 @@
             "import": "./dist/dialog.js"
         },
         "./confirm-dialog": {
-            "types": "./dist/components/dialogs/confirm-dialog/index.d.ts",
+            "types": "./dist/components/confirm-dialog/index.d.ts",
             "import": "./dist/confirm-dialog.js"
         },
         "./message-dialog": {
-            "types": "./dist/components/dialogs/message-dialog/index.d.ts",
+            "types": "./dist/components/message-dialog/index.d.ts",
             "import": "./dist/message-dialog.js"
         },
         "./field": {

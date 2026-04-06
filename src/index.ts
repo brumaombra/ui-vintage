@@ -22,8 +22,11 @@ export * from "./components/ui/switch";
 export * from "./components/ui/tooltip";
 
 // Dialogs
-export * from "./components/dialogs/confirm-dialog";
-export * from "./components/dialogs/message-dialog";
+export * from "./components/confirm-dialog";
+export * from "./components/message-dialog";
+
+// Indicators
+export * from "./components/busy-indicator";
 
 // Utils
 export { cn } from "./lib/utils";

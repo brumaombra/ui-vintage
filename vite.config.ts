@@ -9,7 +9,6 @@ import dts from "vite-plugin-dts";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const componentsDir = resolve(__dirname, "src/components");
-const dialogsDir = resolve(__dirname, "src/components/dialogs");
 const componentsUiDir = resolve(__dirname, "src/components/ui");
 
 // Read the directory entries and filter for directories that contain an index.ts file
@@ -25,11 +24,8 @@ function getLibraryEntries() {
     // Get entries for top-level components
     const topLevelComponentEntries = Object.fromEntries(
         Object.entries(getDirectoryEntries(componentsDir))
-            .filter(([entryName]) => entryName !== "ui" && entryName !== "dialogs")
+            .filter(([entryName]) => entryName !== "ui")
     );
-
-    // Get entries for nested dialog components
-    const dialogComponentEntries = getDirectoryEntries(dialogsDir);
 
     // Get entries for UI components
     const uiComponentEntries = getDirectoryEntries(componentsUiDir);
@@ -38,7 +34,6 @@ function getLibraryEntries() {
     return {
         index: resolve(__dirname, "src/index.ts"),
         ...topLevelComponentEntries,
-        ...dialogComponentEntries,
         ...uiComponentEntries,
         utils: resolve(__dirname, "src/lib/utils.ts")
     };
