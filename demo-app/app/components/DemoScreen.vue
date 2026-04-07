@@ -23,8 +23,12 @@ import {
     CardTitle,
     ConfirmDialog,
     DashboardShell,
+    Field,
+    FieldContent,
+    FieldDescription,
+    FieldGroup,
+    FieldLabel,
     Input,
-    Label,
     MessageDialog,
     Popover,
     PopoverContent,
@@ -189,50 +193,56 @@ const handleInfoDemo = async () => {
                             Small form controls for spacing, borders, and typography checks.
                         </CardDescription>
                     </CardHeader>
-                    <CardContent class="space-y-5">
-                        <div class="space-y-2">
-                            <Label for="demo-name">Display name</Label>
-                            <Input id="demo-name" v-model="name" placeholder="Enter a display name" />
-                        </div>
+                    <CardContent>
+                        <FieldGroup>
+                            <Field>
+                                <FieldLabel>Display name</FieldLabel>
+                                <FieldContent>
+                                    <Input id="demo-name" v-model="name" placeholder="Enter a display name" />
+                                </FieldContent>
+                            </Field>
 
-                        <div class="space-y-2">
-                            <Label>Network</Label>
-                            <Select v-model="network">
-                                <SelectTrigger class="w-full">
-                                    <SelectValue placeholder="Choose a network" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="bitcoin">
-                                        <SelectItemText>Bitcoin</SelectItemText>
-                                    </SelectItem>
-                                    <SelectItem value="kaspa">
-                                        <SelectItemText>Kaspa</SelectItemText>
-                                    </SelectItem>
-                                    <SelectItem value="litecoin">
-                                        <SelectItemText>Litecoin</SelectItemText>
-                                    </SelectItem>
-                                </SelectContent>
-                            </Select>
-                        </div>
+                            <Field>
+                                <FieldLabel>Network</FieldLabel>
+                                <FieldContent>
+                                    <Select v-model="network">
+                                        <SelectTrigger class="w-full">
+                                            <SelectValue placeholder="Choose a network" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            <SelectItem value="bitcoin">
+                                                <SelectItemText>Bitcoin</SelectItemText>
+                                            </SelectItem>
+                                            <SelectItem value="kaspa">
+                                                <SelectItemText>Kaspa</SelectItemText>
+                                            </SelectItem>
+                                            <SelectItem value="litecoin">
+                                                <SelectItemText>Litecoin</SelectItemText>
+                                            </SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                </FieldContent>
+                            </Field>
 
-                        <div class="flex items-center justify-between gap-4 rounded border border-border bg-card px-4 py-3">
-                            <div>
-                                <div class="text-sm font-medium">Enable alerts</div>
-                                <div class="text-xs text-muted-foreground">Preview switch track and thumb styling.</div>
-                            </div>
-                            <Switch v-model:model-value="alertsEnabled" />
-                        </div>
-
-                        <div class="space-y-3 rounded border border-border bg-card px-4 py-4">
-                            <div class="flex items-center justify-between gap-3">
+                            <div class="flex items-center justify-between gap-4 rounded border border-border bg-card px-4 py-3">
                                 <div>
-                                    <div class="text-sm font-medium">Confidence</div>
-                                    <div class="text-xs text-muted-foreground">Current value: {{ confidence[0] }}%</div>
+                                    <div class="text-sm font-medium">Enable alerts</div>
+                                    <div class="text-xs text-muted-foreground">Preview switch track and thumb styling.</div>
                                 </div>
-                                <span class="rounded border border-border bg-background px-2 py-1 text-xs font-medium">{{ confidence[0] }}%</span>
+                                <Switch v-model:model-value="alertsEnabled" />
                             </div>
-                            <Slider v-model:model-value="confidence" :max="100" :step="1" />
-                        </div>
+
+                            <div class="space-y-3 rounded border border-border bg-card px-4 py-4">
+                                <div class="flex items-center justify-between gap-3">
+                                    <div>
+                                        <div class="text-sm font-medium">Confidence</div>
+                                        <div class="text-xs text-muted-foreground">Current value: {{ confidence[0] }}%</div>
+                                    </div>
+                                    <span class="rounded border border-border bg-background px-2 py-1 text-xs font-medium">{{ confidence[0] }}%</span>
+                                </div>
+                                <Slider v-model:model-value="confidence" :max="100" :step="1" />
+                            </div>
+                        </FieldGroup>
                     </CardContent>
                 </Card>
 
@@ -263,10 +273,10 @@ const handleInfoDemo = async () => {
                         </CardDescription>
                     </CardHeader>
                     <CardContent class="space-y-3">
-                        <Skeleton class="h-5 w-32 rounded-md" />
-                        <Skeleton class="h-4 w-full rounded-md" />
-                        <Skeleton class="h-4 w-5/6 rounded-md" />
-                        <Skeleton class="h-28 w-full rounded-xl" />
+                        <Skeleton class="h-5 w-32" />
+                        <Skeleton class="h-4 w-full" />
+                        <Skeleton class="h-4 w-5/6" />
+                        <Skeleton class="h-28 w-full" />
                     </CardContent>
                 </Card>
 

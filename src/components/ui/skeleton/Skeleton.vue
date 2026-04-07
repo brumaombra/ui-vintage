@@ -10,5 +10,5 @@ const props = defineProps<SkeletonProps>()
 </script>
 
 <template>
-  <div data-slot="skeleton" :class="cn('animate-pulse rounded-md bg-primary/10', props.class)" />
+  <div data-slot="skeleton" :class="cn(props.class, 'animate-pulse rounded border border-(--border-light) bg-(--bg-surface-light) transition-colors duration-300 ease-in-out dark:border-(--border-dark) dark:bg-(--bg-surface-dark)',)" />
 </template>

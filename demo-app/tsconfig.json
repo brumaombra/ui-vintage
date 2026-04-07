@@ -4,6 +4,12 @@
         "paths": {
             "theme-vintage": [
                 "../src/index.ts"
+            ],
+            "theme-vintage/style.css": [
+                "../src/styles.css"
+            ],
+            "@/*": [
+                "../src/*"
             ]
         }
     }
