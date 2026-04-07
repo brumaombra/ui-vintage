@@ -42,7 +42,7 @@ import {
     SelectValue,
     Skeleton,
     Slider,
-    Switch,
+    SwitchFormComponent,
     Tooltip,
     TooltipContent,
     TooltipProvider,
@@ -232,13 +232,12 @@ const handleInfoDemo = async () => {
                                 </FieldContent>
                             </Field>
 
-                            <div class="flex items-center justify-between gap-4 rounded border border-border bg-card px-4 py-3">
-                                <div>
-                                    <div class="text-sm font-medium">Enable alerts</div>
-                                    <div class="text-xs text-muted-foreground">Preview switch track and thumb styling.</div>
-                                </div>
-                                <Switch v-model:model-value="alertsEnabled" />
-                            </div>
+                            <SwitchFormComponent
+                                id="demo-alerts-enabled"
+                                v-model="alertsEnabled"
+                                label="Enable alerts"
+                                description="Preview switch track and thumb styling."
+                            />
 
                             <div class="space-y-3 rounded border border-border bg-card px-4 py-4">
                                 <div class="flex items-center justify-between gap-3">

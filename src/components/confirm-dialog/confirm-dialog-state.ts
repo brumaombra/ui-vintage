@@ -11,14 +11,18 @@ export interface ShowConfirmDialogOptions {
     confirmButtonType?: DialogButtonVariant
     cancelButtonType?: DialogButtonVariant
     icon?: Component | null
+    confirmButtonIcon?: Component | null
+    cancelButtonIcon?: Component | null
     onConfirm?: (() => void | Promise<void>) | null
     onCancel?: (() => void | Promise<void>) | null
 }
 
 interface ConfirmDialogRequest {
     id: number
-    options: Required<Omit<ShowConfirmDialogOptions, "icon" | "onConfirm" | "onCancel">> & {
+    options: Required<Omit<ShowConfirmDialogOptions, "icon" | "confirmButtonIcon" | "cancelButtonIcon" | "onConfirm" | "onCancel">> & {
         icon: Component | null
+        confirmButtonIcon: Component | null
+        cancelButtonIcon: Component | null
         onConfirm: (() => void | Promise<void>) | null
         onCancel: (() => void | Promise<void>) | null
     }
@@ -178,6 +182,8 @@ export const showConfirmDialog = (options: ShowConfirmDialogOptions) => {
                 confirmButtonType: options.confirmButtonType ?? "default",
                 cancelButtonType: options.cancelButtonType ?? "outline",
                 icon: markIcon(options.icon),
+                confirmButtonIcon: markIcon(options.confirmButtonIcon),
+                cancelButtonIcon: markIcon(options.cancelButtonIcon),
                 onConfirm: options.onConfirm ?? null,
                 onCancel: options.onCancel ?? null,
             },

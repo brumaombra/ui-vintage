@@ -43,9 +43,11 @@ const handleOpenChange = (open: boolean) => {
 
             <AlertDialogFooter>
                 <Button :variant="currentDialog.options.cancelButtonType" :disabled="confirmDialogState.busy" @click="cancelActiveConfirmDialog">
+                    <component :is="currentDialog.options.cancelButtonIcon" v-if="currentDialog.options.cancelButtonIcon" class="size-4" />
                     {{ currentDialog.options.cancelText }}
                 </Button>
                 <Button :variant="currentDialog.options.confirmButtonType" :disabled="confirmDialogState.busy" @click="confirmActiveDialog">
+                    <component :is="currentDialog.options.confirmButtonIcon" v-if="currentDialog.options.confirmButtonIcon" class="size-4" />
                     {{ currentDialog.options.confirmText }}
                 </Button>
             </AlertDialogFooter>

@@ -35,5 +35,8 @@ export * from "./components/background-grid";
 // Layouts
 export * from "./components/dashboard-shell";
 
+// Form helpers
+export * from "./components/switch-form-component";
+
 // Utils
 export { cn } from "./lib/utils";

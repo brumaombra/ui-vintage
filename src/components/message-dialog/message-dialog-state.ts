@@ -9,12 +9,14 @@ export interface ShowMessageDialogOptions {
   message: string
   closeText?: string
   icon?: Component | null
+  closeButtonIcon?: Component | null
 }
 
 interface MessageDialogRequest {
   id: number
-  options: Required<Omit<ShowMessageDialogOptions, "icon">> & {
+  options: Required<Omit<ShowMessageDialogOptions, "icon" | "closeButtonIcon">> & {
     icon: Component | null
+    closeButtonIcon: Component | null
   }
   resolve: () => void
 }
@@ -147,6 +149,7 @@ export const showMessageDialog = (options: ShowMessageDialogOptions) => {
         message: options.message,
         closeText: options.closeText ?? "Close",
         icon: markIcon(options.icon),
+        closeButtonIcon: markIcon(options.closeButtonIcon),
       },
       resolve,
     })

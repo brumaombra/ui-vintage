@@ -109,6 +109,10 @@
             "types": "./dist/components/ui/switch/index.d.ts",
             "import": "./dist/switch.js"
         },
+        "./switch-form-component": {
+            "types": "./dist/components/switch-form-component/index.d.ts",
+            "import": "./dist/switch-form-component.js"
+        },
         "./tooltip": {
             "types": "./dist/components/ui/tooltip/index.d.ts",
             "import": "./dist/tooltip.js"
