@@ -41,7 +41,7 @@ import {
     SelectTrigger,
     SelectValue,
     Skeleton,
-    Slider,
+    SliderFormComponent,
     SwitchFormComponent,
     Tooltip,
     TooltipContent,
@@ -67,7 +67,7 @@ const sidebarSections = [
 const name = ref('Satoshi Nakamoto');
 const network = ref('bitcoin');
 const alertsEnabled = ref(true);
-const confidence = ref([72]);
+const confidence = ref(72);
 
 const handleConfirmDemo = async () => {
     const confirmed = await showConfirmDialog({
@@ -239,16 +239,15 @@ const handleInfoDemo = async () => {
                                 description="Preview switch track and thumb styling."
                             />
 
-                            <div class="space-y-3 rounded border border-border bg-card px-4 py-4">
-                                <div class="flex items-center justify-between gap-3">
-                                    <div>
-                                        <div class="text-sm font-medium">Confidence</div>
-                                        <div class="text-xs text-muted-foreground">Current value: {{ confidence[0] }}%</div>
-                                    </div>
-                                    <span class="rounded border border-border bg-background px-2 py-1 text-xs font-medium">{{ confidence[0] }}%</span>
-                                </div>
-                                <Slider v-model:model-value="confidence" :max="100" :step="1" />
-                            </div>
+                            <SliderFormComponent
+                                id="demo-confidence"
+                                v-model="confidence"
+                                label="Confidence"
+                                :description="`Current value: ${confidence}%`"
+                                :max="100"
+                                :step="1"
+                                :value-text="`${confidence}%`"
+                            />
                         </FieldGroup>
                     </CardContent>
                 </Card>

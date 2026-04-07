@@ -37,6 +37,7 @@ export * from "./components/dashboard-shell";
 
 // Form helpers
 export * from "./components/switch-form-component";
+export * from "./components/slider-form-component";
 
 // Utils
 export { cn } from "./lib/utils";

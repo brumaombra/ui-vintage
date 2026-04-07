@@ -105,6 +105,10 @@
             "types": "./dist/components/ui/slider/index.d.ts",
             "import": "./dist/slider.js"
         },
+        "./slider-form-component": {
+            "types": "./dist/components/slider-form-component/index.d.ts",
+            "import": "./dist/slider-form-component.js"
+        },
         "./switch": {
             "types": "./dist/components/ui/switch/index.d.ts",
             "import": "./dist/switch.js"
