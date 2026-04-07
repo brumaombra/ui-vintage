@@ -7,6 +7,7 @@ export * from "./components/ui/busy";
 export * from "./components/ui/button";
 export * from "./components/ui/card";
 export * from "./components/ui/command";
+export * from "./components/ui/date-picker";
 export * from "./components/ui/dialog";
 export * from "./components/ui/field";
 export * from "./components/ui/input";

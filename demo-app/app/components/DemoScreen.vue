@@ -23,6 +23,7 @@ import {
     CardTitle,
     ConfirmDialog,
     DashboardShell,
+    DatePicker,
     Field,
     FieldContent,
     FieldDescription,
@@ -221,6 +222,13 @@ const handleInfoDemo = async () => {
                                             </SelectItem>
                                         </SelectContent>
                                     </Select>
+                                </FieldContent>
+                            </Field>
+
+                            <Field>
+                                <FieldLabel>Date</FieldLabel>
+                                <FieldContent>
+                                    <DatePicker class="w-full" />
                                 </FieldContent>
                             </Field>
 
