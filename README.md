@@ -16,6 +16,23 @@ npm install
 npm run build
 ```
 
+## Local Showcase
+
+The repository includes a minimal Nuxt demo app in `demo-app/` that hosts a local showcase page built from the library components.
+
+```bash
+npm install
+npm --prefix demo-app install
+npm run demo:dev
+```
+
+Other useful commands:
+
+```bash
+npm run demo:build
+npm run demo:preview
+```
+
 ## Usage
 
 ```ts
