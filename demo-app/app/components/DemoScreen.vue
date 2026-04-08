@@ -26,7 +26,6 @@ import {
     DatePicker,
     Field,
     FieldContent,
-    FieldDescription,
     FieldGroup,
     FieldLabel,
     Input,
@@ -232,22 +231,9 @@ const handleInfoDemo = async () => {
                                 </FieldContent>
                             </Field>
 
-                            <SwitchFormComponent
-                                id="demo-alerts-enabled"
-                                v-model="alertsEnabled"
-                                label="Enable alerts"
-                                description="Preview switch track and thumb styling."
-                            />
+                            <SwitchFormComponent id="demo-alerts-enabled" v-model="alertsEnabled" label="Enable alerts" description="Preview switch track and thumb styling." />
 
-                            <SliderFormComponent
-                                id="demo-confidence"
-                                v-model="confidence"
-                                label="Confidence"
-                                :description="`Current value: ${confidence}%`"
-                                :max="100"
-                                :step="1"
-                                :value-text="`${confidence}%`"
-                            />
+                            <SliderFormComponent id="demo-confidence" v-model="confidence" label="Confidence" :description="`Current value: ${confidence}%`" :max="100" :step="1" :value-text="`${confidence}%`" />
                         </FieldGroup>
                     </CardContent>
                 </Card>
