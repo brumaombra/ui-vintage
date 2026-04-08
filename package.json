@@ -1,6 +1,6 @@
 {
     "name": "@brumaombra/ui-vintage",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "Vue 3 component library with shadcn-style primitives, app shells, dialogs, and shared theme tokens.",
     "private": false,
     "author": "Mauro Brambilla",
