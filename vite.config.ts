@@ -19,7 +19,7 @@ const getDirectoryEntries = (baseDir: string) => Object.fromEntries(
         .filter(([, entryPath]) => existsSync(entryPath))
 );
 
-// Dynamically generate library entries for each exported component
+// Dynamically generate library entries for each dedicated component entrypoint
 function getLibraryEntries() {
     // Get entries for top-level components
     const topLevelComponentEntries = Object.fromEntries(
@@ -30,9 +30,8 @@ function getLibraryEntries() {
     // Get entries for UI components
     const uiComponentEntries = getDirectoryEntries(componentsUiDir);
 
-    // Add the main index.ts and utils entry
+    // Add dedicated component entries plus the shared utils entry
     return {
-        index: resolve(__dirname, "src/index.ts"),
         ...topLevelComponentEntries,
         ...uiComponentEntries,
         utils: resolve(__dirname, "src/lib/utils.ts")
@@ -45,8 +44,7 @@ export default defineConfig({
         vue(),
         tailwindcss(),
         dts({
-            include: ["src/**/*"],
-            insertTypesEntry: true
+            include: ["src/**/*"]
         }),
     ],
     resolve: {

@@ -14,7 +14,7 @@ Keep the `name` field in `package.json` aligned with that scoped package name.
 
 ```bash
 npm pack --dry-run
-npm version patch
+npm version minor
 git push --follow-tags
 ```
 

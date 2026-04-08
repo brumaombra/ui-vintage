@@ -9,47 +9,22 @@ import {
     SlidersHorizontal,
     Sparkles,
 } from 'lucide-vue-next';
-import {
-    Alert,
-    AlertDescription,
-    AlertTitle,
-    BusyIndicator,
-    Button,
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-    ConfirmDialog,
-    DashboardShell,
-    DatePicker,
-    Field,
-    FieldContent,
-    FieldGroup,
-    FieldLabel,
-    Input,
-    MessageDialog,
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectItemText,
-    SelectTrigger,
-    SelectValue,
-    Skeleton,
-    SliderFormComponent,
-    SwitchFormComponent,
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-    setBusy,
-    showConfirmDialog,
-    showMessageDialog,
-} from '@brumaombra/ui-vintage';
+import { Alert, AlertDescription, AlertTitle } from '@brumaombra/ui-vintage/alert';
+import { BusyIndicator, setBusy } from '@brumaombra/ui-vintage/busy-indicator';
+import { Button } from '@brumaombra/ui-vintage/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@brumaombra/ui-vintage/card';
+import { ConfirmDialog, showConfirmDialog } from '@brumaombra/ui-vintage/confirm-dialog';
+import { DashboardShell } from '@brumaombra/ui-vintage/dashboard-shell';
+import { DatePicker } from '@brumaombra/ui-vintage/date-picker';
+import { Field, FieldContent, FieldGroup, FieldLabel } from '@brumaombra/ui-vintage/field';
+import { Input } from '@brumaombra/ui-vintage/input';
+import { MessageDialog, showMessageDialog } from '@brumaombra/ui-vintage/message-dialog';
+import { Popover, PopoverContent, PopoverTrigger } from '@brumaombra/ui-vintage/popover';
+import { Select, SelectContent, SelectItem, SelectItemText, SelectTrigger, SelectValue } from '@brumaombra/ui-vintage/select';
+import { Skeleton } from '@brumaombra/ui-vintage/skeleton';
+import { SliderFormComponent } from '@brumaombra/ui-vintage/slider-form-component';
+import { SwitchFormComponent } from '@brumaombra/ui-vintage/switch-form-component';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@brumaombra/ui-vintage/tooltip';
 
 const sidebarSections = [
     {
