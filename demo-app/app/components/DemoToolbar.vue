@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, watch } from 'vue';
 import { MoonStar, SunMedium } from 'lucide-vue-next';
-import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Select, SelectContent, SelectItem, SelectItemText, SelectTrigger, SelectValue, Switch } from 'theme-vintage';
+import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Select, SelectContent, SelectItem, SelectItemText, SelectTrigger, SelectValue, Switch } from 'ui-vintage';
 
 const isDark = useState('demo-dark-mode', () => false);
 const cryptoCoin = useState('demo-crypto-coin', () => 'bitcoin');

@@ -2,10 +2,10 @@
     "extends": "./.nuxt/tsconfig.json",
     "compilerOptions": {
         "paths": {
-            "theme-vintage": [
+            "ui-vintage": [
                 "../src/index.ts"
             ],
-            "theme-vintage/style.css": [
+            "ui-vintage/style.css": [
                 "../src/styles.css"
             ],
             "@/*": [

@@ -41,7 +41,7 @@ const DIALOG_CLOSE_DURATION_MS = 300
 let closeTimer: ReturnType<typeof setTimeout> | null = null
 let confirmDialogMountPromise: Promise<void> | null = null
 
-const CONFIRM_DIALOG_ROOT_ID = "theme-vintage-confirm-dialog-root"
+const CONFIRM_DIALOG_ROOT_ID = "ui-vintage-confirm-dialog-root"
 
 export const confirmDialogState: ConfirmDialogState = reactive({
     current: null,

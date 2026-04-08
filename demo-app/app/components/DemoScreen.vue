@@ -49,7 +49,7 @@ import {
     setBusy,
     showConfirmDialog,
     showMessageDialog,
-} from 'theme-vintage';
+} from 'ui-vintage';
 
 const sidebarSections = [
     {

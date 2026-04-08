@@ -14,7 +14,7 @@ export default defineNuxtConfig({
 
     app: {
         head: {
-            title: 'Theme Vintage Demo'
+            title: 'UI Vintage Demo'
         }
     },
 
@@ -24,10 +24,10 @@ export default defineNuxtConfig({
         ],
         resolve: {
             alias: [{
-                find: /^theme-vintage\/style\.css$/,
+                find: /^ui-vintage\/style\.css$/,
                 replacement: resolve(librarySrcDir, 'styles.css')
             }, {
-                find: /^theme-vintage$/,
+                find: /^ui-vintage$/,
                 replacement: resolve(librarySrcDir, 'index.ts')
             }, {
                 find: /^@\//,
@@ -42,12 +42,19 @@ export default defineNuxtConfig({
         optimizeDeps: {
             include: [
                 'lucide-vue-next',
+                'clsx',
+                'tailwind-merge',
+                'class-variance-authority',
+                'reka-ui',
+                '@vueuse/core',
+                '@internationalized/date',
+                'reka-ui/date'
             ]
         }
     },
 
     css: [
-        'theme-vintage/style.css',
+        'ui-vintage/style.css',
         '~/assets/main.css'
     ],
 

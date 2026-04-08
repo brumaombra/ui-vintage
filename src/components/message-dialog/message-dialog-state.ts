@@ -33,7 +33,7 @@ const DIALOG_CLOSE_DURATION_MS = 300
 let closeTimer: ReturnType<typeof setTimeout> | null = null
 let messageDialogMountPromise: Promise<void> | null = null
 
-const MESSAGE_DIALOG_ROOT_ID = "theme-vintage-message-dialog-root"
+const MESSAGE_DIALOG_ROOT_ID = "ui-vintage-message-dialog-root"
 
 export const messageDialogState: MessageDialogState = reactive({
   current: null,

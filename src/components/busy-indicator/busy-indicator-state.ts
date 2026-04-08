@@ -14,7 +14,7 @@ interface BusyIndicatorState {
   overlayClass: HTMLAttributes["class"]
 }
 
-const BUSY_INDICATOR_ROOT_ID = "theme-vintage-busy-indicator-root"
+const BUSY_INDICATOR_ROOT_ID = "ui-vintage-busy-indicator-root"
 
 let busyIndicatorMountPromise: Promise<void> | null = null
 
