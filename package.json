@@ -1,8 +1,33 @@
 {
-    "name": "ui-vintage",
+    "name": "@brumaombra/ui-vintage",
     "version": "0.1.0",
+    "description": "Vue 3 component library with shadcn-style primitives, app shells, dialogs, and shared theme tokens.",
     "private": false,
+    "author": "Mauro Brambilla",
+    "license": "MIT",
+    "homepage": "https://github.com/brumaombra/ui-vintage#readme",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/brumaombra/ui-vintage.git"
+    },
+    "bugs": {
+        "url": "https://github.com/brumaombra/ui-vintage/issues"
+    },
+    "keywords": [
+        "vue",
+        "vue3",
+        "components",
+        "component-library",
+        "vite",
+        "typescript",
+        "shadcn-vue",
+        "nuxt",
+        "ui"
+    ],
     "type": "module",
+    "publishConfig": {
+        "access": "public"
+    },
     "files": [
         "dist"
     ],

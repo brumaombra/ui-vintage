@@ -2,10 +2,10 @@
     "extends": "./.nuxt/tsconfig.json",
     "compilerOptions": {
         "paths": {
-            "ui-vintage": [
+            "@brumaombra/ui-vintage": [
                 "../src/index.ts"
             ],
-            "ui-vintage/style.css": [
+            "@brumaombra/ui-vintage/style.css": [
                 "../src/styles.css"
             ],
             "@/*": [

@@ -24,10 +24,10 @@ export default defineNuxtConfig({
         ],
         resolve: {
             alias: [{
-                find: /^ui-vintage\/style\.css$/,
+                find: /^@brumaombra\/ui-vintage\/style\.css$/,
                 replacement: resolve(librarySrcDir, 'styles.css')
             }, {
-                find: /^ui-vintage$/,
+                find: /^@brumaombra\/ui-vintage$/,
                 replacement: resolve(librarySrcDir, 'index.ts')
             }, {
                 find: /^@\//,
@@ -54,7 +54,7 @@ export default defineNuxtConfig({
     },
 
     css: [
-        'ui-vintage/style.css',
+        '@brumaombra/ui-vintage/style.css',
         '~/assets/main.css'
     ],
 

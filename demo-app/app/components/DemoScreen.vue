@@ -49,7 +49,7 @@ import {
     setBusy,
     showConfirmDialog,
     showMessageDialog,
-} from 'ui-vintage';
+} from '@brumaombra/ui-vintage';
 
 const sidebarSections = [
     {

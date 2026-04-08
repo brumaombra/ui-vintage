@@ -1,4 +1,4 @@
-# ui-vintage
+# @brumaombra/ui-vintage
 
 A reusable Nuxt component library scaffold aligned with the Bitcoin Ticker web UI.
 
@@ -36,13 +36,13 @@ npm run demo:preview
 ## Usage
 
 ```ts
-import { Busy } from "ui-vintage"
+import { Busy } from "@brumaombra/ui-vintage"
 ```
 
 If you prefer explicit CSS loading, you can also import:
 
 ```ts
-import "ui-vintage/style.css"
+import "@brumaombra/ui-vintage/style.css"
 ```
 
 ## Adding Components

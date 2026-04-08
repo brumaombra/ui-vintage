@@ -11,7 +11,7 @@
     },
     "dependencies": {
         "nuxt": "4.4.2",
-        "ui-vintage": "file:.."
+        "@brumaombra/ui-vintage": "file:.."
     },
     "devDependencies": {
         "@tailwindcss/vite": "4.2.2",
