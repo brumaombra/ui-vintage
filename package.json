@@ -162,7 +162,7 @@
         "typecheck": "vue-tsc --noEmit"
     },
     "peerDependencies": {
-        "vue": "3.5.0"
+        "vue": "^3.5.0"
     },
     "dependencies": {
         "@internationalized/date": "3.10.0",
