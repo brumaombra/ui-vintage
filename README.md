@@ -14,7 +14,7 @@
 </p>
 
 <p>
-	🧩 UI primitives • 🪟 dialogs and overlays • 🧱 dashboard helpers • 🎨 shared styles
+	🧩 UI primitives • 🎭 dialogs and overlays • 🧱 dashboard helpers • 🎨 shared styles
 </p>
 
 <p>
