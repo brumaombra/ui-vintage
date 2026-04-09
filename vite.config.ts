@@ -30,10 +30,11 @@ function getLibraryEntries() {
     // Get entries for UI components
     const uiComponentEntries = getDirectoryEntries(componentsUiDir);
 
-    // Add dedicated component entries plus the shared utils entry
+    // Add dedicated component entries plus shared utility and stylesheet entries
     return {
         ...topLevelComponentEntries,
         ...uiComponentEntries,
+        style: resolve(__dirname, "src/style.ts"),
         utils: resolve(__dirname, "src/lib/utils.ts")
     };
 }
