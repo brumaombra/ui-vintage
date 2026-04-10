@@ -45,11 +45,11 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
 <template>
   <DefineMonthTemplate v-slot="{ date }">
     <div class="**:data-[slot=native-select-icon]:right-1">
-      <div class="relative rounded border border-(--border-light) bg-(--button-secondary-light) transition-all duration-300 ease-in-out dark:border-(--border-dark) dark:bg-(--button-secondary-dark)">
+      <div class="relative h-10 rounded border border-(--border-light) bg-(--button-secondary-light) transition-all duration-300 ease-in-out hover:border-(--border-hover-light) focus-within:border-(--border-hover-light) dark:border-(--border-dark) dark:bg-(--button-secondary-dark) dark:hover:border-(--border-hover-dark) dark:focus-within:border-(--border-hover-dark)">
         <div class="absolute inset-0 z-10 flex h-full items-center text-sm pl-2 pointer-events-none">
           {{ formatter.custom(toDate(date), { month: 'short' }) }}
         </div>
-        <NativeSelect class="relative z-20 h-8 w-[92px] rounded-none border-0 bg-transparent pl-2 pr-6 text-xs font-medium text-transparent shadow-none transition-all duration-300 ease-in-out outline-none ring-0 focus-visible:border-0 focus-visible:ring-0 dark:bg-transparent sm:text-sm" :model-value="date.month" @change="(e: Event) => {
+        <NativeSelect class="relative z-20 h-full min-h-0 w-[92px] rounded-none border-0 bg-transparent pl-2 pr-6 text-xs font-medium text-transparent shadow-none transition-all duration-300 ease-in-out outline-none ring-0 focus-visible:border-0 focus-visible:ring-0 dark:bg-transparent sm:text-sm" :model-value="date.month" @change="(e: Event) => {
           placeholder = placeholder.set({
             month: Number((e?.target as any)?.value),
           })
@@ -64,11 +64,11 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
 
   <DefineYearTemplate v-slot="{ date }">
     <div class="**:data-[slot=native-select-icon]:right-1">
-      <div class="relative rounded border border-(--border-light) bg-(--button-secondary-light) transition-all duration-300 ease-in-out dark:border-(--border-dark) dark:bg-(--button-secondary-dark)">
+      <div class="relative h-10 rounded border border-(--border-light) bg-(--button-secondary-light) transition-all duration-300 ease-in-out hover:border-(--border-hover-light) focus-within:border-(--border-hover-light) dark:border-(--border-dark) dark:bg-(--button-secondary-dark) dark:hover:border-(--border-hover-dark) dark:focus-within:border-(--border-hover-dark)">
         <div class="absolute inset-0 z-10 flex h-full items-center text-sm pl-2 pointer-events-none">
           {{ formatter.custom(toDate(date), { year: 'numeric' }) }}
         </div>
-        <NativeSelect class="relative z-20 h-8 w-[96px] rounded-none border-0 bg-transparent pl-2 pr-6 text-xs font-medium text-transparent shadow-none transition-all duration-300 ease-in-out outline-none ring-0 focus-visible:border-0 focus-visible:ring-0 dark:bg-transparent sm:text-sm" :model-value="date.year" @change="(e: Event) => {
+        <NativeSelect class="relative z-20 h-full min-h-0 w-[96px] rounded-none border-0 bg-transparent pl-2 pr-6 text-xs font-medium text-transparent shadow-none transition-all duration-300 ease-in-out outline-none ring-0 focus-visible:border-0 focus-visible:ring-0 dark:bg-transparent sm:text-sm" :model-value="date.year" @change="(e: Event) => {
           placeholder = placeholder.set({
             year: Number((e?.target as any)?.value),
           })
