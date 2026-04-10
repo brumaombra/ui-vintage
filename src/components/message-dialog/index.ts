@@ -3,9 +3,9 @@ export {
     closeMessageDialog,
     messageDialogState,
     resolveActiveMessageDialog,
-    showMessageDialog,
+    showMessageDialog
 } from "./message-dialog-state";
 export type {
     DialogMessageType,
-    ShowMessageDialogOptions,
+    ShowMessageDialogOptions
 } from "./message-dialog-state";

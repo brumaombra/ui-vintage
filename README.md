@@ -47,24 +47,24 @@ npm install @brumaombra/ui-vintage
 Import the shared stylesheet once in your app:
 
 ```ts
-import "@brumaombra/ui-vintage/style.css"
+import "@brumaombra/ui-vintage/style.css";
 ```
 
 Import each component from its dedicated entrypoint:
 
 ```ts
-import { Button } from "@brumaombra/ui-vintage/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@brumaombra/ui-vintage/card"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@brumaombra/ui-vintage/dialog"
+import { Button } from "@brumaombra/ui-vintage/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@brumaombra/ui-vintage/card";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@brumaombra/ui-vintage/dialog";
 ```
 
 Import helpers and higher-level components from their own paths:
 
 ```ts
-import { DashboardShell } from "@brumaombra/ui-vintage/dashboard-shell"
-import { setBusy } from "@brumaombra/ui-vintage/busy-indicator"
-import { showConfirmDialog } from "@brumaombra/ui-vintage/confirm-dialog"
-import { showMessageDialog } from "@brumaombra/ui-vintage/message-dialog"
+import { DashboardShell } from "@brumaombra/ui-vintage/dashboard-shell";
+import { setBusy } from "@brumaombra/ui-vintage/busy-indicator";
+import { showConfirmDialog } from "@brumaombra/ui-vintage/confirm-dialog";
+import { showMessageDialog } from "@brumaombra/ui-vintage/message-dialog";
 ```
 
 There is no global barrel export. Use the dedicated subpath entrypoints for each component or helper.

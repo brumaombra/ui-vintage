@@ -4,9 +4,9 @@ export {
     closeConfirmDialog,
     confirmActiveDialog,
     confirmDialogState,
-    showConfirmDialog,
+    showConfirmDialog
 } from "./confirm-dialog-state";
 export type {
     DialogButtonVariant,
-    ShowConfirmDialogOptions,
+    ShowConfirmDialogOptions
 } from "./confirm-dialog-state";
