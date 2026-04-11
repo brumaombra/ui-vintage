@@ -27,6 +27,7 @@ interface DashboardSidebarItem {
     href?: string;
     to?: unknown;
     active?: boolean;
+    newTab?: boolean;
 }
 
 interface DashboardSidebarSection {
@@ -59,8 +60,21 @@ const props = withDefaults(defineProps<DashboardShellProps>(), {
 
 // Resolve link props for sidebar items
 const getSidebarItemLinkProps = (item: DashboardSidebarItem) => {
-    if (props.sidebarLinkComponent === "a") return { href: item.href ?? "#" };
-    return { to: item.to ?? item.href ?? "/" };
+    const sharedProps = item.newTab ? { target: "_blank", rel: "noopener noreferrer" } : {};
+
+    // If the link component is an anchor, use href. Otherwise, use to for router links.
+    if (props.sidebarLinkComponent === "a") {
+        return {
+            href: item.href ?? "#",
+            ...sharedProps
+        };
+    }
+
+    // For non-anchor link components, assume they use a "to" prop (like Vue Router's <RouterLink>).
+    return {
+        to: item.to ?? item.href ?? "/",
+        ...sharedProps
+    };
 };
 </script>
 

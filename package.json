@@ -76,6 +76,10 @@
             "types": "./dist/components/dashboard-shell/index.d.ts",
             "import": "./dist/dashboard-shell.js"
         },
+        "./error-page": {
+            "types": "./dist/components/error-page/index.d.ts",
+            "import": "./dist/error-page.js"
+        },
         "./dialog": {
             "types": "./dist/components/ui/dialog/index.d.ts",
             "import": "./dist/dialog.js"
