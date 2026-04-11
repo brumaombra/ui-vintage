@@ -44,6 +44,10 @@
             "types": "./dist/components/background-grid/index.d.ts",
             "import": "./dist/background-grid.js"
         },
+        "./badge": {
+            "types": "./dist/components/ui/badge/index.d.ts",
+            "import": "./dist/badge.js"
+        },
         "./busy": {
             "types": "./dist/components/ui/busy/index.d.ts",
             "import": "./dist/busy.js"

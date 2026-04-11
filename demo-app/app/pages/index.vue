@@ -9,6 +9,7 @@ import { DashboardShell } from '@brumaombra/ui-vintage/dashboard-shell';
 import { showMessageDialog } from '@brumaombra/ui-vintage/message-dialog';
 import { TooltipProvider } from '@brumaombra/ui-vintage/tooltip';
 import CurrentStateCard from '../components/CurrentStateCard.vue';
+import BadgePreviewCard from '../components/BadgePreviewCard.vue';
 import InputStatesCard from '../components/InputStatesCard.vue';
 import LoadingPreviewCard from '../components/LoadingPreviewCard.vue';
 import PrimaryActionsCard from '../components/PrimaryActionsCard.vue';
@@ -148,6 +149,9 @@ const handleInfoDemo = async () => {
 
                 <!-- Surface variants card -->
                 <SurfaceVariantsCard />
+
+                <!-- Badge preview card -->
+                <BadgePreviewCard />
 
                 <!-- Loading preview card -->
                 <LoadingPreviewCard />
