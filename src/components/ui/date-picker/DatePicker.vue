@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue'
 import { DateFormatter, getLocalTimeZone, today } from '@internationalized/date'
-import { CalendarIcon } from 'lucide-vue-next'
+import { Calendar03Icon } from '@hugeicons/core-free-icons'
+import { HugeiconsIcon } from '@hugeicons/vue'
 import type { DateValue } from 'reka-ui'
 import { computed, ref } from 'vue'
 import { cn } from '@/lib/utils'
@@ -53,7 +54,7 @@ const formatter = new DateFormatter('en-US', {
     <Popover v-slot="{ close }">
         <PopoverTrigger as-child>
             <Button variant="outline" :disabled="disabled" :class="cn('w-[240px] justify-start text-left font-normal', !date && 'text-muted-foreground', props.class)">
-                <CalendarIcon class="size-4" />
+                <HugeiconsIcon :icon="Calendar03Icon" class="size-4" />
                 {{ date ? formatter.format(date.toDate(getLocalTimeZone())) : placeholder }}
             </Button>
         </PopoverTrigger>

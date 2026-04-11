@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { BellRing, LayoutDashboard, SlidersHorizontal, } from 'lucide-vue-next';
+import { BellDotIcon, Cancel01Icon, CheckmarkCircle02Icon, DashboardSquare01Icon, InformationCircleIcon, RefreshIcon, SaveIcon, SlidersHorizontalIcon } from '@hugeicons/core-free-icons';
+import { createIconComponent } from '../composables/useUtils.js';
 import { setBusy } from '@brumaombra/ui-vintage/busy-indicator';
 import { Button } from '@brumaombra/ui-vintage/button';
 import { showConfirmDialog } from '@brumaombra/ui-vintage/confirm-dialog';
@@ -14,14 +15,26 @@ import PrimaryActionsCard from '../components/PrimaryActionsCard.vue';
 import SurfaceVariantsCard from '../components/SurfaceVariantsCard.vue';
 import DemoToolbar from '../components/DemoToolbar.vue';
 
+// Icon components
+const DashboardSquareSidebarIcon = createIconComponent(DashboardSquare01Icon);
+const BellDotSidebarIcon = createIconComponent(BellDotIcon);
+const SlidersHorizontalSidebarIcon = createIconComponent(SlidersHorizontalIcon);
+const PublishDialogIcon = createIconComponent(SaveIcon);
+const ReviewDialogIcon = createIconComponent(Cancel01Icon);
+const SuccessDialogIcon = createIconComponent(CheckmarkCircle02Icon);
+const ContinueDialogIcon = createIconComponent(CheckmarkCircle02Icon);
+const SyncDialogIcon = createIconComponent(RefreshIcon);
+const InfoDialogIcon = createIconComponent(InformationCircleIcon);
+const CloseDialogIcon = createIconComponent(Cancel01Icon);
+
 // Sidebar navigation structure
 const sidebarSections = [{
     id: 'overview',
     label: 'Overview',
     items: [
-        { id: 'components', label: 'Components', description: 'Interactive primitives and surfaces', icon: LayoutDashboard, active: true },
-        { id: 'feedback', label: 'Feedback', description: 'Dialogs, alerts, and busy states', icon: BellRing },
-        { id: 'controls', label: 'Controls', description: 'Inputs, selects, sliders, and toggles', icon: SlidersHorizontal }
+        { id: 'components', label: 'Components', description: 'Interactive primitives and surfaces', icon: DashboardSquareSidebarIcon, active: true },
+        { id: 'feedback', label: 'Feedback', description: 'Dialogs, alerts, and busy states', icon: BellDotSidebarIcon },
+        { id: 'controls', label: 'Controls', description: 'Inputs, selects, sliders, and toggles', icon: SlidersHorizontalSidebarIcon }
     ]
 }];
 
@@ -36,18 +49,23 @@ const handleConfirmDemo = async () => {
     // Show a confirm dialog
     const confirmed = await showConfirmDialog({
         title: 'Publish changes?',
+        icon: PublishDialogIcon,
         message: 'This confirms the action flow and the dialog animation using the current theme styles.',
         confirmText: 'Publish',
-        cancelText: 'Review'
+        cancelText: 'Review',
+        confirmButtonIcon: PublishDialogIcon,
+        cancelButtonIcon: ReviewDialogIcon
     });
 
     // If confirmed, show a follow-up message dialog
     if (confirmed) {
         await showMessageDialog({
             type: 'Success',
+            icon: SuccessDialogIcon,
             title: 'Published',
             message: 'The confirm dialog resolved successfully and triggered a follow-up message dialog.',
-            closeText: 'Continue'
+            closeText: 'Continue',
+            closeButtonIcon: ContinueDialogIcon
         });
     }
 };
@@ -62,8 +80,10 @@ const handleBusyDemo = async () => {
     setBusy(false);
     await showMessageDialog({
         type: 'Info',
+        icon: SyncDialogIcon,
         title: 'Sync complete',
-        message: 'The busy indicator was displayed using the shared global overlay.'
+        message: 'The busy indicator was displayed using the shared global overlay.',
+        closeButtonIcon: CloseDialogIcon
     });
 };
 
@@ -71,9 +91,11 @@ const handleBusyDemo = async () => {
 const handleInfoDemo = async () => {
     await showMessageDialog({
         type: 'Info',
+        icon: InfoDialogIcon,
         title: 'Demo screen',
         message: 'This screen is meant to preview the core components with realistic spacing and interactions.',
-        closeText: 'Got it'
+        closeText: 'Got it',
+        closeButtonIcon: CloseDialogIcon
     });
 };
 </script>

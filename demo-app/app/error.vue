@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, watch } from 'vue';
-import { MoonStar, SunMedium } from 'lucide-vue-next';
+import { GibbousMoonIcon, Sun01Icon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/vue';
 import { Button } from '@brumaombra/ui-vintage/button';
 import { ErrorPage } from '@brumaombra/ui-vintage/error-page';
 
@@ -54,7 +55,7 @@ onMounted(() => {
 
                 <!-- Change theme -->
                 <Button variant="outline" size="sm" @click="isDark = !isDark">
-                    <component :is="isDark ? MoonStar : SunMedium" class="size-4" />
+                    <HugeiconsIcon :icon="isDark ? GibbousMoonIcon : Sun01Icon" class="size-4" />
                     Toggle Theme
                 </Button>
             </div>

@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from "vue";
+import { ArrowLeft01Icon } from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/vue";
 import { computed } from "vue";
-import { ArrowLeft } from "lucide-vue-next";
 import BackgroundGrid from "@/components/background-grid/BackgroundGrid.vue";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
@@ -105,7 +106,7 @@ const handleAction = () => {
                     <CardFooter :class="cn('items-start flex-col gap-3 sm:flex-row sm:items-center', props.footerClass)">
                         <slot name="actions" :on-action="handleAction">
                             <Button v-if="props.showDefaultAction" variant="default" @click="handleAction">
-                                <ArrowLeft class="size-4" :stroke-width="1.8" />
+                                <HugeiconsIcon :icon="ArrowLeft01Icon" :stroke-width="1.8" class="size-4" />
                                 {{ props.actionLabel }}
                             </Button>
                         </slot>

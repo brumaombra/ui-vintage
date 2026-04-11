@@ -2,7 +2,8 @@
 import type { CalendarPrevProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
 import { reactiveOmit } from "@vueuse/core"
-import { ChevronLeft } from "lucide-vue-next"
+import { ArrowLeft01Icon } from "@hugeicons/core-free-icons"
+import { HugeiconsIcon } from "@hugeicons/vue"
 import { CalendarPrev, useForwardProps } from "reka-ui"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from '@/components/ui/button'
@@ -25,7 +26,7 @@ const forwardedProps = useForwardProps(delegatedProps)
     v-bind="forwardedProps"
   >
     <slot>
-      <ChevronLeft class="size-4" />
+      <HugeiconsIcon :icon="ArrowLeft01Icon" class="size-4" />
     </slot>
   </CalendarPrev>
 </template>

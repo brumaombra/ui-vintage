@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, watch } from 'vue';
-import { MoonStar, SunMedium } from 'lucide-vue-next';
+import { GibbousMoonIcon, Sun01Icon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/vue';
 import { Button } from '@brumaombra/ui-vintage/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@brumaombra/ui-vintage/card';
 import { Select, SelectContent, SelectItem, SelectItemText, SelectTrigger, SelectValue } from '@brumaombra/ui-vintage/select';
@@ -40,7 +41,7 @@ onMounted(() => {
         <CardContent class="flex flex-col gap-3 lg:flex-row lg:flex-wrap lg:items-center lg:justify-between">
             <!-- Theme toggle controls -->
             <div class="flex items-center gap-3 rounded border border-border bg-background px-3 py-2">
-                <component :is="isDark ? MoonStar : SunMedium" class="size-4 text-muted-foreground" />
+                <HugeiconsIcon :icon="isDark ? GibbousMoonIcon : Sun01Icon" class="size-4 text-muted-foreground" />
                 <span class="text-xs font-medium text-foreground">{{ themeLabel }}</span>
                 <Switch v-model:model-value="isDark" />
             </div>

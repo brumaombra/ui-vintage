@@ -2,7 +2,8 @@
 import type { DialogContentEmits, DialogContentProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
 import { reactiveOmit } from "@vueuse/core"
-import { X } from "lucide-vue-next"
+import { Cancel01Icon } from "@hugeicons/core-free-icons"
+import { HugeiconsIcon } from "@hugeicons/vue"
 import {
   DialogClose,
   DialogContent,
@@ -45,7 +46,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
         data-slot="dialog-close"
         class="ring-offset-background focus:ring-ring absolute top-4 right-4 rounded border border-border bg-card p-1 text-muted-foreground opacity-80 transition-all duration-200 hover:bg-accent hover:text-foreground hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
       >
-        <X />
+        <HugeiconsIcon :icon="Cancel01Icon" />
         <span class="sr-only">Close</span>
       </DialogClose>
     </DialogContent>

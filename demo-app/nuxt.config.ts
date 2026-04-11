@@ -47,7 +47,8 @@ export default defineNuxtConfig({
         },
         optimizeDeps: {
             include: [
-                'lucide-vue-next',
+                '@hugeicons/core-free-icons',
+                '@hugeicons/vue',
                 'clsx',
                 'tailwind-merge',
                 'class-variance-authority',

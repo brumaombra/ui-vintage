@@ -1,6 +1,7 @@
 <script setup lang="ts">
+import { HugeiconsIcon } from "@hugeicons/vue";
 import { computed } from "vue";
-import { Check, CircleAlert, Info } from "lucide-vue-next";
+import { AlertCircleIcon, InformationCircleIcon, Tick02Icon } from "@hugeicons/core-free-icons";
 import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { closeMessageDialog, messageDialogState, resolveActiveMessageDialog } from "./message-dialog-state";
@@ -8,14 +9,13 @@ import { closeMessageDialog, messageDialogState, resolveActiveMessageDialog } fr
 // Active dialog state
 const currentDialog = computed(() => messageDialogState.current);
 
-// Resolved icon for the current message type
-const messageIcon = computed(() => {
+// Resolved fallback icon for the current message type
+const defaultMessageIcon = computed(() => {
     const current = currentDialog.value;
-    if (!current) return Info;
-    if (current.options.icon) return current.options.icon;
-    if (current.options.type === "Error") return CircleAlert;
-    if (current.options.type === "Success") return Check;
-    return Info;
+    if (!current) return InformationCircleIcon;
+    if (current.options.type === "Error") return AlertCircleIcon;
+    if (current.options.type === "Success") return Tick02Icon;
+    return InformationCircleIcon;
 });
 
 // Resolved container classes for the message icon
@@ -53,7 +53,8 @@ const handleOpenChange = (open: boolean) => {
                 <div class="flex flex-col gap-4 sm:flex-row sm:items-start">
                     <!-- Dialog icon -->
                     <div class="flex size-12 shrink-0 self-center items-center justify-center rounded border sm:size-10 sm:self-start" :class="messageIconClasses">
-                        <component :is="messageIcon" :stroke-width="1.8" class="size-6" :class="messageGlyphClasses" />
+                        <component :is="currentDialog.options.icon" v-if="currentDialog.options.icon" :stroke-width="1.8" class="size-6" :class="messageGlyphClasses" />
+                        <HugeiconsIcon v-else :icon="defaultMessageIcon" :stroke-width="1.8" class="size-6" :class="messageGlyphClasses" />
                     </div>
 
                     <!-- Dialog header -->

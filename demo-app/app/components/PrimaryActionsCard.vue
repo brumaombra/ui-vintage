@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { CheckCircle2, MousePointerClick, Sparkles, } from 'lucide-vue-next';
+import { CheckmarkCircle02Icon, MouseLeftClick01Icon, SparklesIcon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/vue';
 import { Alert, AlertDescription, AlertTitle } from '@brumaombra/ui-vintage/alert';
 import { Button } from '@brumaombra/ui-vintage/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@brumaombra/ui-vintage/card';
@@ -30,13 +31,13 @@ const emit = defineEmits<{
             <div class="flex flex-wrap gap-3">
                 <!-- Primary action button -->
                 <Button @click="emit('confirmDemo')">
-                    <Sparkles class="size-4" />
+                    <HugeiconsIcon :icon="SparklesIcon" class="size-4" />
                     Confirm Flow
                 </Button>
 
                 <!-- Secondary action button -->
                 <Button variant="outline" @click="emit('busyDemo')">
-                    <MousePointerClick class="size-4" />
+                    <HugeiconsIcon :icon="MouseLeftClick01Icon" class="size-4" />
                     Busy Overlay
                 </Button>
 
@@ -69,7 +70,7 @@ const emit = defineEmits<{
 
             <!-- Status alert -->
             <Alert>
-                <CheckCircle2 class="size-4" />
+                <HugeiconsIcon :icon="CheckmarkCircle02Icon" class="size-4" />
                 <AlertTitle>Theme tokens are active</AlertTitle>
                 <AlertDescription>
                     Cards, overlays, and controls in this screen intentionally mix semantic tokens and custom component states.

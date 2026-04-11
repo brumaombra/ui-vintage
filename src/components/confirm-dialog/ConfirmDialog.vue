@@ -1,12 +1,12 @@
 <script setup lang="ts">
+import { HugeiconsIcon } from "@hugeicons/vue";
 import { computed } from "vue";
-import { Info } from "lucide-vue-next";
+import { InformationCircleIcon } from "@hugeicons/core-free-icons";
 import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { cancelActiveConfirmDialog, closeConfirmDialog, confirmActiveDialog, confirmDialogState } from "./confirm-dialog-state";
 
 const currentDialog = computed(() => confirmDialogState.current);
-const confirmIcon = computed(() => currentDialog.value?.options.icon ?? Info);
 
 // Close the dialog when the shell requests it
 const handleOpenChange = (open: boolean) => {
@@ -25,7 +25,8 @@ const handleOpenChange = (open: boolean) => {
                 <div class="flex flex-col gap-4 sm:flex-row sm:items-start">
                     <!-- Dialog icon -->
                     <div class="flex size-12 shrink-0 self-center items-center justify-center rounded border border-[var(--border-light)] bg-[var(--bg-surface-light)] sm:size-10 sm:self-start dark:border-[var(--border-dark)] dark:bg-[var(--bg-surface-dark)]">
-                        <component :is="confirmIcon" :stroke-width="1.8" class="size-6 text-[var(--button-primary-light)] dark:text-[var(--button-primary-dark)]" />
+                        <component :is="currentDialog.options.icon" v-if="currentDialog.options.icon" :stroke-width="1.8" class="size-6 text-[var(--button-primary-light)] dark:text-[var(--button-primary-dark)]" />
+                        <HugeiconsIcon v-else :icon="InformationCircleIcon" :stroke-width="1.8" class="size-6 text-[var(--button-primary-light)] dark:text-[var(--button-primary-dark)]" />
                     </div>
 
                     <!-- Dialog header -->
