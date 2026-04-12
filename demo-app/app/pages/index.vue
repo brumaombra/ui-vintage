@@ -10,6 +10,7 @@ import { showMessageDialog } from '@brumaombra/ui-vintage/message-dialog';
 import { TooltipProvider } from '@brumaombra/ui-vintage/tooltip';
 import CurrentStateCard from '../components/CurrentStateCard.vue';
 import BadgePreviewCard from '../components/BadgePreviewCard.vue';
+import DialogPreviewCard from '../components/DialogPreviewCard.vue';
 import InputStatesCard from '../components/InputStatesCard.vue';
 import LoadingPreviewCard from '../components/LoadingPreviewCard.vue';
 import PrimaryActionsCard from '../components/PrimaryActionsCard.vue';
@@ -152,6 +153,9 @@ const handleInfoDemo = async () => {
 
                 <!-- Badge preview card -->
                 <BadgePreviewCard />
+
+                <!-- Dialog preview card -->
+                <DialogPreviewCard />
 
                 <!-- Loading preview card -->
                 <LoadingPreviewCard />
