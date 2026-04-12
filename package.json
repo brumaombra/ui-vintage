@@ -96,6 +96,10 @@
             "types": "./dist/components/message-dialog/index.d.ts",
             "import": "./dist/message-dialog.js"
         },
+        "./message-toast": {
+            "types": "./dist/components/message-toast/index.d.ts",
+            "import": "./dist/message-toast.js"
+        },
         "./native-select": {
             "types": "./dist/components/ui/native-select/index.d.ts",
             "import": "./dist/native-select.js"

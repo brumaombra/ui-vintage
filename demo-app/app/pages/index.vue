@@ -13,6 +13,7 @@ import BadgePreviewCard from '../components/BadgePreviewCard.vue';
 import DialogPreviewCard from '../components/DialogPreviewCard.vue';
 import InputStatesCard from '../components/InputStatesCard.vue';
 import LoadingPreviewCard from '../components/LoadingPreviewCard.vue';
+import MessageToastPreviewCard from '../components/MessageToastPreviewCard.vue';
 import PrimaryActionsCard from '../components/PrimaryActionsCard.vue';
 import SurfaceVariantsCard from '../components/SurfaceVariantsCard.vue';
 import DemoToolbar from '../components/DemoToolbar.vue';
@@ -159,6 +160,9 @@ const handleInfoDemo = async () => {
 
                 <!-- Loading preview card -->
                 <LoadingPreviewCard />
+
+                <!-- Message toast preview card -->
+                <MessageToastPreviewCard />
 
                 <!-- Current state card -->
                 <CurrentStateCard
