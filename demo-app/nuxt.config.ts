@@ -30,7 +30,7 @@ export default defineNuxtConfig({
                 find: /^@brumaombra\/ui-vintage\/utils$/,
                 replacement: resolve(librarySrcDir, 'lib/utils.ts')
             }, {
-                find: /^@brumaombra\/ui-vintage\/(background-grid|busy-indicator|confirm-dialog|dashboard-shell|error-page|message-dialog|slider-form-component|switch-form-component)$/,
+                find: /^@brumaombra\/ui-vintage\/(background-grid|busy-indicator|confirm-dialog|dashboard-shell|error-page|landing-shell|message-dialog|slider-form-component|switch-form-component)$/,
                 replacement: `${librarySrcDir}/components/$1/index.ts`
             }, {
                 find: /^@brumaombra\/ui-vintage\/([a-z-]+)$/,

@@ -116,6 +116,10 @@
             "types": "./dist/components/ui/label/index.d.ts",
             "import": "./dist/label.js"
         },
+        "./landing-shell": {
+            "types": "./dist/components/landing-shell/index.d.ts",
+            "import": "./dist/landing-shell.js"
+        },
         "./popover": {
             "types": "./dist/components/ui/popover/index.d.ts",
             "import": "./dist/popover.js"
