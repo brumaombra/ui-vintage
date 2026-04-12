@@ -25,6 +25,8 @@ const MESSAGE_TOAST_ROOT_ID = "ui-vintage-message-toast-root";
 let dismissTimer: ReturnType<typeof setTimeout> | null = null;
 let clearTimer: ReturnType<typeof setTimeout> | null = null;
 let messageToastMountPromise: Promise<void> | null = null;
+let openFrame: number | null = null;
+let activeToastId = 0;
 
 // Shared message toast state
 export const messageToastState: MessageToastState = reactive({
@@ -86,6 +88,12 @@ const clearMessageToastTimers = () => {
         clearTimeout(clearTimer);
         clearTimer = null;
     }
+
+    // Clear any pending open frame from a previous toast
+    if (openFrame !== null && typeof cancelAnimationFrame !== "undefined") {
+        cancelAnimationFrame(openFrame);
+        openFrame = null;
+    }
 };
 
 // Clear the current toast after the leave transition
@@ -116,24 +124,44 @@ export const closeMessageToast = () => {
 
 // Show a message toast and optionally auto-dismiss it
 export const showMessageToast = (options: ShowMessageToastOptions) => {
-    void ensureMessageToastMounted();
-
-    // Update the toast state to show the new message
     clearMessageToastTimers();
+    activeToastId += 1;
+    const toastId = activeToastId;
+    const duration = options.duration ?? DEFAULT_TOAST_DURATION_MS;
+
+    // Update the toast state while keeping the shell closed until the renderer is mounted
     messageToastState.current = {
         message: options.message,
         status: options.status ?? "success"
     };
+    messageToastState.isOpen = false;
 
-    // Start the open transition
-    messageToastState.isOpen = true;
+    // Mount first so the initial visible transition can run after the component exists
+    void ensureMessageToastMounted().then(() => {
+        // Guard against a toast change during the async mount
+        if (toastId !== activeToastId || !messageToastState.current || typeof requestAnimationFrame === "undefined") {
+            return;
+        }
 
-    // Auto-dismiss the toast after the specified duration
-    const duration = options.duration ?? DEFAULT_TOAST_DURATION_MS;
-    if (duration > 0) {
-        dismissTimer = setTimeout(() => {
-            dismissTimer = null;
-            scheduleCloseMessageToast();
-        }, duration);
-    }
+        // Use requestAnimationFrame to ensure the DOM updates before starting the open transition
+        openFrame = requestAnimationFrame(() => {
+            openFrame = null;
+
+            // Guard against a toast change before the frame
+            if (toastId !== activeToastId || !messageToastState.current) {
+                return;
+            }
+
+            // Start the open transition after the renderer is present
+            messageToastState.isOpen = true;
+
+            // Auto-dismiss the toast after the specified duration
+            if (duration > 0) {
+                dismissTimer = setTimeout(() => {
+                    dismissTimer = null;
+                    scheduleCloseMessageToast();
+                }, duration);
+            }
+        });
+    });
 };
