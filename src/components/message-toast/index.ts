@@ -1,4 +1,3 @@
-export { default as MessageToast } from "./MessageToast.vue";
 export {
     closeMessageToast,
     messageToastState,
