@@ -116,6 +116,10 @@
             "types": "./dist/components/ui/label/index.d.ts",
             "import": "./dist/label.js"
         },
+        "./landing": {
+            "types": "./dist/components/landing/index.d.ts",
+            "import": "./dist/landing.js"
+        },
         "./landing-shell": {
             "types": "./dist/components/landing-shell/index.d.ts",
             "import": "./dist/landing-shell.js"
