@@ -51,9 +51,11 @@ const props = withDefaults(defineProps<LandingFooterProps>(), {
 
 const resolvedCopyrightName = computed(() => props.copyrightName || props.appName);
 
+// Get link props based on the type of link component and whether the link should open in a new tab
 const getLinkProps = (link: LandingFooterLink) => {
     const sharedProps = link.newTab ? { target: "_blank", rel: "noopener noreferrer" } : {};
 
+    // If the link component is an anchor, use href. Otherwise, use to for router links.
     if (props.linkComponent === "a") {
         return {
             href: link.href ?? "#",
@@ -61,6 +63,7 @@ const getLinkProps = (link: LandingFooterLink) => {
         };
     }
 
+    // For non-anchor link components, assume they use a "to" prop (like Vue Router's <RouterLink>).
     return {
         to: link.to ?? link.href ?? "/",
         ...sharedProps
@@ -69,31 +72,33 @@ const getLinkProps = (link: LandingFooterLink) => {
 </script>
 
 <template>
-    <footer :class="cn('border-t border-border bg-card', props.class)">
+    <footer :class="cn('relative z-10 border-t border-border bg-card', props.class)">
         <div :class="cn('mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8', props.containerClass)">
             <div class="grid grid-cols-1 gap-8 md:grid-cols-4">
+                <!-- Brand section -->
                 <div :class="cn('col-span-1 md:col-span-2', props.brandClass)">
+                    <!-- App name -->
                     <div class="mb-4 text-lg font-semibold tracking-tight text-foreground">
                         {{ props.appName }}
                     </div>
 
+                    <!-- App description -->
                     <p v-if="props.appDescription" class="max-w-sm text-sm leading-relaxed text-muted-foreground">
                         {{ props.appDescription }}
                     </p>
                 </div>
 
+                <!-- Link sections -->
                 <div v-for="section in props.sections" :key="section.id" :class="cn('min-w-0', props.sectionsClass)">
+                    <!-- Section title -->
                     <h3 class="mb-4 font-semibold text-foreground">
                         {{ section.title }}
                     </h3>
 
+                    <!-- Section links -->
                     <ul class="space-y-3 text-sm">
                         <li v-for="link in section.links" :key="link.id">
-                            <component
-                                :is="props.linkComponent"
-                                v-bind="getLinkProps(link)"
-                                class="text-muted-foreground transition-colors duration-200 hover:text-foreground"
-                            >
+                            <component :is="props.linkComponent" v-bind="getLinkProps(link)" class="text-muted-foreground transition-colors duration-200 hover:text-foreground">
                                 {{ link.label }}
                             </component>
                         </li>
@@ -101,14 +106,14 @@ const getLinkProps = (link: LandingFooterLink) => {
                 </div>
             </div>
 
-            <div
-                v-if="props.showBottomBar"
-                :class="cn('mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 text-sm text-muted-foreground md:flex-row', props.bottomBarClass)"
-            >
+            <!-- Bottom bar -->
+            <div v-if="props.showBottomBar" :class="cn('mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 text-sm text-muted-foreground md:flex-row', props.bottomBarClass)">
+                <!-- Copyright -->
                 <div>
                     &copy; {{ props.year }} {{ resolvedCopyrightName }}. {{ props.allRightsReservedText }}
                 </div>
 
+                <!-- Made by -->
                 <div v-if="props.madeByText && props.madeByName && props.madeByLink">
                     {{ props.madeByText }}
                     <a :href="props.madeByLink" target="_blank" rel="noopener noreferrer" class="font-medium text-foreground hover:underline">
