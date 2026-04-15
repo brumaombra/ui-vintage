@@ -24,11 +24,17 @@ const toastIconClasses = computed(() => {
     if (toastStatus.value === "info") return "text-blue-600 dark:text-blue-400";
     return "text-green-600 dark:text-green-400";
 });
+
+// Resolved aria-live politeness based on toast status
+const toastAriaLive = computed(() => {
+    if (toastStatus.value === "error" || toastStatus.value === "warning") return "assertive";
+    return "polite";
+});
 </script>
 
 <template>
     <Transition name="toast">
-        <div v-if="messageToastState.current && messageToastState.isOpen" class="fixed bottom-6 right-6 z-30 max-w-[350px] min-w-[250px] rounded border border-border bg-card p-4 text-card-foreground transition-colors duration-300 ease-in-out" role="alert" :aria-live="toastStatus === 'error' || toastStatus === 'warning' ? 'assertive' : 'polite'" aria-atomic="true">
+        <div v-if="messageToastState.current && messageToastState.isOpen" class="fixed inset-x-3 bottom-3 z-30 rounded border border-border bg-card p-4 text-card-foreground transition-colors duration-300 ease-in-out sm:inset-x-auto sm:right-6 sm:bottom-6 sm:max-w-[350px] sm:min-w-[250px]" role="alert" :aria-live="toastAriaLive" aria-atomic="true">
             <div class="flex items-center gap-4">
                 <!-- Leading status icon -->
                 <HugeiconsIcon :icon="toastIcon" class="size-5" :class="toastIconClasses" />

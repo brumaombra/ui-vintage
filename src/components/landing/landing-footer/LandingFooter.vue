@@ -88,8 +88,27 @@ const getLinkProps = (link: LandingFooterLink) => {
                     </p>
                 </div>
 
+                <!-- Single link section -->
+                <div v-if="props.sections?.length === 1" :class="cn('min-w-0 md:col-span-2 md:flex md:justify-end', props.sectionsClass)">
+                    <div class="md:text-right">
+                        <!-- Section title -->
+                        <h3 class="mb-4 font-semibold text-foreground">
+                            {{ props.sections[0]?.title }}
+                        </h3>
+
+                        <!-- Section links -->
+                        <ul class="space-y-3 text-sm">
+                            <li v-for="link in props.sections[0]?.links" :key="link.id">
+                                <component :is="props.linkComponent" v-bind="getLinkProps(link)" class="text-muted-foreground transition-colors duration-200 hover:text-foreground">
+                                    {{ link.label }}
+                                </component>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
                 <!-- Link sections -->
-                <div v-for="section in props.sections" :key="section.id" :class="cn('min-w-0', props.sectionsClass)">
+                <div v-else v-for="section in props.sections" :key="section.id" :class="cn('min-w-0', props.sectionsClass)">
                     <!-- Section title -->
                     <h3 class="mb-4 font-semibold text-foreground">
                         {{ section.title }}
