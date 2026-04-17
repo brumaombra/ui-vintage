@@ -17,7 +17,7 @@ const themeClasses = computed(() => {
     case "green":
       return "border border-green-200 bg-green-50 text-green-700 dark:border-green-800/50 dark:bg-green-900/10 dark:text-green-400"
     case "red":
-      return "border border-red-200 bg-red-50 text-red-700 dark:border-red-800/50 dark:bg-red-900/10 dark:text-red-400"
+      return "border border-red-200 bg-red-50 text-red-700 dark:!border-red-800/50 dark:bg-red-900/10 dark:text-red-400"
     case "blue":
       return "border border-blue-200 bg-blue-50 text-blue-700 dark:border-blue-800/50 dark:bg-blue-900/10 dark:text-blue-400"
     case "yellow":
