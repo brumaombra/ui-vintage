@@ -160,6 +160,10 @@
             "types": "./dist/components/switch-form-component/index.d.ts",
             "import": "./dist/switch-form-component.js"
         },
+        "./textarea": {
+            "types": "./dist/components/ui/textarea/index.d.ts",
+            "import": "./dist/textarea.js"
+        },
         "./tooltip": {
             "types": "./dist/components/ui/tooltip/index.d.ts",
             "import": "./dist/tooltip.js"

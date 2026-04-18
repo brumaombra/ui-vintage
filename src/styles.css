@@ -181,6 +181,10 @@ body {
     transform: translateY(-4px);
 }
 
+
+/******************************** Custom scrollbar ********************************/
+
+/* Webkit browsers */
 ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -192,12 +196,22 @@ body {
 
 ::-webkit-scrollbar-thumb {
     background-color: var(--border-light);
+    border-radius: 0px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--text-secondary-light);
 }
 
 .dark ::-webkit-scrollbar-thumb {
     background-color: var(--border-dark);
 }
 
+.dark ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--text-secondary-dark);
+}
+
+/* Firefox */
 * {
     scrollbar-width: thin;
     scrollbar-color: var(--border-light) transparent;

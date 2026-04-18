@@ -22,7 +22,7 @@ const props = defineProps<LandingNavbarProps>();
             </div>
 
             <!-- Right-aligned content -->
-            <div :class="cn('flex items-center justify-end gap-3', props.rightClass)">
+            <div :class="cn('flex items-center justify-end gap-2 sm:gap-3', props.rightClass)">
                 <slot name="right" />
             </div>
         </nav>

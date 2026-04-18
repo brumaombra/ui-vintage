@@ -99,14 +99,17 @@ const getSidebarItemLinkProps = (item: DashboardSidebarItem) => {
                     <SidebarGroupContent>
                         <SidebarMenu class="gap-3">
                             <SidebarMenuItem v-for="item in section.items" :key="item.id">
-                                <SidebarMenuButton as-child :is-active="item.active" class="group h-auto min-h-12 items-start rounded border border-[var(--border-light)] px-3 py-2.5 text-[var(--text-secondary-light)] transition-all duration-200 hover:border-[var(--border-hover-light)] hover:bg-[var(--bg-selected-light)] hover:text-[var(--text-primary-light)] data-[active=true]:border-[var(--border-hover-light)] data-[active=true]:bg-[var(--bg-selected-light)] data-[active=true]:text-[var(--text-primary-light)] dark:border-[var(--border-dark)] dark:text-[var(--text-secondary-dark)] dark:hover:border-[var(--border-hover-dark)] dark:hover:bg-[var(--bg-selected-dark)] dark:hover:text-[var(--text-primary-dark)] dark:data-[active=true]:border-[var(--border-hover-dark)] dark:data-[active=true]:bg-[var(--bg-selected-dark)] dark:data-[active=true]:text-[var(--text-primary-dark)] sm:px-4 sm:py-3">
+                                <SidebarMenuButton as-child :is-active="item.active" :class="cn('group h-auto min-h-12 rounded border border-[var(--border-light)] px-3 py-2.5 text-[var(--text-secondary-light)] transition-all duration-200 hover:border-[var(--border-hover-light)] hover:bg-[var(--bg-selected-light)] hover:text-[var(--text-primary-light)] data-[active=true]:border-[var(--border-hover-light)] data-[active=true]:bg-[var(--bg-selected-light)] data-[active=true]:text-[var(--text-primary-light)] dark:border-[var(--border-dark)] dark:text-[var(--text-secondary-dark)] dark:hover:border-[var(--border-hover-dark)] dark:hover:bg-[var(--bg-selected-dark)] dark:hover:text-[var(--text-primary-dark)] dark:data-[active=true]:border-[var(--border-hover-dark)] dark:data-[active=true]:bg-[var(--bg-selected-dark)] dark:data-[active=true]:text-[var(--text-primary-dark)] sm:px-4 sm:py-3', item.description ? 'items-start' : 'items-center')">
                                     <component :is="props.sidebarLinkComponent" v-bind="getSidebarItemLinkProps(item)">
-                                        <!-- Optional item icon -->
-                                        <component :is="item.icon" v-if="item.icon" :stroke-width="1.8" class="mt-0.5 h-4 w-4 shrink-0 opacity-90 transition-opacity duration-200 group-hover:opacity-100 sm:h-5 sm:w-5" />
+                                        <!-- Icon -->
+                                        <component :is="item.icon" v-if="item.icon" :stroke-width="1.8" :class="cn('shrink-0 opacity-90 transition-opacity duration-200 group-hover:opacity-100', item.description ? 'mt-0.5 size-5 sm:h-5 sm:w-5' : 'size-5 self-center sm:h-6 sm:w-6')" />
 
-                                        <!-- Item label and description -->
-                                        <div class="grid min-w-0 flex-1 text-left leading-tight">
+                                        <!-- Label and optional description -->
+                                        <div :class="cn('min-w-0 flex-1 text-left leading-tight', item.description ? 'grid' : 'flex items-center')">
+                                            <!-- Label -->
                                             <span class="truncate font-semibold">{{ item.label }}</span>
+
+                                            <!-- Description -->
                                             <span v-if="item.description" class="mt-0.5 text-[11px] leading-4 text-sidebar-foreground/65">
                                                 {{ item.description }}
                                             </span>
@@ -143,9 +146,12 @@ const getSidebarItemLinkProps = (item: DashboardSidebarItem) => {
 
                 <!-- Title and description -->
                 <div class="min-w-0 flex-1">
+                    <!-- Title -->
                     <div class="truncate text-sm font-medium">
                         {{ props.title }}
                     </div>
+
+                    <!-- Description -->
                     <div v-if="props.description" class="truncate text-xs text-muted-foreground">
                         {{ props.description }}
                     </div>
@@ -163,6 +169,11 @@ const getSidebarItemLinkProps = (item: DashboardSidebarItem) => {
                     </div>
                 </div>
             </main>
+
+            <!-- Full-width footer -->
+            <footer v-if="$slots.footer" class="relative z-10 mt-auto">
+                <slot name="footer" />
+            </footer>
         </SidebarInset>
     </SidebarProvider>
 </template>
