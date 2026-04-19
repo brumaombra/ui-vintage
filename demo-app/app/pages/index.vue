@@ -106,7 +106,7 @@ const handleInfoDemo = async () => {
 <template>
     <TooltipProvider>
         <!-- Main dashboard shell container with a topbar and sidebar -->
-        <DashboardShell title="Theme Vintage Demo" description="A compact showcase of the current component library." :sidebar-sections="sidebarSections" content-container-class="max-w-7xl">
+        <DashboardShell title="Theme Vintage Demo" description="A compact showcase of the current component library." :sidebar-sections="sidebarSections">
             <!-- Custom sidebar header slot -->
             <template #sidebar-header>
                 <div class="hidden items-center gap-2 sm:flex">

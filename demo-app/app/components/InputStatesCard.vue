@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@brumaombra/ui-vintage/card';
-import { DatePicker } from '@brumaombra/ui-vintage/date-picker';
+import { DateTimePicker } from '@brumaombra/ui-vintage/date-time-picker';
 import { Field, FieldContent, FieldGroup, FieldLabel } from '@brumaombra/ui-vintage/field';
 import { Input } from '@brumaombra/ui-vintage/input';
 import { Select, SelectContent, SelectItem, SelectItemText, SelectTrigger, SelectValue } from '@brumaombra/ui-vintage/select';
@@ -12,6 +12,7 @@ const nameModel = defineModel<string>('name', { required: true });
 const networkModel = defineModel<string>('network', { required: true });
 const alertsEnabledModel = defineModel<boolean>('alertsEnabled', { required: true });
 const confidenceModel = defineModel<number>('confidence', { required: true });
+const scheduleModel = defineModel<Date | null>('schedule', { default: null });
 </script>
 
 <template>
@@ -58,11 +59,10 @@ const confidenceModel = defineModel<number>('confidence', { required: true });
                     </FieldContent>
                 </Field>
 
-                <!-- Date picker field -->
                 <Field>
-                    <FieldLabel>Date</FieldLabel>
+                    <FieldLabel>Date and time</FieldLabel>
                     <FieldContent>
-                        <DatePicker class="w-full" />
+                        <DateTimePicker v-model="scheduleModel" class="w-full" />
                     </FieldContent>
                 </Field>
 

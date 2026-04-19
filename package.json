@@ -76,6 +76,10 @@
             "types": "./dist/components/ui/date-picker/index.d.ts",
             "import": "./dist/date-picker.js"
         },
+        "./date-time-picker": {
+            "types": "./dist/components/ui/date-time-picker/index.d.ts",
+            "import": "./dist/date-time-picker.js"
+        },
         "./dashboard-shell": {
             "types": "./dist/components/dashboard-shell/index.d.ts",
             "import": "./dist/dashboard-shell.js"
@@ -163,6 +167,10 @@
         "./textarea": {
             "types": "./dist/components/ui/textarea/index.d.ts",
             "import": "./dist/textarea.js"
+        },
+        "./time-picker": {
+            "types": "./dist/components/ui/time-picker/index.d.ts",
+            "import": "./dist/time-picker.js"
         },
         "./tooltip": {
             "types": "./dist/components/ui/tooltip/index.d.ts",

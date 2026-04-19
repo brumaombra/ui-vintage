@@ -163,7 +163,7 @@ const getSidebarItemLinkProps = (item: DashboardSidebarItem) => {
 
             <!-- Main content -->
             <main class="relative z-10 min-w-0 flex-1">
-                <div :class="cn('mx-auto flex w-full min-w-0 max-w-6xl flex-col gap-6 p-3 sm:p-6 lg:p-8', props.contentContainerClass)">
+                <div :class="cn('mx-auto flex w-full min-w-0 max-w-7xl flex-col gap-6 p-3 sm:p-6 lg:p-8', props.contentContainerClass)">
                     <div class="pb-4">
                         <slot />
                     </div>
