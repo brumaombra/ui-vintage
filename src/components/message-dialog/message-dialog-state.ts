@@ -1,7 +1,7 @@
 import { h, markRaw, reactive, render } from "vue";
 import type { Component } from "vue";
 
-export type DialogMessageType = "Error" | "Success" | "Info";
+export type DialogMessageType = "error" | "success" | "info" | "warning";
 
 export interface ShowMessageDialogOptions {
     type?: DialogMessageType;
@@ -155,7 +155,7 @@ export const showMessageDialog = (options: ShowMessageDialogOptions) => {
         enqueueMessageDialog({
             id: nextMessageDialogId += 1,
             options: {
-                type: options.type ?? "Info",
+                type: options.type ?? "info",
                 title: options.title ?? "",
                 message: options.message,
                 closeText: options.closeText ?? "Close",

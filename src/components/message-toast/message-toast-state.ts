@@ -1,16 +1,16 @@
 import { h, reactive, render } from "vue";
 
-export type MessageToastStatus = "success" | "info" | "warning" | "error";
+export type MessageToastType = "success" | "info" | "warning" | "error";
 
 export interface ShowMessageToastOptions {
     message: string;
-    status?: MessageToastStatus;
+    type?: MessageToastType;
     duration?: number;
 }
 
 interface MessageToastContent {
     message: string;
-    status: MessageToastStatus;
+    type: MessageToastType;
 }
 
 interface MessageToastState {
@@ -132,7 +132,7 @@ export const showMessageToast = (options: ShowMessageToastOptions) => {
     // Update the toast state while keeping the shell closed until the renderer is mounted
     messageToastState.current = {
         message: options.message,
-        status: options.status ?? "success"
+        type: options.type ?? "success"
     };
     messageToastState.isOpen = false;
 

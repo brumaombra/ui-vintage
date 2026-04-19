@@ -63,7 +63,7 @@ const handleConfirmDemo = async () => {
     // If confirmed, show a follow-up message dialog
     if (confirmed) {
         await showMessageDialog({
-            type: 'Success',
+            type: 'success',
             icon: SuccessDialogIcon,
             title: 'Published',
             message: 'The confirm dialog resolved successfully and triggered a follow-up message dialog.',
@@ -82,7 +82,7 @@ const handleBusyDemo = async () => {
     // Hide the busy indicator and show a message dialog
     setBusy(false);
     await showMessageDialog({
-        type: 'Info',
+        type: 'info',
         icon: SyncDialogIcon,
         title: 'Sync complete',
         message: 'The busy indicator was displayed using the shared global overlay.',
@@ -93,7 +93,7 @@ const handleBusyDemo = async () => {
 // Show an informational dialog about the demo screen
 const handleInfoDemo = async () => {
     await showMessageDialog({
-        type: 'Info',
+        type: 'info',
         icon: InfoDialogIcon,
         title: 'Demo screen',
         message: 'This screen is meant to preview the core components with realistic spacing and interactions.',

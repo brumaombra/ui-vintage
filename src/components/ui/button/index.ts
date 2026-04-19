@@ -10,7 +10,11 @@ export const buttonVariants = cva(
       variant: {
         default:
           "bg-(--button-primary-light) text-(--button-primary-foreground-light) hover:bg-(--button-primary-hover-light) dark:bg-(--button-primary-dark) dark:text-(--button-primary-foreground-dark) dark:hover:bg-(--button-primary-hover-dark)",
+        primary:
+          "bg-(--button-primary-light) text-(--button-primary-foreground-light) hover:bg-(--button-primary-hover-light) dark:bg-(--button-primary-dark) dark:text-(--button-primary-foreground-dark) dark:hover:bg-(--button-primary-hover-dark)",
         destructive:
+          "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
+        danger:
           "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
         outline:
           "border border-(--border-light) bg-(--button-secondary-light) text-(--text-primary-light) hover:border-(--border-hover-light) hover:bg-(--bg-selected-light) dark:border-(--border-dark) dark:bg-(--button-secondary-dark) dark:text-(--text-primary-dark) dark:hover:border-(--border-hover-dark) dark:hover:bg-(--bg-selected-dark)",

@@ -10,7 +10,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 const handleShowSuccessToast = () => {
     showMessageToast({
         message: 'Changes saved successfully. This success toast closes automatically after a few seconds.',
-        status: 'success'
+        type: 'success'
     });
 };
 
@@ -18,7 +18,7 @@ const handleShowSuccessToast = () => {
 const handleShowInfoToast = () => {
     showMessageToast({
         message: 'A new report is ready to review. This informational toast uses the neutral status styling.',
-        status: 'info'
+        type: 'info'
     });
 };
 
@@ -26,7 +26,7 @@ const handleShowInfoToast = () => {
 const handleShowWarningToast = () => {
     showMessageToast({
         message: 'Your session will expire soon. This warning toast highlights a time-sensitive state.',
-        status: 'warning'
+        type: 'warning'
     });
 };
 
@@ -34,7 +34,7 @@ const handleShowWarningToast = () => {
 const handleShowErrorToast = () => {
     showMessageToast({
         message: 'Sync failed. This error toast stays open until you dismiss it manually.',
-        status: 'error',
+        type: 'error',
         duration: 0
     });
 };

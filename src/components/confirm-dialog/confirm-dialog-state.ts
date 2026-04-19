@@ -1,7 +1,8 @@
 import { h, markRaw, reactive, render } from "vue";
 import type { Component } from "vue";
+import type { ButtonVariants } from "@/components/ui/button";
 
-export type DialogButtonVariant = "default" | "outline" | "ghost";
+export type DialogButtonVariant = NonNullable<ButtonVariants["variant"]>;
 
 export interface ShowConfirmDialogOptions {
     title?: string;

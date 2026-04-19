@@ -4,6 +4,6 @@ export {
     showMessageToast
 } from "./message-toast-state";
 export type {
-    MessageToastStatus,
+    MessageToastType,
     ShowMessageToastOptions
 } from "./message-toast-state";
