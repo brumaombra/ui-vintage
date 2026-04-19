@@ -1,22 +1,22 @@
 import { h, markRaw, reactive, render } from "vue";
-import type { Component } from "vue";
 
 export type DialogMessageType = "error" | "success" | "info" | "warning";
+export type HugeiconsIconDefinition = readonly (readonly [string, { readonly [key: string]: string | number }])[];
 
 export interface ShowMessageDialogOptions {
     type?: DialogMessageType;
     title?: string;
     message: string;
     closeText?: string;
-    icon?: Component | null;
-    closeButtonIcon?: Component | null;
+    icon?: HugeiconsIconDefinition | null;
+    closeButtonIcon?: HugeiconsIconDefinition | null;
 }
 
 interface MessageDialogRequest {
     id: number;
     options: Required<Omit<ShowMessageDialogOptions, "icon" | "closeButtonIcon">> & {
-        icon: Component | null;
-        closeButtonIcon: Component | null;
+        icon: HugeiconsIconDefinition | null;
+        closeButtonIcon: HugeiconsIconDefinition | null;
     };
     resolve: () => void;
 }
@@ -42,8 +42,8 @@ export const messageDialogState: MessageDialogState = reactive({
     isOpen: false
 });
 
-// Keep component icons non-reactive
-const markIcon = (icon: Component | null | undefined) => icon ? markRaw(icon) : null;
+// Keep icon definitions non-reactive
+const markIcon = (icon: HugeiconsIconDefinition | null | undefined) => icon ? markRaw(icon) : null;
 
 // Mount the dialog once on demand
 const ensureMessageDialogMounted = () => {

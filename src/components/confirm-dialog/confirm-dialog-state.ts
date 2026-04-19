@@ -1,8 +1,8 @@
 import { h, markRaw, reactive, render } from "vue";
-import type { Component } from "vue";
 import type { ButtonVariants } from "@/components/ui/button";
 
 export type DialogButtonVariant = NonNullable<ButtonVariants["variant"]>;
+export type HugeiconsIconDefinition = readonly (readonly [string, { readonly [key: string]: string | number }])[];
 
 export interface ShowConfirmDialogOptions {
     title?: string;
@@ -11,9 +11,9 @@ export interface ShowConfirmDialogOptions {
     cancelText?: string;
     confirmButtonType?: DialogButtonVariant;
     cancelButtonType?: DialogButtonVariant;
-    icon?: Component | null;
-    confirmButtonIcon?: Component | null;
-    cancelButtonIcon?: Component | null;
+    icon?: HugeiconsIconDefinition | null;
+    confirmButtonIcon?: HugeiconsIconDefinition | null;
+    cancelButtonIcon?: HugeiconsIconDefinition | null;
     onConfirm?: (() => void | Promise<void>) | null;
     onCancel?: (() => void | Promise<void>) | null;
 }
@@ -21,9 +21,9 @@ export interface ShowConfirmDialogOptions {
 interface ConfirmDialogRequest {
     id: number;
     options: Required<Omit<ShowConfirmDialogOptions, "icon" | "confirmButtonIcon" | "cancelButtonIcon" | "onConfirm" | "onCancel">> & {
-        icon: Component | null;
-        confirmButtonIcon: Component | null;
-        cancelButtonIcon: Component | null;
+        icon: HugeiconsIconDefinition | null;
+        confirmButtonIcon: HugeiconsIconDefinition | null;
+        cancelButtonIcon: HugeiconsIconDefinition | null;
         onConfirm: (() => void | Promise<void>) | null;
         onCancel: (() => void | Promise<void>) | null;
     };
@@ -51,8 +51,8 @@ export const confirmDialogState: ConfirmDialogState = reactive({
     isOpen: false
 });
 
-// Keep component icons non-reactive
-const markIcon = (icon: Component | null | undefined) => icon ? markRaw(icon) : null;
+// Keep icon definitions non-reactive
+const markIcon = (icon: HugeiconsIconDefinition | null | undefined) => icon ? markRaw(icon) : null;
 
 // Mount the dialog once on demand
 const ensureConfirmDialogMounted = () => {

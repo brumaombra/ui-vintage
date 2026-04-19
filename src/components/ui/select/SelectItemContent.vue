@@ -1,10 +1,13 @@
 <script setup lang="ts">
-import type { Component, HTMLAttributes } from "vue"
+import type { HTMLAttributes } from "vue"
+import { HugeiconsIcon } from "@hugeicons/vue"
 import { cn } from "@/lib/utils"
+
+type HugeiconsIconDefinition = readonly (readonly [string, { readonly [key: string]: string | number }])[]
 
 const props = defineProps<{
   class?: HTMLAttributes["class"]
-  icon?: Component | null
+  icon?: HugeiconsIconDefinition | null
   label?: string | number | null
   description?: string | number | null
   iconClass?: HTMLAttributes["class"]
@@ -16,7 +19,7 @@ const props = defineProps<{
 <template>
   <div data-slot="select-item-content" :class="cn('flex min-w-0 flex-1 items-start gap-2', props.class)">
     <div v-if="props.icon" data-slot="select-item-content-icon" :class="cn('mt-0.5 shrink-0', props.iconClass)">
-      <component :is="props.icon" />
+      <HugeiconsIcon :icon="props.icon" :stroke-width="1.8" />
     </div>
 
     <div class="flex min-w-0 flex-1 flex-col">

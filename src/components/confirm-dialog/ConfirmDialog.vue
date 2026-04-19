@@ -25,7 +25,7 @@ const handleOpenChange = (open: boolean) => {
                 <div class="flex flex-col gap-4 sm:flex-row sm:items-start">
                     <!-- Dialog icon -->
                     <div class="flex size-12 shrink-0 self-center items-center justify-center rounded border border-[var(--border-light)] bg-[var(--bg-surface-light)] sm:size-10 sm:self-start dark:border-[var(--border-dark)] dark:bg-[var(--bg-surface-dark)]">
-                        <component :is="currentDialog.options.icon" v-if="currentDialog.options.icon" :stroke-width="1.8" class="size-6 text-[var(--button-primary-light)] dark:text-[var(--button-primary-dark)]" />
+                        <HugeiconsIcon v-if="currentDialog.options.icon" :icon="currentDialog.options.icon" :stroke-width="1.8" class="size-6 text-[var(--button-primary-light)] dark:text-[var(--button-primary-dark)]" />
                         <HugeiconsIcon v-else :icon="InformationCircleIcon" :stroke-width="1.8" class="size-6 text-[var(--button-primary-light)] dark:text-[var(--button-primary-dark)]" />
                     </div>
 
@@ -45,13 +45,13 @@ const handleOpenChange = (open: boolean) => {
             <AlertDialogFooter>
                 <!-- Cancel button -->
                 <Button :variant="currentDialog.options.cancelButtonType" :disabled="confirmDialogState.busy" @click="cancelActiveConfirmDialog">
-                    <component :is="currentDialog.options.cancelButtonIcon" v-if="currentDialog.options.cancelButtonIcon" class="size-4" />
+                    <HugeiconsIcon v-if="currentDialog.options.cancelButtonIcon" :icon="currentDialog.options.cancelButtonIcon" class="size-4" />
                     {{ currentDialog.options.cancelText }}
                 </Button>
 
                 <!-- Confirm button -->
                 <Button :variant="currentDialog.options.confirmButtonType" :disabled="confirmDialogState.busy" @click="confirmActiveDialog">
-                    <component :is="currentDialog.options.confirmButtonIcon" v-if="currentDialog.options.confirmButtonIcon" class="size-4" />
+                    <HugeiconsIcon v-if="currentDialog.options.confirmButtonIcon" :icon="currentDialog.options.confirmButtonIcon" class="size-4" />
                     {{ currentDialog.options.confirmText }}
                 </Button>
             </AlertDialogFooter>

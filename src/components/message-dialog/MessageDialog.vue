@@ -55,7 +55,7 @@ const handleOpenChange = (open: boolean) => {
                 <div class="flex flex-col gap-4 sm:flex-row sm:items-start">
                     <!-- Dialog icon -->
                     <div class="flex size-12 shrink-0 self-center items-center justify-center rounded border sm:size-10 sm:self-start" :class="messageIconClasses">
-                        <component :is="currentDialog.options.icon" v-if="currentDialog.options.icon" :stroke-width="1.8" class="size-6" :class="messageGlyphClasses" />
+                        <HugeiconsIcon v-if="currentDialog.options.icon" :icon="currentDialog.options.icon" :stroke-width="1.8" class="size-6" :class="messageGlyphClasses" />
                         <HugeiconsIcon v-else :icon="defaultMessageIcon" :stroke-width="1.8" class="size-6" :class="messageGlyphClasses" />
                     </div>
 
@@ -74,7 +74,7 @@ const handleOpenChange = (open: boolean) => {
             <!-- Dialog actions -->
             <AlertDialogFooter class="items-end">
                 <Button variant="outline" :disabled="messageDialogState.busy" @click="resolveActiveMessageDialog">
-                    <component :is="currentDialog.options.closeButtonIcon" v-if="currentDialog.options.closeButtonIcon" class="size-4" />
+                    <HugeiconsIcon v-if="currentDialog.options.closeButtonIcon" :icon="currentDialog.options.closeButtonIcon" class="size-4" />
                     {{ currentDialog.options.closeText }}
                 </Button>
             </AlertDialogFooter>

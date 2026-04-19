@@ -1,12 +1,15 @@
 <script setup lang="ts">
-import type { Component, HTMLAttributes } from "vue"
+import type { HTMLAttributes } from "vue"
+import { HugeiconsIcon } from "@hugeicons/vue"
 import type { SelectValueProps } from "reka-ui"
 import { SelectValue } from "reka-ui"
 import { cn } from "@/lib/utils"
 
+type HugeiconsIconDefinition = readonly (readonly [string, { readonly [key: string]: string | number }])[]
+
 const props = defineProps<SelectValueProps & {
   class?: HTMLAttributes["class"]
-  icon?: Component | null
+  icon?: HugeiconsIconDefinition | null
   label?: string | number | null
   description?: string | number | null
   iconClass?: HTMLAttributes["class"]
@@ -18,7 +21,7 @@ const props = defineProps<SelectValueProps & {
 <template>
   <SelectValue data-slot="select-value-content" :placeholder="props.placeholder" :class="cn('flex min-w-0 flex-1 gap-2 text-left', props.description ? 'items-start' : 'items-center', props.class)">
     <div v-if="props.icon" data-slot="select-value-content-icon" :class="cn('shrink-0', props.iconClass)">
-      <component :is="props.icon" />
+      <HugeiconsIcon :icon="props.icon" :stroke-width="1.8" />
     </div>
 
     <div class="flex min-w-0 flex-1 flex-col">
