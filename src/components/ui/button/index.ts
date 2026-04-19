@@ -16,6 +16,8 @@ export const buttonVariants = cva(
           "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
         danger:
           "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
+        warning:
+          "border border-yellow-200 bg-yellow-50 text-yellow-700 hover:bg-yellow-100 dark:border-yellow-900/50 dark:bg-yellow-900/10 dark:text-yellow-400 dark:hover:bg-yellow-900/20",
         outline:
           "border border-(--border-light) bg-(--button-secondary-light) text-(--text-primary-light) hover:border-(--border-hover-light) hover:bg-(--bg-selected-light) dark:border-(--border-dark) dark:bg-(--button-secondary-dark) dark:text-(--text-primary-dark) dark:hover:border-(--border-hover-dark) dark:hover:bg-(--bg-selected-dark)",
         secondary:
