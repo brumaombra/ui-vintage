@@ -128,6 +128,10 @@
             "types": "./dist/components/ui/label/index.d.ts",
             "import": "./dist/label.js"
         },
+        "./loading-state-card": {
+            "types": "./dist/components/loading-state-card/index.d.ts",
+            "import": "./dist/loading-state-card.js"
+        },
         "./landing": {
             "types": "./dist/components/landing/index.d.ts",
             "import": "./dist/landing.js"
