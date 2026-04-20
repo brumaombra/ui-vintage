@@ -92,6 +92,10 @@
             "types": "./dist/components/ui/dialog/index.d.ts",
             "import": "./dist/dialog.js"
         },
+        "./empty-state-card": {
+            "types": "./dist/components/empty-state-card/index.d.ts",
+            "import": "./dist/empty-state-card.js"
+        },
         "./confirm-dialog": {
             "types": "./dist/components/confirm-dialog/index.d.ts",
             "import": "./dist/confirm-dialog.js"
