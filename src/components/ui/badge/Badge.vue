@@ -1,21 +1,20 @@
 <script setup lang="ts">
-import type { PrimitiveProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
-import type { BadgeVariants } from "."
-import { Primitive } from "reka-ui"
+import { getSurfaceToneClasses, type ToneColor } from "@/lib/color-tokens"
 import { cn } from "@/lib/utils"
-import { badgeVariants } from "."
 
-interface Props extends PrimitiveProps {
-  variant?: BadgeVariants["variant"]
-  class?: HTMLAttributes["class"]
-}
-
-const props = defineProps<Props>()
+// Props
+const props = withDefaults(defineProps<{
+    text: string
+    color?: ToneColor
+    class?: HTMLAttributes["class"]
+}>(), {
+    color: "gray"
+})
 </script>
 
 <template>
-  <Primitive data-slot="badge" :data-variant="variant" :as="as" :as-child="asChild" :class="cn(badgeVariants({ variant }), props.class)">
-    <slot />
-  </Primitive>
+    <span data-slot="badge" :class="cn('inline-flex w-fit items-center justify-center whitespace-nowrap rounded border px-2 py-0.5 text-xs font-semibold transition-colors duration-300 ease-in-out', getSurfaceToneClasses(props.color), props.class)">
+        {{ props.text }}
+    </span>
 </template>

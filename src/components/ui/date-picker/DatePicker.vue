@@ -55,7 +55,7 @@ const formatter = new DateFormatter('en-US', {
 <template>
     <Popover v-slot="{ close }">
         <PopoverTrigger as-child>
-            <Button variant="outline" :disabled="disabled" :class="cn('h-[52px] w-[240px] justify-start text-left font-normal enabled:active:scale-100', !date && 'text-muted-foreground', props.class)">
+            <Button variant="secondary" :disabled="disabled" :class="cn('h-[52px] w-[240px] justify-start text-left font-normal enabled:active:scale-100', !date && 'text-muted-foreground', props.class)">
                 <HugeiconsIcon :icon="Calendar03Icon" class="size-4" />
                 {{ date ? formatter.format(date.toDate(getLocalTimeZone())) : placeholder }}
             </Button>

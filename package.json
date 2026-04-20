@@ -68,6 +68,10 @@
             "types": "./dist/components/ui/card/index.d.ts",
             "import": "./dist/card.js"
         },
+        "./chip": {
+            "types": "./dist/components/chip/index.d.ts",
+            "import": "./dist/chip.js"
+        },
         "./command": {
             "types": "./dist/components/ui/command/index.d.ts",
             "import": "./dist/command.js"

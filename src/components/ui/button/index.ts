@@ -1,5 +1,6 @@
 import type { VariantProps } from "class-variance-authority"
 import { cva } from "class-variance-authority"
+import { getButtonVariantClasses } from "@/lib/color-tokens"
 
 export { default as Button } from "./Button.vue"
 
@@ -8,23 +9,12 @@ export const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default:
-          "bg-(--button-primary-light) text-(--button-primary-foreground-light) hover:bg-(--button-primary-hover-light) dark:bg-(--button-primary-dark) dark:text-(--button-primary-foreground-dark) dark:hover:bg-(--button-primary-hover-dark)",
-        primary:
-          "bg-(--button-primary-light) text-(--button-primary-foreground-light) hover:bg-(--button-primary-hover-light) dark:bg-(--button-primary-dark) dark:text-(--button-primary-foreground-dark) dark:hover:bg-(--button-primary-hover-dark)",
-        destructive:
-          "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
-        danger:
-          "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
-        warning:
-          "border border-yellow-200 bg-yellow-50 text-yellow-700 hover:bg-yellow-100 dark:border-yellow-900/50 dark:bg-yellow-900/10 dark:text-yellow-400 dark:hover:bg-yellow-900/20",
-        outline:
-          "border border-(--border-light) bg-(--button-secondary-light) text-(--text-primary-light) hover:border-(--border-hover-light) hover:bg-(--bg-selected-light) dark:border-(--border-dark) dark:bg-(--button-secondary-dark) dark:text-(--text-primary-dark) dark:hover:border-(--border-hover-dark) dark:hover:bg-(--bg-selected-dark)",
-        secondary:
-          "border border-(--border-light) bg-(--button-secondary-light) text-(--text-primary-light) hover:border-(--border-hover-light) hover:bg-(--bg-selected-light) dark:border-(--border-dark) dark:bg-(--button-secondary-dark) dark:text-(--text-primary-dark) dark:hover:border-(--border-hover-dark) dark:hover:bg-(--bg-selected-dark)",
-        ghost:
-          "text-(--text-secondary-light) hover:bg-(--bg-selected-light) hover:text-(--text-primary-light) dark:text-(--text-secondary-dark) dark:hover:bg-(--bg-selected-dark) dark:hover:text-(--text-primary-dark)",
-        link: "text-primary underline-offset-4 hover:underline",
+        primary: getButtonVariantClasses("primary"),
+        danger: getButtonVariantClasses("danger"),
+        warning: getButtonVariantClasses("warning"),
+        secondary: getButtonVariantClasses("secondary"),
+        ghost: getButtonVariantClasses("ghost"),
+        link: getButtonVariantClasses("link"),
       },
       size: {
         "default": "min-h-12 px-4 py-3 has-[>svg]:px-3",
@@ -36,7 +26,7 @@ export const buttonVariants = cva(
       },
     },
     defaultVariants: {
-      variant: "default",
+      variant: "primary",
       size: "default",
     },
   },

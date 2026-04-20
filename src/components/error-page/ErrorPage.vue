@@ -105,7 +105,7 @@ const handleAction = () => {
                     <!-- Actions -->
                     <CardFooter :class="cn('items-start flex-col gap-3 sm:flex-row sm:items-center', props.footerClass)">
                         <slot name="actions" :on-action="handleAction">
-                            <Button v-if="props.showDefaultAction" variant="default" @click="handleAction">
+                            <Button v-if="props.showDefaultAction" variant="primary" @click="handleAction">
                                 <HugeiconsIcon :icon="ArrowLeft01Icon" :stroke-width="1.8" class="size-4" />
                                 {{ props.actionLabel }}
                             </Button>

@@ -73,7 +73,7 @@ const handleOpenChange = (open: boolean) => {
 
             <!-- Dialog actions -->
             <AlertDialogFooter class="items-end">
-                <Button variant="outline" :disabled="messageDialogState.busy" @click="resolveActiveMessageDialog">
+                <Button variant="secondary" :disabled="messageDialogState.busy" @click="resolveActiveMessageDialog">
                     <HugeiconsIcon v-if="currentDialog.options.closeButtonIcon" :icon="currentDialog.options.closeButtonIcon" class="size-4" />
                     {{ currentDialog.options.closeText }}
                 </Button>

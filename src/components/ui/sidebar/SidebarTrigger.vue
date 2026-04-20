@@ -14,7 +14,7 @@ const { toggleSidebar } = useSidebar()
 </script>
 
 <template>
-  <Button data-sidebar="trigger" data-slot="sidebar-trigger" variant="outline" size="icon" :class="cn(props.class)" @click="toggleSidebar">
+  <Button data-sidebar="trigger" data-slot="sidebar-trigger" variant="secondary" size="icon" :class="cn(props.class)" @click="toggleSidebar">
     <HugeiconsIcon :icon="PanelLeftIcon" />
     <span class="sr-only">Toggle Sidebar</span>
   </Button>
