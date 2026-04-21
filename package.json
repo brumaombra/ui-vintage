@@ -60,6 +60,10 @@
             "types": "./dist/components/ui/button/index.d.ts",
             "import": "./dist/button.js"
         },
+        "./breadcrumb": {
+            "types": "./dist/components/ui/breadcrumb/index.d.ts",
+            "import": "./dist/breadcrumb.js"
+        },
         "./calendar": {
             "types": "./dist/components/ui/calendar/index.d.ts",
             "import": "./dist/calendar.js"
@@ -95,6 +99,10 @@
         "./dialog": {
             "types": "./dist/components/ui/dialog/index.d.ts",
             "import": "./dist/dialog.js"
+        },
+        "./card-grid": {
+            "types": "./dist/components/card-grid/index.d.ts",
+            "import": "./dist/card-grid.js"
         },
         "./empty-state-card": {
             "types": "./dist/components/empty-state-card/index.d.ts",
