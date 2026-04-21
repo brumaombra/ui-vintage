@@ -103,7 +103,7 @@ const handleInfoDemo = async () => {
                     </span>
 
                     <!-- Quick intro button -->
-                    <Button variant="outline" size="sm" @click="handleInfoDemo">
+                    <Button variant="secondary" size="sm" @click="handleInfoDemo">
                         Quick Intro
                     </Button>
                 </div>
