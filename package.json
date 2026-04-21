@@ -132,6 +132,14 @@
             "types": "./dist/lib/i18n.d.ts",
             "import": "./dist/i18n.js"
         },
+        "./language-flag": {
+            "types": "./dist/components/language-flag/index.d.ts",
+            "import": "./dist/language-flag.js"
+        },
+        "./language-selector": {
+            "types": "./dist/components/language-selector/index.d.ts",
+            "import": "./dist/language-selector.js"
+        },
         "./load-more-button": {
             "types": "./dist/components/load-more-button/index.d.ts",
             "import": "./dist/load-more-button.js"
@@ -187,6 +195,10 @@
         "./textarea": {
             "types": "./dist/components/ui/textarea/index.d.ts",
             "import": "./dist/textarea.js"
+        },
+        "./theme-selector": {
+            "types": "./dist/components/theme-selector/index.d.ts",
+            "import": "./dist/theme-selector.js"
         },
         "./time-picker": {
             "types": "./dist/components/ui/time-picker/index.d.ts",
