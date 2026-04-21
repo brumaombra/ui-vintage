@@ -1,10 +1,15 @@
-import type { VariantProps } from "class-variance-authority"
+import type { ClassProp } from "class-variance-authority/types"
 import { cva } from "class-variance-authority"
 import { getButtonVariantClasses } from "@/lib/color-tokens"
 
 export { default as Button } from "./Button.vue"
 
-export const buttonVariants = cva(
+export type ButtonVariants = {
+  variant?: "primary" | "secondary" | "ghost" | "link" | "gray" | "green" | "red" | "blue" | "yellow" | null | undefined
+  size?: "default" | "sm" | "lg" | "icon" | "icon-sm" | "icon-lg" | null | undefined
+}
+
+export const buttonVariants: (props?: ButtonVariants & ClassProp) => string = cva(
   "inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded text-xs font-medium transition-all duration-300 ease-in-out disabled:pointer-events-none disabled:opacity-50 enabled:active:scale-[0.98] sm:text-sm [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
   {
     variants: {
@@ -34,4 +39,3 @@ export const buttonVariants = cva(
     },
   },
 )
-export type ButtonVariants = VariantProps<typeof buttonVariants>

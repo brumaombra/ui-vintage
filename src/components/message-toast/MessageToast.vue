@@ -2,8 +2,11 @@
 import { AlertCircleIcon, Cancel01Icon, CheckmarkCircle02Icon, InformationCircleIcon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/vue";
 import { computed } from "vue";
+import { useI18n } from "vue-i18n";
 import { Button } from "@/components/ui/button";
 import { closeMessageToast, messageToastState } from "./message-toast-state";
+
+const { t } = useI18n();
 
 // Current toast data
 const currentToast = computed(() => messageToastState.current);
@@ -45,7 +48,7 @@ const toastAriaLive = computed(() => {
                 </p>
 
                 <!-- Dismiss button -->
-                <Button variant="ghost" size="icon-sm" class="-me-1 h-auto min-h-0 w-auto p-0 opacity-70 hover:opacity-100" aria-label="Close" @click="closeMessageToast">
+                <Button variant="ghost" size="icon-sm" class="-me-1 h-auto min-h-0 w-auto p-0 opacity-70 hover:opacity-100" :aria-label="t('ui.buttons.close') || 'Close'" @click="closeMessageToast">
                     <HugeiconsIcon :icon="Cancel01Icon" class="size-4" />
                 </Button>
             </div>

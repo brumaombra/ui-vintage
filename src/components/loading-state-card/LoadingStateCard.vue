@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { Loading03Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Card, CardContent } from '@/components/ui/card';
@@ -9,6 +11,11 @@ const props = defineProps({
     title: { type: String, default: '' },
     description: { type: String, default: '' }
 });
+
+const { t } = useI18n();
+
+const resolvedTitle = computed(() => props.title || t('ui.common.loading.title') || 'Loading...');
+const resolvedDescription = computed(() => props.description || t('ui.common.loading.description') || 'Please wait a moment while we load the content.');
 </script>
 
 <template>
@@ -20,13 +27,13 @@ const props = defineProps({
             </div>
 
             <!-- Title -->
-            <h3 v-if="props.title" class="text-sm font-bold text-[var(--text-primary-light)] dark:text-[var(--text-primary-dark)] md:text-lg">
-                {{ props.title }}
+            <h3 v-if="resolvedTitle" class="text-sm font-bold text-[var(--text-primary-light)] dark:text-[var(--text-primary-dark)] md:text-lg">
+                {{ resolvedTitle }}
             </h3>
 
             <!-- Description -->
-            <p v-if="props.description" class="max-w-md text-xs text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)] md:text-sm">
-                {{ props.description }}
+            <p v-if="resolvedDescription" class="max-w-md text-xs text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)] md:text-sm">
+                {{ resolvedDescription }}
             </p>
 
             <!-- Slot for additional content -->

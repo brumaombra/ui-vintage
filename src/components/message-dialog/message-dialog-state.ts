@@ -14,7 +14,7 @@ export interface ShowMessageDialogOptions {
 
 interface MessageDialogRequest {
     id: number;
-    options: Required<Omit<ShowMessageDialogOptions, "icon" | "closeButtonIcon">> & {
+    options: Omit<ShowMessageDialogOptions, "icon" | "closeButtonIcon"> & {
         icon: HugeiconsIconDefinition | null;
         closeButtonIcon: HugeiconsIconDefinition | null;
     };
@@ -158,7 +158,7 @@ export const showMessageDialog = (options: ShowMessageDialogOptions) => {
                 type: options.type ?? "info",
                 title: options.title ?? "",
                 message: options.message,
-                closeText: options.closeText ?? "Close",
+                closeText: options.closeText ?? "",
                 icon: markIcon(options.icon),
                 closeButtonIcon: markIcon(options.closeButtonIcon)
             },

@@ -34,6 +34,7 @@ function getLibraryEntries() {
     return {
         ...topLevelComponentEntries,
         ...uiComponentEntries,
+        i18n: resolve(__dirname, "src/lib/i18n.ts"),
         style: resolve(__dirname, "src/style.ts"),
         utils: resolve(__dirname, "src/lib/utils.ts")
     };
@@ -45,7 +46,10 @@ export default defineConfig({
         vue(),
         tailwindcss(),
         dts({
-            include: ["src/**/*"]
+            include: ["src/**/*"],
+            entryRoot: "src",
+            outDir: "dist",
+            strictOutput: true
         }),
     ],
     resolve: {
@@ -62,7 +66,7 @@ export default defineConfig({
             fileName: (_, entryName) => `${entryName}.js`
         },
         rollupOptions: {
-            external: ["vue"]
+            external: ["vue", "vue-i18n"]
         }
     }
 });

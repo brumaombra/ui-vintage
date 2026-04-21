@@ -1,0 +1,50 @@
+{
+    "ui": {
+        "common": {
+            "empty": {
+                "title": "Nothing here yet",
+                "description": "There is no content to show right now."
+            },
+            "loading": {
+                "title": "Loading...",
+                "description": "Please wait a moment while we load the content."
+            }
+        },
+        "buttons": {
+            "all": "All",
+            "close": "Close",
+            "cancel": "Cancel",
+            "delete": "Delete",
+            "confirm": "Confirm",
+            "filter": "Filter",
+            "search": "Search",
+            "apply": "Apply",
+            "clear": "Clear",
+            "loading": "Loading",
+            "loadMore": "Load more",
+            "save": "Save",
+            "update": "Update",
+            "goBack": "Go back"
+        },
+        "theme": {
+            "light": "Light",
+            "dark": "Dark",
+            "auto": "Auto",
+            "title": "Choose theme",
+            "ariaLabel": "Toggle theme selector"
+        },
+        "language": {
+            "title": "Choose language",
+            "ariaLabel": "Language selector"
+        },
+        "select": {
+            "defaultPlaceholder": "Select an option"
+        },
+        "messageDialog": {
+            "error": "Error",
+            "success": "Success",
+            "info": "Information",
+            "warning": "Warning"
+        }
+    }
+}

@@ -1,7 +1,11 @@
-import type { VariantProps } from "class-variance-authority"
+import type { ClassProp } from "class-variance-authority/types"
 import { cva } from "class-variance-authority"
 
-export const fieldVariants = cva(
+export type FieldVariants = {
+  orientation?: "vertical" | "horizontal" | "responsive" | null | undefined
+}
+
+export const fieldVariants: (props?: FieldVariants & ClassProp) => string = cva(
   "group/field flex w-full gap-3 data-[invalid=true]:text-destructive",
   {
     variants: {
@@ -24,8 +28,6 @@ export const fieldVariants = cva(
     },
   },
 )
-
-export type FieldVariants = VariantProps<typeof fieldVariants>
 
 export { default as Field } from "./Field.vue"
 export { default as FieldContent } from "./FieldContent.vue"

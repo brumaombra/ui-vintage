@@ -1,13 +1,30 @@
 <script setup lang="ts">
 import { HugeiconsIcon } from "@hugeicons/vue";
 import { computed } from "vue";
+import { useI18n } from "vue-i18n";
 import { AlertCircleIcon, InformationCircleIcon, Tick02Icon } from "@hugeicons/core-free-icons";
 import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { closeMessageDialog, messageDialogState, resolveActiveMessageDialog } from "./message-dialog-state";
 
+const { t } = useI18n();
+
 // Active dialog state
 const currentDialog = computed(() => messageDialogState.current);
+
+// Resolve the title
+const resolvedTitle = computed(() => {
+    const current = currentDialog.value;
+    if (!current) return '';
+    return current.options.title || t(`ui.messageDialog.${current.options.type}`) || '';
+});
+
+// Resolve the close button text
+const resolvedCloseText = computed(() => {
+    const current = currentDialog.value;
+    if (!current) return t('ui.buttons.close') || 'Close';
+    return current.options.closeText || t('ui.buttons.close') || 'Close';
+});
 
 // Resolved fallback icon for the current message type
 const defaultMessageIcon = computed(() => {
@@ -61,9 +78,12 @@ const handleOpenChange = (open: boolean) => {
 
                     <!-- Dialog header -->
                     <AlertDialogHeader class="sm:pt-0">
+                        <!-- Title -->
                         <AlertDialogTitle>
-                            {{ currentDialog.options.title }}
+                            {{ resolvedTitle }}
                         </AlertDialogTitle>
+
+                        <!-- Message -->
                         <AlertDialogDescription>
                             {{ currentDialog.options.message }}
                         </AlertDialogDescription>
@@ -75,7 +95,7 @@ const handleOpenChange = (open: boolean) => {
             <AlertDialogFooter class="items-end">
                 <Button variant="secondary" :disabled="messageDialogState.busy" @click="resolveActiveMessageDialog">
                     <HugeiconsIcon v-if="currentDialog.options.closeButtonIcon" :icon="currentDialog.options.closeButtonIcon" class="size-4" />
-                    {{ currentDialog.options.closeText }}
+                    {{ resolvedCloseText }}
                 </Button>
             </AlertDialogFooter>
         </AlertDialogContent>
