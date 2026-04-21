@@ -84,6 +84,10 @@
             "types": "./dist/components/ui/date-picker/index.d.ts",
             "import": "./dist/date-picker.js"
         },
+        "./data-list": {
+            "types": "./dist/components/data-list/index.d.ts",
+            "import": "./dist/data-list.js"
+        },
         "./date-time-picker": {
             "types": "./dist/components/ui/date-time-picker/index.d.ts",
             "import": "./dist/date-time-picker.js"

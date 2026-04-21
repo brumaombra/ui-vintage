@@ -1,0 +1,5 @@
+export { default as DataList } from "./DataList.vue"
+export { default as DataListItem } from "./DataListItem.vue"
+export { default as DataListLabel } from "./DataListLabel.vue"
+export { default as DataListText } from "./DataListText.vue"
+export { default as DataListValue } from "./DataListValue.vue"
