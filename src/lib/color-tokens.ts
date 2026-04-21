@@ -1,5 +1,5 @@
 export type ToneColor = "gray" | "green" | "red" | "blue" | "yellow"
-export type ButtonVariantName = "primary" | "danger" | "warning" | "secondary" | "ghost" | "link"
+export type ButtonVariantName = "primary" | "secondary" | "ghost" | "link" | ToneColor
 
 // Return the list of classes for a given tone color
 const surfaceToneClasses: Record<ToneColor, string> = {
@@ -31,12 +31,18 @@ export const getInteractiveSurfaceToneClasses = (color: ToneColor) => {
 
 // Return the list of classes for button variants
 export const buttonVariantClasses: Record<ButtonVariantName, string> = {
+    // Custom button variants
     primary: "bg-(--button-primary-light) text-(--button-primary-foreground-light) hover:bg-(--button-primary-hover-light) dark:bg-(--button-primary-dark) dark:text-(--button-primary-foreground-dark) dark:hover:bg-(--button-primary-hover-dark)",
     secondary: "border border-(--border-light) bg-(--button-secondary-light) text-(--text-primary-light) hover:border-(--border-hover-light) hover:bg-(--bg-selected-light) dark:border-(--border-dark) dark:bg-(--button-secondary-dark) dark:text-(--text-primary-dark) dark:hover:border-(--border-hover-dark) dark:hover:bg-(--bg-selected-dark)",
-    danger: getInteractiveSurfaceToneClasses("red"),
-    warning: getInteractiveSurfaceToneClasses("yellow"),
     ghost: "text-(--text-secondary-light) hover:bg-(--bg-selected-light) hover:text-(--text-primary-light) dark:text-(--text-secondary-dark) dark:hover:bg-(--bg-selected-dark) dark:hover:text-(--text-primary-dark)",
-    link: "text-primary underline-offset-4 hover:underline"
+    link: "text-primary underline-offset-4 hover:underline",
+
+    // Tone-based button variants
+    gray: getInteractiveSurfaceToneClasses("gray"),
+    green: getInteractiveSurfaceToneClasses("green"),
+    red: getInteractiveSurfaceToneClasses("red"),
+    blue: getInteractiveSurfaceToneClasses("blue"),
+    yellow: getInteractiveSurfaceToneClasses("yellow")
 }
 
 // Get the appropriate classes for a given button variant

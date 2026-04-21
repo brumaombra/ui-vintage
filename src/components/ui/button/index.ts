@@ -10,11 +10,14 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         primary: getButtonVariantClasses("primary"),
-        danger: getButtonVariantClasses("danger"),
-        warning: getButtonVariantClasses("warning"),
         secondary: getButtonVariantClasses("secondary"),
         ghost: getButtonVariantClasses("ghost"),
         link: getButtonVariantClasses("link"),
+        gray: getButtonVariantClasses("gray"),
+        green: getButtonVariantClasses("green"),
+        red: getButtonVariantClasses("red"),
+        blue: getButtonVariantClasses("blue"),
+        yellow: getButtonVariantClasses("yellow"),
       },
       size: {
         "default": "min-h-12 px-4 py-3 has-[>svg]:px-3",
