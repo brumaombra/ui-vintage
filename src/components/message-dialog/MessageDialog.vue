@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import { HugeiconsIcon } from "@hugeicons/vue";
 import { computed } from "vue";
-import { useI18n } from "vue-i18n";
 import { AlertCircleIcon, InformationCircleIcon, Tick02Icon } from "@hugeicons/core-free-icons";
 import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
+import { getUiVintageRuntimeMessage } from "@/lib/i18n";
 import { closeMessageDialog, messageDialogState, resolveActiveMessageDialog } from "./message-dialog-state";
-
-const { t } = useI18n();
 
 // Active dialog state
 const currentDialog = computed(() => messageDialogState.current);
@@ -16,14 +14,14 @@ const currentDialog = computed(() => messageDialogState.current);
 const resolvedTitle = computed(() => {
     const current = currentDialog.value;
     if (!current) return '';
-    return current.options.title || t(`ui.messageDialog.${current.options.type}`) || '';
+    return current.options.title || getUiVintageRuntimeMessage(`ui.messageDialog.${current.options.type}`, '');
 });
 
 // Resolve the close button text
 const resolvedCloseText = computed(() => {
     const current = currentDialog.value;
-    if (!current) return t('ui.buttons.close') || 'Close';
-    return current.options.closeText || t('ui.buttons.close') || 'Close';
+    if (!current) return getUiVintageRuntimeMessage('ui.buttons.close', 'Close');
+    return current.options.closeText || getUiVintageRuntimeMessage('ui.buttons.close', 'Close');
 });
 
 // Resolved fallback icon for the current message type
