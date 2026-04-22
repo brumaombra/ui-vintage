@@ -208,6 +208,10 @@
             "types": "./dist/components/switch-form-component/index.d.ts",
             "import": "./dist/switch-form-component.js"
         },
+        "./tabs": {
+            "types": "./dist/components/ui/tabs/index.d.ts",
+            "import": "./dist/tabs.js"
+        },
         "./textarea": {
             "types": "./dist/components/ui/textarea/index.d.ts",
             "import": "./dist/textarea.js"
