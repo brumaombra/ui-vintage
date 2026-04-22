@@ -212,6 +212,10 @@
             "types": "./dist/components/ui/tabs/index.d.ts",
             "import": "./dist/tabs.js"
         },
+        "./table": {
+            "types": "./dist/components/ui/table/index.d.ts",
+            "import": "./dist/table.js"
+        },
         "./textarea": {
             "types": "./dist/components/ui/textarea/index.d.ts",
             "import": "./dist/textarea.js"
