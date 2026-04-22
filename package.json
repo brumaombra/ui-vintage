@@ -136,6 +136,10 @@
             "types": "./dist/components/ui/input/index.d.ts",
             "import": "./dist/input.js"
         },
+        "./info-card": {
+            "types": "./dist/components/info-card/index.d.ts",
+            "import": "./dist/info-card.js"
+        },
         "./label": {
             "types": "./dist/components/ui/label/index.d.ts",
             "import": "./dist/label.js"
