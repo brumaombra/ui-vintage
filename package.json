@@ -172,6 +172,10 @@
             "types": "./dist/components/ui/popover/index.d.ts",
             "import": "./dist/popover.js"
         },
+        "./page-header": {
+            "types": "./dist/components/page-header/index.d.ts",
+            "import": "./dist/page-header.js"
+        },
         "./select": {
             "types": "./dist/components/ui/select/index.d.ts",
             "import": "./dist/select.js"
@@ -179,6 +183,10 @@
         "./separator": {
             "types": "./dist/components/ui/separator/index.d.ts",
             "import": "./dist/separator.js"
+        },
+        "./single-value-card": {
+            "types": "./dist/components/single-value-card/index.d.ts",
+            "import": "./dist/single-value-card.js"
         },
         "./sheet": {
             "types": "./dist/components/ui/sheet/index.d.ts",
@@ -215,6 +223,10 @@
         "./table": {
             "types": "./dist/components/ui/table/index.d.ts",
             "import": "./dist/table.js"
+        },
+        "./text-link": {
+            "types": "./dist/components/text-link/index.d.ts",
+            "import": "./dist/text-link.js"
         },
         "./textarea": {
             "types": "./dist/components/ui/textarea/index.d.ts",
