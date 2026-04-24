@@ -12,7 +12,7 @@ const surfaceToneClasses: Record<ToneColor, string> = {
 
 // Get the appropriate classes for a given tone color
 export const getSurfaceToneClasses = (color: ToneColor) => {
-    return surfaceToneClasses[color]
+    return surfaceToneClasses[color];
 }
 
 // Return the list of classes for interactive surfaces
@@ -26,7 +26,7 @@ const interactiveSurfaceToneClasses: Record<ToneColor, string> = {
 
 // Get the appropriate classes for interactive surfaces based on tone color
 export const getInteractiveSurfaceToneClasses = (color: ToneColor) => {
-    return interactiveSurfaceToneClasses[color]
+    return interactiveSurfaceToneClasses[color];
 }
 
 // Return the list of classes for button variants
@@ -47,5 +47,5 @@ export const buttonVariantClasses: Record<ButtonVariantName, string> = {
 
 // Get the appropriate classes for a given button variant
 export const getButtonVariantClasses = (variant: ButtonVariantName) => {
-    return buttonVariantClasses[variant]
+    return buttonVariantClasses[variant];
 }

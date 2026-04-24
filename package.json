@@ -176,6 +176,10 @@
             "types": "./dist/components/ui/progress/index.d.ts",
             "import": "./dist/progress.js"
         },
+        "./progress-component": {
+            "types": "./dist/components/progress-component/index.d.ts",
+            "import": "./dist/progress-component.js"
+        },
         "./page-header": {
             "types": "./dist/components/page-header/index.d.ts",
             "import": "./dist/page-header.js"

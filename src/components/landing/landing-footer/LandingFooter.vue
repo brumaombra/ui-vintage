@@ -84,7 +84,7 @@ const getLinkProps = (link: LandingFooterLink) => {
                     </div>
 
                     <!-- App description -->
-                    <p v-if="props.appDescription" class="max-w-sm text-sm leading-relaxed text-muted-foreground">
+                    <p v-if="props.appDescription" class="max-w-sm text-xs md:text-sm leading-relaxed text-muted-foreground">
                         {{ props.appDescription }}
                     </p>
                 </div>
@@ -98,7 +98,7 @@ const getLinkProps = (link: LandingFooterLink) => {
                         </h3>
 
                         <!-- Section links -->
-                        <ul class="space-y-3 text-sm">
+                        <ul class="space-y-3 text-xs sm:text-sm">
                             <li v-for="link in props.sections[0]?.links" :key="link.id">
                                 <component :is="props.linkComponent" v-bind="getLinkProps(link)" class="text-muted-foreground transition-colors duration-200 hover:text-foreground">
                                     {{ link.label }}
@@ -117,7 +117,7 @@ const getLinkProps = (link: LandingFooterLink) => {
                         </h3>
 
                         <!-- Section links -->
-                        <ul class="space-y-3 text-sm">
+                        <ul class="space-y-3 text-xs sm:text-sm">
                             <li v-for="link in section.links" :key="link.id">
                                 <component :is="props.linkComponent" v-bind="getLinkProps(link)" class="text-muted-foreground transition-colors duration-200 hover:text-foreground">
                                     {{ link.label }}
@@ -129,7 +129,7 @@ const getLinkProps = (link: LandingFooterLink) => {
             </div>
 
             <!-- Bottom bar -->
-            <div v-if="props.showBottomBar" :class="cn('mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 text-sm text-muted-foreground md:flex-row', props.bottomBarClass)">
+            <div v-if="props.showBottomBar" :class="cn('mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 text-xs md:text-sm text-muted-foreground md:flex-row', props.bottomBarClass)">
                 <!-- Copyright -->
                 <div>
                     &copy; {{ props.year }} {{ resolvedCopyrightName }}. {{ props.allRightsReservedText }}
