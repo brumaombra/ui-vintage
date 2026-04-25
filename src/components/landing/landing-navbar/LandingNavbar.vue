@@ -28,7 +28,7 @@ const props = withDefaults(defineProps<LandingNavbarProps>(), {
                 <slot name="left">
                     <a :href="props.appLinkTo" class="inline-flex items-center gap-2 transition-opacity hover:opacity-80">
                         <!-- App logo -->
-                        <img v-if="props.appLogo" :src="props.appLogo" :alt="`${props.appName} logo`" class="size-12 sm:size-9 shrink-0 object-contain" />
+                        <img v-if="props.appLogo" :src="props.appLogo" :alt="`${props.appName} logo`" class="size-11 sm:size-9 shrink-0 object-contain" />
 
                         <!-- App name -->
                         <span v-if="props.appName" class="hidden sm:inline text-xl font-bold tracking-tight text-foreground">
