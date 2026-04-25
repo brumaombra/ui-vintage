@@ -204,6 +204,10 @@
             "types": "./dist/components/ui/select/index.d.ts",
             "import": "./dist/select.js"
         },
+        "./scroll-area": {
+            "types": "./dist/components/ui/scroll-area/index.d.ts",
+            "import": "./dist/scroll-area.js"
+        },
         "./separator": {
             "types": "./dist/components/ui/separator/index.d.ts",
             "import": "./dist/separator.js"

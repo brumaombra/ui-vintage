@@ -22,6 +22,7 @@ export interface LandingFooterSection {
 
 interface LandingFooterProps {
     appName: string;
+    appLogo?: string;
     appDescription?: string;
     sections?: LandingFooterSection[];
     linkComponent?: Component | string;
@@ -76,9 +77,10 @@ const getLinkProps = (link: LandingFooterLink) => {
             <div :class="cn('flex flex-col gap-8', !hasSingleSection && 'md:flex-row md:items-start md:justify-between')">
                 <!-- Brand section -->
                 <div :class="cn('max-w-md flex-1', props.brandClass)">
-                    <!-- App name -->
-                    <div class="mb-4 text-lg font-semibold tracking-tight text-foreground">
-                        {{ props.appName }}
+                    <!-- App logo and name -->
+                    <div class="mb-4 inline-flex items-center gap-2 text-lg font-semibold tracking-tight text-foreground">
+                        <img v-if="props.appLogo" :src="props.appLogo" :alt="`${props.appName} logo`" class="size-8 shrink-0 object-contain">
+                        <span>{{ props.appName }}</span>
                     </div>
 
                     <!-- App description -->
