@@ -9,7 +9,6 @@ interface LandingShellProps {
     rootClass?: HTMLAttributes["class"];
     navbarClass?: HTMLAttributes["class"];
     mainClass?: HTMLAttributes["class"];
-    contentContainerClass?: HTMLAttributes["class"];
     footerClass?: HTMLAttributes["class"];
 }
 
@@ -39,12 +38,10 @@ const hasStructuredSlots = computed(() => {
             </header>
 
             <!-- Main content -->
-            <main :class="cn('relative z-10 flex-1', props.mainClass)">
-                <div :class="cn('mx-auto w-full max-w-6xl px-3 py-6 sm:px-6 lg:px-8 lg:py-14', props.contentContainerClass)">
-                    <slot name="content">
-                        <slot />
-                    </slot>
-                </div>
+            <main :class="cn('relative z-10', props.mainClass)">
+                <slot name="content">
+                    <slot />
+                </slot>
             </main>
 
             <!-- Footer -->
