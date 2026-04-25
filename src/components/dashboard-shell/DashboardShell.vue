@@ -40,6 +40,9 @@ interface DashboardSidebarSection {
 }
 
 interface DashboardShellProps {
+    appName?: string;
+    appLogo?: string;
+    appLinkTo?: string;
     title?: string;
     description?: string;
     collapsible?: "offcanvas" | "icon" | "none";
@@ -53,6 +56,9 @@ interface DashboardShellProps {
 
 // Props
 const props = withDefaults(defineProps<DashboardShellProps>(), {
+    appName: "",
+    appLogo: "",
+    appLinkTo: "/",
     title: "",
     description: "",
     collapsible: "offcanvas",
@@ -86,8 +92,24 @@ const getSidebarItemLinkProps = (item: DashboardSidebarItem) => {
         <!-- Sidebar -->
         <Sidebar :collapsible="props.collapsible">
             <!-- Sidebar header -->
-            <SidebarHeader v-if="$slots['sidebar-header']" class="h-16 justify-center border-b border-sidebar-border">
-                <slot name="sidebar-header" />
+            <SidebarHeader v-if="props.appName || $slots['sidebar-header']" class="h-16 justify-center border-b border-sidebar-border">
+                <slot name="sidebar-header">
+                    <SidebarMenu>
+                        <SidebarMenuItem>
+                            <SidebarMenuButton as-child size="lg">
+                                <a :href="props.appLinkTo" class="inline-flex items-center gap-2">
+                                    <div class="inline-flex items-center gap-2">
+                                        <!-- App logo -->
+                                        <img v-if="props.appLogo" :src="props.appLogo" :alt="`${props.appName} logo`" class="size-8 shrink-0 object-contain" />
+
+                                        <!-- App name -->
+                                        <span v-if="props.appName" class="text-xl font-bold tracking-tight text-foreground">{{ props.appName }}</span>
+                                    </div>
+                                </a>
+                            </SidebarMenuButton>
+                        </SidebarMenuItem>
+                    </SidebarMenu>
+                </slot>
             </SidebarHeader>
 
             <!-- Sidebar sections -->
