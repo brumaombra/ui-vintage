@@ -37,6 +37,11 @@
             "title": "Choose language",
             "ariaLabel": "Language selector"
         },
+        "footer": {
+            "madeWith": "Made with",
+            "by": "by",
+            "allRightsReserved": "All rights reserved."
+        },
         "select": {
             "defaultPlaceholder": "Select an option"
         },

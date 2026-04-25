@@ -168,6 +168,22 @@
             "types": "./dist/components/landing/index.d.ts",
             "import": "./dist/landing.js"
         },
+        "./landing-content": {
+            "types": "./dist/components/landing/landing-content/index.d.ts",
+            "import": "./dist/landing-content.js"
+        },
+        "./landing-footer": {
+            "types": "./dist/components/landing/landing-footer/index.d.ts",
+            "import": "./dist/landing-footer.js"
+        },
+        "./landing-navbar": {
+            "types": "./dist/components/landing/landing-navbar/index.d.ts",
+            "import": "./dist/landing-navbar.js"
+        },
+        "./landing-shell": {
+            "types": "./dist/components/landing/landing-shell/index.d.ts",
+            "import": "./dist/landing-shell.js"
+        },
         "./popover": {
             "types": "./dist/components/ui/popover/index.d.ts",
             "import": "./dist/popover.js"

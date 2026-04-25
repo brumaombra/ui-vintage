@@ -10,6 +10,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const componentsDir = resolve(__dirname, "src/components");
 const componentsUiDir = resolve(__dirname, "src/components/ui");
+const landingComponentsDir = resolve(__dirname, "src/components/landing");
 
 // Read the directory entries and filter for directories that contain an index.ts file
 const getDirectoryEntries = (baseDir: string) => Object.fromEntries(
@@ -30,10 +31,14 @@ function getLibraryEntries() {
     // Get entries for UI components
     const uiComponentEntries = getDirectoryEntries(componentsUiDir);
 
+    // Get dedicated entries for landing subcomponents
+    const landingComponentEntries = getDirectoryEntries(landingComponentsDir);
+
     // Add dedicated component entries plus shared utility and stylesheet entries
     return {
         ...topLevelComponentEntries,
         ...uiComponentEntries,
+        ...landingComponentEntries,
         i18n: resolve(__dirname, "src/lib/i18n.ts"),
         style: resolve(__dirname, "src/style.ts"),
         utils: resolve(__dirname, "src/lib/utils.ts")

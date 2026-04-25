@@ -91,12 +91,12 @@ const handleAction = () => {
                             </div>
 
                             <!-- Title -->
-                            <h1 class="mt-3 text-2xl font-bold">
+                            <h1 class="text-2xl font-bold mt-3">
                                 {{ resolvedTitle }}
                             </h1>
 
                             <!-- Message -->
-                            <p class="mt-4 text-sm leading-7 text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)] sm:text-base">
+                            <p class="text-sm leading-7 text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)] sm:text-base mt-4">
                                 {{ resolvedMessage }}
                             </p>
                         </div>

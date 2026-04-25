@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import type { Component, HTMLAttributes } from "vue";
+import { FavouriteIcon } from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/vue";
 import { computed } from "vue";
+import { useI18n } from "vue-i18n";
 import { cn } from "@/lib/utils";
 
 export interface LandingFooterLink {
@@ -22,11 +25,8 @@ interface LandingFooterProps {
     appDescription?: string;
     sections?: LandingFooterSection[];
     linkComponent?: Component | string;
-    copyrightName?: string;
-    allRightsReservedText?: string;
-    madeByText?: string;
-    madeByName?: string;
-    madeByLink?: string;
+    authorName?: string;
+    authorLink?: string;
     year?: number;
     showBottomBar?: boolean;
     class?: HTMLAttributes["class"];
@@ -36,20 +36,18 @@ interface LandingFooterProps {
     bottomBarClass?: HTMLAttributes["class"];
 }
 
+// Props
 const props = withDefaults(defineProps<LandingFooterProps>(), {
     appDescription: "",
     sections: () => [],
     linkComponent: "a",
-    copyrightName: "",
-    allRightsReservedText: "All rights reserved.",
-    madeByText: "",
-    madeByName: "",
-    madeByLink: "",
+    authorName: "",
+    authorLink: "",
     year: () => new Date().getFullYear(),
     showBottomBar: true
 });
 
-const resolvedCopyrightName = computed(() => props.copyrightName || props.appName);
+const { t } = useI18n();
 const hasSingleSection = computed(() => props.sections.length === 1);
 
 // Get link props based on the type of link component and whether the link should open in a new tab
@@ -132,14 +130,16 @@ const getLinkProps = (link: LandingFooterLink) => {
             <div v-if="props.showBottomBar" :class="cn('mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 text-xs md:text-sm text-muted-foreground md:flex-row', props.bottomBarClass)">
                 <!-- Copyright -->
                 <div>
-                    &copy; {{ props.year }} {{ resolvedCopyrightName }}. {{ props.allRightsReservedText }}
+                    &copy; {{ props.year }} {{ props.appName }}. {{ t("ui.footer.allRightsReserved") }}
                 </div>
 
-                <!-- Made by -->
-                <div v-if="props.madeByText && props.madeByName && props.madeByLink">
-                    {{ props.madeByText }}
-                    <a :href="props.madeByLink" target="_blank" rel="noopener noreferrer" class="font-medium text-foreground hover:underline">
-                        {{ props.madeByName }}
+                <!-- Author -->
+                <div v-if="props.authorName && props.authorLink" class="flex flex-wrap items-center justify-center gap-1.5 md:justify-end">
+                    <span>{{ t("ui.footer.madeWith") }}</span>
+                    <HugeiconsIcon :icon="FavouriteIcon" class="size-4 shrink-0 text-red-700 dark:text-red-400" />
+                    <span>{{ t("ui.footer.by") }}</span>
+                    <a :href="props.authorLink" target="_blank" rel="noopener noreferrer" class="font-medium text-foreground hover:underline">
+                        {{ props.authorName }}
                     </a>
                 </div>
             </div>
