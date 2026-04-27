@@ -130,7 +130,7 @@ const handleSelectLanguage = (language: string) => {
     <Popover v-model:open="isOpen">
         <!-- Trigger button showing the current language flag -->
         <PopoverTrigger as-child>
-            <Button variant="secondary" size="icon" :aria-label="t('ui.language.ariaLabel')">
+            <Button variant="secondary" size="icon" :aria-label="t('ui-vintage.language.ariaLabel')">
                 <component :is="currentFlagComponent" v-if="currentFlagComponent" class="h-4 w-[1.35rem] rounded-[2px]" />
             </Button>
         </PopoverTrigger>
@@ -139,7 +139,7 @@ const handleSelectLanguage = (language: string) => {
         <PopoverContent side="bottom" align="end" :side-offset="8" class="w-44 !p-0">
             <Command :model-value="props.modelValue">
                 <CommandList>
-                    <CommandGroup :heading="t('ui.language.title')">
+                    <CommandGroup :heading="t('ui-vintage.language.title')">
                         <CommandItem v-for="option in normalizedLanguages" :key="option.code" :value="option.code" @select="handleSelectLanguage(option.code)">
                             <component :is="resolveFlagComponent(option.code)" class="h-4 w-[1.35rem] rounded-[2px]" />
                             <span class="flex-1">{{ option.label }}</span>

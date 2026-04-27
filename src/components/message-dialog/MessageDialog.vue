@@ -14,14 +14,14 @@ const currentDialog = computed(() => messageDialogState.current);
 const resolvedTitle = computed(() => {
     const current = currentDialog.value;
     if (!current) return '';
-    return current.options.title || getUiVintageRuntimeMessage(`ui.messageDialog.${current.options.type}`, '');
+    return current.options.title || getUiVintageRuntimeMessage(`ui-vintage.messageDialog.${current.options.type}`, '');
 });
 
 // Resolve the close button text
 const resolvedCloseText = computed(() => {
     const current = currentDialog.value;
-    if (!current) return getUiVintageRuntimeMessage('ui.buttons.close', 'Close');
-    return current.options.closeText || getUiVintageRuntimeMessage('ui.buttons.close', 'Close');
+    if (!current) return getUiVintageRuntimeMessage('ui-vintage.buttons.close', 'Close');
+    return current.options.closeText || getUiVintageRuntimeMessage('ui-vintage.buttons.close', 'Close');
 });
 
 // Resolved fallback icon for the current message type

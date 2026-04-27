@@ -132,14 +132,14 @@ const getLinkProps = (link: LandingFooterLink) => {
             <div v-if="props.showBottomBar" :class="cn('mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 text-xs md:text-sm text-muted-foreground md:flex-row', props.bottomBarClass)">
                 <!-- Copyright -->
                 <div>
-                    &copy; {{ props.year }} {{ props.appName }}. {{ t("ui.footer.allRightsReserved") }}
+                    &copy; {{ props.year }} {{ props.appName }}. {{ t("ui-vintage.footer.allRightsReserved") }}
                 </div>
 
                 <!-- Author -->
                 <div v-if="props.authorName && props.authorLink" class="flex flex-wrap items-center justify-center gap-1.5 md:justify-end">
-                    <span>{{ t("ui.footer.madeWith") }}</span>
+                    <span>{{ t("ui-vintage.footer.madeWith") }}</span>
                     <HugeiconsIcon :icon="FavouriteIcon" class="size-4 shrink-0 text-red-700 dark:text-red-400" />
-                    <span>{{ t("ui.footer.by") }}</span>
+                    <span>{{ t("ui-vintage.footer.by") }}</span>
                     <a :href="props.authorLink" target="_blank" rel="noopener noreferrer" class="font-medium text-foreground hover:underline">
                         {{ props.authorName }}
                     </a>

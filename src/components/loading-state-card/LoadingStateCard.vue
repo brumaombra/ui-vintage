@@ -14,8 +14,8 @@ const props = defineProps({
 
 const { t } = useI18n();
 
-const resolvedTitle = computed(() => props.title || t('ui.common.loading.title') || 'Loading...');
-const resolvedDescription = computed(() => props.description || t('ui.common.loading.description') || 'Please wait a moment while we load the content.');
+const resolvedTitle = computed(() => props.title || t('ui-vintage.common.loading.title') || 'Loading...');
+const resolvedDescription = computed(() => props.description || t('ui-vintage.common.loading.description') || 'Please wait a moment while we load the content.');
 </script>
 
 <template>

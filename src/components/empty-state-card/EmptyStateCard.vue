@@ -19,11 +19,11 @@ const { t } = useI18n();
 const hasCustomCopy = computed(() => Boolean(props.title || props.description || props.titleKey || props.descriptionKey));
 const resolvedTitle = computed(() => props.title
     || (props.titleKey ? t(props.titleKey) : '')
-    || (!hasCustomCopy.value ? t('ui.common.empty.title') : '')
+    || (!hasCustomCopy.value ? t('ui-vintage.common.empty.title') : '')
     || (!hasCustomCopy.value ? 'Nothing here yet' : ''));
 const resolvedDescription = computed(() => props.description
     || (props.descriptionKey ? t(props.descriptionKey) : '')
-    || (!hasCustomCopy.value ? t('ui.common.empty.description') : '')
+    || (!hasCustomCopy.value ? t('ui-vintage.common.empty.description') : '')
     || (!hasCustomCopy.value ? 'There is no content to show right now.' : ''));
 </script>
 
