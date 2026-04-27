@@ -74,7 +74,7 @@ const getLinkProps = (link: LandingFooterLink) => {
 <template>
     <footer :class="cn('relative z-10 border-t border-border bg-card', props.class)">
         <div :class="cn('mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8', props.containerClass)">
-            <div :class="cn('flex flex-col gap-8', !hasSingleSection && 'md:flex-row md:items-start md:justify-between')">
+            <div :class="cn('flex flex-col gap-8 md:flex-row md:items-start md:justify-between')">
                 <!-- Brand section -->
                 <div :class="cn('max-w-md flex-1', props.brandClass)">
                     <!-- App logo and name -->
