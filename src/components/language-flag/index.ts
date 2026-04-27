@@ -4,4 +4,7 @@ export { default as EnglishFlag } from './flags/EnglishFlag.vue';
 export { default as FrenchFlag } from './flags/FrenchFlag.vue';
 export { default as GermanFlag } from './flags/GermanFlag.vue';
 export { default as ItalianFlag } from './flags/ItalianFlag.vue';
+export { default as ChineseFlag } from './flags/ChineseFlag.vue';
+export { default as JapaneseFlag } from './flags/JapaneseFlag.vue';
+export { default as RussianFlag } from './flags/RussianFlag.vue';
 export { default as SpanishFlag } from './flags/SpanishFlag.vue';

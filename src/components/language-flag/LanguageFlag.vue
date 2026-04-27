@@ -8,7 +8,10 @@ const supportedFlagLoaders = {
     it: () => import('./flags/ItalianFlag.vue'),
     fr: () => import('./flags/FrenchFlag.vue'),
     es: () => import('./flags/SpanishFlag.vue'),
-    de: () => import('./flags/GermanFlag.vue')
+    de: () => import('./flags/GermanFlag.vue'),
+    zh: () => import('./flags/ChineseFlag.vue'),
+    ja: () => import('./flags/JapaneseFlag.vue'),
+    ru: () => import('./flags/RussianFlag.vue')
 } as const;
 
 type SupportedLanguageCode = keyof typeof supportedFlagLoaders;
