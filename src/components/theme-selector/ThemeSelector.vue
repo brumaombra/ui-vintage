@@ -26,9 +26,9 @@ const getThemeIcon = (theme: string) => {
 
 // Available themes
 const themes = computed(() => [
-    { id: 'light', label: t('ui-vintage.theme.light') },
-    { id: 'dark', label: t('ui-vintage.theme.dark') },
-    { id: 'auto', label: t('ui-vintage.theme.auto') }
+    { id: 'light', label: t('uiVintage.theme.light') },
+    { id: 'dark', label: t('uiVintage.theme.dark') },
+    { id: 'auto', label: t('uiVintage.theme.auto') }
 ]);
 
 // Check if system prefers dark mode
@@ -106,7 +106,7 @@ onUnmounted(() => {
     <Popover v-model:open="isOpen">
         <!-- Trigger button showing the current theme icon -->
         <PopoverTrigger as-child>
-            <Button variant="secondary" size="icon" :aria-label="t('ui-vintage.theme.ariaLabel')">
+            <Button variant="secondary" size="icon" :aria-label="t('uiVintage.theme.ariaLabel')">
                 <HugeiconsIcon :icon="currentThemeIcon" class="h-5 w-5" />
             </Button>
         </PopoverTrigger>
@@ -115,7 +115,7 @@ onUnmounted(() => {
         <PopoverContent side="bottom" align="end" :side-offset="8" class="w-44 !p-0">
             <Command :model-value="currentTheme">
                 <CommandList>
-                    <CommandGroup :heading="t('ui-vintage.theme.title')">
+                    <CommandGroup :heading="t('uiVintage.theme.title')">
                         <CommandItem v-for="option in themeOptions" :key="option.key" :value="option.key" @select="handleSelectTheme(option.key)">
                             <HugeiconsIcon :icon="option.icon" class="size-4" />
                             <span class="flex-1">{{ option.label }}</span>

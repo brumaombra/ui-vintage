@@ -10,7 +10,7 @@ import { closeMessageToast, messageToastState } from "./message-toast-state";
 const currentToast = computed(() => messageToastState.current);
 
 // Localized dismiss label resolved from bundled library messages
-const closeAriaLabel = computed(() => getUiVintageRuntimeMessage("ui-vintage.buttons.close", "Close"));
+const closeAriaLabel = computed(() => getUiVintageRuntimeMessage("uiVintage.buttons.close", "Close"));
 
 // Determine toast type for styling and icon selection
 const toastType = computed(() => currentToast.value?.type ?? "success");
