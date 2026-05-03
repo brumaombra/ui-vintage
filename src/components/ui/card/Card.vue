@@ -25,7 +25,7 @@ const colorClasses = computed(() => {
 </script>
 
 <template>
-    <div data-slot="card" :class="cn('flex flex-col gap-6 rounded py-6 transition-colors duration-300 ease-in-out', colorClasses, props.class)">
+    <div data-slot="card" :class="cn('flex flex-col gap-4 sm:!gap-6 rounded py-6 transition-colors duration-300 ease-in-out', colorClasses, props.class)">
         <slot />
     </div>
 </template>

@@ -20,7 +20,7 @@ const props = defineProps({
 
             <!-- Content -->
             <div class="flex w-full flex-1 items-center justify-between text-center sm:w-auto sm:text-left">
-                <div class="flex flex-col">
+                <div class="flex flex-col w-full gap-2 sm:gap-1">
                     <!-- Title -->
                     <span class="text-base font-bold text-[var(--text-primary-light)] dark:text-[var(--text-primary-dark)]">
                         {{ props.title }}
