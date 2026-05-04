@@ -38,7 +38,7 @@ const hasStructuredSlots = computed(() => {
             </header>
 
             <!-- Main content -->
-            <main :class="cn('relative z-10', props.mainClass)">
+            <main :class="cn('relative z-10 flex-1', props.mainClass)">
                 <slot name="content">
                     <slot />
                 </slot>
