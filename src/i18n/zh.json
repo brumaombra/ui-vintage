@@ -1,0 +1,55 @@
+{
+    "uiVintage": {
+        "common": {
+            "empty": {
+                "title": "这里还没有内容",
+                "description": "当前没有可显示的内容。"
+            },
+            "loading": {
+                "title": "加载中...",
+                "description": "请稍候，正在加载内容。"
+            }
+        },
+        "buttons": {
+            "all": "全部",
+            "close": "关闭",
+            "cancel": "取消",
+            "delete": "删除",
+            "confirm": "确认",
+            "filter": "筛选",
+            "search": "搜索",
+            "apply": "应用",
+            "clear": "清除",
+            "loading": "加载中",
+            "loadMore": "加载更多",
+            "save": "保存",
+            "update": "更新",
+            "goBack": "返回"
+        },
+        "theme": {
+            "light": "浅色",
+            "dark": "深色",
+            "auto": "自动",
+            "title": "选择主题",
+            "ariaLabel": "主题选择器"
+        },
+        "language": {
+            "title": "选择语言",
+            "ariaLabel": "语言选择器"
+        },
+        "footer": {
+            "madeWith": "用",
+            "by": "由",
+            "allRightsReserved": "版权所有。"
+        },
+        "select": {
+            "defaultPlaceholder": "请选择一个选项"
+        },
+        "messageDialog": {
+            "error": "错误",
+            "success": "成功",
+            "info": "信息",
+            "warning": "警告"
+        }
+    }
+}

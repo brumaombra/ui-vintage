@@ -1,0 +1,55 @@
+{
+    "uiVintage": {
+        "common": {
+            "empty": {
+                "title": "まだ何もありません",
+                "description": "現在表示できるコンテンツはありません。"
+            },
+            "loading": {
+                "title": "読み込み中...",
+                "description": "コンテンツを読み込んでいます。しばらくお待ちください。"
+            }
+        },
+        "buttons": {
+            "all": "すべて",
+            "close": "閉じる",
+            "cancel": "キャンセル",
+            "delete": "削除",
+            "confirm": "確認",
+            "filter": "絞り込み",
+            "search": "検索",
+            "apply": "適用",
+            "clear": "クリア",
+            "loading": "読み込み中",
+            "loadMore": "もっと読み込む",
+            "save": "保存",
+            "update": "更新",
+            "goBack": "戻る"
+        },
+        "theme": {
+            "light": "ライト",
+            "dark": "ダーク",
+            "auto": "自動",
+            "title": "テーマを選択",
+            "ariaLabel": "テーマセレクター"
+        },
+        "language": {
+            "title": "言語を選択",
+            "ariaLabel": "言語セレクター"
+        },
+        "footer": {
+            "madeWith": "愛を込めて",
+            "by": "by",
+            "allRightsReserved": "無断転載を禁じます。"
+        },
+        "select": {
+            "defaultPlaceholder": "オプションを選択してください"
+        },
+        "messageDialog": {
+            "error": "エラー",
+            "success": "成功",
+            "info": "情報",
+            "warning": "警告"
+        }
+    }
+}

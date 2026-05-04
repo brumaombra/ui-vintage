@@ -1,0 +1,55 @@
+{
+    "uiVintage": {
+        "common": {
+            "empty": {
+                "title": "Здесь пока ничего нет",
+                "description": "Сейчас нет контента для отображения."
+            },
+            "loading": {
+                "title": "Загрузка...",
+                "description": "Подождите немного, пока мы загружаем содержимое."
+            }
+        },
+        "buttons": {
+            "all": "Все",
+            "close": "Закрыть",
+            "cancel": "Отмена",
+            "delete": "Удалить",
+            "confirm": "Подтвердить",
+            "filter": "Фильтр",
+            "search": "Поиск",
+            "apply": "Применить",
+            "clear": "Очистить",
+            "loading": "Загрузка",
+            "loadMore": "Загрузить еще",
+            "save": "Сохранить",
+            "update": "Обновить",
+            "goBack": "Назад"
+        },
+        "theme": {
+            "light": "Светлая",
+            "dark": "Темная",
+            "auto": "Авто",
+            "title": "Выберите тему",
+            "ariaLabel": "Переключатель темы"
+        },
+        "language": {
+            "title": "Выберите язык",
+            "ariaLabel": "Выбор языка"
+        },
+        "footer": {
+            "madeWith": "Сделано с",
+            "by": "от",
+            "allRightsReserved": "Все права защищены."
+        },
+        "select": {
+            "defaultPlaceholder": "Выберите вариант"
+        },
+        "messageDialog": {
+            "error": "Ошибка",
+            "success": "Успех",
+            "info": "Информация",
+            "warning": "Предупреждение"
+        }
+    }
+}

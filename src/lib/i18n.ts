@@ -1,10 +1,22 @@
 import en from '@/i18n/en.json';
+import fr from '@/i18n/fr.json';
+import de from '@/i18n/de.json';
+import es from '@/i18n/es.json';
 import it from '@/i18n/it.json';
+import ja from '@/i18n/ja.json';
+import ru from '@/i18n/ru.json';
+import zh from '@/i18n/zh.json';
 
 // The list of translation files
 export const uiVintageMessages = {
     en,
-    it
+    it,
+    fr,
+    es,
+    de,
+    zh,
+    ja,
+    ru
 } as const;
 
 // The type of the available locales based on the keys of the messages object
@@ -20,15 +32,27 @@ const getUiVintageRuntimeLocale = (): UiVintageLocale => {
     let browserLocale = 'en';
 
     // Try to detect the user's locale from the document or navigator
-    if (typeof document !== 'undefined' && document.documentElement.lang) {
-        browserLocale = document.documentElement.lang;
+    if (typeof document !== 'undefined' && document.documentElement?.lang) {
+        browserLocale = document.documentElement.lang?.toLowerCase();
     } else if (typeof navigator !== 'undefined' && navigator.language) {
-        browserLocale = navigator.language;
+        browserLocale = navigator.language?.toLowerCase();
     }
 
     // Default to English if the detected locale is not supported, otherwise use it
-    if (browserLocale.toLowerCase().startsWith('it')) {
+    if (browserLocale.startsWith('it')) {
         return 'it';
+    } else if (browserLocale.startsWith('fr')) {
+        return 'fr';
+    } else if (browserLocale.startsWith('es')) {
+        return 'es';
+    } else if (browserLocale.startsWith('de')) {
+        return 'de';
+    } else if (browserLocale.startsWith('zh')) {
+        return 'zh';
+    } else if (browserLocale.startsWith('ja')) {
+        return 'ja';
+    } else if (browserLocale.startsWith('ru')) {
+        return 'ru';
     }
 
     // Fallback to English for unsupported or undetectable locales
