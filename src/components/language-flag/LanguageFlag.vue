@@ -9,6 +9,7 @@ const supportedFlagLoaders = {
     fr: () => import('./flags/FrenchFlag.vue'),
     es: () => import('./flags/SpanishFlag.vue'),
     de: () => import('./flags/GermanFlag.vue'),
+    pt: () => import('./flags/PortugueseFlag.vue'),
     zh: () => import('./flags/ChineseFlag.vue'),
     ja: () => import('./flags/JapaneseFlag.vue'),
     ru: () => import('./flags/RussianFlag.vue')

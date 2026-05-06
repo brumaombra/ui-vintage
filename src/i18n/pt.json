@@ -1,0 +1,55 @@
+{
+    "uiVintage": {
+        "common": {
+            "empty": {
+                "title": "Ainda nao ha nada aqui",
+                "description": "Nao ha conteudo para mostrar neste momento."
+            },
+            "loading": {
+                "title": "Carregando...",
+                "description": "Aguarde um momento enquanto carregamos o conteudo."
+            }
+        },
+        "buttons": {
+            "all": "Todos",
+            "close": "Fechar",
+            "cancel": "Cancelar",
+            "delete": "Excluir",
+            "confirm": "Confirmar",
+            "filter": "Filtrar",
+            "search": "Pesquisar",
+            "apply": "Aplicar",
+            "clear": "Limpar",
+            "loading": "Carregando",
+            "loadMore": "Carregar mais",
+            "save": "Salvar",
+            "update": "Atualizar",
+            "goBack": "Voltar"
+        },
+        "theme": {
+            "light": "Claro",
+            "dark": "Escuro",
+            "auto": "Automatico",
+            "title": "Escolher tema",
+            "ariaLabel": "Seletor de tema"
+        },
+        "language": {
+            "title": "Escolher idioma",
+            "ariaLabel": "Seletor de idioma"
+        },
+        "footer": {
+            "madeWith": "Feito com",
+            "by": "por",
+            "allRightsReserved": "Todos os direitos reservados."
+        },
+        "select": {
+            "defaultPlaceholder": "Selecione uma opcao"
+        },
+        "messageDialog": {
+            "error": "Erro",
+            "success": "Sucesso",
+            "info": "Informacao",
+            "warning": "Aviso"
+        }
+    }
+}

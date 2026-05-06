@@ -17,6 +17,7 @@ const supportedLanguages = [
     { code: 'fr', label: 'Francais', loadFlag: () => import('@/components/language-flag/flags/FrenchFlag.vue') },
     { code: 'es', label: 'Espanol', loadFlag: () => import('@/components/language-flag/flags/SpanishFlag.vue') },
     { code: 'de', label: 'Deutsch', loadFlag: () => import('@/components/language-flag/flags/GermanFlag.vue') },
+    { code: 'pt', label: 'Portugues', loadFlag: () => import('@/components/language-flag/flags/PortugueseFlag.vue') },
     { code: 'zh', label: '中文', loadFlag: () => import('@/components/language-flag/flags/ChineseFlag.vue') },
     { code: 'ja', label: '日本語', loadFlag: () => import('@/components/language-flag/flags/JapaneseFlag.vue') },
     { code: 'ru', label: 'Русский', loadFlag: () => import('@/components/language-flag/flags/RussianFlag.vue') }
