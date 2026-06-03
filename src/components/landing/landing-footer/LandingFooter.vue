@@ -100,7 +100,7 @@ const getLinkProps = (link: LandingFooterLink) => {
                         <!-- Section links -->
                         <ul class="space-y-3 text-xs sm:text-sm">
                             <li v-for="link in props.sections[0]?.links" :key="link.id">
-                                <component :is="props.linkComponent" v-bind="getLinkProps(link)" class="text-muted-foreground transition-colors duration-200 hover:text-foreground">
+                                <component :is="props.linkComponent" v-bind="getLinkProps(link)" class="text-muted-foreground hover:underline">
                                     {{ link.label }}
                                 </component>
                             </li>
@@ -119,7 +119,7 @@ const getLinkProps = (link: LandingFooterLink) => {
                         <!-- Section links -->
                         <ul class="space-y-3 text-xs sm:text-sm">
                             <li v-for="link in section.links" :key="link.id">
-                                <component :is="props.linkComponent" v-bind="getLinkProps(link)" class="text-muted-foreground transition-colors duration-200 hover:text-foreground">
+                                <component :is="props.linkComponent" v-bind="getLinkProps(link)" class="text-muted-foreground hover:underline">
                                     {{ link.label }}
                                 </component>
                             </li>
