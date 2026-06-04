@@ -49,7 +49,7 @@ onMounted(() => {
         <template #toolbar>
             <div class="flex items-center gap-3">
                 <!-- Current theme display -->
-                <span class="rounded border border-border bg-card px-2.5 py-1 text-[11px] font-medium text-muted-foreground uppercase tracking-[0.16em]">
+                <span class="rounded border border-border bg-card px-2.5 py-1 text-[11px] font-semibold text-muted-foreground uppercase tracking-[0.16em]">
                     {{ themeLabel }}
                 </span>
 
@@ -64,12 +64,12 @@ onMounted(() => {
         <template #brand>
             <div class="flex items-center gap-3">
                 <!-- Current demo label -->
-                <span class="rounded border border-border bg-card px-2.5 py-1 text-[11px] font-medium text-muted-foreground uppercase tracking-[0.16em]">
+                <span class="rounded border border-border bg-card px-2.5 py-1 text-[11px] font-semibold text-muted-foreground uppercase tracking-[0.16em]">
                     Demo
                 </span>
 
                 <!-- App name -->
-                <div class="text-sm font-medium text-foreground">
+                <div class="text-sm font-semibold text-foreground">
                     UI Vintage
                 </div>
             </div>

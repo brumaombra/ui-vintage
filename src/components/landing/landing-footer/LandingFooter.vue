@@ -140,7 +140,7 @@ const getLinkProps = (link: LandingFooterLink) => {
                     <span>{{ t("uiVintage.footer.madeWith") }}</span>
                     <HugeiconsIcon :icon="FavouriteIcon" class="size-4 shrink-0 text-red-700 dark:text-red-400" />
                     <span>{{ t("uiVintage.footer.by") }}</span>
-                    <a :href="props.authorLink" target="_blank" rel="noopener noreferrer" class="font-medium text-foreground hover:underline">
+                    <a :href="props.authorLink" target="_blank" rel="noopener noreferrer" class="font-semibold text-foreground hover:underline">
                         {{ props.authorName }}
                     </a>
                 </div>

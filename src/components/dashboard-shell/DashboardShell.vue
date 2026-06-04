@@ -172,7 +172,7 @@ const getSidebarItemLinkProps = (item: DashboardSidebarItem) => {
                 <!-- Title and description -->
                 <div class="min-w-0 flex-1">
                     <!-- Title -->
-                    <div class="truncate text-sm font-medium">
+                    <div class="truncate text-sm font-semibold">
                         {{ props.title }}
                     </div>
 

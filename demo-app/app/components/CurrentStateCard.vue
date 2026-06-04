@@ -24,19 +24,19 @@ const props = defineProps<{
             <!-- Display current name -->
             <div class="flex items-center justify-between gap-3 rounded border border-border bg-background px-3 py-2">
                 <span class="text-muted-foreground">Name</span>
-                <span class="truncate font-medium">{{ props.name }}</span>
+                <span class="truncate font-semibold">{{ props.name }}</span>
             </div>
 
             <!-- Display current network -->
             <div class="flex items-center justify-between gap-3 rounded border border-border bg-background px-3 py-2">
                 <span class="text-muted-foreground">Network</span>
-                <span class="font-medium capitalize">{{ props.network }}</span>
+                <span class="font-semibold capitalize">{{ props.network }}</span>
             </div>
 
             <!-- Display current alerts enabled state -->
             <div class="flex items-center justify-between gap-3 rounded border border-border bg-background px-3 py-2">
                 <span class="text-muted-foreground">Alerts</span>
-                <span class="font-medium">{{ props.alertsEnabled ? 'Enabled' : 'Disabled' }}</span>
+                <span class="font-semibold">{{ props.alertsEnabled ? 'Enabled' : 'Disabled' }}</span>
             </div>
         </CardContent>
     </Card>

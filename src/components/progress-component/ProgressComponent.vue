@@ -16,12 +16,12 @@ const props = defineProps({
         <!-- Header with icon and label -->
         <div class="flex items-center justify-between">
             <!-- Title of the progress bar -->
-            <span class="text-sm font-medium text-[var(--text-primary-light)] dark:text-[var(--text-primary-dark)]">
+            <span class="text-sm font-semibold text-[var(--text-primary-light)] dark:text-[var(--text-primary-dark)]">
                 {{ props.title }}
             </span>
 
             <!-- Current value / max -->
-            <span class="text-sm font-medium text-[var(--text-primary-light)] dark:text-[var(--text-primary-dark)]">
+            <span class="text-sm font-semibold text-[var(--text-primary-light)] dark:text-[var(--text-primary-dark)]">
                 {{ props.value }} / {{ props.max }}
             </span>
         </div>

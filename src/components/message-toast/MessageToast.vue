@@ -44,7 +44,7 @@ const toastAriaLive = computed(() => {
                 <HugeiconsIcon :icon="toastIcon" class="size-5" :class="toastIconClasses" />
 
                 <!-- Message text -->
-                <p class="m-0 flex-1 text-sm font-medium leading-5">
+                <p class="m-0 flex-1 text-sm font-semibold leading-5">
                     {{ currentToast?.message }}
                 </p>
 

@@ -42,7 +42,7 @@ onMounted(() => {
             <!-- Theme toggle controls -->
             <div class="flex items-center gap-3 rounded border border-border bg-background px-3 py-2">
                 <HugeiconsIcon :icon="isDark ? GibbousMoonIcon : Sun01Icon" class="size-4 text-muted-foreground" />
-                <span class="text-xs font-medium text-foreground">{{ themeLabel }}</span>
+                <span class="text-xs font-semibold text-foreground">{{ themeLabel }}</span>
                 <Switch v-model:model-value="isDark" />
             </div>
 

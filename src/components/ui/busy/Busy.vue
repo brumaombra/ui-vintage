@@ -23,7 +23,7 @@ const props = withDefaults(defineProps<BusyProps>(), {
       <div data-slot="busy-content" role="status" aria-live="polite" aria-busy="true" :class="cn('bg-card text-card-foreground flex w-72 flex-col items-center justify-center gap-4 rounded border border-border px-8 py-7 text-center shadow-2xl', props.class)">
         <slot>
           <HugeiconsIcon data-slot="busy-spinner" :icon="Loading03Icon" class="size-10 animate-spin text-primary" />
-          <span v-if="props.label" data-slot="busy-label" class="text-xs font-medium text-foreground sm:text-sm">
+          <span v-if="props.label" data-slot="busy-label" class="text-xs font-semibold text-foreground sm:text-sm">
             {{ props.label }}
           </span>
         </slot>

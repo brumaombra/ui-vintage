@@ -44,7 +44,7 @@ const handleUpdateModelValue = (value?: number[]) => {
         <div class="flex items-center justify-between gap-3">
             <!-- Label and description block -->
             <div class="space-y-2">
-                <div class="text-sm font-medium">
+                <div class="text-sm font-semibold">
                     {{ props.label }}
                 </div>
                 <div v-if="props.description" class="text-xs text-muted-foreground">
@@ -53,7 +53,7 @@ const handleUpdateModelValue = (value?: number[]) => {
             </div>
 
             <!-- Current slider value display -->
-            <span class="rounded border border-border bg-background px-2 py-1 text-xs font-medium">
+            <span class="rounded border border-border bg-background px-2 py-1 text-xs font-semibold">
                 {{ resolvedValueText }}
             </span>
         </div>

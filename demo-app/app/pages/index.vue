@@ -98,7 +98,7 @@ const handleInfoDemo = async () => {
             <template #sidebar-header>
                 <div class="hidden items-center gap-2 sm:flex">
                     <!-- App name -->
-                    <span class="rounded border border-border bg-card px-2.5 py-1 text-[11px] font-medium text-muted-foreground uppercase tracking-[0.16em]">
+                    <span class="rounded border border-border bg-card px-2.5 py-1 text-[11px] font-semibold text-muted-foreground uppercase tracking-[0.16em]">
                         Demo
                     </span>
 

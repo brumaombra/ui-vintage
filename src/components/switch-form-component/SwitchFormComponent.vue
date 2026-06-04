@@ -22,7 +22,7 @@ const emits = defineEmits<{
     <Card class="flex flex-row items-center justify-between gap-4 px-4 py-3">
         <!-- Switch label block -->
         <div class="space-y-2">
-            <div class="text-sm font-medium">
+            <div class="text-sm font-semibold">
                 {{ props.label }}
             </div>
             <div class="text-xs text-muted-foreground">

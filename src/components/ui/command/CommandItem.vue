@@ -66,7 +66,7 @@ onUnmounted(() => {
     :id="id"
     ref="itemRef"
     data-slot="command-item"
-    :class="cn('relative flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-left text-sm font-medium text-(--text-secondary-light) outline-hidden transition-colors duration-200 select-none data-[highlighted]:bg-(--bg-selected-light) data-[highlighted]:text-(--text-primary-light) data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:text-(--text-secondary-dark) dark:data-[highlighted]:bg-(--bg-selected-dark) dark:data-[highlighted]:text-(--text-primary-dark) [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*=\'size-\'])]:size-4 [&_svg:not([class*=\'text-\'])]:text-current', props.class)"
+    :class="cn('relative flex cursor-pointer items-center gap-3 rounded px-3 py-2 text-left text-sm font-semibold text-(--text-secondary-light) outline-hidden transition-colors duration-200 select-none data-[highlighted]:bg-(--bg-selected-light) data-[highlighted]:text-(--text-primary-light) data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:text-(--text-secondary-dark) dark:data-[highlighted]:bg-(--bg-selected-dark) dark:data-[highlighted]:text-(--text-primary-dark) [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*=\'size-\'])]:size-4 [&_svg:not([class*=\'text-\'])]:text-current', props.class)"
     @select="() => {
       filterState.search = ''
     }"

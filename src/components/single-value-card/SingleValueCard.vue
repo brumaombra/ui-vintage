@@ -37,7 +37,7 @@ const valueClass = computed(() => {
             <!-- Content -->
             <div class="flex flex-col">
                 <!-- Label -->
-                <span class="mb-1 text-xs font-medium text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)]">
+                <span class="mb-1 text-xs font-semibold text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)]">
                     {{ props.label }}
                 </span>
 

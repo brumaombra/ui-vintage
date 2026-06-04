@@ -10,7 +10,7 @@ const props = defineProps<{
 <template>
   <td
     data-slot="data-list-value"
-    :class="cn('py-3 pl-2 align-top text-right font-medium text-foreground', props.class)"
+    :class="cn('py-3 pl-2 align-top text-right font-semibold text-foreground', props.class)"
   >
     <slot />
   </td>

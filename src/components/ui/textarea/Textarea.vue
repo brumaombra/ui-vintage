@@ -21,7 +21,7 @@ const modelValue = useVModel(props, "modelValue", emits, {
 
 <template>
   <textarea v-model="modelValue" data-slot="textarea" :class="cn(
-    'selection:bg-primary selection:text-primary-foreground flex field-sizing-content min-h-[120px] w-full min-w-0 rounded border border-(--border-light) bg-(--button-secondary-light) px-4 py-3 text-xs font-medium text-(--text-primary-light) outline-none transition-all duration-300 ease-in-out placeholder:text-(--text-secondary-light) placeholder:opacity-60 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-60 dark:border-(--border-dark) dark:bg-(--button-secondary-dark) dark:text-(--text-primary-dark) dark:placeholder:text-(--text-secondary-dark) sm:text-sm',
+    'selection:bg-primary selection:text-primary-foreground flex field-sizing-content min-h-[120px] w-full min-w-0 rounded border border-(--border-light) bg-(--button-secondary-light) px-4 py-3 text-xs font-semibold text-(--text-primary-light) outline-none transition-all duration-300 ease-in-out placeholder:text-(--text-secondary-light) placeholder:opacity-60 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-60 dark:border-(--border-dark) dark:bg-(--button-secondary-dark) dark:text-(--text-primary-dark) dark:placeholder:text-(--text-secondary-dark) sm:text-sm',
     'focus-visible:border-(--border-hover-light) focus-visible:ring-0 dark:focus-visible:border-(--border-hover-dark)',
     'aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive',
     props.class,

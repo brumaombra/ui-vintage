@@ -49,7 +49,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
         <div class="absolute inset-0 z-10 flex h-full items-center text-sm pl-2 pointer-events-none">
           {{ formatter.custom(toDate(date), { month: 'short' }) }}
         </div>
-        <NativeSelect class="relative z-20 h-full min-h-0 w-[92px] rounded-none border-0 bg-transparent pl-2 pr-6 text-xs font-medium text-transparent shadow-none transition-all duration-300 ease-in-out outline-none ring-0 focus-visible:border-0 focus-visible:ring-0 dark:bg-transparent sm:text-sm" :model-value="date.month" @change="(e: Event) => {
+        <NativeSelect class="relative z-20 h-full min-h-0 w-[92px] rounded-none border-0 bg-transparent pl-2 pr-6 text-xs font-semibold text-transparent shadow-none transition-all duration-300 ease-in-out outline-none ring-0 focus-visible:border-0 focus-visible:ring-0 dark:bg-transparent sm:text-sm" :model-value="date.month" @change="(e: Event) => {
           placeholder = placeholder.set({
             month: Number((e?.target as any)?.value),
           })
@@ -68,7 +68,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
         <div class="absolute inset-0 z-10 flex h-full items-center text-sm pl-2 pointer-events-none">
           {{ formatter.custom(toDate(date), { year: 'numeric' }) }}
         </div>
-        <NativeSelect class="relative z-20 h-full min-h-0 w-[96px] rounded-none border-0 bg-transparent pl-2 pr-6 text-xs font-medium text-transparent shadow-none transition-all duration-300 ease-in-out outline-none ring-0 focus-visible:border-0 focus-visible:ring-0 dark:bg-transparent sm:text-sm" :model-value="date.year" @change="(e: Event) => {
+        <NativeSelect class="relative z-20 h-full min-h-0 w-[96px] rounded-none border-0 bg-transparent pl-2 pr-6 text-xs font-semibold text-transparent shadow-none transition-all duration-300 ease-in-out outline-none ring-0 focus-visible:border-0 focus-visible:ring-0 dark:bg-transparent sm:text-sm" :model-value="date.year" @change="(e: Event) => {
           placeholder = placeholder.set({
             year: Number((e?.target as any)?.value),
           })
