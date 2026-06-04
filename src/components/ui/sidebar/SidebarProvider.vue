@@ -9,10 +9,12 @@ import { provideSidebarContext, SIDEBAR_COOKIE_MAX_AGE, SIDEBAR_COOKIE_NAME, SID
 const props = withDefaults(defineProps<{
   defaultOpen?: boolean
   open?: boolean
+  compact?: boolean
   class?: HTMLAttributes["class"]
 }>(), {
   defaultOpen: !defaultDocument?.cookie.includes(`${SIDEBAR_COOKIE_NAME}=false`),
   open: undefined,
+  compact: false,
 })
 
 const emits = defineEmits<{
@@ -67,7 +69,7 @@ provideSidebarContext({
 
 <template>
   <TooltipProvider :delay-duration="0">
-    <div data-slot="sidebar-wrapper" :style="{
+    <div data-slot="sidebar-wrapper" :data-compact="props.compact ? 'true' : 'false'" :style="{
       '--sidebar-width': SIDEBAR_WIDTH,
       '--sidebar-width-icon': SIDEBAR_WIDTH_ICON,
     }" :class="cn('group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex min-h-svh w-full', props.class)" v-bind="$attrs">

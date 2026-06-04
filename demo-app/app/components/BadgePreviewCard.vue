@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ArrowRight01Icon, CheckmarkCircle02Icon, InformationCircleIcon, SparklesIcon } from '@hugeicons/core-free-icons';
-import { HugeiconsIcon } from '@hugeicons/vue';
 import { Badge } from '@brumaombra/ui-vintage/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@brumaombra/ui-vintage/card';
 </script>
@@ -11,7 +10,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@brum
         <CardHeader>
             <CardTitle>Badges</CardTitle>
             <CardDescription>
-                Variant, icon spacing, and inline usage checks for compact status labels.
+                Tone variants, icon support, and inline usage checks for compact status labels.
             </CardDescription>
         </CardHeader>
 
@@ -19,39 +18,25 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@brum
         <CardContent class="space-y-6">
             <!-- Variant previews -->
             <div class="flex flex-wrap gap-3">
-                <Badge>Default</Badge>
-                <Badge variant="secondary">Secondary</Badge>
-                <Badge variant="outline">Outline</Badge>
-                <Badge variant="destructive">Destructive</Badge>
+                <Badge text="Default" />
+                <Badge text="Secondary" color="gray" />
+                <Badge text="Outline" color="blue" />
+                <Badge text="Destructive" color="red" />
             </div>
 
             <!-- Badge content with icons -->
             <div class="flex flex-wrap gap-3">
-                <Badge>
-                    <HugeiconsIcon :icon="SparklesIcon" />
-                    Featured
-                </Badge>
-
-                <Badge variant="secondary">
-                    <HugeiconsIcon :icon="CheckmarkCircle02Icon" />
-                    Stable
-                </Badge>
-
-                <Badge variant="outline">
-                    <HugeiconsIcon :icon="InformationCircleIcon" />
-                    Beta
-                </Badge>
+                <Badge :icon="SparklesIcon" text="Featured" color="yellow" />
+                <Badge :icon="CheckmarkCircle02Icon" text="Stable" color="green" />
+                <Badge :icon="InformationCircleIcon" text="Beta" color="blue" />
             </div>
 
             <!-- Inline usage preview -->
             <div class="rounded border border-border bg-card px-4 py-4 text-sm leading-6 text-foreground">
                 New dashboard shell updates are available
-                <Badge variant="outline" class="mx-2 align-middle">v0.2.2</Badge>
+                <Badge text="v0.2.2" color="blue" class="mx-2 align-middle" />
                 and ready for review.
-                <Badge class="ml-2 align-middle">
-                    <HugeiconsIcon :icon="ArrowRight01Icon" />
-                    Continue
-                </Badge>
+                <Badge :icon="ArrowRight01Icon" text="Continue" class="ml-2 align-middle" />
             </div>
         </CardContent>
     </Card>

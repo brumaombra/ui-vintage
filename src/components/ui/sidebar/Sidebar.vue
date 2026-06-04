@@ -15,6 +15,7 @@ const props = withDefaults(defineProps<SidebarProps>(), {
   side: "left",
   variant: "sidebar",
   collapsible: "offcanvas",
+  compact: false,
 })
 
 const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
@@ -29,12 +30,12 @@ function handleMobileSidebarClick(event: MouseEvent) {
 </script>
 
 <template>
-  <div v-if="collapsible === 'none'" data-slot="sidebar" :class="cn('bg-sidebar text-sidebar-foreground flex h-full w-(--sidebar-width) flex-col', props.class)" v-bind="$attrs">
+  <div v-if="collapsible === 'none'" data-slot="sidebar" :data-compact="props.compact ? 'true' : 'false'" :class="cn('group/sidebar-wrapper bg-sidebar text-sidebar-foreground flex h-full w-(--sidebar-width) flex-col', props.class)" v-bind="$attrs">
     <slot />
   </div>
 
   <Sheet v-else-if="isMobile" :open="openMobile" v-bind="$attrs" @update:open="setOpenMobile">
-    <SheetContent data-sidebar="sidebar" data-slot="sidebar" data-mobile="true" :side="side" class="border-sidebar-border bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden" :style="{
+    <SheetContent data-sidebar="sidebar" data-slot="sidebar" data-mobile="true" :data-compact="props.compact ? 'true' : 'false'" :side="side" class="group/sidebar-wrapper border-sidebar-border bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden" :style="{
       '--sidebar-width': SIDEBAR_WIDTH_MOBILE,
     }">
       <SheetHeader class="sr-only">
@@ -47,7 +48,7 @@ function handleMobileSidebarClick(event: MouseEvent) {
     </SheetContent>
   </Sheet>
 
-  <div v-else class="group peer text-sidebar-foreground hidden md:block" data-slot="sidebar" :data-state="state" :data-collapsible="state === 'collapsed' ? collapsible : ''" :data-variant="variant" :data-side="side">
+  <div v-else class="group/sidebar-wrapper group peer text-sidebar-foreground hidden md:block" data-slot="sidebar" :data-compact="props.compact ? 'true' : 'false'" :data-state="state" :data-collapsible="state === 'collapsed' ? collapsible : ''" :data-variant="variant" :data-side="side">
     <!-- This is what handles the sidebar gap on desktop  -->
     <div :class="cn(
       'relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear',
