@@ -21,7 +21,7 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
             <Dialog>
                 <!-- Dialog trigger button -->
                 <DialogTrigger as-child>
-                    <Button variant="outline">
+                    <Button variant="gray">
                         <HugeiconsIcon :icon="InformationCircleIcon" class="size-4" />
                         Open Dialog
                     </Button>
@@ -48,7 +48,7 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
                     <DialogFooter>
                         <!-- Close dialog action -->
                         <DialogClose as-child>
-                            <Button variant="outline">
+                            <Button variant="gray">
                                 <HugeiconsIcon :icon="Cancel01Icon" class="size-4" />
                                 Close
                             </Button>

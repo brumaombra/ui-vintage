@@ -20,7 +20,7 @@ const props = defineProps<{
         </CardHeader>
 
         <!-- Card content -->
-        <CardContent class="space-y-3 text-sm">
+        <CardContent class="text-sm">
             <!-- Display current name -->
             <div class="flex items-center justify-between gap-3 rounded border border-border bg-background px-3 py-2">
                 <span class="text-muted-foreground">Name</span>

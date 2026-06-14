@@ -4,12 +4,13 @@ import { GibbousMoonIcon, Sun01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Button } from '@brumaombra/ui-vintage/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@brumaombra/ui-vintage/card';
-import { Select, SelectContent, SelectItem, SelectItemText, SelectTrigger, SelectValue } from '@brumaombra/ui-vintage/select';
+import { Select, SelectContent, SelectItem, SelectItemContent, SelectTrigger, SelectValueContent } from '@brumaombra/ui-vintage/select';
 import { Switch } from '@brumaombra/ui-vintage/switch';
 
 const isDark = useState('demo-dark-mode', () => false);
 const cryptoCoin = useState('demo-crypto-coin', () => 'bitcoin');
 const themeLabel = computed(() => isDark.value ? 'Dark' : 'Light');
+const cryptoCoinLabel = computed(() => cryptoCoin.value === 'kaspa' ? 'Kaspa' : 'Bitcoin');
 
 // Keep the document theme classes and dataset in sync with the demo controls
 const applyDocumentTheme = () => {
@@ -51,20 +52,20 @@ onMounted(() => {
                 <!-- Crypto coin preset selector -->
                 <Select v-model="cryptoCoin">
                     <SelectTrigger class="min-w-40 bg-background">
-                        <SelectValue placeholder="Choose a theme" />
+                        <SelectValueContent placeholder="Choose a theme" :label="cryptoCoinLabel" />
                     </SelectTrigger>
                     <SelectContent>
                         <SelectItem value="bitcoin">
-                            <SelectItemText>Bitcoin</SelectItemText>
+                            <SelectItemContent label="Bitcoin" />
                         </SelectItem>
                         <SelectItem value="kaspa">
-                            <SelectItemText>Kaspa</SelectItemText>
+                            <SelectItemContent label="Kaspa" />
                         </SelectItem>
                     </SelectContent>
                 </Select>
 
                 <!-- Quick toggle button -->
-                <Button variant="outline" size="sm" @click="isDark = !isDark">
+                <Button variant="gray" size="sm" @click="isDark = !isDark">
                     Toggle Theme
                 </Button>
             </div>

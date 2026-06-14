@@ -14,6 +14,7 @@ import InputStatesCard from '../components/InputStatesCard.vue';
 import LoadingPreviewCard from '../components/LoadingPreviewCard.vue';
 import MessageToastPreviewCard from '../components/MessageToastPreviewCard.vue';
 import PrimaryActionsCard from '../components/PrimaryActionsCard.vue';
+import SelectContentCard from '../components/SelectContentCard.vue';
 import SurfaceVariantsCard from '../components/SurfaceVariantsCard.vue';
 import DemoToolbar from '../components/DemoToolbar.vue';
 
@@ -135,6 +136,9 @@ const handleInfoDemo = async () => {
                     @update:alerts-enabled="alertsEnabled = $event"
                     @update:confidence="confidence = $event"
                 />
+
+                <!-- Select content card -->
+                <SelectContentCard />
 
                 <!-- Surface variants card -->
                 <SurfaceVariantsCard />

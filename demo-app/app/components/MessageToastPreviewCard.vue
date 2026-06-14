@@ -51,7 +51,7 @@ const handleShowErrorToast = () => {
         </CardHeader>
 
         <!-- Card content -->
-        <CardContent class="space-y-4">
+        <CardContent>
             <div class="flex flex-wrap gap-3">
                 <!-- Button to trigger success toast -->
                 <Button @click="handleShowSuccessToast">
@@ -60,7 +60,7 @@ const handleShowErrorToast = () => {
                 </Button>
 
                 <!-- Button to trigger informational toast -->
-                <Button variant="outline" @click="handleShowInfoToast">
+                <Button variant="secondary" @click="handleShowInfoToast">
                     <HugeiconsIcon :icon="InformationCircleIcon" class="size-4" />
                     Show Info Toast
                 </Button>
@@ -72,7 +72,7 @@ const handleShowErrorToast = () => {
                 </Button>
 
                 <!-- Button to trigger persistent error toast -->
-                <Button variant="destructive" @click="handleShowErrorToast">
+                <Button variant="red" @click="handleShowErrorToast">
                     <HugeiconsIcon :icon="AlertCircleIcon" class="size-4" />
                     Show Error Toast
                 </Button>

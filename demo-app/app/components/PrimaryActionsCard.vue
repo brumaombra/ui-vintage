@@ -36,7 +36,7 @@ const emit = defineEmits<{
                 </Button>
 
                 <!-- Secondary action button -->
-                <Button variant="outline" @click="emit('busyDemo')">
+                <Button variant="gray" @click="emit('busyDemo')">
                     <HugeiconsIcon :icon="MouseLeftClick01Icon" class="size-4" />
                     Busy Overlay
                 </Button>
@@ -54,7 +54,7 @@ const emit = defineEmits<{
                 <!-- Popover trigger -->
                 <Popover>
                     <PopoverTrigger as-child>
-                        <Button variant="outline">Open Popover</Button>
+                        <Button variant="gray">Open Popover</Button>
                     </PopoverTrigger>
                     <PopoverContent class="space-y-3">
                         <div>

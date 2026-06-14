@@ -3,9 +3,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@brum
 import { DateTimePicker } from '@brumaombra/ui-vintage/date-time-picker';
 import { Field, FieldContent, FieldGroup, FieldLabel } from '@brumaombra/ui-vintage/field';
 import { Input } from '@brumaombra/ui-vintage/input';
-import { Select, SelectContent, SelectItem, SelectItemText, SelectTrigger, SelectValue } from '@brumaombra/ui-vintage/select';
+import { Select, SelectContent, SelectItem, SelectItemContent, SelectTrigger, SelectValueContent } from '@brumaombra/ui-vintage/select';
 import { SliderFormComponent } from '@brumaombra/ui-vintage/slider-form-component';
 import { SwitchFormComponent } from '@brumaombra/ui-vintage/switch-form-component';
+import { computed } from 'vue';
 
 // Two-way models for each input field
 const nameModel = defineModel<string>('name', { required: true });
@@ -13,6 +14,12 @@ const networkModel = defineModel<string>('network', { required: true });
 const alertsEnabledModel = defineModel<boolean>('alertsEnabled', { required: true });
 const confidenceModel = defineModel<number>('confidence', { required: true });
 const scheduleModel = defineModel<Date | null>('schedule', { default: null });
+
+const networkLabel = computed(() => {
+    if (networkModel.value === 'kaspa') return 'Kaspa';
+    if (networkModel.value === 'litecoin') return 'Litecoin';
+    return 'Bitcoin';
+});
 </script>
 
 <template>
@@ -42,17 +49,17 @@ const scheduleModel = defineModel<Date | null>('schedule', { default: null });
                     <FieldContent>
                         <Select v-model="networkModel">
                             <SelectTrigger class="w-full">
-                                <SelectValue placeholder="Choose a network" />
+                                <SelectValueContent placeholder="Choose a network" :label="networkLabel" />
                             </SelectTrigger>
                             <SelectContent>
                                 <SelectItem value="bitcoin">
-                                    <SelectItemText>Bitcoin</SelectItemText>
+                                    <SelectItemContent label="Bitcoin" />
                                 </SelectItem>
                                 <SelectItem value="kaspa">
-                                    <SelectItemText>Kaspa</SelectItemText>
+                                    <SelectItemContent label="Kaspa" />
                                 </SelectItem>
                                 <SelectItem value="litecoin">
-                                    <SelectItemText>Litecoin</SelectItemText>
+                                    <SelectItemContent label="Litecoin" />
                                 </SelectItem>
                             </SelectContent>
                         </Select>

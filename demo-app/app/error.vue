@@ -54,7 +54,7 @@ onMounted(() => {
                 </span>
 
                 <!-- Change theme -->
-                <Button variant="outline" size="sm" @click="isDark = !isDark">
+                <Button variant="gray" size="sm" @click="isDark = !isDark">
                     <HugeiconsIcon :icon="isDark ? GibbousMoonIcon : Sun01Icon" class="size-4" />
                     Toggle Theme
                 </Button>

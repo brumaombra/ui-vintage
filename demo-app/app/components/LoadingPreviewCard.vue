@@ -14,7 +14,7 @@ import { Skeleton } from '@brumaombra/ui-vintage/skeleton';
         </CardHeader>
 
         <!-- Card content -->
-        <CardContent class="space-y-3">
+        <CardContent>
             <Skeleton class="h-5 w-32" />
             <Skeleton class="h-4 w-full" />
             <Skeleton class="h-4 w-5/6" />
