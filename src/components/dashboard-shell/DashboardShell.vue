@@ -46,6 +46,7 @@ interface DashboardShellProps {
     title?: string;
     description?: string;
     collapsible?: "offcanvas" | "icon" | "none";
+    compact?: boolean;
     sidebarSections?: DashboardSidebarSection[];
     sidebarLinkComponent?: Component | string;
     showBackground?: boolean;
@@ -62,6 +63,7 @@ const props = withDefaults(defineProps<DashboardShellProps>(), {
     title: "",
     description: "",
     collapsible: "offcanvas",
+    compact: false,
     sidebarSections: () => [],
     sidebarLinkComponent: "a",
     showBackground: true
@@ -90,7 +92,7 @@ const getSidebarItemLinkProps = (item: DashboardSidebarItem) => {
 <template>
     <SidebarProvider>
         <!-- Sidebar -->
-        <Sidebar :collapsible="props.collapsible">
+        <Sidebar :collapsible="props.collapsible" :compact="props.compact">
             <!-- Sidebar header -->
             <SidebarHeader v-if="props.appName || $slots['sidebar-header']" class="h-16 justify-center border-b border-sidebar-border">
                 <slot name="sidebar-header">
