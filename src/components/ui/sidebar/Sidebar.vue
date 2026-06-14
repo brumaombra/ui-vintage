@@ -30,7 +30,7 @@ function handleMobileSidebarClick(event: MouseEvent) {
 </script>
 
 <template>
-  <div v-if="collapsible === 'none'" data-slot="sidebar" :data-compact="props.compact ? 'true' : 'false'" :class="cn('group/sidebar-wrapper bg-sidebar text-sidebar-foreground flex h-full w-(--sidebar-width) flex-col', props.class)" v-bind="$attrs">
+  <div v-if="collapsible === 'none'" data-slot="sidebar" :class="cn('group/sidebar-wrapper bg-sidebar text-sidebar-foreground flex h-full w-(--sidebar-width) flex-col', props.class)" v-bind="$attrs">
     <slot />
   </div>
 
@@ -48,7 +48,7 @@ function handleMobileSidebarClick(event: MouseEvent) {
     </SheetContent>
   </Sheet>
 
-  <div v-else class="group/sidebar-wrapper group peer text-sidebar-foreground hidden md:block" data-slot="sidebar" :data-compact="props.compact ? 'true' : 'false'" :data-state="state" :data-collapsible="state === 'collapsed' ? collapsible : ''" :data-variant="variant" :data-side="side">
+  <div v-else class="group/sidebar-wrapper group peer text-sidebar-foreground hidden md:block" data-slot="sidebar" :data-state="state" :data-collapsible="state === 'collapsed' ? collapsible : ''" :data-variant="variant" :data-side="side">
     <!-- This is what handles the sidebar gap on desktop  -->
     <div :class="cn(
       'relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear',
