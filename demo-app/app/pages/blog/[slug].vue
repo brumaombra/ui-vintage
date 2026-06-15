@@ -96,6 +96,14 @@ definePageMeta({
                     <BreadcrumbList>
                         <BreadcrumbItem>
                             <BreadcrumbLink as-child>
+                                <NuxtLinkLocale to="/">
+                                    Home
+                                </NuxtLinkLocale>
+                            </BreadcrumbLink>
+                        </BreadcrumbItem>
+                        <BreadcrumbSeparator />
+                        <BreadcrumbItem>
+                            <BreadcrumbLink as-child>
                                 <NuxtLinkLocale to="/blog">
                                     Blog
                                 </NuxtLinkLocale>
@@ -204,42 +212,87 @@ definePageMeta({
 </template>
 
 <style>
+.prose h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
 .prose h2 {
     margin-top: 2rem;
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.prose h2 a {
+    font-size: 1.375rem;
     font-weight: 700;
+    line-height: 2rem;
     color: var(--text-primary-light);
 }
 
-.dark .prose h2 {
+.dark .prose h2 a {
     color: var(--text-primary-dark);
 }
 
 .prose h3 {
-    margin-top: 1.5rem;
-    margin-bottom: 0.75rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.prose h3 a {
     font-size: 1.125rem;
     font-weight: 700;
+    line-height: 1.75rem;
     color: var(--text-primary-light);
 }
 
-.dark .prose h3 {
+.dark .prose h3 a {
     color: var(--text-primary-dark);
 }
 
-.prose p,
-.prose li {
-    color: var(--text-secondary-light);
-    line-height: 1.8;
+.prose p {
+    font-size: 15px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    line-height: 1.75;
+    color: var(--text-primary-light);
 }
 
-.dark .prose p,
-.dark .prose li {
-    color: var(--text-secondary-dark);
+.dark .prose p {
+    color: var(--text-primary-dark);
 }
 
-.prose ul {
-    padding-left: 1.25rem;
+.prose p strong {
+    font-weight: 700;
+}
+
+.prose blockquote strong {
+    font-weight: 700;
+}
+
+.prose img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1.5rem;
+}
+
+.prose a {
+    text-decoration: none;
+    font-weight: 700;
+}
+
+/* Responsive styles */
+@media (max-width: 640px) {
+
+    .prose p {
+        font-size: 13px;
+        line-height: 1.75;
+    }
+
+    .prose h2 {
+        margin-bottom: 1rem;
+    }
+
 }
 </style>

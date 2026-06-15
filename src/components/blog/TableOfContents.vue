@@ -12,6 +12,7 @@ const props = defineProps({
 
 const { t } = useI18n();
 const isExpanded = ref(false);
+const contentBodyRef = ref(null);
 
 // Create the headings list
 const headings = computed(() => {
@@ -54,10 +55,15 @@ const toggleExpanded = () => {
     isExpanded.value = !isExpanded.value;
 };
 
+// Get the current content height for the expand/collapse animation
+const contentHeight = computed(() => {
+    return contentBodyRef.value?.scrollHeight ?? 0;
+});
+
 // Get classes for heading button
 const getHeadingButtonClasses = heading => {
     // Base classes for all titles
-    const baseClasses = 'block w-full text-left px-0 py-2 md:px-3 md:py-3 rounded transition-all duration-200 hover:bg-[var(--bg-selected-light)] dark:hover:bg-[var(--bg-selected-dark)] cursor-pointer';
+    const baseClasses = 'block w-full text-left px-0 py-2 md:px-3 md:py-2 rounded transition-all duration-200 hover:bg-[var(--bg-selected-light)] dark:hover:bg-[var(--bg-selected-dark)] cursor-pointer';
 
     // Add classes based on heading level
     let levelClasses = '';
@@ -96,8 +102,8 @@ const getHeadingButtonClasses = heading => {
             </button>
 
             <!-- Table of contents list with smooth transition -->
-            <div class="overflow-hidden transition-all duration-300 ease-in-out" :class="isExpanded ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'">
-                <nav class="px-5 pb-5 space-y-1">
+            <div class="overflow-hidden transition-[height,opacity] duration-300 ease-in-out" :style="{ height: isExpanded ? `${contentHeight}px` : '0px' }" :class="isExpanded ? 'opacity-100' : 'opacity-0'">
+                <nav ref="contentBodyRef" class="px-5 pb-5 space-y-1">
                     <button v-for="heading in headings" :key="heading.id" @click="scrollToHeading(heading.id)" :class="getHeadingButtonClasses(heading)">
                         {{ heading.text }}
                     </button>
