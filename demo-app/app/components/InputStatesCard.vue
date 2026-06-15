@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@brumaombra/ui-vintage/card';
 import { DateTimePicker } from '@brumaombra/ui-vintage/date-time-picker';
-import { Field, FieldContent, FieldGroup, FieldLabel } from '@brumaombra/ui-vintage/field';
+import { Field, FieldContent, FieldDescription, FieldError, FieldGroup, FieldLabel } from '@brumaombra/ui-vintage/field';
 import { Input } from '@brumaombra/ui-vintage/input';
 import { Select, SelectContent, SelectItem, SelectItemContent, SelectTrigger, SelectValueContent } from '@brumaombra/ui-vintage/select';
 import { SliderFormComponent } from '@brumaombra/ui-vintage/slider-form-component';
@@ -40,6 +40,10 @@ const networkLabel = computed(() => {
                     <FieldLabel>Display name</FieldLabel>
                     <FieldContent>
                         <Input id="demo-name" v-model="nameModel" placeholder="Enter a display name" />
+                        <FieldError :errors="['Please enter a display name to continue.', 'Use 3 or more characters for a better preview.']" />
+                        <FieldDescription>
+                            This name appears in the header and helps identify the current profile.
+                        </FieldDescription>
                     </FieldContent>
                 </Field>
 
@@ -63,6 +67,9 @@ const networkLabel = computed(() => {
                                 </SelectItem>
                             </SelectContent>
                         </Select>
+                        <FieldDescription>
+                            Pick the blockchain network used by the demo forms and select states.
+                        </FieldDescription>
                     </FieldContent>
                 </Field>
 
@@ -70,6 +77,9 @@ const networkLabel = computed(() => {
                     <FieldLabel>Date and time</FieldLabel>
                     <FieldContent>
                         <DateTimePicker v-model="scheduleModel" class="w-full" />
+                        <FieldDescription>
+                            This keeps the date-time control aligned with the other form inputs.
+                        </FieldDescription>
                     </FieldContent>
                 </Field>
 

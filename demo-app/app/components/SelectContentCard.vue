@@ -3,6 +3,8 @@ import { computed, ref } from 'vue';
 import { BitcoinIcon, CheckmarkCircle02Icon, InformationCircleIcon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@brumaombra/ui-vintage/card';
+import { Alert, AlertDescription, AlertTitle } from '@brumaombra/ui-vintage/alert';
+import { Field, FieldContent, FieldDescription, FieldGroup, FieldLabel } from '@brumaombra/ui-vintage/field';
 import { Select, SelectContent, SelectItem, SelectItemContent, SelectTrigger, SelectValueContent } from '@brumaombra/ui-vintage/select';
 
 const network = ref(null);
@@ -62,50 +64,62 @@ const selectedCompactNetwork = computed(() => {
 
         <!-- Card content -->
         <CardContent class="space-y-4">
-            <Select v-model="network">
-                <!-- Trigger with icon and label -->
-                <SelectTrigger class="w-full">
-                    <SelectValueContent placeholder="Choose a network" :icon="selectedNetwork?.icon ?? null" :label="selectedNetwork?.label ?? null" />
-                </SelectTrigger>
+            <FieldGroup>
+                <Field>
+                    <FieldLabel>Detailed select</FieldLabel>
+                    <FieldContent>
+                        <Select v-model="network">
+                            <!-- Trigger with icon and label -->
+                            <SelectTrigger class="w-full">
+                                <SelectValueContent placeholder="Choose a network" :icon="selectedNetwork?.icon ?? null" :label="selectedNetwork?.label ?? null" />
+                            </SelectTrigger>
 
-                <!-- Content with item previews -->
-                <SelectContent>
-                    <!-- Bitcoin item -->
-                    <SelectItem v-for="option in networkOptions" :key="option.value" :value="option.value">
-                        <SelectItemContent :icon="option.icon" :label="option.label" :description="option.description" />
-                    </SelectItem>
-                </SelectContent>
-            </Select>
+                            <!-- Content with item previews -->
+                            <SelectContent>
+                                <!-- Bitcoin item -->
+                                <SelectItem v-for="option in networkOptions" :key="option.value" :value="option.value">
+                                    <SelectItemContent :icon="option.icon" :label="option.label" :description="option.description" />
+                                </SelectItem>
+                            </SelectContent>
+                        </Select>
+                        <FieldDescription>
+                            Uses icon, label, and longer supporting text to show the richer item layout.
+                        </FieldDescription>
+                    </FieldContent>
+                </Field>
 
-            <!-- Compact select sample -->
-            <Select v-model="compactNetwork">
-                <!-- Trigger with icon and label -->
-                <SelectTrigger class="w-full">
-                    <SelectValueContent placeholder="Choose a compact option" :icon="selectedCompactNetwork?.icon ?? null" :label="selectedCompactNetwork?.label ?? null" />
-                </SelectTrigger>
+                <Field>
+                    <FieldLabel>Compact select</FieldLabel>
+                    <FieldContent>
+                        <Select v-model="compactNetwork">
+                            <!-- Trigger with icon and label -->
+                            <SelectTrigger class="w-full">
+                                <SelectValueContent placeholder="Choose a compact option" :icon="selectedCompactNetwork?.icon ?? null" :label="selectedCompactNetwork?.label ?? null" />
+                            </SelectTrigger>
 
-                <!-- Content with icon and label only -->
-                <SelectContent>
-                    <!-- Bitcoin item -->
-                    <SelectItem v-for="option in compactNetworkOptions" :key="option.value" :value="option.value">
-                        <SelectItemContent :icon="option.icon" :label="option.label" />
-                    </SelectItem>
-                </SelectContent>
-            </Select>
+                            <!-- Content with icon and label only -->
+                            <SelectContent>
+                                <!-- Bitcoin item -->
+                                <SelectItem v-for="option in compactNetworkOptions" :key="option.value" :value="option.value">
+                                    <SelectItemContent :icon="option.icon" :label="option.label" />
+                                </SelectItem>
+                            </SelectContent>
+                        </Select>
+                        <FieldDescription>
+                            Keeps the trigger and menu rows tighter when only the primary label is needed.
+                        </FieldDescription>
+                    </FieldContent>
+                </Field>
+            </FieldGroup>
 
             <!-- Current selection display -->
-            <div class="rounded border border-border bg-muted px-4 py-3 text-sm leading-6 text-muted-foreground">
-                <!-- Icon and label -->
-                <div class="flex items-center gap-2 text-foreground">
-                    <HugeiconsIcon :icon="InformationCircleIcon" class="size-4" />
-                    <span class="font-semibold">Current selection</span>
-                </div>
-
-                <!-- Description -->
-                <p class="mt-1">
+            <Alert>
+                <HugeiconsIcon :icon="InformationCircleIcon" class="size-4" />
+                <AlertTitle>Current selection</AlertTitle>
+                <AlertDescription>
                     This example keeps the trigger compact while the menu items show icon, label, and description.
-                </p>
-            </div>
+                </AlertDescription>
+            </Alert>
         </CardContent>
     </Card>
 </template>

@@ -15,7 +15,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@brum
         </CardHeader>
 
         <!-- Card content -->
-        <CardContent class="space-y-6">
+        <CardContent>
             <!-- Variant previews -->
             <div class="flex flex-wrap gap-3">
                 <Badge text="Default" />

@@ -26,7 +26,7 @@ const emit = defineEmits<{
         </CardHeader>
 
         <!-- Card content -->
-        <CardContent class="space-y-6">
+        <CardContent>
             <!-- Action buttons and overlay triggers -->
             <div class="flex flex-wrap gap-3">
                 <!-- Primary action button -->
