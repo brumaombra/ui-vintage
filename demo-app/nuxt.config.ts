@@ -19,6 +19,7 @@ export default defineNuxtConfig({
     },
 
     modules: [
+        '@nuxt/content',
         '@nuxtjs/i18n',
         '@nuxt/image'
     ],
@@ -38,7 +39,7 @@ export default defineNuxtConfig({
                 find: /^@brumaombra\/ui-vintage\/i18n$/,
                 replacement: resolve(librarySrcDir, 'lib/i18n.ts')
             }, {
-                find: /^@brumaombra\/ui-vintage\/(background-grid|blog|busy-indicator|confirm-dialog|dashboard-shell|error-page|landing|message-dialog|slider-form-component|switch-form-component)$/,
+                find: /^@brumaombra\/ui-vintage\/(background-grid|blog|busy-indicator|confirm-dialog|dashboard-shell|error-page|landing|language-selector|load-more-button|message-dialog|page-header|slider-form-component|switch-form-component|theme-selector)$/,
                 replacement: `${librarySrcDir}/components/$1/index.ts`
             }, {
                 find: /^@brumaombra\/ui-vintage\/(landing-content|landing-footer|landing-navbar|landing-shell)$/,

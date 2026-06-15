@@ -1,122 +1,245 @@
-<script setup lang="ts">
-import { computed } from 'vue';
-import { BlogSectionTitle, CategoryCard, PostCard } from '@brumaombra/ui-vintage/blog';
-import { getBlogPost, getRelatedCategories, getRelatedPosts } from '~/composables/useDemoBlogData.js';
+<script setup>
+import { useI18n } from 'vue-i18n';
+import { Bookmark01Icon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/vue';
+import { BlogFAQSection, BlogInfoSection, BlogSectionTitle, CategoryCard, PostCard, SocialShareSidebar, TableOfContents } from '@brumaombra/ui-vintage/blog';
+import { Badge } from '@brumaombra/ui-vintage/badge';
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@brumaombra/ui-vintage/breadcrumb';
+import { Button } from '@brumaombra/ui-vintage/button';
 
+const { t, locale } = useI18n();
 const route = useRoute();
+const { slug } = route.params;
+const fullURL = `https://ui-vintage-demo.local${route.path}`;
 
-const postSlug = computed(() => String(route.params.slug || ''));
-const post = computed(() => getBlogPost(postSlug.value));
-const relatedPosts = computed(() => getRelatedPosts(postSlug.value));
-const relatedCategories = computed(() => {
-    if (!post.value) {
-        return [];
-    }
+// Create a deterministic hash for stable related content ordering
+const hashString = value => {
+    return value.split('').reduce((hash, char) => {
+        return ((hash << 5) - hash) + char.charCodeAt(0);
+    }, 0);
+};
 
-    return getRelatedCategories(post.value.categorySlug);
+// Sort a list by a deterministic score derived from the current slug
+const sortByStableSeed = (items, getKey) => {
+    const seed = `${locale.value}-${slug}`;
+
+    // Sort items by their hash score based on the seed and key
+    return [...items].sort((itemA, itemB) => {
+        const scoreA = hashString(`${seed}-${getKey(itemA)}`);
+        const scoreB = hashString(`${seed}-${getKey(itemB)}`);
+        return scoreA - scoreB;
+    });
+};
+
+// Fetch single post
+const { data: post } = await useAsyncData(`post-${slug}-${locale.value}`, async () => {
+    return await queryCollection('blog').path(route.path).first();
 });
 
+// Fetch related posts
+const { data: relatedPosts } = await useAsyncData(`related-posts-${slug}-${locale.value}`, async () => {
+    // Get all posts except current post
+    const posts = await queryCollection('blog').select('title', 'description', 'image', 'categoryText', 'path').where('language', '=', 'en').where('path', '<>', route.path).all();
+    if (!posts || posts.length === 0) return [];
+
+    // Sort posts deterministically based on current slug/locale
+    const sortedPosts = sortByStableSeed(posts, postItem => postItem.path || postItem.title);
+
+    // Return first 4 items
+    return sortedPosts.slice(0, 4);
+});
+
+// Fetch related categories
+const { data: relatedCategories } = await useAsyncData(`related-categories-${slug}-${locale.value}`, async () => {
+    // Get all posts excluding current post's category
+    const allPosts = await queryCollection('blog').select('categorySlug', 'categoryText', 'image').where('language', '=', 'en').where('categorySlug', '<>', post.value?.categorySlug).all();
+    if (!allPosts || allPosts.length === 0) return [];
+
+    // Extract unique categories
+    const categoriesList = allPosts.map(post => post.categorySlug);
+    const uniqueCategories = categoriesList.filter((category, index, self) => category && self.indexOf(category) === index);
+    const categoryCounts = uniqueCategories.map(category => {
+        const firstPost = allPosts.find(post => post.categorySlug === category);
+        return {
+            name: firstPost?.categoryText || category,
+            slug: category,
+            count: categoriesList.filter(item => item === category).length,
+            image: firstPost?.image
+        };
+    });
+
+    // Sort categories by a deterministic score based on the current slug
+    const sortedCategories = sortByStableSeed(categoryCounts, category => category.slug || category.name);
+
+    // Return first 4 categories
+    return sortedCategories.slice(0, 4);
+});
+
+// Add metatags
 useHead(() => ({
     title: post.value ? post.value.title : 'Blog Post Demo'
 }));
+
+// Define page metadata
+definePageMeta({
+    layout: 'landing'
+});
 </script>
 
 <template>
-    <div class="mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 py-10 md:px-6 lg:px-8">
-        <template v-if="post">
-            <header class="space-y-5">
-                <NuxtLink to="/blog" class="text-sm font-semibold text-[var(--text-primary-light)] underline underline-offset-4 transition-opacity hover:opacity-70 dark:text-[var(--text-primary-dark)]">
-                    Back to blog
-                </NuxtLink>
+    <div class="max-w-4xl mx-auto">
+        <article v-if="post">
+            <!-- Article header -->
+            <header class="mb-6 sm:mb-8 lg:mb-12">
+                <!-- Breadcrumbs -->
+                <Breadcrumb>
+                    <BreadcrumbList>
+                        <BreadcrumbItem>
+                            <BreadcrumbLink as-child>
+                                <NuxtLinkLocale to="/blog">
+                                    Blog
+                                </NuxtLinkLocale>
+                            </BreadcrumbLink>
+                        </BreadcrumbItem>
+                        <BreadcrumbSeparator />
+                        <BreadcrumbItem>
+                            <BreadcrumbPage>
+                                {{ post?.title }}
+                            </BreadcrumbPage>
+                        </BreadcrumbItem>
+                    </BreadcrumbList>
+                </Breadcrumb>
 
-                <NuxtLink :to="`/blog/categories/${post.categorySlug}`" class="inline-flex text-xs font-semibold uppercase tracking-[0.18em] text-[var(--text-secondary-light)] transition-opacity hover:opacity-70 dark:text-[var(--text-secondary-dark)]">
-                    {{ post.categoryText }}
-                </NuxtLink>
+                <!-- Category badge -->
+                <NuxtLinkLocale v-if="post.categoryText" :to="`/blog/categories/${post.categorySlug}`" class="inline-block my-4 md:my-6">
+                    <Badge color="gray" :text="post.categoryText" class="transition-transform duration-200 ease-out hover:scale-105 motion-reduce:transition-none motion-reduce:hover:scale-100" />
+                </NuxtLinkLocale>
 
-                <div class="space-y-3">
-                    <h1 class="max-w-4xl text-3xl font-bold leading-tight text-[var(--text-primary-light)] dark:text-[var(--text-primary-dark)] md:text-5xl">
-                        {{ post.title }}
-                    </h1>
-                    <p class="max-w-3xl text-sm leading-relaxed text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)] md:text-lg">
-                        {{ post.description }}
-                    </p>
-                </div>
+                <!-- Title -->
+                <h1 class="text-2xl sm:!text-3xl md:!text-4xl font-bold tracking-tight text-[var(--text-primary-light)] dark:text-[var(--text-primary-dark)] leading-tight mb-6">
+                    {{ post.title }}
+                </h1>
 
-                <div class="flex flex-wrap gap-4 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)]">
-                    <span>{{ post.publishedAt }}</span>
-                    <span>{{ post.readTime }}</span>
-                </div>
-
-                <div class="overflow-hidden rounded border border-[var(--border-light)] bg-[var(--bg-card-light)] dark:border-[var(--border-dark)] dark:bg-[var(--bg-card-dark)]">
-                    <img :src="post.image" :alt="post.title" class="h-72 w-full object-cover md:h-[26rem]">
+                <!-- Featured image -->
+                <div v-if="post.image" class="relative w-full rounded-lg overflow-hidden aspect-video mb-6">
+                    <NuxtImg :src="post.image" :alt="post.title" format="avif" quality="50" :sizes="{ 480: '480px', 1536: '896px' }" loading="eager" fetchpriority="high" preload class="w-full h-full object-cover" />
                 </div>
             </header>
 
-            <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-start">
-                <article class="space-y-8">
-                    <section v-for="section in post.sections" :key="section.title" class="space-y-3">
-                        <h2 class="text-2xl font-bold text-[var(--text-primary-light)] dark:text-[var(--text-primary-dark)]">
-                            {{ section.title }}
-                        </h2>
-                        <p v-for="paragraph in section.paragraphs" :key="paragraph" class="text-sm leading-7 text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)] md:text-base">
-                            {{ paragraph }}
-                        </p>
-                    </section>
-                </article>
+            <!-- Table of contents -->
+            <TableOfContents :content="post" />
 
-                <aside class="rounded border border-[var(--border-light)] bg-[var(--bg-card-light)] p-5 dark:border-[var(--border-dark)] dark:bg-[var(--bg-card-dark)]">
-                    <h2 class="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)]">
-                        Key takeaways
-                    </h2>
-                    <ul class="space-y-3 text-sm leading-6 text-[var(--text-primary-light)] dark:text-[var(--text-primary-dark)]">
-                        <li v-for="point in post.keyPoints" :key="point">
-                            {{ point }}
-                        </li>
-                    </ul>
-                </aside>
+            <!-- Social share sidebar -->
+            <SocialShareSidebar :title="post.title" :url="fullURL" />
+
+            <!-- Article content -->
+            <div class="prose prose-base sm:prose-lg max-w-none">
+                <ContentRenderer :value="post" />
             </div>
 
-            <section class="space-y-5" v-if="relatedPosts.length > 0">
-                <BlogSectionTitle title="Read also" />
-                <div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-                    <NuxtLink v-for="relatedPost in relatedPosts" :key="relatedPost.path" :to="relatedPost.path" class="block h-full">
-                        <PostCard
-                            class="h-full"
-                            :image="relatedPost.image"
-                            :category="relatedPost.categoryText"
-                            :title="relatedPost.title"
-                            :description="relatedPost.description"
-                        />
-                    </NuxtLink>
-                </div>
-            </section>
+            <!-- Divider -->
+            <div class="my-10 border-t border-[var(--border-light)] dark:border-[var(--border-dark)]"></div>
 
-            <section class="space-y-5" v-if="relatedCategories.length > 0">
-                <BlogSectionTitle title="Explore categories" />
-                <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-                    <NuxtLink v-for="category in relatedCategories" :key="category.slug" :to="`/blog/categories/${category.slug}`" class="block h-full">
-                        <CategoryCard
-                            :name="category.name"
-                            :image="category.image"
-                            :count="category.count"
-                        />
-                    </NuxtLink>
-                </div>
-            </section>
-        </template>
+            <!-- FAQ section -->
+            <BlogFAQSection v-if="post.faqs && post.faqs?.length > 0"
+                :faqs="post.faqs"
+                data-aos="fade-up" />
 
-        <template v-else>
-            <div class="space-y-3">
-                <NuxtLink to="/blog" class="text-sm font-semibold text-[var(--text-primary-light)] underline underline-offset-4 transition-opacity hover:opacity-70 dark:text-[var(--text-primary-dark)]">
-                    Back to blog
-                </NuxtLink>
-                <h1 class="text-3xl font-bold text-[var(--text-primary-light)] dark:text-[var(--text-primary-dark)]">
-                    Post not found
-                </h1>
-                <p class="text-sm text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)]">
-                    The selected post does not exist in the static demo dataset.
-                </p>
+            <!-- Divider -->
+            <div class="my-10 border-t border-[var(--border-light)] dark:border-[var(--border-dark)]"></div>
+
+            <!-- Blog info section -->
+            <BlogInfoSection :author="post.author"
+                :author-url="post.authorUrl"
+                :author-image-url="post.authorImageUrl"
+                :date-published="post.datePublished"
+                :date-modified="post.dateModified" />
+        </article>
+
+        <!-- Divider -->
+        <div class="my-10 border-t border-[var(--border-light)] dark:border-[var(--border-dark)]"></div>
+
+        <!-- Related posts -->
+        <section v-if="relatedPosts?.length" data-aos="fade-up">
+            <!-- Title -->
+            <BlogSectionTitle :title="t('blog.readAlso')" />
+
+            <!-- Posts -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+                <NuxtLinkLocale v-for="relatedPost in relatedPosts" :key="relatedPost.path" :to="relatedPost.path" class="block h-full">
+                    <PostCard :image="relatedPost.image"
+                        :category="relatedPost.categoryText"
+                        :title="relatedPost.title"
+                        :description="relatedPost.description"
+                        class="h-full" />
+                </NuxtLinkLocale>
             </div>
-        </template>
+        </section>
+
+        <!-- Related categories -->
+        <section v-if="relatedCategories?.length" class="mt-8 sm:mt-16">
+            <!-- Title -->
+            <BlogSectionTitle :title="t('blog.exploreCategories')" />
+
+            <!-- Categories list -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+                <NuxtLinkLocale v-for="(category, index) in relatedCategories" :key="category.slug" :to="`/blog/categories/${category.slug}`" class="block h-full" data-aos="fade-up" :data-aos-delay="((index % 2) * 200) + 100">
+                    <CategoryCard :name="category.name"
+                        :image="category.image"
+                        :count="category.count" />
+                </NuxtLinkLocale>
+            </div>
+
+            <!-- Explore all categories button -->
+            <div class="flex items-center justify-center mt-8 md:mt-10" data-aos="fade-up">
+                <NuxtLinkLocale to="/blog/categories">
+                    <Button variant="primary">
+                        <HugeiconsIcon :icon="Bookmark01Icon" class="size-4" />
+                        {{ t('blog.exploreAllCategories') }}
+                    </Button>
+                </NuxtLinkLocale>
+            </div>
+        </section>
     </div>
 </template>
+
+<style>
+.prose h2 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary-light);
+}
+
+.dark .prose h2 {
+    color: var(--text-primary-dark);
+}
+
+.prose h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--text-primary-light);
+}
+
+.dark .prose h3 {
+    color: var(--text-primary-dark);
+}
+
+.prose p,
+.prose li {
+    color: var(--text-secondary-light);
+    line-height: 1.8;
+}
+
+.dark .prose p,
+.dark .prose li {
+    color: var(--text-secondary-dark);
+}
+
+.prose ul {
+    padding-left: 1.25rem;
+}
+</style>
