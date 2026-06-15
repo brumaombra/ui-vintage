@@ -46,7 +46,7 @@ const props = defineProps({
                 <div class="mt-auto">
                     <Button variant="primary" class="w-full sm:w-auto">
                         <HugeiconsIcon :icon="ArrowRight01Icon" class="size-4" />
-                        {{ t('blog.readMore') }}
+                        {{ t('uiVintage.blog.readMore') }}
                     </Button>
                 </div>
             </div>

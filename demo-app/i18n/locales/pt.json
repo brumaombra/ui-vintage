@@ -1,4 +1,9 @@
 {
+    "blog": {
+        "readAlso": "Leia tambem",
+        "exploreCategories": "Explorar categorias",
+        "exploreAllCategories": "Explorar todas as categorias"
+    },
     "demo": {
         "title": "Demo UI Vintage"
     }

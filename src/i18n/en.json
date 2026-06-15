@@ -42,6 +42,30 @@
             "by": "by",
             "allRightsReserved": "All rights reserved."
         },
+        "blog": {
+            "readMore": "Read more",
+            "goToPost": "Go to post",
+            "tableOfContents": "Table of contents",
+            "loadMoreWithNumbers": "Load more ({current}/{total})",
+            "author": "Author",
+            "publishedDate": "Published",
+            "lastUpdatedDate": "Updated",
+            "carouselNavigation": "Carousel navigation",
+            "goToSlide": "Go to slide {index}",
+            "previousSlide": "Previous slide",
+            "nextSlide": "Next slide",
+            "faq": {
+                "title": "Frequently asked questions",
+                "description": "Find quick answers to the most common questions about this topic."
+            },
+            "share": {
+                "facebook": "Share on Facebook",
+                "x": "Share on X",
+                "whatsapp": "Share on WhatsApp",
+                "linkedin": "Share on LinkedIn",
+                "telegram": "Share on Telegram"
+            }
+        },
         "select": {
             "defaultPlaceholder": "Select an option"
         },

@@ -35,7 +35,7 @@ const formattedModifiedDate = computed(() => formatDateLongItalyTimezone(props.d
 
                         <!-- Author name -->
                         <div>
-                            <p class="text-sm text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)]">{{ t('common.author') }}</p>
+                            <p class="text-sm text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)]">{{ t('uiVintage.blog.author') }}</p>
                             <p class="font-bold text-[var(--text-primary-light)] dark:text-[var(--text-primary-dark)]">
                                 <NuxtLink :to="props.authorUrl" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--text-secondary-light)] dark:hover:text-[var(--text-secondary-dark)] transition-colors">
                                     {{ props.author }}
@@ -49,7 +49,7 @@ const formattedModifiedDate = computed(() => formatDateLongItalyTimezone(props.d
                 <div class="flex flex-col sm:items-end text-xs md:text-sm text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)]">
                     <!-- Published date -->
                     <div v-if="props.datePublished" class="mb-1">
-                        <span class="font-semibold">{{ t('common.publishedDate') }}:</span>
+                        <span class="font-semibold">{{ t('uiVintage.blog.publishedDate') }}:</span>
                         <time :datetime="props.datePublished" class="ml-1">
                             {{ formattedPublishedDate }}
                         </time>
@@ -57,7 +57,7 @@ const formattedModifiedDate = computed(() => formatDateLongItalyTimezone(props.d
 
                     <!-- Last updated date -->
                     <div v-if="props.dateModified" class="text-xs">
-                        <span class="font-semibold">{{ t('common.lastUpdatedDate') }}:</span>
+                        <span class="font-semibold">{{ t('uiVintage.blog.lastUpdatedDate') }}:</span>
                         <time :datetime="props.dateModified" class="ml-1">
                             {{ formattedModifiedDate }}
                         </time>

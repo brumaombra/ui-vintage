@@ -42,6 +42,30 @@
             "by": "由",
             "allRightsReserved": "版权所有。"
         },
+        "blog": {
+            "readMore": "阅读更多",
+            "goToPost": "前往文章",
+            "tableOfContents": "目录",
+            "loadMoreWithNumbers": "加载更多 ({current}/{total})",
+            "author": "作者",
+            "publishedDate": "发布时间",
+            "lastUpdatedDate": "更新时间",
+            "carouselNavigation": "轮播导航",
+            "goToSlide": "转到第 {index} 张幻灯片",
+            "previousSlide": "上一张幻灯片",
+            "nextSlide": "下一张幻灯片",
+            "faq": {
+                "title": "常见问题",
+                "description": "快速找到有关此主题的常见问题答案。"
+            },
+            "share": {
+                "facebook": "分享到 Facebook",
+                "x": "分享到 X",
+                "whatsapp": "分享到 WhatsApp",
+                "linkedin": "分享到 LinkedIn",
+                "telegram": "分享到 Telegram"
+            }
+        },
         "select": {
             "defaultPlaceholder": "请选择一个选项"
         },

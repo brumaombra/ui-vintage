@@ -42,6 +42,30 @@
             "by": "by",
             "allRightsReserved": "無断転載を禁じます。"
         },
+        "blog": {
+            "readMore": "続きを読む",
+            "goToPost": "記事を開く",
+            "tableOfContents": "目次",
+            "loadMoreWithNumbers": "さらに読み込む ({current}/{total})",
+            "author": "著者",
+            "publishedDate": "公開日",
+            "lastUpdatedDate": "更新日",
+            "carouselNavigation": "カルーセルナビゲーション",
+            "goToSlide": "スライド {index} へ移動",
+            "previousSlide": "前のスライド",
+            "nextSlide": "次のスライド",
+            "faq": {
+                "title": "よくある質問",
+                "description": "このトピックに関するよくある質問への回答をすばやく確認できます。"
+            },
+            "share": {
+                "facebook": "Facebook で共有",
+                "x": "X で共有",
+                "whatsapp": "WhatsApp で共有",
+                "linkedin": "LinkedIn で共有",
+                "telegram": "Telegram で共有"
+            }
+        },
         "select": {
             "defaultPlaceholder": "オプションを選択してください"
         },

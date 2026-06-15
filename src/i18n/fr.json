@@ -42,6 +42,30 @@
             "by": "par",
             "allRightsReserved": "Tous droits reserves."
         },
+        "blog": {
+            "readMore": "Lire la suite",
+            "goToPost": "Aller a l'article",
+            "tableOfContents": "Table des matieres",
+            "loadMoreWithNumbers": "Charger plus ({current}/{total})",
+            "author": "Auteur",
+            "publishedDate": "Publie",
+            "lastUpdatedDate": "Mis a jour",
+            "carouselNavigation": "Navigation du carrousel",
+            "goToSlide": "Aller a la diapositive {index}",
+            "previousSlide": "Diapositive precedente",
+            "nextSlide": "Diapositive suivante",
+            "faq": {
+                "title": "Questions frequentes",
+                "description": "Trouvez des reponses rapides aux questions les plus courantes sur ce sujet."
+            },
+            "share": {
+                "facebook": "Partager sur Facebook",
+                "x": "Partager sur X",
+                "whatsapp": "Partager sur WhatsApp",
+                "linkedin": "Partager sur LinkedIn",
+                "telegram": "Partager sur Telegram"
+            }
+        },
         "select": {
             "defaultPlaceholder": "Selectionnez une option"
         },

@@ -106,17 +106,17 @@ onUnmounted(() => {
                                     <NuxtLinkLocale :to="post.path">
                                         <Button variant="primary" class="w-full sm:w-auto">
                                             <HugeiconsIcon :icon="ArrowRight01Icon" class="size-4" />
-                                            {{ t('blog.goToPost') }}
+                                            {{ t('uiVintage.blog.goToPost') }}
                                         </Button>
                                     </NuxtLinkLocale>
 
                                     <!-- Slide indicators -->
-                                    <div v-if="props.featuredPosts.length > 1" class="flex w-full justify-center gap-3 sm:w-auto" role="tablist" :aria-label="t('common.carouselNavigation')">
+                                    <div v-if="props.featuredPosts.length > 1" class="flex w-full justify-center gap-3 sm:w-auto" role="tablist" :aria-label="t('uiVintage.blog.carouselNavigation')">
                                         <button v-for="(_, idx) in props.featuredPosts"
                                             :key="idx"
                                             @click="goToSlide(idx)"
                                             :class="['h-5 w-5 sm:!h-4 sm:!w-4 shrink-0 rounded-[2px] transition-all duration-300 cursor-pointer bg-[var(--border-light)] dark:bg-[var(--border-dark)]', currentSlide === idx ? '!w-8 sm:!w-7 !bg-[var(--text-primary-light)] dark:!bg-[var(--text-primary-dark)]' : '']"
-                                            :aria-label="t('common.goToSlide', { index: idx + 1 })"
+                                            :aria-label="t('uiVintage.blog.goToSlide', { index: idx + 1 })"
                                             :aria-current="currentSlide === idx"
                                             role="tab"
                                             :aria-controls="`carousel-slide-${idx}`">
@@ -133,7 +133,7 @@ onUnmounted(() => {
         <!-- Previous slide -->
         <button v-if="props.featuredPosts.length > 1"
             @click="prevSlide"
-            :aria-label="t('common.previousSlide')"
+            :aria-label="t('uiVintage.blog.previousSlide')"
             class="absolute left-2 top-[calc(50%-4rem)] -translate-y-1/2 z-10 border border-[var(--border-light)] dark:border-[var(--border-dark)] bg-[var(--bg-card-light)] dark:bg-[var(--bg-card-dark)] px-3 py-3 rounded-none transition-colors duration-200 hover:border-[var(--border-hover-light)] dark:hover:border-[var(--border-hover-dark)] cursor-pointer">
             <HugeiconsIcon :icon="ArrowLeft01Icon" class="size-4 text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)]" />
         </button>
@@ -141,7 +141,7 @@ onUnmounted(() => {
         <!-- Next slide -->
         <button v-if="props.featuredPosts.length > 1"
             @click="nextSlide"
-            :aria-label="t('common.nextSlide')"
+            :aria-label="t('uiVintage.blog.nextSlide')"
             class="absolute right-2 top-[calc(50%-4rem)] -translate-y-1/2 z-10 border border-[var(--border-light)] dark:border-[var(--border-dark)] bg-[var(--bg-card-light)] dark:bg-[var(--bg-card-dark)] px-3 py-3 rounded-none transition-colors duration-200 hover:border-[var(--border-hover-light)] dark:hover:border-[var(--border-hover-dark)] cursor-pointer">
             <HugeiconsIcon :icon="ArrowRight01Icon" class="size-4 text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)]" />
         </button>

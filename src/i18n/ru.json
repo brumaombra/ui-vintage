@@ -42,6 +42,30 @@
             "by": "от",
             "allRightsReserved": "Все права защищены."
         },
+        "blog": {
+            "readMore": "Читать далее",
+            "goToPost": "Перейти к статье",
+            "tableOfContents": "Содержание",
+            "loadMoreWithNumbers": "Загрузить еще ({current}/{total})",
+            "author": "Автор",
+            "publishedDate": "Опубликовано",
+            "lastUpdatedDate": "Обновлено",
+            "carouselNavigation": "Навигация карусели",
+            "goToSlide": "Перейти к слайду {index}",
+            "previousSlide": "Предыдущий слайд",
+            "nextSlide": "Следующий слайд",
+            "faq": {
+                "title": "Часто задаваемые вопросы",
+                "description": "Быстрые ответы на самые распространенные вопросы по этой теме."
+            },
+            "share": {
+                "facebook": "Поделиться в Facebook",
+                "x": "Поделиться в X",
+                "whatsapp": "Поделиться в WhatsApp",
+                "linkedin": "Поделиться в LinkedIn",
+                "telegram": "Поделиться в Telegram"
+            }
+        },
         "select": {
             "defaultPlaceholder": "Выберите вариант"
         },

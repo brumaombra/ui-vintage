@@ -34,11 +34,11 @@ if (hasValidFAQs.value) {
 <template>
     <div v-if="hasValidFAQs" class="mt-12 lg:mt-16">
         <!-- Title -->
-        <BlogSectionTitle :title="t('blog.faq.title')" />
+        <BlogSectionTitle :title="t('uiVintage.blog.faq.title')" />
 
         <!-- Description -->
         <p class="text-base md:text-lg text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)] mb-8">
-            {{ t('blog.faq.description') }}
+            {{ t('uiVintage.blog.faq.description') }}
         </p>
 
         <!-- FAQ Items -->

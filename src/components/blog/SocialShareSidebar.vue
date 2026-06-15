@@ -23,31 +23,31 @@ const socialPlatforms = computed(() => {
         url: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
         icon: Facebook01Icon,
         color: 'bg-blue-700 hover:bg-blue-800',
-        label: t('blog.share.facebook')
+        label: t('uiVintage.blog.share.facebook')
     }, {
         name: 'twitter',
         url: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`,
         icon: NewTwitterIcon,
         color: 'bg-black hover:bg-gray-800',
-        label: t('blog.share.x')
+        label: t('uiVintage.blog.share.x')
     }, {
         name: 'whatsapp',
         url: `https://api.whatsapp.com/send?text=${encodedTitle}%20${encodedUrl}`,
         icon: WhatsappIcon,
         color: 'bg-green-500 hover:bg-green-600',
-        label: t('blog.share.whatsapp')
+        label: t('uiVintage.blog.share.whatsapp')
     }, {
         name: 'linkedin',
         url: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
         icon: Linkedin01Icon,
         color: 'bg-blue-700 hover:bg-blue-800',
-        label: t('blog.share.linkedin')
+        label: t('uiVintage.blog.share.linkedin')
     }, {
         name: 'telegram',
         url: `https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle}`,
         icon: TelegramIcon,
         color: 'bg-blue-400 hover:bg-blue-500',
-        label: t('blog.share.telegram')
+        label: t('uiVintage.blog.share.telegram')
     }];
 });
 </script>

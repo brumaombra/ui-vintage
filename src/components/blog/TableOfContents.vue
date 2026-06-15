@@ -85,7 +85,7 @@ const getHeadingButtonClasses = heading => {
 
                     <!-- Title -->
                     <span class="text-sm md:!text-base font-semibold text-[var(--text-primary-light)] dark:text-[var(--text-primary-dark)]">
-                        {{ t('blog.tableOfContents') }}
+                        {{ t('uiVintage.blog.tableOfContents') }}
                     </span>
                 </div>
 
