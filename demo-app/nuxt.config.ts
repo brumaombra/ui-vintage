@@ -18,6 +18,11 @@ export default defineNuxtConfig({
         }
     },
 
+    modules: [
+        '@nuxtjs/i18n',
+        '@nuxt/image'
+    ],
+
     vite: {
         plugins: [
             tailwindcss() as unknown as PluginOption
@@ -30,7 +35,10 @@ export default defineNuxtConfig({
                 find: /^@brumaombra\/ui-vintage\/utils$/,
                 replacement: resolve(librarySrcDir, 'lib/utils.ts')
             }, {
-                find: /^@brumaombra\/ui-vintage\/(background-grid|busy-indicator|confirm-dialog|dashboard-shell|error-page|landing|message-dialog|slider-form-component|switch-form-component)$/,
+                find: /^@brumaombra\/ui-vintage\/i18n$/,
+                replacement: resolve(librarySrcDir, 'lib/i18n.ts')
+            }, {
+                find: /^@brumaombra\/ui-vintage\/(background-grid|blog|busy-indicator|confirm-dialog|dashboard-shell|error-page|landing|message-dialog|slider-form-component|switch-form-component)$/,
                 replacement: `${librarySrcDir}/components/$1/index.ts`
             }, {
                 find: /^@brumaombra\/ui-vintage\/(landing-content|landing-footer|landing-navbar|landing-shell)$/,
@@ -67,6 +75,27 @@ export default defineNuxtConfig({
         '@brumaombra/ui-vintage/style.css',
         '~/assets/main.css'
     ],
+
+    i18n: {
+        defaultLocale: 'en',
+        detectBrowserLanguage: false,
+        langDir: 'locales',
+        locales: [
+            { code: 'en', language: 'en-US', file: 'en.json' },
+            { code: 'it', language: 'it-IT', file: 'it.json' },
+            { code: 'fr', language: 'fr-FR', file: 'fr.json' },
+            { code: 'es', language: 'es-ES', file: 'es.json' },
+            { code: 'de', language: 'de-DE', file: 'de.json' },
+            { code: 'pt', language: 'pt-PT', file: 'pt.json' },
+            { code: 'zh', language: 'zh-CN', file: 'zh.json' },
+            { code: 'ja', language: 'ja-JP', file: 'ja.json' },
+            { code: 'ru', language: 'ru-RU', file: 'ru.json' }
+        ]
+    },
+
+    image: {
+        provider: 'ipx'
+    },
 
     devtools: {
         enabled: false

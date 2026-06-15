@@ -12,6 +12,8 @@
     "dependencies": {
         "@hugeicons/core-free-icons": "4.1.1",
         "@hugeicons/vue": "1.0.5",
+        "@nuxt/image": "2.0.0",
+        "@nuxtjs/i18n": "10.2.3",
         "nuxt": "4.4.4",
         "@brumaombra/ui-vintage": "file:.."
     },

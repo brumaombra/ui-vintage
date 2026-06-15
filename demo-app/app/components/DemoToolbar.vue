@@ -68,6 +68,13 @@ onMounted(() => {
                 <Button variant="gray" size="sm" @click="isDark = !isDark">
                     Toggle Theme
                 </Button>
+
+                <!-- Blog demo link -->
+                <Button variant="secondary" size="sm" as-child>
+                    <NuxtLink to="/blog">
+                        Open Blog Demo
+                    </NuxtLink>
+                </Button>
             </div>
         </CardContent>
     </Card>
