@@ -1,14 +1,22 @@
 <script setup>
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useRoute } from 'vue-router';
 import { AllPostsSection, BlogHeaderSection, BlogSectionTitle, CategoriesSection, HeaderCarousel } from '@brumaombra/ui-vintage/blog';
 
-const { t, locale } = useI18n();
-const route = useRoute();
+const { locale } = useI18n();
+const localePath = useLocalePath();
 const currentPage = ref(1);
 const postsPerPage = 1;
 const isLoading = ref(false);
+
+// Map post links to include localized paths
+const mapPostLinks = posts => {
+    return posts.map(post => ({
+        ...post,
+        path: localePath(post.path),
+        categoryPath: post.categorySlug ? localePath(`/blog/categories/${post.categorySlug}`) : undefined
+    }));
+};
 
 // Build category cards data from blog posts
 const buildCategoriesFromPosts = posts => {
@@ -24,6 +32,7 @@ const buildCategoriesFromPosts = posts => {
         return {
             name: firstPost?.categoryText || category,
             slug: category,
+            path: localePath(`/blog/categories/${category}`),
             count: categoriesList.filter(item => item === category).length,
             image: firstPost?.image
         };
@@ -43,8 +52,8 @@ const { data: blogIndexData } = await useAsyncData(`blog-index-${locale.value}`,
 
         // Return the data
         return {
-            featuredPosts,
-            initialPosts,
+            featuredPosts: mapPostLinks(featuredPosts),
+            initialPosts: mapPostLinks(initialPosts),
             totalPosts,
             categories: buildCategoriesFromPosts(categoryPosts)
         };
@@ -88,7 +97,7 @@ const loadMorePosts = async () => {
         }
 
         // Append new posts and update pagination state
-        posts.value = [...posts.value, ...morePosts];
+        posts.value = [...posts.value, ...mapPostLinks(morePosts)];
         hasMorePosts.value = posts.value.length < totalPosts.value;
     } catch (error) {
         console.error('Error loading more blog posts:', error);

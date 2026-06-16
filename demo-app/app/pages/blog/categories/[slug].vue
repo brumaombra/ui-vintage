@@ -8,11 +8,20 @@ import { LoadMoreButton } from '@brumaombra/ui-vintage/load-more-button';
 import { PageHeader } from '@/components/page-header';
 
 const { t, locale } = useI18n();
+const localePath = useLocalePath();
 const route = useRoute();
 const { slug } = route.params;
 const currentPage = ref(1);
 const postsPerPage = 9;
 const isLoading = ref(false);
+
+// Map post links to include localized paths
+const mapPostLinks = posts => {
+    return posts.map(post => ({
+        ...post,
+        path: localePath(post.path)
+    }));
+};
 
 // Fetch prerendered category page data
 const { data: categoryData } = await useAsyncData(`category-${slug}-${locale.value}-posts`, async () => {
@@ -27,7 +36,7 @@ const { data: categoryData } = await useAsyncData(`category-${slug}-${locale.val
         // Return the data
         return {
             categoryTitle: categoryPost?.categoryText || slug,
-            posts,
+            posts: mapPostLinks(posts),
             totalPosts: totalPostsCount || 0
         };
     } catch (error) {
@@ -55,7 +64,7 @@ const loadMorePosts = async () => {
         if (morePosts.length === 0) {
             hasMorePosts.value = false;
         } else {
-            posts.value = [...posts.value, ...morePosts];
+            posts.value = [...posts.value, ...mapPostLinks(morePosts)];
             hasMorePosts.value = currentPage.value * postsPerPage < totalPosts;
         }
     } catch (error) {

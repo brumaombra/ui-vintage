@@ -76,25 +76,25 @@ onUnmounted(() => {
                     <Card class="!p-0 overflow-hidden cursor-pointer">
                         <CardContent class="gap-0 !p-0">
                             <!-- Slide image -->
-                            <NuxtLinkLocale :to="post.path">
+                            <NuxtLink :to="post.path">
                                 <div class="relative w-full h-56 md:h-80 overflow-hidden">
                                     <NuxtImg :src="post.image" :alt="post.title" width="560" height="315" format="avif" quality="35" :sizes="{ 480: '480px', 1536: '1086px' }" :loading="index === 0 ? 'eager' : 'lazy'" :fetchpriority="index === 0 ? 'high' : 'auto'" :preload="index === 0" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
                                 </div>
-                            </NuxtLinkLocale>
+                            </NuxtLink>
 
                             <!-- Slide content -->
                             <div class="p-6 md:p-8">
                                 <!-- Category badge -->
-                                <NuxtLinkLocale v-if="post.categoryText" :to="`/blog/categories/${post.categorySlug}`" class="inline-block mb-3">
+                                <NuxtLink v-if="post.categoryText && post.categoryPath" :to="post.categoryPath" class="inline-block mb-3">
                                     <Badge color="gray" :text="post.categoryText" />
-                                </NuxtLinkLocale>
+                                </NuxtLink>
 
                                 <!-- Title -->
-                                <NuxtLinkLocale :to="post.path">
+                                <NuxtLink :to="post.path">
                                     <h3 class="text-base md:text-3xl font-bold text-[var(--text-primary-light)] dark:text-[var(--text-primary-dark)] mb-3 line-clamp-2 hover:opacity-75 transition-opacity duration-200">
                                         {{ post.title }}
                                     </h3>
-                                </NuxtLinkLocale>
+                                </NuxtLink>
 
                                 <!-- Description -->
                                 <p class="text-xs md:!text-base text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)] mb-6 line-clamp-2 leading-relaxed">
@@ -104,12 +104,12 @@ onUnmounted(() => {
                                 <!-- Button + indicators row -->
                                 <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
                                     <!-- Read post button -->
-                                    <NuxtLinkLocale :to="post.path">
+                                    <NuxtLink :to="post.path">
                                         <Button variant="primary" class="w-full sm:w-auto">
                                             <HugeiconsIcon :icon="ArrowRight01Icon" class="size-4" />
                                             {{ t('uiVintage.blog.goToPost') }}
                                         </Button>
-                                    </NuxtLinkLocale>
+                                    </NuxtLink>
 
                                     <!-- Slide indicators -->
                                     <div v-if="props.featuredPosts.length > 1" class="flex w-full justify-center gap-3 sm:w-auto" role="tablist" :aria-label="t('uiVintage.blog.carouselNavigation')">

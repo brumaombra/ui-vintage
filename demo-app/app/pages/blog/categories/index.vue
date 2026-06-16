@@ -5,6 +5,7 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbP
 import { PageHeader } from '@brumaombra/ui-vintage/page-header';
 
 const { locale } = useI18n();
+const localePath = useLocalePath();
 
 // Build category cards data from blog posts
 const buildCategoriesFromPosts = posts => {
@@ -20,6 +21,7 @@ const buildCategoriesFromPosts = posts => {
         return {
             name: firstPost?.categoryText || category,
             slug: category,
+            path: localePath(`/blog/categories/${category}`),
             count: categoriesList.filter(item => item === category).length,
             image: firstPost?.image
         };
