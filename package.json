@@ -34,6 +34,7 @@
         ".": {
             "import": "./module.mjs"
         },
+        "./style.css": "./src/styles.css",
         "./alert": "./src/components/ui/alert/index.ts",
         "./alert-dialog": "./src/components/ui/alert-dialog/index.ts",
         "./background-grid": "./src/components/background-grid/index.ts",
