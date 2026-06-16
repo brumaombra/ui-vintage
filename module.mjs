@@ -1,4 +1,3 @@
-import { readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -6,114 +5,71 @@ import { pathToFileURL } from 'node:url';
 const moduleRequire = createRequire(import.meta.url);
 const consumerRequire = createRequire(resolve(process.cwd(), 'package.json'));
 
+// Resolve Nuxt Kit from either the consumer app or the package itself
 const loadNuxtKit = async () => {
+    // Attempt to load Nuxt Kit
     for (const specifier of ['@nuxt/kit', 'nuxt/node_modules/@nuxt/kit']) {
         try {
             return await import(specifier);
-        } catch {
-        }
+        } catch { }
 
         try {
             const resolvedPath = consumerRequire.resolve(specifier);
             return await import(pathToFileURL(resolvedPath).href);
-        } catch {
-        }
+        } catch { }
 
         try {
             const resolvedPath = moduleRequire.resolve(specifier);
             return await import(pathToFileURL(resolvedPath).href);
-        } catch {
-        }
+        } catch { }
     }
 
+    // Throw an error if Nuxt Kit cannot be resolved
     throw new Error('Unable to resolve @nuxt/kit for @brumaombra/ui-vintage. Install the package dependencies or add Nuxt to the consuming app.');
 };
 
-const { addPluginTemplate, createResolver, defineNuxtModule, installModule } = await loadNuxtKit();
-
-const PACKAGE_NAME = '@brumaombra/ui-vintage';
-
+const { addPlugin, createResolver, defineNuxtModule, installModule } = await loadNuxtKit();
 const resolver = createResolver(import.meta.url);
 const sourceRoot = resolver.resolve('src');
 const stylesPath = resolver.resolve('src/styles.css');
-const locales = ['en', 'it', 'fr', 'es', 'de', 'pt', 'zh', 'ja', 'ru'];
-const uiVintageMessages = Object.fromEntries(
-    locales.map((locale) => [locale, JSON.parse(readFileSync(resolver.resolve(`src/i18n/${locale}.json`), 'utf8'))])
-);
 
-const escapeForRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-
+// Check whether the consuming app already has a specific module installed
 const hasModuleInstalled = (modules, moduleName) => {
     return modules.some((entry) => {
-        if (typeof entry === 'string') {
-            return entry === moduleName;
-        }
-
-        if (Array.isArray(entry)) {
-            return entry[0] === moduleName;
-        }
-
+        if (typeof entry === 'string') return entry === moduleName;
+        if (Array.isArray(entry)) return entry[0] === moduleName;
         return false;
     });
 };
 
-const i18nPluginTemplate = () => `
-import { defineNuxtPlugin } from '#app'
-
-const uiVintageMessages = ${JSON.stringify(uiVintageMessages)}
-
-const isPlainObject = (value) => value && typeof value === 'object' && !Array.isArray(value)
-
-const mergeMessages = (base, override) => {
-  const result = { ...base }
-
-  for (const [key, value] of Object.entries(override || {})) {
-    if (isPlainObject(value) && isPlainObject(result[key])) {
-      result[key] = mergeMessages(result[key], value)
-      continue
-    }
-
-    result[key] = value
-  }
-
-  return result
-}
-
-export default defineNuxtPlugin((nuxtApp) => {
-  const i18n = nuxtApp.$i18n
-
-  if (!i18n?.global?.getLocaleMessage || !i18n.global.setLocaleMessage) {
-    return
-  }
-
-  for (const [locale, messages] of Object.entries(uiVintageMessages)) {
-    const currentMessages = i18n.global.getLocaleMessage(locale)
-    i18n.global.setLocaleMessage(locale, mergeMessages(messages, currentMessages))
-  }
-})
-`;
-
 export default defineNuxtModule({
+    // Module meta information
     meta: {
-        name: PACKAGE_NAME,
+        name: '@brumaombra/ui-vintage',
         compatibility: {
             nuxt: '>=4.0.0'
         }
     },
+
+    // Module main function
     async setup(_, nuxt) {
+        // Inject the shared library stylesheet once
         if (!nuxt.options.css.includes(stylesPath)) {
             nuxt.options.css.push(stylesPath);
         }
 
-        nuxt.options.build.transpile.push(new RegExp(`^${escapeForRegExp(sourceRoot)}`));
+        // Transpile the published source so consuming apps can import it directly
+        const cleanSourceRoot = sourceRoot.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        nuxt.options.build.transpile.push(new RegExp(`^${cleanSourceRoot}`));
 
+        // Ensure Nuxt Image is available for components that render NuxtImg
         if (!hasModuleInstalled(nuxt.options.modules, '@nuxt/image')) {
             await installModule('@nuxt/image');
         }
 
-        addPluginTemplate({
-            filename: 'ui-vintage-i18n.mjs',
-            getContents: i18nPluginTemplate
+        // Add the plugin to merge the library translations into the app i18n instance at runtime
+        addPlugin({
+            src: resolver.resolve('src/runtime/ui-vintage-i18n-plugin.js')
         });
     }
 });
