@@ -4,6 +4,13 @@
         "exploreCategories": "探索分类",
         "exploreAllCategories": "探索全部分类"
     },
+    "navigation": {
+        "breadcrumbs": {
+            "home": "首页",
+            "blog": "博客",
+            "categories": "分类"
+        }
+    },
     "demo": {
         "title": "UI Vintage 演示"
     }

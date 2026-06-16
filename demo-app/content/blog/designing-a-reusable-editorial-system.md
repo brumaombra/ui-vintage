@@ -23,11 +23,23 @@ Reusable blog UI works best when the typography and spacing rules are stable bef
 
 In this demo, the goal is not to simulate a CMS with endless data. It is to prove that the shared blog components can render a believable article page, category flow, and listing experience with the same surface language across routes.
 
+::BlogList
+---
+variant: checkmark
+items:
+  - "Stable typography and spacing make the article page portable across products"
+  - "Shared content blocks reduce duplication between markdown-heavy apps"
+  - "Wrapper components preserve app-level compatibility while moving real UI into the library"
+---
+::
+
 ### A reusable system needs clear boundaries
 
 The library owns the reusable chrome: hero cards, carousels, category grids, FAQs, author information, and table-of-contents behavior. The demo app owns the content source and route composition.
 
 That boundary is what makes the setup portable. Another project can change the post inventory, author information, or publishing cadence without rewriting the reusable UI blocks.
+
+---
 
 ## Real content is a better test than static arrays
 
@@ -35,11 +47,28 @@ Mock arrays are useful for initial exploration, but they hide the real shape of 
 
 This is where production-like behavior matters. A working post page is not just a hero image plus a few paragraphs. It includes:
 
-- category metadata
-- author and publish information
-- a content-driven table of contents
-- related article links
-- related category links
+::BlogList
+---
+variant: circle
+items:
+  - "Category metadata"
+  - "Author and publish information"
+  - "A content-driven table of contents"
+  - "Related article links"
+  - "Related category links"
+---
+::
+
+::BlogTable
+---
+highlightCol: 1
+headers: ["Responsibility", "Library", "App"]
+rows:
+  - ["Editorial UI blocks", "Cards, lists, tables, dividers, TOC, FAQ, author info", "Consumes them through wrappers or direct imports"]
+  - ["Content source", "No hardcoded product content", "Markdown entries and route queries"]
+  - ["Product-specific conversion blocks", "Optional", "Owns CTA cards like GiveItATryCard"]
+---
+::
 
 ### Markdown helps expose content assumptions
 

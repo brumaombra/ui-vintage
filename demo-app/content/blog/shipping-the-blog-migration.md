@@ -23,9 +23,21 @@ Once the blog UI moves into the library, the demo app stops being a static galle
 
 That is a more meaningful test, because it mirrors the way a consuming product actually uses the library.
 
+::BlogList
+---
+variant: numbered
+items:
+  - "The page queries real markdown entries instead of rendering hardcoded arrays"
+  - "Shared article components now sit behind dedicated library subpath imports"
+  - "The demo validates wrappers, content rendering, and route composition together"
+---
+::
+
 ### Production-like does not mean product-specific
 
 The demo does not need every conversion card or SEO helper from the original app. It does need the real data flow: content collection, frontmatter schema, content renderer, related post logic, and category navigation.
+
+---
 
 ## Two example posts are enough to validate the route graph
 
@@ -37,6 +49,17 @@ With two posts, the demo can validate the full blog route graph:
 - the `/blog/categories/[slug]` listing
 
 That is the minimum useful slice for testing whether the migrated components still compose correctly around actual content.
+
+::BlogTable
+---
+headers: ["Route", "What it validates"]
+rows:
+  - ["/blog", "Index composition, featured posts, and paginated lists"]
+  - ["/blog/[slug]", "Article content, author info, TOC, and related blocks"]
+  - ["/blog/categories", "Category aggregation and navigation"]
+  - ["/blog/categories/[slug]", "Filtered post listings with pagination"]
+---
+::
 
 ### The content schema matters as much as the components
 

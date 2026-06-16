@@ -6,6 +6,7 @@ import { BlogFAQSection, BlogInfoSection, BlogSectionTitle, CategoryCard, PostCa
 import { Badge } from '@brumaombra/ui-vintage/badge';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@brumaombra/ui-vintage/breadcrumb';
 import { Button } from '@brumaombra/ui-vintage/button';
+import ProseHr from '~/components/content/ProseHr.vue';
 
 const { t, locale } = useI18n();
 const route = useRoute();
@@ -129,7 +130,7 @@ definePageMeta({
                 </h1>
 
                 <!-- Featured image -->
-                <div v-if="post.image" class="relative w-full rounded-lg overflow-hidden aspect-video mb-6">
+                <div v-if="post.image" class="relative w-full rounded-[4px] overflow-hidden aspect-video mb-6">
                     <NuxtImg :src="post.image" :alt="post.title" format="avif" quality="50" :sizes="{ 480: '480px', 1536: '896px' }" loading="eager" fetchpriority="high" preload class="w-full h-full object-cover" />
                 </div>
             </header>
@@ -146,7 +147,7 @@ definePageMeta({
             </div>
 
             <!-- Divider -->
-            <div class="my-10 border-t border-[var(--border-light)] dark:border-[var(--border-dark)]"></div>
+            <ProseHr />
 
             <!-- FAQ section -->
             <BlogFAQSection v-if="post.faqs && post.faqs?.length > 0"
@@ -154,7 +155,7 @@ definePageMeta({
                 data-aos="fade-up" />
 
             <!-- Divider -->
-            <div class="my-10 border-t border-[var(--border-light)] dark:border-[var(--border-dark)]"></div>
+            <ProseHr />
 
             <!-- Blog info section -->
             <BlogInfoSection :author="post.author"
@@ -165,7 +166,7 @@ definePageMeta({
         </article>
 
         <!-- Divider -->
-        <div class="my-10 border-t border-[var(--border-light)] dark:border-[var(--border-dark)]"></div>
+        <ProseHr />
 
         <!-- Related posts -->
         <section v-if="relatedPosts?.length" data-aos="fade-up">

@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { useI18n } from 'vue-i18n';
 import { CategoriesList } from '@brumaombra/ui-vintage/blog';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@brumaombra/ui-vintage/breadcrumb';

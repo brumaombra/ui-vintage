@@ -4,6 +4,13 @@
         "exploreCategories": "Kategorien entdecken",
         "exploreAllCategories": "Alle Kategorien entdecken"
     },
+    "navigation": {
+        "breadcrumbs": {
+            "home": "Startseite",
+            "blog": "Blog",
+            "categories": "Kategorien"
+        }
+    },
     "demo": {
         "title": "UI Vintage Demo"
     }

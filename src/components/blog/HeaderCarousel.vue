@@ -71,7 +71,7 @@ onUnmounted(() => {
         <!-- Slides -->
         <div class="relative overflow-hidden rounded">
             <TransitionGroup name="slide">
-                <div v-for="(post, index) in props.featuredPosts" :id="`carousel-slide-${index}`" :key="post.id" v-show="currentSlide === index" class="w-full" :data-direction="direction">
+                <div v-for="(post, index) in props.featuredPosts" :id="`carousel-slide-${index}`" :key="post.path || post.title || index" v-show="currentSlide === index" class="w-full" :data-direction="direction">
                     <Card class="!p-0 overflow-hidden cursor-pointer">
                         <CardContent class="gap-0 !p-0">
                             <!-- Slide image -->

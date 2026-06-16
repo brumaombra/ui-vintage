@@ -120,6 +120,10 @@
             "types": "./dist/components/confirm-dialog/index.d.ts",
             "import": "./dist/confirm-dialog.js"
         },
+        "./content": {
+            "types": "./dist/components/content/index.d.ts",
+            "import": "./dist/content.js"
+        },
         "./message-dialog": {
             "types": "./dist/components/message-dialog/index.d.ts",
             "import": "./dist/message-dialog.js"

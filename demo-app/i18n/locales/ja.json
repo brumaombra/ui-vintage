@@ -4,6 +4,13 @@
         "exploreCategories": "カテゴリーを探す",
         "exploreAllCategories": "すべてのカテゴリーを見る"
     },
+    "navigation": {
+        "breadcrumbs": {
+            "home": "ホーム",
+            "blog": "ブログ",
+            "categories": "カテゴリー"
+        }
+    },
     "demo": {
         "title": "UI Vintage デモ"
     }

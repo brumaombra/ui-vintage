@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { ref } from 'vue';
 import { BellDotIcon, Cancel01Icon, CheckmarkCircle02Icon, DashboardSquare01Icon, InformationCircleIcon, RefreshIcon, SaveIcon, SlidersHorizontalIcon } from '@hugeicons/core-free-icons';
 import { setBusy } from '@brumaombra/ui-vintage/busy-indicator';
