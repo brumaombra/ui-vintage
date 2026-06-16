@@ -1,6 +1,6 @@
 {
     "name": "@brumaombra/ui-vintage",
-    "version": "0.7.3",
+    "version": "0.7.4",
     "description": "Source-published Nuxt UI runtime with shared theme tokens and built-in Nuxt integrations.",
     "private": false,
     "author": "Mauro Brambilla",
