@@ -5,7 +5,7 @@ import { reactiveOmit } from "@vueuse/core"
 import { Search01Icon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/vue"
 import { ListboxFilter, useForwardProps } from "reka-ui"
-import { cn } from "@/lib/utils"
+import { cn } from "../../../lib/utils"
 import { useCommand } from "."
 
 defineOptions({

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from "vue";
 import { computed, useSlots } from "vue";
-import BackgroundGrid from "@/components/background-grid/BackgroundGrid.vue";
-import { cn } from "@/lib/utils";
+import BackgroundGrid from "../../background-grid/BackgroundGrid.vue";
+import { cn } from "../../../lib/utils";
 
 interface LandingShellProps {
     showBackground?: boolean;

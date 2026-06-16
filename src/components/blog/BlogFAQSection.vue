@@ -3,7 +3,7 @@ import { ref, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { ArrowDown01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent } from '../ui/card';
 import BlogSectionTitle from './BlogSectionTitle.vue';
 
 // Props
@@ -48,7 +48,7 @@ if (hasValidFAQs.value) {
                     <!-- Question -->
                     <div class="flex items-center justify-between p-5 gap-4">
                         <!-- Question text -->
-                        <h3 class="text-sm md:!text-base font-semibold text-[var(--text-primary-light)] dark:text-[var(--text-primary-dark)] text-left">
+                        <h3 class="text-sm md:text-base font-semibold text-[var(--text-primary-light)] dark:text-[var(--text-primary-dark)] text-left">
                             {{ faq.question }}
                         </h3>
 

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from "vue"
 import { HugeiconsIcon } from "@hugeicons/vue"
-import { getSurfaceToneClasses, type ToneColor } from "@/lib/color-tokens"
-import { cn } from "@/lib/utils"
+import { getSurfaceToneClasses, type ToneColor } from "../../../lib/color-tokens"
+import { cn } from "../../../lib/utils"
 
 type HugeiconsIconDefinition = readonly (readonly [string, { readonly [key: string]: string | number }])[]
 

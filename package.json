@@ -1,7 +1,7 @@
 {
     "name": "@brumaombra/ui-vintage",
     "version": "0.6.10",
-    "description": "Nuxt UI component library with dedicated imports, shared theme tokens, and built-in Nuxt integrations.",
+    "description": "Source-published Nuxt UI runtime with shared theme tokens and built-in Nuxt integrations.",
     "private": false,
     "author": "Mauro Brambilla",
     "license": "MIT",
@@ -16,12 +16,10 @@
     "keywords": [
         "nuxt",
         "nuxt4",
+        "nuxt-module",
         "components",
-        "component-library",
-        "vite",
-        "typescript",
         "ui",
-        "design-system",
+        "shared-runtime",
         "nuxt-image"
     ],
     "type": "module",
@@ -29,268 +27,80 @@
         "access": "public"
     },
     "files": [
-        "dist"
+        "src",
+        "module.mjs"
     ],
     "exports": {
-        "./alert": {
-            "types": "./dist/components/ui/alert/index.d.ts",
-            "import": "./dist/alert.js"
+        ".": {
+            "import": "./module.mjs"
         },
-        "./alert-dialog": {
-            "types": "./dist/components/ui/alert-dialog/index.d.ts",
-            "import": "./dist/alert-dialog.js"
-        },
-        "./background-grid": {
-            "types": "./dist/components/background-grid/index.d.ts",
-            "import": "./dist/background-grid.js"
-        },
-        "./badge": {
-            "types": "./dist/components/ui/badge/index.d.ts",
-            "import": "./dist/badge.js"
-        },
-        "./blog": {
-            "types": "./dist/components/blog/index.d.ts",
-            "import": "./dist/blog.js"
-        },
-        "./busy": {
-            "types": "./dist/components/ui/busy/index.d.ts",
-            "import": "./dist/busy.js"
-        },
-        "./busy-indicator": {
-            "types": "./dist/components/busy-indicator/index.d.ts",
-            "import": "./dist/busy-indicator.js"
-        },
-        "./button": {
-            "types": "./dist/components/ui/button/index.d.ts",
-            "import": "./dist/button.js"
-        },
-        "./breadcrumb": {
-            "types": "./dist/components/ui/breadcrumb/index.d.ts",
-            "import": "./dist/breadcrumb.js"
-        },
-        "./calendar": {
-            "types": "./dist/components/ui/calendar/index.d.ts",
-            "import": "./dist/calendar.js"
-        },
-        "./card": {
-            "types": "./dist/components/ui/card/index.d.ts",
-            "import": "./dist/card.js"
-        },
-        "./chip": {
-            "types": "./dist/components/chip/index.d.ts",
-            "import": "./dist/chip.js"
-        },
-        "./command": {
-            "types": "./dist/components/ui/command/index.d.ts",
-            "import": "./dist/command.js"
-        },
-        "./date-picker": {
-            "types": "./dist/components/ui/date-picker/index.d.ts",
-            "import": "./dist/date-picker.js"
-        },
-        "./data-list": {
-            "types": "./dist/components/data-list/index.d.ts",
-            "import": "./dist/data-list.js"
-        },
-        "./date-time-picker": {
-            "types": "./dist/components/ui/date-time-picker/index.d.ts",
-            "import": "./dist/date-time-picker.js"
-        },
-        "./dashboard-shell": {
-            "types": "./dist/components/dashboard-shell/index.d.ts",
-            "import": "./dist/dashboard-shell.js"
-        },
-        "./error-page": {
-            "types": "./dist/components/error-page/index.d.ts",
-            "import": "./dist/error-page.js"
-        },
-        "./dialog": {
-            "types": "./dist/components/ui/dialog/index.d.ts",
-            "import": "./dist/dialog.js"
-        },
-        "./card-grid": {
-            "types": "./dist/components/card-grid/index.d.ts",
-            "import": "./dist/card-grid.js"
-        },
-        "./empty-state-card": {
-            "types": "./dist/components/empty-state-card/index.d.ts",
-            "import": "./dist/empty-state-card.js"
-        },
-        "./confirm-dialog": {
-            "types": "./dist/components/confirm-dialog/index.d.ts",
-            "import": "./dist/confirm-dialog.js"
-        },
-        "./content": {
-            "types": "./dist/components/content/index.d.ts",
-            "import": "./dist/content.js"
-        },
-        "./message-dialog": {
-            "types": "./dist/components/message-dialog/index.d.ts",
-            "import": "./dist/message-dialog.js"
-        },
-        "./message-toast": {
-            "types": "./dist/components/message-toast/index.d.ts",
-            "import": "./dist/message-toast.js"
-        },
-        "./native-select": {
-            "types": "./dist/components/ui/native-select/index.d.ts",
-            "import": "./dist/native-select.js"
-        },
-        "./field": {
-            "types": "./dist/components/ui/field/index.d.ts",
-            "import": "./dist/field.js"
-        },
-        "./input": {
-            "types": "./dist/components/ui/input/index.d.ts",
-            "import": "./dist/input.js"
-        },
-        "./info-card": {
-            "types": "./dist/components/info-card/index.d.ts",
-            "import": "./dist/info-card.js"
-        },
-        "./label": {
-            "types": "./dist/components/ui/label/index.d.ts",
-            "import": "./dist/label.js"
-        },
-        "./i18n": {
-            "types": "./dist/lib/i18n.d.ts",
-            "import": "./dist/i18n.js"
-        },
-        "./language-flag": {
-            "types": "./dist/components/language-flag/index.d.ts",
-            "import": "./dist/language-flag.js"
-        },
-        "./language-selector": {
-            "types": "./dist/components/language-selector/index.d.ts",
-            "import": "./dist/language-selector.js"
-        },
-        "./load-more-button": {
-            "types": "./dist/components/load-more-button/index.d.ts",
-            "import": "./dist/load-more-button.js"
-        },
-        "./loading-state-card": {
-            "types": "./dist/components/loading-state-card/index.d.ts",
-            "import": "./dist/loading-state-card.js"
-        },
-        "./landing": {
-            "types": "./dist/components/landing/index.d.ts",
-            "import": "./dist/landing.js"
-        },
-        "./landing-content": {
-            "types": "./dist/components/landing/landing-content/index.d.ts",
-            "import": "./dist/landing-content.js"
-        },
-        "./landing-footer": {
-            "types": "./dist/components/landing/landing-footer/index.d.ts",
-            "import": "./dist/landing-footer.js"
-        },
-        "./landing-navbar": {
-            "types": "./dist/components/landing/landing-navbar/index.d.ts",
-            "import": "./dist/landing-navbar.js"
-        },
-        "./landing-shell": {
-            "types": "./dist/components/landing/landing-shell/index.d.ts",
-            "import": "./dist/landing-shell.js"
-        },
-        "./popover": {
-            "types": "./dist/components/ui/popover/index.d.ts",
-            "import": "./dist/popover.js"
-        },
-        "./progress": {
-            "types": "./dist/components/ui/progress/index.d.ts",
-            "import": "./dist/progress.js"
-        },
-        "./progress-component": {
-            "types": "./dist/components/progress-component/index.d.ts",
-            "import": "./dist/progress-component.js"
-        },
-        "./page-header": {
-            "types": "./dist/components/page-header/index.d.ts",
-            "import": "./dist/page-header.js"
-        },
-        "./select": {
-            "types": "./dist/components/ui/select/index.d.ts",
-            "import": "./dist/select.js"
-        },
-        "./scroll-area": {
-            "types": "./dist/components/ui/scroll-area/index.d.ts",
-            "import": "./dist/scroll-area.js"
-        },
-        "./separator": {
-            "types": "./dist/components/ui/separator/index.d.ts",
-            "import": "./dist/separator.js"
-        },
-        "./single-value-card": {
-            "types": "./dist/components/single-value-card/index.d.ts",
-            "import": "./dist/single-value-card.js"
-        },
-        "./sheet": {
-            "types": "./dist/components/ui/sheet/index.d.ts",
-            "import": "./dist/sheet.js"
-        },
-        "./sidebar": {
-            "types": "./dist/components/ui/sidebar/index.d.ts",
-            "import": "./dist/sidebar.js"
-        },
-        "./skeleton": {
-            "types": "./dist/components/ui/skeleton/index.d.ts",
-            "import": "./dist/skeleton.js"
-        },
-        "./slider": {
-            "types": "./dist/components/ui/slider/index.d.ts",
-            "import": "./dist/slider.js"
-        },
-        "./slider-form-component": {
-            "types": "./dist/components/slider-form-component/index.d.ts",
-            "import": "./dist/slider-form-component.js"
-        },
-        "./switch": {
-            "types": "./dist/components/ui/switch/index.d.ts",
-            "import": "./dist/switch.js"
-        },
-        "./switch-form-component": {
-            "types": "./dist/components/switch-form-component/index.d.ts",
-            "import": "./dist/switch-form-component.js"
-        },
-        "./tabs": {
-            "types": "./dist/components/ui/tabs/index.d.ts",
-            "import": "./dist/tabs.js"
-        },
-        "./table": {
-            "types": "./dist/components/ui/table/index.d.ts",
-            "import": "./dist/table.js"
-        },
-        "./text-link": {
-            "types": "./dist/components/text-link/index.d.ts",
-            "import": "./dist/text-link.js"
-        },
-        "./textarea": {
-            "types": "./dist/components/ui/textarea/index.d.ts",
-            "import": "./dist/textarea.js"
-        },
-        "./theme-selector": {
-            "types": "./dist/components/theme-selector/index.d.ts",
-            "import": "./dist/theme-selector.js"
-        },
-        "./time-picker": {
-            "types": "./dist/components/ui/time-picker/index.d.ts",
-            "import": "./dist/time-picker.js"
-        },
-        "./tooltip": {
-            "types": "./dist/components/ui/tooltip/index.d.ts",
-            "import": "./dist/tooltip.js"
-        },
-        "./utils": {
-            "types": "./dist/lib/utils.d.ts",
-            "import": "./dist/utils.js"
-        },
-        "./style.css": "./dist/style.css"
+        "./alert": "./src/components/ui/alert/index.ts",
+        "./alert-dialog": "./src/components/ui/alert-dialog/index.ts",
+        "./background-grid": "./src/components/background-grid/index.ts",
+        "./badge": "./src/components/ui/badge/index.ts",
+        "./blog": "./src/components/blog/index.ts",
+        "./busy": "./src/components/ui/busy/index.ts",
+        "./busy-indicator": "./src/components/busy-indicator/index.ts",
+        "./breadcrumb": "./src/components/ui/breadcrumb/index.ts",
+        "./button": "./src/components/ui/button/index.ts",
+        "./calendar": "./src/components/ui/calendar/index.ts",
+        "./card": "./src/components/ui/card/index.ts",
+        "./card-grid": "./src/components/card-grid/index.ts",
+        "./chip": "./src/components/chip/index.ts",
+        "./command": "./src/components/ui/command/index.ts",
+        "./confirm-dialog": "./src/components/confirm-dialog/index.ts",
+        "./content": "./src/components/content/index.ts",
+        "./dashboard-shell": "./src/components/dashboard-shell/index.ts",
+        "./data-list": "./src/components/data-list/index.ts",
+        "./date-picker": "./src/components/ui/date-picker/index.ts",
+        "./date-time-picker": "./src/components/ui/date-time-picker/index.ts",
+        "./dialog": "./src/components/ui/dialog/index.ts",
+        "./empty-state-card": "./src/components/empty-state-card/index.ts",
+        "./error-page": "./src/components/error-page/index.ts",
+        "./field": "./src/components/ui/field/index.ts",
+        "./info-card": "./src/components/info-card/index.ts",
+        "./input": "./src/components/ui/input/index.ts",
+        "./label": "./src/components/ui/label/index.ts",
+        "./landing": "./src/components/landing/index.ts",
+        "./landing-content": "./src/components/landing/landing-content/index.ts",
+        "./landing-footer": "./src/components/landing/landing-footer/index.ts",
+        "./landing-navbar": "./src/components/landing/landing-navbar/index.ts",
+        "./landing-shell": "./src/components/landing/landing-shell/index.ts",
+        "./language-flag": "./src/components/language-flag/index.ts",
+        "./language-selector": "./src/components/language-selector/index.ts",
+        "./load-more-button": "./src/components/load-more-button/index.ts",
+        "./loading-state-card": "./src/components/loading-state-card/index.ts",
+        "./message-dialog": "./src/components/message-dialog/index.ts",
+        "./message-toast": "./src/components/message-toast/index.ts",
+        "./native-select": "./src/components/ui/native-select/index.ts",
+        "./page-header": "./src/components/page-header/index.ts",
+        "./popover": "./src/components/ui/popover/index.ts",
+        "./progress": "./src/components/ui/progress/index.ts",
+        "./progress-component": "./src/components/progress-component/index.ts",
+        "./scroll-area": "./src/components/ui/scroll-area/index.ts",
+        "./select": "./src/components/ui/select/index.ts",
+        "./separator": "./src/components/ui/separator/index.ts",
+        "./sheet": "./src/components/ui/sheet/index.ts",
+        "./sidebar": "./src/components/ui/sidebar/index.ts",
+        "./single-value-card": "./src/components/single-value-card/index.ts",
+        "./skeleton": "./src/components/ui/skeleton/index.ts",
+        "./slider": "./src/components/ui/slider/index.ts",
+        "./slider-form-component": "./src/components/slider-form-component/index.ts",
+        "./switch": "./src/components/ui/switch/index.ts",
+        "./switch-form-component": "./src/components/switch-form-component/index.ts",
+        "./table": "./src/components/ui/table/index.ts",
+        "./tabs": "./src/components/ui/tabs/index.ts",
+        "./text-link": "./src/components/text-link/index.ts",
+        "./textarea": "./src/components/ui/textarea/index.ts",
+        "./theme-selector": "./src/components/theme-selector/index.ts",
+        "./time-picker": "./src/components/ui/time-picker/index.ts",
+        "./tooltip": "./src/components/ui/tooltip/index.ts",
+        "./utils": "./src/lib/utils.ts"
     },
     "sideEffects": [
         "**/*.css"
     ],
     "scripts": {
-        "build": "vue-tsc --noEmit && vite build",
         "typecheck": "vue-tsc --noEmit"
     },
     "peerDependencies": {
@@ -300,6 +110,7 @@
         "vue-i18n": "^9.0.0 || ^10.0.0"
     },
     "dependencies": {
+        "@nuxt/kit": "^4.4.4",
         "@hugeicons/core-free-icons": "4.1.1",
         "@hugeicons/vue": "1.0.5",
         "@internationalized/date": "3.10.0",
@@ -307,17 +118,13 @@
         "class-variance-authority": "0.7.1",
         "clsx": "2.1.1",
         "reka-ui": "2.9.2",
-        "tailwind-merge": "3.5.0"
+        "tailwind-merge": "3.5.0",
+        "tailwindcss": "4.1.3",
+        "tw-animate-css": "1.4.0"
     },
     "devDependencies": {
-        "@tailwindcss/vite": "4.2.2",
         "@types/node": "24.0.0",
-        "@vitejs/plugin-vue": "5.2.4",
-        "tailwindcss": "4.1.3",
-        "tw-animate-css": "1.4.0",
         "typescript": "5.9.3",
-        "vite": "5.4.18",
-        "vite-plugin-dts": "4.5.4",
         "vue": "3.5.13",
         "vue-tsc": "2.2.10"
     }

@@ -4,9 +4,9 @@ import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { ArrowLeft01Icon, ArrowRight01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '../ui/badge';
+import { Button } from '../ui/button';
+import { Card, CardContent } from '../ui/card';
 
 const { t } = useI18n();
 
@@ -97,7 +97,7 @@ onUnmounted(() => {
                                 </NuxtLink>
 
                                 <!-- Description -->
-                                <p class="text-xs md:!text-base text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)] mb-6 line-clamp-2 leading-relaxed">
+                                <p class="text-xs md:text-base text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)] mb-6 line-clamp-2 leading-relaxed">
                                     {{ post.description }}
                                 </p>
 
@@ -116,7 +116,7 @@ onUnmounted(() => {
                                         <button v-for="(_, idx) in props.featuredPosts"
                                             :key="idx"
                                             @click="goToSlide(idx)"
-                                            :class="['h-5 w-5 sm:!h-4 sm:!w-4 shrink-0 rounded-[2px] transition-all duration-300 cursor-pointer bg-[var(--border-light)] dark:bg-[var(--border-dark)]', currentSlide === idx ? '!w-8 sm:!w-7 !bg-[var(--text-primary-light)] dark:!bg-[var(--text-primary-dark)]' : '']"
+                                            :class="['h-5 w-5 sm:h-4 sm:w-4 shrink-0 rounded-[2px] transition-all duration-300 cursor-pointer bg-[var(--border-light)] dark:bg-[var(--border-dark)]', currentSlide === idx ? 'w-8 sm:w-7 !bg-[var(--text-primary-light)] dark:!bg-[var(--text-primary-dark)]' : '']"
                                             :aria-label="t('uiVintage.blog.goToSlide', { index: idx + 1 })"
                                             :aria-current="currentSlide === idx"
                                             role="tab"

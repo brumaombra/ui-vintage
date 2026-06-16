@@ -1,6 +1,6 @@
 import type { ClassProp } from "class-variance-authority/types"
 import { cva } from "class-variance-authority"
-import type { ToneColor } from "@/lib/color-tokens"
+import type { ToneColor } from "../../../lib/color-tokens"
 
 export { default as Alert } from "./Alert.vue"
 export { default as AlertDescription } from "./AlertDescription.vue"

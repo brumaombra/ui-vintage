@@ -5,7 +5,7 @@ import { reactiveOmit } from "@vueuse/core"
 import { ArrowDown01Icon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/vue"
 import { SelectScrollDownButton, useForwardProps } from "reka-ui"
-import { cn } from "@/lib/utils"
+import { cn } from "../../../lib/utils"
 
 const props = defineProps<SelectScrollDownButtonProps & { class?: HTMLAttributes["class"] }>()
 

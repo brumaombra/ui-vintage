@@ -3,9 +3,9 @@ import { NuxtImg } from '#components';
 import { useI18n } from 'vue-i18n';
 import { ArrowRight01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '../ui/badge';
+import { Button } from '../ui/button';
+import { Card, CardContent } from '../ui/card';
 
 const { t } = useI18n();
 

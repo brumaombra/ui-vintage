@@ -2,8 +2,8 @@
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { LandingContent, LandingFooter, LandingNavbar, LandingShell } from '@brumaombra/ui-vintage/landing';
-import { LanguageSelector } from '@/components/language-selector';
-import { ThemeSelector } from '@/components/theme-selector';
+import { LanguageSelector } from '@brumaombra/ui-vintage/language-selector';
+import { ThemeSelector } from '@brumaombra/ui-vintage/theme-selector';
 
 const { locale, locales, setLocale } = useI18n();
 const localePath = useLocalePath();

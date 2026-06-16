@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed } from "vue"
 import type { HTMLAttributes } from "vue"
-import { getSurfaceToneClasses, type ToneColor } from "@/lib/color-tokens"
-import { cn } from "@/lib/utils"
+import { getSurfaceToneClasses, type ToneColor } from "../../../lib/color-tokens"
+import { cn } from "../../../lib/utils"
 
 type CardColor = "default" | ToneColor
 
@@ -25,7 +25,7 @@ const colorClasses = computed(() => {
 </script>
 
 <template>
-    <div data-slot="card" :class="cn('flex flex-col gap-4 sm:!gap-6 rounded py-6 transition-colors duration-300 ease-in-out', colorClasses, props.class)">
+    <div data-slot="card" :class="cn('flex flex-col gap-4 rounded py-6 transition-colors duration-300 ease-in-out', colorClasses, props.class)">
         <slot />
     </div>
 </template>

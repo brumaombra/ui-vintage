@@ -2,8 +2,8 @@
 import { NuxtImg } from '#components';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { Card, CardContent } from '@/components/ui/card';
-import { formatDateLongItalyTimezone } from '@/lib/utils';
+import { Card, CardContent } from '../ui/card';
+import { formatDateLongItalyTimezone } from '../../lib/utils';
 
 // Props
 const props = defineProps({

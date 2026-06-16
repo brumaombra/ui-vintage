@@ -3,7 +3,7 @@ import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { ArrowDown01Icon, Bookmark01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent } from '../ui/card';
 
 // Props
 const props = defineProps({
@@ -85,12 +85,12 @@ const getHeadingButtonClasses = heading => {
             <button @click="toggleExpanded" class="flex items-center justify-between w-full p-5 gap-4 text-left cursor-pointer">
                 <div class="flex items-center gap-3 min-w-0">
                     <!-- Icon -->
-                    <div class="flex items-center justify-center w-8 h-8 md:!w-10 md:!h-10 bg-[var(--bg-card-light)] dark:bg-[var(--bg-card-dark)] border border-[var(--border-light)] dark:border-[var(--border-dark)] rounded-none flex-shrink-0">
+                    <div class="flex items-center justify-center w-8 h-8 md:w-10 md:h-10 bg-[var(--bg-card-light)] dark:bg-[var(--bg-card-dark)] border border-[var(--border-light)] dark:border-[var(--border-dark)] rounded-none flex-shrink-0">
                         <HugeiconsIcon :icon="Bookmark01Icon" class="size-4 text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)]" />
                     </div>
 
                     <!-- Title -->
-                    <span class="text-sm md:!text-base font-semibold text-[var(--text-primary-light)] dark:text-[var(--text-primary-dark)]">
+                    <span class="text-sm md:text-base font-semibold text-[var(--text-primary-light)] dark:text-[var(--text-primary-dark)]">
                         {{ t('uiVintage.blog.tableOfContents') }}
                     </span>
                 </div>

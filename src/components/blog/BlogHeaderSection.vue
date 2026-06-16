@@ -1,5 +1,5 @@
 <script setup>
-import { Badge } from '@/components/ui/badge';
+import { Badge } from '../ui/badge';
 
 // Props
 const props = defineProps({
@@ -13,7 +13,7 @@ const props = defineProps({
 </script>
 
 <template>
-    <div class="flex flex-col space-y-6 md:!space-y-8">
+    <div class="flex flex-col space-y-6 md:space-y-8">
         <!-- Badges -->
         <div v-if="props.badges.length > 0" class="flex flex-wrap gap-3 mb-6 md:mb-8">
             <Badge v-for="badge in props.badges"

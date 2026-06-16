@@ -3,9 +3,9 @@ import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { ComputerIcon, GibbousMoonIcon, Sun01Icon, Tick02Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
-import { Button } from '@/components/ui/button';
-import { Command, CommandGroup, CommandItem, CommandList } from '@/components/ui/command';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Button } from '../ui/button';
+import { Command, CommandGroup, CommandItem, CommandList } from '../ui/command';
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 
 const { t } = useI18n();
 const isOpen = ref(false);

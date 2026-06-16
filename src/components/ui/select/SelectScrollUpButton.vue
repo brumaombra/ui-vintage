@@ -5,7 +5,7 @@ import { reactiveOmit } from "@vueuse/core"
 import { ArrowUp01Icon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/vue"
 import { SelectScrollUpButton, useForwardProps } from "reka-ui"
-import { cn } from "@/lib/utils"
+import { cn } from "../../../lib/utils"
 
 const props = defineProps<SelectScrollUpButtonProps & { class?: HTMLAttributes["class"] }>()
 

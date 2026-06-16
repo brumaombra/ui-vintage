@@ -1,6 +1,6 @@
 import type { ClassProp } from "class-variance-authority/types"
 import { cva } from "class-variance-authority"
-import { getButtonVariantClasses } from "@/lib/color-tokens"
+import { getButtonVariantClasses } from "../../../lib/color-tokens"
 
 export { default as Button } from "./Button.vue"
 

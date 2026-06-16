@@ -2,8 +2,8 @@
 import { computed, ref } from 'vue';
 import { BitcoinIcon, CheckmarkCircle02Icon, InformationCircleIcon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@brumaombra/ui-vintage/card';
 import { Alert, AlertDescription, AlertTitle } from '@brumaombra/ui-vintage/alert';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@brumaombra/ui-vintage/card';
 import { Field, FieldContent, FieldDescription, FieldGroup, FieldLabel } from '@brumaombra/ui-vintage/field';
 import { Select, SelectContent, SelectItem, SelectItemContent, SelectTrigger, SelectValueContent } from '@brumaombra/ui-vintage/select';
 

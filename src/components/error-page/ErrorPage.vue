@@ -3,10 +3,10 @@ import type { HTMLAttributes } from "vue";
 import { ArrowLeft01Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/vue";
 import { computed } from "vue";
-import BackgroundGrid from "@/components/background-grid/BackgroundGrid.vue";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
+import BackgroundGrid from "../background-grid/BackgroundGrid.vue";
+import { Button } from "../ui/button";
+import { Card, CardContent, CardFooter } from "../ui/card";
+import { cn } from "../../lib/utils";
 
 interface ErrorPageProps {
     statusCode?: number | string;

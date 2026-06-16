@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { NuxtImg } from "#components";
 import type { HTMLAttributes } from "vue";
-import { cn } from "@/lib/utils";
+import { cn } from "../../../lib/utils";
 
 interface LandingNavbarProps {
     appName?: string;

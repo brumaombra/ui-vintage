@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Busy } from "@/components/ui/busy";
+import { Busy } from "../ui/busy";
 import { busyIndicatorState } from "./busy-indicator-state";
 </script>
 

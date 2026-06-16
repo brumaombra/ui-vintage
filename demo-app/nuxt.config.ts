@@ -1,11 +1,4 @@
-import { resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
 import tailwindcss from '@tailwindcss/vite';
-import { defineNuxtConfig } from 'nuxt/config';
-import type { PluginOption } from 'vite';
-
-const workspaceRoot = fileURLToPath(new URL('..', import.meta.url));
-const librarySrcDir = resolve(workspaceRoot, 'src');
 
 export default defineNuxtConfig({
     srcDir: 'app/',
@@ -19,44 +12,15 @@ export default defineNuxtConfig({
     },
 
     modules: [
+        '@brumaombra/ui-vintage',
         '@nuxt/content',
-        '@nuxtjs/i18n',
-        '@nuxt/image'
+        '@nuxtjs/i18n'
     ],
 
     vite: {
         plugins: [
-            tailwindcss() as unknown as PluginOption
+            tailwindcss()
         ],
-        resolve: {
-            alias: [{
-                find: /^@brumaombra\/ui-vintage\/style\.css$/,
-                replacement: resolve(librarySrcDir, 'styles.css')
-            }, {
-                find: /^@brumaombra\/ui-vintage\/utils$/,
-                replacement: resolve(librarySrcDir, 'lib/utils.ts')
-            }, {
-                find: /^@brumaombra\/ui-vintage\/i18n$/,
-                replacement: resolve(librarySrcDir, 'lib/i18n.ts')
-            }, {
-                find: /^@brumaombra\/ui-vintage\/(background-grid|blog|busy-indicator|confirm-dialog|content|dashboard-shell|error-page|landing|language-selector|load-more-button|message-dialog|page-header|slider-form-component|switch-form-component|theme-selector)$/,
-                replacement: `${librarySrcDir}/components/$1/index.ts`
-            }, {
-                find: /^@brumaombra\/ui-vintage\/(landing-content|landing-footer|landing-navbar|landing-shell)$/,
-                replacement: `${librarySrcDir}/components/landing/$1/index.ts`
-            }, {
-                find: /^@brumaombra\/ui-vintage\/([a-z-]+)$/,
-                replacement: `${librarySrcDir}/components/ui/$1/index.ts`
-            }, {
-                find: /^@\//,
-                replacement: `${librarySrcDir}/`
-            }]
-        },
-        server: {
-            fs: {
-                allow: [workspaceRoot]
-            }
-        },
         optimizeDeps: {
             include: [
                 '@hugeicons/core-free-icons',
@@ -67,13 +31,13 @@ export default defineNuxtConfig({
                 'reka-ui',
                 '@vueuse/core',
                 '@internationalized/date',
-                'reka-ui/date'
+                'reka-ui/date',
+                '@brumaombra/ui-vintage'
             ]
         }
     },
 
     css: [
-        '@brumaombra/ui-vintage/style.css',
         '~/assets/main.css'
     ],
 

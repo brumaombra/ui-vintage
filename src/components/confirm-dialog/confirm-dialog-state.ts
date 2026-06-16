@@ -1,5 +1,5 @@
 import { h, markRaw, reactive, render } from "vue";
-import type { ButtonVariants } from "@/components/ui/button";
+import type { ButtonVariants } from "../ui/button";
 
 export type DialogButtonVariant = NonNullable<ButtonVariants["variant"]>;
 export type HugeiconsIconDefinition = readonly (readonly [string, { readonly [key: string]: string | number }])[];

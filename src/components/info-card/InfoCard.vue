@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { HugeiconsIcon } from "@hugeicons/vue"
-import { Card, CardContent, CardText } from "@/components/ui/card"
+import { Card, CardContent, CardText } from "../ui/card"
 
 // Props
 const props = defineProps({

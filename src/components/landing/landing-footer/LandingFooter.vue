@@ -5,7 +5,7 @@ import { FavouriteIcon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/vue";
 import { computed } from "vue";
 import { useI18n } from "vue-i18n";
-import { cn } from "@/lib/utils";
+import { cn } from "../../../lib/utils";
 
 export interface LandingFooterLink {
     id: string;

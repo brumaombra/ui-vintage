@@ -1,108 +1,85 @@
-<div align="center">
+# UI Vintage
 
-# 🎛️ UI Vintage
+`@brumaombra/ui-vintage` is a source-published Nuxt runtime package. Instead of building a separate component library output, it ships the actual `src` files and lets the consuming Nuxt app compile them as part of its own runtime.
 
-### Reusable Nuxt UI components with dedicated imports, shared theme tokens, and built-in Nuxt integrations.
+## Features
 
-`@brumaombra/ui-vintage` is a Nuxt-first component library built with Vite and TypeScript.
-
-<p>
-	<a href="https://github.com/brumaombra/ui-vintage"><img alt="GitHub Repo" src="https://img.shields.io/badge/github-brumaombra%2Fui--vintage-111111?logo=github"></a>
-	<a href="https://www.npmjs.com/package/%40brumaombra%2Fui-vintage"><img alt="npm" src="https://img.shields.io/npm/v/%40brumaombra%2Fui-vintage?logo=npm&color=CB3837"></a>
-	<img alt="Nuxt 4" src="https://img.shields.io/badge/nuxt-4-00DC82?logo=nuxt&logoColor=white">
-	<img alt="License MIT" src="https://img.shields.io/badge/license-MIT-2563EB">
-</p>
-
-<p>
-	🧩 UI primitives • 🎭 dialogs and overlays • 🧱 dashboard helpers • 🎨 shared styles
-</p>
-
-<p>
-	<a href="#features"><strong>Features</strong></a> •
-	<a href="#install"><strong>Install</strong></a> •
-	<a href="#usage"><strong>Usage</strong></a> •
-	<a href="#license"><strong>License</strong></a>
-</p>
-
-</div>
-
-<a id="features"></a>
-## ✨ Features
-
-- Nuxt-first components for common app interfaces
-- dedicated subpath imports such as `@brumaombra/ui-vintage/button`
-- shared stylesheet at `@brumaombra/ui-vintage/style.css`
-- higher-level helpers like `DashboardShell`, `showConfirmDialog`, `showMessageDialog`, and `setBusy`
-- built-in use of Nuxt primitives such as `NuxtImg` and Nuxt component resolution
+- Nuxt module entrypoint for stylesheet, i18n, and Nuxt runtime integration
+- automatic stylesheet injection from `src/styles.css`
+- explicit source-based subpath imports for components and helpers
+- built-in locale merge for the library messages when `vue-i18n` is present
+- real Nuxt integrations, including `@nuxt/image` components inside the shared source
 
 ## Nuxt Only
 
-`@brumaombra/ui-vintage` is intentionally a Nuxt library, not a generic Vue component library.
+This package is intentionally Nuxt-specific. The shared components use Nuxt runtime features such as `#components`, `NuxtImg`, and module-driven app integration. If you need framework-agnostic Vue components, this package is the wrong shape.
 
-The package assumes a Nuxt app environment and uses Nuxt-specific features in shared components, including:
-
-- `NuxtImg` from `@nuxt/image`
-- Nuxt component resolution via `#components`
-- Nuxt-friendly app-level integration patterns used by the shipped demo app
-
-If you need framework-agnostic Vue components, this package is the wrong abstraction layer.
-
-<a id="install"></a>
-## 📦 Install
+## Install
 
 ```bash
-npm install @brumaombra/ui-vintage @nuxt/image
+npm install @brumaombra/ui-vintage @nuxt/image vue-i18n
 ```
 
-Enable the Nuxt image module in your app:
+Register the module in your Nuxt app:
 
 ```ts
 export default defineNuxtConfig({
-	modules: [
-		'@nuxt/image'
-	]
+    modules: ['@brumaombra/ui-vintage']
 })
 ```
 
-<a id="usage"></a>
-## 🚀 Usage
+The module only handles shared runtime integration: styles, library locale messages, source transpilation, and `@nuxt/image` installation when needed. Components and helpers are always imported explicitly.
 
-Import the shared stylesheet once in your Nuxt app:
+## Usage
 
-```ts
-import "@brumaombra/ui-vintage/style.css";
-```
+Once the module is installed:
 
-Then import components from their dedicated entrypoints inside your Nuxt app code:
+- the shared stylesheet is injected automatically
+- components are imported from explicit subpaths such as `@brumaombra/ui-vintage/button`
+- helpers are imported from explicit subpaths such as `@brumaombra/ui-vintage/message-dialog`
+
+Example:
 
 ```vue
 <script setup lang="ts">
-import { Button } from "@brumaombra/ui-vintage/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@brumaombra/ui-vintage/card";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@brumaombra/ui-vintage/dialog";
+import { Button } from '@brumaombra/ui-vintage/button'
+import { Card, CardContent } from '@brumaombra/ui-vintage/card'
 </script>
-```
 
-Higher-level Nuxt-oriented pieces are available from their own paths:
+<template>
+    <Button>Save</Button>
+    <Card>
+        <CardContent>Reusable content</CardContent>
+    </Card>
+</template>
+```
 
 ```ts
-import { DashboardShell } from "@brumaombra/ui-vintage/dashboard-shell";
-import { setBusy } from "@brumaombra/ui-vintage/busy-indicator";
-import { showConfirmDialog } from "@brumaombra/ui-vintage/confirm-dialog";
-import { showMessageDialog } from "@brumaombra/ui-vintage/message-dialog";
+import { setBusy } from '@brumaombra/ui-vintage/busy-indicator'
+import { showConfirmDialog } from '@brumaombra/ui-vintage/confirm-dialog'
+
+await showConfirmDialog({
+    title: 'Delete item?',
+    description: 'This action cannot be undone.'
+})
+
+setBusy({
+    title: 'Loading data',
+    description: 'Please wait while the dashboard refreshes.'
+})
 ```
 
-There is no global barrel export. Use the dedicated subpath entrypoints for each component or helper.
+## Publish Model
+
+The npm package publishes `module.mjs` and `src/` directly. There is no required `dist` build step for publishing anymore.
 
 ## Requirements
 
 - Nuxt 4
 - `@nuxt/image`
-- Vue 3 and `vue-i18n` versions compatible with your Nuxt app
+- Vue 3
+- `vue-i18n`
 
-The package is distributed as a library, but it expects the consuming runtime to be Nuxt.
-
-<a id="license"></a>
-## ⚖️ License
+## License
 
 MIT

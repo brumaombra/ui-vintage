@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from "vue"
-import { getSurfaceToneClasses } from "@/lib/color-tokens"
-import { cn } from "@/lib/utils"
+import { getSurfaceToneClasses } from "../../../lib/color-tokens"
+import { cn } from "../../../lib/utils"
 import { alertClasses, type AlertColors } from "."
 
 const props = defineProps<{

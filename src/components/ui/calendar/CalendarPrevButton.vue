@@ -5,8 +5,8 @@ import { reactiveOmit } from "@vueuse/core"
 import { ArrowLeft01Icon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/vue"
 import { CalendarPrev, useForwardProps } from "reka-ui"
-import { cn } from "@/lib/utils"
-import { buttonVariants } from '@/components/ui/button'
+import { cn } from "../../../lib/utils"
+import { buttonVariants } from '../button'
 
 const props = defineProps<CalendarPrevProps & { class?: HTMLAttributes["class"] }>()
 

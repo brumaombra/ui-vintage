@@ -15,20 +15,13 @@
             "DOM.Iterable"
         ],
         "skipLibCheck": true,
-        "paths": {
-            "@/*": [
-                "./src/*"
-            ]
-        },
         "types": [
-            "vite/client",
             "node"
         ]
     },
     "include": [
         "src/**/*.ts",
         "src/**/*.d.ts",
-        "src/**/*.vue",
-        "vite.config.ts"
+        "src/**/*.vue"
     ]
 }

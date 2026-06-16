@@ -3,9 +3,9 @@ import type { HTMLAttributes } from 'vue'
 import { fromDate, getLocalTimeZone, toCalendarDate } from '@internationalized/date'
 import type { DateValue } from 'reka-ui'
 import { computed, ref } from 'vue'
-import { cn } from '@/lib/utils'
-import { DatePicker } from '@/components/ui/date-picker'
-import { TimePicker } from '@/components/ui/time-picker'
+import { cn } from '../../../lib/utils'
+import { DatePicker } from '../date-picker'
+import { TimePicker } from '../time-picker'
 
 const props = withDefaults(defineProps<{
     defaultValue?: Date | null

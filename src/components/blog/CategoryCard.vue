@@ -1,7 +1,7 @@
 <script setup>
 import { NuxtImg } from '#components';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '../ui/badge';
+import { Card, CardContent } from '../ui/card';
 
 // Props
 const props = defineProps({

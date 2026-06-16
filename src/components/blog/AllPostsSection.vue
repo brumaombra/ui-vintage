@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { LoadMoreButton } from '@/components/load-more-button';
+import { LoadMoreButton } from '../load-more-button';
 import PostsList from './PostsList.vue';
 
 const { t } = useI18n();

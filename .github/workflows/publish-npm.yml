@@ -44,13 +44,13 @@ jobs:
             exit 1
           fi
 
-      # Validate types before building the published package
+      # Validate types before publishing the source runtime package
       - name: Type-check package
         run: npm run typecheck
 
-      # Build the dist output that npm will publish
-      - name: Build package
-        run: npm run build
+      # Inspect the published tarball contents without building dist output
+      - name: Inspect package contents
+        run: npm pack --dry-run
 
       # Publish to npm through trusted publishing using the GitHub OIDC identity
       - name: Publish to npm

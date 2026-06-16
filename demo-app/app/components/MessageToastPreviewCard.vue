@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { AlertCircleIcon, CheckmarkCircle02Icon, InformationCircleIcon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
-import { showMessageToast } from '@/components/message-toast';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Alert, AlertDescription } from '@brumaombra/ui-vintage/alert';
+import { Button } from '@brumaombra/ui-vintage/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@brumaombra/ui-vintage/card';
+import { showMessageToast } from '@brumaombra/ui-vintage/message-toast';
 
 // Trigger success toast
 const handleShowSuccessToast = () => {

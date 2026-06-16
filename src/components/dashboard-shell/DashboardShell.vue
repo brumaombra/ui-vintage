@@ -2,8 +2,8 @@
 import { NuxtImg } from "#components";
 import type { Component, HTMLAttributes } from "vue";
 import { HugeiconsIcon } from "@hugeicons/vue";
-import BackgroundGrid from "@/components/background-grid/BackgroundGrid.vue";
-import { Separator } from "@/components/ui/separator";
+import BackgroundGrid from "../background-grid/BackgroundGrid.vue";
+import { Separator } from "../ui/separator";
 import {
     Sidebar,
     SidebarContent,
@@ -18,8 +18,8 @@ import {
     SidebarMenuItem,
     SidebarProvider,
     SidebarTrigger
-} from "@/components/ui/sidebar";
-import { cn } from "@/lib/utils";
+} from "../ui/sidebar";
+import { cn } from "../../lib/utils";
 
 type HugeiconsIconDefinition = readonly (readonly [string, { readonly [key: string]: string | number }])[];
 

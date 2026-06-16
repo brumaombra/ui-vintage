@@ -4,7 +4,7 @@ import type { HTMLAttributes } from "vue"
 import { reactiveOmit, useVModel } from "@vueuse/core"
 import { ArrowDown01Icon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/vue"
-import { cn } from "@/lib/utils"
+import { cn } from "../../../lib/utils"
 
 defineOptions({
   inheritAttrs: false,

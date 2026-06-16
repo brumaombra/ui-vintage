@@ -1,7 +1,7 @@
 <script setup>
 import { Cancel01Icon, CheckmarkCircle02Icon, CircleSmallIcon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent } from '../ui/card';
 
 // Props
 const props = defineProps({

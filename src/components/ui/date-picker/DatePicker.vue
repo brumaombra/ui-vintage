@@ -5,14 +5,14 @@ import { Calendar03Icon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/vue'
 import type { DateValue } from 'reka-ui'
 import { computed, ref } from 'vue'
-import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
-import { Calendar } from '@/components/ui/calendar'
+import { cn } from '../../../lib/utils'
+import { Button } from '../button'
+import { Calendar } from '../calendar'
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
-} from '@/components/ui/popover'
+} from '../popover'
 
 const props = withDefaults(defineProps<{
     defaultValue?: DateValue

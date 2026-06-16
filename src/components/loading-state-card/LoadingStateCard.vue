@@ -3,7 +3,7 @@ import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { Loading03Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent } from '../ui/card';
 
 // Props
 const props = defineProps({

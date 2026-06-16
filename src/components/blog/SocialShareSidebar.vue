@@ -3,7 +3,7 @@ import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { Facebook01Icon, Linkedin01Icon, NewTwitterIcon, Share08Icon, TelegramIcon, WhatsappIcon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent } from '../ui/card';
 
 // Props
 const props = defineProps({
@@ -54,7 +54,7 @@ const socialPlatforms = computed(() => {
 
 <template>
     <!-- Desktop sidebar on the right -->
-    <div class="fixed right-[calc(50%-600px)] top-[140px] z-10 hidden xl:!block">
+    <div class="fixed right-[calc(50%-600px)] top-[140px] z-10 hidden xl:block">
         <Card class="!p-5 flex flex-col space-y-4 items-center">
             <CardContent class="!p-0 gap-4 items-center">
                 <!-- Share icon -->

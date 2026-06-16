@@ -2,8 +2,8 @@
 import { HugeiconsIcon } from "@hugeicons/vue";
 import { computed } from "vue";
 import { InformationCircleIcon } from "@hugeicons/core-free-icons";
-import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
+import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "../ui/alert-dialog";
+import { Button } from "../ui/button";
 import { cancelActiveConfirmDialog, closeConfirmDialog, confirmActiveDialog, confirmDialogState } from "./confirm-dialog-state";
 
 const currentDialog = computed(() => confirmDialogState.current);

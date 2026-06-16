@@ -2,8 +2,8 @@
 import { AlertCircleIcon, Cancel01Icon, CheckmarkCircle02Icon, InformationCircleIcon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/vue";
 import { computed } from "vue";
-import { getUiVintageRuntimeMessage } from "@/lib/i18n";
-import { Button } from "@/components/ui/button";
+import { getUiVintageRuntimeMessage } from "../../lib/i18n";
+import { Button } from "../ui/button";
 import { closeMessageToast, messageToastState } from "./message-toast-state";
 
 // Current toast data

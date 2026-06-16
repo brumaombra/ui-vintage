@@ -125,7 +125,7 @@ definePageMeta({
                 </NuxtLinkLocale>
 
                 <!-- Title -->
-                <h1 class="text-2xl sm:!text-3xl md:!text-4xl font-bold tracking-tight text-[var(--text-primary-light)] dark:text-[var(--text-primary-dark)] leading-tight mb-6">
+                <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-[var(--text-primary-light)] dark:text-[var(--text-primary-dark)] leading-tight mb-6">
                     {{ post.title }}
                 </h1>
 

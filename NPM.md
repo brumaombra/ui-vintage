@@ -7,6 +7,7 @@ This package is published as a Nuxt library, not as a generic Vue library.
 - The README, npm description, and release notes should describe it as Nuxt-only.
 - Shared components rely on Nuxt runtime features such as `#components` and `NuxtImg`.
 - Consumer apps are expected to install Nuxt and `@nuxt/image`.
+- Components and helper functions are imported explicitly from package subpaths; the Nuxt module should not auto-register or auto-import them.
 
 ## Package name
 
@@ -35,7 +36,7 @@ It will:
 1. install dependencies with `npm ci`
 2. verify the tag matches `package.json`
 3. run `npm run typecheck`
-4. run `npm run build`
+4. inspect the npm tarball with `npm pack --dry-run`
 5. publish to npm
 6. create a GitHub Release
 

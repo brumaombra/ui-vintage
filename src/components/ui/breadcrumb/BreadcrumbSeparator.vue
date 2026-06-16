@@ -2,7 +2,7 @@
 import type { HTMLAttributes } from "vue"
 import { ArrowRight01Icon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/vue"
-import { cn } from "@/lib/utils"
+import { cn } from "../../../lib/utils"
 
 const props = defineProps<{
   class?: HTMLAttributes["class"]

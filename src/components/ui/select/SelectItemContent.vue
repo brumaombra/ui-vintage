@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from "vue"
 import { HugeiconsIcon } from "@hugeicons/vue"
-import { cn } from "@/lib/utils"
+import { cn } from "../../../lib/utils"
 
 type HugeiconsIconDefinition = readonly (readonly [string, { readonly [key: string]: string | number }])[]
 

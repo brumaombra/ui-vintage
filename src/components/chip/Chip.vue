@@ -2,8 +2,8 @@
 import { Cancel01Icon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/vue"
 import type { HTMLAttributes } from "vue"
-import { getSurfaceToneClasses, type ToneColor } from "@/lib/color-tokens"
-import { cn } from "@/lib/utils"
+import { getSurfaceToneClasses, type ToneColor } from "../../lib/color-tokens"
+import { cn } from "../../lib/utils"
 
 // Props
 const props = withDefaults(defineProps<{

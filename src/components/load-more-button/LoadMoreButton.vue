@@ -3,7 +3,7 @@ import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { ArrowDown01Icon, RefreshIcon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
-import { Button } from '@/components/ui/button';
+import { Button } from '../ui/button';
 
 const props = defineProps({
     busy: { type: Boolean, default: false },

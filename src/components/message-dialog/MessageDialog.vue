@@ -2,9 +2,9 @@
 import { HugeiconsIcon } from "@hugeicons/vue";
 import { computed } from "vue";
 import { AlertCircleIcon, InformationCircleIcon, Tick02Icon } from "@hugeicons/core-free-icons";
-import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
-import { getUiVintageRuntimeMessage } from "@/lib/i18n";
+import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "../ui/alert-dialog";
+import { Button } from "../ui/button";
+import { getUiVintageRuntimeMessage } from "../../lib/i18n";
 import { closeMessageDialog, messageDialogState, resolveActiveMessageDialog } from "./message-dialog-state";
 
 // Active dialog state

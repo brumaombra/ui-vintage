@@ -1,12 +1,12 @@
-import en from '@/i18n/en.json';
-import it from '@/i18n/it.json';
-import fr from '@/i18n/fr.json';
-import es from '@/i18n/es.json';
-import de from '@/i18n/de.json';
-import pt from '@/i18n/pt.json';
-import zh from '@/i18n/zh.json';
-import ja from '@/i18n/ja.json';
-import ru from '@/i18n/ru.json';
+import en from '../i18n/en.json';
+import it from '../i18n/it.json';
+import fr from '../i18n/fr.json';
+import es from '../i18n/es.json';
+import de from '../i18n/de.json';
+import pt from '../i18n/pt.json';
+import zh from '../i18n/zh.json';
+import ja from '../i18n/ja.json';
+import ru from '../i18n/ru.json';
 
 // The list of translation files
 export const uiVintageMessages = {

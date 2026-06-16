@@ -2,8 +2,8 @@
 import type { HTMLAttributes } from "vue"
 import { PanelLeftIcon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/vue"
-import { cn } from "@/lib/utils"
-import { Button } from '@/components/ui/button'
+import { cn } from "../../../lib/utils"
+import { Button } from '../button'
 import { useSidebar } from "./utils"
 
 const props = defineProps<{

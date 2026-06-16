@@ -5,7 +5,6 @@ import { useI18n } from 'vue-i18n';
 import { PostsList } from '@brumaombra/ui-vintage/blog';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@brumaombra/ui-vintage/breadcrumb';
 import { LoadMoreButton } from '@brumaombra/ui-vintage/load-more-button';
-import { PageHeader } from '@/components/page-header';
 
 const { t, locale } = useI18n();
 const localePath = useLocalePath();
@@ -125,7 +124,7 @@ definePageMeta({
         <!-- Blog header -->
         <div class="mb-12">
             <PageHeader :title="categoryTitle" />
-            <p class="text-sm md:!text-base text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)]">
+            <p class="text-sm md:text-base text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)]">
                 A focused view of every demo article published under this category.
             </p>
         </div>

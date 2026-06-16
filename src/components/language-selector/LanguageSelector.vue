@@ -4,23 +4,23 @@ import { computed, defineAsyncComponent, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { Tick02Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
-import { Button } from '@/components/ui/button';
-import { Command, CommandGroup, CommandItem, CommandList } from '@/components/ui/command';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Button } from '../ui/button';
+import { Command, CommandGroup, CommandItem, CommandList } from '../ui/command';
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 
 export type LanguageSelectorCode = string;
 
 // Single source of truth for supported language codes, labels, and flag loaders
 const supportedLanguages = [
-    { code: 'en', label: 'English', loadFlag: () => import('@/components/language-flag/flags/EnglishFlag.vue') },
-    { code: 'it', label: 'Italiano', loadFlag: () => import('@/components/language-flag/flags/ItalianFlag.vue') },
-    { code: 'fr', label: 'Francais', loadFlag: () => import('@/components/language-flag/flags/FrenchFlag.vue') },
-    { code: 'es', label: 'Espanol', loadFlag: () => import('@/components/language-flag/flags/SpanishFlag.vue') },
-    { code: 'de', label: 'Deutsch', loadFlag: () => import('@/components/language-flag/flags/GermanFlag.vue') },
-    { code: 'pt', label: 'Portugues', loadFlag: () => import('@/components/language-flag/flags/PortugueseFlag.vue') },
-    { code: 'zh', label: '中文', loadFlag: () => import('@/components/language-flag/flags/ChineseFlag.vue') },
-    { code: 'ja', label: '日本語', loadFlag: () => import('@/components/language-flag/flags/JapaneseFlag.vue') },
-    { code: 'ru', label: 'Русский', loadFlag: () => import('@/components/language-flag/flags/RussianFlag.vue') }
+    { code: 'en', label: 'English', loadFlag: () => import('../language-flag/flags/EnglishFlag.vue') },
+    { code: 'it', label: 'Italiano', loadFlag: () => import('../language-flag/flags/ItalianFlag.vue') },
+    { code: 'fr', label: 'Francais', loadFlag: () => import('../language-flag/flags/FrenchFlag.vue') },
+    { code: 'es', label: 'Espanol', loadFlag: () => import('../language-flag/flags/SpanishFlag.vue') },
+    { code: 'de', label: 'Deutsch', loadFlag: () => import('../language-flag/flags/GermanFlag.vue') },
+    { code: 'pt', label: 'Portugues', loadFlag: () => import('../language-flag/flags/PortugueseFlag.vue') },
+    { code: 'zh', label: '中文', loadFlag: () => import('../language-flag/flags/ChineseFlag.vue') },
+    { code: 'ja', label: '日本語', loadFlag: () => import('../language-flag/flags/JapaneseFlag.vue') },
+    { code: 'ru', label: 'Русский', loadFlag: () => import('../language-flag/flags/RussianFlag.vue') }
 ] as const;
 
 type SupportedLanguage = (typeof supportedLanguages)[number];

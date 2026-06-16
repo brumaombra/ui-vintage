@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import { Card } from "@/components/ui/card";
-import { Slider } from "@/components/ui/slider";
+import { Card } from "../ui/card";
+import { Slider } from "../ui/slider";
 
 interface SliderFormComponentProps {
     id?: string;
