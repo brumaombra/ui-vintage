@@ -71,7 +71,7 @@ export default defineConfig({
             fileName: (_, entryName) => `${entryName}.js`
         },
         rollupOptions: {
-            external: ["vue", "vue-i18n"]
+            external: ["vue", "vue-i18n", "#components"]
         }
     }
 });

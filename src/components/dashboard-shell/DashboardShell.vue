@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { NuxtImg } from "#components";
 import type { Component, HTMLAttributes } from "vue";
 import { HugeiconsIcon } from "@hugeicons/vue";
 import BackgroundGrid from "@/components/background-grid/BackgroundGrid.vue";
@@ -102,7 +103,7 @@ const getSidebarItemLinkProps = (item: DashboardSidebarItem) => {
                                 <a :href="props.appLinkTo" class="inline-flex items-center gap-2">
                                     <div class="inline-flex items-center gap-2">
                                         <!-- App logo -->
-                                        <img v-if="props.appLogo" :src="props.appLogo" :alt="`${props.appName} logo`" class="size-8 shrink-0 object-contain" />
+                                        <NuxtImg v-if="props.appLogo" :src="props.appLogo" :alt="`${props.appName} logo`" width="32" height="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="eager" class="size-8 shrink-0 object-contain" />
 
                                         <!-- App name -->
                                         <span v-if="props.appName" class="text-xl font-bold tracking-tight text-foreground">{{ props.appName }}</span>

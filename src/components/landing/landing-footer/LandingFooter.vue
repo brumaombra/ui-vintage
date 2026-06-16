@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { NuxtImg } from "#components";
 import type { Component, HTMLAttributes } from "vue";
 import { FavouriteIcon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/vue";
@@ -79,7 +80,7 @@ const getLinkProps = (link: LandingFooterLink) => {
                 <div :class="cn('max-w-md flex-1', props.brandClass)">
                     <!-- App logo and name -->
                     <div class="mb-4 inline-flex items-center gap-2 text-lg font-semibold tracking-tight text-foreground">
-                        <img v-if="props.appLogo" :src="props.appLogo" :alt="`${props.appName} logo`" class="size-8 shrink-0 object-contain">
+                        <NuxtImg v-if="props.appLogo" :src="props.appLogo" :alt="`${props.appName} logo`" width="32" height="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="lazy" decoding="async" class="size-8 shrink-0 object-contain" />
                         <span>{{ props.appName }}</span>
                     </div>
 

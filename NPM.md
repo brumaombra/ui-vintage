@@ -1,5 +1,13 @@
 # Publishing to npm
 
+## Package positioning
+
+This package is published as a Nuxt library, not as a generic Vue library.
+
+- The README, npm description, and release notes should describe it as Nuxt-only.
+- Shared components rely on Nuxt runtime features such as `#components` and `NuxtImg`.
+- Consumer apps are expected to install Nuxt and `@nuxt/image`.
+
 ## Package name
 
 This package is published under the npm scope `@brumaombra/ui-vintage` instead of using a plain prefixed name.

@@ -1,4 +1,5 @@
 <script setup>
+import { NuxtImg } from '#components';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 

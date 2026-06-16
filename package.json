@@ -1,7 +1,7 @@
 {
     "name": "@brumaombra/ui-vintage",
     "version": "0.6.8",
-    "description": "Vue 3 component library with shadcn-style primitives, app shells, dialogs, and shared theme tokens.",
+    "description": "Nuxt UI component library with dedicated imports, shared theme tokens, and built-in Nuxt integrations.",
     "private": false,
     "author": "Mauro Brambilla",
     "license": "MIT",
@@ -14,15 +14,15 @@
         "url": "https://github.com/brumaombra/ui-vintage/issues"
     },
     "keywords": [
-        "vue",
-        "vue3",
+        "nuxt",
+        "nuxt4",
         "components",
         "component-library",
         "vite",
         "typescript",
-        "shadcn-vue",
-        "nuxt",
-        "ui"
+        "ui",
+        "design-system",
+        "nuxt-image"
     ],
     "type": "module",
     "publishConfig": {
@@ -294,6 +294,8 @@
         "typecheck": "vue-tsc --noEmit"
     },
     "peerDependencies": {
+        "@nuxt/image": "^2.0.0",
+        "nuxt": "^4.0.0",
         "vue": "^3.5.0",
         "vue-i18n": "^9.0.0 || ^10.0.0"
     },
