@@ -77,7 +77,7 @@ definePageMeta({
         <!-- Blog header -->
         <div class="mb-12">
             <PageHeader title="Browse every category" />
-            <p class="text-sm md:text-base text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)]">
+            <p class="text-sm md:!text-base text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)]">
                 Each category is derived from the real markdown posts in the demo content collection.
             </p>
         </div>

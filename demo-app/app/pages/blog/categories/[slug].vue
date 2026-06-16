@@ -125,7 +125,7 @@ definePageMeta({
         <!-- Blog header -->
         <div class="mb-12">
             <PageHeader :title="categoryTitle" />
-            <p class="text-sm md:text-base text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)]">
+            <p class="text-sm md:!text-base text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)]">
                 A focused view of every demo article published under this category.
             </p>
         </div>

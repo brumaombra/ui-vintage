@@ -48,7 +48,7 @@ if (hasValidFAQs.value) {
                     <!-- Question -->
                     <div class="flex items-center justify-between p-5 gap-4">
                         <!-- Question text -->
-                        <h3 class="text-sm md:text-base font-semibold text-[var(--text-primary-light)] dark:text-[var(--text-primary-dark)] text-left">
+                        <h3 class="text-sm md:!text-base font-semibold text-[var(--text-primary-light)] dark:text-[var(--text-primary-dark)] text-left">
                             {{ faq.question }}
                         </h3>
 

@@ -32,7 +32,7 @@ const props = withDefaults(defineProps<LandingNavbarProps>(), {
                         <NuxtImg v-if="props.appLogo" :src="props.appLogo" :alt="`${props.appName} logo`" width="44" height="44" :sizes="{ 320: '44px', 640: '36px' }" loading="eager" fetchpriority="high" preload class="size-11 sm:size-9 shrink-0 object-contain" />
 
                         <!-- App name -->
-                        <span v-if="props.appName" class="hidden sm:inline text-xl font-bold tracking-tight text-foreground">
+                        <span v-if="props.appName" class="hidden sm:!inline text-xl font-bold tracking-tight text-foreground">
                             {{ props.appName }}
                         </span>
                     </a>

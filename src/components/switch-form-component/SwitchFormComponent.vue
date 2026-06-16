@@ -19,7 +19,7 @@ const emits = defineEmits<{
 </script>
 
 <template>
-    <Card class="flex flex-col gap-2 sm:gap-3 px-4 py-3">
+    <Card class="flex flex-col gap-2 sm:!gap-3 px-4 py-3">
         <!-- Switch label and control -->
         <div class="flex items-center justify-between gap-4">
             <!-- Switch label -->
