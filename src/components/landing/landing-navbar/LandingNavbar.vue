@@ -7,6 +7,7 @@ interface LandingNavbarProps {
     appName?: string;
     appLogo?: string;
     appLinkTo?: string;
+    logoClass?: HTMLAttributes["class"];
     class?: HTMLAttributes["class"];
     containerClass?: HTMLAttributes["class"];
     leftClass?: HTMLAttributes["class"];
@@ -29,7 +30,7 @@ const props = withDefaults(defineProps<LandingNavbarProps>(), {
                 <slot name="left">
                     <a :href="props.appLinkTo" class="inline-flex items-center gap-2 transition-opacity hover:opacity-80">
                         <!-- App logo -->
-                        <NuxtImg v-if="props.appLogo" :src="props.appLogo" :alt="`${props.appName} logo`" width="44" height="44" :sizes="{ 320: '44px', 640: '36px' }" loading="eager" fetchpriority="high" preload class="size-11 sm:size-9 shrink-0 object-contain" />
+                        <NuxtImg v-if="props.appLogo" :src="props.appLogo" :alt="`${props.appName} logo`" width="44" height="44" :sizes="{ 320: '44px', 640: '36px' }" loading="eager" fetchpriority="high" :class="cn('size-11 sm:size-9 shrink-0 object-contain', props.logoClass)" />
 
                         <!-- App name -->
                         <span v-if="props.appName" class="hidden sm:!inline text-xl font-bold tracking-tight text-foreground">

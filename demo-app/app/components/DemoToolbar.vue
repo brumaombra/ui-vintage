@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, watch } from 'vue';
-import { GibbousMoonIcon, Sun01Icon } from '@hugeicons/core-free-icons';
+import { ArrowRight01Icon, GibbousMoonIcon, Sun01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Button } from '@brumaombra/ui-vintage/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@brumaombra/ui-vintage/card';
@@ -65,14 +65,16 @@ onMounted(() => {
                 </Select>
 
                 <!-- Quick toggle button -->
-                <Button variant="gray" size="sm" @click="isDark = !isDark">
+                <Button variant="gray" size="lg" @click="isDark = !isDark">
+                    <HugeiconsIcon :icon="isDark ? Sun01Icon : GibbousMoonIcon" class="size-4" />
                     Toggle Theme
                 </Button>
 
                 <!-- Blog demo link -->
-                <Button variant="secondary" size="sm" as-child>
+                <Button variant="secondary" size="lg" as-child>
                     <NuxtLink to="/blog">
                         Open Blog Demo
+                        <HugeiconsIcon :icon="ArrowRight01Icon" class="size-4" />
                     </NuxtLink>
                 </Button>
             </div>

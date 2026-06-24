@@ -27,10 +27,10 @@ export const buttonVariants: (props?: ButtonVariants & ClassProp) => string = cv
       size: {
         "default": "min-h-12 px-4 py-3 has-[>svg]:px-3",
         "sm": "min-h-10 gap-1.5 px-3 py-2 has-[>svg]:px-2.5",
-        "lg": "min-h-12 px-6 py-3 has-[>svg]:px-4",
+        "lg": "min-h-[52px] px-4 py-3 has-[>svg]:px-4",
         "icon": "size-12",
         "icon-sm": "size-10",
-        "icon-lg": "size-12",
+        "icon-lg": "size-[52px]",
       },
     },
     defaultVariants: {
