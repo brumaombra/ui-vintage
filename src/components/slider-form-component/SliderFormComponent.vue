@@ -39,7 +39,7 @@ const handleUpdateModelValue = (value?: number[]) => {
 </script>
 
 <template>
-    <Card class="space-y-3 px-4 py-4">
+    <Card class="px-4 py-4">
         <!-- Slider header -->
         <div class="flex items-center justify-between gap-3">
             <!-- Label and description block -->
