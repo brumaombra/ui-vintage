@@ -11,6 +11,7 @@ import CurrentStateCard from '../components/CurrentStateCard.vue';
 import BadgePreviewCard from '../components/BadgePreviewCard.vue';
 import DialogPreviewCard from '../components/DialogPreviewCard.vue';
 import InputStatesCard from '../components/InputStatesCard.vue';
+import AccordionPreviewCard from '../components/AccordionPreviewCard.vue';
 import LoadingPreviewCard from '../components/LoadingPreviewCard.vue';
 import MessageToastPreviewCard from '../components/MessageToastPreviewCard.vue';
 import PrimaryActionsCard from '../components/PrimaryActionsCard.vue';
@@ -139,6 +140,9 @@ const handleInfoDemo = async () => {
 
                 <!-- Select content card -->
                 <SelectContentCard />
+
+                <!-- Accordion preview card -->
+                <AccordionPreviewCard />
 
                 <!-- Surface variants card -->
                 <SurfaceVariantsCard />

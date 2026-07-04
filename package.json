@@ -37,6 +37,7 @@
         "./style.css": "./src/styles.css",
         "./alert": "./src/components/ui/alert/index.ts",
         "./alert-dialog": "./src/components/ui/alert-dialog/index.ts",
+        "./accordion": "./src/components/ui/accordion/index.ts",
         "./background-grid": "./src/components/background-grid/index.ts",
         "./badge": "./src/components/ui/badge/index.ts",
         "./blog": "./src/components/blog/index.ts",
