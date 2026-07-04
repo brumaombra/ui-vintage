@@ -72,7 +72,7 @@ provideSidebarContext({
     <div data-slot="sidebar-wrapper" :style="{
       '--sidebar-width': SIDEBAR_WIDTH,
       '--sidebar-width-icon': SIDEBAR_WIDTH_ICON,
-    }" :class="cn('group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex min-h-svh w-full', props.class)" v-bind="$attrs">
+    }" :data-compact="props.compact ? 'true' : 'false'" :class="cn('group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex min-h-svh w-full', props.class)" v-bind="$attrs">
       <slot />
     </div>
   </TooltipProvider>

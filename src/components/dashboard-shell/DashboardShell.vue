@@ -117,7 +117,7 @@ const getSidebarItemLinkProps = (item: DashboardSidebarItem) => {
 
             <!-- Sidebar sections -->
             <SidebarContent v-if="props.sidebarSections.length">
-                <SidebarGroup v-for="section in props.sidebarSections" :key="section.id">
+                <SidebarGroup v-for="section in props.sidebarSections" :key="section.id" class="space-y-1">
                     <!-- Section label -->
                     <SidebarGroupLabel v-if="section.label">
                         {{ section.label }}
@@ -125,9 +125,9 @@ const getSidebarItemLinkProps = (item: DashboardSidebarItem) => {
 
                     <!-- Section content -->
                     <SidebarGroupContent>
-                        <SidebarMenu class="gap-3">
+                        <SidebarMenu :class="cn('gap-3', props.compact && 'gap-2')">
                             <SidebarMenuItem v-for="item in section.items" :key="item.id">
-                                <SidebarMenuButton as-child :is-active="item.active" :class="cn('group h-auto min-h-12 rounded border border-[var(--border-light)] px-3 py-2.5 text-[var(--text-secondary-light)] transition-all duration-200 hover:border-[var(--border-hover-light)] hover:bg-[var(--bg-selected-light)] hover:text-[var(--text-primary-light)] data-[active=true]:border-[var(--border-hover-light)] data-[active=true]:bg-[var(--bg-selected-light)] data-[active=true]:text-[var(--text-primary-light)] dark:border-[var(--border-dark)] dark:text-[var(--text-secondary-dark)] dark:hover:border-[var(--border-hover-dark)] dark:hover:bg-[var(--bg-selected-dark)] dark:hover:text-[var(--text-primary-dark)] dark:data-[active=true]:border-[var(--border-hover-dark)] dark:data-[active=true]:bg-[var(--bg-selected-dark)] dark:data-[active=true]:text-[var(--text-primary-dark)] sm:px-4 sm:py-3', item.description ? 'items-start' : 'items-center')">
+                                <SidebarMenuButton as-child :is-active="item.active" :class="cn('group h-auto min-h-12 rounded border border-(--border-light) px-3 py-2.5 text-(--text-secondary-light) transition-all duration-200 hover:border-(--border-hover-light) hover:bg-(--bg-selected-light) hover:text-(--text-primary-light) data-[active=true]:border-(--border-hover-light) data-[active=true]:bg-(--bg-selected-light) data-[active=true]:text-(--text-primary-light) dark:border-(--border-dark) dark:text-(--text-secondary-dark) dark:hover:border-(--border-hover-dark) dark:hover:bg-(--bg-selected-dark) dark:hover:text-(--text-primary-dark) dark:data-[active=true]:border-(--border-hover-dark) dark:data-[active=true]:bg-(--bg-selected-dark) dark:data-[active=true]:text-(--text-primary-dark) sm:px-4 sm:py-3', item.description ? 'items-start' : 'items-center')">
                                     <component :is="props.sidebarLinkComponent" v-bind="getSidebarItemLinkProps(item)">
                                         <!-- Icon -->
                                         <HugeiconsIcon v-if="item.icon" :icon="item.icon" :stroke-width="1.8" :class="cn('shrink-0 opacity-90 transition-opacity duration-200 group-hover:opacity-100', item.description ? 'mt-0.5 size-5 sm:h-5 sm:w-5' : 'size-5 self-center sm:h-6 sm:w-6')" />

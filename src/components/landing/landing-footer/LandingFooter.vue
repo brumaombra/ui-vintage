@@ -24,6 +24,7 @@ export interface LandingFooterSection {
 interface LandingFooterProps {
     appName: string;
     appLogo?: string;
+    appLinkTo?: string;
     appDescription?: string;
     sections?: LandingFooterSection[];
     linkComponent?: Component | string;
@@ -40,6 +41,7 @@ interface LandingFooterProps {
 
 // Props
 const props = withDefaults(defineProps<LandingFooterProps>(), {
+    appLinkTo: "/",
     appDescription: "",
     sections: () => [],
     linkComponent: "a",
@@ -79,10 +81,10 @@ const getLinkProps = (link: LandingFooterLink) => {
                 <!-- Brand section -->
                 <div :class="cn('max-w-md flex-1', props.brandClass)">
                     <!-- App logo and name -->
-                    <div class="mb-4 inline-flex items-center gap-2 text-lg font-semibold tracking-tight text-foreground">
+                    <a :href="props.appLinkTo" class="mb-4 inline-flex items-center gap-2 text-lg font-semibold tracking-tight text-foreground transition-opacity hover:opacity-80">
                         <NuxtImg v-if="props.appLogo" :src="props.appLogo" :alt="`${props.appName} logo`" width="32" height="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="lazy" decoding="async" class="size-8 shrink-0 object-contain" />
                         <span>{{ props.appName }}</span>
-                    </div>
+                    </a>
 
                     <!-- App description -->
                     <p v-if="props.appDescription" class="max-w-sm text-xs md:text-sm leading-relaxed text-muted-foreground">

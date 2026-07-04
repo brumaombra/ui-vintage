@@ -66,6 +66,7 @@ const handleSelectLanguage = async language => {
         <!-- Footer -->
         <template #footer>
             <LandingFooter app-name="UI Vintage Demo"
+                :app-link-to="localePath('/')"
                 app-description="A production-like Nuxt demo for the UI Vintage component library."
                 :sections="footerSections"
                 author-name="Mauro Brambilla"

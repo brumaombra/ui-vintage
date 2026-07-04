@@ -51,8 +51,8 @@ export const sidebarMenuButtonVariants: (props?: SidebarMenuButtonVariants & Cla
           "bg-background shadow-[0_0_0_1px_hsl(var(--sidebar-border))] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground hover:shadow-[0_0_0_1px_hsl(var(--sidebar-accent))]",
       },
       size: {
-        default: "min-h-8 text-sm group-data-[compact=true]/sidebar-wrapper:min-h-7 group-data-[compact=true]/sidebar-wrapper:text-xs",
-        sm: "min-h-7 text-xs group-data-[compact=true]/sidebar-wrapper:min-h-6",
+        default: "min-h-8 text-sm group-data-[compact=true]/sidebar-wrapper:min-h-7 group-data-[compact=true]/sidebar-wrapper:text-xs group-data-[compact=true]/sidebar-wrapper:py-3",
+        sm: "min-h-7 text-xs group-data-[compact=true]/sidebar-wrapper:min-h-6 group-data-[compact=true]/sidebar-wrapper:py-2.5",
         lg: "min-h-12 text-sm group-data-[compact=true]/sidebar-wrapper:min-h-10 group-data-[collapsible=icon]:p-0!",
       },
     },
