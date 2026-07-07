@@ -14,7 +14,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@brum
         </CardHeader>
 
         <!-- Card content -->
-        <CardContent class="space-y-4">
+        <CardContent>
             <!-- Accordion -->
             <Accordion title="What is this component for?" :initially-expanded="true">
                 <p class="text-xs md:text-sm text-(--text-secondary-light) dark:text-(--text-secondary-dark) leading-relaxed">

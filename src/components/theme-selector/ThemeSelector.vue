@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { ComputerIcon, GibbousMoonIcon, Sun01Icon, Tick02Icon } from '@hugeicons/core-free-icons';
+import { LaptopIcon, Moon01Icon, Sun01Icon, Tick02Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Button } from '../ui/button';
 import { Command, CommandGroup, CommandItem, CommandList } from '../ui/command';
@@ -18,9 +18,9 @@ const getThemeIcon = (theme: string) => {
     if (theme === 'light') {
         return Sun01Icon;
     } else if (theme === 'dark') {
-        return GibbousMoonIcon;
+        return Moon01Icon;
     } else {
-        return ComputerIcon;
+        return LaptopIcon;
     }
 };
 
@@ -112,7 +112,7 @@ onUnmounted(() => {
         </PopoverTrigger>
 
         <!-- Theme options -->
-        <PopoverContent side="bottom" align="end" :side-offset="8" class="w-44 !p-0">
+        <PopoverContent side="bottom" align="end" :side-offset="8" class="w-44 p-0!">
             <Command :model-value="currentTheme">
                 <CommandList>
                     <CommandGroup :heading="t('uiVintage.theme.title')">

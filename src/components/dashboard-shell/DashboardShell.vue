@@ -3,6 +3,7 @@ import { NuxtImg } from "#components";
 import type { Component, HTMLAttributes } from "vue";
 import { HugeiconsIcon } from "@hugeicons/vue";
 import BackgroundGrid from "../background-grid/BackgroundGrid.vue";
+import { ThemeSelector } from "../theme-selector";
 import { Separator } from "../ui/separator";
 import {
     Sidebar,
@@ -151,8 +152,12 @@ const getSidebarItemLinkProps = (item: DashboardSidebarItem) => {
             </SidebarContent>
 
             <!-- Sidebar footer -->
-            <SidebarFooter v-if="$slots['sidebar-footer']" class="border-t border-sidebar-border">
-                <slot name="sidebar-footer" />
+            <SidebarFooter class="border-t border-sidebar-border">
+                <slot name="sidebar-footer">
+                    <div class="flex items-center gap-2">
+                        <ThemeSelector />
+                    </div>
+                </slot>
             </SidebarFooter>
         </Sidebar>
 

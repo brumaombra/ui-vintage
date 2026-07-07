@@ -28,10 +28,10 @@ const toggleExpanded = () => {
 </script>
 
 <template>
-    <Card class="p-0! overflow-hidden" @click="toggleExpanded">
+    <Card class="p-0! overflow-hidden">
         <CardContent class="p-0! gap-0">
             <!-- Header -->
-            <div class="flex items-center justify-between p-5 gap-4 text-left cursor-pointer">
+            <div class="flex items-center justify-between p-5 gap-4 text-left cursor-pointer" @click="toggleExpanded">
                 <div class="flex items-center gap-3 min-w-0">
                     <!-- Icon -->
                     <div v-if="props.icon" class="flex h-8 w-8 shrink-0 items-center justify-center rounded bg-(--bg-card-light) border border-(--border-light) dark:bg-(--bg-card-dark) dark:border-(--border-dark) md:h-10 md:w-10">
