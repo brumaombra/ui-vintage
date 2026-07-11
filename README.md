@@ -1,36 +1,36 @@
 <div align="center">
 
-# 🧱 UI Vintage
+# 🎨 UI Vintage
 
 ### A source-published Nuxt UI runtime for focused, reusable interfaces
 
 `@brumaombra/ui-vintage` is a Nuxt 4 component library and runtime module for building consistent dashboards, forms, landing pages, overlays, and content experiences. It combines reusable Vue components, shared theme tokens, localization, and Nuxt integrations in one package that is compiled by the consuming application.
 
 <p>
-  <a href="https://github.com/brumaombra/ui-vintage"><img alt="GitHub Repo" src="https://img.shields.io/badge/github-brumaombra%2Fui--vintage-111111?logo=github"></a>
-  <img alt="Nuxt 4" src="https://img.shields.io/badge/nuxt-4-00DC82?logo=nuxt&logoColor=white">
-  <img alt="Vue 3" src="https://img.shields.io/badge/vue-3-42B883?logo=vue.js&logoColor=white">
-  <img alt="npm" src="https://img.shields.io/npm/v/@brumaombra/ui-vintage?color=CB3837&logo=npm">
-  <img alt="License MIT" src="https://img.shields.io/badge/license-MIT-2563EB">
+    <a href="https://github.com/brumaombra/ui-vintage"><img alt="GitHub Repo" src="https://img.shields.io/badge/github-brumaombra%2Fui--vintage-111111?logo=github"></a>
+    <img alt="Nuxt 4" src="https://img.shields.io/badge/nuxt-4-00DC82?logo=nuxt&logoColor=white">
+    <img alt="Vue 3" src="https://img.shields.io/badge/vue-3-42B883?logo=vue.js&logoColor=white">
+    <img alt="npm" src="https://img.shields.io/npm/v/@brumaombra/ui-vintage?color=CB3837&logo=npm">
+    <img alt="License MIT" src="https://img.shields.io/badge/license-MIT-2563EB">
 </p>
 
 <p>
-  🧩 Reusable Vue components • 🎨 Shared theme tokens • 🌍 Built-in locale messages • 🖼️ Nuxt Image integration • ⚡ Source-based publishing
+    🧩 Reusable Vue components • 🎨 Shared theme tokens • 🌍 Built-in locale messages • 🖼️ Nuxt Image integration • ⚡ Source-based publishing
 </p>
 
 <p>
-  <a href="#overview"><strong>Overview</strong></a> •
+    <a href="#overview"><strong>Overview</strong></a> •
     <a href="#images"><strong>Images</strong></a> •
-  <a href="#features"><strong>Features</strong></a> •
-  <a href="#architecture"><strong>Architecture</strong></a> •
-  <a href="#quick-start"><strong>Quick Start</strong></a> •
-  <a href="#usage"><strong>Usage</strong></a> •
-  <a href="#components"><strong>Components</strong></a> •
-  <a href="#demo-app"><strong>Demo App</strong></a> •
-  <a href="#configuration"><strong>Configuration</strong></a> •
-  <a href="#publishing"><strong>Publishing</strong></a> •
-  <a href="#troubleshooting"><strong>Troubleshooting</strong></a> •
-  <a href="#license"><strong>License</strong></a>
+    <a href="#features"><strong>Features</strong></a> •
+    <a href="#architecture"><strong>Architecture</strong></a> •
+    <a href="#quick-start"><strong>Quick Start</strong></a> •
+    <a href="#usage"><strong>Usage</strong></a> •
+    <a href="#components"><strong>Components</strong></a> •
+    <a href="#demo-app"><strong>Demo App</strong></a> •
+    <a href="#configuration"><strong>Configuration</strong></a> •
+    <a href="#publishing"><strong>Publishing</strong></a> •
+    <a href="#troubleshooting"><strong>Troubleshooting</strong></a> •
+    <a href="#license"><strong>License</strong></a>
 </p>
 
 </div>
@@ -50,29 +50,19 @@ This is a Nuxt library, not a generic Vue component bundle. Components rely on N
 ### Screenshots
 
 <div align="center">
-    <table width="100%" style="max-width: 768px;">
-        <tr>
-            <td align="center" valign="top">
-                <img src="docs/images/screen-1.png" alt="UI Vintage component demo controls and primary actions" width="100%">
-            </td>
-            <td align="center" valign="top">
-                <img src="docs/images/screen-2.png" alt="UI Vintage select, accordion, tabs, and component previews" width="100%">
-            </td>
-        </tr>
-        <tr>
-            <td align="center" valign="top">
-                <img src="docs/images/screen-3.png" alt="UI Vintage surface variants, badges, dialogs, and feedback previews" width="100%">
-            </td>
-            <td align="center" valign="top">
-                <img src="docs/images/screen-4.png" alt="UI Vintage loading, toast, and current state previews" width="100%">
-            </td>
-        </tr>
-    </table>
+    <div style="display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); max-width: 768px; overflow: hidden;">
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); min-width: 0;">
+            <img src="docs/images/screen-1.png" alt="UI Vintage component demo controls and primary actions" width="100%" style="display: block;">
+            <img src="docs/images/screen-2.png" alt="UI Vintage select, accordion, tabs, and component previews" width="100%" style="display: block;">
+            <img src="docs/images/screen-3.png" alt="UI Vintage surface variants, badges, dialogs, and feedback previews" width="100%" style="display: block;">
+            <img src="docs/images/screen-4.png" alt="UI Vintage loading, toast, and current state previews" width="100%" style="display: block;">
+        </div>
+        <div style="position: relative; min-width: 0; min-height: 0; overflow: hidden;">
+            <img src="docs/images/blog.png" alt="UI Vintage landing and blog showcase" width="100%" height="100%" style="position: absolute; inset: 0; display: block; object-fit: contain; object-position: top center;">
+        </div>
+    </div>
     <p>
-        <img src="docs/images/blog.png" alt="UI Vintage landing and blog showcase" width="100%" style="max-width: 768px;">
-    </p>
-    <p>
-        <sub>Component showcase, interactive states, landing surface, and full-width blog showcase</sub>
+        <sub>Component showcase, interactive states, and landing/blog showcase</sub>
     </p>
 </div>
 
