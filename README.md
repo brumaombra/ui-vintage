@@ -20,6 +20,7 @@
 
 <p>
   <a href="#overview"><strong>Overview</strong></a> •
+    <a href="#images"><strong>Images</strong></a> •
   <a href="#features"><strong>Features</strong></a> •
   <a href="#architecture"><strong>Architecture</strong></a> •
   <a href="#quick-start"><strong>Quick Start</strong></a> •
@@ -42,6 +43,38 @@ UI Vintage is designed for Nuxt applications that need a coherent interface with
 The package is intentionally published as source. The consuming Nuxt application compiles the library together with its own runtime, which keeps Nuxt-specific integrations available and avoids maintaining a separate framework-agnostic build artifact.
 
 This is a Nuxt library, not a generic Vue component bundle. Components rely on Nuxt runtime features including `#components`, `NuxtImg`, and module lifecycle hooks.
+
+<a id="images"></a>
+## 🖼️ Images
+
+### Screenshots
+
+<div align="center">
+    <table width="100%" style="max-width: 768px;">
+        <tr>
+            <td align="center" valign="top">
+                <img src="docs/images/screen-1.png" alt="UI Vintage component demo controls and primary actions" width="100%">
+            </td>
+            <td align="center" valign="top">
+                <img src="docs/images/screen-2.png" alt="UI Vintage select, accordion, tabs, and component previews" width="100%">
+            </td>
+        </tr>
+        <tr>
+            <td align="center" valign="top">
+                <img src="docs/images/screen-3.png" alt="UI Vintage surface variants, badges, dialogs, and feedback previews" width="100%">
+            </td>
+            <td align="center" valign="top">
+                <img src="docs/images/screen-4.png" alt="UI Vintage loading, toast, and current state previews" width="100%">
+            </td>
+        </tr>
+    </table>
+    <p>
+        <img src="docs/images/blog.png" alt="UI Vintage landing and blog showcase" width="100%" style="max-width: 768px;">
+    </p>
+    <p>
+        <sub>Component showcase, interactive states, landing surface, and full-width blog showcase</sub>
+    </p>
+</div>
 
 <a id="features"></a>
 ## ✨ Features
