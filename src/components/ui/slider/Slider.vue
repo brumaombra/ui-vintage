@@ -15,7 +15,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
 
 <template>
   <SliderRoot v-slot="{ modelValue }" data-slot="slider" :class="cn(
-    'relative flex w-full cursor-pointer touch-none items-center select-none data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50 data-[orientation=vertical]:h-full data-[orientation=vertical]:min-h-44 data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col',
+    'relative flex w-full cursor-pointer touch-none items-center select-none data-disabled:cursor-not-allowed data-disabled:opacity-50 data-[orientation=vertical]:h-full data-[orientation=vertical]:min-h-44 data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col',
     props.class,
   )" v-bind="forwarded">
     <SliderTrack data-slot="slider-track" class="bg-muted relative grow overflow-hidden rounded data-[orientation=horizontal]:h-2 data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-2">

@@ -38,7 +38,7 @@ const toastAriaLive = computed(() => {
 
 <template>
     <Transition name="toast">
-        <div v-if="messageToastState.current && messageToastState.isOpen" class="fixed inset-x-3 bottom-3 z-[60] rounded border border-border bg-card p-4 text-card-foreground transition-colors duration-300 ease-in-out sm:inset-x-auto sm:right-6 sm:bottom-6 sm:max-w-[350px] sm:min-w-[250px]" role="alert" :aria-live="toastAriaLive" aria-atomic="true">
+        <div v-if="messageToastState.current && messageToastState.isOpen" class="fixed inset-x-3 bottom-3 z-60 rounded border border-border bg-card p-4 text-card-foreground transition-colors duration-300 ease-in-out sm:inset-x-auto sm:right-6 sm:bottom-6 sm:max-w-87.5 sm:min-w-62.5" role="alert" :aria-live="toastAriaLive" aria-atomic="true">
             <div class="flex items-center gap-4">
                 <!-- Leading type icon -->
                 <HugeiconsIcon :icon="toastIcon" class="size-5" :class="toastIconClasses" />

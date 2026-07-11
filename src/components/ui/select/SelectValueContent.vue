@@ -30,12 +30,12 @@ const props = defineProps<SelectValueProps & {
             <!-- Text and description -->
             <div class="flex min-w-0 flex-1 flex-col gap-0.5">
                 <!-- Text -->
-                <span data-slot="select-value-content-text" :class="cn('min-w-0 whitespace-normal break-words text-xs leading-5 sm:truncate sm:text-sm max-sm:[display:-webkit-box] max-sm:[overflow:hidden] max-sm:[-webkit-box-orient:vertical] max-sm:[-webkit-line-clamp:2]', props.textClass)">
+                <span data-slot="select-value-content-text" :class="cn('min-w-0 whitespace-normal wrap-break-word text-xs leading-5 sm:truncate sm:text-sm max-sm:[display:-webkit-box] max-sm:overflow-hidden max-sm:[-webkit-box-orient:vertical] max-sm:[-webkit-line-clamp:2]', props.textClass)">
                     {{ props.label }}
                 </span>
 
                 <!-- Description -->
-                <span v-if="props.description" data-slot="select-value-content-description" :class="cn('min-w-0 whitespace-normal break-words text-[11px] leading-4 text-(--text-secondary-light) dark:text-(--text-secondary-dark) sm:text-xs sm:leading-5 max-sm:[display:-webkit-box] max-sm:[overflow:hidden] max-sm:[-webkit-box-orient:vertical] max-sm:[-webkit-line-clamp:3]', props.descriptionClass)">
+                <span v-if="props.description" data-slot="select-value-content-description" :class="cn('min-w-0 whitespace-normal wrap-break-word text-[11px] leading-4 text-(--text-secondary-light) dark:text-(--text-secondary-dark) sm:text-xs sm:leading-5 max-sm:[display:-webkit-box] max-sm:overflow-hidden max-sm:[-webkit-box-orient:vertical] max-sm:[-webkit-line-clamp:3]', props.descriptionClass)">
                     {{ props.description }}
                 </span>
             </div>
