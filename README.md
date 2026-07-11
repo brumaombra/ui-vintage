@@ -50,19 +50,29 @@ This is a Nuxt library, not a generic Vue component bundle. Components rely on N
 ### Screenshots
 
 <div align="center">
-    <div style="display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); max-width: 768px; overflow: hidden;">
-        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); min-width: 0;">
-            <img src="docs/images/screen-1.png" alt="UI Vintage component demo controls and primary actions" width="100%" style="display: block;">
-            <img src="docs/images/screen-2.png" alt="UI Vintage select, accordion, tabs, and component previews" width="100%" style="display: block;">
-            <img src="docs/images/screen-3.png" alt="UI Vintage surface variants, badges, dialogs, and feedback previews" width="100%" style="display: block;">
-            <img src="docs/images/screen-4.png" alt="UI Vintage loading, toast, and current state previews" width="100%" style="display: block;">
-        </div>
-        <div style="position: relative; min-width: 0; min-height: 0; overflow: hidden;">
-            <img src="docs/images/blog.png" alt="UI Vintage landing and blog showcase" width="100%" height="100%" style="position: absolute; inset: 0; display: block; object-fit: contain; object-position: top center;">
-        </div>
-    </div>
+    <table width="100%" style="max-width: 768px;">
+        <tr>
+            <td align="center" valign="top">
+                <img src="docs/images/screen-1.png" alt="UI Vintage component demo controls and primary actions" width="100%">
+            </td>
+            <td align="center" valign="top">
+                <img src="docs/images/screen-2.png" alt="UI Vintage select, accordion, tabs, and component previews" width="100%">
+            </td>
+        </tr>
+        <tr>
+            <td align="center" valign="top">
+                <img src="docs/images/screen-3.png" alt="UI Vintage surface variants, badges, dialogs, and feedback previews" width="100%">
+            </td>
+            <td align="center" valign="top">
+                <img src="docs/images/screen-4.png" alt="UI Vintage loading, toast, and current state previews" width="100%">
+            </td>
+        </tr>
+    </table>
     <p>
-        <sub>Component showcase, interactive states, and landing/blog showcase</sub>
+        <img src="docs/images/blog.png" alt="UI Vintage landing and blog showcase" width="100%" style="max-width: 768px;">
+    </p>
+    <p>
+        <sub>Component showcase, interactive states, landing surface, and full-width blog showcase</sub>
     </p>
 </div>
 

@@ -39,7 +39,7 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
 
                     <!-- Dialog body content -->
                     <div class="space-y-3">
-                        <div class="rounded-[var(--radius)] border border-border bg-muted px-4 py-3 text-sm text-muted-foreground">
+                        <div class="rounded-(--radius) border border-border bg-muted px-4 py-3 text-sm text-muted-foreground">
                             Dialog content stays compact, centered, and action-driven.
                         </div>
                     </div>
