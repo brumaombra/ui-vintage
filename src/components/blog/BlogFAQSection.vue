@@ -1,12 +1,17 @@
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { Accordion } from '@brumaombra/ui-vintage/accordion';
 import BlogSectionTitle from './BlogSectionTitle.vue';
 
 // Props
-const props = defineProps({
-    faqs: { type: Array, default: () => [] }
+const props = withDefaults(defineProps<{
+    faqs?: Array<{
+        question: string;
+        answer: string;
+    }>;
+}>(), {
+    faqs: () => []
 });
 
 const { t } = useI18n();

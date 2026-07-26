@@ -1,9 +1,17 @@
-<script setup>
+<script setup lang="ts">
 import CategoryCard from './CategoryCard.vue';
 
 // Props
-const props = defineProps({
-    categories: { type: Array, default: () => [] }
+const props = withDefaults(defineProps<{
+    categories?: Array<{
+        path: string;
+        slug?: string;
+        name: string;
+        image?: string;
+        count: number;
+    }>;
+}>(), {
+    categories: () => []
 });
 </script>
 

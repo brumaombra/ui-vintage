@@ -1,9 +1,18 @@
-<script setup>
+<script setup lang="ts">
 import PostCard from './PostCard.vue';
 
 // Props
-const props = defineProps({
-    posts: { type: Array, default: () => [] }
+const props = withDefaults(defineProps<{
+    posts?: Array<{
+        path: string;
+        title: string;
+        description?: string;
+        image?: string;
+        categoryText?: string;
+        categoryPath?: string;
+    }>;
+}>(), {
+    posts: () => []
 });
 </script>
 

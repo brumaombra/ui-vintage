@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { LoadMoreButton } from '../load-more-button';
@@ -7,17 +7,33 @@ import PostsList from './PostsList.vue';
 const { t } = useI18n();
 
 // Props
-const props = defineProps({
-    posts: { type: Array, default: () => [] },
-    currentPage: { type: Number, default: 1 },
-    postsPerPage: { type: Number, default: 9 },
-    totalPosts: { type: Number, default: 0 },
-    hasMorePosts: { type: Boolean, default: false },
-    isLoading: { type: Boolean, default: false }
+const props = withDefaults(defineProps<{
+    posts?: Array<{
+        path: string;
+        title: string;
+        description?: string;
+        image?: string;
+        categoryText?: string;
+        categoryPath?: string;
+    }>;
+    currentPage?: number;
+    postsPerPage?: number;
+    totalPosts?: number;
+    hasMorePosts?: boolean;
+    isLoading?: boolean;
+}>(), {
+    posts: () => [],
+    currentPage: 1,
+    postsPerPage: 9,
+    totalPosts: 0,
+    hasMorePosts: false,
+    isLoading: false
 });
 
 // Emits
-const emits = defineEmits(['load-more']);
+const emits = defineEmits<{
+    'load-more': [];
+}>();
 
 // Handle load more posts
 const handleLoadMorePosts = () => {

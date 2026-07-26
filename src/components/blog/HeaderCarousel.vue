@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { NuxtImg } from '#components';
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -11,15 +11,24 @@ import { Card, CardContent } from '../ui/card';
 const { t } = useI18n();
 
 // Props
-const props = defineProps({
-    featuredPosts: { type: Array, default: () => [] }
+const props = withDefaults(defineProps<{
+    featuredPosts?: Array<{
+        path: string;
+        title: string;
+        description?: string;
+        image?: string;
+        categoryText?: string;
+        categoryPath?: string;
+    }>;
+}>(), {
+    featuredPosts: () => []
 });
 
 // Carousel state
 const currentSlide = ref(0);
 const slideCount = computed(() => props.featuredPosts.length || 0);
-const intervalId = ref(null);
-const direction = ref('forward');
+const intervalId = ref<ReturnType<typeof setInterval> | null>(null);
+const direction = ref<'forward' | 'backward'>('forward');
 
 // Start auto-play functionality
 const startAutoPlay = () => {
@@ -44,7 +53,7 @@ const prevSlide = () => {
 };
 
 // Go to specific slide
-const goToSlide = index => {
+const goToSlide = (index: number) => {
     // Determine direction
     if (index > currentSlide.value) {
         direction.value = 'forward';
@@ -73,8 +82,8 @@ onUnmounted(() => {
         <div class="relative overflow-hidden rounded">
             <TransitionGroup name="slide">
                 <div v-for="(post, index) in props.featuredPosts" :id="`carousel-slide-${index}`" :key="post.path || post.title || index" v-show="currentSlide === index" class="w-full" :data-direction="direction">
-                    <Card class="!p-0 overflow-hidden cursor-pointer">
-                        <CardContent class="gap-0 !p-0">
+                    <Card class="p-0! overflow-hidden cursor-pointer">
+                        <CardContent class="gap-0 p-0!">
                             <!-- Slide image -->
                             <NuxtLink :to="post.path">
                                 <div class="relative w-full h-56 md:h-80 overflow-hidden">
@@ -91,13 +100,13 @@ onUnmounted(() => {
 
                                 <!-- Title -->
                                 <NuxtLink :to="post.path">
-                                    <h3 class="text-base md:text-3xl font-bold text-[var(--text-primary-light)] dark:text-[var(--text-primary-dark)] mb-3 line-clamp-2 hover:opacity-75 transition-opacity duration-200">
+                                    <h3 class="text-base md:text-3xl font-bold text-(--text-primary-light) dark:text-(--text-primary-dark) mb-3 line-clamp-2 hover:opacity-75 transition-opacity duration-200">
                                         {{ post.title }}
                                     </h3>
                                 </NuxtLink>
 
                                 <!-- Description -->
-                                <p class="text-xs md:!text-base text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)] mb-6 line-clamp-2 leading-relaxed">
+                                <p class="text-xs md:text-base! text-(--text-secondary-light) dark:text-(--text-secondary-dark) mb-6 line-clamp-2 leading-relaxed">
                                     {{ post.description }}
                                 </p>
 
@@ -116,7 +125,7 @@ onUnmounted(() => {
                                         <button v-for="(_, idx) in props.featuredPosts"
                                             :key="idx"
                                             @click="goToSlide(idx)"
-                                            :class="['h-5 w-5 sm:!h-4 sm:!w-4 shrink-0 rounded-[2px] transition-all duration-300 cursor-pointer bg-[var(--border-light)] dark:bg-[var(--border-dark)]', currentSlide === idx ? '!w-8 sm:!w-7 !bg-[var(--text-primary-light)] dark:!bg-[var(--text-primary-dark)]' : '']"
+                                            :class="['h-5 w-5 sm:h-4! sm:w-4! shrink-0 rounded-[2px] transition-all duration-300 cursor-pointer bg-(--border-light) dark:bg-(--border-dark)', currentSlide === idx ? 'w-8! sm:w-7! bg-(--text-primary-light)! dark:bg-(--text-primary-dark)!' : '']"
                                             :aria-label="t('uiVintage.blog.goToSlide', { index: idx + 1 })"
                                             :aria-current="currentSlide === idx"
                                             role="tab"
@@ -135,16 +144,16 @@ onUnmounted(() => {
         <button v-if="props.featuredPosts.length > 1"
             @click="prevSlide"
             :aria-label="t('uiVintage.blog.previousSlide')"
-            class="absolute left-2 top-[calc(50%-4rem)] -translate-y-1/2 z-10 border border-[var(--border-light)] dark:border-[var(--border-dark)] bg-[var(--bg-card-light)] dark:bg-[var(--bg-card-dark)] px-3 py-3 rounded-none transition-colors duration-200 hover:border-[var(--border-hover-light)] dark:hover:border-[var(--border-hover-dark)] cursor-pointer">
-            <HugeiconsIcon :icon="ArrowLeft01Icon" class="size-4 text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)]" />
+            class="absolute left-2 top-[calc(50%-4rem)] -translate-y-1/2 z-10 border border-(--border-light) dark:border-(--border-dark) bg-(--bg-card-light) dark:bg-(--bg-card-dark) px-3 py-3 rounded-none transition-colors duration-200 hover:border-(--border-hover-light) dark:hover:border-(--border-hover-dark) cursor-pointer">
+            <HugeiconsIcon :icon="ArrowLeft01Icon" class="size-4 text-(--text-secondary-light) dark:text-(--text-secondary-dark)" />
         </button>
 
         <!-- Next slide -->
         <button v-if="props.featuredPosts.length > 1"
             @click="nextSlide"
             :aria-label="t('uiVintage.blog.nextSlide')"
-            class="absolute right-2 top-[calc(50%-4rem)] -translate-y-1/2 z-10 border border-[var(--border-light)] dark:border-[var(--border-dark)] bg-[var(--bg-card-light)] dark:bg-[var(--bg-card-dark)] px-3 py-3 rounded-none transition-colors duration-200 hover:border-[var(--border-hover-light)] dark:hover:border-[var(--border-hover-dark)] cursor-pointer">
-            <HugeiconsIcon :icon="ArrowRight01Icon" class="size-4 text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)]" />
+            class="absolute right-2 top-[calc(50%-4rem)] -translate-y-1/2 z-10 border border-(--border-light) dark:border-(--border-dark) bg-(--bg-card-light) dark:bg-(--bg-card-dark) px-3 py-3 rounded-none transition-colors duration-200 hover:border-(--border-hover-light) dark:hover:border-(--border-hover-dark) cursor-pointer">
+            <HugeiconsIcon :icon="ArrowRight01Icon" class="size-4 text-(--text-secondary-light) dark:text-(--text-secondary-dark)" />
         </button>
     </div>
 </template>

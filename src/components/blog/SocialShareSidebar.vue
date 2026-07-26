@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { Facebook01Icon, Linkedin01Icon, NewTwitterIcon, Share08Icon, TelegramIcon, WhatsappIcon } from '@hugeicons/core-free-icons';
@@ -6,10 +6,10 @@ import { HugeiconsIcon } from '@hugeicons/vue';
 import { Card, CardContent } from '../ui/card';
 
 // Props
-const props = defineProps({
-    title: { type: String, required: true },
-    url: { type: String, required: true }
-});
+const props = defineProps<{
+    title: string;
+    url: string;
+}>();
 
 const { t } = useI18n();
 
@@ -54,11 +54,11 @@ const socialPlatforms = computed(() => {
 
 <template>
     <!-- Desktop sidebar on the right -->
-    <div class="fixed right-[calc(50%-600px)] top-[140px] z-10 hidden xl:block">
-        <Card class="!p-5 flex flex-col space-y-4 items-center">
-            <CardContent class="!p-0 gap-4 items-center">
+    <div class="fixed right-[calc(50%-600px)] top-35 z-10 hidden xl:block">
+        <Card class="p-5! flex flex-col space-y-4 items-center">
+            <CardContent class="p-0! gap-4 items-center">
                 <!-- Share icon -->
-                <HugeiconsIcon :icon="Share08Icon" class="size-5 text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)] mb-2" />
+                <HugeiconsIcon :icon="Share08Icon" class="size-5 text-(--text-secondary-light) dark:text-(--text-secondary-dark) mb-2" />
 
                 <!-- Social share links (desktop) -->
                 <template v-for="platform in socialPlatforms" :key="platform.name">
@@ -76,8 +76,8 @@ const socialPlatforms = computed(() => {
 
     <!-- Mobile view (floating bar at bottom) -->
     <div class="fixed bottom-4 left-1/2 z-10 -translate-x-1/2 xl:hidden">
-        <Card class="!p-3 w-fit">
-            <CardContent class="!flex-row !p-0 items-center justify-center gap-3">
+        <Card class="p-3! w-fit">
+            <CardContent class="flex-row! p-0! items-center justify-center gap-3">
                 <!-- Social share links (mobile) -->
                 <template v-for="platform in socialPlatforms" :key="platform.name">
                     <NuxtLink :to="platform.url"

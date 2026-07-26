@@ -1,19 +1,22 @@
-<script setup>
+<script setup lang="ts">
+import type { ToneColor } from '../../lib/color-tokens';
 import { Badge } from '../ui/badge';
 
 // Props
-const props = defineProps({
-    badges: {
-        type: Array,
-        default: () => []
-    },
-    title: { type: String, required: true },
-    description: { type: String, required: true }
+const props = withDefaults(defineProps<{
+    badges?: Array<{
+        color: ToneColor;
+        text: string;
+    }>;
+    title: string;
+    description: string;
+}>(), {
+    badges: () => []
 });
 </script>
 
 <template>
-    <div class="flex flex-col space-y-6 md:!space-y-8">
+    <div class="flex flex-col space-y-6 md:space-y-8!">
         <!-- Badges -->
         <div v-if="props.badges.length > 0" class="flex flex-wrap gap-3 mb-6 md:mb-8">
             <Badge v-for="badge in props.badges"
@@ -23,12 +26,12 @@ const props = defineProps({
         </div>
 
         <!-- Title -->
-        <h1 class="text-3xl md:text-6xl font-bold text-[var(--text-primary-light)] dark:text-[var(--text-primary-dark)] leading-tight">
+        <h1 class="text-3xl md:text-6xl font-bold text-(--text-primary-light) dark:text-(--text-primary-dark) leading-tight">
             {{ props.title }}
         </h1>
 
         <!-- Description -->
-        <p class="text-sm md:text-xl text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)] leading-relaxed">
+        <p class="text-sm md:text-xl text-(--text-secondary-light) dark:text-(--text-secondary-dark) leading-relaxed">
             {{ props.description }}
         </p>
     </div>

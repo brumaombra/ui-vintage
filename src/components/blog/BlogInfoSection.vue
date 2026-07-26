@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { NuxtImg } from '#components';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -6,12 +6,14 @@ import { Card, CardContent } from '../ui/card';
 import { formatDateLongItalyTimezone } from '../../lib/utils';
 
 // Props
-const props = defineProps({
-    author: { type: String, required: true },
-    authorUrl: { type: String, required: true },
-    authorImageUrl: { type: String, required: true },
-    datePublished: { type: String, required: true },
-    dateModified: { type: String, default: null }
+const props = withDefaults(defineProps<{
+    author: string;
+    authorUrl: string;
+    authorImageUrl: string;
+    datePublished: string;
+    dateModified?: string | null;
+}>(), {
+    dateModified: null
 });
 
 const { t, locale } = useI18n();
@@ -36,9 +38,9 @@ const formattedModifiedDate = computed(() => formatDateLongItalyTimezone(props.d
 
                         <!-- Author name -->
                         <div>
-                            <p class="text-sm text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)]">{{ t('uiVintage.blog.author') }}</p>
-                            <p class="font-bold text-[var(--text-primary-light)] dark:text-[var(--text-primary-dark)]">
-                                <NuxtLink :to="props.authorUrl" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--text-secondary-light)] dark:hover:text-[var(--text-secondary-dark)] transition-colors">
+                            <p class="text-sm text-(--text-secondary-light) dark:text-(--text-secondary-dark)">{{ t('uiVintage.blog.author') }}</p>
+                            <p class="font-bold text-(--text-primary-light) dark:text-(--text-primary-dark)">
+                                <NuxtLink :to="props.authorUrl" target="_blank" rel="noopener noreferrer" class="hover:text-(--text-secondary-light) dark:hover:text-(--text-secondary-dark) transition-colors">
                                     {{ props.author }}
                                 </NuxtLink>
                             </p>
@@ -47,7 +49,7 @@ const formattedModifiedDate = computed(() => formatDateLongItalyTimezone(props.d
                 </div>
 
                 <!-- Date information -->
-                <div class="flex flex-col sm:items-end text-xs md:text-sm text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)]">
+                <div class="flex flex-col sm:items-end text-xs md:text-sm text-(--text-secondary-light) dark:text-(--text-secondary-dark)">
                     <!-- Published date -->
                     <div v-if="props.datePublished" class="mb-1">
                         <span class="font-semibold">{{ t('uiVintage.blog.publishedDate') }}:</span>
