@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Busy } from "../ui/busy";
-import { busyIndicatorState } from "./busy-indicator-state";
+import { Busy } from '../ui/busy';
+import { busyIndicatorState } from './busy-indicator-state';
 </script>
 
 <template>
