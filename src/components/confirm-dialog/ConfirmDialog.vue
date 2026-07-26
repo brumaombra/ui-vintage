@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { HugeiconsIcon } from "@hugeicons/vue";
-import { computed } from "vue";
-import { InformationCircleIcon } from "@hugeicons/core-free-icons";
-import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "../ui/alert-dialog";
-import { Button } from "../ui/button";
-import { cancelActiveConfirmDialog, closeConfirmDialog, confirmActiveDialog, confirmDialogState } from "./confirm-dialog-state";
+import { HugeiconsIcon } from '@hugeicons/vue';
+import { computed } from 'vue';
+import { InformationCircleIcon } from '@hugeicons/core-free-icons';
+import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '../ui/alert-dialog';
+import { Button } from '../ui/button';
+import { cancelActiveConfirmDialog, closeConfirmDialog, confirmActiveDialog, confirmDialogState } from './confirm-dialog-state';
 
 const currentDialog = computed(() => confirmDialogState.current);
 
@@ -24,9 +24,9 @@ const handleOpenChange = (open: boolean) => {
             <div class="px-5 pb-5 pt-5 sm:px-6 sm:pb-4 sm:pt-6">
                 <div class="flex flex-col gap-4 sm:flex-row sm:items-start">
                     <!-- Dialog icon -->
-                    <div class="flex size-12 shrink-0 self-center items-center justify-center rounded border border-[var(--border-light)] bg-[var(--bg-surface-light)] sm:size-10 sm:self-start dark:border-[var(--border-dark)] dark:bg-[var(--bg-surface-dark)]">
-                        <HugeiconsIcon v-if="currentDialog.options.icon" :icon="currentDialog.options.icon" :stroke-width="1.8" class="size-6 text-[var(--button-primary-light)] dark:text-[var(--button-primary-dark)]" />
-                        <HugeiconsIcon v-else :icon="InformationCircleIcon" :stroke-width="1.8" class="size-6 text-[var(--button-primary-light)] dark:text-[var(--button-primary-dark)]" />
+                    <div class="flex size-12 shrink-0 self-center items-center justify-center rounded border border-(--border-light) bg-(--bg-surface-light) sm:size-10 sm:self-start dark:border-(--border-dark) dark:bg-(--bg-surface-dark)">
+                        <HugeiconsIcon v-if="currentDialog.options.icon" :icon="currentDialog.options.icon" :stroke-width="1.8" class="size-6 text-(--button-primary-light) dark:text-(--button-primary-dark)" />
+                        <HugeiconsIcon v-else :icon="InformationCircleIcon" :stroke-width="1.8" class="size-6 text-(--button-primary-light) dark:text-(--button-primary-dark)" />
                     </div>
 
                     <!-- Dialog header -->

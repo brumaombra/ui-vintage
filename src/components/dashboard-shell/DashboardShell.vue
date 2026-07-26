@@ -1,91 +1,71 @@
 <script setup lang="ts">
-import { NuxtImg } from "#components";
-import type { Component, HTMLAttributes } from "vue";
-import { HugeiconsIcon } from "@hugeicons/vue";
-import BackgroundGrid from "../background-grid/BackgroundGrid.vue";
-import { ThemeSelector } from "../theme-selector";
-import { Separator } from "../ui/separator";
-import {
-    Sidebar,
-    SidebarContent,
-    SidebarFooter,
-    SidebarGroup,
-    SidebarGroupContent,
-    SidebarGroupLabel,
-    SidebarHeader,
-    SidebarInset,
-    SidebarMenu,
-    SidebarMenuButton,
-    SidebarMenuItem,
-    SidebarProvider,
-    SidebarTrigger
-} from "../ui/sidebar";
-import { cn } from "../../lib/utils";
+import { NuxtImg } from '#components';
+import type { Component, HTMLAttributes } from 'vue';
+import { HugeiconsIcon } from '@hugeicons/vue';
+import BackgroundGrid from '../background-grid/BackgroundGrid.vue';
+import { ThemeSelector } from '../theme-selector';
+import { Separator } from '../ui/separator';
+import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarInset, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarProvider, SidebarTrigger } from '../ui/sidebar';
+import { cn } from '../../lib/utils';
 
 type HugeiconsIconDefinition = readonly (readonly [string, { readonly [key: string]: string | number }])[];
 
-interface DashboardSidebarItem {
-    id: string;
-    label: string;
-    description?: string;
-    icon?: HugeiconsIconDefinition | null;
-    href?: string;
-    to?: unknown;
-    active?: boolean;
-    newTab?: boolean;
-}
-
-interface DashboardSidebarSection {
-    id: string;
-    label?: string;
-    items: DashboardSidebarItem[];
-}
-
-interface DashboardShellProps {
+// Props
+const props = withDefaults(defineProps<{
     appName?: string;
     appLogo?: string;
     appLinkTo?: string;
     title?: string;
     description?: string;
-    collapsible?: "offcanvas" | "icon" | "none";
+    collapsible?: 'offcanvas' | 'icon' | 'none';
     compact?: boolean;
-    sidebarSections?: DashboardSidebarSection[];
+    sidebarSections?: Array<{
+        id: string;
+        label?: string;
+        items: Array<{
+            id: string;
+            label: string;
+            description?: string;
+            icon?: HugeiconsIconDefinition | null;
+            href?: string;
+            to?: unknown;
+            active?: boolean;
+            newTab?: boolean;
+        }>;
+    }>;
     sidebarLinkComponent?: Component | string;
     showBackground?: boolean;
-    insetClass?: HTMLAttributes["class"];
-    topbarClass?: HTMLAttributes["class"];
-    contentContainerClass?: HTMLAttributes["class"];
-}
-
-// Props
-const props = withDefaults(defineProps<DashboardShellProps>(), {
-    appName: "",
-    appLogo: "",
-    appLinkTo: "/",
-    title: "",
-    description: "",
-    collapsible: "offcanvas",
+    insetClass?: HTMLAttributes['class'];
+    topbarClass?: HTMLAttributes['class'];
+    contentContainerClass?: HTMLAttributes['class'];
+}>(), {
+    appName: '',
+    appLogo: '',
+    appLinkTo: '/',
+    title: '',
+    description: '',
+    collapsible: 'offcanvas',
     compact: false,
     sidebarSections: () => [],
-    sidebarLinkComponent: "a",
+    sidebarLinkComponent: 'a',
     showBackground: true
 });
 
 // Resolve link props for sidebar items
-const getSidebarItemLinkProps = (item: DashboardSidebarItem) => {
-    const sharedProps = item.newTab ? { target: "_blank", rel: "noopener noreferrer" } : {};
+const getSidebarItemLinkProps = (item: NonNullable<typeof props.sidebarSections>[number]['items'][number]) => {
+    const sharedProps = item.newTab ? { target: '_blank', rel: 'noopener noreferrer' } : {};
 
     // If the link component is an anchor, use href. Otherwise, use to for router links.
-    if (props.sidebarLinkComponent === "a") {
+    if (props.sidebarLinkComponent === 'a') {
         return {
-            href: item.href ?? "#",
+            href: item.href ?? '#',
             ...sharedProps
         };
     }
 
     // For non-anchor link components, assume they use a "to" prop (like Vue Router's <RouterLink>).
     return {
-        to: item.to ?? item.href ?? "/",
+        to: item.to ?? item.href ?? '/',
         ...sharedProps
     };
 };

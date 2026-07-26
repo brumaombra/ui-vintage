@@ -1,7 +1,7 @@
-import { h, markRaw, reactive, render } from "vue";
-import type { ButtonVariants } from "../ui/button";
+import { h, markRaw, reactive, render } from 'vue';
+import type { ButtonVariants } from '../ui/button';
 
-export type DialogButtonVariant = NonNullable<ButtonVariants["variant"]>;
+export type DialogButtonVariant = NonNullable<ButtonVariants['variant']>;
 export type HugeiconsIconDefinition = readonly (readonly [string, { readonly [key: string]: string | number }])[];
 
 export interface ShowConfirmDialogOptions {
@@ -20,7 +20,7 @@ export interface ShowConfirmDialogOptions {
 
 interface ConfirmDialogRequest {
     id: number;
-    options: Required<Omit<ShowConfirmDialogOptions, "icon" | "confirmButtonIcon" | "cancelButtonIcon" | "onConfirm" | "onCancel">> & {
+    options: Required<Omit<ShowConfirmDialogOptions, 'icon' | 'confirmButtonIcon' | 'cancelButtonIcon' | 'onConfirm' | 'onCancel'>> & {
         icon: HugeiconsIconDefinition | null;
         confirmButtonIcon: HugeiconsIconDefinition | null;
         cancelButtonIcon: HugeiconsIconDefinition | null;
@@ -42,7 +42,7 @@ const DIALOG_CLOSE_DURATION_MS = 300;
 let closeTimer: ReturnType<typeof setTimeout> | null = null;
 let confirmDialogMountPromise: Promise<void> | null = null;
 
-const CONFIRM_DIALOG_ROOT_ID = "ui-vintage-confirm-dialog-root";
+const CONFIRM_DIALOG_ROOT_ID = 'ui-vintage-confirm-dialog-root';
 
 // Shared confirm dialog state
 export const confirmDialogState: ConfirmDialogState = reactive({
@@ -57,7 +57,7 @@ const markIcon = (icon: HugeiconsIconDefinition | null | undefined) => icon ? ma
 // Mount the dialog once on demand
 const ensureConfirmDialogMounted = () => {
     // Skip mounting during SSR
-    if (typeof document === "undefined") {
+    if (typeof document === 'undefined') {
         return Promise.resolve();
     }
 
@@ -75,7 +75,7 @@ const ensureConfirmDialogMounted = () => {
     // Start the lazy mount
     confirmDialogMountPromise = (async () => {
         // Load the component only when needed
-        const { default: ConfirmDialog } = await import("./ConfirmDialog.vue");
+        const { default: ConfirmDialog } = await import('./ConfirmDialog.vue');
 
         // Guard against a concurrent mount
         if (document.getElementById(CONFIRM_DIALOG_ROOT_ID)) {
@@ -83,7 +83,7 @@ const ensureConfirmDialogMounted = () => {
         }
 
         // Create the host element and render the component
-        const container = document.createElement("div");
+        const container = document.createElement('div');
         container.id = CONFIRM_DIALOG_ROOT_ID;
         document.body.appendChild(container);
         render(h(ConfirmDialog), container);
@@ -182,12 +182,12 @@ export const showConfirmDialog = (options: ShowConfirmDialogOptions) => {
         enqueueConfirmDialog({
             id: nextConfirmDialogId += 1,
             options: {
-                title: options.title ?? "Confirm",
+                title: options.title ?? 'Confirm',
                 message: options.message,
-                confirmText: options.confirmText ?? "Confirm",
-                cancelText: options.cancelText ?? "Cancel",
-                confirmButtonType: options.confirmButtonType ?? "primary",
-                cancelButtonType: options.cancelButtonType ?? "secondary",
+                confirmText: options.confirmText ?? 'Confirm',
+                cancelText: options.cancelText ?? 'Cancel',
+                confirmButtonType: options.confirmButtonType ?? 'primary',
+                cancelButtonType: options.cancelButtonType ?? 'secondary',
                 icon: markIcon(options.icon),
                 confirmButtonIcon: markIcon(options.confirmButtonIcon),
                 cancelButtonIcon: markIcon(options.cancelButtonIcon),

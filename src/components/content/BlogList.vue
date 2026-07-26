@@ -1,22 +1,25 @@
-<script setup>
+<script setup lang="ts">
 import { Cancel01Icon, CheckmarkCircle02Icon, CircleSmallIcon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Card, CardContent } from '../ui/card';
 
 // Props
-const props = defineProps({
-    items: { type: Array, default: () => [] },
-    variant: { type: String, default: 'checkmark', validator: value => ['circle', 'checkmark', 'numbered', 'cross'].includes(value) }
+const props = withDefaults(defineProps<{
+    items?: string[];
+    variant?: 'circle' | 'checkmark' | 'numbered' | 'cross';
+}>(), {
+    items: () => [],
+    variant: 'checkmark'
 });
 
 // Icon container classes
 const getIconContainerClasses = () => {
-    return 'flex items-center justify-center w-8 h-8 bg-[var(--bg-card-light)] dark:bg-[var(--bg-card-dark)] border border-[var(--border-light)] dark:border-[var(--border-dark)] rounded mr-4 flex-shrink-0';
+    return 'flex items-center justify-center w-8 h-8 bg-(--bg-card-light) dark:bg-(--bg-card-dark) border border-(--border-light) dark:border-(--border-dark) rounded mr-4 shrink-0';
 };
 
 // Icon color classes
 const getIconClasses = () => {
-    return 'text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)] text-xs';
+    return 'text-(--text-secondary-light) dark:text-(--text-secondary-dark) text-xs';
 };
 </script>
 
@@ -24,7 +27,7 @@ const getIconClasses = () => {
     <div class="not-prose my-6 sm:my-12">
         <Card>
             <CardContent class="gap-0">
-                <ul class="text-xs md:text-sm !p-0 !space-y-6">
+                <ul class="text-xs md:text-sm p-0! space-y-6!">
                     <li v-for="(item, index) in props.items" :key="index" class="flex items-center">
                         <!-- Circle -->
                         <div v-if="props.variant === 'circle'" :class="getIconContainerClasses()">
@@ -48,7 +51,7 @@ const getIconClasses = () => {
 
                         <!-- Content -->
                         <div class="flex-1">
-                            <div class="text-[var(--text-primary-light)] dark:text-[var(--text-primary-dark)] leading-relaxed">
+                            <div class="text-(--text-primary-light) dark:text-(--text-primary-dark) leading-relaxed">
                                 {{ item }}
                             </div>
                         </div>
