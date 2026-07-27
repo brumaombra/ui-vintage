@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { computed } from "vue";
-import { Card } from "../ui/card";
-import { Slider } from "../ui/slider";
+import { computed } from 'vue';
+import { Card } from '../ui/card';
+import { Slider } from '../ui/slider';
 
-interface SliderFormComponentProps {
+// Props
+const props = withDefaults(defineProps<{
     id?: string;
     label: string;
     description?: string;
@@ -12,21 +13,18 @@ interface SliderFormComponentProps {
     max?: number;
     step?: number;
     valueText?: string;
-}
-
-// Props
-const props = withDefaults(defineProps<SliderFormComponentProps>(), {
+}>(), {
     id: undefined,
-    description: "",
+    description: '',
     min: 0,
     max: 100,
     step: 1,
-    valueText: ""
+    valueText: ''
 });
 
 // Emits
 const emits = defineEmits<{
-    (e: "update:modelValue", value: number): void;
+    (e: 'update:modelValue', value: number): void;
 }>();
 
 const sliderValue = computed(() => [props.modelValue]);
@@ -34,7 +32,7 @@ const resolvedValueText = computed(() => props.valueText || String(props.modelVa
 
 // Emit the first slider value back to the parent
 const handleUpdateModelValue = (value?: number[]) => {
-    emits("update:modelValue", value?.[0] ?? props.min);
+    emits('update:modelValue', value?.[0] ?? props.min);
 };
 </script>
 
@@ -59,13 +57,6 @@ const handleUpdateModelValue = (value?: number[]) => {
         </div>
 
         <!-- Slider control -->
-        <Slider
-            :id="props.id"
-            :model-value="sliderValue"
-            :min="props.min"
-            :max="props.max"
-            :step="props.step"
-            @update:model-value="handleUpdateModelValue"
-        />
+        <Slider :id="props.id" :model-value="sliderValue" :min="props.min" :max="props.max" :step="props.step" @update:model-value="handleUpdateModelValue" />
     </Card>
 </template>

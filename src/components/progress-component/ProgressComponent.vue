@@ -2,12 +2,15 @@
 import { Progress } from '../ui/progress';
 
 // Props
-const props = defineProps({
-    title: { type: String, required: true },
-    bottomLeftLabel: { type: String, default: '' },
-    bottomRightLabel: { type: String, default: '' },
-    value: { type: Number, required: true },
-    max: { type: Number, required: true }
+const props = withDefaults(defineProps<{
+    title: string;
+    bottomLeftLabel?: string;
+    bottomRightLabel?: string;
+    value: number;
+    max: number;
+}>(), {
+    bottomLeftLabel: '',
+    bottomRightLabel: ''
 });
 </script>
 
@@ -16,12 +19,12 @@ const props = defineProps({
         <!-- Header with icon and label -->
         <div class="flex items-center justify-between">
             <!-- Title of the progress bar -->
-            <span class="text-sm font-semibold text-[var(--text-primary-light)] dark:text-[var(--text-primary-dark)]">
+            <span class="text-sm font-semibold text-(--text-primary-light) dark:text-(--text-primary-dark)">
                 {{ props.title }}
             </span>
 
             <!-- Current value / max -->
-            <span class="text-sm font-semibold text-[var(--text-primary-light)] dark:text-[var(--text-primary-dark)]">
+            <span class="text-sm font-semibold text-(--text-primary-light) dark:text-(--text-primary-dark)">
                 {{ props.value }} / {{ props.max }}
             </span>
         </div>
@@ -32,12 +35,12 @@ const props = defineProps({
         <!-- Bottom labels -->
         <div v-if="props.bottomLeftLabel || props.bottomRightLabel" class="flex items-center justify-between text-xs">
             <!-- Bottom left label -->
-            <span v-if="props.bottomLeftLabel" class="text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)]">
+            <span v-if="props.bottomLeftLabel" class="text-(--text-secondary-light) dark:text-(--text-secondary-dark)">
                 {{ props.bottomLeftLabel }}
             </span>
 
             <!-- Bottom right label -->
-            <span v-if="props.bottomRightLabel" class="text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)]">
+            <span v-if="props.bottomRightLabel" class="text-(--text-secondary-light) dark:text-(--text-secondary-dark)">
                 {{ props.bottomRightLabel }}
             </span>
         </div>

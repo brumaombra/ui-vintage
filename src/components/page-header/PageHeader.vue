@@ -2,10 +2,13 @@
 import { Comment, Text, computed, useSlots, type VNode } from 'vue';
 
 // Props
-const props = defineProps({
-    title: { type: String, required: true },
-    headingLevel: { type: Number, default: 1 },
-    size: { type: String, default: 'large', validator: (value: unknown) => ['small', 'medium', 'large'].includes(String(value)) }
+const props = withDefaults(defineProps<{
+    title: string;
+    headingLevel?: number;
+    size?: 'small' | 'medium' | 'large';
+}>(), {
+    headingLevel: 1,
+    size: 'large'
 });
 
 const slots = useSlots();
@@ -24,7 +27,7 @@ const hasSlotContent = computed(() => {
 
 // Get size classes based on size prop
 const getSizeClasses = (size: string) => {
-    const baseClasses = 'font-bold text-[var(--text-primary-light)] dark:text-[var(--text-primary-dark)]';
+    const baseClasses = 'font-bold text-(--text-primary-light) dark:text-(--text-primary-dark)';
 
     // Return classes based on size
     switch (size) {

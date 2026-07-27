@@ -1,25 +1,23 @@
 <script setup lang="ts">
-import { Card } from "../ui/card";
-import { Switch } from "../ui/switch";
+import { Card } from '../ui/card';
+import { Switch } from '../ui/switch';
 
-interface SwitchFormComponentProps {
+// Props
+const props = defineProps<{
     id: string;
     label: string;
     description: string;
     modelValue: boolean;
-}
-
-// Props
-const props = defineProps<SwitchFormComponentProps>();
+}>();
 
 // Emits
 const emits = defineEmits<{
-    (e: "update:modelValue", value: boolean): void;
+    (e: 'update:modelValue', value: boolean): void;
 }>();
 </script>
 
 <template>
-    <Card class="flex flex-col gap-2 sm:gap-3! px-4 py-3">
+    <Card class="flex flex-col gap-2 px-4 py-3 sm:gap-3!">
         <!-- Switch label and control -->
         <div class="flex items-center justify-between gap-4">
             <!-- Switch label -->

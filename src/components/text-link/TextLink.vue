@@ -1,15 +1,19 @@
 <script setup lang="ts">
-import type { Component, PropType } from 'vue';
+import type { Component } from 'vue';
 
 // Props
-const props = defineProps({
-    to: { type: String, required: true },
-    text: { type: String, required: true },
-    linkComponent: { type: [String, Object] as PropType<Component | string>, default: 'a' }
+const props = withDefaults(defineProps<{
+    to: string;
+    text: string;
+    linkComponent?: Component | string;
+}>(), {
+    linkComponent: 'a'
 });
 
 // Emits
-const emits = defineEmits(['click']);
+const emits = defineEmits<{
+    click: [event: MouseEvent];
+}>();
 
 // Get link props based on the type of link component
 const getLinkProps = () => {
@@ -27,7 +31,7 @@ const handleClick = (event: MouseEvent) => {
 </script>
 
 <template>
-    <component :is="props.linkComponent" v-bind="getLinkProps()" class="cursor-pointer font-semibold text-[var(--text-primary-light)] hover:underline dark:text-[var(--text-primary-dark)]" @click="handleClick">
+    <component :is="props.linkComponent" v-bind="getLinkProps()" class="cursor-pointer font-semibold text-(--text-primary-light) hover:underline dark:text-(--text-primary-dark)" @click="handleClick">
         {{ props.text }}
     </component>
 </template>

@@ -1,6 +1,6 @@
-import { h, reactive, render } from "vue";
+import { h, reactive, render } from 'vue';
 
-export type MessageToastType = "success" | "info" | "warning" | "error";
+export type MessageToastType = 'success' | 'info' | 'warning' | 'error';
 
 export interface ShowMessageToastOptions {
     message: string;
@@ -20,7 +20,7 @@ interface MessageToastState {
 
 const TOAST_CLOSE_DURATION_MS = 300;
 const DEFAULT_TOAST_DURATION_MS = 5000;
-const MESSAGE_TOAST_ROOT_ID = "ui-vintage-message-toast-root";
+const MESSAGE_TOAST_ROOT_ID = 'ui-vintage-message-toast-root';
 
 let dismissTimer: ReturnType<typeof setTimeout> | null = null;
 let clearTimer: ReturnType<typeof setTimeout> | null = null;
@@ -37,7 +37,7 @@ export const messageToastState: MessageToastState = reactive({
 // Mount the toast once on demand
 const ensureMessageToastMounted = () => {
     // Skip mounting during SSR
-    if (typeof document === "undefined") {
+    if (typeof document === 'undefined') {
         return Promise.resolve();
     }
 
@@ -55,7 +55,7 @@ const ensureMessageToastMounted = () => {
     // Start the lazy mount
     messageToastMountPromise = (async () => {
         // Load the component only when needed
-        const { default: MessageToast } = await import("./MessageToast.vue");
+        const { default: MessageToast } = await import('./MessageToast.vue');
 
         // Guard against a concurrent mount
         if (document.getElementById(MESSAGE_TOAST_ROOT_ID)) {
@@ -63,7 +63,7 @@ const ensureMessageToastMounted = () => {
         }
 
         // Create the host element and render the component
-        const container = document.createElement("div");
+        const container = document.createElement('div');
         container.id = MESSAGE_TOAST_ROOT_ID;
         document.body.appendChild(container);
         render(h(MessageToast), container);
@@ -90,7 +90,7 @@ const clearMessageToastTimers = () => {
     }
 
     // Clear any pending open frame from a previous toast
-    if (openFrame !== null && typeof cancelAnimationFrame !== "undefined") {
+    if (openFrame !== null && typeof cancelAnimationFrame !== 'undefined') {
         cancelAnimationFrame(openFrame);
         openFrame = null;
     }
@@ -132,14 +132,14 @@ export const showMessageToast = (options: ShowMessageToastOptions) => {
     // Update the toast state while keeping the shell closed until the renderer is mounted
     messageToastState.current = {
         message: options.message,
-        type: options.type ?? "success"
+        type: options.type ?? 'success'
     };
     messageToastState.isOpen = false;
 
     // Mount first so the initial visible transition can run after the component exists
     void ensureMessageToastMounted().then(() => {
         // Guard against a toast change during the async mount
-        if (toastId !== activeToastId || !messageToastState.current || typeof requestAnimationFrame === "undefined") {
+        if (toastId !== activeToastId || !messageToastState.current || typeof requestAnimationFrame === 'undefined') {
             return;
         }
 
