@@ -1,7 +1,8 @@
 import { h, markRaw, reactive, render } from 'vue';
+import type { HugeiconsIconDefinition } from '../../lib/common-types';
 
 export type DialogMessageType = 'error' | 'success' | 'info' | 'warning';
-export type HugeiconsIconDefinition = readonly (readonly [string, { readonly [key: string]: string | number }])[];
+export type { HugeiconsIconDefinition };
 
 export interface ShowMessageDialogOptions {
     type?: DialogMessageType;

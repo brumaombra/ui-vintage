@@ -3,8 +3,7 @@ import type { HTMLAttributes } from "vue"
 import { HugeiconsIcon } from "@hugeicons/vue"
 import { getSurfaceToneClasses, type ToneColor } from "../../../lib/color-tokens"
 import { cn } from "../../../lib/utils"
-
-type HugeiconsIconDefinition = readonly (readonly [string, { readonly [key: string]: string | number }])[]
+import type { HugeiconsIconDefinition } from "../../../lib/common-types"
 
 // Props
 const props = withDefaults(defineProps<{

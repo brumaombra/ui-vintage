@@ -7,8 +7,7 @@ import { ThemeSelector } from '../theme-selector';
 import { Separator } from '../ui/separator';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarInset, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarProvider, SidebarTrigger } from '../ui/sidebar';
 import { cn } from '../../lib/utils';
-
-type HugeiconsIconDefinition = readonly (readonly [string, { readonly [key: string]: string | number }])[];
+import type { HugeiconsIconDefinition } from '../../lib/common-types';
 
 // Props
 const props = withDefaults(defineProps<{

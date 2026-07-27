@@ -1,20 +1,19 @@
 <script setup lang="ts">
-import { HugeiconsIcon } from '@hugeicons/vue'
-import type { HTMLAttributes } from 'vue'
-import { Card, CardContent, CardText } from '../ui/card'
-
-type HugeiconsIconDefinition = readonly (readonly [string, { readonly [key: string]: string | number }])[]
+import { HugeiconsIcon } from '@hugeicons/vue';
+import type { HTMLAttributes } from 'vue';
+import { Card, CardContent, CardText } from '../ui/card';
+import type { HugeiconsIconDefinition } from '../../lib/common-types';
 
 // Props
 const props = withDefaults(defineProps<{
-    icon: HugeiconsIconDefinition
-    title?: string
-    description?: string | number
-    class?: HTMLAttributes['class']
+    icon: HugeiconsIconDefinition;
+    title?: string;
+    description?: string | number;
+    class?: HTMLAttributes['class'];
 }>(), {
     title: '',
     description: ''
-})
+});
 </script>
 
 <template>

@@ -4,8 +4,7 @@ import { ref } from "vue";
 import { ArrowDown01Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/vue";
 import { Card, CardContent } from "@brumaombra/ui-vintage/card";
-
-type HugeiconsIconDefinition = readonly (readonly [string, { readonly [key: string]: string | number }])[];
+import type { HugeiconsIconDefinition } from "../../../lib/common-types";
 
 interface AccordionProps {
     title: string;

@@ -1,30 +1,30 @@
 <script setup lang="ts">
-import { Cancel01Icon } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/vue'
-import type { HTMLAttributes } from 'vue'
-import { getSurfaceToneClasses, type ToneColor } from '../../lib/color-tokens'
-import { cn } from '../../lib/utils'
+import { Cancel01Icon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/vue';
+import type { HTMLAttributes } from 'vue';
+import { getSurfaceToneClasses, type ToneColor } from '../../lib/color-tokens';
+import { cn } from '../../lib/utils';
 
 // Props
 const props = withDefaults(defineProps<{
-    text: string
-    color?: ToneColor
-    removeLabel?: string
-    class?: HTMLAttributes['class']
+    text: string;
+    color?: ToneColor;
+    removeLabel?: string;
+    class?: HTMLAttributes['class'];
 }>(), {
     color: 'gray',
     removeLabel: 'Remove'
-})
+});
 
 // Emits
 const emits = defineEmits<{
     remove: []
-}>()
+}>();
 
 // Handle remove button click
 const handleRemove = () => {
-    emits('remove')
-}
+    emits('remove');
+};
 </script>
 
 <template>

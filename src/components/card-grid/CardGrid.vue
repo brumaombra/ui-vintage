@@ -3,8 +3,7 @@ import { PackageIcon } from '@hugeicons/core-free-icons';
 import { EmptyStateCard } from '../empty-state-card';
 import { LoadMoreButton } from '../load-more-button';
 import { LoadingStateCard } from '../loading-state-card';
-
-type HugeiconsIconDefinition = readonly (readonly [string, { readonly [key: string]: string | number }])[];
+import type { HugeiconsIconDefinition } from '../../lib/common-types';
 
 // Props
 const props = withDefaults(defineProps<{

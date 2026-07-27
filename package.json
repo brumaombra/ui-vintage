@@ -61,6 +61,7 @@
         "./error-page": "./src/components/error-page/index.ts",
         "./field": "./src/components/ui/field/index.ts",
         "./info-card": "./src/components/info-card/index.ts",
+        "./common-types": "./src/lib/common-types.ts",
         "./input": "./src/components/ui/input/index.ts",
         "./label": "./src/components/ui/label/index.ts",
         "./landing": "./src/components/landing/index.ts",

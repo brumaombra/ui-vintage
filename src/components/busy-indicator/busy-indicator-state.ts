@@ -1,5 +1,4 @@
-import { h, reactive, render } from 'vue';
-import type { HTMLAttributes } from 'vue';
+import { h, reactive, render, type HTMLAttributes } from 'vue';
 
 export interface SetBusyOptions {
     label?: string;

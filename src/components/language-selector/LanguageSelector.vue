@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import type { Component } from 'vue';
-import { computed, defineAsyncComponent, ref } from 'vue';
+import { computed, defineAsyncComponent, ref, type Component } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { Tick02Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';

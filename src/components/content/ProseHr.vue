@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { ChartLineData02Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
-
-type HugeiconsIconDefinition = readonly (readonly [string, { readonly [key: string]: string | number }])[];
+import type { HugeiconsIconDefinition } from '../../lib/common-types';
 
 // Props
 const props = withDefaults(defineProps<{

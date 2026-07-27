@@ -2,8 +2,7 @@
 import type { HTMLAttributes } from "vue"
 import { HugeiconsIcon } from "@hugeicons/vue"
 import { cn } from "../../../lib/utils"
-
-type HugeiconsIconDefinition = readonly (readonly [string, { readonly [key: string]: string | number }])[]
+import type { HugeiconsIconDefinition } from "../../../lib/common-types"
 
 // Props
 const props = defineProps<{

@@ -4,8 +4,7 @@ import { useI18n } from 'vue-i18n';
 import { PackageIcon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Card, CardContent } from '../ui/card';
-
-type HugeiconsIconDefinition = readonly (readonly [string, { readonly [key: string]: string | number }])[];
+import type { HugeiconsIconDefinition } from '../../lib/common-types';
 
 // Props
 const props = withDefaults(defineProps<{

@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import type { HTMLAttributes } from 'vue';
 import { ArrowLeft01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
-import { computed } from 'vue';
+import { computed, type HTMLAttributes } from 'vue';
 import BackgroundGrid from '../background-grid/BackgroundGrid.vue';
 import { Button } from '../ui/button';
 import { Card, CardContent, CardFooter } from '../ui/card';

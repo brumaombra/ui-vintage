@@ -4,8 +4,7 @@ import { HugeiconsIcon } from "@hugeicons/vue"
 import type { SelectValueProps } from "reka-ui"
 import { SelectValue } from "reka-ui"
 import { cn } from "../../../lib/utils"
-
-type HugeiconsIconDefinition = readonly (readonly [string, { readonly [key: string]: string | number }])[]
+import type { HugeiconsIconDefinition } from "../../../lib/common-types"
 
 // Props
 const props = defineProps<SelectValueProps & {

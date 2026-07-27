@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import type { Component } from 'vue';
-import { computed, defineAsyncComponent } from 'vue';
+import { computed, defineAsyncComponent, type Component } from 'vue';
 
 // Single source of truth for supported flag component loaders
 const supportedFlagLoaders = {
