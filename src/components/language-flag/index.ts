@@ -1,5 +1,6 @@
 export { default } from './LanguageFlag.vue';
 export { default as LanguageFlag } from './LanguageFlag.vue';
+export type { SupportedLanguageCode } from './LanguageFlag.vue';
 export { default as EnglishFlag } from './flags/EnglishFlag.vue';
 export { default as FrenchFlag } from './flags/FrenchFlag.vue';
 export { default as GermanFlag } from './flags/GermanFlag.vue';

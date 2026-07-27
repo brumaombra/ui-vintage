@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { HugeiconsIcon } from "@hugeicons/vue";
-import { computed } from "vue";
-import { AlertCircleIcon, InformationCircleIcon, Tick02Icon } from "@hugeicons/core-free-icons";
-import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "../ui/alert-dialog";
-import { Button } from "../ui/button";
-import { getUiVintageRuntimeMessage } from "../../lib/i18n";
-import { closeMessageDialog, messageDialogState, resolveActiveMessageDialog } from "./message-dialog-state";
+import { HugeiconsIcon } from '@hugeicons/vue';
+import { computed } from 'vue';
+import { AlertCircleIcon, InformationCircleIcon, Tick02Icon } from '@hugeicons/core-free-icons';
+import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '../ui/alert-dialog';
+import { Button } from '../ui/button';
+import { getUiVintageRuntimeMessage } from '../../lib/i18n';
+import { closeMessageDialog, messageDialogState, resolveActiveMessageDialog } from './message-dialog-state';
 
 // Active dialog state
 const currentDialog = computed(() => messageDialogState.current);
@@ -28,29 +28,29 @@ const resolvedCloseText = computed(() => {
 const defaultMessageIcon = computed(() => {
     const current = currentDialog.value;
     if (!current) return InformationCircleIcon;
-    if (current.options.type === "error" || current.options.type === "warning") return AlertCircleIcon;
-    if (current.options.type === "success") return Tick02Icon;
+    if (current.options.type === 'error' || current.options.type === 'warning') return AlertCircleIcon;
+    if (current.options.type === 'success') return Tick02Icon;
     return InformationCircleIcon;
 });
 
 // Resolved container classes for the message icon
 const messageIconClasses = computed(() => {
     const current = currentDialog.value;
-    if (!current) return "border-[var(--border)] bg-[var(--bg-surface-light)] dark:bg-[var(--bg-surface-dark)]";
-    if (current.options.type === "error") return "border-red-200 bg-red-50 dark:border-red-900/50 dark:bg-red-950/30";
-    if (current.options.type === "warning") return "border-amber-200 bg-amber-50 dark:border-amber-900/50 dark:bg-amber-950/30";
-    if (current.options.type === "success") return "border-green-200 bg-green-50 dark:border-green-900/50 dark:bg-green-950/30";
-    return "border-[var(--border)] bg-[var(--bg-surface-light)] dark:bg-[var(--bg-surface-dark)]";
+    if (!current) return 'border-(--border) bg-(--bg-surface-light) dark:bg-(--bg-surface-dark)';
+    if (current.options.type === 'error') return 'border-red-200 bg-red-50 dark:border-red-900/50 dark:bg-red-950/30';
+    if (current.options.type === 'warning') return 'border-amber-200 bg-amber-50 dark:border-amber-900/50 dark:bg-amber-950/30';
+    if (current.options.type === 'success') return 'border-green-200 bg-green-50 dark:border-green-900/50 dark:bg-green-950/30';
+    return 'border-(--border) bg-(--bg-surface-light) dark:bg-(--bg-surface-dark)';
 });
 
 // Resolved glyph color classes
 const messageGlyphClasses = computed(() => {
     const current = currentDialog.value;
-    if (!current) return "text-blue-600";
-    if (current.options.type === "error") return "text-red-600";
-    if (current.options.type === "warning") return "text-amber-600";
-    if (current.options.type === "success") return "text-green-600";
-    return "text-blue-600";
+    if (!current) return 'text-blue-600';
+    if (current.options.type === 'error') return 'text-red-600';
+    if (current.options.type === 'warning') return 'text-amber-600';
+    if (current.options.type === 'success') return 'text-green-600';
+    return 'text-blue-600';
 });
 
 // Close the dialog when the shell requests it

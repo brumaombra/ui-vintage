@@ -15,7 +15,7 @@ const supportedFlagLoaders = {
     ru: () => import('./flags/RussianFlag.vue')
 } as const;
 
-type SupportedLanguageCode = keyof typeof supportedFlagLoaders;
+export type SupportedLanguageCode = keyof typeof supportedFlagLoaders;
 const asyncFlagComponentCache = new Map<SupportedLanguageCode, Component>();
 
 // Type guard to ensure a code is one of the supported flag codes
@@ -38,8 +38,10 @@ const getAsyncFlagComponent = (code: SupportedLanguageCode) => {
 };
 
 // Props
-const props = defineProps({
-    code: { type: String, default: 'en' }
+const props = withDefaults(defineProps<{
+    code?: SupportedLanguageCode;
+}>(), {
+    code: 'en'
 });
 
 // Get the appropriate flag component based on the code prop

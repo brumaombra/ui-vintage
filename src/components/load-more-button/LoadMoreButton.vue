@@ -5,19 +5,27 @@ import { ArrowDown01Icon, RefreshIcon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Button } from '../ui/button';
 
-const props = defineProps({
-    busy: { type: Boolean, default: false },
-    text: { type: String, default: '' },
-    loadingText: { type: String, default: '' }
+// Props
+const props = withDefaults(defineProps<{
+    busy?: boolean;
+    text?: string;
+    loadingText?: string;
+}>(), {
+    busy: false,
+    text: '',
+    loadingText: ''
 });
 
-const emits = defineEmits(['load-more']);
+// Emits
+const emits = defineEmits<{
+    'load-more': [];
+}>();
 
 const { t } = useI18n();
-
 const resolvedText = computed(() => props.text || t('uiVintage.buttons.loadMore') || 'Load more');
 const resolvedLoadingText = computed(() => props.loadingText || t('uiVintage.buttons.loading') || 'Loading');
 
+// Handle click event
 const handleClick = () => {
     emits('load-more');
 };
@@ -25,18 +33,14 @@ const handleClick = () => {
 
 <template>
     <div class="flex justify-center">
-        <Button v-if="props.busy"
-            variant="secondary"
-            class="w-full md:w-auto"
-            :disabled="true">
+        <!-- Loading button -->
+        <Button v-if="props.busy" variant="secondary" class="w-full md:w-auto" :disabled="true">
             <HugeiconsIcon :icon="RefreshIcon" class="size-4 animate-spin" />
             {{ resolvedLoadingText }}
         </Button>
 
-        <Button v-else
-            variant="secondary"
-            class="w-full md:w-auto"
-            @click="handleClick">
+        <!-- Load more button -->
+        <Button v-else variant="secondary" class="w-full md:w-auto" @click="handleClick">
             <HugeiconsIcon :icon="ArrowDown01Icon" class="size-4" />
             {{ resolvedText }}
         </Button>

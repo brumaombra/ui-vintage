@@ -1,6 +1,6 @@
-import { h, markRaw, reactive, render } from "vue";
+import { h, markRaw, reactive, render } from 'vue';
 
-export type DialogMessageType = "error" | "success" | "info" | "warning";
+export type DialogMessageType = 'error' | 'success' | 'info' | 'warning';
 export type HugeiconsIconDefinition = readonly (readonly [string, { readonly [key: string]: string | number }])[];
 
 export interface ShowMessageDialogOptions {
@@ -14,7 +14,7 @@ export interface ShowMessageDialogOptions {
 
 interface MessageDialogRequest {
     id: number;
-    options: Omit<ShowMessageDialogOptions, "icon" | "closeButtonIcon"> & {
+    options: Omit<ShowMessageDialogOptions, 'icon' | 'closeButtonIcon'> & {
         icon: HugeiconsIconDefinition | null;
         closeButtonIcon: HugeiconsIconDefinition | null;
     };
@@ -33,7 +33,7 @@ const DIALOG_CLOSE_DURATION_MS = 300;
 let closeTimer: ReturnType<typeof setTimeout> | null = null;
 let messageDialogMountPromise: Promise<void> | null = null;
 
-const MESSAGE_DIALOG_ROOT_ID = "ui-vintage-message-dialog-root";
+const MESSAGE_DIALOG_ROOT_ID = 'ui-vintage-message-dialog-root';
 
 // Shared message dialog state
 export const messageDialogState: MessageDialogState = reactive({
@@ -48,7 +48,7 @@ const markIcon = (icon: HugeiconsIconDefinition | null | undefined) => icon ? ma
 // Mount the dialog once on demand
 const ensureMessageDialogMounted = () => {
     // Skip mounting during SSR
-    if (typeof document === "undefined") {
+    if (typeof document === 'undefined') {
         return Promise.resolve();
     }
 
@@ -66,7 +66,7 @@ const ensureMessageDialogMounted = () => {
     // Start the lazy mount
     messageDialogMountPromise = (async () => {
         // Load the component only when needed
-        const { default: MessageDialog } = await import("./MessageDialog.vue");
+        const { default: MessageDialog } = await import('./MessageDialog.vue');
 
         // Guard against a concurrent mount
         if (document.getElementById(MESSAGE_DIALOG_ROOT_ID)) {
@@ -74,7 +74,7 @@ const ensureMessageDialogMounted = () => {
         }
 
         // Create the host element and render the component
-        const container = document.createElement("div");
+        const container = document.createElement('div');
         container.id = MESSAGE_DIALOG_ROOT_ID;
         document.body.appendChild(container);
         render(h(MessageDialog), container);
@@ -155,10 +155,10 @@ export const showMessageDialog = (options: ShowMessageDialogOptions) => {
         enqueueMessageDialog({
             id: nextMessageDialogId += 1,
             options: {
-                type: options.type ?? "info",
-                title: options.title ?? "",
+                type: options.type ?? 'info',
+                title: options.title ?? '',
                 message: options.message,
-                closeText: options.closeText ?? "",
+                closeText: options.closeText ?? '',
                 icon: markIcon(options.icon),
                 closeButtonIcon: markIcon(options.closeButtonIcon)
             },

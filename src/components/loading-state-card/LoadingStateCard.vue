@@ -5,34 +5,39 @@ import { Loading03Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Card, CardContent } from '../ui/card';
 
+type HugeiconsIconDefinition = readonly (readonly [string, { readonly [key: string]: string | number }])[];
+
 // Props
-const props = defineProps({
-    icon: { type: [Object, Array], default: () => Loading03Icon },
-    title: { type: String, default: '' },
-    description: { type: String, default: '' }
+const props = withDefaults(defineProps<{
+    icon?: HugeiconsIconDefinition;
+    title?: string;
+    description?: string;
+}>(), {
+    icon: () => Loading03Icon,
+    title: '',
+    description: ''
 });
 
 const { t } = useI18n();
-
 const resolvedTitle = computed(() => props.title || t('uiVintage.common.loading.title') || 'Loading...');
 const resolvedDescription = computed(() => props.description || t('uiVintage.common.loading.description') || 'Please wait a moment while we load the content.');
 </script>
 
 <template>
     <Card class="flex flex-col items-center justify-center px-4 py-8 text-center md:py-12">
-        <CardContent class="flex flex-col items-center justify-center !p-0 text-center">
+        <CardContent class="flex flex-col items-center justify-center p-0! text-center">
             <!-- Loading spinner icon -->
-            <div class="flex items-center justify-center text-4xl text-[var(--text-secondary-light)] opacity-60 dark:text-[var(--text-secondary-dark)]">
+            <div class="flex items-center justify-center text-4xl text-(--text-secondary-light) opacity-60 dark:text-(--text-secondary-dark)">
                 <HugeiconsIcon :icon="props.icon" class="size-10 animate-spin" />
             </div>
 
             <!-- Title -->
-            <h3 v-if="resolvedTitle" class="text-sm font-bold text-[var(--text-primary-light)] dark:text-[var(--text-primary-dark)] md:text-lg">
+            <h3 v-if="resolvedTitle" class="text-sm font-bold text-(--text-primary-light) dark:text-(--text-primary-dark) md:text-lg">
                 {{ resolvedTitle }}
             </h3>
 
             <!-- Description -->
-            <p v-if="resolvedDescription" class="max-w-md text-xs text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)] md:text-sm">
+            <p v-if="resolvedDescription" class="max-w-md text-xs text-(--text-secondary-light) dark:text-(--text-secondary-dark) md:text-sm">
                 {{ resolvedDescription }}
             </p>
 

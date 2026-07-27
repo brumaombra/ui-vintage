@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Component, PropType } from 'vue';
+import type { Component } from 'vue';
 import { computed, defineAsyncComponent, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { Tick02Icon } from '@hugeicons/core-free-icons';
@@ -9,6 +9,24 @@ import { Command, CommandGroup, CommandItem, CommandList } from '../ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 
 export type LanguageSelectorCode = string;
+
+// Props
+const props = withDefaults(defineProps<{
+    modelValue?: string;
+    languages?: LanguageSelectorCode[];
+}>(), {
+    modelValue: '',
+    languages: () => ['en', 'it']
+});
+
+// Emits
+const emits = defineEmits<{
+    'update:modelValue': [value: string];
+    select: [value: string];
+}>();
+
+const { locale, t } = useI18n();
+const isOpen = ref(false);
 
 // Single source of truth for supported language codes, labels, and flag loaders
 const supportedLanguages = [
@@ -50,24 +68,6 @@ const getAsyncFlagComponent = (code: SupportedLanguageCode) => {
     asyncFlagComponentCache.set(code, asyncComponent);
     return asyncComponent;
 };
-
-// Props
-const props = defineProps({
-    modelValue: { type: String, default: '' },
-    languages: {
-        type: Array as PropType<LanguageSelectorCode[]>,
-        default: () => ['en', 'it']
-    }
-});
-
-// Emits
-const emits = defineEmits<{
-    'update:modelValue': [value: string];
-    select: [value: string];
-}>();
-
-const { locale, t } = useI18n();
-const isOpen = ref(false);
 
 // Build localized language labels from the provided language codes
 const languageDisplayNames = computed(() => {
@@ -137,7 +137,7 @@ const handleSelectLanguage = (language: string) => {
         </PopoverTrigger>
 
         <!-- Popover content with language options -->
-        <PopoverContent side="bottom" align="end" :side-offset="8" class="w-44 !p-0">
+        <PopoverContent side="bottom" align="end" :side-offset="8" class="w-44 p-0!">
             <Command :model-value="props.modelValue">
                 <CommandList>
                     <CommandGroup :heading="t('uiVintage.language.title')">
