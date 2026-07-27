@@ -1,13 +1,11 @@
 <script setup lang="ts">
-import type { HTMLAttributes } from "vue";
-import { cn } from "../../../lib/utils";
-
-interface LandingContentProps {
-    class?: HTMLAttributes["class"];
-}
+import type { HTMLAttributes } from 'vue';
+import { cn } from '../../../lib/utils';
 
 // Props
-const props = defineProps<LandingContentProps>();
+const props = defineProps<{
+    class?: HTMLAttributes['class'];
+}>();
 </script>
 
 <template>

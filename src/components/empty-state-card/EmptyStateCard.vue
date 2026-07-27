@@ -5,22 +5,33 @@ import { PackageIcon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Card, CardContent } from '../ui/card';
 
+type HugeiconsIconDefinition = readonly (readonly [string, { readonly [key: string]: string | number }])[];
+
 // Props
-const props = defineProps({
-    icon: { type: [Object, Array], default: () => PackageIcon },
-    title: { type: String, default: '' },
-    description: { type: String, default: '' },
-    titleKey: { type: String, default: '' },
-    descriptionKey: { type: String, default: '' }
+const props = withDefaults(defineProps<{
+    icon?: HugeiconsIconDefinition;
+    title?: string;
+    description?: string;
+    titleKey?: string;
+    descriptionKey?: string;
+}>(), {
+    icon: () => PackageIcon,
+    title: '',
+    description: '',
+    titleKey: '',
+    descriptionKey: ''
 });
 
 const { t } = useI18n();
-
 const hasCustomCopy = computed(() => Boolean(props.title || props.description || props.titleKey || props.descriptionKey));
+
+// Title
 const resolvedTitle = computed(() => props.title
     || (props.titleKey ? t(props.titleKey) : '')
     || (!hasCustomCopy.value ? t('uiVintage.common.empty.title') : '')
     || (!hasCustomCopy.value ? 'Nothing here yet' : ''));
+
+// Description
 const resolvedDescription = computed(() => props.description
     || (props.descriptionKey ? t(props.descriptionKey) : '')
     || (!hasCustomCopy.value ? t('uiVintage.common.empty.description') : '')
@@ -29,19 +40,19 @@ const resolvedDescription = computed(() => props.description
 
 <template>
     <Card class="flex flex-col items-center justify-center px-4 py-8 text-center md:py-12">
-        <CardContent class="flex flex-col items-center justify-center !p-0 text-center">
+        <CardContent class="flex flex-col items-center justify-center p-0! text-center">
             <!-- Icon -->
-            <div class="flex items-center justify-center text-4xl text-[var(--text-secondary-light)] opacity-40 dark:text-[var(--text-secondary-dark)]">
+            <div class="flex items-center justify-center text-4xl text-(--text-secondary-light) opacity-40 dark:text-(--text-secondary-dark)">
                 <HugeiconsIcon :icon="props.icon" class="size-10" />
             </div>
 
             <!-- Title -->
-            <h3 v-if="resolvedTitle" class="text-sm font-bold text-[var(--text-primary-light)] dark:text-[var(--text-primary-dark)] md:text-lg">
+            <h3 v-if="resolvedTitle" class="text-sm font-bold text-(--text-primary-light) dark:text-(--text-primary-dark) md:text-lg">
                 {{ resolvedTitle }}
             </h3>
 
             <!-- Description -->
-            <p v-if="resolvedDescription" class="max-w-md text-xs text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)] md:text-sm">
+            <p v-if="resolvedDescription" class="max-w-md text-xs text-(--text-secondary-light) dark:text-(--text-secondary-dark) md:text-sm">
                 {{ resolvedDescription }}
             </p>
 

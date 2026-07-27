@@ -1,2 +1,2 @@
-export { default } from "./LandingNavbar.vue";
-export { default as LandingNavbar } from "./LandingNavbar.vue";
+export { default } from './LandingNavbar.vue';
+export { default as LandingNavbar } from './LandingNavbar.vue';

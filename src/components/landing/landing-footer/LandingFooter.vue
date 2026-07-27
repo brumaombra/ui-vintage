@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { NuxtImg } from "#components";
-import type { Component, HTMLAttributes } from "vue";
-import { FavouriteIcon } from "@hugeicons/core-free-icons";
-import { HugeiconsIcon } from "@hugeicons/vue";
-import { computed } from "vue";
-import { useI18n } from "vue-i18n";
-import { cn } from "../../../lib/utils";
+import { NuxtImg } from '#components';
+import type { Component, HTMLAttributes } from 'vue';
+import { FavouriteIcon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/vue';
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { cn } from '../../../lib/utils';
 
 export interface LandingFooterLink {
     id: string;
@@ -21,7 +21,8 @@ export interface LandingFooterSection {
     links: LandingFooterLink[];
 }
 
-interface LandingFooterProps {
+// Props
+const props = withDefaults(defineProps<{
     appName: string;
     appLogo?: string;
     appLinkTo?: string;
@@ -32,21 +33,18 @@ interface LandingFooterProps {
     authorLink?: string;
     year?: number;
     showBottomBar?: boolean;
-    class?: HTMLAttributes["class"];
-    containerClass?: HTMLAttributes["class"];
-    brandClass?: HTMLAttributes["class"];
-    sectionsClass?: HTMLAttributes["class"];
-    bottomBarClass?: HTMLAttributes["class"];
-}
-
-// Props
-const props = withDefaults(defineProps<LandingFooterProps>(), {
-    appLinkTo: "/",
-    appDescription: "",
+    class?: HTMLAttributes['class'];
+    containerClass?: HTMLAttributes['class'];
+    brandClass?: HTMLAttributes['class'];
+    sectionsClass?: HTMLAttributes['class'];
+    bottomBarClass?: HTMLAttributes['class'];
+}>(), {
+    appLinkTo: '/',
+    appDescription: '',
     sections: () => [],
-    linkComponent: "a",
-    authorName: "",
-    authorLink: "",
+    linkComponent: 'a',
+    authorName: '',
+    authorLink: '',
     year: () => new Date().getFullYear(),
     showBottomBar: true
 });
@@ -56,19 +54,19 @@ const hasSingleSection = computed(() => props.sections.length === 1);
 
 // Get link props based on the type of link component and whether the link should open in a new tab
 const getLinkProps = (link: LandingFooterLink) => {
-    const sharedProps = link.newTab ? { target: "_blank", rel: "noopener noreferrer" } : {};
+    const sharedProps = link.newTab ? { target: '_blank', rel: 'noopener noreferrer' } : {};
 
     // If the link component is an anchor, use href. Otherwise, use to for router links.
-    if (props.linkComponent === "a") {
+    if (props.linkComponent === 'a') {
         return {
-            href: link.href ?? "#",
+            href: link.href ?? '#',
             ...sharedProps
         };
     }
 
     // For non-anchor link components, assume they use a "to" prop (like Vue Router's <RouterLink>).
     return {
-        to: link.to ?? link.href ?? "/",
+        to: link.to ?? link.href ?? '/',
         ...sharedProps
     };
 };
@@ -135,14 +133,14 @@ const getLinkProps = (link: LandingFooterLink) => {
             <div v-if="props.showBottomBar" :class="cn('mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 text-xs md:text-sm text-muted-foreground md:flex-row', props.bottomBarClass)">
                 <!-- Copyright -->
                 <div>
-                    &copy; {{ props.year }} {{ props.appName }}. {{ t("uiVintage.footer.allRightsReserved") }}
+                    &copy; {{ props.year }} {{ props.appName }}. {{ t('uiVintage.footer.allRightsReserved') }}
                 </div>
 
                 <!-- Author -->
                 <div v-if="props.authorName && props.authorLink" class="flex flex-wrap items-center justify-center gap-1.5 md:justify-end">
-                    <span>{{ t("uiVintage.footer.madeWith") }}</span>
+                    <span>{{ t('uiVintage.footer.madeWith') }}</span>
                     <HugeiconsIcon :icon="FavouriteIcon" class="size-4 shrink-0 text-red-700 dark:text-red-400" />
-                    <span>{{ t("uiVintage.footer.by") }}</span>
+                    <span>{{ t('uiVintage.footer.by') }}</span>
                     <a :href="props.authorLink" target="_blank" rel="noopener noreferrer" class="font-semibold text-foreground hover:underline">
                         {{ props.authorName }}
                     </a>

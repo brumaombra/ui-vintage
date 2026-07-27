@@ -1,24 +1,22 @@
 <script setup lang="ts">
-import { NuxtImg } from "#components";
-import type { HTMLAttributes } from "vue";
-import { cn } from "../../../lib/utils";
+import { NuxtImg } from '#components';
+import type { HTMLAttributes } from 'vue';
+import { cn } from '../../../lib/utils';
 
-interface LandingNavbarProps {
+// Props
+const props = withDefaults(defineProps<{
     appName?: string;
     appLogo?: string;
     appLinkTo?: string;
-    logoClass?: HTMLAttributes["class"];
-    class?: HTMLAttributes["class"];
-    containerClass?: HTMLAttributes["class"];
-    leftClass?: HTMLAttributes["class"];
-    rightClass?: HTMLAttributes["class"];
-}
-
-// Props
-const props = withDefaults(defineProps<LandingNavbarProps>(), {
-    appName: "",
-    appLogo: "",
-    appLinkTo: "/"
+    logoClass?: HTMLAttributes['class'];
+    class?: HTMLAttributes['class'];
+    containerClass?: HTMLAttributes['class'];
+    leftClass?: HTMLAttributes['class'];
+    rightClass?: HTMLAttributes['class'];
+}>(), {
+    appName: '',
+    appLogo: '',
+    appLinkTo: '/'
 });
 </script>
 

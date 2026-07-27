@@ -1,19 +1,17 @@
 <script setup lang="ts">
-import type { HTMLAttributes } from "vue";
-import { computed, useSlots } from "vue";
-import BackgroundGrid from "../../background-grid/BackgroundGrid.vue";
-import { cn } from "../../../lib/utils";
-
-interface LandingShellProps {
-    showBackground?: boolean;
-    rootClass?: HTMLAttributes["class"];
-    navbarClass?: HTMLAttributes["class"];
-    mainClass?: HTMLAttributes["class"];
-    footerClass?: HTMLAttributes["class"];
-}
+import type { HTMLAttributes } from 'vue';
+import { computed, useSlots } from 'vue';
+import BackgroundGrid from '../../background-grid/BackgroundGrid.vue';
+import { cn } from '../../../lib/utils';
 
 // Props
-const props = withDefaults(defineProps<LandingShellProps>(), {
+const props = withDefaults(defineProps<{
+    showBackground?: boolean;
+    rootClass?: HTMLAttributes['class'];
+    navbarClass?: HTMLAttributes['class'];
+    mainClass?: HTMLAttributes['class'];
+    footerClass?: HTMLAttributes['class'];
+}>(), {
     showBackground: true
 });
 
