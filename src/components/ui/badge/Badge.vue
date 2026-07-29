@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import type { HTMLAttributes } from "vue"
-import { HugeiconsIcon } from "@hugeicons/vue"
-import { getSurfaceToneClasses, type ToneColor } from "../../../lib/color-tokens"
-import { cn } from "../../../lib/utils"
-import type { HugeiconsIconDefinition } from "../../../lib/common-types"
+import type { HTMLAttributes } from 'vue';
+import { HugeiconsIcon } from '@hugeicons/vue';
+import { getSurfaceToneClasses, type ToneColor } from '../../../lib/color-tokens';
+import { cn } from '../../../lib/utils';
+import type { HugeiconsIconDefinition } from '../../../lib/common-types';
 
 // Props
 const props = withDefaults(defineProps<{
-    text: string
-    icon?: HugeiconsIconDefinition | null
-    color?: ToneColor
-    class?: HTMLAttributes["class"]
+    text: string;
+    icon?: HugeiconsIconDefinition | null;
+    color?: ToneColor;
+    class?: HTMLAttributes['class'];
 }>(), {
     icon: null,
-    color: "gray"
-})
+    color: 'gray'
+});
 </script>
 
 <template>

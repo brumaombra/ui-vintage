@@ -1,20 +1,18 @@
 <script setup lang="ts">
-import type { HTMLAttributes } from "vue";
-import { ref } from "vue";
-import { ArrowDown01Icon } from "@hugeicons/core-free-icons";
-import { HugeiconsIcon } from "@hugeicons/vue";
-import { Card, CardContent } from "@brumaombra/ui-vintage/card";
-import type { HugeiconsIconDefinition } from "../../../lib/common-types";
+import type { HTMLAttributes } from 'vue';
+import { ref } from 'vue';
+import { ArrowDown01Icon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/vue';
+import { Card, CardContent } from '@brumaombra/ui-vintage/card';
+import type { HugeiconsIconDefinition } from '../../../lib/common-types';
 
-interface AccordionProps {
+// Props
+const props = withDefaults(defineProps<{
     title: string;
     initiallyExpanded?: boolean;
     icon?: HugeiconsIconDefinition | null;
-    iconClass?: HTMLAttributes["class"];
-}
-
-// Props
-const props = withDefaults(defineProps<AccordionProps>(), {
+    iconClass?: HTMLAttributes['class'];
+}>(), {
     initiallyExpanded: false
 });
 
