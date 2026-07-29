@@ -1,32 +1,35 @@
-<script lang="ts" setup>
-import type { CalendarNextProps } from "reka-ui"
-import type { HTMLAttributes } from "vue"
-import { reactiveOmit } from "@vueuse/core"
-import { ArrowRight01Icon } from "@hugeicons/core-free-icons"
-import { HugeiconsIcon } from "@hugeicons/vue"
-import { CalendarNext, useForwardProps } from "reka-ui"
-import { cn } from "../../../lib/utils"
-import { buttonVariants } from '../button'
+<script setup lang="ts">
+import type { CalendarNextProps } from 'reka-ui';
+import type { HTMLAttributes } from 'vue';
+import { reactiveOmit } from '@vueuse/core';
+import { ArrowRight01Icon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/vue';
+import { CalendarNext, useForwardProps } from 'reka-ui';
+import { cn } from '../../../lib/utils';
+import { buttonVariants } from '../button';
 
-const props = defineProps<CalendarNextProps & { class?: HTMLAttributes["class"] }>()
+// Props
+const props = defineProps<CalendarNextProps & { class?: HTMLAttributes['class'] }>();
 
-const delegatedProps = reactiveOmit(props, "class")
+const delegatedProps = reactiveOmit(props, 'class');
 
-const forwardedProps = useForwardProps(delegatedProps)
+const forwardedProps = useForwardProps(delegatedProps);
 </script>
 
 <template>
-  <CalendarNext
-    data-slot="calendar-next-button"
-    :class="cn(
-      buttonVariants({ variant: 'secondary' }),
-      'size-7 min-h-10 bg-transparent p-0 text-(--text-secondary-light) hover:text-(--text-primary-light) dark:text-(--text-secondary-dark) dark:hover:text-(--text-primary-dark)',
-      props.class,
-    )"
-    v-bind="forwardedProps"
-  >
-    <slot>
-      <HugeiconsIcon :icon="ArrowRight01Icon" class="size-4" />
-    </slot>
-  </CalendarNext>
+    <CalendarNext
+        data-slot="calendar-next-button"
+        :class="
+            cn(
+                buttonVariants({ variant: 'secondary' }),
+                'size-7 min-h-10 bg-transparent p-0 text-(--text-secondary-light) hover:text-(--text-primary-light) dark:text-(--text-secondary-dark) dark:hover:text-(--text-primary-dark)',
+                props.class,
+            )
+        "
+        v-bind="forwardedProps"
+    >
+        <slot>
+            <HugeiconsIcon :icon="ArrowRight01Icon" class="size-4" />
+        </slot>
+    </CalendarNext>
 </template>

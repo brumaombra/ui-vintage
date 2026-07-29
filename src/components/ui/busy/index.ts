@@ -1,1 +1,1 @@
-export { default as Busy } from "./Busy.vue"
+export { default as Busy } from './Busy.vue';

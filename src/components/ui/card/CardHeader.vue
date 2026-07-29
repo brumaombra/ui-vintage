@@ -1,14 +1,19 @@
 <script setup lang="ts">
-import type { HTMLAttributes } from "vue"
-import { cn } from "../../../lib/utils"
+import type { HTMLAttributes } from 'vue';
+import { cn } from '../../../lib/utils';
 
+// Props
 const props = defineProps<{
-  class?: HTMLAttributes["class"]
-}>()
+    class?: HTMLAttributes['class'];
+}>();
 </script>
 
 <template>
-  <div data-slot="card-header" :class="cn('@container/card-header grid auto-rows-min items-start px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6 gap-2', props.class)">
-    <slot />
-  </div>
+    <div data-slot="card-header" :class="cn(
+        '@container/card-header grid auto-rows-min items-start px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6 gap-2',
+        props.class,
+    )
+        ">
+        <slot />
+    </div>
 </template>
