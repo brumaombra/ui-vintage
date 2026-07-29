@@ -14,7 +14,7 @@ const props = defineProps<{
         'mb-3 font-semibold',
         'data-[variant=legend]:text-base',
         'data-[variant=label]:text-sm',
-        props.class,
+        props.class
     )
         ">
         <slot />

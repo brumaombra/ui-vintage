@@ -18,8 +18,8 @@ const content = computed(() => {
                 const message =
                     typeof error === 'string' ? error : error?.message;
                 return [message, error];
-            }),
-        ).values(),
+            })
+        ).values()
     ];
 
     if (uniqueErrors.length === 1 && uniqueErrors[0]) {
@@ -29,7 +29,7 @@ const content = computed(() => {
     }
 
     return uniqueErrors.map((error) =>
-        typeof error === 'string' ? error : error?.message,
+        typeof error === 'string' ? error : error?.message
     );
 });
 </script>

@@ -11,7 +11,7 @@ const props = defineProps<{
 <template>
     <div data-slot="field-content" :class="cn(
         'group/field-content flex flex-1 flex-col gap-1.5 leading-snug',
-        props.class,
+        props.class
     )
         ">
         <slot />
