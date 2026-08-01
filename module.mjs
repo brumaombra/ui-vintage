@@ -69,7 +69,7 @@ export default defineNuxtModule({
 
         // Add the plugin to merge the library translations into the app i18n instance at runtime
         addPlugin({
-            src: resolver.resolve('src/runtime/ui-vintage-i18n-plugin.js')
+            src: resolver.resolve('src/runtime/ui-vintage-i18n-plugin.ts')
         });
     }
 });

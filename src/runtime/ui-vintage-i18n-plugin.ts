@@ -1,21 +1,39 @@
 import { defineNuxtPlugin } from 'nuxt/app';
+import type { NuxtApp } from 'nuxt/app';
 import { uiVintageMessages } from '../lib/i18n';
 
+type MessageComposer = {
+    mergeLocaleMessage: (locale: string, messages: unknown) => void;
+};
+
+type I18nInstance = {
+    mergeLocaleMessage?: unknown;
+    global?: {
+        mergeLocaleMessage?: unknown;
+    };
+};
+
+type NuxtAppWithI18n = NuxtApp & {
+    $i18n?: unknown;
+};
+
 // Resolve the active i18n composer from either the Nuxt app or the Vue I18n instance
-const resolveMessageComposer = i18n => {
+const resolveMessageComposer = (i18n: unknown): MessageComposer | null => {
     // If no i18n instance is provided, return null
-    if (!i18n) {
+    if (!i18n || typeof i18n !== 'object') {
         return null;
     }
 
+    const instance = i18n as I18nInstance;
+
     // Check if the provided i18n instance has the mergeLocaleMessage method (Vue I18n 9+ composer API)
-    if (typeof i18n.mergeLocaleMessage === 'function') {
-        return i18n;
+    if (typeof instance.mergeLocaleMessage === 'function') {
+        return i18n as MessageComposer;
     }
 
     // Check if the provided i18n instance has a global property with the mergeLocaleMessage method (Vue I18n 9+ global API)
-    if (i18n.global && typeof i18n.global.mergeLocaleMessage === 'function') {
-        return i18n.global;
+    if (instance.global && typeof instance.global.mergeLocaleMessage === 'function') {
+        return instance.global as MessageComposer;
     }
 
     // If neither check succeeded, return null
@@ -23,9 +41,13 @@ const resolveMessageComposer = i18n => {
 };
 
 // Merge the library locale messages into the app composer
-const applyUiVintageMessages = nuxtApp => {
+const applyUiVintageMessages = (nuxtApp: NuxtApp): void => {
     // Attempt to resolve the i18n composer from the Nuxt app or Vue I18n instance
-    const composer = resolveMessageComposer(nuxtApp.$i18n || nuxtApp.vueApp?.config?.globalProperties?.$i18n);
+    const app = nuxtApp as NuxtAppWithI18n;
+    const globalProperties = app.vueApp.config.globalProperties as {
+        $i18n?: unknown;
+    };
+    const composer = resolveMessageComposer(app.$i18n || globalProperties.$i18n);
     if (!composer) {
         return;
     }
