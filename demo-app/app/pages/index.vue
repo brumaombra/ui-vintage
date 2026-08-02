@@ -1,12 +1,9 @@
 <script setup>
 import { ref } from 'vue';
-import { BellDotIcon, Cancel01Icon, CheckmarkCircle02Icon, DashboardSquare01Icon, InformationCircleIcon, RefreshIcon, SaveIcon, SlidersHorizontalIcon } from '@hugeicons/core-free-icons';
+import { Cancel01Icon, CheckmarkCircle02Icon, InformationCircleIcon, RefreshIcon, SaveIcon } from '@hugeicons/core-free-icons';
 import { setBusy } from '@brumaombra/ui-vintage/busy-indicator';
-import { Button } from '@brumaombra/ui-vintage/button';
 import { showConfirmDialog } from '@brumaombra/ui-vintage/confirm-dialog';
-import { DashboardShell } from '@brumaombra/ui-vintage/dashboard-shell';
 import { showMessageDialog } from '@brumaombra/ui-vintage/message-dialog';
-import { TooltipProvider } from '@brumaombra/ui-vintage/tooltip';
 import CurrentStateCard from '../components/CurrentStateCard.vue';
 import BadgePreviewCard from '../components/BadgePreviewCard.vue';
 import DialogPreviewCard from '../components/DialogPreviewCard.vue';
@@ -20,18 +17,6 @@ import SelectContentCard from '../components/SelectContentCard.vue';
 import SurfaceVariantsCard from '../components/SurfaceVariantsCard.vue';
 import DemoToolbar from '../components/DemoToolbar.vue';
 
-// Sidebar navigation structure
-const sidebarSections = [{
-    id: 'overview',
-    label: 'Overview',
-    items: [
-        { id: 'components', label: 'Components', description: 'Interactive primitives and surfaces', icon: DashboardSquare01Icon, active: true },
-        { id: 'feedback', label: 'Feedback', description: 'Dialogs, alerts, and busy states', icon: BellDotIcon },
-        { id: 'controls', label: 'Controls', description: 'Inputs, selects, sliders, and toggles', icon: SlidersHorizontalIcon }
-    ]
-}];
-
-// Various state variables
 const name = ref('Satoshi Nakamoto');
 const network = ref('bitcoin');
 const alertsEnabled = ref(true);
@@ -91,85 +76,70 @@ const handleInfoDemo = async () => {
         closeButtonIcon: Cancel01Icon
     });
 };
+
+// Define page metadata
+definePageMeta({
+    layout: 'dashboard'
+});
 </script>
 
 <template>
-    <TooltipProvider>
-        <!-- Main dashboard shell container with a topbar and sidebar -->
-        <DashboardShell title="Theme Vintage Demo" description="A compact showcase of the current component library." :sidebar-sections="sidebarSections">
-            <!-- Custom sidebar header slot -->
-            <template #sidebar-header>
-                <div class="hidden items-center gap-2 sm:flex">
-                    <!-- App name -->
-                    <span class="rounded border border-border bg-card px-2.5 py-1 text-[11px] font-semibold text-muted-foreground uppercase tracking-[0.16em]">
-                        Demo
-                    </span>
+    <!-- Main content area -->
+    <div class="grid items-start gap-4 lg:grid-cols-2 xl:grid-cols-3">
+        <!-- Demo controls card spanning multiple columns -->
+        <div class="lg:col-span-2 xl:col-span-3">
+            <DemoToolbar />
+        </div>
 
-                    <!-- Quick intro button -->
-                    <Button variant="secondary" size="sm" @click="handleInfoDemo">
-                        Quick Intro
-                    </Button>
-                </div>
-            </template>
+        <!-- Primary actions card with event handlers for demo interactions -->
+        <PrimaryActionsCard
+            class="lg:col-span-2 xl:col-span-2"
+            @confirm-demo="handleConfirmDemo"
+            @busy-demo="handleBusyDemo"
+            @info-demo="handleInfoDemo"
+        />
 
-            <!-- Main content area -->
-            <div class="grid gap-4 lg:grid-cols-2 xl:grid-cols-3">
-                <!-- Demo controls card spanning multiple columns -->
-                <div class="lg:col-span-2 xl:col-span-3">
-                    <DemoToolbar />
-                </div>
+        <!-- Current state card with values from the live demo controls -->
+        <CurrentStateCard
+            :name="name"
+            :network="network"
+            :alerts-enabled="alertsEnabled"
+        />
 
-                <!-- Primary actions card with event handlers for demo interactions -->
-                <PrimaryActionsCard
-                    class="lg:col-span-2 xl:col-span-2"
-                    @confirm-demo="handleConfirmDemo"
-                    @busy-demo="handleBusyDemo"
-                    @info-demo="handleInfoDemo"
-                />
+        <!-- Accordion preview card -->
+        <AccordionPreviewCard />
 
-                <!-- Input states card with two-way bindings for form controls -->
-                <InputStatesCard
-                    :name="name"
-                    :network="network"
-                    :alerts-enabled="alertsEnabled"
-                    :confidence="confidence"
-                    @update:name="name = $event"
-                    @update:network="network = $event"
-                    @update:alerts-enabled="alertsEnabled = $event"
-                    @update:confidence="confidence = $event"
-                />
+        <!-- Input states card with two-way bindings for form controls -->
+        <InputStatesCard
+            :name="name"
+            :network="network"
+            :alerts-enabled="alertsEnabled"
+            :confidence="confidence"
+            @update:name="name = $event"
+            @update:network="network = $event"
+            @update:alerts-enabled="alertsEnabled = $event"
+            @update:confidence="confidence = $event"
+        />
 
-                <!-- Select content card -->
-                <SelectContentCard />
+        <!-- Select content card -->
+        <SelectContentCard />
 
-                <!-- Accordion preview card -->
-                <AccordionPreviewCard />
+        <!-- Tabs preview card -->
+        <TabsPreviewCard />
 
-                <!-- Tabs preview card -->
-                <TabsPreviewCard />
+        <!-- Surface variants card -->
+        <SurfaceVariantsCard />
 
-                <!-- Surface variants card -->
-                <SurfaceVariantsCard />
+        <!-- Badge preview card -->
+        <BadgePreviewCard />
 
-                <!-- Badge preview card -->
-                <BadgePreviewCard />
+        <!-- Dialog preview card -->
+        <DialogPreviewCard />
 
-                <!-- Dialog preview card -->
-                <DialogPreviewCard />
+        <!-- Loading preview card -->
+        <LoadingPreviewCard />
 
-                <!-- Loading preview card -->
-                <LoadingPreviewCard />
-
-                <!-- Message toast preview card -->
-                <MessageToastPreviewCard />
-
-                <!-- Current state card -->
-                <CurrentStateCard
-                    :name="name"
-                    :network="network"
-                    :alerts-enabled="alertsEnabled"
-                />
-            </div>
-        </DashboardShell>
-    </TooltipProvider>
+        <!-- Message toast preview card -->
+        <MessageToastPreviewCard />
+    </div>
 </template>
