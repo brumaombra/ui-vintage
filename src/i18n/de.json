@@ -37,6 +37,11 @@
             "title": "Sprache wahlen",
             "ariaLabel": "Sprachauswahl"
         },
+        "terminal": {
+            "title": "Terminal",
+            "copy": "Befehle kopieren",
+            "copied": "Befehle kopiert"
+        },
         "footer": {
             "madeWith": "Gemacht mit",
             "by": "von",

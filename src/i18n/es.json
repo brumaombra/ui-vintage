@@ -37,6 +37,11 @@
             "title": "Elegir idioma",
             "ariaLabel": "Selector de idioma"
         },
+        "terminal": {
+            "title": "Terminal",
+            "copy": "Copiar comandos",
+            "copied": "Comandos copiados"
+        },
         "footer": {
             "madeWith": "Hecho con",
             "by": "por",

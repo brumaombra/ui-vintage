@@ -59,6 +59,15 @@ items:
 ---
 ::
 
+::Terminal
+---
+title: Install the project
+commands:
+  - npm install
+  - npm run dev
+---
+::
+
 ::BlogTable
 ---
 highlightCol: 1

@@ -37,6 +37,11 @@
             "title": "Scegli lingua",
             "ariaLabel": "Selettore lingua"
         },
+        "terminal": {
+            "title": "Terminale",
+            "copy": "Copia comandi",
+            "copied": "Comandi copiati"
+        },
         "footer": {
             "madeWith": "Fatto con",
             "by": "da",

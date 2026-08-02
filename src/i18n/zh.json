@@ -37,6 +37,11 @@
             "title": "选择语言",
             "ariaLabel": "语言选择器"
         },
+        "terminal": {
+            "title": "终端",
+            "copy": "复制命令",
+            "copied": "命令已复制"
+        },
         "footer": {
             "madeWith": "用",
             "by": "由",

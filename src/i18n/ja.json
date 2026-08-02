@@ -37,6 +37,11 @@
             "title": "言語を選択",
             "ariaLabel": "言語セレクター"
         },
+        "terminal": {
+            "title": "ターミナル",
+            "copy": "コマンドをコピー",
+            "copied": "コマンドをコピーしました"
+        },
         "footer": {
             "madeWith": "愛を込めて",
             "by": "by",
