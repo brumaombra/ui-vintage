@@ -125,12 +125,12 @@ definePageMeta({
                 </NuxtLinkLocale>
 
                 <!-- Title -->
-                <h1 class="text-2xl sm:!text-3xl md:!text-4xl font-bold tracking-tight text-[var(--text-primary-light)] dark:text-[var(--text-primary-dark)] leading-tight mb-6">
+                <h1 class="text-2xl sm:text-3xl! md:text-4xl! font-bold tracking-tight text-(--text-primary-light) dark:text-(--text-primary-dark) leading-tight mb-6">
                     {{ post.title }}
                 </h1>
 
                 <!-- Featured image -->
-                <div v-if="post.image" class="relative w-full rounded-[4px] overflow-hidden aspect-video mb-6">
+                <div v-if="post.image" class="relative w-full rounded-sm overflow-hidden aspect-video mb-6">
                     <NuxtImg :src="post.image" :alt="post.title" format="avif" quality="50" :sizes="{ 480: '480px', 1536: '896px' }" loading="eager" fetchpriority="high" preload class="w-full h-full object-cover" />
                 </div>
             </header>
