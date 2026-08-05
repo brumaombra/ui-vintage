@@ -30,9 +30,9 @@ const hasStructuredSlots = computed(() => {
         <!-- If structured slots are provided, render them -->
         <template v-if="hasStructuredSlots">
             <!-- Navbar -->
-            <header :class="cn('relative z-10', props.navbarClass)">
+            <div :class="cn('contents', props.navbarClass)">
                 <slot name="navbar" />
-            </header>
+            </div>
 
             <!-- Main content -->
             <main :class="cn('relative z-10 flex-1', props.mainClass)">

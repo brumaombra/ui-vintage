@@ -21,7 +21,7 @@ const props = withDefaults(defineProps<{
 </script>
 
 <template>
-    <header :class="cn('z-30 flex h-20 w-full flex-wrap sm:flex-nowrap sm:justify-start', props.class)">
+    <header :class="cn('sticky top-0 z-30 flex h-20 w-full flex-wrap border-b border-transparent bg-transparent text-card-foreground landing-navbar-sticky sm:flex-nowrap sm:justify-start', props.class)">
         <nav :class="cn('mx-auto flex max-w-6xl basis-full items-center justify-between px-3 sm:px-6 lg:px-8', props.containerClass)">
             <!-- Left-aligned content -->
             <div :class="cn('flex items-center', props.leftClass)">
@@ -45,3 +45,30 @@ const props = withDefaults(defineProps<{
         </nav>
     </header>
 </template>
+
+<style scoped>
+.landing-navbar-sticky {
+    animation: landing-navbar-scroll linear both;
+    animation-range: 0 160px;
+    animation-timeline: scroll(root);
+}
+
+@keyframes landing-navbar-scroll {
+    from {
+        background-color: transparent;
+        border-bottom-color: transparent;
+    }
+
+    to {
+        background-color: var(--card);
+        border-bottom-color: var(--border);
+    }
+}
+
+@supports not (animation-timeline: scroll()) {
+    .landing-navbar-sticky {
+        border-bottom-color: var(--border);
+        background-color: var(--card);
+    }
+}
+</style>

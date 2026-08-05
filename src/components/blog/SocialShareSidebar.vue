@@ -53,42 +53,44 @@ const socialPlatforms = computed(() => {
 </script>
 
 <template>
-    <!-- Desktop sidebar on the right -->
-    <div class="fixed right-[calc(50%-600px)] top-35 z-10 hidden xl:block">
-        <Card class="p-5! flex flex-col space-y-4 items-center">
-            <CardContent class="p-0! gap-4 items-center">
-                <!-- Share icon -->
-                <HugeiconsIcon :icon="Share08Icon" class="size-5 text-(--text-secondary-light) dark:text-(--text-secondary-dark) mb-2" />
+    <Teleport to="body">
+        <!-- Desktop sidebar on the right -->
+        <div class="fixed right-[calc(50%-600px)] top-35 z-20 hidden xl:block">
+            <Card class="p-5! flex flex-col space-y-4 items-center">
+                <CardContent class="p-0! gap-4 items-center">
+                    <!-- Share icon -->
+                    <HugeiconsIcon :icon="Share08Icon" class="size-5 text-(--text-secondary-light) dark:text-(--text-secondary-dark) mb-2" />
 
-                <!-- Social share links (desktop) -->
-                <template v-for="platform in socialPlatforms" :key="platform.name">
-                    <NuxtLink :to="platform.url"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        :aria-label="platform.label"
-                        :class="['w-10 h-10 rounded flex items-center justify-center text-white transition-all duration-200 hover:opacity-80 hover:scale-105', platform.color]">
-                        <HugeiconsIcon :icon="platform.icon" class="size-4" />
-                    </NuxtLink>
-                </template>
-            </CardContent>
-        </Card>
-    </div>
+                    <!-- Social share links (desktop) -->
+                    <template v-for="platform in socialPlatforms" :key="platform.name">
+                        <NuxtLink :to="platform.url"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            :aria-label="platform.label"
+                            :class="['w-10 h-10 rounded flex items-center justify-center text-white transition-all duration-200 hover:opacity-80 hover:scale-105', platform.color]">
+                            <HugeiconsIcon :icon="platform.icon" class="size-4" />
+                        </NuxtLink>
+                    </template>
+                </CardContent>
+            </Card>
+        </div>
 
-    <!-- Mobile view (floating bar at bottom) -->
-    <div class="fixed bottom-4 left-1/2 z-10 -translate-x-1/2 xl:hidden">
-        <Card class="p-3! w-fit">
-            <CardContent class="flex-row! p-0! items-center justify-center gap-3">
-                <!-- Social share links (mobile) -->
-                <template v-for="platform in socialPlatforms" :key="platform.name">
-                    <NuxtLink :to="platform.url"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        :aria-label="platform.label"
-                        :class="['w-10 h-10 rounded flex items-center justify-center text-white transition-all duration-200 hover:opacity-80 hover:scale-105', platform.color]">
-                        <HugeiconsIcon :icon="platform.icon" class="size-4" />
-                    </NuxtLink>
-                </template>
-            </CardContent>
-        </Card>
-    </div>
+        <!-- Mobile view (floating bar at bottom) -->
+        <div class="fixed bottom-4 left-1/2 z-20 -translate-x-1/2 xl:hidden">
+            <Card class="p-3! w-fit">
+                <CardContent class="flex-row! p-0! items-center justify-center gap-3">
+                    <!-- Social share links (mobile) -->
+                    <template v-for="platform in socialPlatforms" :key="platform.name">
+                        <NuxtLink :to="platform.url"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            :aria-label="platform.label"
+                            :class="['w-10 h-10 rounded flex items-center justify-center text-white transition-all duration-200 hover:opacity-80 hover:scale-105', platform.color]">
+                            <HugeiconsIcon :icon="platform.icon" class="size-4" />
+                        </NuxtLink>
+                    </template>
+                </CardContent>
+            </Card>
+        </div>
+    </Teleport>
 </template>
