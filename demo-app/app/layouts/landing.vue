@@ -7,6 +7,10 @@ import { ThemeSelector } from '@brumaombra/ui-vintage/theme-selector';
 
 const { locale, locales, setLocale } = useI18n();
 const localePath = useLocalePath();
+const route = useRoute();
+
+// Show reading progress on individual blog posts only
+const showBlogProgress = computed(() => /\/blog\/[^/]+$/.test(route.path));
 
 // Available language codes for the selector
 const languageOptions = computed(() => {
@@ -44,7 +48,7 @@ const handleSelectLanguage = async language => {
     <LandingShell>
         <!-- Navbar -->
         <template #navbar>
-            <LandingNavbar app-name="UI Vintage Demo" :app-link-to="localePath('/')">
+            <LandingNavbar app-name="UI Vintage Demo" :app-link-to="localePath('/')" :show-progress="showBlogProgress">
                 <!-- Right side -->
                 <template #right>
                     <!-- Language selector -->

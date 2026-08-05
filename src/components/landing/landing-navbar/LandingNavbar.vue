@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { NuxtImg } from '#components';
 import type { HTMLAttributes } from 'vue';
+import BlogProgressBar from '../../blog/BlogProgressBar.vue';
 import { cn } from '../../../lib/utils';
 
 // Props
@@ -13,10 +14,12 @@ const props = withDefaults(defineProps<{
     containerClass?: HTMLAttributes['class'];
     leftClass?: HTMLAttributes['class'];
     rightClass?: HTMLAttributes['class'];
+    showProgress?: boolean;
 }>(), {
     appName: '',
     appLogo: '',
-    appLinkTo: '/'
+    appLinkTo: '/',
+    showProgress: false
 });
 </script>
 
@@ -43,6 +46,10 @@ const props = withDefaults(defineProps<{
                 <slot name="right" />
             </div>
         </nav>
+
+        <div v-if="props.showProgress" class="absolute inset-x-0 bottom-0 translate-y-full">
+            <BlogProgressBar aria-label="Blog reading progress" />
+        </div>
     </header>
 </template>
 
