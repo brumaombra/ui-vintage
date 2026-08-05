@@ -6,6 +6,7 @@ import { BlogFAQSection, BlogInfoSection, BlogSectionTitle, CategoryCard, PostCa
 import { Badge } from '@brumaombra/ui-vintage/badge';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@brumaombra/ui-vintage/breadcrumb';
 import { Button } from '@brumaombra/ui-vintage/button';
+import { BlogContentRenderer } from '@brumaombra/ui-vintage/content';
 import ProseHr from '~/components/content/ProseHr.vue';
 
 const { t, locale } = useI18n();
@@ -142,9 +143,7 @@ definePageMeta({
             <SocialShareSidebar :title="post.title" :url="fullURL" />
 
             <!-- Article content -->
-            <div class="prose prose-base sm:prose-lg max-w-none">
-                <ContentRenderer :value="post" />
-            </div>
+            <BlogContentRenderer :value="post" />
 
             <!-- Divider -->
             <ProseHr />
@@ -211,89 +210,3 @@ definePageMeta({
         </section>
     </div>
 </template>
-
-<style>
-.prose h1 {
-    font-size: 1.75rem;
-    font-weight: 700;
-    margin-bottom: 2rem;
-}
-
-.prose h2 {
-    margin-top: 2rem;
-    margin-bottom: 1.5rem;
-}
-
-.prose h2 a {
-    font-size: 1.375rem;
-    font-weight: 700;
-    line-height: 2rem;
-    color: var(--text-primary-light);
-}
-
-.dark .prose h2 a {
-    color: var(--text-primary-dark);
-}
-
-.prose h3 {
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-}
-
-.prose h3 a {
-    font-size: 1.125rem;
-    font-weight: 700;
-    line-height: 1.75rem;
-    color: var(--text-primary-light);
-}
-
-.dark .prose h3 a {
-    color: var(--text-primary-dark);
-}
-
-.prose p {
-    font-size: 15px;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    line-height: 1.75;
-    color: var(--text-primary-light);
-}
-
-.dark .prose p {
-    color: var(--text-primary-dark);
-}
-
-.prose p strong {
-    font-weight: 700;
-}
-
-.prose blockquote strong {
-    font-weight: 700;
-}
-
-.prose img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 1.5rem;
-}
-
-.prose a {
-    text-decoration: none;
-    font-weight: 700;
-}
-
-/* Responsive styles */
-@media (max-width: 640px) {
-
-    .prose p {
-        font-size: 13px;
-        line-height: 1.75;
-    }
-
-    .prose h2 {
-        margin-bottom: 1rem;
-    }
-
-}
-</style>
