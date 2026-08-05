@@ -4,8 +4,8 @@ description: "A practical summary of what changed once the original blog impleme
 image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&q=80"
 datePublished: "2026-06-14T00:00:00Z"
 dateModified: "2026-06-14T00:00:00Z"
-author: "Mauro Brambilla"
-authorUrl: "https://github.com/brumaombra"
+author: "Bruma"
+authorUrl: "https://brumaombra.com"
 authorImageUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80"
 categorySlug: "product-updates"
 categoryText: "Product Updates"
@@ -43,10 +43,15 @@ The demo does not need every conversion card or SEO helper from the original app
 
 With two posts, the demo can validate the full blog route graph:
 
-- the `/blog` index
-- the `/blog/[slug]` article page
-- the `/blog/categories` overview
-- the `/blog/categories/[slug]` listing
+::BlogList
+---
+items:
+  - "The /blog index"
+  - "The /blog/[slug] article page"
+  - "The /blog/categories overview"
+  - "The /blog/categories/[slug] listing"
+---
+::
 
 That is the minimum useful slice for testing whether the migrated components still compose correctly around actual content.
 

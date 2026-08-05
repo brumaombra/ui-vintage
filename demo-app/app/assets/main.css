@@ -1,1 +1,6 @@
+@import "./fonts.css";
 @import "@brumaombra/ui-vintage/style.css";
+
+html {
+    font-family: 'JetBrains Mono', monospace;
+}

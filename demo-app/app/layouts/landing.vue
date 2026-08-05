@@ -69,8 +69,8 @@ const handleSelectLanguage = async language => {
                 :app-link-to="localePath('/')"
                 app-description="A production-like Nuxt demo for the UI Vintage component library."
                 :sections="footerSections"
-                author-name="Mauro Brambilla"
-                author-link="https://github.com/brumaombra" />
+                author-name="Bruma"
+                author-link="https://brumaombra.com" />
         </template>
     </LandingShell>
 </template>

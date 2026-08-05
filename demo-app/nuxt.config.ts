@@ -7,7 +7,29 @@ export default defineNuxtConfig({
 
     app: {
         head: {
-            title: 'UI Vintage Demo'
+            // App title
+            title: 'UI Vintage Demo',
+
+            // Preload fonts
+            link: [{
+                rel: 'preload',
+                href: '/fonts/jetbrains-mono/JetBrainsMono-Regular.woff2',
+                as: 'font',
+                type: 'font/woff2',
+                crossorigin: 'anonymous'
+            }, {
+                rel: 'preload',
+                href: '/fonts/jetbrains-mono/JetBrainsMono-SemiBold.woff2',
+                as: 'font',
+                type: 'font/woff2',
+                crossorigin: 'anonymous'
+            }, {
+                rel: 'preload',
+                href: '/fonts/jetbrains-mono/JetBrainsMono-Bold.woff2',
+                as: 'font',
+                type: 'font/woff2',
+                crossorigin: 'anonymous'
+            }]
         }
     },
 
