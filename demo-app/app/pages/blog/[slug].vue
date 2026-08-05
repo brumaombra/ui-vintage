@@ -2,11 +2,10 @@
 import { useI18n } from 'vue-i18n';
 import { Bookmark01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
-import { BlogFAQSection, BlogInfoSection, BlogSectionTitle, CategoryCard, PostCard, SocialShareSidebar, TableOfContents } from '@brumaombra/ui-vintage/blog';
+import { BlogContentRenderer, BlogFAQSection, BlogInfoSection, BlogSectionTitle, CategoryCard, PostCard, SocialShareSidebar, TableOfContents } from '@brumaombra/ui-vintage/blog';
 import { Badge } from '@brumaombra/ui-vintage/badge';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@brumaombra/ui-vintage/breadcrumb';
 import { Button } from '@brumaombra/ui-vintage/button';
-import { BlogContentRenderer } from '@brumaombra/ui-vintage/content';
 import ProseHr from '~/components/content/ProseHr.vue';
 
 const { t, locale } = useI18n();

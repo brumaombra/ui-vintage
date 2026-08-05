@@ -1,4 +1,5 @@
 export { default as AllPostsSection } from './AllPostsSection.vue';
+export { default as BlogContentRenderer } from './BlogContentRenderer.vue';
 export { default as BlogFAQSection } from './BlogFAQSection.vue';
 export { default as BlogInfoSection } from './BlogInfoSection.vue';
 export { default as BlogHeaderSection } from './BlogHeaderSection.vue';
