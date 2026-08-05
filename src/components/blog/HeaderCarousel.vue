@@ -144,7 +144,7 @@ onUnmounted(() => {
         <button v-if="props.featuredPosts.length > 1"
             @click="prevSlide"
             :aria-label="t('uiVintage.blog.previousSlide')"
-            class="absolute left-2 top-[calc(50%-4rem)] -translate-y-1/2 z-10 border border-(--border-light) dark:border-(--border-dark) bg-(--bg-card-light) dark:bg-(--bg-card-dark) px-3 py-3 rounded-none transition-colors duration-200 hover:border-(--border-hover-light) dark:hover:border-(--border-hover-dark) cursor-pointer">
+            class="absolute left-2 top-[calc(50%-4rem)] -translate-y-1/2 z-10 border border-(--border-light) dark:border-(--border-dark) bg-(--bg-card-light) dark:bg-(--bg-card-dark) px-3 py-3 rounded-[3px] transition-colors duration-200 hover:border-(--border-hover-light) dark:hover:border-(--border-hover-dark) cursor-pointer">
             <HugeiconsIcon :icon="ArrowLeft01Icon" class="size-4 text-(--text-secondary-light) dark:text-(--text-secondary-dark)" />
         </button>
 
@@ -152,7 +152,7 @@ onUnmounted(() => {
         <button v-if="props.featuredPosts.length > 1"
             @click="nextSlide"
             :aria-label="t('uiVintage.blog.nextSlide')"
-            class="absolute right-2 top-[calc(50%-4rem)] -translate-y-1/2 z-10 border border-(--border-light) dark:border-(--border-dark) bg-(--bg-card-light) dark:bg-(--bg-card-dark) px-3 py-3 rounded-none transition-colors duration-200 hover:border-(--border-hover-light) dark:hover:border-(--border-hover-dark) cursor-pointer">
+            class="absolute right-2 top-[calc(50%-4rem)] -translate-y-1/2 z-10 border border-(--border-light) dark:border-(--border-dark) bg-(--bg-card-light) dark:bg-(--bg-card-dark) px-3 py-3 rounded-[3px] transition-colors duration-200 hover:border-(--border-hover-light) dark:hover:border-(--border-hover-dark) cursor-pointer">
             <HugeiconsIcon :icon="ArrowRight01Icon" class="size-4 text-(--text-secondary-light) dark:text-(--text-secondary-dark)" />
         </button>
     </div>
