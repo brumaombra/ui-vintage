@@ -40,7 +40,7 @@ const { data: post } = await useAsyncData(`post-${slug}-${locale.value}`, async 
 // Fetch related posts
 const { data: relatedPosts } = await useAsyncData(`related-posts-${slug}-${locale.value}`, async () => {
     // Get all posts except current post
-    const posts = await queryCollection('blog').select('title', 'description', 'image', 'categoryText', 'path').where('language', '=', 'en').where('path', '<>', route.path).all();
+    const posts = await queryCollection('blog').select('title', 'description', 'image', 'categoryText', 'path').where('language', '=', locale.value).where('path', '<>', route.path).all();
     if (!posts || posts.length === 0) return [];
 
     // Sort posts deterministically based on current slug/locale
@@ -53,7 +53,7 @@ const { data: relatedPosts } = await useAsyncData(`related-posts-${slug}-${local
 // Fetch related categories
 const { data: relatedCategories } = await useAsyncData(`related-categories-${slug}-${locale.value}`, async () => {
     // Get all posts excluding current post's category
-    const allPosts = await queryCollection('blog').select('categorySlug', 'categoryText', 'image').where('language', '=', 'en').where('categorySlug', '<>', post.value?.categorySlug).all();
+    const allPosts = await queryCollection('blog').select('categorySlug', 'categoryText', 'image').where('language', '=', locale.value).where('categorySlug', '<>', post.value?.categorySlug).all();
     if (!allPosts || allPosts.length === 0) return [];
 
     // Extract unique categories

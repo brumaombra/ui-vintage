@@ -30,7 +30,7 @@ const buildCategoriesFromPosts = posts => {
 
 // Fetch blog categories data
 const { data: blogCategories } = await useAsyncData(`demo-blog-categories-${locale.value}`, async () => {
-    const posts = await queryCollection('blog').select('categorySlug', 'categoryText', 'image').where('language', '=', 'en').all();
+    const posts = await queryCollection('blog').select('categorySlug', 'categoryText', 'image').where('language', '=', locale.value).all();
     return buildCategoriesFromPosts(posts);
 });
 
@@ -77,7 +77,7 @@ definePageMeta({
         <!-- Blog header -->
         <div class="mb-12">
             <PageHeader title="Browse every category" />
-            <p class="text-sm md:!text-base text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)]">
+            <p class="text-sm md:text-base! text-(--text-secondary-light) dark:text-(--text-secondary-dark)">
                 Each category is derived from the real markdown posts in the demo content collection.
             </p>
         </div>

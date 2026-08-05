@@ -44,10 +44,10 @@ const { data: blogIndexData } = await useAsyncData(`blog-index-${locale.value}`,
     try {
         // Execute queries in parallel
         const [featuredPosts, initialPosts, totalPosts, categoryPosts] = await Promise.all([
-            queryCollection('blog').select('path', 'image', 'title', 'description', 'categoryText', 'categorySlug').where('language', '=', 'en').order('datePublished', 'DESC').limit(4).all(),
-            queryCollection('blog').select('path', 'image', 'title', 'description', 'categoryText', 'categorySlug').where('language', '=', 'en').order('datePublished', 'DESC').limit(postsPerPage).all(),
-            queryCollection('blog').where('language', '=', 'en').count(),
-            queryCollection('blog').select('categorySlug', 'categoryText', 'image').where('language', '=', 'en').all()
+            queryCollection('blog').select('path', 'image', 'title', 'description', 'categoryText', 'categorySlug').where('language', '=', locale.value).order('datePublished', 'DESC').limit(4).all(),
+            queryCollection('blog').select('path', 'image', 'title', 'description', 'categoryText', 'categorySlug').where('language', '=', locale.value).order('datePublished', 'DESC').limit(postsPerPage).all(),
+            queryCollection('blog').where('language', '=', locale.value).count(),
+            queryCollection('blog').select('categorySlug', 'categoryText', 'image').where('language', '=', locale.value).all()
         ]);
 
         // Return the data
@@ -90,7 +90,7 @@ const loadMorePosts = async () => {
         currentPage.value++;
 
         // Fetch the next page of posts
-        const morePosts = await queryCollection('blog').select('path', 'image', 'title', 'description', 'categoryText', 'categorySlug').where('language', '=', 'en').order('datePublished', 'DESC').skip((currentPage.value - 1) * postsPerPage).limit(postsPerPage).all();
+        const morePosts = await queryCollection('blog').select('path', 'image', 'title', 'description', 'categoryText', 'categorySlug').where('language', '=', locale.value).order('datePublished', 'DESC').skip((currentPage.value - 1) * postsPerPage).limit(postsPerPage).all();
         if (morePosts.length === 0) {
             hasMorePosts.value = false;
             return;

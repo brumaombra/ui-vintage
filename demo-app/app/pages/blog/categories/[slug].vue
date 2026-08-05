@@ -28,9 +28,9 @@ const { data: categoryData } = await useAsyncData(`category-${slug}-${locale.val
     try {
         // Execute queries in parallel
         const [categoryPost, posts, totalPostsCount] = await Promise.all([
-            queryCollection('blog').select('categoryText').where('categorySlug', '=', slug).where('language', '=', 'en').first(),
-            queryCollection('blog').select('title', 'description', 'image', 'categoryText', 'path').where('language', '=', 'en').where('categorySlug', '=', slug).limit(postsPerPage).all(),
-            queryCollection('blog').where('categorySlug', '=', slug).where('language', '=', 'en').count()
+            queryCollection('blog').select('categoryText').where('categorySlug', '=', slug).where('language', '=', locale.value).first(),
+            queryCollection('blog').select('title', 'description', 'image', 'categoryText', 'path').where('language', '=', locale.value).where('categorySlug', '=', slug).limit(postsPerPage).all(),
+            queryCollection('blog').where('categorySlug', '=', slug).where('language', '=', locale.value).count()
         ]);
 
         // Return the data
@@ -60,7 +60,7 @@ const loadMorePosts = async () => {
     isLoading.value = true;
     try {
         currentPage.value++;
-        const morePosts = await queryCollection('blog').select('title', 'description', 'image', 'categoryText', 'path').where('categorySlug', '=', slug).where('language', '=', 'en').skip((currentPage.value - 1) * postsPerPage).limit(postsPerPage).all();
+        const morePosts = await queryCollection('blog').select('title', 'description', 'image', 'categoryText', 'path').where('categorySlug', '=', slug).where('language', '=', locale.value).skip((currentPage.value - 1) * postsPerPage).limit(postsPerPage).all();
         if (morePosts.length === 0) {
             hasMorePosts.value = false;
         } else {
@@ -125,7 +125,7 @@ definePageMeta({
         <!-- Blog header -->
         <div class="mb-12">
             <PageHeader :title="categoryTitle" />
-            <p class="text-sm md:!text-base text-[var(--text-secondary-light)] dark:text-[var(--text-secondary-dark)]">
+            <p class="text-sm md:text-base! text-(--text-secondary-light) dark:text-(--text-secondary-dark)">
                 A focused view of every demo article published under this category.
             </p>
         </div>
