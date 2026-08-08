@@ -13,23 +13,20 @@ const props = defineProps<{
 
 <style scoped>
 .blog-content {
-    color: var(--text-primary-light);
+    --blog-content-text: var(--text-primary-light);
+    --blog-content-code-bg: var(--bg-selected-light);
+    color: var(--blog-content-text);
 }
 
-:global(html.dark) .blog-content {
-    color: var(--text-primary-dark);
+.dark .blog-content {
+    --blog-content-text: var(--text-primary-dark);
+    --blog-content-code-bg: var(--bg-selected-dark);
 }
 
 .blog-content :deep(h1:not(.not-prose):not(.not-prose *)),
 .blog-content :deep(h2:not(.not-prose):not(.not-prose *)),
 .blog-content :deep(h3:not(.not-prose):not(.not-prose *)) {
-    color: var(--text-primary-light);
-}
-
-:global(html.dark) .blog-content :deep(h1:not(.not-prose):not(.not-prose *)),
-:global(html.dark) .blog-content :deep(h2:not(.not-prose):not(.not-prose *)),
-:global(html.dark) .blog-content :deep(h3:not(.not-prose):not(.not-prose *)) {
-    color: var(--text-primary-dark) !important;
+    color: var(--blog-content-text);
 }
 
 .blog-content :deep(h1:not(.not-prose):not(.not-prose *)) {
@@ -65,15 +62,7 @@ const props = defineProps<{
 .blog-content :deep(blockquote:not(.not-prose):not(.not-prose *)),
 .blog-content :deep(td:not(.not-prose):not(.not-prose *)),
 .blog-content :deep(th:not(.not-prose):not(.not-prose *)) {
-    color: var(--text-primary-light);
-}
-
-:global(html.dark) .blog-content :deep(p:not(.not-prose):not(.not-prose *)),
-:global(html.dark) .blog-content :deep(li:not(.not-prose):not(.not-prose *)),
-:global(html.dark) .blog-content :deep(blockquote:not(.not-prose):not(.not-prose *)),
-:global(html.dark) .blog-content :deep(td:not(.not-prose):not(.not-prose *)),
-:global(html.dark) .blog-content :deep(th:not(.not-prose):not(.not-prose *)) {
-    color: var(--text-primary-dark) !important;
+    color: var(--blog-content-text);
 }
 
 .blog-content :deep(p:not(.not-prose):not(.not-prose *)) {
@@ -91,15 +80,9 @@ const props = defineProps<{
 .blog-content :deep(p:not(.not-prose):not(.not-prose *) a:not(.not-prose):not(.not-prose *)),
 .blog-content :deep(li:not(.not-prose):not(.not-prose *) a:not(.not-prose):not(.not-prose *)),
 .blog-content :deep(blockquote:not(.not-prose):not(.not-prose *) a:not(.not-prose):not(.not-prose *)) {
-    color: var(--text-primary-light);
+    color: var(--blog-content-text);
     text-decoration: none;
     font-weight: 700;
-}
-
-:global(html.dark) .blog-content :deep(p:not(.not-prose):not(.not-prose *) a:not(.not-prose):not(.not-prose *)),
-:global(html.dark) .blog-content :deep(li:not(.not-prose):not(.not-prose *) a:not(.not-prose):not(.not-prose *)),
-:global(html.dark) .blog-content :deep(blockquote:not(.not-prose):not(.not-prose *) a:not(.not-prose):not(.not-prose *)) {
-    color: var(--text-primary-dark) !important;
 }
 
 .blog-content :deep(p:not(.not-prose):not(.not-prose *) a:not(.not-prose):not(.not-prose *):hover),
@@ -110,14 +93,8 @@ const props = defineProps<{
 
 .blog-content :deep(p:not(.not-prose):not(.not-prose *) code:not(.not-prose):not(.not-prose *)),
 .blog-content :deep(pre:not(.not-prose):not(.not-prose *) code:not(.not-prose):not(.not-prose *)) {
-    color: var(--text-primary-light);
-    background-color: var(--bg-selected-light);
-}
-
-:global(html.dark) .blog-content :deep(p:not(.not-prose):not(.not-prose *) code:not(.not-prose):not(.not-prose *)),
-:global(html.dark) .blog-content :deep(pre:not(.not-prose):not(.not-prose *) code:not(.not-prose):not(.not-prose *)) {
-    color: var(--text-primary-dark) !important;
-    background-color: var(--bg-selected-dark);
+    color: var(--blog-content-text);
+    background-color: var(--blog-content-code-bg);
 }
 
 @media (max-width: 640px) {

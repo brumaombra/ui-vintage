@@ -40,7 +40,7 @@ const formattedModifiedDate = computed(() => formatDateLongItalyTimezone(props.d
                         <div>
                             <p class="text-sm text-(--text-secondary-light) dark:text-(--text-secondary-dark)">{{ t('uiVintage.blog.author') }}</p>
                             <p class="font-bold text-(--text-primary-light) dark:text-(--text-primary-dark)">
-                                <NuxtLink :to="props.authorUrl" target="_blank" rel="noopener noreferrer" class="hover:text-(--text-secondary-light) dark:hover:text-(--text-secondary-dark) transition-colors">
+                                <NuxtLink :to="props.authorUrl" target="_blank" rel="noopener noreferrer" class="hover:underline">
                                     {{ props.author }}
                                 </NuxtLink>
                             </p>
