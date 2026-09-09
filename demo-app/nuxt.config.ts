@@ -64,6 +64,7 @@ export default defineNuxtConfig({
     ],
 
     i18n: {
+        baseUrl: 'https://ui-vintage-demo.local',
         defaultLocale: 'en',
         detectBrowserLanguage: false,
         langDir: 'locales',

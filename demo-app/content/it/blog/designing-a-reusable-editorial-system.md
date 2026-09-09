@@ -40,6 +40,32 @@ La libreria possiede gli elementi di interfaccia riutilizzabili: card hero, caro
 
 È questo confine a rendere il setup portabile. Un altro progetto può cambiare l'inventario degli articoli, le informazioni sull'autore o la frequenza di pubblicazione senza riscrivere i blocchi condivisi.
 
+::Flow
+---
+title: "Dal contenuto alla route"
+description: "Ogni livello mantiene la propria responsabilità mentre l'articolo resta riutilizzabile."
+orientation: horizontal
+items:
+  - "Entry markdown"
+  - "Collezione dei contenuti"
+  - "Componente condiviso"
+  - "Route localizzata"
+---
+::
+
+::Code
+---
+title: "Un contenuto editoriale"
+language: json
+code: |
+  {
+    "title": "Progettare un sistema editoriale riutilizzabile",
+    "category": "Sistemi di design",
+    "tags": ["Contenuti", "Vue"]
+  }
+---
+::
+
 ---
 
 ## I contenuti reali sono un test migliore degli array statici
@@ -47,6 +73,8 @@ La libreria possiede gli elementi di interfaccia riutilizzabili: card hero, caro
 Gli array simulati sono utili all'inizio, ma nascondono la forma reale di una pagina editoriale. Quando i contenuti vivono nel markdown, puoi verificare subito la gestione dei percorsi, i campi del frontmatter, le query dei contenuti correlati e il rendering del corpo dell'articolo.
 
 È qui che il comportamento simile alla produzione diventa importante. Una pagina articolo funzionante non è solo un'immagine hero con qualche paragrafo. Include:
+
+![Spazio di lavoro per la pianificazione editoriale](https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1400&q=80){width="1400" height="933"}
 
 ::BlogList
 ---

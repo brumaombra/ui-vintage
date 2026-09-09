@@ -42,6 +42,11 @@
             "copy": "复制命令",
             "copied": "命令已复制"
         },
+        "code": {
+            "title": "代码",
+            "copy": "复制代码",
+            "copied": "代码已复制"
+        },
         "footer": {
             "madeWith": "用",
             "by": "由",

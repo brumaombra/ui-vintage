@@ -40,6 +40,32 @@ The library owns the reusable chrome: hero cards, carousels, category grids, FAQ
 
 That boundary is what makes the setup portable. Another project can change the post inventory, author information, or publishing cadence without rewriting the reusable UI blocks.
 
+::Flow
+---
+title: "From content to route"
+description: "Each layer keeps its own responsibility while the article stays reusable."
+orientation: horizontal
+items:
+  - "Markdown entry"
+  - "Content collection"
+  - "Shared component"
+  - "Localized route"
+---
+::
+
+::Code
+---
+title: "A content entry"
+language: json
+code: |
+  {
+    "title": "Designing a Reusable Editorial System",
+    "category": "Design Systems",
+    "tags": ["Content", "Vue"]
+  }
+---
+::
+
 ---
 
 ## Real content is a better test than static arrays
@@ -47,6 +73,8 @@ That boundary is what makes the setup portable. Another project can change the p
 Mock arrays are useful for initial exploration, but they hide the real shape of an editorial page. Once content lives in markdown, you immediately verify path handling, frontmatter fields, related content lookups, and rich body rendering.
 
 This is where production-like behavior matters. A working post page is not just a hero image plus a few paragraphs. It includes:
+
+![Editorial planning workspace](https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1400&q=80){width="1400" height="933"}
 
 ::BlogList
 ---

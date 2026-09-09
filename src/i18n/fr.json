@@ -42,6 +42,11 @@
             "copy": "Copier les commandes",
             "copied": "Commandes copiees"
         },
+        "code": {
+            "title": "Code",
+            "copy": "Copier le code",
+            "copied": "Code copie"
+        },
         "footer": {
             "madeWith": "Fait avec",
             "by": "par",

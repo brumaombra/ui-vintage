@@ -56,6 +56,28 @@ items:
 
 That is the minimum useful slice for testing whether the migrated components still compose correctly around actual content.
 
+::Flow
+---
+title: "From markdown to route"
+description: "The demo follows the same path as a consuming application."
+orientation: horizontal
+items:
+  - "Markdown entry"
+  - "Collection query"
+  - "Localized route"
+  - "Rendered article"
+---
+::
+
+::Code
+---
+title: "Plain text output"
+language: text
+code: |
+  The article is loaded from Markdown and rendered through the shared blog surface.
+---
+::
+
 ::BlogTable
 ---
 headers: ["Route", "What it validates"]
@@ -72,6 +94,12 @@ rows:
 The article page only works smoothly because the content schema includes the same metadata the UI expects: title, description, image, author, publish dates, category information, language, and FAQs.
 
 If those fields drift, the page becomes brittle. Keeping the schema explicit is part of keeping the library usable.
+
+```ts
+const post = await queryCollection('blog')
+  .path(route.path)
+  .first();
+```
 
 ## Related content should feel deterministic
 

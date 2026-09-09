@@ -56,6 +56,28 @@ items:
 
 È il minimo utile per verificare che i componenti migrati continuino a comporsi correttamente intorno a contenuti reali.
 
+::Flow
+---
+title: "Dal markdown alla route"
+description: "La demo segue lo stesso percorso di un'applicazione consumer."
+orientation: horizontal
+items:
+  - "Entry markdown"
+  - "Query della collezione"
+  - "Route localizzata"
+  - "Articolo renderizzato"
+---
+::
+
+::Code
+---
+title: "Output testuale"
+language: text
+code: |
+  L'articolo viene caricato dal markdown e renderizzato nella superficie blog condivisa.
+---
+::
+
 ::BlogTable
 ---
 headers: ["Route", "Cosa verifica"]
@@ -72,6 +94,12 @@ rows:
 La pagina articolo funziona bene perché lo schema dei contenuti include gli stessi metadati che l'interfaccia si aspetta: titolo, descrizione, immagine, autore, date di pubblicazione, informazioni sulla categoria, lingua e FAQ.
 
 Se questi campi cambiano, la pagina diventa fragile. Mantenere lo schema esplicito fa parte del rendere la libreria utilizzabile.
+
+```ts
+const post = await queryCollection('blog')
+  .path(route.path)
+  .first();
+```
 
 ## I contenuti correlati dovrebbero essere deterministici
 
