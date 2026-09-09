@@ -1,4 +1,5 @@
 <script setup>
+import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { Bookmark01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
@@ -6,9 +7,12 @@ import { BlogContentRenderer, BlogFAQSection, BlogInfoSection, BlogSectionTitle,
 import { Badge } from '@brumaombra/ui-vintage/badge';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@brumaombra/ui-vintage/breadcrumb';
 import { Button } from '@brumaombra/ui-vintage/button';
+import { createSEOMetatags, createPageSchema, slugify } from '~/composables/useUtils.js';
 import ProseHr from '~/components/content/ProseHr.vue';
 
 const { t, locale } = useI18n();
+const localeHead = useLocaleHead();
+const localePath = useLocalePath();
 const route = useRoute();
 const { slug } = route.params;
 const fullURL = `https://ui-vintage-demo.local${route.path}`;
@@ -76,10 +80,50 @@ const { data: relatedCategories } = await useAsyncData(`related-categories-${slu
     return sortedCategories.slice(0, 4);
 });
 
-// Add metatags
-useHead(() => ({
-    title: post.value ? post.value.title : 'Blog Post Demo'
+// Map current post tags to badge data
+const postTags = computed(() => (post.value?.tags || [])
+    .map(tag => ({
+        name: tag,
+        slug: slugify(tag)
+    }))
+    .filter(tag => tag.slug));
+
+// Define SEO metadata
+useSeoMeta(createSEOMetatags({
+    title: post.value?.title,
+    description: post.value?.description,
+    url: route.path,
+    image: post.value?.image,
+    type: 'article'
 }));
+
+// Define head metadata
+useHead({
+    htmlAttrs: {
+        lang: localeHead.value.htmlAttrs.lang,
+        dir: localeHead.value.htmlAttrs.dir
+    },
+    link: [...(localeHead.value.link || [])],
+    ...createPageSchema({
+        title: post.value?.title,
+        description: post.value?.description,
+        url: route.path,
+        isBlogPost: true,
+        image: post.value?.image,
+        tags: post.value?.tags,
+        datePublished: post.value?.datePublished,
+        dateModified: post.value?.dateModified,
+        author: post.value?.author,
+        authorUrl: post.value?.authorUrl,
+        authorImageUrl: post.value?.authorImageUrl,
+        faqs: post.value?.faqs,
+        breadcrumbs: [
+            { name: t('seo.home.breadcrumb'), item: localePath('/') },
+            { name: t('seo.blog.breadcrumb'), item: localePath('/blog') },
+            { name: post.value?.title, item: route.path }
+        ]
+    })
+});
 
 // Define page metadata
 definePageMeta({
@@ -98,7 +142,7 @@ definePageMeta({
                         <BreadcrumbItem>
                             <BreadcrumbLink as-child>
                                 <NuxtLinkLocale to="/">
-                                    Home
+                                    {{ t('navigation.breadcrumbs.home') }}
                                 </NuxtLinkLocale>
                             </BreadcrumbLink>
                         </BreadcrumbItem>
@@ -106,7 +150,7 @@ definePageMeta({
                         <BreadcrumbItem>
                             <BreadcrumbLink as-child>
                                 <NuxtLinkLocale to="/blog">
-                                    Blog
+                                    {{ t('navigation.breadcrumbs.blog') }}
                                 </NuxtLinkLocale>
                             </BreadcrumbLink>
                         </BreadcrumbItem>
@@ -119,10 +163,22 @@ definePageMeta({
                     </BreadcrumbList>
                 </Breadcrumb>
 
-                <!-- Category badge -->
-                <NuxtLinkLocale v-if="post.categoryText" :to="`/blog/categories/${post.categorySlug}`" class="inline-block my-4 md:my-6">
-                    <Badge color="gray" :text="post.categoryText" class="transition-transform duration-200 ease-out hover:scale-105 motion-reduce:transition-none motion-reduce:hover:scale-100" />
-                </NuxtLinkLocale>
+                <!-- Category and tags -->
+                <div class="my-4 md:my-6">
+                    <!-- Category -->
+                    <div v-if="post.categoryText" class="flex flex-wrap items-center gap-2">
+                        <NuxtLinkLocale :to="`/blog/categories/${post.categorySlug}`">
+                            <Badge color="gray" :text="post.categoryText" class="transition-transform duration-200 ease-out hover:scale-105 motion-reduce:transition-none motion-reduce:hover:scale-100" />
+                        </NuxtLinkLocale>
+                    </div>
+
+                    <!-- Tags -->
+                    <div v-if="postTags.length" class="mt-2 flex flex-wrap items-center gap-2">
+                        <NuxtLinkLocale v-for="tag in postTags" :key="tag.slug" :to="`/blog/tags/${tag.slug}`">
+                            <Badge color="blue" :text="tag.name" class="transition-transform duration-200 ease-out hover:scale-105 motion-reduce:transition-none motion-reduce:hover:scale-100" />
+                        </NuxtLinkLocale>
+                    </div>
+                </div>
 
                 <!-- Title -->
                 <h1 class="text-2xl sm:text-3xl! md:text-4xl! font-bold tracking-tight text-(--text-primary-light) dark:text-(--text-primary-dark) leading-tight mb-6">
@@ -145,7 +201,7 @@ definePageMeta({
             <BlogContentRenderer :value="post" />
 
             <!-- Divider -->
-            <ProseHr />
+            <ProseHr data-aos="fade-up" />
 
             <!-- FAQ section -->
             <BlogFAQSection v-if="post.faqs && post.faqs?.length > 0"
@@ -153,7 +209,7 @@ definePageMeta({
                 data-aos="fade-up" />
 
             <!-- Divider -->
-            <ProseHr />
+            <ProseHr data-aos="fade-up" />
 
             <!-- Blog info section -->
             <BlogInfoSection :author="post.author"
@@ -164,7 +220,7 @@ definePageMeta({
         </article>
 
         <!-- Divider -->
-        <ProseHr />
+        <ProseHr v-if="relatedPosts?.length || relatedCategories?.length" data-aos="fade-up" />
 
         <!-- Related posts -->
         <section v-if="relatedPosts?.length" data-aos="fade-up">

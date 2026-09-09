@@ -10,6 +10,7 @@ authorImageUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?au
 categorySlug: "design-systems"
 categoryText: "Design Systems"
 language: "en"
+tags: ["Design Systems", "Content", "Vue"]
 faqs:
   - question: "Why move a blog UI into a shared library?"
     answer: "Because it lets multiple projects reuse the same content surfaces, spacing decisions, and interaction patterns without rebuilding them from scratch."
@@ -59,14 +60,10 @@ items:
 ---
 ::
 
-::Terminal
----
-title: Install the project
-commands:
-  - npm install
-  - npm run dev
----
-::
+```bash
+npm install
+npm run dev
+```
 
 ::BlogTable
 ---

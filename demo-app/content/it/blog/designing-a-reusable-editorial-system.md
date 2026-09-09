@@ -10,6 +10,7 @@ authorImageUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?au
 categorySlug: "design-systems"
 categoryText: "Sistemi di design"
 language: "it"
+tags: ["Sistemi di design", "Contenuti", "Vue"]
 faqs:
   - question: "Perché spostare l'interfaccia blog in una libreria condivisa?"
     answer: "Perché permette a più progetti di riutilizzare le stesse superfici editoriali, le scelte di spaziatura e i pattern di interazione senza ricostruirli ogni volta."
@@ -59,14 +60,10 @@ items:
 ---
 ::
 
-::Terminal
----
-title: Installa il progetto
-commands:
-  - npm install
-  - npm run dev
----
-::
+```bash
+npm install
+npm run dev
+```
 
 ::BlogTable
 ---

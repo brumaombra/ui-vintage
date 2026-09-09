@@ -1,47 +1,33 @@
 <script setup>
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { CategoriesList } from '@brumaombra/ui-vintage/blog';
+import { Badge } from '@brumaombra/ui-vintage/badge';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@brumaombra/ui-vintage/breadcrumb';
 import { PageHeader } from '@brumaombra/ui-vintage/page-header';
-import { createPageSchema, createSEOMetatags } from '~/composables/useUtils.js';
+import { buildTagsFromPosts, createPageSchema, createSEOMetatags } from '~/composables/useUtils.js';
 
 const { t, locale } = useI18n();
 const localeHead = useLocaleHead();
 const localePath = useLocalePath();
 const route = useRoute();
 
-// Build category cards data from blog posts
-const buildCategoriesFromPosts = posts => {
-    // Extract unique categories
-    const categoriesList = posts.map(post => post.categorySlug);
-    const uniqueCategories = categoriesList.filter((category, index, self) => category && self.indexOf(category) === index);
-
-    // Map unique categories to category data
-    return uniqueCategories.map(category => {
-        const firstPost = posts.find(post => post.categorySlug === category);
-
-        // Return category data
-        return {
-            name: firstPost?.categoryText || category,
-            slug: category,
-            path: localePath(`/blog/categories/${category}`),
-            count: categoriesList.filter(item => item === category).length,
-            image: firstPost?.image
-        };
-    });
-};
-
-// Fetch blog categories data
-const { data: blogCategories } = await useAsyncData(`demo-blog-categories-${locale.value}`, async () => {
-    const posts = await queryCollection('blog').select('categorySlug', 'categoryText', 'image').where('language', '=', locale.value).all();
-    return buildCategoriesFromPosts(posts);
+// Fetch tags data
+const { data: tagsData } = await useAsyncData(`blog-tags-${locale.value}`, async () => {
+    try {
+        const posts = await queryCollection('blog').select('tags').where('language', '=', locale.value).all();
+        return buildTagsFromPosts(posts);
+    } catch (error) {
+        console.error('Error loading blog tags:', error);
+        return [];
+    }
 });
+
+const tags = tagsData.value || [];
 
 // Define SEO metadata
 useSeoMeta(createSEOMetatags({
-    title: t('seo.categories.title'),
-    description: t('seo.categories.description'),
+    title: t('seo.tags.title'),
+    description: t('seo.tags.description'),
     url: route.path
 }));
 
@@ -53,13 +39,13 @@ useHead({
     },
     link: [...(localeHead.value.link || [])],
     ...createPageSchema({
-        title: t('seo.categories.title'),
-        description: t('seo.categories.description'),
+        title: t('seo.tags.title'),
+        description: t('seo.tags.description'),
         url: route.path,
         breadcrumbs: [
             { name: t('seo.home.breadcrumb'), item: localePath('/') },
             { name: t('seo.blog.breadcrumb'), item: localePath('/blog') },
-            { name: t('seo.categories.breadcrumb'), item: localePath('/blog/categories') }
+            { name: t('seo.tags.breadcrumb'), item: localePath('/blog/tags') }
         ]
     })
 });
@@ -93,7 +79,7 @@ definePageMeta({
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
                     <BreadcrumbPage>
-                        {{ t('navigation.breadcrumbs.categories') }}
+                        {{ t('navigation.breadcrumbs.tags') }}
                     </BreadcrumbPage>
                 </BreadcrumbItem>
             </BreadcrumbList>
@@ -101,13 +87,17 @@ definePageMeta({
 
         <!-- Blog header -->
         <div class="mb-12">
-            <PageHeader :title="t('blog.categories.title')" />
+            <PageHeader :title="t('blog.tags.title')" />
             <p class="text-sm md:text-base! text-(--text-secondary-light) dark:text-(--text-secondary-dark)">
-                {{ t('blog.categories.description') }}
+                {{ t('blog.tags.description') }}
             </p>
         </div>
 
-        <!-- Categories section -->
-        <CategoriesList :categories="blogCategories || []" />
+        <!-- Tags list -->
+        <div class="flex flex-wrap gap-3">
+            <NuxtLinkLocale v-for="tag in tags" :key="tag.slug" :to="`/blog/tags/${tag.slug}`">
+                <Badge color="gray" :text="`${tag.name} (${tag.count})`" class="transition-transform duration-200 ease-out hover:scale-105 motion-reduce:transition-none motion-reduce:hover:scale-100" />
+            </NuxtLinkLocale>
+        </div>
     </div>
 </template>

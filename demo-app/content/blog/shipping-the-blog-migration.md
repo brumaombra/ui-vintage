@@ -10,6 +10,7 @@ authorImageUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?au
 categorySlug: "product-updates"
 categoryText: "Product Updates"
 language: "en"
+tags: ["Nuxt", "Content", "Component Libraries"]
 faqs:
   - question: "Why keep Nuxt Content in the demo app?"
     answer: "Because the demo should validate the same content querying and rendering path that a production consumer would use, not just the visual components in isolation."

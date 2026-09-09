@@ -6,7 +6,7 @@ import { PostsList } from '@brumaombra/ui-vintage/blog';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@brumaombra/ui-vintage/breadcrumb';
 import { LoadMoreButton } from '@brumaombra/ui-vintage/load-more-button';
 import { PageHeader } from '@brumaombra/ui-vintage/page-header';
-import { createPageSchema, createSEOMetatags } from '~/composables/useUtils.js';
+import { createPageSchema, createSEOMetatags, slugify } from '~/composables/useUtils.js';
 
 const { t, locale } = useI18n();
 const localeHead = useLocaleHead();
@@ -25,36 +25,36 @@ const mapPostLinks = posts => {
     }));
 };
 
-// Fetch prerendered category page data
-const { data: categoryData } = await useAsyncData(`category-${slug}-${locale.value}-posts`, async () => {
-    try {
-        // Execute queries in parallel
-        const [categoryPost, posts, totalPostsCount] = await Promise.all([
-            queryCollection('blog').select('categoryText').where('categorySlug', '=', slug).where('language', '=', locale.value).first(),
-            queryCollection('blog').select('title', 'description', 'image', 'categoryText', 'path').where('language', '=', locale.value).where('categorySlug', '=', slug).limit(postsPerPage).all(),
-            queryCollection('blog').where('categorySlug', '=', slug).where('language', '=', locale.value).count()
-        ]);
+// Keep posts whose tags match the current tag slug
+const filterPostsByTag = posts => {
+    return posts.filter(post => (post.tags || []).some(tag => slugify(tag) === slug));
+};
 
-        // Return the data
+// Fetch prerendered tag page data
+const { data: tagData } = await useAsyncData(`tag-${slug}-${locale.value}-posts`, async () => {
+    try {
+        const allPosts = await queryCollection('blog').select('title', 'description', 'image', 'categoryText', 'path', 'tags').where('language', '=', locale.value).order('datePublished', 'DESC').all();
+        const matchingPosts = filterPostsByTag(allPosts);
+        const matchingTag = matchingPosts.flatMap(post => post.tags || []).find(tag => slugify(tag) === slug);
+
         return {
-            categoryTitle: categoryPost?.categoryText || slug,
-            posts: mapPostLinks(posts),
-            totalPosts: totalPostsCount || 0
+            tagTitle: matchingTag || slug,
+            posts: mapPostLinks(matchingPosts.slice(0, postsPerPage)),
+            totalPosts: matchingPosts.length
         };
     } catch (error) {
         console.error('Error loading posts:', error);
         return {
-            categoryTitle: slug,
+            tagTitle: slug,
             posts: [],
             totalPosts: 0
         };
     }
 });
 
-// Initialize reactive states
-const categoryTitle = categoryData.value?.categoryTitle || slug;
-const posts = ref(categoryData.value?.posts || []);
-const totalPosts = categoryData.value?.totalPosts || 0;
+const tagTitle = tagData.value?.tagTitle || slug;
+const posts = ref(tagData.value?.posts || []);
+const totalPosts = tagData.value?.totalPosts || 0;
 const hasMorePosts = ref(posts.value.length < totalPosts);
 
 // Load more posts (client-side)
@@ -62,13 +62,12 @@ const loadMorePosts = async () => {
     isLoading.value = true;
     try {
         currentPage.value++;
-        const morePosts = await queryCollection('blog').select('title', 'description', 'image', 'categoryText', 'path').where('categorySlug', '=', slug).where('language', '=', locale.value).skip((currentPage.value - 1) * postsPerPage).limit(postsPerPage).all();
-        if (morePosts.length === 0) {
-            hasMorePosts.value = false;
-        } else {
-            posts.value = [...posts.value, ...mapPostLinks(morePosts)];
-            hasMorePosts.value = currentPage.value * postsPerPage < totalPosts;
-        }
+        const allPosts = await queryCollection('blog').select('title', 'description', 'image', 'categoryText', 'path', 'tags').where('language', '=', locale.value).order('datePublished', 'DESC').all();
+        const matchingPosts = mapPostLinks(filterPostsByTag(allPosts));
+        const nextPosts = matchingPosts.slice(0, currentPage.value * postsPerPage);
+
+        posts.value = nextPosts;
+        hasMorePosts.value = nextPosts.length < matchingPosts.length;
     } catch (error) {
         console.error('Error loading more posts:', error);
     } finally {
@@ -78,8 +77,8 @@ const loadMorePosts = async () => {
 
 // Define SEO metadata
 useSeoMeta(createSEOMetatags({
-    title: t('seo.blog.category.title', { category: categoryTitle }),
-    description: t('seo.blog.category.description', { category: categoryTitle }),
+    title: t('seo.blog.tag.title', { tag: tagTitle }),
+    description: t('seo.blog.tag.description', { tag: tagTitle }),
     url: route.path
 }));
 
@@ -91,14 +90,14 @@ useHead({
     },
     link: [...(localeHead.value.link || [])],
     ...createPageSchema({
-        title: t('seo.blog.category.title', { category: categoryTitle }),
-        description: t('seo.blog.category.description', { category: categoryTitle }),
+        title: t('seo.blog.tag.title', { tag: tagTitle }),
+        description: t('seo.blog.tag.description', { tag: tagTitle }),
         url: route.path,
         breadcrumbs: [
             { name: t('seo.home.breadcrumb'), item: localePath('/') },
             { name: t('seo.blog.breadcrumb'), item: localePath('/blog') },
-            { name: t('seo.categories.breadcrumb'), item: localePath('/blog/categories') },
-            { name: categoryTitle, item: route.path }
+            { name: t('seo.tags.breadcrumb'), item: localePath('/blog/tags') },
+            { name: tagTitle, item: route.path }
         ]
     })
 });
@@ -132,15 +131,15 @@ definePageMeta({
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
                     <BreadcrumbLink as-child>
-                        <NuxtLinkLocale to="/blog/categories">
-                            {{ t('navigation.breadcrumbs.categories') }}
+                        <NuxtLinkLocale to="/blog/tags">
+                            {{ t('navigation.breadcrumbs.tags') }}
                         </NuxtLinkLocale>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
                     <BreadcrumbPage>
-                        {{ categoryTitle }}
+                        {{ tagTitle }}
                     </BreadcrumbPage>
                 </BreadcrumbItem>
             </BreadcrumbList>
@@ -148,9 +147,9 @@ definePageMeta({
 
         <!-- Blog header -->
         <div class="mb-12">
-            <PageHeader :title="categoryTitle" />
+            <PageHeader :title="tagTitle" />
             <p class="text-sm md:text-base! text-(--text-secondary-light) dark:text-(--text-secondary-dark)">
-                {{ t('blog.categories.singleCategoryDescription', { category: categoryTitle }) }}
+                {{ t('blog.tags.singleTagDescription', { tag: tagTitle }) }}
             </p>
         </div>
 

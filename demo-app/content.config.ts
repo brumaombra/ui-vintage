@@ -18,6 +18,7 @@ export default defineContentConfig({
                 categorySlug: z.string(),
                 categoryText: z.string(),
                 language: z.string(),
+                tags: z.array(z.string()).optional(),
                 faqs: z.array(z.object({
                     question: z.string(),
                     answer: z.string()

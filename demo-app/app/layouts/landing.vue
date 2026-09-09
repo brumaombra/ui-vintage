@@ -10,7 +10,7 @@ const localePath = useLocalePath();
 const route = useRoute();
 
 // Show reading progress on individual blog posts only
-const showBlogProgress = computed(() => /\/blog\/[^/]+$/.test(route.path));
+const showBlogProgress = computed(() => /^.*\/blog\/(?!(?:categories|tags)(?:\/|$))[^/]+\/?$/.test(route.path));
 
 // Available language codes for the selector
 const languageOptions = computed(() => {
@@ -29,6 +29,10 @@ const footerSections = [{
         id: 'categories',
         label: 'Categories',
         href: '/blog/categories'
+    }, {
+        id: 'tags',
+        label: 'Tags',
+        href: '/blog/tags'
     }, {
         id: 'github',
         label: 'GitHub',

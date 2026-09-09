@@ -1,15 +1,68 @@
 {
+    "seo": {
+        "home": {
+            "breadcrumb": "Home"
+        },
+        "blog": {
+            "title": "The UI Vintage Demo Blog",
+            "description": "A production-like blog surface powered by the UI Vintage component library and Nuxt Content.",
+            "breadcrumb": "Blog",
+            "category": {
+                "title": "{category} - UI Vintage Demo",
+                "description": "Browse UI Vintage demo posts in the '{category}' category."
+            },
+            "tag": {
+                "title": "{tag} - UI Vintage Demo",
+                "description": "Browse UI Vintage demo posts tagged '{tag}'."
+            }
+        },
+        "categories": {
+            "title": "Blog categories - UI Vintage Demo",
+            "description": "Browse the categories used by the UI Vintage demo blog.",
+            "breadcrumb": "Categories"
+        },
+        "tags": {
+            "title": "Blog tags - UI Vintage Demo",
+            "description": "Browse the tags used by the UI Vintage demo blog.",
+            "breadcrumb": "Tags"
+        }
+    },
     "blog": {
+        "title": "The UI Vintage Demo Blog",
+        "description": "A production-like blog surface powered by the UI Vintage component library and Nuxt Content.",
+        "latestPosts": "Latest posts",
+        "allPosts": "All posts",
         "readAlso": "Read also",
         "exploreCategories": "Explore categories",
-        "exploreAllCategories": "Explore all categories"
+        "exploreAllCategories": "Explore all categories",
+        "header": {
+            "badge": {
+                "topic": "Production-like demo",
+                "content": "Nuxt Content",
+                "free": "Real markdown posts"
+            }
+        },
+        "categories": {
+            "title": "Categories",
+            "description": "Browse the categories derived from the demo's markdown posts.",
+            "singleCategoryDescription": "All demo posts in the '{category}' category."
+        },
+        "tags": {
+            "title": "Tags",
+            "description": "Browse the tags derived from the demo's markdown posts.",
+            "singleTagDescription": "All demo posts tagged '{tag}'."
+        }
     },
     "navigation": {
         "breadcrumbs": {
             "home": "Home",
             "blog": "Blog",
-            "categories": "Categories"
+            "categories": "Categories",
+            "tags": "Tags"
         }
+    },
+    "common": {
+        "loadMoreWithNumbers": "Load more ({current} of {total})"
     },
     "demo": {
         "title": "UI Vintage Demo"
