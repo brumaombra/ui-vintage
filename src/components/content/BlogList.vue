@@ -24,7 +24,7 @@ const getIconClasses = () => {
 </script>
 
 <template>
-    <div class="not-prose my-6 sm:my-12">
+    <div class="not-prose my-6 sm:my-8">
         <Card>
             <CardContent class="gap-0">
                 <ul class="text-xs md:text-sm p-0! space-y-6!">

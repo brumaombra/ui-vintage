@@ -41,7 +41,7 @@ const copyCommands = async () => {
 </script>
 
 <template>
-    <div class="not-prose my-6 sm:my-12">
+    <div class="not-prose my-6 sm:my-8">
         <Card class="gap-0! sm:gap-0! overflow-hidden p-0! text-(--text-primary-light) dark:text-(--text-primary-dark)">
             <!-- Terminal header -->
             <div class="flex items-center justify-between gap-3 border-b border-(--border-light) bg-(--bg-card-light) px-3 py-2 sm:px-4 dark:border-(--border-dark) dark:bg-(--bg-card-dark)">

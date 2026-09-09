@@ -30,7 +30,7 @@ const getCellClasses = (colIndex: number) => {
 </script>
 
 <template>
-    <div class="not-prose my-6 sm:my-12">
+    <div class="not-prose my-6 sm:my-8">
         <Card>
             <CardContent>
                 <div class="w-full overflow-x-auto">
