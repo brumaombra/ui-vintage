@@ -24,6 +24,8 @@ Once the blog UI moves into the library, the demo app stops being a static galle
 
 That is a more meaningful test, because it mirrors the way a consuming product actually uses the library.
 
+In practice, the integration stays easy to scan when names such as `queryCollection` and `@brumaombra/ui-vintage/content` remain compact inline references.
+
 ::BlogList
 ---
 variant: numbered

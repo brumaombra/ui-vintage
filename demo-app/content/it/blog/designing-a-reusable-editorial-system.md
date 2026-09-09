@@ -24,6 +24,8 @@ Un'interfaccia blog riutilizzabile funziona meglio quando tipografia e spaziatur
 
 In questa demo l'obiettivo non è simulare un CMS con dati infiniti. È dimostrare che i componenti condivisi per i contenuti possono visualizzare un articolo credibile, un flusso di categorie e un'esperienza di navigazione coerente tra le route.
 
+Il renderer mantiene leggibili nel testo riferimenti come `BlogContentRenderer` e `sm:my-8`, senza trasformarli in blocchi di codice completi.
+
 ::BlogList
 ---
 variant: checkmark

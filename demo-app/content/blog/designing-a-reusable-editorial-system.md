@@ -24,6 +24,8 @@ Reusable blog UI works best when the typography and spacing rules are stable bef
 
 In this demo, the goal is not to simulate a CMS with endless data. It is to prove that the shared blog components can render a believable article page, category flow, and listing experience with the same surface language across routes.
 
+The renderer keeps references such as `BlogContentRenderer` and `sm:my-8` readable inside the editorial flow without turning them into full code blocks.
+
 ::BlogList
 ---
 variant: checkmark

@@ -15,12 +15,16 @@ const props = defineProps<{
 .blog-content {
     --blog-content-text: var(--text-primary-light);
     --blog-content-code-bg: var(--bg-selected-light);
+    --blog-content-inline-code-bg: #f9fafb;
+    --blog-content-inline-code-border: var(--border-light);
     color: var(--blog-content-text);
 }
 
 .dark .blog-content {
     --blog-content-text: var(--text-primary-dark);
     --blog-content-code-bg: var(--bg-selected-dark);
+    --blog-content-inline-code-bg: var(--bg-card-dark);
+    --blog-content-inline-code-border: var(--border-dark);
 }
 
 .blog-content :deep(h1:not(.not-prose):not(.not-prose *)),
@@ -92,6 +96,23 @@ const props = defineProps<{
 }
 
 .blog-content :deep(p:not(.not-prose):not(.not-prose *) code:not(.not-prose):not(.not-prose *)),
+.blog-content :deep(li:not(.not-prose):not(.not-prose *) code:not(.not-prose):not(.not-prose *)),
+.blog-content :deep(blockquote:not(.not-prose):not(.not-prose *) code:not(.not-prose):not(.not-prose *)),
+.blog-content :deep(td:not(.not-prose):not(.not-prose *) code:not(.not-prose):not(.not-prose *)),
+.blog-content :deep(th:not(.not-prose):not(.not-prose *) code:not(.not-prose):not(.not-prose *)) {
+    color: var(--blog-content-text);
+    background-color: var(--blog-content-inline-code-bg);
+    border: 1px solid var(--blog-content-inline-code-border);
+    border-radius: 0.25rem;
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1rem;
+    padding: 0.125rem 0.5rem;
+    transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+    white-space: nowrap;
+}
+
 .blog-content :deep(pre:not(.not-prose):not(.not-prose *) code:not(.not-prose):not(.not-prose *)) {
     color: var(--blog-content-text);
     background-color: var(--blog-content-code-bg);

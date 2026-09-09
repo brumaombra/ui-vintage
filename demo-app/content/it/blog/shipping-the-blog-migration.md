@@ -24,6 +24,8 @@ Quando l'interfaccia del blog viene spostata nella libreria, la demo app smette 
 
 È un test più significativo perché rispecchia il modo in cui un prodotto consumer utilizza davvero la libreria.
 
+In pratica, l'integrazione resta facile da leggere quando nomi come `queryCollection` e `@brumaombra/ui-vintage/content` rimangono riferimenti inline compatti.
+
 ::BlogList
 ---
 variant: numbered
