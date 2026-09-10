@@ -55,7 +55,7 @@ items:
 ---
 ::
 
-::Code
+::CodeBlock
 ---
 title: "A content entry"
 language: json

@@ -55,7 +55,7 @@ items:
 ---
 ::
 
-::Code
+::CodeBlock
 ---
 title: "Un contenuto editoriale"
 language: json

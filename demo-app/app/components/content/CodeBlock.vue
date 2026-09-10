@@ -1,5 +1,5 @@
 <script setup>
-import { Code as UiVintageCode } from '@brumaombra/ui-vintage/content';
+import { CodeBlock as UiVintageCodeBlock } from '@brumaombra/ui-vintage/content';
 
 // Props
 const props = defineProps({
@@ -11,7 +11,7 @@ const props = defineProps({
 </script>
 
 <template>
-    <UiVintageCode :code="props.code"
+    <UiVintageCodeBlock :code="props.code"
         :language="props.language"
         :title="props.title"
         :copyable="props.copyable" />

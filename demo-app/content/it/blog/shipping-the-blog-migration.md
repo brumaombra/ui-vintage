@@ -71,7 +71,7 @@ items:
 ---
 ::
 
-::Code
+::CodeBlock
 ---
 title: "Output testuale"
 language: text

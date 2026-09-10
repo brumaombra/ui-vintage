@@ -71,7 +71,7 @@ items:
 ---
 ::
 
-::Code
+::CodeBlock
 ---
 title: "Plain text output"
 language: text
