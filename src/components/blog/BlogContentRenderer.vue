@@ -31,6 +31,7 @@ const props = defineProps<{
 .blog-content :deep(h2:not(.not-prose):not(.not-prose *)),
 .blog-content :deep(h3:not(.not-prose):not(.not-prose *)) {
     color: var(--blog-content-text);
+    scroll-margin-top: 6rem;
 }
 
 .blog-content :deep(h1:not(.not-prose):not(.not-prose *)) {

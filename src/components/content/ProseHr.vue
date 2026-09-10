@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<{
 </script>
 
 <template>
-    <div aria-hidden="true" class="not-prose my-6 sm:my-8">
+    <div aria-hidden="true" class="not-prose my-6 sm:my-12">
         <div class="flex items-center gap-3 sm:gap-4">
             <!-- Left line -->
             <div class="h-px flex-1 bg-linear-to-r from-transparent via-(--border-light) to-(--border-light) dark:via-(--border-dark) dark:to-(--border-dark)" />
