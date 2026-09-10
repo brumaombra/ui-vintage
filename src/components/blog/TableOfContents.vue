@@ -339,7 +339,7 @@ onUnmounted(() => {
         <Teleport to="body">
             <!-- Desktop sticky sidebar -->
             <Transition name="toc-dock">
-                <aside v-if="isDesktop && isDocked" class="fixed top-35 left-[max(0.75rem,calc(50%-45rem))] z-20 hidden w-44 xl:block 2xl:w-56" :aria-label="tocTitle">
+                <aside v-if="isDesktop && isDocked" class="fixed top-35 left-[max(0rem,calc(50%-45rem))] z-20 hidden w-48 xl:block 2xl:w-60" :aria-label="tocTitle">
                     <Card class="p-5!">
                         <CardContent class="p-0! gap-3">
                             <div class="flex items-center gap-3 min-w-0">

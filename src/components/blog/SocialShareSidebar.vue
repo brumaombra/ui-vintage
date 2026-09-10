@@ -55,7 +55,7 @@ const socialPlatforms = computed(() => {
 <template>
     <Teleport to="body">
         <!-- Desktop sidebar on the right -->
-        <div class="fixed right-[calc(50%-600px)] top-35 z-20 hidden xl:block">
+        <div class="fixed right-[max(6.875rem,calc(50%-38.125rem))] top-35 z-20 hidden xl:block 2xl:right-[max(0rem,calc(50%-35.125rem))]">
             <Card class="p-5! flex flex-col space-y-4 items-center">
                 <CardContent class="p-0! gap-4 items-center">
                     <!-- Share icon -->

@@ -108,3 +108,99 @@ const post = await queryCollection('blog')
 Even in a small demo, related content should not feel random. Prioritizing same-category posts first keeps the page behavior understandable and closer to what a real product would do.
 
 That is enough for this app. The point is not to recreate a full editorial recommendation engine. The point is to validate that the layout, links, and supporting components work when content is real.
+
+## A longer article gives the table of contents room to work
+
+This section intentionally adds more structure so the floating table of contents can be tested with a realistic amount of navigation.
+
+### Start with the reading context
+
+The first subsection gives the reader a clear place to begin before the article branches into smaller topics.
+
+### Keep each section focused
+
+Short, focused sections make a long table of contents easier to scan even when the navigation itself needs to scroll.
+
+### Leave room for the next idea
+
+Consistent spacing between sections helps the active heading remain easy to identify while reading.
+
+## Heading density changes the navigation rhythm
+
+More headings make it easier to see whether active-state tracking and nested heading indentation continue to work together.
+
+### Compare primary sections
+
+Primary sections should remain visually stronger than their subtitles in both the in-flow and floating versions of the navigation.
+
+### Compare supporting subtitles
+
+Supporting subtitles should stay readable without making the navigation card grow beyond the viewport.
+
+### Follow the active chapter
+
+As the reader moves down the page, the highlighted entry should continue to follow the visible heading.
+
+## A docked navigation needs a bounded height
+
+The floating card should remain available without covering an unreasonable amount of the article or extending below the viewport.
+
+### Test a short viewport
+
+A shorter viewport should make the navigation list scroll internally instead of pushing the card outside the screen.
+
+### Test a wide viewport
+
+At wider desktop sizes, the card can show more entries while keeping the same relationship to the prose container.
+
+### Test repeated heading levels
+
+Repeated h2 and h3 pairs make indentation, spacing, and active styling easier to inspect.
+
+## Long navigation should remain keyboard friendly
+
+The table of contents is also a keyboard navigation surface, so a larger list should not change its focus behavior.
+
+### Move through the list with Tab
+
+Each heading link should remain reachable in document order whether the card is in flow or docked.
+
+### Activate a distant heading
+
+Selecting a heading near the end of the list should close the mobile overlay when needed and scroll to the matching content.
+
+### Return focus after closing
+
+When the mobile navigation closes, focus should return to its trigger so the reading flow remains predictable.
+
+## The active heading should survive dense content
+
+Dense articles are useful for checking whether the observer keeps the correct chapter active around section boundaries.
+
+### Enter a new section
+
+The active state should change when a new primary heading enters the reading window.
+
+### Pass through a subtitle
+
+Subtitles should be able to become active without losing their parent section from the overall navigation structure.
+
+### Reach the final section
+
+The last entries should remain selectable even when they begin below the visible portion of the floating list.
+
+## A stress test should still feel like an article
+
+The extra headings are deliberately lightweight, but they preserve the kind of hierarchy a longer production post might use.
+
+### Keep the prose meaningful
+
+Each heading should introduce a small idea rather than existing only as a repeated placeholder.
+
+### Preserve the visual cadence
+
+Paragraphs between headings make it possible to inspect scrolling, spacing, and heading offsets together.
+
+### Finish with a clear conclusion
+
+A final group of subtitles gives the TOC a complete ending to track and keeps the test content easy to remove later.
