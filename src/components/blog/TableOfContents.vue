@@ -5,7 +5,6 @@ import { ArrowRight01Icon, Bookmark01Icon, Cancel01Icon } from '@hugeicons/core-
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Accordion } from '../ui/accordion';
 import { Button } from '../ui/button';
-import { Card, CardContent } from '../ui/card';
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '../ui/sheet';
 
 interface BlogTocLink {
@@ -82,10 +81,11 @@ const headings = computed(() => {
     return flattenLinks(tocLinks).filter(heading => heading.id && heading.text && heading.level >= 2 && heading.level <= 3);
 });
 
+// Title and description for the table of contents
 const tocTitle = computed(() => t('uiVintage.blog.tableOfContents'));
 const tocDescription = computed(() => t('uiVintage.blog.tableOfContentsDescription'));
 
-// Prefer reduced motion for scroll and docking animation
+// Prefer reduced motion for heading scroll
 const prefersReducedMotion = () => {
     return Boolean(window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches);
 };
@@ -94,11 +94,13 @@ const prefersReducedMotion = () => {
 const resolveActiveHeadingId = () => {
     if (!headings.value.length) return '';
 
+    // Filter the headings to only those currently visible in the viewport
     const visibleHeadings = headings.value.filter(heading => visibleHeadingIds.value.has(heading.id));
     if (visibleHeadings.length > 0) {
         return visibleHeadings[0].id;
     }
 
+    // If no headings are currently visible, fall back to the first heading in the list
     let currentId = headings.value[0].id;
     for (const heading of headings.value) {
         const element = document.getElementById(heading.id);
@@ -107,9 +109,11 @@ const resolveActiveHeadingId = () => {
         }
     }
 
+    // Return the resolved current heading ID
     return currentId;
 };
 
+// Update the active heading based on the current scroll position
 const updateActiveHeading = () => {
     activeHeadingId.value = resolveActiveHeadingId();
 };
@@ -118,6 +122,7 @@ const updateActiveHeading = () => {
 const handleHeadingIntersect = (entries: IntersectionObserverEntry[]) => {
     const nextVisibleIds = new Set(visibleHeadingIds.value);
 
+    // Update the set of visible heading IDs
     for (const entry of entries) {
         if (entry.isIntersecting) {
             nextVisibleIds.add(entry.target.id);
@@ -126,25 +131,30 @@ const handleHeadingIntersect = (entries: IntersectionObserverEntry[]) => {
         }
     }
 
+    // Apply the updated set
     visibleHeadingIds.value = nextVisibleIds;
     updateActiveHeading();
 };
 
+// Disconnect the heading observer and clear any pending retries
 const disconnectHeadingObserver = () => {
     headingObserver?.disconnect();
     headingObserver = null;
     window.clearTimeout(headingRetryTimeout);
 };
 
+// Bind the heading observer to track which headings are visible in the viewport
 const bindHeadingObserver = () => {
     disconnectHeadingObserver();
 
+    // If there are no headings, clear the active heading and visible heading IDs
     if (!headings.value.length) {
         activeHeadingId.value = '';
         visibleHeadingIds.value = new Set();
         return true;
     }
 
+    // Get the DOM elements corresponding to the headings
     const elements = headings.value
         .map(heading => document.getElementById(heading.id))
         .filter((element): element is HTMLElement => Boolean(element));
@@ -170,6 +180,7 @@ const bindHeadingObserver = () => {
     return true;
 };
 
+// Retry binding until the content renderer has mounted its headings
 const scheduleHeadingObserver = (attempt = 0) => {
     nextTick(() => {
         if (bindHeadingObserver()) return;
@@ -181,11 +192,13 @@ const scheduleHeadingObserver = (attempt = 0) => {
     });
 };
 
+// Disconnect the observer that controls the mobile trigger visibility
 const disconnectSentinelObserver = () => {
     sentinelObserver?.disconnect();
     sentinelObserver = null;
 };
 
+// Show the mobile trigger after the in-flow accordion leaves the viewport
 const bindSentinelObserver = () => {
     disconnectSentinelObserver();
 
@@ -194,7 +207,7 @@ const bindSentinelObserver = () => {
         return;
     }
 
-    // Dock the sidebar once the in-flow accordion has scrolled completely out of view
+    // Show the mobile control once the in-flow accordion has scrolled completely out of view
     sentinelObserver = new IntersectionObserver(([entry]) => {
         const hasScrolledPast = !entry.isIntersecting && entry.boundingClientRect.top < 0;
         isDocked.value = hasScrolledPast;
@@ -205,22 +218,20 @@ const bindSentinelObserver = () => {
     sentinelObserver.observe(inlineRef.value);
 };
 
+// Keep the mobile trigger state in sync with the viewport breakpoint
 const handleDesktopMediaChange = (event: MediaQueryList | MediaQueryListEvent) => {
     isDesktop.value = event.matches;
 
-    if (!event.matches) {
-        nextTick(() => {
-            bindSentinelObserver();
-        });
-        return;
+    if (event.matches) {
+        isMobileOpen.value = false;
     }
 
-    isMobileOpen.value = false;
     nextTick(() => {
         bindSentinelObserver();
     });
 };
 
+// Synchronize the mobile sheet state and restore focus after dismissal
 const handleMobileOpenChange = (open: boolean) => {
     isMobileOpen.value = open;
 
@@ -232,6 +243,7 @@ const handleMobileOpenChange = (open: boolean) => {
     restoreMobileTriggerFocus = true;
 };
 
+// Scroll to a heading and optionally close the mobile sheet first
 const scrollToHeading = (id: string, options: { closeMobile?: boolean } = {}) => {
     const runScroll = () => {
         const element = document.getElementById(id);
@@ -266,6 +278,7 @@ const scrollToHeading = (id: string, options: { closeMobile?: boolean } = {}) =>
     runScroll();
 };
 
+// Open the mobile table of contents sheet
 const openMobileToc = () => {
     isMobileOpen.value = true;
 };
@@ -283,24 +296,26 @@ const getHeadingButtonClasses = (level: number, isActive: boolean) => {
         levelClasses = 'text-(--text-secondary-light) dark:text-(--text-secondary-dark) pl-6! text-xs md:text-sm';
     }
 
-    const activeClasses = isActive
-        ? 'bg-(--bg-selected-light) dark:bg-(--bg-selected-dark) border-l-primary text-(--text-primary-light) dark:text-(--text-primary-dark)'
-        : '';
+    // Add classes if the heading is active
+    const activeClasses = isActive ? 'bg-(--bg-selected-light) dark:bg-(--bg-selected-dark) border-l-primary text-(--text-primary-light) dark:text-(--text-primary-dark)' : '';
 
     // Return combined classes
     return [baseClasses, levelClasses, activeClasses];
 };
 
+// Watch for changes in the headings and update the visible heading IDs and active heading ID accordingly
 watch(headings, () => {
     visibleHeadingIds.value = new Set();
     activeHeadingId.value = headings.value[0]?.id ?? '';
     scheduleHeadingObserver();
 });
 
+// Watch for changes in the inline table of contents reference and bind the sentinel observer accordingly
 watch(inlineRef, () => {
     bindSentinelObserver();
 }, { flush: 'post' });
 
+// On component mounted
 onMounted(() => {
     desktopMediaQuery = window.matchMedia(DESKTOP_MEDIA_QUERY);
     handleDesktopMediaChange(desktopMediaQuery);
@@ -314,6 +329,7 @@ onMounted(() => {
     scheduleHeadingObserver();
 });
 
+// On component unmounted
 onUnmounted(() => {
     desktopMediaQuery?.removeEventListener('change', handleDesktopMediaChange);
     disconnectSentinelObserver();
@@ -324,7 +340,7 @@ onUnmounted(() => {
 
 <template>
     <div v-if="headings.length > 0">
-        <!-- Desktop in-flow accordion; docks to a left sidebar after it scrolls away -->
+        <!-- In-flow accordion; replaced by the mobile control after it scrolls away -->
         <div ref="inlineRef" class="mb-6" :aria-hidden="isDocked" :inert="isDocked">
             <Accordion :title="tocTitle" :icon="Bookmark01Icon">
                 <nav :aria-label="tocTitle" class="space-y-1">
@@ -336,33 +352,9 @@ onUnmounted(() => {
         </div>
 
         <Teleport to="body">
-            <!-- Desktop sticky sidebar -->
-            <Transition name="toc-dock">
-                <aside v-if="isDesktop && isDocked" class="fixed top-35 left-[max(0rem,calc(50%-45rem))] z-20 hidden w-48 xl:block 2xl:w-60" :aria-label="tocTitle">
-                    <Card class="p-5!">
-                        <CardContent class="p-0! gap-3">
-                            <div class="flex items-center gap-3 min-w-0">
-                                <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded border border-(--border-light) bg-(--bg-card-light) dark:border-(--border-dark) dark:bg-(--bg-card-dark)">
-                                    <HugeiconsIcon :icon="Bookmark01Icon" class="size-4 text-(--text-secondary-light) dark:text-(--text-secondary-dark)" />
-                                </div>
-                                <div class="text-sm font-semibold text-(--text-primary-light) dark:text-(--text-primary-dark)">
-                                    {{ tocTitle }}
-                                </div>
-                            </div>
-
-                            <nav :aria-label="tocTitle" class="max-h-[calc(100vh-12rem)] space-y-1 overflow-y-auto">
-                                <button v-for="heading in headings" :key="`docked-${heading.id}`" type="button" :class="getHeadingButtonClasses(heading.level, heading.id === activeHeadingId)" :aria-current="heading.id === activeHeadingId ? 'location' : undefined" @click="scrollToHeading(heading.id)">
-                                    {{ heading.text }}
-                                </button>
-                            </nav>
-                        </CardContent>
-                    </Card>
-                </aside>
-            </Transition>
-
             <!-- Mobile persistent control -->
             <Transition name="toc-tab">
-                <button v-if="!isDesktop && isDocked" ref="mobileTriggerRef" type="button" class="fixed top-1/2 left-0 z-20 flex h-16 w-8 -translate-y-1/2 items-center justify-center rounded-r border border-l-0 border-(--border-light) bg-(--bg-card-light) text-(--text-secondary-light) shadow-lg transition-[background-color,color,transform] duration-200 hover:bg-(--bg-selected-light) hover:text-(--text-primary-light) focus-visible:z-30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 dark:border-(--border-dark) dark:bg-(--bg-card-dark) dark:text-(--text-secondary-dark) dark:hover:bg-(--bg-selected-dark) dark:hover:text-(--text-primary-dark) motion-reduce:transition-none xl:hidden" :aria-label="t('uiVintage.blog.openTableOfContents')" :aria-expanded="isMobileOpen" aria-haspopup="dialog" aria-controls="toc-mobile-overlay" @click="openMobileToc">
+                <button v-if="!isDesktop && isDocked" ref="mobileTriggerRef" type="button" class="fixed top-1/2 left-0 z-20 flex h-16 w-8 -translate-y-1/2 items-center justify-center rounded-r border border-l-0 border-(--border-light) bg-(--bg-card-light) text-(--text-secondary-light) transition-[background-color,color,transform] duration-200 hover:bg-(--bg-selected-light) hover:text-(--text-primary-light) focus-visible:z-30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 dark:border-(--border-dark) dark:bg-(--bg-card-dark) dark:text-(--text-secondary-dark) dark:hover:bg-(--bg-selected-dark) dark:hover:text-(--text-primary-dark) motion-reduce:transition-none" :aria-label="t('uiVintage.blog.openTableOfContents')" :aria-expanded="isMobileOpen" aria-haspopup="dialog" aria-controls="toc-mobile-overlay" @click="openMobileToc">
                     <HugeiconsIcon :icon="ArrowRight01Icon" class="size-4" aria-hidden="true" />
                 </button>
             </Transition>
@@ -371,10 +363,14 @@ onUnmounted(() => {
             <Sheet :open="isMobileOpen" @update:open="handleMobileOpenChange">
                 <SheetContent id="toc-mobile-overlay" side="left" class="flex h-full w-full max-w-none flex-col gap-0 border-0 bg-(--bg-card-light) p-0 dark:bg-(--bg-card-dark) sm:max-w-none">
                     <SheetHeader class="flex-row items-center justify-between gap-4 border-b border-(--border-light) p-5 dark:border-(--border-dark)">
+                        <!-- Mobile table of contents header -->
                         <div class="flex min-w-0 items-center gap-3">
+                            <!-- Mobile table of contents icon -->
                             <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded border border-(--border-light) bg-(--bg-card-light) dark:border-(--border-dark) dark:bg-(--bg-card-dark)">
                                 <HugeiconsIcon :icon="Bookmark01Icon" class="size-4 text-(--text-secondary-light) dark:text-(--text-secondary-dark)" />
                             </div>
+
+                            <!-- Mobile table of contents title and description -->
                             <div class="min-w-0">
                                 <SheetTitle class="text-sm md:text-base! font-semibold text-(--text-primary-light) dark:text-(--text-primary-dark)">
                                     {{ tocTitle }}
@@ -385,6 +381,7 @@ onUnmounted(() => {
                             </div>
                         </div>
 
+                        <!-- Close button for the mobile table of contents -->
                         <SheetClose as-child>
                             <Button type="button" variant="ghost" size="icon-sm" :aria-label="t('uiVintage.blog.closeTableOfContents')">
                                 <HugeiconsIcon :icon="Cancel01Icon" class="size-4" />
@@ -392,6 +389,7 @@ onUnmounted(() => {
                         </SheetClose>
                     </SheetHeader>
 
+                    <!-- Mobile table of contents navigation -->
                     <nav :aria-label="tocTitle" class="flex-1 overflow-y-auto p-5">
                         <div class="space-y-1">
                             <button v-for="heading in headings" :key="`mobile-${heading.id}`" type="button" :class="getHeadingButtonClasses(heading.level, heading.id === activeHeadingId)" :aria-current="heading.id === activeHeadingId ? 'location' : undefined" @click="scrollToHeading(heading.id, { closeMobile: true })">
@@ -406,17 +404,6 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-.toc-dock-enter-active,
-.toc-dock-leave-active {
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.toc-dock-enter-from,
-.toc-dock-leave-to {
-    opacity: 0;
-    transform: translateX(-1rem);
-}
-
 .toc-tab-enter-active,
 .toc-tab-leave-active {
     transition: opacity 0.25s ease;
@@ -429,8 +416,6 @@ onUnmounted(() => {
 
 @media (prefers-reduced-motion: reduce) {
 
-    .toc-dock-enter-active,
-    .toc-dock-leave-active,
     .toc-tab-enter-active,
     .toc-tab-leave-active {
         transition: none;
