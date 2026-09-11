@@ -226,9 +226,7 @@ const handleMobileOpenChange = (open: boolean) => {
 
     // Return focus to the persistent control when the overlay is dismissed
     if (!open && restoreMobileTriggerFocus) {
-        nextTick(() => {
-            mobileTriggerRef.value?.focus();
-        });
+        mobileTriggerRef.value?.focus();
     }
 
     restoreMobileTriggerFocus = true;
@@ -258,6 +256,7 @@ const scrollToHeading = (id: string, options: { closeMobile?: boolean } = {}) =>
     restoreMobileTriggerFocus = false;
 
     if (options.closeMobile && isMobileOpen.value) {
+        mobileTriggerRef.value?.focus();
         isMobileOpen.value = false;
         window.clearTimeout(mobileScrollTimeout);
         mobileScrollTimeout = window.setTimeout(runScroll, MOBILE_CLOSE_SCROLL_DELAY_MS);
@@ -274,7 +273,7 @@ const openMobileToc = () => {
 // Get classes for heading button
 const getHeadingButtonClasses = (level: number, isActive: boolean) => {
     // Base classes for all titles
-    const baseClasses = 'block w-full text-left px-0 py-2 md:px-3 md:py-2 rounded border-l-2 border-transparent transition-all duration-200 hover:bg-(--bg-selected-light) dark:hover:bg-(--bg-selected-dark) cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 motion-reduce:transition-none';
+    const baseClasses = 'block w-full text-left px-2.5 py-2 md:px-3 md:py-2 rounded border-l-2 border-transparent transition-all duration-200 hover:bg-(--bg-selected-light) dark:hover:bg-(--bg-selected-dark) cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 motion-reduce:transition-none';
 
     // Add classes based on heading level
     let levelClasses = '';

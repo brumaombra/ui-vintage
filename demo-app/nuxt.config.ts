@@ -45,16 +45,17 @@ export default defineNuxtConfig({
         ],
         optimizeDeps: {
             include: [
+                '@brumaombra/ui-vintage',
                 '@hugeicons/core-free-icons',
                 '@hugeicons/vue',
-                'clsx',
-                'tailwind-merge',
-                'class-variance-authority',
-                'reka-ui',
-                '@vueuse/core',
                 '@internationalized/date',
+                '@vueuse/core',
+                'class-variance-authority',
+                'clsx',
+                'reka-ui',
                 'reka-ui/date',
-                '@brumaombra/ui-vintage'
+                'shiki',
+                'tailwind-merge'
             ]
         }
     },
