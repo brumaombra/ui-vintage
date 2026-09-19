@@ -5,6 +5,7 @@ import { HugeiconsIcon } from '@hugeicons/vue';
 import { computed, type Component, type HTMLAttributes } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { cn } from '../../../lib/utils';
+import type { HeadingLevel } from '../../../lib/common-types';
 
 export interface LandingFooterLink {
     id: string;
@@ -33,6 +34,7 @@ const props = withDefaults(defineProps<{
     authorLink?: string;
     year?: number;
     showBottomBar?: boolean;
+    level?: HeadingLevel;
     class?: HTMLAttributes['class'];
     containerClass?: HTMLAttributes['class'];
     brandClass?: HTMLAttributes['class'];
@@ -46,7 +48,8 @@ const props = withDefaults(defineProps<{
     authorName: '',
     authorLink: '',
     year: () => new Date().getFullYear(),
-    showBottomBar: true
+    showBottomBar: true,
+    level: 3
 });
 
 const { t } = useI18n();
@@ -94,9 +97,9 @@ const getLinkProps = (link: LandingFooterLink) => {
                 <div v-if="hasSingleSection" :class="cn('min-w-0 md:flex md:justify-end', props.sectionsClass)">
                     <div class="md:text-right">
                         <!-- Section title -->
-                        <h3 class="mb-4 font-semibold text-foreground">
+                        <component :is="`h${props.level}`" class="mb-4 font-semibold text-foreground">
                             {{ props.sections[0]?.title }}
-                        </h3>
+                        </component>
 
                         <!-- Section links -->
                         <ul class="space-y-3 text-xs sm:text-sm">
@@ -113,9 +116,9 @@ const getLinkProps = (link: LandingFooterLink) => {
                 <div v-else class="flex flex-col gap-8 md:max-w-[60%] md:flex-row md:flex-wrap md:justify-end md:gap-16">
                     <div v-for="section in props.sections" :key="section.id" :class="cn('min-w-28', props.sectionsClass)">
                         <!-- Section title -->
-                        <h3 class="mb-4 font-semibold text-foreground">
+                        <component :is="`h${props.level}`" class="mb-4 font-semibold text-foreground">
                             {{ section.title }}
-                        </h3>
+                        </component>
 
                         <!-- Section links -->
                         <ul class="space-y-3 text-xs sm:text-sm">

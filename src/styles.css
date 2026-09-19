@@ -28,7 +28,7 @@ html {
     --button-primary-hover-light: #df8112;
     --button-primary-dark: #f7a23c;
     --button-primary-hover-dark: #ffb55b;
-    --button-primary-foreground-light: #ffffff;
+    --button-primary-foreground-light: var(--text-primary-light);
     --button-primary-foreground-dark: #1b1307;
     --button-secondary-light: #ffffff;
     --button-secondary-dark: #171c23;

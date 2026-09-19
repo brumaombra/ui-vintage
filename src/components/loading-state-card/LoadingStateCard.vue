@@ -4,17 +4,19 @@ import { useI18n } from 'vue-i18n';
 import { Loading03Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Card, CardContent } from '../ui/card';
-import type { HugeiconsIconDefinition } from '../../lib/common-types';
+import type { HeadingLevel, HugeiconsIconDefinition } from '../../lib/common-types';
 
 // Props
 const props = withDefaults(defineProps<{
     icon?: HugeiconsIconDefinition;
     title?: string;
     description?: string;
+    level?: HeadingLevel;
 }>(), {
     icon: () => Loading03Icon,
     title: '',
-    description: ''
+    description: '',
+    level: 3
 });
 
 const { t } = useI18n();
@@ -31,9 +33,11 @@ const resolvedDescription = computed(() => props.description || t('uiVintage.com
             </div>
 
             <!-- Title -->
-            <h3 v-if="resolvedTitle" class="text-sm font-bold text-(--text-primary-light) dark:text-(--text-primary-dark) md:text-lg">
+            <component :is="`h${props.level}`"
+                v-if="resolvedTitle"
+                class="text-sm font-bold text-(--text-primary-light) dark:text-(--text-primary-dark) md:text-lg">
                 {{ resolvedTitle }}
-            </h3>
+            </component>
 
             <!-- Description -->
             <p v-if="resolvedDescription" class="max-w-md text-xs text-(--text-secondary-light) dark:text-(--text-secondary-dark) md:text-sm">
