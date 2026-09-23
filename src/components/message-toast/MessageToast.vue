@@ -13,7 +13,7 @@ const currentToast = computed(() => messageToastState.current);
 const closeAriaLabel = computed(() => getUiVintageRuntimeMessage('uiVintage.buttons.close', 'Close'));
 
 // Determine toast type for styling and icon selection
-const toastType = computed(() => currentToast.value?.type ?? 'success');
+const toastType = computed(() => currentToast.value?.type || 'success');
 
 // Resolved icon based on toast type
 const toastIcon = computed(() => {

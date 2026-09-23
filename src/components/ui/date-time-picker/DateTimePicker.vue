@@ -25,8 +25,7 @@ const props = withDefaults(defineProps<{
     minDate: null,
     maxDate: null,
     step: 60,
-    disabled: false,
-    datePlaceholder: 'Pick a date'
+    disabled: false
 });
 
 // Emits
@@ -158,11 +157,7 @@ const maxTimeValue = computed(() => {
 </script>
 
 <template>
-    <div :class="cn(
-        'grid grid-cols-1 gap-3 md:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]',
-        props.class,
-    )
-        ">
+    <div :class="cn('grid grid-cols-1 gap-3 md:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]', props.class,)">
         <div>
             <DatePicker v-model="dateValue" :disabled="props.disabled" :placeholder="props.datePlaceholder" :min-value="minDateValue" :max-value="maxDateValue" :class="cn('w-full', props.datePickerClass)" :content-class="props.datePickerContentClass" />
         </div>

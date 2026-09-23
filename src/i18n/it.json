@@ -1,6 +1,8 @@
 {
     "uiVintage": {
         "common": {
+            "breadcrumb": "Percorso di navigazione",
+            "more": "Altro",
             "empty": {
                 "title": "Non c'è ancora niente qui",
                 "description": "Al momento non c'è alcun contenuto da mostrare."
@@ -11,6 +13,7 @@
             }
         },
         "buttons": {
+            "remove": "Rimuovi",
             "all": "Tutti",
             "close": "Chiudi",
             "cancel": "Annulla",
@@ -37,6 +40,18 @@
             "title": "Scegli lingua",
             "ariaLabel": "Selettore lingua"
         },
+        "sidebar": {
+            "title": "Barra laterale",
+            "description": "Mostra la barra laterale sui dispositivi mobili.",
+            "toggle": "Attiva o disattiva la barra laterale"
+        },
+        "commandDialog": {
+            "title": "Tavolozza dei comandi",
+            "description": "Cerca un comando da eseguire..."
+        },
+        "datePicker": {
+            "placeholder": "Scegli una data"
+        },
         "terminal": {
             "title": "Terminale",
             "copy": "Copia comandi",
@@ -53,6 +68,7 @@
             "allRightsReserved": "Tutti i diritti riservati."
         },
         "blog": {
+            "readingProgress": "Avanzamento della lettura",
             "readMore": "Leggi di piu",
             "goToPost": "Vai all'articolo",
             "tableOfContents": "Indice dei contenuti",
@@ -82,7 +98,18 @@
         "select": {
             "defaultPlaceholder": "Seleziona un'opzione"
         },
+        "errorPage": {
+            "notFound": {
+                "title": "Pagina non trovata",
+                "message": "La pagina richiesta non è stata trovata o potrebbe essere stata spostata."
+            },
+            "unexpected": {
+                "title": "Qualcosa è andato storto",
+                "message": "Un errore imprevisto ha interrotto il flusso corrente. Riprova o torna a una pagina sicura."
+            }
+        },
         "messageDialog": {
+            "confirm": "Conferma",
             "error": "Errore",
             "success": "Successo",
             "info": "Informazione",

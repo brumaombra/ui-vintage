@@ -1,23 +1,20 @@
 <script setup lang="ts">
 import type { DialogRootEmits, DialogRootProps } from 'reka-ui';
 import { useForwardPropsEmits } from 'reka-ui';
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-} from '../dialog';
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, } from '../dialog';
 import Command from './Command.vue';
 
 // Props
-const props = withDefaults(defineProps<DialogRootProps & {
+const props = defineProps<DialogRootProps & {
     title?: string;
     description?: string;
-}>(), {
-    title: 'Command Palette',
-    description: 'Search for a command to run...'
-});
+}>();
+
+const { t } = useI18n();
+const resolvedTitle = computed(() => props.title || t('uiVintage.commandDialog.title'));
+const resolvedDescription = computed(() => props.description || t('uiVintage.commandDialog.description'));
 
 // Emits
 const emits = defineEmits<DialogRootEmits>();
@@ -30,8 +27,8 @@ const forwarded = useForwardPropsEmits(props, emits);
     <Dialog v-slot="slotProps" v-bind="forwarded">
         <DialogContent class="overflow-hidden p-0">
             <DialogHeader class="sr-only">
-                <DialogTitle>{{ title }}</DialogTitle>
-                <DialogDescription>{{ description }}</DialogDescription>
+                <DialogTitle>{{ resolvedTitle }}</DialogTitle>
+                <DialogDescription>{{ resolvedDescription }}</DialogDescription>
             </DialogHeader>
             <Command>
                 <slot v-bind="slotProps" />

@@ -1,6 +1,8 @@
 {
     "uiVintage": {
         "common": {
+            "breadcrumb": "Brotkrumennavigation",
+            "more": "Mehr",
             "empty": {
                 "title": "Hier gibt es noch nichts",
                 "description": "Zurzeit gibt es keine Inhalte zum Anzeigen."
@@ -11,6 +13,7 @@
             }
         },
         "buttons": {
+            "remove": "Entfernen",
             "all": "Alle",
             "close": "Schliessen",
             "cancel": "Abbrechen",
@@ -37,6 +40,18 @@
             "title": "Sprache wahlen",
             "ariaLabel": "Sprachauswahl"
         },
+        "sidebar": {
+            "title": "Seitenleiste",
+            "description": "Zeigt die mobile Seitenleiste an.",
+            "toggle": "Seitenleiste umschalten"
+        },
+        "commandDialog": {
+            "title": "Befehlspalette",
+            "description": "Nach einem auszuführenden Befehl suchen..."
+        },
+        "datePicker": {
+            "placeholder": "Datum auswählen"
+        },
         "terminal": {
             "title": "Terminal",
             "copy": "Befehle kopieren",
@@ -53,6 +68,7 @@
             "allRightsReserved": "Alle Rechte vorbehalten."
         },
         "blog": {
+            "readingProgress": "Lesefortschritt",
             "readMore": "Weiterlesen",
             "goToPost": "Zum Beitrag",
             "tableOfContents": "Inhaltsverzeichnis",
@@ -82,7 +98,18 @@
         "select": {
             "defaultPlaceholder": "Option auswahlen"
         },
+        "errorPage": {
+            "notFound": {
+                "title": "Seite nicht gefunden",
+                "message": "Die angeforderte Seite wurde nicht gefunden oder wurde möglicherweise verschoben."
+            },
+            "unexpected": {
+                "title": "Etwas ist schiefgelaufen",
+                "message": "Ein unerwarteter Fehler hat den aktuellen Ablauf unterbrochen. Bitte versuche es erneut oder gehe zu einer sicheren Seite zurück."
+            }
+        },
         "messageDialog": {
+            "confirm": "Bestatigen",
             "error": "Fehler",
             "success": "Erfolg",
             "info": "Information",

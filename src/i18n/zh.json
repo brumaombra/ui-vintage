@@ -1,6 +1,8 @@
 {
     "uiVintage": {
         "common": {
+            "breadcrumb": "面包屑导航",
+            "more": "更多",
             "empty": {
                 "title": "这里还没有内容",
                 "description": "当前没有可显示的内容。"
@@ -11,6 +13,7 @@
             }
         },
         "buttons": {
+            "remove": "移除",
             "all": "全部",
             "close": "关闭",
             "cancel": "取消",
@@ -37,6 +40,18 @@
             "title": "选择语言",
             "ariaLabel": "语言选择器"
         },
+        "sidebar": {
+            "title": "侧边栏",
+            "description": "显示移动侧边栏。",
+            "toggle": "切换侧边栏"
+        },
+        "commandDialog": {
+            "title": "命令面板",
+            "description": "搜索要运行的命令..."
+        },
+        "datePicker": {
+            "placeholder": "选择日期"
+        },
         "terminal": {
             "title": "终端",
             "copy": "复制命令",
@@ -53,6 +68,7 @@
             "allRightsReserved": "版权所有。"
         },
         "blog": {
+            "readingProgress": "阅读进度",
             "readMore": "阅读更多",
             "goToPost": "前往文章",
             "tableOfContents": "目录",
@@ -82,7 +98,18 @@
         "select": {
             "defaultPlaceholder": "请选择一个选项"
         },
+        "errorPage": {
+            "notFound": {
+                "title": "找不到页面",
+                "message": "找不到您请求的页面，或者该页面可能已被移动。"
+            },
+            "unexpected": {
+                "title": "出了点问题",
+                "message": "发生意外错误，当前操作已中断。请重试或返回安全页面。"
+            }
+        },
         "messageDialog": {
+            "confirm": "确认",
             "error": "错误",
             "success": "成功",
             "info": "信息",

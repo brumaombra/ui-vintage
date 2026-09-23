@@ -1,6 +1,8 @@
 {
     "uiVintage": {
         "common": {
+            "breadcrumb": "Breadcrumb",
+            "more": "More",
             "empty": {
                 "title": "Nothing here yet",
                 "description": "There is no content to show right now."
@@ -11,6 +13,7 @@
             }
         },
         "buttons": {
+            "remove": "Remove",
             "all": "All",
             "close": "Close",
             "cancel": "Cancel",
@@ -37,6 +40,18 @@
             "title": "Choose language",
             "ariaLabel": "Language selector"
         },
+        "sidebar": {
+            "title": "Sidebar",
+            "description": "Displays the mobile sidebar.",
+            "toggle": "Toggle sidebar"
+        },
+        "commandDialog": {
+            "title": "Command palette",
+            "description": "Search for a command to run..."
+        },
+        "datePicker": {
+            "placeholder": "Pick a date"
+        },
         "terminal": {
             "title": "Terminal",
             "copy": "Copy commands",
@@ -53,6 +68,7 @@
             "allRightsReserved": "All rights reserved."
         },
         "blog": {
+            "readingProgress": "Reading progress",
             "readMore": "Read more",
             "goToPost": "Go to post",
             "tableOfContents": "Table of contents",
@@ -82,7 +98,18 @@
         "select": {
             "defaultPlaceholder": "Select an option"
         },
+        "errorPage": {
+            "notFound": {
+                "title": "Page not found",
+                "message": "The page you requested could not be found or may have been moved."
+            },
+            "unexpected": {
+                "title": "Something went wrong",
+                "message": "An unexpected error interrupted the current flow. Please try again or go back to a safe page."
+            }
+        },
         "messageDialog": {
+            "confirm": "Confirm",
             "error": "Error",
             "success": "Success",
             "info": "Information",

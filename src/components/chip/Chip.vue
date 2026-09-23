@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { Cancel01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
+import { computed } from 'vue';
 import type { HTMLAttributes } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { getSurfaceToneClasses, type ToneColor } from '../../lib/color-tokens';
 import { cn } from '../../lib/utils';
 
@@ -12,9 +14,11 @@ const props = withDefaults(defineProps<{
     removeLabel?: string;
     class?: HTMLAttributes['class'];
 }>(), {
-    color: 'gray',
-    removeLabel: 'Remove'
+    color: 'gray'
 });
+
+const { t } = useI18n();
+const resolvedRemoveLabel = computed(() => props.removeLabel || t('uiVintage.buttons.remove'));
 
 // Emits
 const emits = defineEmits<{
@@ -33,7 +37,7 @@ const handleRemove = () => {
         <span class="leading-none">{{ props.text }}</span>
 
         <!-- Remove button -->
-        <button type="button" :aria-label="props.removeLabel" class="inline-flex size-4 items-center justify-center rounded-sm opacity-70 transition-all duration-200 ease-in-out hover:bg-black/5 hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-current/20 dark:hover:bg-white/10" @click="handleRemove">
+        <button type="button" :aria-label="resolvedRemoveLabel" class="inline-flex size-4 items-center justify-center rounded-sm opacity-70 transition-all duration-200 ease-in-out hover:bg-black/5 hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-current/20 dark:hover:bg-white/10" @click="handleRemove">
             <HugeiconsIcon :icon="Cancel01Icon" class="size-3" />
         </button>
     </div>

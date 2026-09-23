@@ -1,4 +1,5 @@
 import { h, reactive, render, type HTMLAttributes } from 'vue';
+import { getUiVintageRuntimeMessage } from '../../lib/i18n';
 
 export interface SetBusyOptions {
     label?: string;
@@ -20,7 +21,7 @@ let busyIndicatorMountPromise: Promise<void> | null = null;
 // Shared busy state
 export const busyIndicatorState: BusyIndicatorState = reactive({
     show: false,
-    label: 'Loading...',
+    label: getUiVintageRuntimeMessage('uiVintage.common.loading.title', 'Loading...'),
     class: undefined,
     overlayClass: undefined
 });
@@ -70,7 +71,7 @@ const ensureBusyIndicatorMounted = () => {
 export const setBusy = (show: boolean, options: SetBusyOptions = {}) => {
     // Prepare the overlay before showing it
     if (show) {
-        busyIndicatorState.label = options.label ?? busyIndicatorState.label ?? 'Loading...';
+        busyIndicatorState.label = options.label ?? getUiVintageRuntimeMessage('uiVintage.common.loading.title', 'Loading...');
         busyIndicatorState.class = options.class;
         busyIndicatorState.overlayClass = options.overlayClass;
         void ensureBusyIndicatorMounted();

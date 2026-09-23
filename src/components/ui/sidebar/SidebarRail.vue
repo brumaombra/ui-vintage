@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { cn } from '../../../lib/utils';
 import { useSidebar } from './utils';
 
@@ -8,11 +9,12 @@ const props = defineProps<{
     class?: HTMLAttributes['class'];
 }>();
 
+const { t } = useI18n();
 const { toggleSidebar } = useSidebar();
 </script>
 
 <template>
-    <button data-sidebar="rail" data-slot="sidebar-rail" aria-label="Toggle Sidebar" :tabindex="-1" title="Toggle Sidebar" :class="cn(
+    <button data-sidebar="rail" data-slot="sidebar-rail" :aria-label="t('uiVintage.sidebar.toggle')" :tabindex="-1" :title="t('uiVintage.sidebar.toggle')" :class="cn(
         'hover:after:bg-sidebar-border absolute inset-y-0 z-20 hidden w-4 -translate-x-1/2 transition-all ease-linear group-data-[side=left]:-right-4 group-data-[side=right]:left-0 after:absolute after:inset-y-0 after:left-1/2 after:w-0.5 sm:flex',
         'in-data-[side=left]:cursor-w-resize in-data-[side=right]:cursor-e-resize',
         '[[data-side=left][data-state=collapsed]_&]:cursor-e-resize [[data-side=right][data-state=collapsed]_&]:cursor-w-resize',

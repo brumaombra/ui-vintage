@@ -1,16 +1,17 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
 import type { HTMLAttributes } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { cn } from '../../lib/utils';
 
 // Props
-const props = withDefaults(defineProps<{
+const props = defineProps<{
     class?: HTMLAttributes['class'];
     ariaLabel?: string;
-}>(), {
-    ariaLabel: 'Reading progress'
-});
+}>();
 
+const { t } = useI18n();
+const resolvedAriaLabel = computed(() => props.ariaLabel || t('uiVintage.blog.readingProgress'));
 const progress = ref(0);
 let animationFrame = 0;
 
@@ -44,7 +45,7 @@ onUnmounted(() => {
 <template>
     <div :class="cn('relative h-1 w-full border-t border-(--border-light) bg-(--bg-selected-light) dark:border-(--border-dark) dark:bg-(--bg-selected-dark) landing-navbar-progress', props.class)"
         role="progressbar"
-        :aria-label="props.ariaLabel"
+        :aria-label="resolvedAriaLabel"
         aria-valuemin="0"
         aria-valuemax="100"
         :aria-valuenow="Math.round(progress)">

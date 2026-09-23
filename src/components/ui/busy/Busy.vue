@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import type { HTMLAttributes } from 'vue';
+import { computed, type HTMLAttributes } from 'vue';
 import { Loading03Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
+import { getUiVintageRuntimeMessage } from '../../../lib/i18n';
 import { cn } from '../../../lib/utils';
 
 // Props
@@ -11,9 +12,10 @@ const props = withDefaults(defineProps<{
     class?: HTMLAttributes['class'];
     overlayClass?: HTMLAttributes['class'];
 }>(), {
-    show: false,
-    label: 'Loading...'
+    show: false
 });
+
+const resolvedLabel = computed(() => props.label || getUiVintageRuntimeMessage('uiVintage.common.loading.title', 'Loading...'));
 </script>
 
 <template>
@@ -30,8 +32,8 @@ const props = withDefaults(defineProps<{
                 ">
                 <slot>
                     <HugeiconsIcon data-slot="busy-spinner" :icon="Loading03Icon" class="size-10 animate-spin text-primary" />
-                    <span v-if="props.label" data-slot="busy-label" class="text-xs font-semibold text-foreground sm:text-sm">
-                        {{ props.label }}
+                    <span v-if="resolvedLabel" data-slot="busy-label" class="text-xs font-semibold text-foreground sm:text-sm">
+                        {{ resolvedLabel }}
                     </span>
                 </slot>
             </div>

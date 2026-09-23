@@ -1,6 +1,7 @@
 import { h, markRaw, reactive, render } from 'vue';
 import type { ButtonVariants } from '../ui/button';
 import type { HugeiconsIconDefinition } from '../../lib/common-types';
+import { getUiVintageRuntimeMessage } from '../../lib/i18n';
 
 export type DialogButtonVariant = NonNullable<ButtonVariants['variant']>;
 export type { HugeiconsIconDefinition };
@@ -183,10 +184,10 @@ export const showConfirmDialog = (options: ShowConfirmDialogOptions) => {
         enqueueConfirmDialog({
             id: nextConfirmDialogId += 1,
             options: {
-                title: options.title ?? 'Confirm',
+                title: options.title ?? getUiVintageRuntimeMessage('uiVintage.messageDialog.confirm', 'Confirm'),
                 message: options.message,
-                confirmText: options.confirmText ?? 'Confirm',
-                cancelText: options.cancelText ?? 'Cancel',
+                confirmText: options.confirmText ?? getUiVintageRuntimeMessage('uiVintage.buttons.confirm', 'Confirm'),
+                cancelText: options.cancelText ?? getUiVintageRuntimeMessage('uiVintage.buttons.cancel', 'Cancel'),
                 confirmButtonType: options.confirmButtonType ?? 'primary',
                 cancelButtonType: options.cancelButtonType ?? 'secondary',
                 icon: markIcon(options.icon),

@@ -22,8 +22,8 @@ const emits = defineEmits<{
 }>();
 
 const { t } = useI18n();
-const resolvedText = computed(() => props.text || t('uiVintage.buttons.loadMore') || 'Load more');
-const resolvedLoadingText = computed(() => props.loadingText || t('uiVintage.buttons.loading') || 'Loading');
+const resolvedText = computed(() => props.text || t('uiVintage.buttons.loadMore'));
+const resolvedLoadingText = computed(() => props.loadingText || t('uiVintage.buttons.loading'));
 
 // Handle click event
 const handleClick = () => {

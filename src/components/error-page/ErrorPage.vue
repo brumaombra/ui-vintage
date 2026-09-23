@@ -2,6 +2,7 @@
 import { ArrowLeft01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { computed, type HTMLAttributes } from 'vue';
+import { useI18n } from 'vue-i18n';
 import BackgroundGrid from '../background-grid/BackgroundGrid.vue';
 import { Button } from '../ui/button';
 import { Card, CardContent, CardFooter } from '../ui/card';
@@ -22,10 +23,8 @@ const props = withDefaults(defineProps<{
     footerClass?: HTMLAttributes['class'];
 }>(), {
     statusCode: 500,
-    label: 'Error',
     title: undefined,
     message: undefined,
-    actionLabel: 'Go back',
     showBackground: true,
     showDefaultAction: true,
     class: undefined,
@@ -39,23 +38,26 @@ const emit = defineEmits<{
     action: [];
 }>();
 
-const resolvedStatusCode = computed(() => String(props.statusCode ?? 500));
+const { t } = useI18n();
+const resolvedStatusCode = computed(() => String(props.statusCode || 500));
+const resolvedLabel = computed(() => props.label || t('uiVintage.messageDialog.error'));
+const resolvedActionLabel = computed(() => props.actionLabel || t('uiVintage.buttons.goBack'));
 
-// Resolve the heading copy.
+// Resolve the heading copy
 const resolvedTitle = computed(() => {
     if (props.title) return props.title;
-    if (resolvedStatusCode.value === '404') return 'Page not found';
-    return 'Something went wrong';
+    if (resolvedStatusCode.value === '404') return t('uiVintage.errorPage.notFound.title');
+    return t('uiVintage.errorPage.unexpected.title');
 });
 
-// Resolve the supporting message.
+// Resolve the supporting message
 const resolvedMessage = computed(() => {
     if (props.message) return props.message;
-    if (resolvedStatusCode.value === '404') return 'The page you requested could not be found or may have been moved.';
-    return 'An unexpected error interrupted the current flow. Please try again or go back to a safe page.';
+    if (resolvedStatusCode.value === '404') return t('uiVintage.errorPage.notFound.message');
+    return t('uiVintage.errorPage.unexpected.message');
 });
 
-// Emit the default action.
+// Emit the default action
 const handleAction = () => {
     emit('action');
 };
@@ -84,7 +86,7 @@ const handleAction = () => {
                         <div>
                             <!-- Status code -->
                             <div class="text-sm font-semibold uppercase tracking-[0.24em] text-(--button-primary-light) dark:text-(--button-primary-dark)">
-                                {{ props.label }} {{ resolvedStatusCode }}
+                                {{ resolvedLabel }} {{ resolvedStatusCode }}
                             </div>
 
                             <!-- Title -->
@@ -104,7 +106,7 @@ const handleAction = () => {
                         <slot name="actions" :on-action="handleAction">
                             <Button v-if="props.showDefaultAction" variant="primary" @click="handleAction">
                                 <HugeiconsIcon :icon="ArrowLeft01Icon" :stroke-width="1.8" class="size-4" />
-                                {{ props.actionLabel }}
+                                {{ resolvedActionLabel }}
                             </Button>
                         </slot>
                     </CardFooter>

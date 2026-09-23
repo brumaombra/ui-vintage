@@ -1,6 +1,8 @@
 {
     "uiVintage": {
         "common": {
+            "breadcrumb": "パンくずリスト",
+            "more": "もっと見る",
             "empty": {
                 "title": "まだ何もありません",
                 "description": "現在表示できるコンテンツはありません。"
@@ -11,6 +13,7 @@
             }
         },
         "buttons": {
+            "remove": "取り除く",
             "all": "すべて",
             "close": "閉じる",
             "cancel": "キャンセル",
@@ -37,6 +40,18 @@
             "title": "言語を選択",
             "ariaLabel": "言語セレクター"
         },
+        "sidebar": {
+            "title": "サイドバー",
+            "description": "モバイルサイドバーを表示します。",
+            "toggle": "サイドバーを切り替え"
+        },
+        "commandDialog": {
+            "title": "コマンドパレット",
+            "description": "実行するコマンドを検索..."
+        },
+        "datePicker": {
+            "placeholder": "日付を選択"
+        },
         "terminal": {
             "title": "ターミナル",
             "copy": "コマンドをコピー",
@@ -53,6 +68,7 @@
             "allRightsReserved": "無断転載を禁じます。"
         },
         "blog": {
+            "readingProgress": "読書の進捗",
             "readMore": "続きを読む",
             "goToPost": "記事を開く",
             "tableOfContents": "目次",
@@ -82,7 +98,18 @@
         "select": {
             "defaultPlaceholder": "オプションを選択してください"
         },
+        "errorPage": {
+            "notFound": {
+                "title": "ページが見つかりません",
+                "message": "指定されたページが見つからないか、移動された可能性があります。"
+            },
+            "unexpected": {
+                "title": "問題が発生しました",
+                "message": "予期しないエラーが発生しました。もう一度お試しいただくか、安全なページに戻ってください。"
+            }
+        },
         "messageDialog": {
+            "confirm": "確認",
             "error": "エラー",
             "success": "成功",
             "info": "情報",

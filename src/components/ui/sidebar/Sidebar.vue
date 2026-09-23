@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { SidebarProps } from '.';
+import { useI18n } from 'vue-i18n';
 import { cn } from '../../../lib/utils';
 import { Sheet, SheetContent } from '../sheet';
 import SheetDescription from '../sheet/SheetDescription.vue';
@@ -19,6 +20,7 @@ const props = withDefaults(defineProps<SidebarProps>(), {
     compact: false
 });
 
+const { t } = useI18n();
 const { isMobile, state, openMobile, setOpenMobile } = useSidebar();
 
 function handleMobileSidebarClick(event: MouseEvent) {
@@ -44,8 +46,8 @@ function handleMobileSidebarClick(event: MouseEvent) {
             '--sidebar-width': SIDEBAR_WIDTH_MOBILE
         }">
             <SheetHeader class="sr-only">
-                <SheetTitle>Sidebar</SheetTitle>
-                <SheetDescription>Displays the mobile sidebar.</SheetDescription>
+                <SheetTitle>{{ t('uiVintage.sidebar.title') }}</SheetTitle>
+                <SheetDescription>{{ t('uiVintage.sidebar.description') }}</SheetDescription>
             </SheetHeader>
             <div class="flex h-full w-full flex-col" @click="handleMobileSidebarClick">
                 <slot />

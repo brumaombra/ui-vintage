@@ -1,6 +1,8 @@
 {
     "uiVintage": {
         "common": {
+            "breadcrumb": "Fil d'Ariane",
+            "more": "Plus",
             "empty": {
                 "title": "Rien ici pour le moment",
                 "description": "Il n'y a aucun contenu a afficher pour le moment."
@@ -11,6 +13,7 @@
             }
         },
         "buttons": {
+            "remove": "Retirer",
             "all": "Tout",
             "close": "Fermer",
             "cancel": "Annuler",
@@ -37,6 +40,18 @@
             "title": "Choisir la langue",
             "ariaLabel": "Selecteur de langue"
         },
+        "sidebar": {
+            "title": "Barre latérale",
+            "description": "Affiche la barre latérale sur mobile.",
+            "toggle": "Afficher ou masquer la barre latérale"
+        },
+        "commandDialog": {
+            "title": "Palette de commandes",
+            "description": "Rechercher une commande à exécuter..."
+        },
+        "datePicker": {
+            "placeholder": "Choisir une date"
+        },
         "terminal": {
             "title": "Terminal",
             "copy": "Copier les commandes",
@@ -53,6 +68,7 @@
             "allRightsReserved": "Tous droits reserves."
         },
         "blog": {
+            "readingProgress": "Progression de lecture",
             "readMore": "Lire la suite",
             "goToPost": "Aller a l'article",
             "tableOfContents": "Table des matieres",
@@ -82,7 +98,18 @@
         "select": {
             "defaultPlaceholder": "Selectionnez une option"
         },
+        "errorPage": {
+            "notFound": {
+                "title": "Page introuvable",
+                "message": "La page demandée est introuvable ou a peut-être été déplacée."
+            },
+            "unexpected": {
+                "title": "Une erreur est survenue",
+                "message": "Une erreur inattendue a interrompu l'opération. Veuillez réessayer ou revenir à une page sûre."
+            }
+        },
         "messageDialog": {
+            "confirm": "Confirmer",
             "error": "Erreur",
             "success": "Succes",
             "info": "Information",

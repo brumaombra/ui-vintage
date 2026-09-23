@@ -3,6 +3,7 @@ import type { DialogContentEmits, DialogContentProps } from 'reka-ui';
 import type { HTMLAttributes } from 'vue';
 import { reactiveOmit } from '@vueuse/core';
 import { DialogClose, DialogContent, DialogOverlay, DialogPortal, useForwardPropsEmits } from 'reka-ui';
+import { useI18n } from 'vue-i18n';
 import { cn } from '../../../lib/utils';
 import { Button } from '../button';
 
@@ -17,6 +18,8 @@ const props = withDefaults(defineProps<DialogContentProps & {
 }>(), {
     showCloseButton: false
 });
+
+const { t } = useI18n();
 
 // Emits
 const emits = defineEmits<DialogContentEmits>();
@@ -50,7 +53,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
                 <DialogClose v-if="props.showCloseButton" data-slot="dialog-close" as-child>
                     <Button variant="ghost" size="icon-sm" class="absolute top-4 right-4 p-0.5">
                         <span aria-hidden="true">X</span>
-                        <span class="sr-only">Close</span>
+                        <span class="sr-only">{{ t('uiVintage.buttons.close') }}</span>
                     </Button>
                 </DialogClose>
             </DialogContent>

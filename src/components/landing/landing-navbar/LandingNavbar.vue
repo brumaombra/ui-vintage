@@ -47,8 +47,9 @@ const props = withDefaults(defineProps<{
             </div>
         </nav>
 
+        <!-- Progress bar -->
         <div v-if="props.showProgress" class="absolute inset-x-0 bottom-0 translate-y-full">
-            <BlogProgressBar aria-label="Blog reading progress" />
+            <BlogProgressBar />
         </div>
     </header>
 </template>
