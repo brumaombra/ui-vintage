@@ -1,8 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { AllPostsSection, BlogHeaderSection, BlogSectionTitle, CategoriesSection, HeaderCarousel } from '@brumaombra/ui-vintage/blog';
-import { Badge } from '@brumaombra/ui-vintage/badge';
+import { AllPostsSection, BlogHeaderSection, BlogSectionTitle, BlogTagsSection, CategoriesSection, HeaderCarousel } from '@brumaombra/ui-vintage/blog';
 import { createSEOMetatags, createPageSchema, buildTagsFromPosts } from '~/composables/useUtils.js';
 
 const { t, locale } = useI18n();
@@ -171,14 +170,10 @@ definePageMeta({
         <!-- Tags section -->
         <div v-if="tags.length">
             <!-- Section title -->
-            <BlogSectionTitle :title="t('blog.tags.title')" />
+            <BlogSectionTitle :title="t('blog.tags.title')" data-aos="fade-up" />
 
-            <!-- Tags list -->
-            <div class="flex flex-wrap gap-3">
-                <NuxtLinkLocale v-for="tag in tags" :key="tag.slug" :to="`/blog/tags/${tag.slug}`">
-                    <Badge color="gray" :text="`${tag.name} (${tag.count})`" class="transition-transform duration-200 ease-out hover:scale-105 motion-reduce:transition-none motion-reduce:hover:scale-100" />
-                </NuxtLinkLocale>
-            </div>
+            <!-- Tags list component -->
+            <BlogTagsSection :tags="tags" />
         </div>
 
         <!-- All posts section -->

@@ -4,6 +4,7 @@ export { default as BlogFAQSection } from './BlogFAQSection.vue';
 export { default as BlogInfoSection } from './BlogInfoSection.vue';
 export { default as BlogHeaderSection } from './BlogHeaderSection.vue';
 export { default as BlogSectionTitle } from './BlogSectionTitle.vue';
+export { default as BlogTagsSection } from './BlogTagsSection.vue';
 export { default as CategoriesList } from './CategoriesList.vue';
 export { default as CategoriesSection } from './CategoriesSection.vue';
 export { default as CategoryCard } from './CategoryCard.vue';

@@ -1,7 +1,7 @@
 <script setup>
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { Badge } from '@brumaombra/ui-vintage/badge';
+import { BlogTagsSection } from '@brumaombra/ui-vintage/blog';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@brumaombra/ui-vintage/breadcrumb';
 import { PageHeader } from '@brumaombra/ui-vintage/page-header';
 import { buildTagsFromPosts, createPageSchema, createSEOMetatags } from '~/composables/useUtils.js';
@@ -94,10 +94,6 @@ definePageMeta({
         </div>
 
         <!-- Tags list -->
-        <div class="flex flex-wrap gap-3">
-            <NuxtLinkLocale v-for="tag in tags" :key="tag.slug" :to="`/blog/tags/${tag.slug}`">
-                <Badge color="gray" :text="`${tag.name} (${tag.count})`" class="transition-transform duration-200 ease-out hover:scale-105 motion-reduce:transition-none motion-reduce:hover:scale-100" />
-            </NuxtLinkLocale>
-        </div>
+        <BlogTagsSection :tags="tags" />
     </div>
 </template>
