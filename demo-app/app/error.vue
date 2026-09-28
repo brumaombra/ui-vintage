@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import { computed, onMounted, watch } from 'vue';
-import { GibbousMoonIcon, Sun01Icon } from '@hugeicons/core-free-icons';
-import { HugeiconsIcon } from '@hugeicons/vue';
-import { Button } from '@brumaombra/ui-vintage/button';
+import { computed } from 'vue';
 import { ErrorPage } from '@brumaombra/ui-vintage/error-page';
+import { ThemeSelector } from '@brumaombra/ui-vintage/theme-selector';
 
 // Props
 const props = defineProps<{
@@ -14,17 +12,6 @@ const props = defineProps<{
     };
 }>();
 
-const isDark = useState('demo-dark-mode', () => false);
-const cryptoCoin = useState('demo-crypto-coin', () => 'bitcoin');
-const themeLabel = computed(() => isDark.value ? 'Dark' : 'Light');
-
-// Keep the document theme classes and dataset in sync with the demo controls
-const applyDocumentTheme = () => {
-    if (typeof document === 'undefined') return;
-    document.documentElement.classList.toggle('dark', isDark.value);
-    document.documentElement.dataset.cryptoCoin = cryptoCoin.value;
-};
-
 // Resolve the error message shown in the card
 const errorMessage = computed(() => {
     return props.error?.statusMessage || props.error?.message || undefined;
@@ -34,41 +21,21 @@ const errorMessage = computed(() => {
 const handleBackHome = async () => {
     await clearError({ redirect: '/' });
 };
-
-// Watch the theme control states
-watch([isDark, cryptoCoin], applyDocumentTheme);
-
-// On component mounted
-onMounted(() => {
-    applyDocumentTheme();
-});
 </script>
 
 <template>
     <ErrorPage :status-code="props.error?.statusCode" :message="errorMessage" action-label="Back to demo" @action="handleBackHome">
+        <!-- Theme selector -->
         <template #toolbar>
-            <div class="flex items-center gap-3">
-                <!-- Current theme display -->
-                <span class="rounded border border-border bg-card px-2.5 py-1 text-[11px] font-semibold text-muted-foreground uppercase tracking-[0.16em]">
-                    {{ themeLabel }}
-                </span>
-
-                <!-- Change theme -->
-                <Button variant="gray" size="sm" @click="isDark = !isDark">
-                    <HugeiconsIcon :icon="isDark ? GibbousMoonIcon : Sun01Icon" class="size-4" />
-                    Toggle Theme
-                </Button>
-            </div>
+            <ThemeSelector />
         </template>
 
+        <!-- Brand -->
         <template #brand>
             <div class="flex items-center gap-3">
-                <!-- Current demo label -->
-                <span class="rounded border border-border bg-card px-2.5 py-1 text-[11px] font-semibold text-muted-foreground uppercase tracking-[0.16em]">
-                    Demo
+                <span class="flex size-9 items-center justify-center rounded border border-primary/40 bg-primary text-sm font-bold text-primary-foreground shadow-glow">
+                    UV
                 </span>
-
-                <!-- App name -->
                 <div class="text-sm font-semibold text-foreground">
                     UI Vintage
                 </div>

@@ -28,12 +28,22 @@ export type ButtonVariants = {
     | undefined;
 };
 
+// Sheen sweep that crosses solid buttons on hover
+const sheenClasses = "before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:-translate-x-full before:bg-[linear-gradient(105deg,transparent_35%,rgb(255_255_255/0.38)_50%,transparent_65%)] before:transition-transform before:duration-700 before:ease-out-expo hover:before:translate-x-full";
+
 export const buttonVariants: (props?: ButtonVariants & ClassProp) => string = cva(
-    "inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded text-xs font-semibold transition-all duration-300 ease-in-out disabled:pointer-events-none disabled:opacity-50 enabled:active:scale-[0.98] sm:text-sm [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+    [
+        "relative isolate inline-flex shrink-0 cursor-pointer select-none items-center justify-center gap-2 overflow-hidden whitespace-nowrap rounded text-xs font-semibold outline-none sm:text-sm",
+        "[transition:color_150ms,background-color_150ms,border-color_150ms,box-shadow_220ms,opacity_150ms,scale_380ms_var(--ease-spring)]",
+        "enabled:active:scale-[0.97] enabled:active:duration-75 disabled:pointer-events-none disabled:opacity-50 data-loading:cursor-wait data-loading:disabled:opacity-100",
+        "focus-visible:ring-[3px] focus-visible:ring-ring/45",
+        "aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40",
+        "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+    ],
     {
         variants: {
             variant: {
-                primary: getButtonVariantClasses('primary'),
+                primary: `${getButtonVariantClasses('primary')} ${sheenClasses}`,
                 secondary: getButtonVariantClasses('secondary'),
                 ghost: getButtonVariantClasses('ghost'),
                 link: getButtonVariantClasses('link'),

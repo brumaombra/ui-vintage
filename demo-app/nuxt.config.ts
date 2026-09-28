@@ -6,6 +6,9 @@ export default defineNuxtConfig({
     ssr: false,
 
     app: {
+        // Blur-and-rise transition between pages (styles live in the library stylesheet)
+        pageTransition: { name: 'page', mode: 'out-in' },
+
         head: {
             // App title
             title: 'UI Vintage Demo',
@@ -30,6 +33,13 @@ export default defineNuxtConfig({
                 type: 'font/woff2',
                 crossorigin: 'anonymous'
             }]
+        }
+    },
+
+    router: {
+        options: {
+            // Smooth scroll to section anchors (waits for the page transition)
+            scrollBehaviorType: 'smooth'
         }
     },
 

@@ -44,7 +44,7 @@ const props = defineProps<SelectValueProps & {
 
                 <!-- Description -->
                 <span v-if="props.description" data-slot="select-value-content-description" :class="cn(
-                    'min-w-0 whitespace-normal wrap-break-word text-[11px] leading-4 text-(--text-secondary-light) dark:text-(--text-secondary-dark) sm:text-xs sm:leading-5 max-sm:[display:-webkit-box] max-sm:overflow-hidden max-sm:[-webkit-box-orient:vertical] max-sm:[-webkit-line-clamp:3]',
+                    'min-w-0 whitespace-normal wrap-break-word text-[11px] leading-4 text-muted-foreground sm:text-xs sm:leading-5 max-sm:[display:-webkit-box] max-sm:overflow-hidden max-sm:[-webkit-box-orient:vertical] max-sm:[-webkit-line-clamp:3]',
                     props.descriptionClass
                 )
                     ">

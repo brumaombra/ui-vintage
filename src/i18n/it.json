@@ -114,6 +114,55 @@
             "success": "Successo",
             "info": "Informazione",
             "warning": "Attenzione"
+        },
+        "toast": {
+            "region": "Notifiche"
+        },
+        "dataTable": {
+            "selectAll": "Seleziona tutte le righe",
+            "selectRow": "Seleziona riga"
+        },
+        "numberField": {
+            "decrement": "Diminuisci",
+            "increment": "Aumenta"
+        },
+        "tagsInput": {
+            "placeholder": "Aggiungi un tag…"
+        },
+        "combobox": {
+            "placeholder": "Seleziona un'opzione",
+            "searchPlaceholder": "Cerca...",
+            "empty": "Nessun risultato trovato."
+        },
+        "avatar": {
+            "status": {
+                "online": "Online",
+                "offline": "Offline",
+                "busy": "Occupato",
+                "away": "Assente"
+            }
+        },
+        "pagination": {
+            "label": "Paginazione",
+            "page": "Pagina {page}",
+            "first": "Prima pagina",
+            "previous": "Pagina precedente",
+            "next": "Pagina successiva",
+            "last": "Ultima pagina",
+            "more": "Altre pagine"
+        },
+        "stepper": {
+            "label": "Avanzamento"
+        },
+        "fileDropzone": {
+            "title": "Trascina qui i file",
+            "description": "oppure fai clic per sfogliare il dispositivo",
+            "dropActive": "Rilascia per caricare",
+            "browse": "Sfoglia file",
+            "remove": "Rimuovi {name}",
+            "maxSize": "Max {size} per file",
+            "maxFiles": "Fino a {count} file",
+            "files": "File selezionati"
         }
     }
 }

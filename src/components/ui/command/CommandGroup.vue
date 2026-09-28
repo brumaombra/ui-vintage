@@ -34,7 +34,7 @@ onUnmounted(() => {
 
 <template>
     <ListboxGroup v-bind="delegatedProps" :id="id" data-slot="command-group" :class="cn('text-foreground overflow-hidden', props.class)" :hidden="isRender ? undefined : true">
-        <ListboxGroupLabel v-if="heading" data-slot="command-group-heading" class="border-b border-(--border-light) px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-(--text-secondary-light) dark:border-(--border-dark) dark:text-(--text-secondary-dark)">
+        <ListboxGroupLabel v-if="heading" data-slot="command-group-heading" class="border-b border-border px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
             {{ heading }}
         </ListboxGroupLabel>
         <div class="p-2">

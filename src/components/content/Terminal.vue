@@ -42,12 +42,12 @@ const copyCommands = async () => {
 
 <template>
     <div class="not-prose my-6 sm:my-8">
-        <Card class="gap-0! sm:gap-0! overflow-hidden p-0! text-(--text-primary-light) dark:text-(--text-primary-dark)">
+        <Card class="gap-0! sm:gap-0! overflow-hidden p-0! text-foreground">
             <!-- Terminal header -->
             <div class="flex items-center justify-between gap-3 border-b border-(--border-light) bg-(--bg-card-light) px-3 py-2 sm:px-4 dark:border-(--border-dark) dark:bg-(--bg-card-dark)">
                 <div class="flex min-w-0 items-center gap-2">
-                    <HugeiconsIcon :icon="TerminalIcon" class="size-4 shrink-0 text-(--text-secondary-light) dark:text-(--text-secondary-dark)" />
-                    <span class="truncate text-xs font-semibold text-(--text-secondary-light) dark:text-(--text-secondary-dark)">{{ resolvedTitle }}</span>
+                    <HugeiconsIcon :icon="TerminalIcon" class="size-4 shrink-0 text-muted-foreground" />
+                    <span class="truncate text-xs font-semibold text-muted-foreground">{{ resolvedTitle }}</span>
                 </div>
 
                 <!-- Copy command button -->
@@ -64,7 +64,7 @@ const copyCommands = async () => {
             </div>
 
             <!-- Terminal commands -->
-            <pre class="overflow-x-auto bg-(--bg-surface-light) px-4 py-3 text-xs leading-6 dark:bg-(--bg-surface-dark) sm:px-5 sm:py-4 sm:text-sm"><code><span v-for="(command, index) in props.commands" :key="`${command}-${index}`" class="flex min-w-max"><span class="mr-3 select-none text-(--text-secondary-light) dark:text-(--text-secondary-dark)" aria-hidden="true">{{ props.prompt }}</span><span>{{ command }}</span></span></code></pre>
+            <pre class="overflow-x-auto bg-(--bg-surface-light) px-4 py-3 text-xs leading-6 dark:bg-(--bg-surface-dark) sm:px-5 sm:py-4 sm:text-sm"><code><span v-for="(command, index) in props.commands" :key="`${command}-${index}`" class="flex min-w-max"><span class="mr-3 select-none text-muted-foreground" aria-hidden="true">{{ props.prompt }}</span><span>{{ command }}</span></span></code></pre>
         </Card>
     </div>
 </template>

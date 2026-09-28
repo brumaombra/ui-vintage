@@ -38,8 +38,8 @@ const formattedModifiedDate = computed(() => formatDateLongItalyTimezone(props.d
 
                         <!-- Author name -->
                         <div>
-                            <p class="text-sm text-(--text-secondary-light) dark:text-(--text-secondary-dark)">{{ t('uiVintage.blog.author') }}</p>
-                            <p class="font-bold text-(--text-primary-light) dark:text-(--text-primary-dark)">
+                            <p class="text-sm text-muted-foreground">{{ t('uiVintage.blog.author') }}</p>
+                            <p class="font-bold text-foreground">
                                 <NuxtLink :to="props.authorUrl" target="_blank" rel="noopener noreferrer" class="hover:underline">
                                     {{ props.author }}
                                 </NuxtLink>
@@ -49,7 +49,7 @@ const formattedModifiedDate = computed(() => formatDateLongItalyTimezone(props.d
                 </div>
 
                 <!-- Date information -->
-                <div class="flex flex-col sm:items-end text-xs md:text-sm text-(--text-secondary-light) dark:text-(--text-secondary-dark)">
+                <div class="flex flex-col sm:items-end text-xs md:text-sm text-muted-foreground">
                     <!-- Published date -->
                     <div v-if="props.datePublished" class="mb-1">
                         <span class="font-semibold">{{ t('uiVintage.blog.publishedDate') }}:</span>

@@ -24,14 +24,14 @@ const hasValidFAQs = computed(() => props.faqs && props.faqs.length > 0);
         <BlogSectionTitle :title="t('uiVintage.blog.faq.title')" />
 
         <!-- Description -->
-        <p class="text-base md:text-lg text-(--text-secondary-light) dark:text-(--text-secondary-dark) mb-8">
+        <p class="text-base md:text-lg text-muted-foreground mb-8">
             {{ t('uiVintage.blog.faq.description') }}
         </p>
 
         <!-- FAQ Items -->
         <div class="space-y-4">
             <Accordion v-for="(faq, index) in props.faqs" :key="index" :title="faq.question" :initially-expanded="index === 0">
-                <p class="text-xs md:text-sm text-(--text-secondary-light) dark:text-(--text-secondary-dark) leading-relaxed">
+                <p class="text-xs md:text-sm text-muted-foreground leading-relaxed">
                     {{ faq.answer }}
                 </p>
             </Accordion>

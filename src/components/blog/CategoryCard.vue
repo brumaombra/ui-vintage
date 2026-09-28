@@ -24,7 +24,7 @@ const props = withDefaults(defineProps<{
             <!-- Content -->
             <div class="p-4 flex items-center justify-between">
                 <!-- Name -->
-                <span class="text-sm font-bold text-(--text-primary-light) dark:text-(--text-primary-dark) truncate mr-3">
+                <span class="text-sm font-bold text-foreground truncate mr-3">
                     {{ props.name }}
                 </span>
 

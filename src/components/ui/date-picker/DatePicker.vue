@@ -30,7 +30,7 @@ const emits = defineEmits<{
     (e: 'update:modelValue', payload: DateValue | undefined): void;
 }>();
 
-const { t } = useI18n();
+const { t, locale } = useI18n();
 const resolvedPlaceholder = computed(() => props.placeholder || t('uiVintage.datePicker.placeholder'));
 const internalDate = ref<DateValue | undefined>(props.defaultValue);
 const isControlled = computed(() => props.modelValue !== undefined);
@@ -48,9 +48,10 @@ const defaultPlaceholder = computed(
     () => (date.value ?? today(getLocalTimeZone())) as any,
 );
 
-const formatter = new DateFormatter('en-US', {
+// Format the selected date in the active locale
+const formatter = computed(() => new DateFormatter(locale.value || 'en-US', {
     dateStyle: 'long',
-});
+}));
 </script>
 
 <template>

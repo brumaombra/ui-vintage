@@ -1,6 +1,6 @@
 @import "./fonts.css";
-@import "@brumaombra/ui-vintage/style.css";
 
-html {
+/* The UI Vintage stylesheet (Tailwind + theme tokens) is injected by the Nuxt module */
+body {
     font-family: 'JetBrains Mono', monospace;
 }

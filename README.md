@@ -85,8 +85,9 @@ This is a Nuxt library, not a generic Vue component bundle. Components rely on N
 - Vue 3 components built with Composition API and TypeScript source.
 - Primitive UI controls based on Reka UI where accessible behavior is required.
 - Reusable dashboard, landing, blog, card, field, and data-display components.
-- Built-in busy, confirm-dialog, message-dialog, and message-toast flows.
-- Theme selector with light, dark, and automatic system modes.
+- Built-in busy, confirm-dialog, message-dialog, and stacked, swipeable message-toast flows.
+- A spring-based motion system (pure CSS `linear()` easings) that respects `prefers-reduced-motion`.
+- Theme selector with light, dark, and automatic modes and a circular View Transitions reveal.
 - Library locale messages merged into an existing Vue I18n instance when available.
 - Automatic `@nuxt/image` installation for components that use `NuxtImg`.
 - Source publishing with no required library build step before installation.
@@ -190,11 +191,10 @@ const confirmed = await showConfirmDialog({
 });
 
 if (confirmed) {
-    // Keep the shared loading state visible while the request is running
-    setBusy({
-        title: 'Deleting project',
-        description: 'Please wait while the project is removed.'
-    });
+    // Keep the shared loading overlay visible while the request is running
+    setBusy(true, { label: 'Deleting project...' });
+    await deleteProject();
+    setBusy(false);
 }
 ```
 
@@ -231,7 +231,7 @@ The package exposes components through explicit subpaths. The complete public ex
 
 ### 🎛️ UI primitives
 
-`alert`, `alert-dialog`, `accordion`, `badge`, `breadcrumb`, `button`, `calendar`, `card`, `command`, `dialog`, `field`, `input`, `label`, `popover`, `progress`, `scroll-area`, `select`, `separator`, `sheet`, `sidebar`, `skeleton`, `slider`, `switch`, `table`, `tabs`, `textarea`, `time-picker`, and `tooltip`.
+`alert`, `alert-dialog`, `accordion`, `animated-number`, `avatar`, `badge`, `breadcrumb`, `button`, `calendar`, `card`, `checkbox`, `collapsible`, `combobox`, `command`, `data-table`, `date-picker`, `date-time-picker`, `dialog`, `dropdown-menu`, `field`, `file-dropzone`, `hover-card`, `input`, `kbd`, `label`, `native-select`, `number-field`, `pagination`, `pin-input`, `popover`, `progress`, `radio-group`, `scroll-area`, `select`, `separator`, `sheet`, `sidebar`, `skeleton`, `slider`, `spinner`, `stepper`, `switch`, `table`, `tabs`, `tags-input`, `textarea`, `time-picker`, `toggle-group`, and `tooltip`.
 
 ### 🧱 Composite components
 
@@ -241,10 +241,21 @@ The package exposes components through explicit subpaths. The complete public ex
 
 `busy`, `busy-indicator`, `confirm-dialog`, `message-dialog`, `message-toast`, `language-flag`, `language-selector`, `blog`, `content`, and `utils`.
 
+### 🎬 Motion system
+
+`src/styles.css` ships a small motion vocabulary that every component uses and that apps can reuse:
+
+- Easing utilities: `ease-spring`, `ease-bounce`, `ease-out-expo`, and `ease-snappy`.
+- Surface utilities: `uv-floating-motion` (popovers, menus, tooltips), `uv-modal-motion`, `uv-overlay-motion`, `uv-collapsible-motion`, and `uv-field` (focus glow and invalid states for inputs).
+- Animations: `animate-uv-pop`, `animate-uv-fade-up`, `animate-uv-shake`, `animate-uv-shimmer`, `animate-uv-float`, and `animate-uv-ping-soft`.
+- Elevation: `shadow-elevated-sm` through `shadow-elevated-xl`, plus `shadow-glow`.
+
+All durations collapse automatically when the user prefers reduced motion. Tailwind v4 animates `scale`, `rotate`, and `translate` as individual properties, so list those names (not `transform`) in custom transitions.
+
 <a id="demo-app"></a>
 ## 🖥️ Demo App
 
-The private `demo-app/` directory is a Nuxt 4 showcase for manual verification. It demonstrates the public components, shared theme behavior, responsive layouts, form states, dialogs, toasts, tabs, accordions, localization, and dashboard composition.
+The private `demo-app/` directory is a Nuxt 4 documentation-style showcase for manual verification. It is organized by category (Foundations, Actions, Forms, Data display, Navigation, Overlays, Feedback, Layouts), shows every component with a live preview and a copyable code tab, includes a live mini-app on the overview page, and has a global command palette (`Ctrl/⌘ + K`) to jump to any section. The navigation model lives in `demo-app/app/utils/demo-navigation.ts`.
 
 The demo app is not part of the published package and is not intended to be installed by consumers. It imports the package through `file:..`, so it exercises the same source that is published to npm.
 

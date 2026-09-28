@@ -19,14 +19,16 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 
 <template>
     <SliderRoot v-slot="{ modelValue }" data-slot="slider" :class="cn(
-        'relative flex w-full cursor-pointer touch-none items-center select-none data-disabled:cursor-not-allowed data-disabled:opacity-50 data-[orientation=vertical]:h-full data-[orientation=vertical]:min-h-44 data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col',
+        'group/slider relative flex w-full cursor-pointer touch-none items-center py-2 select-none data-disabled:cursor-not-allowed data-disabled:opacity-50 data-[orientation=vertical]:h-full data-[orientation=vertical]:min-h-44 data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col data-[orientation=vertical]:px-2 data-[orientation=vertical]:py-0',
         props.class
-    )
-        " v-bind="forwarded">
-        <SliderTrack data-slot="slider-track" class="bg-muted relative grow overflow-hidden rounded data-[orientation=horizontal]:h-2 data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-2">
-            <SliderRange data-slot="slider-range" class="bg-primary absolute data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full" />
+    )" v-bind="forwarded">
+        <!-- Track -->
+        <SliderTrack data-slot="slider-track" class="relative grow overflow-hidden rounded bg-muted transition-[height,width] duration-200 ease-spring data-[orientation=horizontal]:h-2 data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-2 group-hover/slider:data-[orientation=horizontal]:h-2.5 group-hover/slider:data-[orientation=vertical]:w-2.5">
+            <!-- Filled range -->
+            <SliderRange data-slot="slider-range" class="absolute bg-primary bg-[linear-gradient(90deg,transparent,rgb(255_255_255/0.22))] data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full" />
         </SliderTrack>
 
-        <SliderThumb v-for="(_, key) in modelValue" :key="key" data-slot="slider-thumb" class="bg-white border-primary ring-ring/50 block size-5 shrink-0 rounded border shadow-sm transition-[color,box-shadow,transform] hover:scale-105 hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50" />
+        <!-- Thumbs -->
+        <SliderThumb v-for="(_, key) in modelValue" :key="key" data-slot="slider-thumb" class="block size-5 shrink-0 cursor-grab rounded border-2 border-primary bg-white shadow-elevated-md outline-none [transition:scale_300ms_var(--ease-spring),box-shadow_200ms] hover:scale-110 hover:shadow-[0_0_0_6px_color-mix(in_oklab,var(--primary)_16%,transparent)] focus-visible:shadow-[0_0_0_6px_color-mix(in_oklab,var(--primary)_24%,transparent)] active:scale-125 active:cursor-grabbing disabled:pointer-events-none disabled:opacity-50" />
     </SliderRoot>
 </template>

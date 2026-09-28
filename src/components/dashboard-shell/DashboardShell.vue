@@ -107,10 +107,10 @@ const getSidebarItemLinkProps = (item: NonNullable<typeof props.sidebarSections>
                     <SidebarGroupContent>
                         <SidebarMenu :class="cn('gap-3', props.compact && 'gap-2')">
                             <SidebarMenuItem v-for="item in section.items" :key="item.id">
-                                <SidebarMenuButton as-child :is-active="item.active" :class="cn('group h-auto min-h-12 rounded border border-(--border-light) px-3 py-2.5 text-(--text-secondary-light) transition-all duration-200 hover:border-(--border-hover-light) hover:bg-(--bg-selected-light) hover:text-(--text-primary-light) data-[active=true]:border-(--border-hover-light) data-[active=true]:bg-(--bg-selected-light) data-[active=true]:text-(--text-primary-light) dark:border-(--border-dark) dark:text-(--text-secondary-dark) dark:hover:border-(--border-hover-dark) dark:hover:bg-(--bg-selected-dark) dark:hover:text-(--text-primary-dark) dark:data-[active=true]:border-(--border-hover-dark) dark:data-[active=true]:bg-(--bg-selected-dark) dark:data-[active=true]:text-(--text-primary-dark) sm:px-4 sm:py-3', item.description ? 'items-start' : 'items-center')">
+                                <SidebarMenuButton as-child :is-active="item.active" :class="cn('group/nav relative h-auto min-h-12 overflow-hidden rounded border border-border px-3 py-2.5 text-muted-foreground [transition:color_150ms,background-color_150ms,border-color_150ms,scale_300ms_var(--ease-spring)] hover:border-border-strong hover:bg-accent hover:text-foreground active:scale-[0.98] data-[active=true]:border-border-strong data-[active=true]:bg-accent data-[active=true]:text-foreground sm:px-4 sm:py-3', 'before:absolute before:inset-y-2 before:left-0 before:w-[3px] before:origin-center before:scale-y-0 before:rounded-r-full before:bg-primary before:transition-transform before:duration-[420ms] before:ease-spring data-[active=true]:before:scale-y-100', item.description ? 'items-start' : 'items-center')">
                                     <component :is="props.sidebarLinkComponent" v-bind="getSidebarItemLinkProps(item)">
                                         <!-- Icon -->
-                                        <HugeiconsIcon v-if="item.icon" :icon="item.icon" :stroke-width="1.8" :class="cn('shrink-0 opacity-90 transition-opacity duration-200 group-hover:opacity-100', item.description ? 'mt-0.5 size-5 sm:h-5 sm:w-5' : 'size-5 self-center sm:h-6 sm:w-6')" />
+                                        <HugeiconsIcon v-if="item.icon" :icon="item.icon" :stroke-width="1.8" :class="cn('shrink-0 opacity-90 transition-[opacity,translate,color] duration-300 ease-spring group-hover/nav:translate-x-0.5 group-hover/nav:opacity-100 group-data-[active=true]/nav:text-primary', item.description ? 'mt-0.5 size-5 sm:h-5 sm:w-5' : 'size-5 self-center sm:h-6 sm:w-6')" />
 
                                         <!-- Label and optional description -->
                                         <div :class="cn('min-w-0 flex-1 text-left leading-tight', item.description ? 'grid' : 'flex items-center')">
@@ -146,7 +146,7 @@ const getSidebarItemLinkProps = (item: NonNullable<typeof props.sidebarSections>
             <BackgroundGrid v-if="props.showBackground" />
 
             <!-- Topbar -->
-            <header :class="cn('sticky top-0 z-20 flex h-16 shrink-0 items-center gap-2 border-b border-sidebar-border bg-sidebar px-4 backdrop-blur', props.topbarClass)">
+            <header :class="cn('sticky top-0 z-20 flex h-16 shrink-0 items-center gap-2 border-b border-sidebar-border bg-sidebar/80 px-4 backdrop-blur-md backdrop-saturate-150', props.topbarClass)">
                 <!-- Sidebar trigger -->
                 <SidebarTrigger class="-ml-1" />
 

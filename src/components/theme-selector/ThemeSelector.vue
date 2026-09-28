@@ -1,15 +1,17 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from 'vue';
+import { computed, nextTick, onMounted, onUnmounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { LaptopIcon, Moon01Icon, Sun01Icon, Tick02Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Button } from '../ui/button';
 import { Command, CommandGroup, CommandItem, CommandList } from '../ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
+import { applyTheme, applyThemeWithTransition, getStoredTheme, type ThemeMode } from './theme-transition';
 
 const { t } = useI18n();
 const isOpen = ref(false);
-const currentTheme = ref('auto');
+const currentTheme = ref<ThemeMode>('auto');
+const triggerRef = ref<InstanceType<typeof Button> | null>(null);
 let mediaQueryList: MediaQueryList | undefined;
 let handleSystemThemeChange: (() => void) | undefined;
 
@@ -26,40 +28,20 @@ const getThemeIcon = (theme: string) => {
 
 // Available themes
 const themes = computed(() => [
-    { id: 'light', label: t('uiVintage.theme.light') },
-    { id: 'dark', label: t('uiVintage.theme.dark') },
-    { id: 'auto', label: t('uiVintage.theme.auto') }
+    { id: 'light' as const, label: t('uiVintage.theme.light') },
+    { id: 'dark' as const, label: t('uiVintage.theme.dark') },
+    { id: 'auto' as const, label: t('uiVintage.theme.auto') }
 ]);
 
-// Check if system prefers dark mode
-const isSystemDarkPreferred = () => {
-    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-};
-
-// Apply the selected theme to the document
-const applyTheme = (theme: string) => {
-    document.documentElement.classList.remove('light', 'dark');
-
-    // If auto is selected, apply the theme based on system preference
-    if (theme === 'auto') {
-        if (isSystemDarkPreferred()) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.add('light');
-        }
-    } else {
-        document.documentElement.classList.add(theme);
-    }
-
-    // Persist the selected theme in localStorage
-    localStorage.setItem('theme', theme);
-};
-
 // Handle theme selection from the menu
-const handleSelectTheme = (theme: string) => {
+const handleSelectTheme = async (theme: ThemeMode) => {
     currentTheme.value = theme;
-    applyTheme(theme);
     isOpen.value = false;
+
+    // Reveal the new theme from the trigger button once the menu has closed
+    await nextTick();
+    const triggerElement = (triggerRef.value as { $el?: Element } | null)?.$el ?? null;
+    await applyThemeWithTransition(theme, triggerElement);
 };
 
 // Compute the icon for the currently selected theme
@@ -78,7 +60,7 @@ const themeOptions = computed(() => {
 
 // On component mounted
 onMounted(() => {
-    const savedTheme = localStorage.getItem('theme') || 'auto';
+    const savedTheme = getStoredTheme();
     currentTheme.value = savedTheme;
     applyTheme(savedTheme);
     mediaQueryList = window.matchMedia('(prefers-color-scheme: dark)');
@@ -86,7 +68,7 @@ onMounted(() => {
     // Handler to update the theme
     handleSystemThemeChange = () => {
         if (currentTheme.value === 'auto') {
-            applyTheme('auto');
+            void applyThemeWithTransition('auto');
         }
     };
 
@@ -106,8 +88,10 @@ onUnmounted(() => {
     <Popover v-model:open="isOpen">
         <!-- Trigger button showing the current theme icon -->
         <PopoverTrigger as-child>
-            <Button variant="secondary" size="icon" :aria-label="t('uiVintage.theme.ariaLabel')">
-                <HugeiconsIcon :icon="currentThemeIcon" class="h-5 w-5" />
+            <Button ref="triggerRef" variant="secondary" size="icon" :aria-label="t('uiVintage.theme.ariaLabel')">
+                <Transition mode="out-in" enter-active-class="transition-[rotate,scale,opacity] duration-[420ms] ease-bounce" enter-from-class="-rotate-90 scale-50 opacity-0" leave-active-class="transition-[rotate,scale,opacity] duration-150 ease-snappy" leave-to-class="rotate-90 scale-50 opacity-0">
+                    <HugeiconsIcon :key="currentTheme" :icon="currentThemeIcon" class="h-5 w-5" />
+                </Transition>
             </Button>
         </PopoverTrigger>
 
@@ -119,7 +103,7 @@ onUnmounted(() => {
                         <CommandItem v-for="option in themeOptions" :key="option.key" :value="option.key" @select="handleSelectTheme(option.key)">
                             <HugeiconsIcon :icon="option.icon" class="size-4" />
                             <span class="flex-1">{{ option.label }}</span>
-                            <HugeiconsIcon :icon="Tick02Icon" class="ml-auto size-4 shrink-0" :class="currentTheme === option.key ? 'opacity-100' : 'opacity-0'" />
+                            <HugeiconsIcon :icon="Tick02Icon" class="ml-auto size-4 shrink-0 text-primary! transition-[opacity,scale] duration-300 ease-bounce" :class="currentTheme === option.key ? 'scale-100 opacity-100' : 'scale-50 opacity-0'" />
                         </CommandItem>
                     </CommandGroup>
                 </CommandList>

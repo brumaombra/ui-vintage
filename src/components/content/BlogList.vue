@@ -14,12 +14,12 @@ const props = withDefaults(defineProps<{
 
 // Icon container classes
 const getIconContainerClasses = () => {
-    return 'flex items-center justify-center w-8 h-8 bg-(--bg-card-light) dark:bg-(--bg-card-dark) border border-(--border-light) dark:border-(--border-dark) rounded mr-4 shrink-0';
+    return 'flex items-center justify-center w-8 h-8 bg-card border border-border rounded mr-4 shrink-0';
 };
 
 // Icon color classes
 const getIconClasses = () => {
-    return 'text-(--text-secondary-light) dark:text-(--text-secondary-dark) text-xs';
+    return 'text-muted-foreground text-xs';
 };
 </script>
 
@@ -51,7 +51,7 @@ const getIconClasses = () => {
 
                         <!-- Content -->
                         <div class="flex-1">
-                            <div class="text-(--text-primary-light) dark:text-(--text-primary-dark) leading-relaxed">
+                            <div class="text-foreground leading-relaxed">
                                 {{ item }}
                             </div>
                         </div>

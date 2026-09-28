@@ -19,12 +19,12 @@ const props = withDefaults(defineProps<{
         <!-- Header with icon and label -->
         <div class="flex items-center justify-between">
             <!-- Title of the progress bar -->
-            <span class="text-sm font-semibold text-(--text-primary-light) dark:text-(--text-primary-dark)">
+            <span class="text-sm font-semibold text-foreground">
                 {{ props.title }}
             </span>
 
             <!-- Current value / max -->
-            <span class="text-sm font-semibold text-(--text-primary-light) dark:text-(--text-primary-dark)">
+            <span class="text-sm font-semibold text-foreground">
                 {{ props.value }} / {{ props.max }}
             </span>
         </div>
@@ -35,12 +35,12 @@ const props = withDefaults(defineProps<{
         <!-- Bottom labels -->
         <div v-if="props.bottomLeftLabel || props.bottomRightLabel" class="flex items-center justify-between text-xs">
             <!-- Bottom left label -->
-            <span v-if="props.bottomLeftLabel" class="text-(--text-secondary-light) dark:text-(--text-secondary-dark)">
+            <span v-if="props.bottomLeftLabel" class="text-muted-foreground">
                 {{ props.bottomLeftLabel }}
             </span>
 
             <!-- Bottom right label -->
-            <span v-if="props.bottomRightLabel" class="text-(--text-secondary-light) dark:text-(--text-secondary-dark)">
+            <span v-if="props.bottomRightLabel" class="text-muted-foreground">
                 {{ props.bottomRightLabel }}
             </span>
         </div>

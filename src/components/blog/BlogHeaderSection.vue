@@ -26,12 +26,12 @@ const props = withDefaults(defineProps<{
         </div>
 
         <!-- Title -->
-        <h1 class="text-3xl md:text-6xl font-bold text-(--text-primary-light) dark:text-(--text-primary-dark) leading-tight">
+        <h1 class="text-3xl md:text-6xl font-bold text-foreground leading-tight">
             {{ props.title }}
         </h1>
 
         <!-- Description -->
-        <p class="text-sm md:text-xl text-(--text-secondary-light) dark:text-(--text-secondary-dark) leading-relaxed">
+        <p class="text-sm md:text-xl text-muted-foreground leading-relaxed">
             {{ props.description }}
         </p>
     </div>

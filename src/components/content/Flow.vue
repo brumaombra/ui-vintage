@@ -65,7 +65,7 @@ const isVertical = () => {
                         <Card class="flex-1 overflow-hidden md:flex md:items-center">
                             <CardContent class="w-full gap-3 md:justify-center">
                                 <!-- Flow item header -->
-                                <div class="inline-flex items-center gap-3 text-xs font-semibold text-(--text-primary-light) dark:text-(--text-primary-dark)">
+                                <div class="inline-flex items-center gap-3 text-xs font-semibold text-foreground">
                                     <!-- Flow item number -->
                                     <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded border border-(--border-light) bg-(--bg-card-light) text-xs font-semibold text-(--text-secondary-light) dark:border-(--border-dark) dark:bg-(--bg-card-dark) dark:text-(--text-secondary-dark)">
                                         {{ index + 1 }}
@@ -76,14 +76,14 @@ const isVertical = () => {
                                 </div>
 
                                 <!-- Flow item description -->
-                                <p v-if="getItemDescription(item)" class="text-xs leading-6 text-(--text-secondary-light) dark:text-(--text-secondary-dark) md:leading-5">
+                                <p v-if="getItemDescription(item)" class="text-xs leading-6 text-muted-foreground md:leading-5">
                                     {{ getItemDescription(item) }}
                                 </p>
                             </CardContent>
                         </Card>
 
                         <!-- Flow item separator -->
-                        <div v-if="index < props.items.length - 1" class="flex items-center justify-center text-(--text-secondary-light) dark:text-(--text-secondary-dark)">
+                        <div v-if="index < props.items.length - 1" class="flex items-center justify-center text-muted-foreground">
                             <!-- Flow item separator for vertical orientation -->
                             <HugeiconsIcon v-if="isVertical()" :icon="ArrowDown01Icon" class="size-5 shrink-0" />
 

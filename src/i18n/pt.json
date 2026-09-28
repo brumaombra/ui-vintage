@@ -114,6 +114,55 @@
             "success": "Sucesso",
             "info": "Informacao",
             "warning": "Aviso"
+        },
+        "toast": {
+            "region": "Notificações"
+        },
+        "dataTable": {
+            "selectAll": "Selecionar todas as linhas",
+            "selectRow": "Selecionar linha"
+        },
+        "numberField": {
+            "decrement": "Diminuir",
+            "increment": "Aumentar"
+        },
+        "tagsInput": {
+            "placeholder": "Adicionar uma tag…"
+        },
+        "combobox": {
+            "placeholder": "Selecione uma opção",
+            "searchPlaceholder": "Pesquisar...",
+            "empty": "Nenhum resultado encontrado."
+        },
+        "avatar": {
+            "status": {
+                "online": "Online",
+                "offline": "Offline",
+                "busy": "Ocupado",
+                "away": "Ausente"
+            }
+        },
+        "pagination": {
+            "label": "Paginação",
+            "page": "Página {page}",
+            "first": "Primeira página",
+            "previous": "Página anterior",
+            "next": "Próxima página",
+            "last": "Última página",
+            "more": "Mais páginas"
+        },
+        "stepper": {
+            "label": "Progresso"
+        },
+        "fileDropzone": {
+            "title": "Arraste e solte arquivos aqui",
+            "description": "ou clique para procurar no seu dispositivo",
+            "dropActive": "Solte para enviar",
+            "browse": "Procurar arquivos",
+            "remove": "Remover {name}",
+            "maxSize": "Máx. {size} por arquivo",
+            "maxFiles": "Até {count} arquivos",
+            "files": "Arquivos selecionados"
         }
     }
 }

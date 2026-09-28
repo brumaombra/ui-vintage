@@ -10,8 +10,8 @@ const props = defineProps<{
 
 <template>
     <div data-slot="skeleton" :class="cn(
-        props.class,
-        'animate-pulse rounded border border-(--border-light) bg-(--bg-surface-light) transition-colors duration-300 ease-in-out dark:border-(--border-dark) dark:bg-(--bg-surface-dark)'
-    )
-        " />
+        'relative overflow-hidden rounded border border-border bg-surface',
+        'after:absolute after:inset-0 after:animate-uv-shimmer after:bg-[linear-gradient(90deg,transparent,color-mix(in_oklab,var(--foreground)_6%,transparent),transparent)]',
+        props.class
+    )" />
 </template>

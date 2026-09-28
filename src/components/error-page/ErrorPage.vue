@@ -85,7 +85,7 @@ const handleAction = () => {
                         <!-- Error copy -->
                         <div>
                             <!-- Status code -->
-                            <div class="text-sm font-semibold uppercase tracking-[0.24em] text-(--button-primary-light) dark:text-(--button-primary-dark)">
+                            <div class="text-sm font-semibold uppercase tracking-[0.24em] text-primary">
                                 {{ resolvedLabel }} {{ resolvedStatusCode }}
                             </div>
 
@@ -95,7 +95,7 @@ const handleAction = () => {
                             </h1>
 
                             <!-- Message -->
-                            <p class="text-sm leading-7 text-(--text-secondary-light) dark:text-(--text-secondary-dark) sm:text-base mt-4">
+                            <p class="text-sm leading-7 text-muted-foreground sm:text-base mt-4">
                                 {{ resolvedMessage }}
                             </p>
                         </div>

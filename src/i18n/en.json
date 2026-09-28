@@ -114,6 +114,55 @@
             "success": "Success",
             "info": "Information",
             "warning": "Warning"
+        },
+        "toast": {
+            "region": "Notifications"
+        },
+        "dataTable": {
+            "selectAll": "Select all rows",
+            "selectRow": "Select row"
+        },
+        "numberField": {
+            "decrement": "Decrease",
+            "increment": "Increase"
+        },
+        "tagsInput": {
+            "placeholder": "Add a tag…"
+        },
+        "combobox": {
+            "placeholder": "Select an option",
+            "searchPlaceholder": "Search...",
+            "empty": "No results found."
+        },
+        "avatar": {
+            "status": {
+                "online": "Online",
+                "offline": "Offline",
+                "busy": "Busy",
+                "away": "Away"
+            }
+        },
+        "pagination": {
+            "label": "Pagination",
+            "page": "Page {page}",
+            "first": "First page",
+            "previous": "Previous page",
+            "next": "Next page",
+            "last": "Last page",
+            "more": "More pages"
+        },
+        "stepper": {
+            "label": "Progress"
+        },
+        "fileDropzone": {
+            "title": "Drag & drop files here",
+            "description": "or click to browse your device",
+            "dropActive": "Drop to upload",
+            "browse": "Browse files",
+            "remove": "Remove {name}",
+            "maxSize": "Max {size} per file",
+            "maxFiles": "Up to {count} files",
+            "files": "Selected files"
         }
     }
 }

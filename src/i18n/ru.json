@@ -114,6 +114,55 @@
             "success": "Успех",
             "info": "Информация",
             "warning": "Предупреждение"
+        },
+        "toast": {
+            "region": "Уведомления"
+        },
+        "dataTable": {
+            "selectAll": "Выбрать все строки",
+            "selectRow": "Выбрать строку"
+        },
+        "numberField": {
+            "decrement": "Уменьшить",
+            "increment": "Увеличить"
+        },
+        "tagsInput": {
+            "placeholder": "Добавить тег…"
+        },
+        "combobox": {
+            "placeholder": "Выберите вариант",
+            "searchPlaceholder": "Поиск...",
+            "empty": "Ничего не найдено."
+        },
+        "avatar": {
+            "status": {
+                "online": "В сети",
+                "offline": "Не в сети",
+                "busy": "Занят",
+                "away": "Отошёл"
+            }
+        },
+        "pagination": {
+            "label": "Пагинация",
+            "page": "Страница {page}",
+            "first": "Первая страница",
+            "previous": "Предыдущая страница",
+            "next": "Следующая страница",
+            "last": "Последняя страница",
+            "more": "Другие страницы"
+        },
+        "stepper": {
+            "label": "Прогресс"
+        },
+        "fileDropzone": {
+            "title": "Перетащите файлы сюда",
+            "description": "или нажмите, чтобы выбрать на устройстве",
+            "dropActive": "Отпустите для загрузки",
+            "browse": "Выбрать файлы",
+            "remove": "Удалить {name}",
+            "maxSize": "Макс. {size} на файл",
+            "maxFiles": "До {count} файлов",
+            "files": "Выбранные файлы"
         }
     }
 }

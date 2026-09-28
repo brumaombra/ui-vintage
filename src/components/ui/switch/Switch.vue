@@ -19,14 +19,16 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 
 <template>
     <SwitchRoot v-slot="slotProps" data-slot="switch" v-bind="forwarded" :class="cn(
-        'peer relative inline-flex h-7 w-12 shrink-0 cursor-pointer items-center rounded border border-(--border-light) bg-(--button-secondary-light) transition-all duration-200 outline-none focus-visible:border-(--border-hover-light) focus-visible:ring-0 disabled:cursor-not-allowed disabled:opacity-60 data-[state=checked]:border-(--button-primary-light) data-[state=checked]:bg-(--bg-selected-light) dark:border-(--border-dark) dark:bg-(--button-secondary-dark) dark:focus-visible:border-(--border-hover-dark) dark:data-[state=checked]:border-(--button-primary-dark) dark:data-[state=checked]:bg-(--bg-selected-dark)',
+        'group/switch peer relative inline-flex h-7 w-12 shrink-0 cursor-pointer items-center rounded border border-input bg-secondary shadow-elevated-sm outline-none',
+        '[transition:background-color_200ms,border-color_200ms,box-shadow_250ms] hover:border-border-strong focus-visible:ring-[3px] focus-visible:ring-ring/45 disabled:cursor-not-allowed disabled:opacity-60',
+        'data-[state=checked]:border-primary data-[state=checked]:bg-accent data-[state=checked]:shadow-[0_0_0_3px_color-mix(in_oklab,var(--primary)_14%,transparent)]',
         props.class
-    )
-        ">
+    )">
         <SwitchThumb data-slot="switch-thumb" :class="cn(
-            'pointer-events-none absolute left-1 top-1/2 block h-4 w-4 -translate-y-1/2 rounded-[0.2rem] bg-(--text-secondary-light) ring-0 transition-all duration-200 data-[state=checked]:translate-x-6 data-[state=checked]:bg-(--button-primary-light) dark:bg-(--text-secondary-dark) dark:data-[state=checked]:bg-(--button-primary-dark)'
-        )
-            ">
+            'pointer-events-none absolute left-1 top-1/2 flex h-4 w-4 -translate-y-1/2 items-center justify-center rounded-[0.2rem] bg-muted-foreground ring-0',
+            '[transition:translate_380ms_var(--ease-spring),width_220ms_var(--ease-spring),background-color_200ms]',
+            'group-active/switch:w-5 data-[state=checked]:translate-x-6 data-[state=checked]:bg-primary group-active/switch:data-[state=checked]:translate-x-5'
+        )">
             <slot name="thumb" v-bind="slotProps" />
         </SwitchThumb>
     </SwitchRoot>

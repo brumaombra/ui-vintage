@@ -36,11 +36,11 @@ const defaultMessageIcon = computed(() => {
 // Resolved container classes for the message icon
 const messageIconClasses = computed(() => {
     const current = currentDialog.value;
-    if (!current) return 'border-(--border) bg-(--bg-surface-light) dark:bg-(--bg-surface-dark)';
+    if (!current) return 'border-(--border) bg-surface';
     if (current.options.type === 'error') return 'border-red-200 bg-red-50 dark:border-red-900/50 dark:bg-red-950/30';
     if (current.options.type === 'warning') return 'border-amber-200 bg-amber-50 dark:border-amber-900/50 dark:bg-amber-950/30';
     if (current.options.type === 'success') return 'border-green-200 bg-green-50 dark:border-green-900/50 dark:bg-green-950/30';
-    return 'border-(--border) bg-(--bg-surface-light) dark:bg-(--bg-surface-dark)';
+    return 'border-(--border) bg-surface';
 });
 
 // Resolved glyph color classes
@@ -70,8 +70,8 @@ const handleOpenChange = (open: boolean) => {
                 <div class="flex flex-col gap-4 sm:flex-row sm:items-start">
                     <!-- Dialog icon -->
                     <div class="flex size-12 shrink-0 self-center items-center justify-center rounded border sm:size-10 sm:self-start" :class="messageIconClasses">
-                        <HugeiconsIcon v-if="currentDialog.options.icon" :icon="currentDialog.options.icon" :stroke-width="1.8" class="size-6" :class="messageGlyphClasses" />
-                        <HugeiconsIcon v-else :icon="defaultMessageIcon" :stroke-width="1.8" class="size-6" :class="messageGlyphClasses" />
+                        <HugeiconsIcon v-if="currentDialog.options.icon" :icon="currentDialog.options.icon" :stroke-width="1.8" class="size-6 animate-uv-pop [animation-delay:140ms]" :class="messageGlyphClasses" />
+                        <HugeiconsIcon v-else :icon="defaultMessageIcon" :stroke-width="1.8" class="size-6 animate-uv-pop [animation-delay:140ms]" :class="messageGlyphClasses" />
                     </div>
 
                     <!-- Dialog header -->

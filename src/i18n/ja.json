@@ -114,6 +114,55 @@
             "success": "成功",
             "info": "情報",
             "warning": "警告"
+        },
+        "toast": {
+            "region": "通知"
+        },
+        "dataTable": {
+            "selectAll": "すべての行を選択",
+            "selectRow": "行を選択"
+        },
+        "numberField": {
+            "decrement": "減らす",
+            "increment": "増やす"
+        },
+        "tagsInput": {
+            "placeholder": "タグを追加…"
+        },
+        "combobox": {
+            "placeholder": "オプションを選択",
+            "searchPlaceholder": "検索...",
+            "empty": "結果が見つかりません。"
+        },
+        "avatar": {
+            "status": {
+                "online": "オンライン",
+                "offline": "オフライン",
+                "busy": "取り込み中",
+                "away": "離席中"
+            }
+        },
+        "pagination": {
+            "label": "ページネーション",
+            "page": "{page} ページ",
+            "first": "最初のページ",
+            "previous": "前のページ",
+            "next": "次のページ",
+            "last": "最後のページ",
+            "more": "その他のページ"
+        },
+        "stepper": {
+            "label": "進捗"
+        },
+        "fileDropzone": {
+            "title": "ここにファイルをドラッグ＆ドロップ",
+            "description": "またはクリックしてデバイスから選択",
+            "dropActive": "ドロップしてアップロード",
+            "browse": "ファイルを選択",
+            "remove": "{name} を削除",
+            "maxSize": "1ファイルあたり最大 {size}",
+            "maxFiles": "最大 {count} ファイル",
+            "files": "選択したファイル"
         }
     }
 }

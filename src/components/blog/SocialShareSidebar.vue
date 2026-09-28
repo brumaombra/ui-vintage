@@ -59,7 +59,7 @@ const socialPlatforms = computed(() => {
             <Card class="p-5! flex flex-col space-y-4 items-center">
                 <CardContent class="p-0! gap-4 items-center">
                     <!-- Share icon -->
-                    <HugeiconsIcon :icon="Share08Icon" class="size-5 text-(--text-secondary-light) dark:text-(--text-secondary-dark) mb-2" />
+                    <HugeiconsIcon :icon="Share08Icon" class="size-5 text-muted-foreground mb-2" />
 
                     <!-- Social share links (desktop) -->
                     <template v-for="platform in socialPlatforms" :key="platform.name">

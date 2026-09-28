@@ -42,7 +42,7 @@ function handleMobileSidebarClick(event: MouseEvent) {
     </div>
 
     <Sheet v-else-if="isMobile" :open="openMobile" v-bind="$attrs" @update:open="setOpenMobile">
-        <SheetContent data-sidebar="sidebar" data-slot="sidebar" data-mobile="true" :data-compact="props.compact ? 'true' : 'false'" :side="side" class="group/sidebar-wrapper border-sidebar-border bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden" :style="{
+        <SheetContent data-sidebar="sidebar" data-slot="sidebar" data-mobile="true" :data-compact="props.compact ? 'true' : 'false'" :side="side" class="group/sidebar-wrapper border-sidebar-border bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 data-[state=open]:[animation-duration:320ms] data-[state=open]:[animation-timing-function:var(--ease-out-expo)] [&>button]:hidden" :style="{
             '--sidebar-width': SIDEBAR_WIDTH_MOBILE
         }">
             <SheetHeader class="sr-only">
@@ -58,7 +58,7 @@ function handleMobileSidebarClick(event: MouseEvent) {
     <div v-else class="group/sidebar-wrapper group peer text-sidebar-foreground hidden md:block" data-slot="sidebar" :data-state="state" :data-collapsible="state === 'collapsed' ? collapsible : ''" :data-variant="variant" :data-side="side">
         <!-- This is what handles the sidebar gap on desktop  -->
         <div :class="cn(
-            'relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear',
+            'relative w-(--sidebar-width) bg-transparent transition-[width] duration-300 ease-out-expo',
             'group-data-[collapsible=offcanvas]:w-0',
             'group-data-[side=right]:rotate-180',
             variant === 'floating' || variant === 'inset'
@@ -67,7 +67,7 @@ function handleMobileSidebarClick(event: MouseEvent) {
         )
             " />
         <div :class="cn(
-            'fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear md:flex',
+            'fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-300 ease-out-expo md:flex',
             side === 'left'
                 ? 'left-0 group-data-[collapsible=offcanvas]:-left-(--sidebar-width)'
                 : 'right-0 group-data-[collapsible=offcanvas]:-right-(--sidebar-width)',

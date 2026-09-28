@@ -1,2 +1,2 @@
-export { closeMessageToast, messageToastState, showMessageToast } from './message-toast-state';
-export type { MessageToastType, ShowMessageToastOptions } from './message-toast-state';
+export { closeMessageToast, messageToastState, pauseMessageToasts, resumeMessageToasts, showMessageToast } from './message-toast-state';
+export type { MessageToastAction, MessageToastItem, MessageToastType, ShowMessageToastOptions } from './message-toast-state';

@@ -16,10 +16,12 @@ const forwardedProps = useForwardProps(delegatedProps);
 
 <template>
     <TabsTrigger data-slot="tabs-trigger" :class="cn(
-        'text-muted-foreground hover:text-foreground focus-visible:outline-none inline-flex min-h-9 flex-1 cursor-pointer items-center justify-center gap-1.5 rounded border border-transparent bg-transparent px-4 py-2 text-sm font-semibold whitespace-nowrap transition-colors duration-300 ease-in-out disabled:pointer-events-none disabled:opacity-50 data-[state=active]:cursor-pointer data-[state=active]:border-(--button-primary-light) data-[state=active]:bg-gray-50 data-[state=active]:text-(--button-primary-light) data-[state=active]:font-semibold data-[state=active]:outline-1 data-[state=active]:outline-border data-[state=active]:outline-offset-0 data-[state=active]:shadow-none dark:data-[state=active]:border-(--button-primary-dark) dark:data-[state=active]:bg-(--bg-card-dark) dark:data-[state=active]:text-(--button-primary-dark) [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*=\'size-\'])]:size-4',
+        'relative inline-flex min-h-9 flex-1 cursor-pointer items-center justify-center gap-1.5 rounded border border-transparent bg-transparent px-4 py-2 text-sm font-semibold whitespace-nowrap text-muted-foreground outline-none select-none',
+        '[transition:color_150ms,background-color_150ms,scale_300ms_var(--ease-spring)] hover:text-foreground active:scale-[0.97] focus-visible:ring-[3px] focus-visible:ring-ring/45 disabled:pointer-events-none disabled:opacity-50',
+        'data-[state=active]:text-primary data-[state=inactive]:hover:bg-accent/60',
+        '[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*=\'size-\'])]:size-4 [&_svg]:transition-transform [&_svg]:duration-300 [&_svg]:ease-bounce data-[state=active]:[&_svg]:scale-110',
         props.class
-    )
-        " v-bind="forwardedProps">
+    )" v-bind="forwardedProps">
         <slot />
     </TabsTrigger>
 </template>

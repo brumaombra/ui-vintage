@@ -43,19 +43,19 @@ const resolvedDescription = computed(() => props.description
     <Card class="flex flex-col items-center justify-center px-4 py-8 text-center md:py-12">
         <CardContent class="flex flex-col items-center justify-center p-0! text-center">
             <!-- Icon -->
-            <div class="flex items-center justify-center text-4xl text-(--text-secondary-light) opacity-40 dark:text-(--text-secondary-dark)">
-                <HugeiconsIcon :icon="props.icon" class="size-10" />
+            <div class="flex items-center justify-center text-4xl text-muted-foreground opacity-40">
+                <HugeiconsIcon :icon="props.icon" class="size-10 animate-uv-float" />
             </div>
 
             <!-- Title -->
             <component :is="`h${props.level}`"
                 v-if="resolvedTitle"
-                class="text-sm font-bold text-(--text-primary-light) dark:text-(--text-primary-dark) md:text-lg">
+                class="text-sm font-bold text-foreground md:text-lg">
                 {{ resolvedTitle }}
             </component>
 
             <!-- Description -->
-            <p v-if="resolvedDescription" class="max-w-md text-xs text-(--text-secondary-light) dark:text-(--text-secondary-dark) md:text-sm">
+            <p v-if="resolvedDescription" class="max-w-md text-xs text-muted-foreground md:text-sm">
                 {{ resolvedDescription }}
             </p>
 

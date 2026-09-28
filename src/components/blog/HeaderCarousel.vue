@@ -100,13 +100,13 @@ onUnmounted(() => {
 
                                 <!-- Title -->
                                 <NuxtLink :to="post.path">
-                                    <h3 class="text-base md:text-3xl font-bold text-(--text-primary-light) dark:text-(--text-primary-dark) mb-3 line-clamp-2 hover:opacity-75 transition-opacity duration-200">
+                                    <h3 class="text-base md:text-3xl font-bold text-foreground mb-3 line-clamp-2 hover:opacity-75 transition-opacity duration-200">
                                         {{ post.title }}
                                     </h3>
                                 </NuxtLink>
 
                                 <!-- Description -->
-                                <p class="text-xs md:text-base! text-(--text-secondary-light) dark:text-(--text-secondary-dark) mb-6 line-clamp-2 leading-relaxed">
+                                <p class="text-xs md:text-base! text-muted-foreground mb-6 line-clamp-2 leading-relaxed">
                                     {{ post.description }}
                                 </p>
 
@@ -144,16 +144,16 @@ onUnmounted(() => {
         <button v-if="props.featuredPosts.length > 1"
             @click="prevSlide"
             :aria-label="t('uiVintage.blog.previousSlide')"
-            class="absolute left-2 top-[calc(50%-4rem)] -translate-y-1/2 z-10 border border-(--border-light) dark:border-(--border-dark) bg-(--bg-card-light) dark:bg-(--bg-card-dark) px-3 py-3 rounded-[3px] transition-colors duration-200 hover:border-(--border-hover-light) dark:hover:border-(--border-hover-dark) cursor-pointer">
-            <HugeiconsIcon :icon="ArrowLeft01Icon" class="size-4 text-(--text-secondary-light) dark:text-(--text-secondary-dark)" />
+            class="absolute left-2 top-[calc(50%-4rem)] -translate-y-1/2 z-10 border border-border bg-card px-3 py-3 rounded-[3px] transition-colors duration-200 hover:border-border-strong cursor-pointer">
+            <HugeiconsIcon :icon="ArrowLeft01Icon" class="size-4 text-muted-foreground" />
         </button>
 
         <!-- Next slide -->
         <button v-if="props.featuredPosts.length > 1"
             @click="nextSlide"
             :aria-label="t('uiVintage.blog.nextSlide')"
-            class="absolute right-2 top-[calc(50%-4rem)] -translate-y-1/2 z-10 border border-(--border-light) dark:border-(--border-dark) bg-(--bg-card-light) dark:bg-(--bg-card-dark) px-3 py-3 rounded-[3px] transition-colors duration-200 hover:border-(--border-hover-light) dark:hover:border-(--border-hover-dark) cursor-pointer">
-            <HugeiconsIcon :icon="ArrowRight01Icon" class="size-4 text-(--text-secondary-light) dark:text-(--text-secondary-dark)" />
+            class="absolute right-2 top-[calc(50%-4rem)] -translate-y-1/2 z-10 border border-border bg-card px-3 py-3 rounded-[3px] transition-colors duration-200 hover:border-border-strong cursor-pointer">
+            <HugeiconsIcon :icon="ArrowRight01Icon" class="size-4 text-muted-foreground" />
         </button>
     </div>
 </template>

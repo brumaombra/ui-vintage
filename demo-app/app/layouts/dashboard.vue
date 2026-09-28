@@ -1,88 +1,90 @@
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue';
-import { BellDotIcon, DashboardSquare01Icon, InformationCircleIcon, SlidersHorizontalIcon } from '@hugeicons/core-free-icons';
+import { NuxtLink } from '#components';
+import { Search01Icon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/vue';
 import { Button } from '@brumaombra/ui-vintage/button';
 import { DashboardShell } from '@brumaombra/ui-vintage/dashboard-shell';
+import { KbdGroup } from '@brumaombra/ui-vintage/kbd';
 import { LanguageSelector } from '@brumaombra/ui-vintage/language-selector';
-import { showMessageDialog } from '@brumaombra/ui-vintage/message-dialog';
 import { ThemeSelector } from '@brumaombra/ui-vintage/theme-selector';
 import { TooltipProvider } from '@brumaombra/ui-vintage/tooltip';
+import DemoCommandPalette from '~/components/demo/DemoCommandPalette.vue';
+import { demoNavigation, findDemoPage } from '~/utils/demo-navigation';
 
+const route = useRoute();
 const { locale, locales, setLocale } = useI18n();
 const languageOptions = computed(() => locales.value.map(language => language.code));
+const paletteOpen = useState('demo-palette-open', () => false);
 
-// Sidebar navigation structure
-const sidebarSections = [{
-    id: 'overview',
-    label: 'Overview',
-    items: [{
-        id: 'components',
-        label: 'Components',
-        description: 'Interactive primitives and surfaces',
-        icon: DashboardSquare01Icon,
-        active: true
-    }, {
-        id: 'feedback',
-        label: 'Feedback',
-        description: 'Dialogs, alerts, and busy states',
-        icon: BellDotIcon
-    }, {
-        id: 'controls',
-        label: 'Controls',
-        description: 'Inputs, selects, sliders, and toggles',
-        icon: SlidersHorizontalIcon
-    }]
-}];
+// Sidebar navigation derived from the shared navigation model
+const sidebarSections = computed(() => demoNavigation.map(group => ({
+    id: group.id,
+    label: group.label,
+    items: group.items.map(page => ({
+        id: page.id,
+        label: page.label,
+        description: page.description,
+        icon: page.icon,
+        to: page.to,
+        active: findDemoPage(route.path)?.id === page.id
+    }))
+})));
+
+// Topbar title of the current page
+const currentPage = computed(() => findDemoPage(route.path));
 
 // Apply a selected language
-const handleSelectLanguage = async (language) => {
-    await setLocale(language);
+const handleSelectLanguage = async (language: string) => {
+    await setLocale(language as typeof locale.value);
     localStorage.setItem('language', language);
-};
-
-// Show the dashboard introduction dialog
-const handleInfoDemo = async () => {
-    await showMessageDialog({
-        type: 'info',
-        icon: InformationCircleIcon,
-        title: 'Demo screen',
-        message: 'This screen is meant to preview the core components with realistic spacing and interactions.',
-        closeText: 'Got it'
-    });
 };
 </script>
 
 <template>
     <TooltipProvider>
-        <DashboardShell title="Theme Vintage Demo" description="A compact showcase of the current component library." :sidebar-sections="sidebarSections">
-            <!-- Custom sidebar header -->
+        <DashboardShell :title="currentPage?.label ?? 'UI Vintage'" :description="currentPage?.description ?? ''" :sidebar-sections="sidebarSections" :sidebar-link-component="NuxtLink" compact>
+            <!-- Brand -->
             <template #sidebar-header>
-                <div class="hidden items-center gap-2 sm:flex">
-                    <!-- App name -->
-                    <span class="rounded border border-border bg-card px-2.5 py-1 text-[11px] font-semibold text-muted-foreground uppercase tracking-[0.16em]">
-                        Demo
+                <NuxtLink to="/" class="group/brand flex items-center gap-3 px-1">
+                    <span class="flex size-9 items-center justify-center rounded border border-primary/40 bg-primary text-sm font-bold text-primary-foreground shadow-glow transition-[rotate,scale] duration-500 ease-bounce group-hover/brand:scale-105 group-hover/brand:-rotate-6">
+                        UV
                     </span>
-
-                    <!-- Quick intro button -->
-                    <Button variant="secondary" size="sm" @click="handleInfoDemo">
-                        Quick Intro
-                    </Button>
-                </div>
+                    <span class="flex flex-col leading-tight">
+                        <span class="text-sm font-bold tracking-tight">UI Vintage</span>
+                        <span class="text-[11px] text-muted-foreground">Nuxt component library</span>
+                    </span>
+                </NuxtLink>
             </template>
 
-            <!-- Custom sidebar footer -->
+            <!-- Search trigger -->
+            <template #topbar-trailing>
+                <Button variant="secondary" size="sm" class="hidden w-64 justify-between text-muted-foreground md:inline-flex" @click="paletteOpen = true">
+                    <span class="flex items-center gap-2">
+                        <HugeiconsIcon :icon="Search01Icon" class="size-4" />
+                        Search...
+                    </span>
+                    <KbdGroup :keys="['mod', 'k']" />
+                </Button>
+                <Button variant="secondary" size="icon-sm" class="md:hidden" aria-label="Search" @click="paletteOpen = true">
+                    <HugeiconsIcon :icon="Search01Icon" class="size-4" />
+                </Button>
+                <ThemeSelector />
+            </template>
+
+            <!-- Sidebar footer -->
             <template #sidebar-footer>
-                <div class="flex items-center gap-2">
-                    <!-- Language selector -->
+                <div class="flex items-center justify-between gap-2">
                     <LanguageSelector :model-value="locale" :languages="languageOptions" @select="handleSelectLanguage" />
-
-                    <!-- Theme selector -->
-                    <ThemeSelector />
+                    <span class="text-[11px] text-muted-foreground">MIT licensed</span>
                 </div>
             </template>
 
-            <!-- Main content slot -->
+            <!-- Page content -->
             <slot />
         </DashboardShell>
+
+        <!-- Global command palette -->
+        <DemoCommandPalette v-model:open="paletteOpen" />
     </TooltipProvider>
 </template>

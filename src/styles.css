@@ -1,10 +1,13 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 @custom-variant dark (&:where(.dark, .dark *));
 @source "./**/*.{ts,vue}";
 
 html {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    -webkit-tap-highlight-color: transparent;
 }
 
 :root {
@@ -38,6 +41,21 @@ html {
     --border-hover-light: #a7b0bd;
     --border-hover-dark: #5d6878;
 
+    /*********************** Motion tokens ***********************/
+
+    --uv-duration-instant: 90ms;
+    --uv-duration-fast: 150ms;
+    --uv-duration-base: 220ms;
+    --uv-duration-slow: 420ms;
+
+    /*********************** Elevation tokens ***********************/
+
+    --uv-shadow-sm: 0 1px 2px rgb(16 24 40 / 0.05);
+    --uv-shadow-md: 0 1px 2px rgb(16 24 40 / 0.04), 0 4px 12px -4px rgb(16 24 40 / 0.08);
+    --uv-shadow-lg: 0 2px 4px rgb(16 24 40 / 0.04), 0 12px 32px -8px rgb(16 24 40 / 0.16);
+    --uv-shadow-xl: 0 4px 8px rgb(16 24 40 / 0.04), 0 24px 64px -12px rgb(16 24 40 / 0.28);
+    --uv-shadow-glow: 0 0 0 1px color-mix(in oklab, var(--primary) 40%, transparent), 0 8px 24px -6px color-mix(in oklab, var(--primary) 45%, transparent);
+
     /*********************** Shadcn UI variables ***********************/
 
     --radius: 0.625rem;
@@ -48,15 +66,21 @@ html {
     --popover: var(--bg-card-light);
     --popover-foreground: var(--text-primary-light);
     --primary: var(--button-primary-light);
+    --primary-hover: var(--button-primary-hover-light);
     --primary-foreground: var(--button-primary-foreground-light);
     --secondary: var(--button-secondary-light);
     --secondary-foreground: var(--text-primary-light);
+    --surface: var(--bg-surface-light);
     --muted: var(--bg-selected-light);
     --muted-foreground: var(--text-secondary-light);
     --accent: var(--bg-selected-light);
     --accent-foreground: var(--text-primary-light);
     --destructive: oklch(0.577 0.245 27.325);
+    --success: oklch(0.627 0.17 149.2);
+    --warning: oklch(0.705 0.17 62.5);
+    --info: oklch(0.588 0.19 256.8);
     --border: var(--border-light);
+    --border-strong: var(--border-hover-light);
     --input: var(--border-light);
     --ring: var(--button-primary-light);
     --chart-1: oklch(0.646 0.222 41.116);
@@ -86,15 +110,21 @@ html {
     --color-popover: var(--popover);
     --color-popover-foreground: var(--popover-foreground);
     --color-primary: var(--primary);
+    --color-primary-hover: var(--primary-hover);
     --color-primary-foreground: var(--primary-foreground);
     --color-secondary: var(--secondary);
     --color-secondary-foreground: var(--secondary-foreground);
+    --color-surface: var(--surface);
     --color-muted: var(--muted);
     --color-muted-foreground: var(--muted-foreground);
     --color-accent: var(--accent);
     --color-accent-foreground: var(--accent-foreground);
     --color-destructive: var(--destructive);
+    --color-success: var(--success);
+    --color-warning: var(--warning);
+    --color-info: var(--info);
     --color-border: var(--border);
+    --color-border-strong: var(--border-strong);
     --color-input: var(--input);
     --color-ring: var(--ring);
     --color-chart-1: var(--chart-1);
@@ -110,6 +140,214 @@ html {
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-ring: var(--sidebar-ring);
+
+    /* Elevation utilities: shadow-elevated-sm, shadow-elevated-md, ... */
+    --shadow-elevated-sm: var(--uv-shadow-sm);
+    --shadow-elevated-md: var(--uv-shadow-md);
+    --shadow-elevated-lg: var(--uv-shadow-lg);
+    --shadow-elevated-xl: var(--uv-shadow-xl);
+    --shadow-glow: var(--uv-shadow-glow);
+}
+
+/*********************** Motion system ***********************/
+
+@theme {
+    /* Easing utilities: ease-spring, ease-bounce, ease-out-expo, ease-snappy */
+    --ease-spring: linear(0, 0.0074, 0.0292 1.6%, 0.1136 3.4%, 0.4254 8.4%, 0.5703 11%, 0.6922 13.7%, 0.7929 16.6%, 0.8729 19.8%, 0.9337 23.3%, 0.9764 27.2%, 1.0036 31.6%, 1.0173 36.7%, 1.0201 43.1%, 1.0083 57.6%, 1.0014 71.9%, 1);
+    --ease-bounce: linear(0, 0.0083, 0.0333 1.4%, 0.1352 2.9%, 0.5163 7.6%, 0.6949 10.1%, 0.8397 12.6%, 0.9546 15.3%, 1.0397 18.2%, 1.0985 21.3%, 1.1326 24.6%, 1.1437 28.2%, 1.1352 32.3%, 1.0873 40.1%, 1.0132 51%, 0.9897 58.6%, 0.9887 66.7%, 1.0009 86.8%, 1);
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
+
+    /* Animation utilities: animate-uv-* */
+    --animate-uv-shimmer: uv-shimmer 1.6s ease-in-out infinite;
+    --animate-uv-shake: uv-shake 0.42s var(--ease-snappy) both;
+    --animate-uv-float: uv-float 3.2s ease-in-out infinite;
+    --animate-uv-pop: uv-pop 0.42s var(--ease-bounce) both;
+    --animate-uv-fade-up: uv-fade-up 0.5s var(--ease-out-expo) both;
+    --animate-uv-ping-soft: uv-ping-soft 1.8s var(--ease-out-expo) infinite;
+    --animate-uv-indeterminate: uv-indeterminate 1.4s var(--ease-snappy) infinite;
+    --animate-uv-gradient: uv-gradient 6s ease infinite;
+
+    @keyframes uv-shimmer {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+
+    @keyframes uv-shake {
+        0%, 100% { transform: translateX(0); }
+        20% { transform: translateX(-5px); }
+        40% { transform: translateX(4px); }
+        60% { transform: translateX(-3px); }
+        80% { transform: translateX(2px); }
+    }
+
+    @keyframes uv-float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-6px); }
+    }
+
+    @keyframes uv-pop {
+        0% { opacity: 0; transform: scale(0.4); }
+        100% { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes uv-fade-up {
+        0% { opacity: 0; transform: translateY(10px); filter: blur(4px); }
+        100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+
+    @keyframes uv-ping-soft {
+        0% { transform: scale(1); opacity: 0.7; }
+        80%, 100% { transform: scale(2.4); opacity: 0; }
+    }
+
+    @keyframes uv-indeterminate {
+        0% { transform: translateX(-100%) scaleX(0.4); }
+        50% { transform: translateX(40%) scaleX(0.6); }
+        100% { transform: translateX(120%) scaleX(0.4); }
+    }
+
+    @keyframes uv-gradient {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+    }
+}
+
+/* Floating surfaces (popover, select, dropdown, tooltip, hover card) scale from their anchor */
+@keyframes uv-float-in {
+    from { opacity: 0; transform: scale(0.94) translateY(var(--uv-float-offset, 0)); filter: blur(3px); }
+    to { opacity: 1; transform: none; filter: blur(0); }
+}
+
+@keyframes uv-float-out {
+    from { opacity: 1; transform: none; filter: blur(0); }
+    to { opacity: 0; transform: scale(0.96); filter: blur(2px); }
+}
+
+/* Modal surfaces (dialog, alert dialog, command dialog) */
+@keyframes uv-modal-in {
+    from { opacity: 0; transform: translateY(12px) scale(0.94); filter: blur(6px); }
+    to { opacity: 1; transform: none; filter: blur(0); }
+}
+
+@keyframes uv-modal-out {
+    from { opacity: 1; transform: none; filter: blur(0); }
+    to { opacity: 0; transform: translateY(6px) scale(0.97); filter: blur(4px); }
+}
+
+/* Backdrops */
+@keyframes uv-overlay-in {
+    from { opacity: 0; backdrop-filter: blur(0); }
+    to { opacity: 1; }
+}
+
+@keyframes uv-overlay-out {
+    from { opacity: 1; }
+    to { opacity: 0; backdrop-filter: blur(0); }
+}
+
+/* Sheets */
+@keyframes uv-sheet-in-right { from { transform: translateX(100%); } to { transform: none; } }
+@keyframes uv-sheet-out-right { from { transform: none; } to { transform: translateX(100%); } }
+@keyframes uv-sheet-in-left { from { transform: translateX(-100%); } to { transform: none; } }
+@keyframes uv-sheet-out-left { from { transform: none; } to { transform: translateX(-100%); } }
+@keyframes uv-sheet-in-top { from { transform: translateY(-100%); } to { transform: none; } }
+@keyframes uv-sheet-out-top { from { transform: none; } to { transform: translateY(-100%); } }
+@keyframes uv-sheet-in-bottom { from { transform: translateY(100%); } to { transform: none; } }
+@keyframes uv-sheet-out-bottom { from { transform: none; } to { transform: translateY(100%); } }
+
+/* Collapsible regions driven by reka CSS variables */
+@keyframes uv-collapsible-down {
+    from { height: 0; opacity: 0; }
+    to { height: var(--reka-collapsible-content-height); opacity: 1; }
+}
+
+@keyframes uv-collapsible-up {
+    from { height: var(--reka-collapsible-content-height); opacity: 1; }
+    to { height: 0; opacity: 0; }
+}
+
+@utility uv-floating-motion {
+    transform-origin: var(--reka-popover-content-transform-origin, var(--reka-select-content-transform-origin, var(--reka-dropdown-menu-content-transform-origin, var(--reka-tooltip-content-transform-origin, var(--reka-hover-card-content-transform-origin, var(--reka-combobox-content-transform-origin, center))))));
+    will-change: transform, opacity;
+
+    &[data-side="bottom"] { --uv-float-offset: -6px; }
+    &[data-side="top"] { --uv-float-offset: 6px; }
+
+    &[data-state="open"],
+    &[data-state="delayed-open"],
+    &[data-state="instant-open"] {
+        animation: uv-float-in var(--uv-duration-base) var(--ease-spring) both;
+    }
+
+    &[data-state="closed"] {
+        animation: uv-float-out var(--uv-duration-fast) var(--ease-snappy) both;
+    }
+}
+
+@utility uv-modal-motion {
+    &[data-state="open"] {
+        animation: uv-modal-in var(--uv-duration-slow) var(--ease-spring) both;
+    }
+
+    &[data-state="closed"] {
+        animation: uv-modal-out var(--uv-duration-fast) var(--ease-snappy) both;
+    }
+}
+
+@utility uv-overlay-motion {
+    &[data-state="open"] {
+        animation: uv-overlay-in var(--uv-duration-base) var(--ease-out-expo) both;
+    }
+
+    &[data-state="closed"] {
+        animation: uv-overlay-out var(--uv-duration-base) var(--ease-snappy) both;
+    }
+}
+
+@utility uv-collapsible-motion {
+    overflow: hidden;
+
+    &[data-state="open"] {
+        animation: uv-collapsible-down var(--uv-duration-base) var(--ease-out-expo);
+    }
+
+    &[data-state="closed"] {
+        animation: uv-collapsible-up var(--uv-duration-fast) var(--ease-snappy);
+    }
+}
+
+/* Shared focus ring used by interactive primitives */
+@utility uv-focus-ring {
+    outline: none;
+
+    &:focus-visible {
+        box-shadow: 0 0 0 1px var(--background), 0 0 0 3px color-mix(in oklab, var(--ring) 55%, transparent);
+    }
+}
+
+/* Shared interactive states for inputs, textareas, and field-like triggers (base colors stay in utility classes) */
+@utility uv-field {
+    transition-property: border-color, box-shadow, background-color, color, opacity;
+    transition-duration: var(--uv-duration-fast);
+    transition-timing-function: var(--ease-snappy);
+
+    &:hover:not(:disabled):not([data-disabled]) {
+        border-color: var(--border-strong);
+    }
+
+    &:focus-visible,
+    &:focus-within:not(:has(button:focus-visible)),
+    &[data-state="open"] {
+        outline: none;
+        border-color: color-mix(in oklab, var(--primary) 75%, var(--border));
+        box-shadow: 0 0 0 3px color-mix(in oklab, var(--primary) 16%, transparent);
+    }
+
+    &[aria-invalid="true"] {
+        border-color: var(--destructive);
+        box-shadow: 0 0 0 3px color-mix(in oklab, var(--destructive) 14%, transparent);
+    }
 }
 
 .dark {
@@ -120,15 +358,21 @@ html {
     --popover: var(--bg-card-dark);
     --popover-foreground: var(--text-primary-dark);
     --primary: var(--button-primary-dark);
+    --primary-hover: var(--button-primary-hover-dark);
     --primary-foreground: var(--button-primary-foreground-dark);
     --secondary: var(--button-secondary-dark);
     --secondary-foreground: var(--text-primary-dark);
+    --surface: var(--bg-surface-dark);
     --muted: var(--bg-selected-dark);
     --muted-foreground: var(--text-secondary-dark);
     --accent: var(--bg-selected-dark);
     --accent-foreground: var(--text-primary-dark);
     --destructive: oklch(0.704 0.191 22.216);
+    --success: oklch(0.723 0.19 149.6);
+    --warning: oklch(0.795 0.16 70.1);
+    --info: oklch(0.707 0.165 254.6);
     --border: var(--border-dark);
+    --border-strong: var(--border-hover-dark);
     --input: var(--border-dark);
     --ring: var(--button-primary-dark);
     --chart-1: oklch(0.488 0.243 264.376);
@@ -144,6 +388,11 @@ html {
     --sidebar-accent-foreground: var(--text-primary-dark);
     --sidebar-border: var(--border-dark);
     --sidebar-ring: var(--button-primary-dark);
+
+    --uv-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.3);
+    --uv-shadow-md: 0 1px 2px rgb(0 0 0 / 0.3), 0 4px 12px -4px rgb(0 0 0 / 0.4);
+    --uv-shadow-lg: 0 2px 4px rgb(0 0 0 / 0.3), 0 12px 32px -8px rgb(0 0 0 / 0.55);
+    --uv-shadow-xl: 0 4px 8px rgb(0 0 0 / 0.3), 0 24px 64px -12px rgb(0 0 0 / 0.7);
 }
 
 @layer base {
@@ -153,6 +402,10 @@ html {
 
     body {
         @apply bg-background text-foreground;
+    }
+
+    ::selection {
+        background-color: color-mix(in oklab, var(--primary) 30%, transparent);
     }
 }
 
@@ -168,14 +421,18 @@ body {
 
 /*********************** Page transition animations ***********************/
 
-.page-enter-active,
+.page-enter-active {
+    transition: opacity 0.32s var(--ease-out-expo), transform 0.42s var(--ease-spring), filter 0.32s var(--ease-out-expo);
+}
+
 .page-leave-active {
-    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+    transition: opacity 0.12s var(--ease-snappy), transform 0.12s var(--ease-snappy), filter 0.12s var(--ease-snappy);
 }
 
 .page-enter-from {
     opacity: 0;
-    transform: translateY(4px);
+    transform: translateY(10px);
+    filter: blur(4px);
 }
 
 .page-leave-to {
@@ -183,6 +440,33 @@ body {
     transform: translateY(-4px);
 }
 
+/*********************** Theme switch (View Transitions API) ***********************/
+
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+
+.uv-theme-switching,
+.uv-theme-switching *,
+.uv-theme-switching *::before,
+.uv-theme-switching *::after {
+    transition: none !important;
+}
+
+/*********************** Reduced motion ***********************/
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
 
 /*********************** Custom scrollbar ***********************/
 
@@ -198,7 +482,7 @@ body {
 
 ::-webkit-scrollbar-thumb {
     background-color: var(--border-light);
-    border-radius: 0px;
+    border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {

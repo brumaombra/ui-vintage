@@ -1,11 +1,32 @@
-import { h, reactive, render } from 'vue';
+import { h, markRaw, reactive, render } from 'vue';
+import type { HugeiconsIconDefinition } from '../../lib/common-types';
 
 export type MessageToastType = 'success' | 'info' | 'warning' | 'error';
+
+export interface MessageToastAction {
+    label: string;
+    onClick: () => void | Promise<void>;
+}
 
 export interface ShowMessageToastOptions {
     message: string;
     type?: MessageToastType;
     duration?: number;
+    title?: string;
+    icon?: HugeiconsIconDefinition | null;
+    action?: MessageToastAction | null;
+    dismissible?: boolean;
+}
+
+export interface MessageToastItem {
+    id: number;
+    message: string;
+    type: MessageToastType;
+    title: string;
+    icon: HugeiconsIconDefinition | null;
+    action: MessageToastAction | null;
+    dismissible: boolean;
+    duration: number;
 }
 
 interface MessageToastContent {
@@ -16,25 +37,40 @@ interface MessageToastContent {
 interface MessageToastState {
     current: MessageToastContent | null;
     isOpen: boolean;
+    toasts: MessageToastItem[];
+    paused: boolean;
 }
 
-const TOAST_CLOSE_DURATION_MS = 300;
+interface ToastTimer {
+    handle: ReturnType<typeof setTimeout> | null;
+    remaining: number;
+    startedAt: number;
+}
+
 const DEFAULT_TOAST_DURATION_MS = 5000;
+const MAX_TOASTS = 5;
 const MESSAGE_TOAST_ROOT_ID = 'ui-vintage-message-toast-root';
 
-let dismissTimer: ReturnType<typeof setTimeout> | null = null;
-let clearTimer: ReturnType<typeof setTimeout> | null = null;
+const toastTimers = new Map<number, ToastTimer>();
 let messageToastMountPromise: Promise<void> | null = null;
-let openFrame: number | null = null;
-let activeToastId = 0;
+let nextToastId = 0;
 
-// Shared message toast state
+// Shared message toast state (current/isOpen are kept for backward compatibility)
 export const messageToastState: MessageToastState = reactive({
     current: null,
-    isOpen: false
+    isOpen: false,
+    toasts: [],
+    paused: false
 });
 
-// Mount the toast once on demand
+// Keep the legacy single-toast fields in sync with the stack
+const syncLegacyState = () => {
+    const latest = messageToastState.toasts[0];
+    messageToastState.current = latest ? { message: latest.message, type: latest.type } : null;
+    messageToastState.isOpen = Boolean(latest);
+};
+
+// Mount the toaster once on demand
 const ensureMessageToastMounted = () => {
     // Skip mounting during SSR
     if (typeof document === 'undefined') {
@@ -42,8 +78,7 @@ const ensureMessageToastMounted = () => {
     }
 
     // Reuse the existing mount root
-    const existingRoot = document.getElementById(MESSAGE_TOAST_ROOT_ID);
-    if (existingRoot) {
+    if (document.getElementById(MESSAGE_TOAST_ROOT_ID)) {
         return Promise.resolve();
     }
 
@@ -75,93 +110,84 @@ const ensureMessageToastMounted = () => {
     return messageToastMountPromise;
 };
 
-// Clear active timers before updating toast state
-const clearMessageToastTimers = () => {
-    // Clear any pending auto-dismiss timer
-    if (dismissTimer) {
-        clearTimeout(dismissTimer);
-        dismissTimer = null;
-    }
-
-    // Clear any pending clear timer from a previous toast
-    if (clearTimer) {
-        clearTimeout(clearTimer);
-        clearTimer = null;
-    }
-
-    // Clear any pending open frame from a previous toast
-    if (openFrame !== null && typeof cancelAnimationFrame !== 'undefined') {
-        cancelAnimationFrame(openFrame);
-        openFrame = null;
-    }
+// Start (or restart) the auto-dismiss countdown of a toast
+const startToastTimer = (id: number) => {
+    const timer = toastTimers.get(id);
+    if (!timer || timer.handle || messageToastState.paused) return;
+    timer.startedAt = Date.now();
+    timer.handle = setTimeout(() => closeMessageToast(id), timer.remaining);
 };
 
-// Clear the current toast after the leave transition
-const clearCurrentMessageToast = () => {
-    messageToastState.current = null;
+// Stop the countdown of a toast and remember how much time is left
+const stopToastTimer = (id: number) => {
+    const timer = toastTimers.get(id);
+    if (!timer?.handle) return;
+    clearTimeout(timer.handle);
+    timer.handle = null;
+    timer.remaining = Math.max(0, timer.remaining - (Date.now() - timer.startedAt));
 };
 
-// Close the toast after the leave transition
-const scheduleCloseMessageToast = () => {
-    // Skip if there's no active toast
-    if (!messageToastState.current || !messageToastState.isOpen) {
-        return;
+// Pause every countdown (used while the toaster is hovered or focused)
+export const pauseMessageToasts = () => {
+    messageToastState.paused = true;
+    toastTimers.forEach((_, id) => stopToastTimer(id));
+};
+
+// Resume every countdown
+export const resumeMessageToasts = () => {
+    messageToastState.paused = false;
+    toastTimers.forEach((_, id) => startToastTimer(id));
+};
+
+// Dismiss one toast by id, or every toast when no id is passed
+export const closeMessageToast = (id?: number) => {
+    const ids = id === undefined ? messageToastState.toasts.map(toast => toast.id) : [id];
+
+    // Clear timers and remove the toasts from the stack
+    for (const toastId of ids) {
+        stopToastTimer(toastId);
+        toastTimers.delete(toastId);
     }
-
-    // Start the close transition
-    messageToastState.isOpen = false;
-    clearTimer = setTimeout(() => {
-        clearTimer = null;
-        clearCurrentMessageToast();
-    }, TOAST_CLOSE_DURATION_MS);
+    messageToastState.toasts = messageToastState.toasts.filter(toast => !ids.includes(toast.id));
+    syncLegacyState();
 };
 
-// Dismiss the active toast
-export const closeMessageToast = () => {
-    clearMessageToastTimers();
-    scheduleCloseMessageToast();
-};
-
-// Show a message toast and optionally auto-dismiss it
+// Show a message toast and optionally auto-dismiss it; returns the toast id
 export const showMessageToast = (options: ShowMessageToastOptions) => {
-    clearMessageToastTimers();
-    activeToastId += 1;
-    const toastId = activeToastId;
+    nextToastId += 1;
+    const id = nextToastId;
     const duration = options.duration ?? DEFAULT_TOAST_DURATION_MS;
 
-    // Update the toast state while keeping the shell closed until the renderer is mounted
-    messageToastState.current = {
+    // Build the toast item
+    const toast: MessageToastItem = {
+        id,
         message: options.message,
-        type: options.type ?? 'success'
+        type: options.type ?? 'success',
+        title: options.title ?? '',
+        icon: options.icon ? markRaw(options.icon) : null,
+        action: options.action ?? null,
+        dismissible: options.dismissible ?? true,
+        duration
     };
-    messageToastState.isOpen = false;
 
-    // Mount first so the initial visible transition can run after the component exists
+    // Expose the newest toast synchronously, as the single-toast API always did
+    messageToastState.current = { message: toast.message, type: toast.type };
+
+    // Mount first so the enter transition runs once the renderer exists
     void ensureMessageToastMounted().then(() => {
-        // Guard against a toast change during the async mount
-        if (toastId !== activeToastId || !messageToastState.current || typeof requestAnimationFrame === 'undefined') {
-            return;
+        // Push the newest toast on top and trim the overflow
+        messageToastState.toasts = [toast, ...messageToastState.toasts];
+        for (const overflow of messageToastState.toasts.slice(MAX_TOASTS)) {
+            closeMessageToast(overflow.id);
         }
+        syncLegacyState();
 
-        // Use requestAnimationFrame to ensure the DOM updates before starting the open transition
-        openFrame = requestAnimationFrame(() => {
-            openFrame = null;
-
-            // Guard against a toast change before the frame
-            if (toastId !== activeToastId || !messageToastState.current) {
-                return;
-            }
-
-            // Start the open transition after the renderer is present
-            messageToastState.isOpen = true;
-
-            // Auto-dismiss the toast after the specified duration
-            if (duration > 0) {
-                dismissTimer = setTimeout(() => {
-                    dismissTimer = null;
-                    scheduleCloseMessageToast();
-                }, duration);
-            }
-        });
+        // Auto-dismiss the toast after the specified duration
+        if (duration > 0) {
+            toastTimers.set(id, { handle: null, remaining: duration, startedAt: Date.now() });
+            startToastTimer(id);
+        }
     });
+
+    return id;
 };

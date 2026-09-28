@@ -10,7 +10,7 @@ const props = defineProps<{
 
 <template>
     <p data-slot="card-text" :class="cn(
-        'text-xs sm:text-sm text-(--text-secondary-light) dark:text-(--text-secondary-dark)',
+        'text-xs sm:text-sm text-muted-foreground',
         props.class,
     )
         ">

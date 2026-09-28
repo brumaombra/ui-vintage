@@ -3,6 +3,8 @@ import type { DialogContentEmits, DialogContentProps } from 'reka-ui';
 import type { HTMLAttributes } from 'vue';
 import { reactiveOmit } from '@vueuse/core';
 import { DialogClose, DialogContent, DialogOverlay, DialogPortal, useForwardPropsEmits } from 'reka-ui';
+import { Cancel01Icon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/vue';
 import { useI18n } from 'vue-i18n';
 import { cn } from '../../../lib/utils';
 import { Button } from '../button';
@@ -31,9 +33,9 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 
 <template>
     <DialogPortal>
-        <DialogOverlay class="fixed inset-0 isolate z-50 grid place-items-center overflow-y-auto bg-black/45 backdrop-blur-[2px] transition-[opacity,backdrop-filter] ease-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500 data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0">
+        <DialogOverlay class="uv-overlay-motion fixed inset-0 isolate z-50 grid place-items-center overflow-y-auto bg-black/40 backdrop-blur-[3px] dark:bg-black/60">
             <DialogContent :class="cn(
-                'relative z-50 my-6 grid w-full max-w-[calc(100%-2rem)] gap-4 rounded border border-border bg-card p-6 text-card-foreground outline-none duration-200 sm:max-w-106.25',
+                'uv-modal-motion relative z-50 my-6 grid w-full max-w-[calc(100%-2rem)] gap-4 rounded border border-border bg-card p-6 text-card-foreground shadow-elevated-xl outline-none sm:max-w-106.25',
                 props.class
             )
                 " v-bind="{ ...$attrs, ...forwarded }" @pointer-down-outside="
@@ -51,8 +53,8 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
                 <slot />
 
                 <DialogClose v-if="props.showCloseButton" data-slot="dialog-close" as-child>
-                    <Button variant="ghost" size="icon-sm" class="absolute top-4 right-4 p-0.5">
-                        <span aria-hidden="true">X</span>
+                    <Button variant="ghost" size="icon-sm" class="group/close absolute top-3 right-3 size-8 p-0.5">
+                        <HugeiconsIcon :icon="Cancel01Icon" aria-hidden="true" class="transition-transform duration-300 ease-spring group-hover/close:rotate-90" />
                         <span class="sr-only">{{ t('uiVintage.buttons.close') }}</span>
                     </Button>
                 </DialogClose>

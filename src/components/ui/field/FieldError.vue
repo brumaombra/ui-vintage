@@ -22,6 +22,9 @@ const content = computed(() => {
         ).values()
     ];
 
+    // Nothing to show when every entry is empty
+    if (uniqueErrors.length === 0) return null;
+
     if (uniqueErrors.length === 1 && uniqueErrors[0]) {
         return typeof uniqueErrors[0] === 'string'
             ? uniqueErrors[0]
@@ -35,7 +38,7 @@ const content = computed(() => {
 </script>
 
 <template>
-    <div v-if="$slots.default || content" role="alert" data-slot="field-error" :class="cn('text-destructive text-xs font-normal', props.class)">
+    <div v-if="$slots.default || content" role="alert" data-slot="field-error" :class="cn('text-destructive animate-[uv-fade-up_0.3s_var(--ease-out-expo)_both] text-xs font-normal', props.class)">
         <slot v-if="$slots.default" />
 
         <template v-else-if="typeof content === 'string'">

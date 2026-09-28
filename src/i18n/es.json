@@ -114,6 +114,55 @@
             "success": "Exito",
             "info": "Informacion",
             "warning": "Advertencia"
+        },
+        "toast": {
+            "region": "Notificaciones"
+        },
+        "dataTable": {
+            "selectAll": "Seleccionar todas las filas",
+            "selectRow": "Seleccionar fila"
+        },
+        "numberField": {
+            "decrement": "Disminuir",
+            "increment": "Aumentar"
+        },
+        "tagsInput": {
+            "placeholder": "Añadir una etiqueta…"
+        },
+        "combobox": {
+            "placeholder": "Selecciona una opción",
+            "searchPlaceholder": "Buscar...",
+            "empty": "No se encontraron resultados."
+        },
+        "avatar": {
+            "status": {
+                "online": "En línea",
+                "offline": "Desconectado",
+                "busy": "Ocupado",
+                "away": "Ausente"
+            }
+        },
+        "pagination": {
+            "label": "Paginación",
+            "page": "Página {page}",
+            "first": "Primera página",
+            "previous": "Página anterior",
+            "next": "Página siguiente",
+            "last": "Última página",
+            "more": "Más páginas"
+        },
+        "stepper": {
+            "label": "Progreso"
+        },
+        "fileDropzone": {
+            "title": "Arrastra y suelta archivos aquí",
+            "description": "o haz clic para explorar tu dispositivo",
+            "dropActive": "Suelta para subir",
+            "browse": "Explorar archivos",
+            "remove": "Eliminar {name}",
+            "maxSize": "Máx. {size} por archivo",
+            "maxFiles": "Hasta {count} archivos",
+            "files": "Archivos seleccionados"
         }
     }
 }

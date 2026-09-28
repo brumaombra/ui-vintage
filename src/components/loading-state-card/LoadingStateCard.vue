@@ -35,12 +35,12 @@ const resolvedDescription = computed(() => props.description || t('uiVintage.com
             <!-- Title -->
             <component :is="`h${props.level}`"
                 v-if="resolvedTitle"
-                class="text-sm font-bold text-(--text-primary-light) dark:text-(--text-primary-dark) md:text-lg">
+                class="text-sm font-bold text-foreground md:text-lg">
                 {{ resolvedTitle }}
             </component>
 
             <!-- Description -->
-            <p v-if="resolvedDescription" class="max-w-md text-xs text-(--text-secondary-light) dark:text-(--text-secondary-dark) md:text-sm">
+            <p v-if="resolvedDescription" class="max-w-md text-xs text-muted-foreground md:text-sm">
                 {{ resolvedDescription }}
             </p>
 

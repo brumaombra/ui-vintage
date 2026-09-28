@@ -27,7 +27,7 @@ const hasSlotContent = computed(() => {
 
 // Get size classes based on size prop
 const getSizeClasses = (size: string) => {
-    const baseClasses = 'font-bold text-(--text-primary-light) dark:text-(--text-primary-dark)';
+    const baseClasses = 'font-bold text-foreground';
 
     // Return classes based on size
     switch (size) {

@@ -286,18 +286,18 @@ const openMobileToc = () => {
 // Get classes for heading button
 const getHeadingButtonClasses = (level: number, isActive: boolean) => {
     // Base classes for all titles
-    const baseClasses = 'block w-full text-left px-2.5 py-2 md:px-3 md:py-2 rounded border-l-2 border-transparent transition-all duration-200 hover:bg-(--bg-selected-light) dark:hover:bg-(--bg-selected-dark) cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 motion-reduce:transition-none';
+    const baseClasses = 'block w-full text-left px-2.5 py-2 md:px-3 md:py-2 rounded border-l-2 border-transparent transition-all duration-200 hover:bg-accent cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 motion-reduce:transition-none';
 
     // Add classes based on heading level
     let levelClasses = '';
     if (level === 2) {
-        levelClasses = 'text-(--text-primary-light) dark:text-(--text-primary-dark) font-semibold text-xs md:text-sm';
+        levelClasses = 'text-foreground font-semibold text-xs md:text-sm';
     } else {
-        levelClasses = 'text-(--text-secondary-light) dark:text-(--text-secondary-dark) pl-6! text-xs md:text-sm';
+        levelClasses = 'text-muted-foreground pl-6! text-xs md:text-sm';
     }
 
     // Add classes if the heading is active
-    const activeClasses = isActive ? 'bg-(--bg-selected-light) dark:bg-(--bg-selected-dark) border-l-primary text-(--text-primary-light) dark:text-(--text-primary-dark)' : '';
+    const activeClasses = isActive ? 'bg-accent border-l-primary text-foreground' : '';
 
     // Return combined classes
     return [baseClasses, levelClasses, activeClasses];
@@ -367,12 +367,12 @@ onUnmounted(() => {
                         <div class="flex min-w-0 items-center gap-3">
                             <!-- Mobile table of contents icon -->
                             <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded border border-(--border-light) bg-(--bg-card-light) dark:border-(--border-dark) dark:bg-(--bg-card-dark)">
-                                <HugeiconsIcon :icon="Bookmark01Icon" class="size-4 text-(--text-secondary-light) dark:text-(--text-secondary-dark)" />
+                                <HugeiconsIcon :icon="Bookmark01Icon" class="size-4 text-muted-foreground" />
                             </div>
 
                             <!-- Mobile table of contents title and description -->
                             <div class="min-w-0">
-                                <SheetTitle class="text-sm md:text-base! font-semibold text-(--text-primary-light) dark:text-(--text-primary-dark)">
+                                <SheetTitle class="text-sm md:text-base! font-semibold text-foreground">
                                     {{ tocTitle }}
                                 </SheetTitle>
                                 <SheetDescription class="sr-only">

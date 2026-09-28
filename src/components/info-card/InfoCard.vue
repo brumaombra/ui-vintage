@@ -28,7 +28,7 @@ const props = withDefaults(defineProps<{
             <div class="flex w-full flex-1 items-center justify-between text-center sm:w-auto sm:text-left">
                 <div class="flex flex-col w-full gap-2 sm:gap-1">
                     <!-- Title -->
-                    <span class="text-base font-bold text-(--text-primary-light) dark:text-(--text-primary-dark)">
+                    <span class="text-base font-bold text-foreground">
                         {{ props.title }}
                     </span>
 

@@ -76,12 +76,12 @@ const copyCode = async () => {
 
 <template>
     <div class="not-prose my-6 sm:my-8">
-        <Card class="gap-0! sm:gap-0! overflow-hidden p-0! text-(--text-primary-light) dark:text-(--text-primary-dark)">
+        <Card class="gap-0! sm:gap-0! overflow-hidden p-0! text-foreground">
             <!-- Code header -->
             <div class="flex items-center justify-between gap-3 border-b border-(--border-light) bg-(--bg-card-light) px-3 py-2 sm:px-4 dark:border-(--border-dark) dark:bg-(--bg-card-dark)">
                 <div class="flex min-w-0 items-center gap-2">
-                    <HugeiconsIcon :icon="CodeIcon" class="size-4 shrink-0 text-(--text-secondary-light) dark:text-(--text-secondary-dark)" />
-                    <span class="truncate text-xs font-semibold text-(--text-secondary-light) dark:text-(--text-secondary-dark)">{{ resolvedTitle }}</span>
+                    <HugeiconsIcon :icon="CodeIcon" class="size-4 shrink-0 text-muted-foreground" />
+                    <span class="truncate text-xs font-semibold text-muted-foreground">{{ resolvedTitle }}</span>
                 </div>
 
                 <!-- Copy code button -->
@@ -98,7 +98,7 @@ const copyCode = async () => {
             </div>
 
             <!-- Code content -->
-            <div v-if="highlightedCode" class="code-block-content overflow-x-auto bg-(--bg-surface-light) dark:bg-(--bg-surface-dark)" v-html="highlightedCode" />
+            <div v-if="highlightedCode" class="code-block-content overflow-x-auto bg-surface" v-html="highlightedCode" />
             <pre v-else class="code-block-content overflow-x-auto bg-(--bg-surface-light) px-4 py-3 text-xs leading-6 dark:bg-(--bg-surface-dark) sm:px-5 sm:py-4 sm:text-sm"><code>{{ displayedCode }}</code></pre>
         </Card>
     </div>
