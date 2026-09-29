@@ -26,6 +26,7 @@ See [README.md](../README.md) for package usage.
 ## Conventions
 
 - For every new public component, add an `index.ts` in its directory and expose it through `package.json` exports.
+- After changing a public API or adding an entry point, add its description to `scripts/components-meta.mjs` and run `npm run docs:components` to regenerate `COMPONENTS.md` (the publish workflow fails when it is stale).
 - Use the semantic Tailwind tokens (`bg-card`, `bg-surface`, `bg-accent`, `text-muted-foreground`, `border-border`, `border-border-strong`, `bg-primary`, `hover:bg-primary-hover`, ...). They switch automatically in dark mode, so avoid paired `light`/`dark:` color classes.
 - Use the motion utilities from `src/styles.css` (`ease-spring`, `uv-floating-motion`, `uv-modal-motion`, `uv-field`, `animate-uv-pop`, ...) instead of ad-hoc animations. In custom transitions, list `scale`, `rotate`, and `translate` by name; Tailwind v4 does not animate them through `transform`.
 - User-facing default strings go through vue-i18n under the `uiVintage` namespace, with keys added to all nine files in `src/i18n/`.

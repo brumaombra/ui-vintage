@@ -48,6 +48,10 @@ jobs:
       - name: Type-check package
         run: npm run typecheck
 
+      # Ensure the shipped component catalog matches the source
+      - name: Check component catalog
+        run: npm run docs:components:check
+
       # Inspect the published tarball contents without building dist output
       - name: Inspect package contents
         run: npm pack --dry-run

@@ -241,6 +241,34 @@ The package exposes components through explicit subpaths. The complete public ex
 
 `busy`, `busy-indicator`, `confirm-dialog`, `message-dialog`, `message-toast`, `language-flag`, `language-selector`, `blog`, `content`, and `utils`.
 
+### 📚 Component catalog
+
+[`COMPONENTS.md`](COMPONENTS.md) lists every entry point with its import line, components, props and defaults, events, slots, helpers, and usage examples. It is generated from the source and ships inside the package, so apps can always read the version they installed at `node_modules/@brumaombra/ui-vintage/COMPONENTS.md`.
+
+Regenerate it after changing a public API, adding an entry point, or editing `scripts/components-meta.mjs`:
+
+```bash
+# Rewrite COMPONENTS.md from the source
+npm run docs:components
+
+# Fail when COMPONENTS.md is out of date (runs in the publish workflow)
+npm run docs:components:check
+```
+
+New entry points need a description and category in `scripts/components-meta.mjs`; the generator fails until they have one.
+
+### 🤖 AI assistant skill
+
+The package also ships a skill that teaches coding assistants to reuse UI Vintage and to read the catalog before writing UI. To enable it in a consuming app with Claude Code, copy it into the app's skills directory:
+
+```bash
+# Copy the skill shipped with the installed version
+mkdir -p .claude/skills
+cp -r node_modules/@brumaombra/ui-vintage/skills/ui-vintage .claude/skills/
+```
+
+The skill only points to `COMPONENTS.md`, so it stays valid when you update the package. Copy it again only when the skill itself changes.
+
 ### 🎬 Motion system
 
 `src/styles.css` ships a small motion vocabulary that every component uses and that apps can reuse:
@@ -320,6 +348,7 @@ UI Vintage publishes the Nuxt module entrypoint and source files directly:
 - `module.mjs` is the package entrypoint registered by Nuxt.
 - `src/` contains the published components, styles, helpers, locale messages, and runtime plugin.
 - `package.json` defines the public component subpath exports.
+- `COMPONENTS.md` and `skills/` ship the generated component catalog and the AI assistant skill.
 - `dist/` is generated repository output and is not the source of truth for consumers.
 
 There is no required library build step before publishing. The normal verification command is:
