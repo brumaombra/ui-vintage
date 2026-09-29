@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue';
-import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import { computed, getCurrentInstance, onBeforeMount, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { cn } from '../../../lib/utils';
 
 // Props
@@ -22,8 +22,12 @@ const props = withDefaults(defineProps<{
     animateOnMount: true
 });
 
-const displayValue = ref(props.animateOnMount ? 0 : props.value);
+// The server always renders the final value (search engines, link previews and the first paint never see a 0), the count-up only runs for components created in the browser
+const isServer = typeof window === 'undefined';
+const displayValue = ref(props.animateOnMount && !isServer ? 0 : props.value);
 const direction = ref<'up' | 'down' | null>(null);
+const instance = getCurrentInstance();
+let isHydrated = false;
 let frame: number | null = null;
 
 // Format the displayed value
@@ -33,6 +37,9 @@ const formatter = computed(() => {
     return new Intl.NumberFormat(props.locale, props.formatOptions ?? { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
 });
 const formattedValue = computed(() => `${props.prefix}${formatter.value.format(displayValue.value)}${props.suffix}`);
+
+// Final value announced to screen readers from visually hidden text (the animated digits are hidden from them, and aria-label is not allowed on a span without a role)
+const accessibleValue = computed(() => `${props.prefix}${formatter.value.format(props.value)}${props.suffix}`);
 
 // Decelerating curve so the count settles gently on the final value
 const easeOutExpo = (progress: number) => progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
@@ -70,9 +77,15 @@ const animateTo = (target: number) => {
 // Re-animate whenever the value changes
 watch(() => props.value, value => animateTo(value));
 
-// Count up on mount
+// When hydrating server HTML (the element already exists before the first render), keep the final value the server rendered, so there is no mismatch and no flash to 0
+onBeforeMount(() => {
+    isHydrated = !!instance?.vnode.el;
+    if (isHydrated) displayValue.value = props.value;
+});
+
+// Count up on mount (only for components created in the browser, server-rendered ones already show the final value)
 onMounted(() => {
-    if (props.animateOnMount) animateTo(props.value);
+    if (props.animateOnMount && !isHydrated) animateTo(props.value);
 });
 
 // Stop any pending frame
@@ -82,7 +95,8 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <span data-slot="animated-number" :data-direction="direction ?? undefined" :aria-label="`${props.prefix}${formatter.format(props.value)}${props.suffix}`" :class="cn('inline-block tabular-nums', props.class)">
+    <span data-slot="animated-number" :data-direction="direction ?? undefined" :class="cn('inline-block tabular-nums', props.class)">
         <span aria-hidden="true">{{ formattedValue }}</span>
+        <span class="sr-only">{{ accessibleValue }}</span>
     </span>
 </template>
