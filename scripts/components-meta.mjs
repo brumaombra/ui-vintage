@@ -413,6 +413,17 @@ export const entries = {
 
     /*********************** Feedback ***********************/
 
+    'cookie-consent': {
+        category: 'feedback',
+        description: 'Cookie consent banner fixed to the bottom of the page, shown in the browser until the visitor accepts or declines. The choice is saved in `localStorage` under `storage-key`; `useCookieConsent(storageKey)` shares it, so optional scripts (analytics, ads) can wait for `consent.value === "granted"` and a settings page can call `reset()` to ask again. Texts have translated defaults, `policy-to` adds a link to the cookie policy.',
+        example: `
+<CookieConsent storage-key="analyticsConsent" policy-to="/cookie-policy" @accept="loadAnalytics" />
+
+<script setup>
+const { consent, reset } = useCookieConsent('analyticsConsent');
+watch(consent, value => value === 'granted' && loadAnalytics(), { immediate: true });
+</script>`
+    },
     'message-toast': {
         category: 'feedback',
         description: 'Stacked toasts (hover to expand and pause, swipe to dismiss) with titles and actions. `showMessageToast` returns an id for `closeMessageToast(id)`; `duration: 0` keeps a toast open.',

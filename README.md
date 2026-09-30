@@ -358,7 +358,7 @@ There is no required library build step before publishing. The normal verificati
 npm run typecheck
 ```
 
-For release details, see [NPM.md](NPM.md). The package is published under the public npm scope `@brumaombra/ui-vintage`.
+For the release process, see the project skill in [`.claude/skills/publish-npm/SKILL.md`](.claude/skills/publish-npm/SKILL.md). The package is published under the public npm scope `@brumaombra/ui-vintage`.
 
 <a id="requirements"></a>
 ## 🧰 Requirements

@@ -20,7 +20,7 @@ This file lists every public entry point of the package with its components, pro
 - **Data display:** [animated-number](#brumaombraui-vintageanimated-number), [avatar](#brumaombraui-vintageavatar), [badge](#brumaombraui-vintagebadge), [card](#brumaombraui-vintagecard), [card-grid](#brumaombraui-vintagecard-grid), [chip](#brumaombraui-vintagechip), [data-list](#brumaombraui-vintagedata-list), [data-table](#brumaombraui-vintagedata-table), [info-card](#brumaombraui-vintageinfo-card), [progress](#brumaombraui-vintageprogress), [progress-component](#brumaombraui-vintageprogress-component), [scroll-area](#brumaombraui-vintagescroll-area), [separator](#brumaombraui-vintageseparator), [single-value-card](#brumaombraui-vintagesingle-value-card), [skeleton](#brumaombraui-vintageskeleton), [table](#brumaombraui-vintagetable)
 - **Navigation:** [accordion](#brumaombraui-vintageaccordion), [breadcrumb](#brumaombraui-vintagebreadcrumb), [collapsible](#brumaombraui-vintagecollapsible), [pagination](#brumaombraui-vintagepagination), [sidebar](#brumaombraui-vintagesidebar), [stepper](#brumaombraui-vintagestepper), [tabs](#brumaombraui-vintagetabs)
 - **Overlays:** [alert-dialog](#brumaombraui-vintagealert-dialog), [command](#brumaombraui-vintagecommand), [dialog](#brumaombraui-vintagedialog), [hover-card](#brumaombraui-vintagehover-card), [popover](#brumaombraui-vintagepopover), [sheet](#brumaombraui-vintagesheet), [tooltip](#brumaombraui-vintagetooltip)
-- **Feedback:** [alert](#brumaombraui-vintagealert), [busy](#brumaombraui-vintagebusy), [busy-indicator](#brumaombraui-vintagebusy-indicator), [confirm-dialog](#brumaombraui-vintageconfirm-dialog), [empty-state-card](#brumaombraui-vintageempty-state-card), [loading-state-card](#brumaombraui-vintageloading-state-card), [message-dialog](#brumaombraui-vintagemessage-dialog), [message-toast](#brumaombraui-vintagemessage-toast), [spinner](#brumaombraui-vintagespinner)
+- **Feedback:** [alert](#brumaombraui-vintagealert), [busy](#brumaombraui-vintagebusy), [busy-indicator](#brumaombraui-vintagebusy-indicator), [confirm-dialog](#brumaombraui-vintageconfirm-dialog), [cookie-consent](#brumaombraui-vintagecookie-consent), [empty-state-card](#brumaombraui-vintageempty-state-card), [loading-state-card](#brumaombraui-vintageloading-state-card), [message-dialog](#brumaombraui-vintagemessage-dialog), [message-toast](#brumaombraui-vintagemessage-toast), [spinner](#brumaombraui-vintagespinner)
 - **Layouts and app shell:** [background-grid](#brumaombraui-vintagebackground-grid), [dashboard-shell](#brumaombraui-vintagedashboard-shell), [error-page](#brumaombraui-vintageerror-page), [landing](#brumaombraui-vintagelanding), [landing-content](#brumaombraui-vintagelanding-content), [landing-footer](#brumaombraui-vintagelanding-footer), [landing-navbar](#brumaombraui-vintagelanding-navbar), [landing-shell](#brumaombraui-vintagelanding-shell), [language-flag](#brumaombraui-vintagelanguage-flag), [language-selector](#brumaombraui-vintagelanguage-selector), [page-header](#brumaombraui-vintagepage-header), [theme-selector](#brumaombraui-vintagetheme-selector)
 - **Content and blog:** [blog](#brumaombraui-vintageblog), [content](#brumaombraui-vintagecontent)
 - **Utilities and types:** [common-types](#brumaombraui-vintagecommon-types), [utils](#brumaombraui-vintageutils)
@@ -2810,6 +2810,47 @@ interface ShowConfirmDialogOptions {
     onConfirm?: (() => void | Promise<void>) | null;
     onCancel?: (() => void | Promise<void>) | null;
 }
+```
+
+---
+
+### `@brumaombra/ui-vintage/cookie-consent`
+
+Cookie consent banner fixed to the bottom of the page, shown in the browser until the visitor accepts or declines. The choice is saved in `localStorage` under `storage-key`; `useCookieConsent(storageKey)` shares it, so optional scripts (analytics, ads) can wait for `consent.value === "granted"` and a settings page can call `reset()` to ask again. Texts have translated defaults, `policy-to` adds a link to the cookie policy.
+
+```ts
+import { CookieConsent, useCookieConsent } from '@brumaombra/ui-vintage/cookie-consent';
+import type { CookieConsentValue } from '@brumaombra/ui-vintage/cookie-consent';
+```
+
+```vue
+<CookieConsent storage-key="analyticsConsent" policy-to="/cookie-policy" @accept="loadAnalytics" />
+
+<script setup>
+const { consent, reset } = useCookieConsent('analyticsConsent');
+watch(consent, value => value === 'granted' && loadAnalytics(), { immediate: true });
+</script>
+```
+
+#### `CookieConsent`
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `storageKey` | `string` | `'cookieConsent'` |
+| `message` | `string` | `undefined` |
+| `policyTo` | `string` | `undefined` |
+| `policyLabel` | `string` | `undefined` |
+| `acceptLabel` | `string` | `undefined` |
+| `declineLabel` | `string` | `undefined` |
+| `class` | `HTMLAttributes['class']` | `undefined` |
+
+- **Emits:** `accept`, `decline`.
+
+#### Functions, constants, and types
+
+```ts
+function useCookieConsent(storageKey = 'cookieConsent')
+type CookieConsentValue = 'granted' | 'denied' | null
 ```
 
 ---

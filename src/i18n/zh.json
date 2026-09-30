@@ -118,6 +118,13 @@
         "toast": {
             "region": "通知"
         },
+        "cookieConsent": {
+            "region": "Cookie 同意",
+            "message": "我们使用可选的 Cookie 来了解网站的使用情况。只有在您同意后才会设置。",
+            "policy": "Cookie 政策",
+            "accept": "接受",
+            "decline": "拒绝"
+        },
         "dataTable": {
             "selectAll": "全选所有行",
             "selectRow": "选择行"

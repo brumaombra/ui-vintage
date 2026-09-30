@@ -5,6 +5,7 @@ import { Alert, AlertDescription, AlertTitle } from '@brumaombra/ui-vintage/aler
 import { setBusy } from '@brumaombra/ui-vintage/busy-indicator';
 import { Button } from '@brumaombra/ui-vintage/button';
 import { showConfirmDialog } from '@brumaombra/ui-vintage/confirm-dialog';
+import { CookieConsent, useCookieConsent } from '@brumaombra/ui-vintage/cookie-consent';
 import { EmptyStateCard } from '@brumaombra/ui-vintage/empty-state-card';
 import { LoadingStateCard } from '@brumaombra/ui-vintage/loading-state-card';
 import { showMessageDialog } from '@brumaombra/ui-vintage/message-dialog';
@@ -110,6 +111,14 @@ showMessageToast({ title: 'Payment received', message: '€249.00 from Acme Inc.
 const id = showMessageToast({ message: 'Publishing…', type: 'info', duration: 0, dismissible: false });
 closeMessageToast(id);`;
 
+// Cookie consent demo (its own storage key, so the demo choice does not affect anything else)
+const { consent: demoConsent, reset: resetDemoConsent } = useCookieConsent('uiVintageDemoConsent');
+const cookieConsentCode = `<CookieConsent storage-key="analyticsConsent" policy-to="/cookie-policy" @accept="loadAnalytics" />
+
+// Anywhere else: load optional scripts only after consent, and let visitors change their mind
+const { consent, reset } = useCookieConsent('analyticsConsent');
+watch(consent, value => value === 'granted' && loadAnalytics(), { immediate: true });`;
+
 const dialogCode = `const confirmed = await showConfirmDialog({
     title: 'Publish changes?',
     message: 'Your changes will be visible to everyone.',
@@ -205,6 +214,20 @@ const dialogCode = `const confirmed = await showConfirmDialog({
                     <AlertDescription>Update your card to keep your workspace active.</AlertDescription>
                 </Alert>
             </div>
+        </DemoSection>
+
+        <!-- Cookie consent -->
+        <DemoSection id="cookie-consent" title="Cookie consent" badge="New" description="A banner fixed to the bottom of the page until the visitor accepts or declines. The choice is stored in the browser and shared through useCookieConsent, so optional scripts can wait for it." :code="cookieConsentCode">
+            <div class="flex flex-wrap items-center gap-3">
+                <span class="text-sm text-muted-foreground">Current choice: <strong class="text-foreground">{{ demoConsent ?? 'not asked yet' }}</strong></span>
+                <Button variant="secondary" size="sm" @click="resetDemoConsent">
+                    <HugeiconsIcon :icon="RefreshIcon" />
+                    Ask again
+                </Button>
+            </div>
+            <ClientOnly>
+                <CookieConsent storage-key="uiVintageDemoConsent" policy-to="/foundations" />
+            </ClientOnly>
         </DemoSection>
 
         <!-- Empty and loading states -->

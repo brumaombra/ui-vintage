@@ -118,6 +118,13 @@
         "toast": {
             "region": "Notifications"
         },
+        "cookieConsent": {
+            "region": "Cookie consent",
+            "message": "We use optional cookies to understand how the site is used. They are only set if you accept.",
+            "policy": "Cookie policy",
+            "accept": "Accept",
+            "decline": "Decline"
+        },
         "dataTable": {
             "selectAll": "Select all rows",
             "selectRow": "Select row"

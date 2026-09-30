@@ -118,6 +118,13 @@
         "toast": {
             "region": "通知"
         },
+        "cookieConsent": {
+            "region": "Cookieの同意",
+            "message": "サイトの利用状況を把握するため、任意のCookieを使用しています。同意した場合にのみ設定されます。",
+            "policy": "Cookieポリシー",
+            "accept": "同意する",
+            "decline": "拒否する"
+        },
         "dataTable": {
             "selectAll": "すべての行を選択",
             "selectRow": "行を選択"

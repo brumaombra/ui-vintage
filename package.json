@@ -59,6 +59,7 @@
         "./command": "./src/components/ui/command/index.ts",
         "./common-types": "./src/lib/common-types.ts",
         "./confirm-dialog": "./src/components/confirm-dialog/index.ts",
+        "./cookie-consent": "./src/components/cookie-consent/index.ts",
         "./content": "./src/components/content/index.ts",
         "./dashboard-shell": "./src/components/dashboard-shell/index.ts",
         "./data-list": "./src/components/data-list/index.ts",
