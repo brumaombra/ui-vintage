@@ -2,10 +2,9 @@
 import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { PostsList } from '@brumaombra/ui-vintage/blog';
+import { BlogHeaderSection, PostsList } from '@brumaombra/ui-vintage/blog';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@brumaombra/ui-vintage/breadcrumb';
 import { LoadMoreButton } from '@brumaombra/ui-vintage/load-more-button';
-import { PageHeader } from '@brumaombra/ui-vintage/page-header';
 import { createPageSchema, createSEOMetatags, slugify } from '~/composables/useUtils.js';
 
 const { t, locale } = useI18n();
@@ -111,7 +110,7 @@ definePageMeta({
 <template>
     <div>
         <!-- Breadcrumbs -->
-        <Breadcrumb class="mb-8">
+        <Breadcrumb class="mb-2 animate-uv-fade-up">
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink as-child>
@@ -146,12 +145,7 @@ definePageMeta({
         </Breadcrumb>
 
         <!-- Blog header -->
-        <div class="mb-12">
-            <PageHeader :title="tagTitle" />
-            <p class="text-sm md:text-base! text-(--text-secondary-light) dark:text-(--text-secondary-dark)">
-                {{ t('blog.tags.singleTagDescription', { tag: tagTitle }) }}
-            </p>
-        </div>
+        <BlogHeaderSection :title="tagTitle" :description="t('blog.tags.singleTagDescription', { tag: tagTitle })" class="mb-12 md:mb-16" />
 
         <!-- Posts -->
         <PostsList :posts="posts" />
@@ -160,6 +154,6 @@ definePageMeta({
         <LoadMoreButton v-if="hasMorePosts" :busy="isLoading" :text="t('common.loadMoreWithNumbers', {
             current: Math.min(currentPage * postsPerPage, totalPosts),
             total: totalPosts
-        })" @load-more="loadMorePosts" class="mt-8" data-aos="fade-up" />
+        })" @load-more="loadMorePosts" class="mt-8" data-aos="blur-up" />
     </div>
 </template>

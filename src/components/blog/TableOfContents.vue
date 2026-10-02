@@ -286,7 +286,7 @@ const openMobileToc = () => {
 // Get classes for heading button
 const getHeadingButtonClasses = (level: number, isActive: boolean) => {
     // Base classes for all titles
-    const baseClasses = 'block w-full text-left px-2.5 py-2 md:px-3 md:py-2 rounded border-l-2 border-transparent transition-all duration-200 hover:bg-accent cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 motion-reduce:transition-none';
+    const baseClasses = 'relative block w-full cursor-pointer rounded px-2.5 py-2 text-left outline-none transition-[background-color,color,padding] duration-200 hover:bg-accent hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/45 md:px-3 before:absolute before:inset-y-1.5 before:left-0 before:w-[3px] before:origin-center before:scale-y-0 before:rounded-full before:bg-primary before:transition-transform before:duration-300 before:ease-spring';
 
     // Add classes based on heading level
     let levelClasses = '';
@@ -297,7 +297,7 @@ const getHeadingButtonClasses = (level: number, isActive: boolean) => {
     }
 
     // Add classes if the heading is active
-    const activeClasses = isActive ? 'bg-accent border-l-primary text-foreground' : '';
+    const activeClasses = isActive ? 'bg-accent text-foreground! before:scale-y-100' : '';
 
     // Return combined classes
     return [baseClasses, levelClasses, activeClasses];
@@ -354,20 +354,20 @@ onUnmounted(() => {
         <Teleport to="body">
             <!-- Mobile persistent control -->
             <Transition name="toc-tab">
-                <button v-if="!isDesktop && isDocked" ref="mobileTriggerRef" type="button" class="fixed top-4/5 left-0 z-20 flex h-16 w-8 -translate-y-1/2 items-center justify-center rounded-r border border-l-0 border-(--border-light) bg-(--bg-card-light) text-(--text-secondary-light) transition-[background-color,color,transform] duration-200 hover:bg-(--bg-selected-light) hover:text-(--text-primary-light) focus-visible:z-30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 dark:border-(--border-dark) dark:bg-(--bg-card-dark) dark:text-(--text-secondary-dark) dark:hover:bg-(--bg-selected-dark) dark:hover:text-(--text-primary-dark) motion-reduce:transition-none" :aria-label="t('uiVintage.blog.openTableOfContents')" :aria-expanded="isMobileOpen" aria-haspopup="dialog" aria-controls="toc-mobile-overlay" @click="openMobileToc">
-                    <HugeiconsIcon :icon="ArrowRight01Icon" class="size-4" aria-hidden="true" />
+                <button v-if="!isDesktop && isDocked" ref="mobileTriggerRef" type="button" class="group/toc-tab fixed top-4/5 left-0 z-20 flex h-16 w-7 -translate-y-1/2 items-center justify-center rounded-r border border-l-0 border-border bg-card text-primary shadow-elevated-sm transition-[width] duration-300 ease-out-expo hover:w-8 focus-visible:z-30 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45" :aria-label="t('uiVintage.blog.openTableOfContents')" :aria-expanded="isMobileOpen" aria-haspopup="dialog" aria-controls="toc-mobile-overlay" @click="openMobileToc">
+                    <HugeiconsIcon :icon="ArrowRight01Icon" class="size-3.5 transition-[translate] duration-300 ease-spring group-hover/toc-tab:translate-x-0.5" aria-hidden="true" />
                 </button>
             </Transition>
 
             <!-- Mobile full-screen overlay -->
             <Sheet :open="isMobileOpen" @update:open="handleMobileOpenChange">
-                <SheetContent id="toc-mobile-overlay" side="left" class="flex h-full w-full max-w-none flex-col gap-0 border-0 bg-(--bg-card-light) p-0 dark:bg-(--bg-card-dark) sm:max-w-none">
-                    <SheetHeader class="flex-row items-center justify-between gap-4 border-b border-(--border-light) p-5 dark:border-(--border-dark)">
+                <SheetContent id="toc-mobile-overlay" side="left" class="flex h-full w-full max-w-none flex-col gap-0 border-0 bg-card p-0 data-[state=open]:[animation-duration:320ms] data-[state=open]:[animation-timing-function:var(--ease-out-expo)] sm:max-w-none">
+                    <SheetHeader class="flex-row items-center justify-between gap-4 border-b border-border p-5">
                         <!-- Mobile table of contents header -->
                         <div class="flex min-w-0 items-center gap-3">
                             <!-- Mobile table of contents icon -->
-                            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded border border-(--border-light) bg-(--bg-card-light) dark:border-(--border-dark) dark:bg-(--bg-card-dark)">
-                                <HugeiconsIcon :icon="Bookmark01Icon" class="size-4 text-muted-foreground" />
+                            <div class="flex size-10 shrink-0 items-center justify-center rounded border border-primary/30 bg-primary/10">
+                                <HugeiconsIcon :icon="Bookmark01Icon" class="size-4 text-primary" />
                             </div>
 
                             <!-- Mobile table of contents title and description -->
@@ -404,14 +404,18 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-.toc-tab-enter-active,
+.toc-tab-enter-active {
+    transition: opacity 0.3s var(--ease-out-expo), transform 0.32s var(--ease-out-expo);
+}
+
 .toc-tab-leave-active {
-    transition: opacity 0.25s ease;
+    transition: opacity 0.15s var(--ease-snappy), transform 0.15s var(--ease-snappy);
 }
 
 .toc-tab-enter-from,
 .toc-tab-leave-to {
     opacity: 0;
+    transform: translateX(-100%);
 }
 
 @media (prefers-reduced-motion: reduce) {

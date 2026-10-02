@@ -167,6 +167,24 @@ html {
     --animate-uv-ping-soft: uv-ping-soft 1.8s var(--ease-out-expo) infinite;
     --animate-uv-indeterminate: uv-indeterminate 1.4s var(--ease-snappy) infinite;
     --animate-uv-gradient: uv-gradient 6s ease infinite;
+    --animate-uv-word-in: uv-word-in 0.9s var(--ease-spring) both;
+    --animate-uv-grow-x: uv-grow-x 0.9s var(--ease-out-expo) both;
+    --animate-uv-ken-burns: uv-ken-burns 9s ease-out both;
+
+    @keyframes uv-word-in {
+        0% { opacity: 0; transform: translateY(0.45em); filter: blur(8px); }
+        100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+
+    @keyframes uv-grow-x {
+        0% { transform: scaleX(0); }
+        100% { transform: scaleX(1); }
+    }
+
+    @keyframes uv-ken-burns {
+        0% { transform: scale(1.12); }
+        100% { transform: scale(1); }
+    }
 
     @keyframes uv-shimmer {
         0% { transform: translateX(-100%); }
@@ -417,6 +435,28 @@ body {
 .dark body {
     background: var(--bg-main-dark);
     color: var(--text-primary-dark);
+}
+
+/*********************** AOS scroll animations ***********************/
+
+/*
+ * "blur-up" animation for AOS (https://github.com/michalsnik/aos), used by the blog components through data-aos="blur-up".
+ * Elements are only hidden once AOS has initialized them (.aos-init), so apps without AOS always show the content.
+ * The repeated attribute selector outranks the global AOS easing and duration rules; data-aos-delay keeps working.
+ */
+[data-aos="blur-up"][data-aos="blur-up"][data-aos="blur-up"].aos-init {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+    filter: blur(6px);
+    transition-property: opacity, transform, filter;
+    transition-duration: 700ms, 900ms, 700ms;
+    transition-timing-function: var(--ease-out-expo), var(--ease-spring), var(--ease-out-expo);
+}
+
+[data-aos="blur-up"][data-aos="blur-up"][data-aos="blur-up"].aos-init.aos-animate {
+    opacity: 1;
+    transform: none;
+    filter: none;
 }
 
 /*********************** Page transition animations ***********************/

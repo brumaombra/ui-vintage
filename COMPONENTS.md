@@ -3424,7 +3424,7 @@ Components for Nuxt Content pages and a complete blog.
 
 ### `@brumaombra/ui-vintage/blog`
 
-Blog building blocks: header carousel, post cards and lists, categories, tags, table of contents, reading progress, FAQ, share sidebar, and the content renderer.
+Blog building blocks: an animated hero header, a full-bleed featured carousel, post and category cards, tags, table of contents, reading progress, FAQ, share sidebar, and the content renderer. Scroll entrances use AOS: install `aos` in the app and initialize it (the components carry `data-aos="blur-up"`, and the library stylesheet defines that animation). Without AOS the content simply renders without entrances.
 
 ```ts
 import { AllPostsSection, BlogContentRenderer, BlogFAQSection, BlogInfoSection, BlogHeaderSection, BlogSectionTitle, BlogTagsSection, CategoriesList, CategoriesSection, CategoryCard, HeaderCarousel, PostCard, PostsList, SocialShareSidebar, TableOfContents } from '@brumaombra/ui-vintage/blog';
@@ -3478,6 +3478,9 @@ import { AllPostsSection, BlogContentRenderer, BlogFAQSection, BlogInfoSection, 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `title` *(required)* | `string` |  |
+| `description` | `string` | `''` |
+
+- **Slots:** `action`.
 
 #### `BlogTagsSection`
 

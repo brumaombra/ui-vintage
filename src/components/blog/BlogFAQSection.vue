@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { Accordion } from '@brumaombra/ui-vintage/accordion';
+import { HelpCircleIcon } from '@hugeicons/core-free-icons';
+import { Accordion } from '../ui/accordion';
 import BlogSectionTitle from './BlogSectionTitle.vue';
 
 // Props
@@ -20,21 +21,18 @@ const hasValidFAQs = computed(() => props.faqs && props.faqs.length > 0);
 
 <template>
     <div v-if="hasValidFAQs" class="mt-12 lg:mt-16">
-        <!-- Title -->
-        <BlogSectionTitle :title="t('uiVintage.blog.faq.title')" />
+        <!-- Title and description -->
+        <BlogSectionTitle :title="t('uiVintage.blog.faq.title')" :description="t('uiVintage.blog.faq.description')" />
 
-        <!-- Description -->
-        <p class="text-base md:text-lg text-muted-foreground mb-8">
-            {{ t('uiVintage.blog.faq.description') }}
-        </p>
-
-        <!-- FAQ Items -->
-        <div class="space-y-4">
-            <Accordion v-for="(faq, index) in props.faqs" :key="index" :title="faq.question" :initially-expanded="index === 0">
-                <p class="text-xs md:text-sm text-muted-foreground leading-relaxed">
-                    {{ faq.answer }}
-                </p>
-            </Accordion>
+        <!-- FAQ items -->
+        <div class="space-y-3">
+            <div v-for="(faq, index) in props.faqs" :key="index" data-aos="blur-up" :data-aos-delay="index * 70">
+                <Accordion :title="faq.question" :icon="HelpCircleIcon" :initially-expanded="index === 0">
+                    <p class="text-xs leading-relaxed text-muted-foreground md:text-sm">
+                        {{ faq.answer }}
+                    </p>
+                </Accordion>
+            </div>
         </div>
     </div>
 </template>

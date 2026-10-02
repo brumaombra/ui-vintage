@@ -92,7 +92,9 @@
                 "x": "Partilhar no X",
                 "whatsapp": "Partilhar no WhatsApp",
                 "linkedin": "Partilhar no LinkedIn",
-                "telegram": "Partilhar no Telegram"
+                "telegram": "Partilhar no Telegram",
+                "copy": "Copiar link",
+                "copied": "Link copiado"
             }
         },
         "select": {

@@ -16,9 +16,9 @@ const props = withDefaults(defineProps<{
 </script>
 
 <template>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-6">
+    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4">
         <!-- Category card -->
-        <NuxtLink v-for="(category, i) in props.categories" :key="category.path || category.slug" :to="category.path" class="block h-full" data-aos="fade-up" :data-aos-delay="(i % 4) * 200">
+        <NuxtLink v-for="(category, index) in props.categories" :key="category.path || category.slug" data-aos="blur-up" :data-aos-delay="(index % 4) * 80" :to="category.path" class="block h-full rounded outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45">
             <CategoryCard :name="category.name" :image="category.image" :count="category.count" />
         </NuxtLink>
     </div>

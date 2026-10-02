@@ -14,21 +14,33 @@ const props = withDefaults(defineProps<{
 
 // Icon container classes
 const getIconContainerClasses = () => {
-    return 'flex items-center justify-center w-8 h-8 bg-card border border-border rounded mr-4 shrink-0';
+    const toneClasses = {
+        checkmark: 'border-green-200 bg-green-50 dark:border-green-900/50 dark:bg-green-950/30',
+        cross: 'border-red-200 bg-red-50 dark:border-red-900/50 dark:bg-red-950/30',
+        numbered: 'border-primary/30 bg-primary/10',
+        circle: 'border-primary/30 bg-primary/10'
+    };
+    return ['flex items-center justify-center size-8 border rounded mr-4 shrink-0', toneClasses[props.variant]];
 };
 
 // Icon color classes
 const getIconClasses = () => {
-    return 'text-muted-foreground text-xs';
+    const toneClasses = {
+        checkmark: 'text-green-600 dark:text-green-400',
+        cross: 'text-red-600 dark:text-red-400',
+        numbered: 'text-primary',
+        circle: 'text-primary'
+    };
+    return ['text-xs size-4', toneClasses[props.variant]];
 };
 </script>
 
 <template>
     <div class="not-prose my-6 sm:my-8">
-        <Card>
+        <Card data-aos="blur-up">
             <CardContent class="gap-0">
                 <ul class="text-xs md:text-sm p-0! space-y-6!">
-                    <li v-for="(item, index) in props.items" :key="index" class="flex items-center">
+                    <li v-for="(item, index) in props.items" :key="index" data-aos="blur-up" :data-aos-delay="100 + index * 80" class="flex items-center">
                         <!-- Circle -->
                         <div v-if="props.variant === 'circle'" :class="getIconContainerClasses()">
                             <HugeiconsIcon :icon="CircleSmallIcon" :class="getIconClasses()" />

@@ -51,7 +51,15 @@
             "title": "Tags",
             "description": "Browse the tags derived from the demo's markdown posts.",
             "singleTagDescription": "All demo posts tagged '{tag}'."
-        }
+        },
+        "footerDescription": "Stories, guides, and release notes from the team behind the UI Vintage component library.",
+        "latestPostsDescription": "Hand-picked stories from the editorial desk.",
+        "allPostsDescription": "Everything we have published, newest first.",
+        "categoriesDescription": "Jump straight to the topics you care about.",
+        "tagsDescription": "Smaller threads that run across categories.",
+        "viewAll": "View all",
+        "minRead": "{minutes} min read",
+        "backToBlog": "Back to the blog"
     },
     "navigation": {
         "breadcrumbs": {
@@ -59,7 +67,11 @@
             "blog": "Blog",
             "categories": "Categories",
             "tags": "Tags"
-        }
+        },
+        "library": "Library",
+        "overview": "Overview",
+        "components": "Components",
+        "foundations": "Foundations"
     },
     "common": {
         "loadMoreWithNumbers": "Load more ({current} of {total})"

@@ -42,10 +42,16 @@ const copyCommands = async () => {
 
 <template>
     <div class="not-prose my-6 sm:my-8">
-        <Card class="gap-0! sm:gap-0! overflow-hidden p-0! text-foreground">
+        <Card data-aos="blur-up" class="gap-0! sm:gap-0! overflow-hidden p-0! text-foreground">
             <!-- Terminal header -->
-            <div class="flex items-center justify-between gap-3 border-b border-(--border-light) bg-(--bg-card-light) px-3 py-2 sm:px-4 dark:border-(--border-dark) dark:bg-(--bg-card-dark)">
+            <div class="flex items-center justify-between gap-3 border-b border-border bg-card px-3 py-2 sm:px-4">
                 <div class="flex min-w-0 items-center gap-2">
+                    <!-- Window dots -->
+                    <span aria-hidden="true" class="mr-1 flex items-center gap-1.5">
+                        <span class="size-2.5 rounded-full bg-red-400/80" />
+                        <span class="size-2.5 rounded-full bg-amber-400/80" />
+                        <span class="size-2.5 rounded-full bg-green-400/80" />
+                    </span>
                     <HugeiconsIcon :icon="TerminalIcon" class="size-4 shrink-0 text-muted-foreground" />
                     <span class="truncate text-xs font-semibold text-muted-foreground">{{ resolvedTitle }}</span>
                 </div>
@@ -54,7 +60,7 @@ const copyCommands = async () => {
                 <Button v-if="props.copyable"
                     variant="ghost"
                     size="icon"
-                    class="size-7 text-(--text-secondary-light) hover:bg-(--bg-selected-light) hover:text-(--text-primary-light) dark:text-(--text-secondary-dark) dark:hover:bg-(--bg-selected-dark) dark:hover:text-(--text-primary-dark)"
+                    class="size-7 text-muted-foreground hover:bg-accent hover:text-foreground"
                     :aria-label="t('uiVintage.terminal.copy')"
                     :title="t('uiVintage.terminal.copy')"
                     :disabled="!commandText"
@@ -64,7 +70,7 @@ const copyCommands = async () => {
             </div>
 
             <!-- Terminal commands -->
-            <pre class="overflow-x-auto bg-(--bg-surface-light) px-4 py-3 text-xs leading-6 dark:bg-(--bg-surface-dark) sm:px-5 sm:py-4 sm:text-sm"><code><span v-for="(command, index) in props.commands" :key="`${command}-${index}`" class="flex min-w-max"><span class="mr-3 select-none text-muted-foreground" aria-hidden="true">{{ props.prompt }}</span><span>{{ command }}</span></span></code></pre>
+            <pre class="overflow-x-auto bg-surface px-4 py-3 text-xs leading-6 sm:px-5 sm:py-4 sm:text-sm"><code><span v-for="(command, index) in props.commands" :key="`${command}-${index}`" class="flex min-w-max"><span class="mr-3 select-none text-primary" aria-hidden="true">{{ props.prompt }}</span><span>{{ command }}</span></span></code></pre>
         </Card>
     </div>
 </template>

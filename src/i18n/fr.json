@@ -92,7 +92,9 @@
                 "x": "Partager sur X",
                 "whatsapp": "Partager sur WhatsApp",
                 "linkedin": "Partager sur LinkedIn",
-                "telegram": "Partager sur Telegram"
+                "telegram": "Partager sur Telegram",
+                "copy": "Copier le lien",
+                "copied": "Lien copié"
             }
         },
         "select": {

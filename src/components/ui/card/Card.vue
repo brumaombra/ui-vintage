@@ -44,7 +44,7 @@ const handlePointerMove = (event: PointerEvent) => {
     <div ref="cardRef" data-slot="card" :data-interactive="props.interactive ? '' : undefined" :class="cn(
         'relative flex flex-col gap-4 sm:gap-6! rounded py-6 transition-[border-color,box-shadow,background-color,translate] duration-300 ease-out-expo',
         colorClasses,
-        props.interactive && 'cursor-pointer hover:-translate-y-0.5 hover:border-border-strong hover:shadow-elevated-lg active:translate-y-0 active:duration-100 before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:opacity-0 before:transition-opacity before:duration-300 before:bg-[radial-gradient(360px_circle_at_var(--uv-spot-x,50%)_var(--uv-spot-y,50%),color-mix(in_oklab,var(--primary)_9%,transparent),transparent_70%)] hover:before:opacity-100',
+        props.interactive && 'cursor-pointer hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-elevated-lg active:translate-y-0 active:duration-100 before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:opacity-0 before:transition-opacity before:duration-300 before:bg-[radial-gradient(360px_circle_at_var(--uv-spot-x,50%)_var(--uv-spot-y,50%),color-mix(in_oklab,var(--primary)_9%,transparent),transparent_70%)] hover:before:opacity-100',
         props.class,
     )" @pointermove="handlePointerMove">
         <slot />

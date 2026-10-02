@@ -1,14 +1,14 @@
 <script setup>
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { Bookmark01Icon } from '@hugeicons/core-free-icons';
+import { Calendar03Icon, Clock01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { BlogContentRenderer, BlogFAQSection, BlogInfoSection, BlogSectionTitle, CategoryCard, PostCard, SocialShareSidebar, TableOfContents } from '@brumaombra/ui-vintage/blog';
 import { Badge } from '@brumaombra/ui-vintage/badge';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@brumaombra/ui-vintage/breadcrumb';
-import { Button } from '@brumaombra/ui-vintage/button';
 import { createSEOMetatags, createPageSchema, slugify } from '~/composables/useUtils.js';
 import ProseHr from '~/components/content/ProseHr.vue';
+import ViewAllLink from '~/components/blog/ViewAllLink.vue';
 
 const { t, locale } = useI18n();
 const localeHead = useLocaleHead();
@@ -80,6 +80,26 @@ const { data: relatedCategories } = await useAsyncData(`related-categories-${slu
     return sortedCategories.slice(0, 4);
 });
 
+// Split the title so each word can rise into place on its own
+const titleWords = computed(() => (post.value?.title || '').split(/\s+/).filter(Boolean));
+
+// Long publication date in the current locale
+const formattedDate = computed(() => post.value?.datePublished
+    ? new Intl.DateTimeFormat(locale.value, { year: 'numeric', month: 'long', day: 'numeric' }).format(new Date(post.value.datePublished))
+    : '');
+
+// Estimate the reading time from the words in the rendered body (about 220 words per minute)
+const readingMinutes = computed(() => {
+    const collectText = node => {
+        if (typeof node === 'string') return node;
+        if (Array.isArray(node)) return node.map(collectText).join(' ');
+        if (node && typeof node === 'object') return Object.values(node).map(collectText).join(' ');
+        return '';
+    };
+    const words = collectText(post.value?.body).split(/\s+/).filter(Boolean).length;
+    return Math.max(1, Math.round(words / 220));
+});
+
 // Map current post tags to badge data
 const postTags = computed(() => (post.value?.tags || [])
     .map(tag => ({
@@ -132,21 +152,13 @@ definePageMeta({
 </script>
 
 <template>
-    <div class="max-w-4xl mx-auto">
+    <div class="mx-auto max-w-4xl">
         <article v-if="post">
             <!-- Article header -->
-            <header class="mb-6 sm:mb-8 lg:mb-12">
+            <header class="relative isolate mb-10 md:mb-14">
                 <!-- Breadcrumbs -->
-                <Breadcrumb>
+                <Breadcrumb class="animate-uv-fade-up">
                     <BreadcrumbList>
-                        <BreadcrumbItem>
-                            <BreadcrumbLink as-child>
-                                <NuxtLinkLocale to="/">
-                                    {{ t('navigation.breadcrumbs.home') }}
-                                </NuxtLinkLocale>
-                            </BreadcrumbLink>
-                        </BreadcrumbItem>
-                        <BreadcrumbSeparator />
                         <BreadcrumbItem>
                             <BreadcrumbLink as-child>
                                 <NuxtLinkLocale to="/blog">
@@ -155,8 +167,16 @@ definePageMeta({
                             </BreadcrumbLink>
                         </BreadcrumbItem>
                         <BreadcrumbSeparator />
-                        <BreadcrumbItem>
-                            <BreadcrumbPage>
+                        <BreadcrumbItem v-if="post.categoryText">
+                            <BreadcrumbLink as-child>
+                                <NuxtLinkLocale :to="`/blog/categories/${post.categorySlug}`">
+                                    {{ post.categoryText }}
+                                </NuxtLinkLocale>
+                            </BreadcrumbLink>
+                        </BreadcrumbItem>
+                        <BreadcrumbSeparator v-if="post.categoryText" />
+                        <BreadcrumbItem class="min-w-0">
+                            <BreadcrumbPage class="truncate">
                                 {{ post?.title }}
                             </BreadcrumbPage>
                         </BreadcrumbItem>
@@ -164,30 +184,49 @@ definePageMeta({
                 </Breadcrumb>
 
                 <!-- Category and tags -->
-                <div class="my-4 md:my-6">
-                    <!-- Category -->
-                    <div v-if="post.categoryText" class="flex flex-wrap items-center gap-2">
-                        <NuxtLinkLocale :to="`/blog/categories/${post.categorySlug}`">
-                            <Badge color="gray" :text="post.categoryText" class="transition-transform duration-200 ease-out hover:scale-105 motion-reduce:transition-none motion-reduce:hover:scale-100" />
-                        </NuxtLinkLocale>
-                    </div>
-
-                    <!-- Tags -->
-                    <div v-if="postTags.length" class="mt-2 flex flex-wrap items-center gap-2">
-                        <NuxtLinkLocale v-for="tag in postTags" :key="tag.slug" :to="`/blog/tags/${tag.slug}`">
-                            <Badge color="blue" :text="tag.name" class="transition-transform duration-200 ease-out hover:scale-105 motion-reduce:transition-none motion-reduce:hover:scale-100" />
-                        </NuxtLinkLocale>
-                    </div>
+                <div class="mt-8 flex flex-wrap items-center gap-2 animate-uv-fade-up [animation-delay:60ms]">
+                    <NuxtLinkLocale v-if="post.categoryText" :to="`/blog/categories/${post.categorySlug}`" class="rounded outline-none transition-[scale] duration-300 ease-spring hover:scale-105 focus-visible:ring-[3px] focus-visible:ring-ring/45">
+                        <Badge color="yellow" :text="post.categoryText" pulse />
+                    </NuxtLinkLocale>
+                    <NuxtLinkLocale v-for="tag in postTags" :key="tag.slug" :to="`/blog/tags/${tag.slug}`" class="rounded outline-none transition-[scale] duration-300 ease-spring hover:scale-105 focus-visible:ring-[3px] focus-visible:ring-ring/45">
+                        <Badge :text="`#${tag.name}`" />
+                    </NuxtLinkLocale>
                 </div>
 
-                <!-- Title -->
-                <h1 class="text-2xl sm:text-3xl! md:text-4xl! font-bold tracking-tight text-(--text-primary-light) dark:text-(--text-primary-dark) leading-tight mb-6">
-                    {{ post.title }}
+                <!-- Title (each word rises in) -->
+                <h1 class="mt-5 text-3xl leading-[1.08] font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl">
+                    <template v-for="(word, index) in titleWords" :key="`${word}-${index}`">
+                        <span class="inline-block animate-uv-word-in" :style="{ animationDelay: `${120 + Math.min(index, 12) * 50}ms` }">{{ word }}</span>{{ index < titleWords.length - 1 ? ' ' : '' }}
+                    </template>
                 </h1>
 
+                <!-- Lede -->
+                <p v-if="post.description" class="mt-5 max-w-3xl animate-uv-fade-up text-sm leading-relaxed text-muted-foreground [animation-delay:450ms] md:text-lg">
+                    {{ post.description }}
+                </p>
+
+                <!-- Author, date, and reading time -->
+                <div class="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 animate-uv-fade-up text-xs text-muted-foreground [animation-delay:550ms] sm:text-sm">
+                    <span class="flex items-center gap-2.5">
+                        <NuxtImg :src="post.authorImageUrl" :alt="post.author" width="32" height="32" format="avif" quality="40" class="size-8 rounded border border-border object-cover" />
+                        <span class="font-semibold text-foreground">{{ post.author }}</span>
+                    </span>
+                    <span aria-hidden="true" class="size-1 rounded-full bg-border-strong" />
+                    <span class="flex items-center gap-1.5">
+                        <HugeiconsIcon :icon="Calendar03Icon" class="size-4 text-primary" />
+                        <time :datetime="post.datePublished">{{ formattedDate }}</time>
+                    </span>
+                    <span aria-hidden="true" class="size-1 rounded-full bg-border-strong" />
+                    <span class="flex items-center gap-1.5">
+                        <HugeiconsIcon :icon="Clock01Icon" class="size-4 text-primary" />
+                        {{ t('blog.minRead', { minutes: readingMinutes }) }}
+                    </span>
+                </div>
+
                 <!-- Featured image -->
-                <div v-if="post.image" class="relative w-full rounded-sm overflow-hidden aspect-video mb-6">
-                    <NuxtImg :src="post.image" :alt="post.title" format="avif" quality="50" :sizes="{ 480: '480px', 1536: '896px' }" loading="eager" fetchpriority="high" preload class="w-full h-full object-cover" />
+                <div v-if="post.image" class="relative mt-10 aspect-video w-full overflow-hidden rounded border border-border shadow-elevated-xl animate-uv-fade-up [animation-delay:650ms]">
+                    <NuxtImg :src="post.image" :alt="post.title" format="avif" quality="50" :sizes="{ 480: '480px', 1536: '896px' }" loading="eager" fetchpriority="high" preload class="size-full animate-uv-ken-burns object-cover" />
+                    <div aria-hidden="true" class="pointer-events-none absolute inset-0 bg-linear-to-t from-black/20 to-transparent" />
                 </div>
             </header>
 
@@ -201,15 +240,13 @@ definePageMeta({
             <BlogContentRenderer :value="post" />
 
             <!-- Divider -->
-            <ProseHr data-aos="fade-up" />
+            <ProseHr />
 
             <!-- FAQ section -->
-            <BlogFAQSection v-if="post.faqs && post.faqs?.length > 0"
-                :faqs="post.faqs"
-                data-aos="fade-up" />
+            <BlogFAQSection v-if="post.faqs && post.faqs?.length > 0" :faqs="post.faqs" />
 
             <!-- Divider -->
-            <ProseHr data-aos="fade-up" />
+            <ProseHr />
 
             <!-- Blog info section -->
             <BlogInfoSection :author="post.author"
@@ -219,17 +256,11 @@ definePageMeta({
                 :date-modified="post.dateModified" />
         </article>
 
-        <!-- Divider -->
-        <ProseHr v-if="relatedPosts?.length || relatedCategories?.length" data-aos="fade-up" />
-
         <!-- Related posts -->
-        <section v-if="relatedPosts?.length" data-aos="fade-up">
-            <!-- Title -->
+        <section v-if="relatedPosts?.length" class="mt-16 md:mt-24">
             <BlogSectionTitle :title="t('blog.readAlso')" />
-
-            <!-- Posts -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
-                <NuxtLinkLocale v-for="relatedPost in relatedPosts" :key="relatedPost.path" :to="relatedPost.path" class="block h-full">
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                <NuxtLinkLocale v-for="(relatedPost, index) in relatedPosts" :key="relatedPost.path" :to="relatedPost.path" data-aos="blur-up" :data-aos-delay="(index % 2) * 90" class="block h-full rounded outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45">
                     <PostCard :image="relatedPost.image"
                         :category="relatedPost.categoryText"
                         :title="relatedPost.title"
@@ -240,26 +271,17 @@ definePageMeta({
         </section>
 
         <!-- Related categories -->
-        <section v-if="relatedCategories?.length" class="mt-8 sm:mt-16">
-            <!-- Title -->
-            <BlogSectionTitle :title="t('blog.exploreCategories')" />
-
-            <!-- Categories list -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
-                <NuxtLinkLocale v-for="(category, index) in relatedCategories" :key="category.slug" :to="`/blog/categories/${category.slug}`" class="block h-full" data-aos="fade-up" :data-aos-delay="((index % 2) * 200) + 100">
+        <section v-if="relatedCategories?.length" class="mt-16 md:mt-24">
+            <BlogSectionTitle :title="t('blog.exploreCategories')">
+                <template #action>
+                    <ViewAllLink :to="localePath('/blog/categories')" :label="t('blog.exploreAllCategories')" />
+                </template>
+            </BlogSectionTitle>
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                <NuxtLinkLocale v-for="(category, index) in relatedCategories" :key="category.slug" :to="`/blog/categories/${category.slug}`" data-aos="blur-up" :data-aos-delay="(index % 2) * 90" class="block h-full rounded outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45">
                     <CategoryCard :name="category.name"
                         :image="category.image"
                         :count="category.count" />
-                </NuxtLinkLocale>
-            </div>
-
-            <!-- Explore all categories button -->
-            <div class="flex items-center justify-center mt-8 md:mt-10" data-aos="fade-up">
-                <NuxtLinkLocale to="/blog/categories">
-                    <Button variant="primary">
-                        <HugeiconsIcon :icon="Bookmark01Icon" class="size-4" />
-                        {{ t('blog.exploreAllCategories') }}
-                    </Button>
                 </NuxtLinkLocale>
             </div>
         </section>

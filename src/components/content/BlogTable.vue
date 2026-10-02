@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<{
 // Header cell classes
 const getHeaderClasses = (colIndex: number) => {
     const baseClasses = 'text-left font-semibold text-foreground';
-    const highlightClass = props.highlightCol === colIndex ? 'bg-accent' : '';
+    const highlightClass = props.highlightCol === colIndex ? 'bg-primary/10 text-primary' : '';
     return [baseClasses, highlightClass];
 };
 
@@ -24,14 +24,14 @@ const getHeaderClasses = (colIndex: number) => {
 const getCellClasses = (colIndex: number) => {
     const baseClasses = 'align-top text-foreground leading-relaxed whitespace-normal';
     const firstColClass = colIndex === 0 ? 'font-semibold text-muted-foreground' : '';
-    const highlightClass = props.highlightCol === colIndex ? 'bg-accent' : '';
+    const highlightClass = props.highlightCol === colIndex ? 'bg-primary/5 font-semibold' : '';
     return [baseClasses, firstColClass, highlightClass];
 };
 </script>
 
 <template>
     <div class="not-prose my-6 sm:my-8">
-        <Card>
+        <Card data-aos="blur-up">
             <CardContent>
                 <div class="w-full overflow-x-auto">
                     <Table class="w-full text-sm text-left">
@@ -46,7 +46,7 @@ const getCellClasses = (colIndex: number) => {
 
                         <!-- Table body -->
                         <TableBody>
-                            <TableRow v-for="(row, rowIndex) in props.rows" :key="rowIndex" class="text-muted-foreground hover:bg-transparent">
+                            <TableRow v-for="(row, rowIndex) in props.rows" :key="rowIndex" class="text-muted-foreground transition-colors duration-150 hover:bg-surface/70">
                                 <TableCell v-for="(cell, colIndex) in row" :key="colIndex" :class="getCellClasses(colIndex)">
                                     {{ cell }}
                                 </TableCell>

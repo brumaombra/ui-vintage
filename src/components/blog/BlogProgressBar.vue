@@ -43,13 +43,16 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <div :class="cn('relative h-1 w-full border-t border-(--border-light) bg-(--bg-selected-light) dark:border-(--border-dark) dark:bg-(--bg-selected-dark) landing-navbar-progress', props.class)"
+    <div :class="cn('relative h-[3px] w-full bg-border/40 landing-navbar-progress', props.class)"
         role="progressbar"
         :aria-label="resolvedAriaLabel"
         aria-valuemin="0"
         aria-valuemax="100"
         :aria-valuenow="Math.round(progress)">
-        <div class="h-full origin-left bg-primary transition-[width] duration-150 ease-out" :style="{ width: `${progress}%` }" />
+        <!-- Fill with a glowing leading edge (the dot stays inside the fill, so it is never clipped and never widens the page) -->
+        <div class="relative h-full bg-linear-to-r from-primary/40 via-primary to-primary transition-[width] duration-150 ease-out" :style="{ width: `${progress}%` }">
+            <span v-if="progress > 0" aria-hidden="true" class="absolute top-1/2 right-0 size-2 -translate-y-1/2 rounded-full bg-primary shadow-[0_0_10px_2px_color-mix(in_oklab,var(--primary)_70%,transparent)]" />
+        </div>
     </div>
 </template>
 

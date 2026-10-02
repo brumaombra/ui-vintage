@@ -554,7 +554,7 @@ setBusy(false);`
 
     'blog': {
         category: 'content',
-        description: 'Blog building blocks: header carousel, post cards and lists, categories, tags, table of contents, reading progress, FAQ, share sidebar, and the content renderer.'
+        description: 'Blog building blocks: an animated hero header, a full-bleed featured carousel, post and category cards, tags, table of contents, reading progress, FAQ, share sidebar, and the content renderer. Scroll entrances use AOS: install `aos` in the app and initialize it (the components carry `data-aos="blur-up"`, and the library stylesheet defines that animation). Without AOS the content simply renders without entrances.'
     },
     'content': {
         category: 'content',

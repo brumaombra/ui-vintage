@@ -65,7 +65,8 @@ export default defineNuxtConfig({
                 'reka-ui',
                 'reka-ui/date',
                 'shiki',
-                'tailwind-merge'
+                'tailwind-merge',
+                'aos' // CJS
             ]
         }
     },

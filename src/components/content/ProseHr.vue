@@ -12,18 +12,18 @@ const props = withDefaults(defineProps<{
 </script>
 
 <template>
-    <div aria-hidden="true" class="not-prose my-6 sm:my-12">
+    <div aria-hidden="true" data-aos="blur-up" class="not-prose my-8 sm:my-14">
         <div class="flex items-center gap-3 sm:gap-4">
             <!-- Left line -->
-            <div class="h-px flex-1 bg-linear-to-r from-transparent via-(--border-light) to-(--border-light) dark:via-(--border-dark) dark:to-(--border-dark)" />
+            <div class="h-px flex-1 bg-linear-to-r from-transparent via-border to-primary/50" />
 
             <!-- Icon in the middle -->
-            <div class="flex h-9 w-9 items-center justify-center rounded bg-card border border-border">
-                <HugeiconsIcon :icon="props.icon" class="size-4 text-muted-foreground" />
+            <div class="flex size-10 rotate-45 items-center justify-center rounded border border-primary/30 bg-card shadow-glow">
+                <HugeiconsIcon :icon="props.icon" class="size-4 -rotate-45 text-primary" />
             </div>
 
             <!-- Right line -->
-            <div class="h-px flex-1 bg-linear-to-l from-transparent via-(--border-light) to-(--border-light) dark:via-(--border-dark) dark:to-(--border-dark)" />
+            <div class="h-px flex-1 bg-linear-to-l from-transparent via-border to-primary/50" />
         </div>
     </div>
 </template>

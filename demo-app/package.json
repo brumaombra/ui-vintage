@@ -16,6 +16,7 @@
         "@nuxt/content": "3.13.0",
         "@nuxt/image": "2.0.0",
         "@nuxtjs/i18n": "10.2.3",
+        "aos": "2.3.4",
         "better-sqlite3": "12.9.0",
         "nuxt": "4.4.8"
     },

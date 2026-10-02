@@ -1,11 +1,14 @@
 <script setup>
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { DashboardSquare01Icon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/vue';
+import { Button } from '@brumaombra/ui-vintage/button';
 import { LandingContent, LandingFooter, LandingNavbar, LandingShell } from '@brumaombra/ui-vintage/landing';
 import { LanguageSelector } from '@brumaombra/ui-vintage/language-selector';
 import { ThemeSelector } from '@brumaombra/ui-vintage/theme-selector';
 
-const { locale, locales, setLocale } = useI18n();
+const { t, locale, locales, setLocale } = useI18n();
 const localePath = useLocalePath();
 const route = useRoute();
 
@@ -17,29 +20,45 @@ const languageOptions = computed(() => {
     return locales.value.map(language => language.code);
 });
 
-// Footer links
-const footerSections = [{
-    id: 'resources',
-    title: 'Resources',
+// Footer links (the library section ties the blog back to the component docs)
+const footerSections = computed(() => [{
+    id: 'blog',
+    title: t('navigation.breadcrumbs.blog'),
     links: [{
         id: 'blog',
-        label: 'Blog',
-        href: '/blog'
+        label: t('blog.allPosts'),
+        href: localePath('/blog')
     }, {
         id: 'categories',
-        label: 'Categories',
-        href: '/blog/categories'
+        label: t('navigation.breadcrumbs.categories'),
+        href: localePath('/blog/categories')
     }, {
         id: 'tags',
-        label: 'Tags',
-        href: '/blog/tags'
+        label: t('navigation.breadcrumbs.tags'),
+        href: localePath('/blog/tags')
+    }]
+}, {
+    id: 'library',
+    title: t('navigation.library'),
+    links: [{
+        id: 'overview',
+        label: t('navigation.overview'),
+        href: '/'
+    }, {
+        id: 'components',
+        label: t('navigation.components'),
+        href: '/components/actions'
+    }, {
+        id: 'foundations',
+        label: t('navigation.foundations'),
+        href: '/foundations'
     }, {
         id: 'github',
         label: 'GitHub',
         href: 'https://github.com/brumaombra/ui-vintage',
         newTab: true
     }]
-}];
+}]);
 
 // Apply a selected language
 const handleSelectLanguage = async language => {
@@ -52,9 +71,30 @@ const handleSelectLanguage = async language => {
     <LandingShell>
         <!-- Navbar -->
         <template #navbar>
-            <LandingNavbar app-name="UI Vintage Demo" :app-link-to="localePath('/')" :show-progress="showBlogProgress">
+            <LandingNavbar :show-progress="showBlogProgress">
+                <!-- Brand (same mark as the component docs) -->
+                <template #left>
+                    <NuxtLink :to="localePath('/blog')" class="group/brand flex items-center gap-3 rounded outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45">
+                        <span class="flex size-9 items-center justify-center rounded border border-primary/40 bg-primary text-sm font-bold text-primary-foreground shadow-glow transition-[rotate,scale] duration-500 ease-bounce group-hover/brand:scale-105 group-hover/brand:-rotate-6">
+                            UV
+                        </span>
+                        <span class="flex flex-col leading-tight">
+                            <span class="text-sm font-bold tracking-tight">UI Vintage</span>
+                            <span class="text-[11px] text-muted-foreground">{{ t('navigation.breadcrumbs.blog') }}</span>
+                        </span>
+                    </NuxtLink>
+                </template>
+
                 <!-- Right side -->
                 <template #right>
+                    <!-- Back to the component docs -->
+                    <Button variant="secondary" size="sm" as-child class="hidden sm:inline-flex">
+                        <NuxtLink to="/">
+                            <HugeiconsIcon :icon="DashboardSquare01Icon" />
+                            {{ t('navigation.components') }}
+                        </NuxtLink>
+                    </Button>
+
                     <!-- Language selector -->
                     <LanguageSelector :model-value="locale" :languages="languageOptions" @select="handleSelectLanguage" />
 
@@ -73,9 +113,9 @@ const handleSelectLanguage = async language => {
 
         <!-- Footer -->
         <template #footer>
-            <LandingFooter app-name="UI Vintage Demo"
-                :app-link-to="localePath('/')"
-                app-description="A production-like Nuxt demo for the UI Vintage component library."
+            <LandingFooter app-name="UI Vintage"
+                :app-link-to="localePath('/blog')"
+                :app-description="t('blog.footerDescription')"
                 :sections="footerSections"
                 author-name="Bruma"
                 author-link="https://brumaombra.com" />

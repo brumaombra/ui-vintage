@@ -92,7 +92,9 @@
                 "x": "Поделиться в X",
                 "whatsapp": "Поделиться в WhatsApp",
                 "linkedin": "Поделиться в LinkedIn",
-                "telegram": "Поделиться в Telegram"
+                "telegram": "Поделиться в Telegram",
+                "copy": "Копировать ссылку",
+                "copied": "Ссылка скопирована"
             }
         },
         "select": {

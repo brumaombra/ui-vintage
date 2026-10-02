@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { AllPostsSection, BlogHeaderSection, BlogSectionTitle, BlogTagsSection, CategoriesSection, HeaderCarousel } from '@brumaombra/ui-vintage/blog';
 import { createSEOMetatags, createPageSchema, buildTagsFromPosts } from '~/composables/useUtils.js';
+import ViewAllLink from '~/components/blog/ViewAllLink.vue';
 
 const { t, locale } = useI18n();
 const localeHead = useLocaleHead();
@@ -47,7 +48,7 @@ const { data: blogIndexData } = await useAsyncData(`blog-index-${locale.value}`,
     try {
         // Execute queries in parallel
         const [featuredPosts, initialPosts, totalPosts, categoryPosts, tagPosts] = await Promise.all([
-            queryCollection('blog').select('id', 'path', 'image', 'title', 'description', 'categoryText', 'categorySlug').where('language', '=', locale.value).limit(6).all(),
+            queryCollection('blog').select('id', 'path', 'image', 'title', 'description', 'categoryText', 'categorySlug').where('language', '=', locale.value).order('datePublished', 'DESC').limit(4).all(),
             queryCollection('blog').select('path', 'image', 'title', 'description', 'categoryText', 'categorySlug').where('language', '=', locale.value).order('datePublished', 'DESC').limit(postsPerPage).all(),
             queryCollection('blog').where('language', '=', locale.value).count(),
             queryCollection('blog').select('categorySlug', 'categoryText', 'image').where('language', '=', locale.value).all(),
@@ -145,43 +146,39 @@ definePageMeta({
 </script>
 
 <template>
-    <div class="space-y-12">
+    <div class="space-y-16 md:space-y-24">
         <!-- Header section -->
         <BlogHeaderSection :badges="headerBadges" :title="t('blog.title')" :description="t('blog.description')" />
 
         <!-- Header carousel -->
-        <div>
-            <!-- Section title -->
-            <BlogSectionTitle :title="t('blog.latestPosts')" />
-
-            <!-- Carousel component -->
+        <section>
+            <BlogSectionTitle :title="t('blog.latestPosts')" :description="t('blog.latestPostsDescription')" />
             <HeaderCarousel :featured-posts="featuredPosts" />
-        </div>
+        </section>
 
         <!-- Categories section -->
-        <div>
-            <!-- Section title -->
-            <BlogSectionTitle :title="t('blog.categories.title')" />
-
-            <!-- Categories list component -->
+        <section>
+            <BlogSectionTitle :title="t('blog.categories.title')" :description="t('blog.categoriesDescription')">
+                <template #action>
+                    <ViewAllLink :to="localePath('/blog/categories')" :label="t('blog.viewAll')" />
+                </template>
+            </BlogSectionTitle>
             <CategoriesSection :categories="categories" />
-        </div>
+        </section>
 
         <!-- Tags section -->
-        <div v-if="tags.length">
-            <!-- Section title -->
-            <BlogSectionTitle :title="t('blog.tags.title')" data-aos="fade-up" />
-
-            <!-- Tags list component -->
+        <section v-if="tags.length">
+            <BlogSectionTitle :title="t('blog.tags.title')" :description="t('blog.tagsDescription')">
+                <template #action>
+                    <ViewAllLink :to="localePath('/blog/tags')" :label="t('blog.viewAll')" />
+                </template>
+            </BlogSectionTitle>
             <BlogTagsSection :tags="tags" />
-        </div>
+        </section>
 
         <!-- All posts section -->
-        <div>
-            <!-- Section title -->
-            <BlogSectionTitle :title="t('blog.allPosts')" data-aos="fade-up" />
-
-            <!-- All posts list component -->
+        <section>
+            <BlogSectionTitle :title="t('blog.allPosts')" :description="t('blog.allPostsDescription')" />
             <AllPostsSection :posts="posts"
                 :current-page="currentPage"
                 :posts-per-page="postsPerPage"
@@ -189,6 +186,6 @@ definePageMeta({
                 :has-more-posts="hasMorePosts"
                 :is-loading="isLoading"
                 @load-more="loadMorePosts" />
-        </div>
+        </section>
     </div>
 </template>

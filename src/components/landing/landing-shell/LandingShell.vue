@@ -24,8 +24,13 @@ const hasStructuredSlots = computed(() => {
 
 <template>
     <div :class="cn('relative flex min-h-screen flex-col bg-background text-foreground', props.rootClass)">
-        <!-- Background grid -->
-        <BackgroundGrid v-if="props.showBackground" />
+        <!-- Background grid and a warm ambient glow at the top -->
+        <template v-if="props.showBackground">
+            <BackgroundGrid />
+            <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 top-0 z-0 h-[36rem] overflow-hidden">
+                <div class="absolute -top-48 left-1/2 h-96 w-[56rem] max-w-[140%] -translate-x-1/2 rounded-full bg-primary/10 blur-[110px]" />
+            </div>
+        </template>
 
         <!-- If structured slots are provided, render them -->
         <template v-if="hasStructuredSlots">

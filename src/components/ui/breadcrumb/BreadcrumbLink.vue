@@ -11,7 +11,7 @@ const props = withDefaults(defineProps<PrimitiveProps & { class?: HTMLAttributes
 </script>
 
 <template>
-    <Primitive data-slot="breadcrumb-link" :as="as" :as-child="asChild" :class="cn('text-muted-foreground hover:underline', props.class)">
+    <Primitive data-slot="breadcrumb-link" :as="as" :as-child="asChild" :class="cn('rounded-sm bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_1px] bg-left-bottom bg-no-repeat text-muted-foreground outline-none transition-[color,background-size] duration-300 ease-out-expo hover:bg-[length:100%_1px] hover:text-primary focus-visible:ring-[3px] focus-visible:ring-ring/45', props.class)">
         <slot />
     </Primitive>
 </template>

@@ -1,9 +1,8 @@
 <script setup>
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { BlogTagsSection } from '@brumaombra/ui-vintage/blog';
+import { BlogHeaderSection, BlogTagsSection } from '@brumaombra/ui-vintage/blog';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@brumaombra/ui-vintage/breadcrumb';
-import { PageHeader } from '@brumaombra/ui-vintage/page-header';
 import { buildTagsFromPosts, createPageSchema, createSEOMetatags } from '~/composables/useUtils.js';
 
 const { t, locale } = useI18n();
@@ -59,7 +58,7 @@ definePageMeta({
 <template>
     <div>
         <!-- Breadcrumbs -->
-        <Breadcrumb class="mb-8">
+        <Breadcrumb class="mb-2 animate-uv-fade-up">
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink as-child>
@@ -86,12 +85,7 @@ definePageMeta({
         </Breadcrumb>
 
         <!-- Blog header -->
-        <div class="mb-12">
-            <PageHeader :title="t('blog.tags.title')" />
-            <p class="text-sm md:text-base! text-(--text-secondary-light) dark:text-(--text-secondary-dark)">
-                {{ t('blog.tags.description') }}
-            </p>
-        </div>
+        <BlogHeaderSection :title="t('blog.tags.title')" :description="t('blog.tags.description')" class="mb-12 md:mb-16" />
 
         <!-- Tags list -->
         <BlogTagsSection :tags="tags" />

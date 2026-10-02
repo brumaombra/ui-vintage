@@ -51,7 +51,15 @@
             "title": "Tag",
             "description": "Esplora i tag derivati dai post Markdown della demo.",
             "singleTagDescription": "Tutti i post della demo con il tag '{tag}'."
-        }
+        },
+        "footerDescription": "Storie, guide e note di rilascio dal team che sviluppa la libreria di componenti UI Vintage.",
+        "latestPostsDescription": "Una selezione di articoli scelti dalla redazione.",
+        "allPostsDescription": "Tutto quello che abbiamo pubblicato, dal più recente.",
+        "categoriesDescription": "Vai dritto agli argomenti che ti interessano.",
+        "tagsDescription": "Fili più piccoli che attraversano le categorie.",
+        "viewAll": "Vedi tutti",
+        "minRead": "{minutes} min di lettura",
+        "backToBlog": "Torna al blog"
     },
     "navigation": {
         "breadcrumbs": {
@@ -59,7 +67,11 @@
             "blog": "Blog",
             "categories": "Categorie",
             "tags": "Tag"
-        }
+        },
+        "library": "Libreria",
+        "overview": "Panoramica",
+        "components": "Componenti",
+        "foundations": "Fondamenta"
     },
     "common": {
         "loadMoreWithNumbers": "Carica altro ({current} di {total})"

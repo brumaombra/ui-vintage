@@ -42,7 +42,7 @@ const isVertical = () => {
 
 <template>
     <div class="not-prose my-6 sm:my-8">
-        <Card>
+        <Card data-aos="blur-up">
             <!-- Card header -->
             <CardHeader v-if="props.title || props.description">
                 <!-- Card title -->
@@ -62,12 +62,12 @@ const isVertical = () => {
                     <!-- Flow items -->
                     <template v-for="(item, index) in props.items" :key="`${getItemLabel(item)}-${index}`">
                         <!-- Flow item -->
-                        <Card class="flex-1 overflow-hidden md:flex md:items-center">
+                        <Card data-aos="blur-up" :data-aos-delay="100 + index * 90" class="flex-1 overflow-hidden transition-[border-color,translate] duration-300 ease-spring hover:-translate-y-0.5 hover:border-primary/40 md:flex md:items-center">
                             <CardContent class="w-full gap-3 md:justify-center">
                                 <!-- Flow item header -->
                                 <div class="inline-flex items-center gap-3 text-xs font-semibold text-foreground">
                                     <!-- Flow item number -->
-                                    <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded border border-(--border-light) bg-(--bg-card-light) text-xs font-semibold text-(--text-secondary-light) dark:border-(--border-dark) dark:bg-(--bg-card-dark) dark:text-(--text-secondary-dark)">
+                                    <span class="inline-flex size-8 shrink-0 items-center justify-center rounded border border-primary/30 bg-primary/10 text-xs font-bold text-primary">
                                         {{ index + 1 }}
                                     </span>
 
@@ -83,7 +83,7 @@ const isVertical = () => {
                         </Card>
 
                         <!-- Flow item separator -->
-                        <div v-if="index < props.items.length - 1" class="flex items-center justify-center text-muted-foreground">
+                        <div v-if="index < props.items.length - 1" data-aos="blur-up" :data-aos-delay="140 + index * 90" class="flex items-center justify-center text-primary">
                             <!-- Flow item separator for vertical orientation -->
                             <HugeiconsIcon v-if="isVertical()" :icon="ArrowDown01Icon" class="size-5 shrink-0" />
 

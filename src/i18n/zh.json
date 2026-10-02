@@ -92,7 +92,9 @@
                 "x": "分享到 X",
                 "whatsapp": "分享到 WhatsApp",
                 "linkedin": "分享到 LinkedIn",
-                "telegram": "分享到 Telegram"
+                "telegram": "分享到 Telegram",
+                "copy": "复制链接",
+                "copied": "链接已复制"
             }
         },
         "select": {

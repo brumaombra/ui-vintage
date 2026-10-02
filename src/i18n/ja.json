@@ -92,7 +92,9 @@
                 "x": "X で共有",
                 "whatsapp": "WhatsApp で共有",
                 "linkedin": "LinkedIn で共有",
-                "telegram": "Telegram で共有"
+                "telegram": "Telegram で共有",
+                "copy": "リンクをコピー",
+                "copied": "リンクをコピーしました"
             }
         },
         "select": {

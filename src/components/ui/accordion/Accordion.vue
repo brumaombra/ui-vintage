@@ -40,13 +40,13 @@ const toggleExpanded = () => {
 </script>
 
 <template>
-    <Card :data-state="expanded ? 'open' : 'closed'" :class="cn('group/accordion gap-0! overflow-hidden sm:gap-0! p-0! data-[state=open]:border-border-strong', props.class)">
+    <Card :data-state="expanded ? 'open' : 'closed'" :class="cn('group/accordion gap-0! overflow-hidden sm:gap-0! p-0! data-[state=open]:border-primary/25', props.class)">
         <!-- Header -->
-        <button type="button" :aria-expanded="expanded" :aria-controls="contentId" class="flex w-full cursor-pointer items-center justify-between gap-4 p-5 text-left outline-none transition-colors duration-150 hover:bg-surface/70 focus-visible:bg-surface focus-visible:ring-[3px] focus-visible:ring-inset focus-visible:ring-ring/40" @click="toggleExpanded">
+        <button type="button" :aria-expanded="expanded" :aria-controls="contentId" class="group/trigger flex w-full cursor-pointer items-center justify-between gap-4 p-5 text-left outline-none focus-visible:bg-surface focus-visible:ring-[3px] focus-visible:ring-inset focus-visible:ring-ring/40" @click="toggleExpanded">
             <div class="flex min-w-0 items-center gap-3">
                 <!-- Icon -->
-                <div v-if="props.icon" class="flex size-8 shrink-0 items-center justify-center rounded border border-border bg-card transition-[border-color,color] duration-200 group-data-[state=open]/accordion:border-primary/60 md:size-10">
-                    <HugeiconsIcon :icon="props.icon" :class="cn('size-4 text-muted-foreground transition-colors duration-200 group-data-[state=open]/accordion:text-primary', props.iconClass)" />
+                <div v-if="props.icon" class="flex size-8 shrink-0 items-center justify-center rounded border border-border bg-card transition-[border-color,color] duration-200 group-hover/trigger:border-primary/60 group-data-[state=open]/accordion:border-primary/60 md:size-10">
+                    <HugeiconsIcon :icon="props.icon" :class="cn('size-4 text-muted-foreground transition-colors duration-200 group-hover/trigger:text-primary group-data-[state=open]/accordion:text-primary', props.iconClass)" />
                 </div>
 
                 <!-- Title -->
@@ -56,8 +56,8 @@ const toggleExpanded = () => {
             </div>
 
             <!-- Toggle icon -->
-            <div class="flex size-8 shrink-0 items-center justify-center rounded border border-border bg-card transition-[rotate,border-color,background-color] duration-[420ms] ease-spring group-data-[state=open]/accordion:rotate-180 group-data-[state=open]/accordion:border-primary/50 group-data-[state=open]/accordion:bg-primary/10">
-                <HugeiconsIcon :icon="ArrowDown01Icon" class="size-4 text-muted-foreground transition-colors duration-200 group-data-[state=open]/accordion:text-primary" />
+            <div class="flex size-8 shrink-0 items-center justify-center rounded border border-border bg-card transition-[rotate,border-color,background-color] duration-[420ms] ease-spring group-hover/trigger:border-primary/50 group-data-[state=open]/accordion:rotate-180 group-data-[state=open]/accordion:border-primary/50 group-data-[state=open]/accordion:bg-primary/10">
+                <HugeiconsIcon :icon="ArrowDown01Icon" class="size-4 text-muted-foreground transition-colors duration-200 group-hover/trigger:text-primary group-data-[state=open]/accordion:text-primary" />
             </div>
         </button>
 
