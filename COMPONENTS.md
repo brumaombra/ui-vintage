@@ -3462,6 +3462,7 @@ import { AllPostsSection, BlogContentRenderer, BlogFAQSection, BlogInfoSection, 
 | `author` *(required)* | `string` |  |
 | `authorUrl` *(required)* | `string` |  |
 | `authorImageUrl` *(required)* | `string` |  |
+| `authorBio` | `string` | `''` |
 | `datePublished` *(required)* | `string` |  |
 | `dateModified` | `string \| null` | `null` |
 
