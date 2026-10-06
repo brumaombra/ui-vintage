@@ -73,6 +73,7 @@
             "goToPost": "Zum Beitrag",
             "tableOfContents": "Inhaltsverzeichnis",
             "tableOfContentsDescription": "Zu einem Abschnitt dieses Artikels springen",
+            "tableOfContentsSections": "{count} Abschnitt | {count} Abschnitte",
             "openTableOfContents": "Inhaltsverzeichnis offnen",
             "closeTableOfContents": "Inhaltsverzeichnis schliessen",
             "loadMoreWithNumbers": "Mehr laden ({current}/{total})",

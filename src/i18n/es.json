@@ -73,6 +73,7 @@
             "goToPost": "Ir al articulo",
             "tableOfContents": "Tabla de contenidos",
             "tableOfContentsDescription": "Ir a una seccion de este articulo",
+            "tableOfContentsSections": "{count} seccion | {count} secciones",
             "openTableOfContents": "Abrir tabla de contenidos",
             "closeTableOfContents": "Cerrar tabla de contenidos",
             "loadMoreWithNumbers": "Cargar mas ({current}/{total})",

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
+import { computed, nextTick, onMounted, onUnmounted, ref, useId, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { ArrowRight01Icon, Bookmark01Icon, Cancel01Icon } from '@hugeicons/core-free-icons';
+import { ArrowDown01Icon, ArrowRight01Icon, Bookmark01Icon, Cancel01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
-import { Accordion } from '../ui/accordion';
 import { Button } from '../ui/button';
+import { Card } from '../ui/card';
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '../ui/sheet';
 
 interface BlogTocLink {
@@ -18,6 +18,7 @@ interface TocHeading {
     id: string;
     text: string;
     level: number;
+    number: string;
 }
 
 // Props
@@ -42,7 +43,9 @@ const MAX_HEADING_OBSERVER_RETRIES = 20;
 const MOBILE_CLOSE_SCROLL_DELAY_MS = 320;
 const ACTIVE_HEADING_OFFSET_PX = 120;
 
+const inlineListId = useId();
 const inlineRef = ref<HTMLElement | null>(null);
+const isInlineOpen = ref(false);
 const mobileTriggerRef = ref<HTMLElement | null>(null);
 const isDesktop = ref(false);
 const isDocked = ref(false);
@@ -68,7 +71,8 @@ const headings = computed(() => {
             const currentHeading = {
                 id: link.id ?? '',
                 text: link.text ?? '',
-                level: link.depth ?? 0
+                level: link.depth ?? 0,
+                number: ''
             };
 
             // Recursively flatten the children links
@@ -77,13 +81,23 @@ const headings = computed(() => {
         });
     };
 
-    // Return the flattened list of headings
-    return flattenLinks(tocLinks).filter(heading => heading.id && heading.text && heading.level >= 2 && heading.level <= 3);
+    // Keep h2 and h3 headings and number the main sections
+    let sectionNumber = 0;
+    return flattenLinks(tocLinks)
+        .filter(heading => heading.id && heading.text && heading.level >= 2 && heading.level <= 3)
+        .map(heading => ({
+            ...heading,
+            number: heading.level === 2 ? String(++sectionNumber).padStart(2, '0') : ''
+        }));
 });
+
+// Number of main sections shown in the header
+const sectionCount = computed(() => headings.value.filter(heading => heading.level === 2).length);
 
 // Title and description for the table of contents
 const tocTitle = computed(() => t('uiVintage.blog.tableOfContents'));
 const tocDescription = computed(() => t('uiVintage.blog.tableOfContentsDescription'));
+const tocSections = computed(() => t('uiVintage.blog.tableOfContentsSections', { count: sectionCount.value }, sectionCount.value));
 
 // Prefer reduced motion for heading scroll
 const prefersReducedMotion = () => {
@@ -286,21 +300,19 @@ const openMobileToc = () => {
 // Get classes for heading button
 const getHeadingButtonClasses = (level: number, isActive: boolean) => {
     // Base classes for all titles
-    const baseClasses = 'relative block w-full cursor-pointer rounded px-2.5 py-2 text-left outline-none transition-[background-color,color,padding] duration-200 hover:bg-accent hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/45 md:px-3 before:absolute before:inset-y-1.5 before:left-0 before:w-[3px] before:origin-center before:scale-y-0 before:rounded-full before:bg-primary before:transition-transform before:duration-300 before:ease-spring';
+    const baseClasses = 'flex w-full cursor-pointer gap-3 rounded-r py-1.5 pr-2 text-left text-xs outline-none transition-colors duration-200 hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/45 md:text-sm';
 
-    // Add classes based on heading level
-    let levelClasses = '';
-    if (level === 2) {
-        levelClasses = 'text-foreground font-semibold text-xs md:text-sm';
-    } else {
-        levelClasses = 'text-muted-foreground pl-6! text-xs md:text-sm';
+    // Main sections carry a number, subsections align with their text
+    const levelClasses = level === 2 ? 'pl-4 font-medium' : 'pl-12 md:text-xs';
+
+    // Add classes based on the active state
+    let stateClasses = level === 2 ? 'text-foreground/80' : 'text-muted-foreground';
+    if (isActive) {
+        stateClasses = 'font-semibold text-foreground';
     }
 
-    // Add classes if the heading is active
-    const activeClasses = isActive ? 'bg-accent text-foreground! before:scale-y-100' : '';
-
     // Return combined classes
-    return [baseClasses, levelClasses, activeClasses];
+    return [baseClasses, levelClasses, stateClasses];
 };
 
 // Watch for changes in the headings and update the visible heading IDs and active heading ID accordingly
@@ -340,15 +352,37 @@ onUnmounted(() => {
 
 <template>
     <div v-if="headings.length > 0">
-        <!-- In-flow accordion; replaced by the mobile control after it scrolls away -->
+        <!-- In-flow collapsible card; replaced by the mobile control after it scrolls away -->
         <div ref="inlineRef" class="mb-6" :aria-hidden="isDocked" :inert="isDocked">
-            <Accordion :title="tocTitle" :icon="Bookmark01Icon">
-                <nav :aria-label="tocTitle" class="space-y-1">
-                    <button v-for="heading in headings" :key="`inline-${heading.id}`" type="button" :class="getHeadingButtonClasses(heading.level, heading.id === activeHeadingId)" :aria-current="heading.id === activeHeadingId ? 'location' : undefined" @click="scrollToHeading(heading.id)">
-                        {{ heading.text }}
-                    </button>
-                </nav>
-            </Accordion>
+            <Card class="gap-0! overflow-hidden p-0! sm:gap-0!">
+                <!-- Header -->
+                <button type="button" :aria-expanded="isInlineOpen" :aria-controls="inlineListId" class="group/toc flex w-full cursor-pointer items-center gap-3 px-5 py-3.5 text-left outline-none focus-visible:bg-surface focus-visible:ring-[3px] focus-visible:ring-inset focus-visible:ring-ring/40" @click="isInlineOpen = !isInlineOpen">
+                    <span class="flex size-7 shrink-0 items-center justify-center rounded border border-primary/30 text-primary">
+                        <HugeiconsIcon :icon="Bookmark01Icon" class="size-3.5" />
+                    </span>
+                    <span class="min-w-0 truncate text-sm font-semibold text-foreground">{{ tocTitle }}</span>
+                    <span class="ml-auto shrink-0 text-xs text-muted-foreground">{{ tocSections }}</span>
+                    <HugeiconsIcon :icon="ArrowDown01Icon" :class="['size-4 shrink-0 text-muted-foreground transition-[rotate,color] duration-[420ms] ease-spring group-hover/toc:text-primary', isInlineOpen && 'rotate-180 text-primary']" />
+                </button>
+
+                <!-- Collapsible list -->
+                <div :id="inlineListId" role="region" :aria-hidden="!isInlineOpen" :inert="!isInlineOpen || undefined" :class="['grid transition-[grid-template-rows,opacity] duration-[380ms] ease-out-expo', isInlineOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0']">
+                    <div class="overflow-hidden">
+                        <nav :aria-label="tocTitle" class="border-t border-border px-5 py-4">
+                            <ol>
+                                <li v-for="heading in headings" :key="`inline-${heading.id}`" class="relative border-l border-border">
+                                    <!-- Active marker on the track -->
+                                    <span aria-hidden="true" :class="['absolute inset-y-1 -left-px w-0.5 origin-center bg-primary transition-transform duration-300 ease-spring', heading.id === activeHeadingId ? 'scale-y-100' : 'scale-y-0']" />
+                                    <button type="button" :class="getHeadingButtonClasses(heading.level, heading.id === activeHeadingId)" :aria-current="heading.id === activeHeadingId ? 'location' : undefined" @click="scrollToHeading(heading.id)">
+                                        <span v-if="heading.number" :class="['w-5 shrink-0 text-[11px] leading-5 tabular-nums transition-colors', heading.id === activeHeadingId ? 'text-primary' : 'text-muted-foreground']">{{ heading.number }}</span>
+                                        <span>{{ heading.text }}</span>
+                                    </button>
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </Card>
         </div>
 
         <Teleport to="body">
@@ -366,8 +400,8 @@ onUnmounted(() => {
                         <!-- Mobile table of contents header -->
                         <div class="flex min-w-0 items-center gap-3">
                             <!-- Mobile table of contents icon -->
-                            <div class="flex size-10 shrink-0 items-center justify-center rounded border border-primary/30 bg-primary/10">
-                                <HugeiconsIcon :icon="Bookmark01Icon" class="size-4 text-primary" />
+                            <div class="flex size-7 shrink-0 items-center justify-center rounded border border-primary/30 text-primary">
+                                <HugeiconsIcon :icon="Bookmark01Icon" class="size-3.5" />
                             </div>
 
                             <!-- Mobile table of contents title and description -->
@@ -378,6 +412,9 @@ onUnmounted(() => {
                                 <SheetDescription class="sr-only">
                                     {{ tocDescription }}
                                 </SheetDescription>
+                                <p aria-hidden="true" class="text-xs text-muted-foreground">
+                                    {{ tocSections }}
+                                </p>
                             </div>
                         </div>
 
@@ -391,11 +428,16 @@ onUnmounted(() => {
 
                     <!-- Mobile table of contents navigation -->
                     <nav :aria-label="tocTitle" class="flex-1 overflow-y-auto p-5">
-                        <div class="space-y-1">
-                            <button v-for="heading in headings" :key="`mobile-${heading.id}`" type="button" :class="getHeadingButtonClasses(heading.level, heading.id === activeHeadingId)" :aria-current="heading.id === activeHeadingId ? 'location' : undefined" @click="scrollToHeading(heading.id, { closeMobile: true })">
-                                {{ heading.text }}
-                            </button>
-                        </div>
+                        <ol>
+                            <li v-for="heading in headings" :key="`mobile-${heading.id}`" class="relative border-l border-border">
+                                <!-- Active marker on the track -->
+                                <span aria-hidden="true" :class="['absolute inset-y-1 -left-px w-0.5 bg-primary', heading.id === activeHeadingId ? 'opacity-100' : 'opacity-0']" />
+                                <button type="button" :class="getHeadingButtonClasses(heading.level, heading.id === activeHeadingId)" :aria-current="heading.id === activeHeadingId ? 'location' : undefined" @click="scrollToHeading(heading.id, { closeMobile: true })">
+                                    <span v-if="heading.number" :class="['w-5 shrink-0 text-[11px] leading-5 tabular-nums', heading.id === activeHeadingId ? 'text-primary' : 'text-muted-foreground']">{{ heading.number }}</span>
+                                    <span>{{ heading.text }}</span>
+                                </button>
+                            </li>
+                        </ol>
                     </nav>
                 </SheetContent>
             </Sheet>

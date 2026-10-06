@@ -73,6 +73,7 @@
             "goToPost": "Ir para o artigo",
             "tableOfContents": "Indice",
             "tableOfContentsDescription": "Ir para uma secao deste artigo",
+            "tableOfContentsSections": "{count} secao | {count} secoes",
             "openTableOfContents": "Abrir indice",
             "closeTableOfContents": "Fechar indice",
             "loadMoreWithNumbers": "Carregar mais ({current}/{total})",

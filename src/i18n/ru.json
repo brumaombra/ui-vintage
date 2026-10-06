@@ -73,6 +73,7 @@
             "goToPost": "Перейти к статье",
             "tableOfContents": "Содержание",
             "tableOfContentsDescription": "Перейти к разделу статьи",
+            "tableOfContentsSections": "Разделов: {count}",
             "openTableOfContents": "Открыть содержание",
             "closeTableOfContents": "Закрыть содержание",
             "loadMoreWithNumbers": "Загрузить еще ({current}/{total})",
