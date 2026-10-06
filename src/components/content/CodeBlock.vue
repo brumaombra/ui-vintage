@@ -180,12 +180,14 @@ const copyCode = async () => {
 </style>
 
 <style>
-/* Shiki emits both themes as CSS variables; pick the one matching the library's `.dark` class */
+/* Shiki emits both themes as CSS variables; pick the one matching the library's `.dark` class and drop Nuxt Content's per-token backgrounds */
 .uv-code-block-content .shiki span {
     color: var(--shiki-light);
+    background-color: transparent;
 }
 
 .dark .uv-code-block-content .shiki span {
     color: var(--shiki-dark);
+    background-color: transparent;
 }
 </style>
