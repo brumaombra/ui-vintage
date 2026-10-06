@@ -3576,6 +3576,7 @@ import { Terminal, CodeBlock, ProsePre, BlogList, BlogTable, Flow, ProseHr } fro
 | --- | --- | --- |
 | `code` | `string` | `''` |
 | `language` | `string` | `''` |
+| `filename` | `string` | `''` |
 
 - **Slots:** `default`.
 
