@@ -11,6 +11,8 @@ html {
 }
 
 :root {
+    color-scheme: light;
+
     /*********************** Core custom colors ***********************/
 
     --bg-main-light: #fafafa;
@@ -369,6 +371,9 @@ html {
 }
 
 .dark {
+    /* Native controls (date/time pickers, scrollbars, form widgets) follow the theme */
+    color-scheme: dark;
+
     --background: var(--bg-main-dark);
     --foreground: var(--text-primary-dark);
     --card: var(--bg-card-dark);

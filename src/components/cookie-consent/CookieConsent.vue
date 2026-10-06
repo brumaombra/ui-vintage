@@ -70,7 +70,7 @@ onMounted(() => {
             <Card class="gap-3! p-4 shadow-elevated-sm">
                 <p class="text-sm text-foreground">
                     {{ resolvedMessage }}
-                    <NuxtLinkLocale v-if="props.policyTo" :to="props.policyTo" class="font-bold underline underline-offset-2">{{ resolvedPolicyLabel }}</NuxtLinkLocale>
+                    <NuxtLinkLocale v-if="props.policyTo" :to="props.policyTo" class="font-semibold text-primary underline underline-offset-2">{{ resolvedPolicyLabel }}</NuxtLinkLocale>
                 </p>
                 <div class="flex flex-wrap justify-end gap-2">
                     <Button variant="secondary" size="sm" @click="handleDecline">{{ resolvedDeclineLabel }}</Button>

@@ -175,7 +175,7 @@ onBeforeUnmount(() => clearTimeout(rejectTimer));
             'group/dropzone relative isolate flex min-h-44 cursor-pointer select-none flex-col items-center justify-center gap-3 rounded border-2 border-dashed border-border bg-surface/50 px-6 py-8 text-center outline-none',
             '[transition:border-color_150ms,background-color_220ms,box-shadow_220ms,transform_420ms_var(--ease-spring)]',
             'hover:border-border-strong hover:bg-surface focus-visible:ring-[3px] focus-visible:ring-ring/45 active:scale-[0.99] active:duration-75',
-            'data-dragging:scale-[1.01] data-dragging:border-transparent data-dragging:bg-primary/5 data-dragging:shadow-[0_0_0_4px_color-mix(in_oklab,var(--primary)_12%,transparent)] data-dragging:hover:border-transparent data-dragging:hover:bg-primary/5',
+            'data-dragging:scale-[1.01] data-dragging:border-transparent data-dragging:bg-primary/5 data-dragging:hover:border-transparent data-dragging:hover:bg-primary/5',
             'data-disabled:cursor-not-allowed data-disabled:opacity-50 data-disabled:hover:border-border data-disabled:hover:bg-surface/50 data-disabled:active:scale-100',
             isRejected && 'animate-uv-shake border-destructive/70'
         )" @click="openPicker" @keydown.enter.prevent="openPicker" @keydown.space.prevent="openPicker" @dragenter.prevent="onDragEnter" @dragover.prevent="onDragOver" @dragleave="onDragLeave" @drop.prevent="onDrop">

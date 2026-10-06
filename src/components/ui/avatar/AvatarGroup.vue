@@ -38,6 +38,15 @@ function getChildren() {
     return flatten(slots.default?.() ?? []);
 }
 
+// Overlap per size, kept clear of the initials so stacked fallbacks stay readable
+const overlapClasses: Record<AvatarSize, string> = {
+    xs: '-space-x-1',
+    sm: '-space-x-1.5',
+    md: '-space-x-2',
+    lg: '-space-x-2.5',
+    xl: '-space-x-3'
+};
+
 // Whether a max limit applies
 function hasMax() {
     return props.max !== undefined && props.max >= 0;
@@ -60,15 +69,16 @@ const VNodeRenderer = (renderProps: { node: VNode }) => renderProps.node;
 
 <template>
     <div data-slot="avatar-group" :class="cn(
-        'flex items-center -space-x-2 hover:-space-x-0.5',
-        '*:ring-2 *:ring-background *:transition-[margin,translate] *:duration-380 *:ease-spring *:hover:-translate-y-0.5',
+        'flex items-center',
+        overlapClasses[props.size],
+        '*:ring-2 *:ring-background',
         props.class
     )">
         <!-- Visible avatars -->
         <VNodeRenderer v-for="(node, index) in getVisible()" :key="node.key ?? index" :node="node" />
 
         <!-- Overflow bubble -->
-        <span v-if="getOverflow() > 0" data-slot="avatar-group-overflow" :class="cn('relative inline-flex shrink-0 select-none items-center justify-center bg-surface font-bold text-muted-foreground', avatarSizeClasses[props.size], avatarShapeClasses[props.shape], avatarTextClasses[props.size])">
+        <span v-if="getOverflow() > 0" data-slot="avatar-group-overflow" :class="cn('relative inline-flex shrink-0 select-none items-center justify-center bg-surface font-semibold text-muted-foreground', avatarSizeClasses[props.size], avatarShapeClasses[props.shape], avatarTextClasses[props.size])">
             +{{ getOverflow() }}
         </span>
     </div>

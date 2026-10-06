@@ -25,10 +25,10 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
         <!-- Track -->
         <SliderTrack data-slot="slider-track" class="relative grow overflow-hidden rounded bg-muted transition-[height,width] duration-200 ease-spring data-[orientation=horizontal]:h-2 data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-2 group-hover/slider:data-[orientation=horizontal]:h-2.5 group-hover/slider:data-[orientation=vertical]:w-2.5">
             <!-- Filled range -->
-            <SliderRange data-slot="slider-range" class="absolute bg-primary bg-[linear-gradient(90deg,transparent,rgb(255_255_255/0.22))] data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full" />
+            <SliderRange data-slot="slider-range" class="absolute bg-primary data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full" />
         </SliderTrack>
 
         <!-- Thumbs -->
-        <SliderThumb v-for="(_, key) in modelValue" :key="key" data-slot="slider-thumb" class="block size-5 shrink-0 cursor-grab rounded border-2 border-primary bg-white shadow-elevated-md outline-none [transition:scale_300ms_var(--ease-spring),box-shadow_200ms] hover:scale-110 hover:shadow-[0_0_0_6px_color-mix(in_oklab,var(--primary)_16%,transparent)] focus-visible:shadow-[0_0_0_6px_color-mix(in_oklab,var(--primary)_24%,transparent)] active:scale-125 active:cursor-grabbing disabled:pointer-events-none disabled:opacity-50" />
+        <SliderThumb v-for="(_, key) in modelValue" :key="key" data-slot="slider-thumb" class="block size-5 shrink-0 cursor-grab rounded border-2 border-primary bg-card shadow-elevated-sm outline-none transition-[background-color,box-shadow] duration-150 hover:bg-primary/10 focus-visible:ring-[3px] focus-visible:ring-ring/45 active:cursor-grabbing active:bg-primary/15 disabled:pointer-events-none disabled:opacity-50" />
     </SliderRoot>
 </template>

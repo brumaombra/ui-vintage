@@ -34,6 +34,6 @@ const percentage = computed(() => {
         <div v-if="props.indeterminate" data-slot="progress-indicator" class="absolute inset-y-0 left-0 w-full origin-left animate-uv-indeterminate rounded-sm bg-primary" />
 
         <!-- Determinate bar -->
-        <ProgressIndicator v-else data-slot="progress-indicator" class="relative h-full w-full flex-1 overflow-hidden rounded-sm bg-primary transition-transform duration-700 ease-out-expo after:absolute after:inset-0 after:animate-uv-shimmer after:bg-[linear-gradient(90deg,transparent,rgb(255_255_255/0.35),transparent)]" :style="`transform: translateX(-${100 - percentage}%);`" />
+        <ProgressIndicator v-else data-slot="progress-indicator" class="relative h-full w-full flex-1 overflow-hidden rounded-sm bg-primary transition-transform duration-700 ease-out-expo" :style="`transform: translateX(-${100 - percentage}%);`" />
     </ProgressRoot>
 </template>

@@ -25,7 +25,7 @@ const { t } = useI18n();
     <PaginationListItem data-slot="pagination-item" :aria-label="t('uiVintage.pagination.page', { page: props.value })" v-bind="delegatedProps" :class="cn(
         buttonVariants({ variant: 'secondary', size: props.size }),
         'tabular-nums',
-        'data-selected:border-primary data-selected:bg-primary data-selected:text-primary-foreground data-selected:shadow-glow data-selected:hover:border-primary data-selected:hover:bg-primary-hover',
+        'data-selected:border-primary data-selected:bg-primary data-selected:text-primary-foreground data-selected:hover:border-primary data-selected:hover:bg-primary-hover',
         'data-selected:animate-[uv-pagination-pop_380ms_var(--ease-bounce)]',
         props.class
     )">

@@ -64,7 +64,7 @@ const handleAction = () => {
 </script>
 
 <template>
-    <div :class="cn('relative min-h-screen bg-(--bg-main-light) text-(--text-primary-light) dark:bg-(--bg-main-dark) dark:text-(--text-primary-dark)', props.class)">
+    <div :class="cn('relative min-h-screen bg-background text-foreground', props.class)">
         <!-- Decorative background -->
         <BackgroundGrid v-if="props.showBackground" />
 
@@ -85,12 +85,12 @@ const handleAction = () => {
                         <!-- Error copy -->
                         <div>
                             <!-- Status code -->
-                            <div class="text-sm font-semibold uppercase tracking-[0.24em] text-primary">
+                            <div class="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
                                 {{ resolvedLabel }} {{ resolvedStatusCode }}
                             </div>
 
                             <!-- Title -->
-                            <h1 class="text-2xl font-bold mt-3">
+                            <h1 class="mt-3 text-2xl font-semibold tracking-tight">
                                 {{ resolvedTitle }}
                             </h1>
 

@@ -23,7 +23,7 @@ const props = defineProps<{
         'group/radio-card relative flex w-full cursor-pointer items-center gap-3 rounded border border-border bg-card px-4 py-3 text-left shadow-elevated-sm outline-none',
         '[transition:scale_320ms_var(--ease-spring),border-color_150ms_var(--ease-snappy),background-color_150ms_var(--ease-snappy),box-shadow_200ms_var(--ease-snappy)]',
         'hover:border-border-strong active:scale-[0.985] focus-visible:ring-[3px] focus-visible:ring-ring/45',
-        'data-[state=checked]:border-primary data-[state=checked]:bg-primary/5 data-[state=checked]:shadow-glow data-[state=checked]:hover:border-primary',
+        'data-[state=checked]:border-primary data-[state=checked]:bg-primary/5 data-[state=checked]:hover:border-primary',
         'disabled:cursor-not-allowed disabled:opacity-60 disabled:active:scale-100',
         props.class
     )">

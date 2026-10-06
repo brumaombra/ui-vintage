@@ -28,11 +28,8 @@ const resolvedLabel = computed(() => props.label || getUiVintageRuntimeMessage('
                 props.class,
             )">
                 <slot>
-                    <!-- Spinner with a soft glow -->
-                    <div class="relative flex items-center justify-center">
-                        <span class="absolute size-14 rounded-full bg-primary/15 blur-md" />
-                        <Spinner data-slot="busy-spinner" size="xl" class="text-primary" />
-                    </div>
+                    <!-- Spinner -->
+                    <Spinner data-slot="busy-spinner" size="xl" class="text-primary" />
 
                     <!-- Label -->
                     <span v-if="resolvedLabel" data-slot="busy-label" class="text-xs font-semibold text-foreground sm:text-sm">

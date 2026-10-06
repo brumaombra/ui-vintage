@@ -86,7 +86,7 @@ const getSidebarItemLinkProps = (item: NonNullable<typeof props.sidebarSections>
                                         <NuxtImg v-if="props.appLogo" :src="props.appLogo" :alt="`${props.appName} logo`" width="32" height="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="eager" class="size-8 shrink-0 object-contain" />
 
                                         <!-- App name -->
-                                        <span v-if="props.appName" class="text-xl font-bold tracking-tight text-foreground">{{ props.appName }}</span>
+                                        <span v-if="props.appName" class="text-xl font-semibold tracking-tight text-foreground">{{ props.appName }}</span>
                                     </div>
                                 </a>
                             </SidebarMenuButton>
@@ -105,12 +105,12 @@ const getSidebarItemLinkProps = (item: NonNullable<typeof props.sidebarSections>
 
                     <!-- Section content -->
                     <SidebarGroupContent>
-                        <SidebarMenu :class="cn('gap-3', props.compact && 'gap-2')">
+                        <SidebarMenu :class="cn('gap-1', props.compact && 'gap-0.5')">
                             <SidebarMenuItem v-for="item in section.items" :key="item.id">
-                                <SidebarMenuButton as-child :is-active="item.active" :class="cn('group/nav relative h-auto min-h-12 overflow-hidden rounded border border-border px-3 py-2.5 text-muted-foreground [transition:color_150ms,background-color_150ms,border-color_150ms,scale_300ms_var(--ease-spring)] hover:border-border-strong hover:bg-accent hover:text-foreground active:scale-[0.98] data-[active=true]:border-border-strong data-[active=true]:bg-accent data-[active=true]:text-foreground sm:px-4 sm:py-3', 'before:absolute before:inset-y-2 before:left-0 before:w-[3px] before:origin-center before:scale-y-0 before:rounded-r-full before:bg-primary before:transition-transform before:duration-[420ms] before:ease-spring data-[active=true]:before:scale-y-100', item.description ? 'items-start' : 'items-center')">
+                                <SidebarMenuButton as-child :is-active="item.active" :class="cn('group/nav relative h-auto min-h-11 overflow-hidden rounded px-3 py-2.5 text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground data-[active=true]:bg-primary/10 data-[active=true]:text-foreground sm:px-3.5', 'before:absolute before:inset-y-2 before:left-0 before:w-0.5 before:origin-center before:scale-y-0 before:bg-primary before:transition-transform before:duration-300 before:ease-spring data-[active=true]:before:scale-y-100', item.description ? 'items-start' : 'items-center')">
                                     <component :is="props.sidebarLinkComponent" v-bind="getSidebarItemLinkProps(item)">
                                         <!-- Icon -->
-                                        <HugeiconsIcon v-if="item.icon" :icon="item.icon" :stroke-width="1.8" :class="cn('shrink-0 opacity-90 transition-[opacity,translate,color] duration-300 ease-spring group-hover/nav:translate-x-0.5 group-hover/nav:opacity-100 group-data-[active=true]/nav:text-primary', item.description ? 'mt-0.5 size-5 sm:h-5 sm:w-5' : 'size-5 self-center sm:h-6 sm:w-6')" />
+                                        <HugeiconsIcon v-if="item.icon" :icon="item.icon" :stroke-width="1.8" :class="cn('shrink-0 opacity-90 transition-[opacity,color] duration-150 group-hover/nav:opacity-100 group-data-[active=true]/nav:text-primary', item.description ? 'mt-0.5 size-5 sm:h-5 sm:w-5' : 'size-5 self-center sm:h-6 sm:w-6')" />
 
                                         <!-- Label and optional description -->
                                         <div :class="cn('min-w-0 flex-1 text-left leading-tight', item.description ? 'grid' : 'flex items-center')">

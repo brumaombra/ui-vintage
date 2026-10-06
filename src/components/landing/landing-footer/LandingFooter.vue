@@ -77,15 +77,12 @@ const getLinkProps = (link: LandingFooterLink) => {
 
 <template>
     <footer :class="cn('relative z-10 border-t border-border bg-card', props.class)">
-        <!-- Accent line -->
-        <div aria-hidden="true" class="absolute inset-x-0 -top-px h-px bg-linear-to-r from-transparent via-primary/60 to-transparent" />
-
         <div :class="cn('mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8', props.containerClass)">
             <div :class="cn('flex flex-col gap-8 md:flex-row md:items-start md:justify-between')">
                 <!-- Brand section -->
                 <div :class="cn('max-w-md flex-1', props.brandClass)">
                     <!-- App logo and name -->
-                    <a :href="props.appLinkTo" class="mb-4 inline-flex items-center gap-2 text-lg font-semibold tracking-tight text-foreground transition-[opacity,scale] duration-300 ease-spring hover:scale-[1.02] hover:opacity-90">
+                    <a :href="props.appLinkTo" class="mb-4 inline-flex items-center gap-2 text-lg font-semibold tracking-tight text-foreground transition-opacity duration-150 hover:opacity-80">
                         <NuxtImg v-if="props.appLogo" :src="props.appLogo" :alt="`${props.appName} logo`" width="32" height="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="lazy" decoding="async" :class="cn('size-8 shrink-0 object-contain', props.logoClass)" />
                         <span>{{ props.appName }}</span>
                     </a>
@@ -107,8 +104,8 @@ const getLinkProps = (link: LandingFooterLink) => {
                         <!-- Section links -->
                         <ul class="space-y-3 text-xs sm:text-sm">
                             <li v-for="link in props.sections[0]?.links" :key="link.id">
-                                <component :is="props.linkComponent" v-bind="getLinkProps(link)" class="group/link inline-flex items-center gap-1.5 text-muted-foreground transition-colors duration-150 hover:text-primary">
-                                    <span class="h-px w-0 bg-primary transition-[width] duration-300 ease-spring group-hover/link:w-3" />
+                                <component :is="props.linkComponent" v-bind="getLinkProps(link)" class="group/link inline-flex items-center text-muted-foreground transition-colors duration-150 hover:text-primary">
+                                    <span class="h-px w-0 bg-primary transition-[width,margin] duration-300 ease-spring group-hover/link:mr-1.5 group-hover/link:w-3" />
                                     {{ link.label }}
                                 </component>
                             </li>
@@ -127,8 +124,8 @@ const getLinkProps = (link: LandingFooterLink) => {
                         <!-- Section links -->
                         <ul class="space-y-3 text-xs sm:text-sm">
                             <li v-for="link in section.links" :key="link.id">
-                                <component :is="props.linkComponent" v-bind="getLinkProps(link)" class="group/link inline-flex items-center gap-1.5 text-muted-foreground transition-colors duration-150 hover:text-primary">
-                                    <span class="h-px w-0 bg-primary transition-[width] duration-300 ease-spring group-hover/link:w-3" />
+                                <component :is="props.linkComponent" v-bind="getLinkProps(link)" class="group/link inline-flex items-center text-muted-foreground transition-colors duration-150 hover:text-primary">
+                                    <span class="h-px w-0 bg-primary transition-[width,margin] duration-300 ease-spring group-hover/link:mr-1.5 group-hover/link:w-3" />
                                     {{ link.label }}
                                 </component>
                             </li>
@@ -147,7 +144,7 @@ const getLinkProps = (link: LandingFooterLink) => {
                 <!-- Author -->
                 <div v-if="props.authorName && props.authorLink" class="flex flex-wrap items-center justify-center gap-1.5 md:justify-end">
                     <span>{{ t('uiVintage.footer.madeWith') }}</span>
-                    <HugeiconsIcon :icon="FavouriteIcon" class="size-4 shrink-0 text-red-600 transition-[scale] duration-300 ease-bounce hover:scale-125 dark:text-red-400" />
+                    <HugeiconsIcon :icon="FavouriteIcon" class="size-4 shrink-0 text-red-600 dark:text-red-400" />
                     <span>{{ t('uiVintage.footer.by') }}</span>
                     <a :href="props.authorLink" target="_blank" rel="noopener noreferrer" class="font-semibold text-foreground hover:underline">
                         {{ props.authorName }}

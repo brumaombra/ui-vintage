@@ -178,7 +178,7 @@ const handleRowClick = (row: T, event: MouseEvent) => {
                     <td :colspan="columnCount" class="px-4 py-12">
                         <slot name="empty">
                             <div class="flex flex-col items-center gap-2 text-center text-muted-foreground">
-                                <HugeiconsIcon :icon="PackageIcon" class="size-8 animate-uv-float opacity-40" />
+                                <HugeiconsIcon :icon="PackageIcon" class="size-8 opacity-40" />
                                 <span class="text-xs sm:text-sm">{{ resolvedEmptyText }}</span>
                             </div>
                         </slot>

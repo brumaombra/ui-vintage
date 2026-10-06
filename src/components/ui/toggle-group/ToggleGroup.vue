@@ -85,7 +85,7 @@ const indicatorStyle = computed<CSSProperties>(() => ({
         <span v-if="isSingle" data-slot="toggle-group-indicator" aria-hidden="true" :style="indicatorStyle" :class="cn(
             'pointer-events-none absolute top-0 left-0 z-0 rounded-sm border',
             animated && '[transition:transform_380ms_var(--ease-spring),width_380ms_var(--ease-spring),height_380ms_var(--ease-spring),opacity_180ms_var(--ease-snappy)]',
-            props.highlight ? 'border-primary/40 bg-primary/10 shadow-[0_0_0_3px_color-mix(in_oklab,var(--primary)_10%,transparent)]' : 'border-border-strong bg-surface shadow-elevated-sm'
+            props.highlight ? 'border-primary/40 bg-primary/10' : 'border-border-strong bg-surface shadow-elevated-sm'
         )" />
 
         <slot v-bind="slotProps" />

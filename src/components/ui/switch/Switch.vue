@@ -21,7 +21,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
     <SwitchRoot v-slot="slotProps" data-slot="switch" v-bind="forwarded" :class="cn(
         'group/switch peer relative inline-flex h-7 w-12 shrink-0 cursor-pointer items-center rounded border border-input bg-secondary shadow-elevated-sm outline-none',
         '[transition:background-color_200ms,border-color_200ms,box-shadow_250ms] hover:border-border-strong focus-visible:ring-[3px] focus-visible:ring-ring/45 disabled:cursor-not-allowed disabled:opacity-60',
-        'data-[state=checked]:border-primary data-[state=checked]:bg-accent data-[state=checked]:shadow-[0_0_0_3px_color-mix(in_oklab,var(--primary)_14%,transparent)]',
+        'data-[state=checked]:border-primary data-[state=checked]:bg-accent',
         props.class
     )">
         <SwitchThumb data-slot="switch-thumb" :class="cn(

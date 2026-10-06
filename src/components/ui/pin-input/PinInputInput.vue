@@ -34,7 +34,7 @@ const isInvalid = computed(() => pinInputContext?.invalid.value || undefined);
     <span data-slot="pin-input-cell" class="relative inline-flex shrink-0">
         <!-- Native input (text is transparent, the overlay below renders the character) -->
         <PinInputInput data-slot="pin-input-input" v-bind="{ ...$attrs, ...forwardedProps }" :aria-invalid="isInvalid" :data-filled="isFilled ? '' : undefined" :class="cn(
-            'uv-field size-12 rounded border border-input bg-secondary text-center text-lg font-bold text-transparent caret-primary shadow-elevated-sm outline-none sm:size-13',
+            'uv-field size-12 rounded border border-input bg-secondary text-center text-lg font-semibold text-transparent caret-primary shadow-elevated-sm outline-none sm:size-13',
             'placeholder:text-muted-foreground placeholder:opacity-50 selection:bg-primary/25',
             'data-filled:border-primary/60 data-filled:bg-primary/5',
             'disabled:cursor-not-allowed disabled:opacity-60',
@@ -42,7 +42,7 @@ const isInvalid = computed(() => pinInputContext?.invalid.value || undefined);
         )" />
 
         <!-- Animated character (re-keyed on every value so it pops) -->
-        <span v-if="isFilled" :key="cellValue" aria-hidden="true" class="pointer-events-none absolute inset-0 flex animate-uv-pop items-center justify-center text-lg font-bold text-foreground">
+        <span v-if="isFilled" :key="cellValue" aria-hidden="true" class="pointer-events-none absolute inset-0 flex animate-uv-pop items-center justify-center text-lg font-semibold text-foreground">
             {{ displayValue }}
         </span>
     </span>

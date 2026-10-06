@@ -29,7 +29,6 @@ export type ButtonVariants = {
 };
 
 // Sheen sweep that crosses solid buttons on hover
-const sheenClasses = "before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:-translate-x-full before:bg-[linear-gradient(105deg,transparent_35%,rgb(255_255_255/0.38)_50%,transparent_65%)] before:transition-transform before:duration-700 before:ease-out-expo hover:before:translate-x-full";
 
 export const buttonVariants: (props?: ButtonVariants & ClassProp) => string = cva(
     [
@@ -43,7 +42,7 @@ export const buttonVariants: (props?: ButtonVariants & ClassProp) => string = cv
     {
         variants: {
             variant: {
-                primary: `${getButtonVariantClasses('primary')} ${sheenClasses}`,
+                primary: getButtonVariantClasses('primary'),
                 secondary: getButtonVariantClasses('secondary'),
                 ghost: getButtonVariantClasses('ghost'),
                 link: getButtonVariantClasses('link'),

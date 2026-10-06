@@ -51,12 +51,12 @@ onBeforeUnmount(() => {
                 <!-- Left-aligned content -->
                 <div :class="cn('flex items-center', props.leftClass)">
                     <slot name="left">
-                        <a :href="props.appLinkTo" class="inline-flex items-center gap-2 transition-[opacity,scale] duration-300 ease-spring hover:scale-[1.02] hover:opacity-90">
+                        <a :href="props.appLinkTo" class="inline-flex items-center gap-2 transition-opacity duration-150 hover:opacity-80">
                             <!-- App logo -->
                             <NuxtImg v-if="props.appLogo" :src="props.appLogo" :alt="`${props.appName} logo`" width="44" height="44" :sizes="{ 320: '44px', 640: '36px' }" loading="eager" fetchpriority="high" :class="cn('size-11 sm:size-9 shrink-0 object-contain', props.logoClass)" />
 
                             <!-- App name -->
-                            <span v-if="props.appName" class="hidden sm:inline! text-xl font-bold tracking-tight text-foreground">
+                            <span v-if="props.appName" class="hidden sm:inline! text-xl font-semibold tracking-tight text-foreground">
                                 {{ props.appName }}
                             </span>
                         </a>
