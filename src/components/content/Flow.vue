@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { ArrowDown01Icon, ArrowRight01Icon } from '@hugeicons/core-free-icons';
-import { HugeiconsIcon } from '@hugeicons/vue';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 
 type FlowItem = string | {
@@ -38,6 +36,11 @@ const getItemDescription = (item: FlowItem) => {
 const isVertical = () => {
     return props.orientation === 'vertical';
 };
+
+// Format the step number with a leading zero
+const formatNumber = (index: number) => {
+    return String(index + 1).padStart(2, '0');
+};
 </script>
 
 <template>
@@ -58,41 +61,32 @@ const isVertical = () => {
 
             <!-- Card content -->
             <CardContent>
-                <div :class="[isVertical() ? 'flex flex-col gap-3' : 'flex flex-col gap-3 md:flex-row md:items-stretch']">
-                    <!-- Flow items -->
-                    <template v-for="(item, index) in props.items" :key="`${getItemLabel(item)}-${index}`">
-                        <!-- Flow item -->
-                        <Card data-aos="blur-up" :data-aos-delay="100 + index * 90" class="flex-1 overflow-hidden transition-[border-color,translate] duration-300 ease-spring hover:-translate-y-0.5 hover:border-primary/40 md:flex md:items-center">
-                            <CardContent class="w-full gap-3 md:justify-center">
-                                <!-- Flow item header -->
-                                <div class="inline-flex items-center gap-3 text-xs font-semibold text-foreground">
-                                    <!-- Flow item number -->
-                                    <span class="inline-flex size-8 shrink-0 items-center justify-center rounded border border-primary/30 bg-primary/10 text-xs font-bold text-primary">
-                                        {{ index + 1 }}
-                                    </span>
+                <ol :class="['flex flex-col', !isVertical() && 'md:flex-row md:gap-4']">
+                    <!-- Flow step -->
+                    <li v-for="(item, index) in props.items"
+                        :key="`${getItemLabel(item)}-${index}`"
+                        data-aos="blur-up"
+                        :data-aos-delay="100 + index * 90"
+                        :class="['relative flex gap-4 pb-6 last:pb-0', !isVertical() && 'md:flex-1 md:flex-col md:gap-3 md:pb-0']">
+                        <!-- Step number -->
+                        <span class="relative z-10 flex size-7 shrink-0 items-center justify-center rounded border border-primary/30 bg-card text-[11px] font-semibold tabular-nums text-primary">
+                            {{ formatNumber(index) }}
+                        </span>
 
-                                    <!-- Flow item label -->
-                                    <span>{{ getItemLabel(item) }}</span>
-                                </div>
+                        <!-- Connector to the next step -->
+                        <span v-if="index < props.items.length - 1"
+                            aria-hidden="true"
+                            :class="['absolute top-8 bottom-1 left-3.5 w-px bg-border', !isVertical() && 'md:top-3.5 md:bottom-auto md:left-10 md:-right-2 md:h-px md:w-auto md:bg-linear-to-r md:from-primary/40 md:to-border']" />
 
-                                <!-- Flow item description -->
-                                <p v-if="getItemDescription(item)" class="text-xs leading-6 text-muted-foreground md:leading-5">
-                                    {{ getItemDescription(item) }}
-                                </p>
-                            </CardContent>
-                        </Card>
-
-                        <!-- Flow item separator -->
-                        <div v-if="index < props.items.length - 1" data-aos="blur-up" :data-aos-delay="140 + index * 90" class="flex items-center justify-center text-primary">
-                            <!-- Flow item separator for vertical orientation -->
-                            <HugeiconsIcon v-if="isVertical()" :icon="ArrowDown01Icon" class="size-5 shrink-0" />
-
-                            <!-- Flow item separator for horizontal orientation -->
-                            <HugeiconsIcon v-else :icon="ArrowRight01Icon" class="hidden size-5 shrink-0 md:block" />
-                            <HugeiconsIcon v-if="!isVertical()" :icon="ArrowDown01Icon" class="size-5 shrink-0 md:hidden" />
+                        <!-- Step text -->
+                        <div :class="['flex min-w-0 flex-col gap-1 pt-1', !isVertical() && 'md:pt-0']">
+                            <span class="text-xs font-semibold leading-5 text-foreground md:text-sm">{{ getItemLabel(item) }}</span>
+                            <p v-if="getItemDescription(item)" class="text-xs leading-5 text-muted-foreground">
+                                {{ getItemDescription(item) }}
+                            </p>
                         </div>
-                    </template>
-                </div>
+                    </li>
+                </ol>
             </CardContent>
         </Card>
     </div>
