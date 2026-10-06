@@ -69,8 +69,8 @@ onBeforeUnmount(() => {
                 </div>
             </nav>
 
-            <!-- Reading progress along the bottom edge of the floating bar -->
-            <div v-if="props.showProgress" :class="cn('absolute inset-x-1 bottom-0 transition-opacity duration-300', isScrolled ? 'opacity-100' : 'opacity-0')">
+            <!-- Reading progress along the bottom edge of the floating bar (edge to edge, clipped to its rounded corners) -->
+            <div v-if="props.showProgress" :class="cn('absolute inset-x-0 bottom-0 overflow-hidden rounded-b-[inherit] transition-opacity duration-300', isScrolled ? 'opacity-100' : 'opacity-0')">
                 <BlogProgressBar />
             </div>
         </div>
