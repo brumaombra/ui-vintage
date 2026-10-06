@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { NuxtImg } from '#components';
-import { ArrowUpRight01Icon } from '@hugeicons/core-free-icons';
+import { ArrowRight01Icon, Folder01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Card } from '../ui/card';
 
@@ -15,31 +15,26 @@ const props = withDefaults(defineProps<{
 </script>
 
 <template>
-    <Card interactive class="group/category h-full gap-0! overflow-hidden p-0! sm:gap-0!">
-        <div class="relative h-40 w-full overflow-hidden bg-surface">
-            <!-- Background image -->
-            <NuxtImg v-if="props.image" :src="props.image" :alt="props.name" height="225" width="400" format="avif" quality="35" :sizes="{ 480: '480px', 1280: '400px' }" loading="lazy" decoding="async" class="size-full object-cover transition-[scale] duration-700 ease-out-expo group-hover/category:scale-110" />
+    <Card class="group/category h-full gap-0! overflow-hidden p-0! transition-[translate,box-shadow] duration-300 ease-out-expo hover:-translate-y-0.5 hover:shadow-elevated-md sm:gap-0!">
+        <!-- Image -->
+        <div class="h-32 w-full overflow-hidden border-b border-border bg-surface">
+            <NuxtImg v-if="props.image" :src="props.image" :alt="props.name" height="225" width="400" format="avif" quality="35" :sizes="{ 480: '480px', 1280: '400px' }" loading="lazy" decoding="async" class="size-full object-cover transition-[scale] duration-700 ease-out-expo group-hover/category:scale-[1.03]" />
 
             <!-- Fallback when there is no image -->
-            <div v-else aria-hidden="true" class="size-full bg-[radial-gradient(circle_at_30%_20%,color-mix(in_oklab,var(--primary)_35%,transparent),transparent_65%)]" />
-
-            <!-- Legibility shade -->
-            <div aria-hidden="true" class="absolute inset-0 bg-linear-to-t from-black/80 via-black/25 to-black/0" />
-
-            <!-- Arrow that appears on hover -->
-            <span aria-hidden="true" class="absolute top-3 right-3 flex size-8 scale-75 items-center justify-center rounded border border-white/25 bg-black/30 text-white opacity-0 backdrop-blur-md transition-[opacity,scale] duration-300 ease-spring group-hover/category:scale-100 group-hover/category:opacity-100">
-                <HugeiconsIcon :icon="ArrowUpRight01Icon" class="size-4" />
-            </span>
-
-            <!-- Name and count -->
-            <div class="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-4">
-                <span class="truncate text-base font-bold text-white transition-[translate] duration-300 ease-spring group-hover/category:-translate-y-0.5">
-                    {{ props.name }}
-                </span>
-                <span class="shrink-0 rounded-sm border border-white/25 bg-white/15 px-2 py-0.5 text-xs font-bold text-white tabular-nums backdrop-blur-md">
-                    {{ props.count }}
-                </span>
+            <div v-else aria-hidden="true" class="flex size-full items-center justify-center text-primary/60">
+                <HugeiconsIcon :icon="Folder01Icon" class="size-8" />
             </div>
+        </div>
+
+        <!-- Name, post count and arrow -->
+        <div class="flex grow items-center gap-3 bg-surface px-4 py-3 transition-colors duration-200 group-hover/category:bg-primary/10">
+            <span class="min-w-0 flex-1 truncate text-sm font-semibold text-foreground transition-colors duration-200 group-hover/category:text-primary">
+                {{ props.name }}
+            </span>
+            <span class="shrink-0 rounded border border-primary/30 px-1.5 text-[11px] font-semibold leading-5 text-primary tabular-nums">
+                {{ props.count }}
+            </span>
+            <HugeiconsIcon :icon="ArrowRight01Icon" class="size-4 shrink-0 text-muted-foreground transition-[translate,color] duration-300 ease-spring group-hover/category:translate-x-1 group-hover/category:text-primary" />
         </div>
     </Card>
 </template>
