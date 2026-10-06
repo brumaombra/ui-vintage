@@ -106,7 +106,7 @@ const paginationCode = `<SimplePagination v-model:page="page" :total="240" :item
         </DemoSection>
 
         <!-- Stepper -->
-        <DemoSection id="stepper" title="Stepper" badge="New" description="Connectors fill with an expo ease as steps complete, the active step gets a glowing ring, and completed steps pop a check." :code="stepperCode">
+        <DemoSection id="stepper" title="Stepper" badge="New" description="Connectors fill with an expo ease as steps complete, the active step gets a tinted outline, and completed steps pop a check." :code="stepperCode">
             <div class="flex flex-col gap-10">
                 <SimpleStepper v-model="step" :steps="steps" />
                 <div class="flex items-center justify-between gap-3">
@@ -124,7 +124,7 @@ const paginationCode = `<SimplePagination v-model:page="page" :total="240" :item
         </DemoSection>
 
         <!-- Pagination -->
-        <DemoSection id="pagination" title="Pagination" badge="New" description="The current page pops with a glow, and arrows nudge toward their direction on hover. Ellipses collapse long ranges." :code="paginationCode" preview-class="flex flex-col items-center gap-4">
+        <DemoSection id="pagination" title="Pagination" badge="New" description="The current page pops into a solid fill, and arrows nudge toward their direction on hover. Ellipses collapse long ranges." :code="paginationCode" preview-class="flex flex-col items-center gap-4">
             <SimplePagination v-model:page="page" :total="240" :items-per-page="20" />
             <span class="text-xs text-muted-foreground">Showing {{ (page - 1) * 20 + 1 }}–{{ Math.min(page * 20, 240) }} of 240 results</span>
         </DemoSection>

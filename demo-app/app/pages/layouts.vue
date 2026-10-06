@@ -60,7 +60,7 @@ const shells = [
                 <template #card="{ item }">
                     <Card interactive class="animate-uv-fade-up">
                         <CardHeader>
-                            <div class="mb-2 flex size-9 items-center justify-center rounded border border-border bg-surface text-primary">
+                            <div class="mb-2 flex size-9 items-center justify-center rounded border border-primary/30 text-primary">
                                 <HugeiconsIcon :icon="Folder01Icon" class="size-4" />
                             </div>
                             <CardTitle>{{ item.name }}</CardTitle>
@@ -78,7 +78,7 @@ const shells = [
                     <Card interactive class="h-full">
                         <CardHeader>
                             <div class="mb-2 flex items-center justify-between">
-                                <div class="flex size-10 items-center justify-center rounded border border-border bg-surface text-primary">
+                                <div class="flex size-10 items-center justify-center rounded border border-primary/30 text-primary">
                                     <HugeiconsIcon :icon="shell.icon" class="size-5" />
                                 </div>
                                 <Badge v-if="shell.badge" :text="shell.badge" color="yellow" pulse />

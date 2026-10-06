@@ -33,7 +33,7 @@ const handleBackHome = async () => {
         <!-- Brand -->
         <template #brand>
             <div class="flex items-center gap-3">
-                <span class="flex size-9 items-center justify-center rounded border border-primary/40 bg-primary text-sm font-bold text-primary-foreground shadow-glow">
+                <span class="flex size-9 items-center justify-center rounded bg-primary text-sm font-semibold text-primary-foreground">
                     UV
                 </span>
                 <div class="text-sm font-semibold text-foreground">

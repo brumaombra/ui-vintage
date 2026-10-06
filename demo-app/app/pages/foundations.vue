@@ -39,8 +39,8 @@ const motionPlayed = ref(false);
 
 const elevations = ['shadow-elevated-sm', 'shadow-elevated-md', 'shadow-elevated-lg', 'shadow-elevated-xl', 'shadow-glow'];
 const typeScale = [
-    { utility: 'text-3xl font-bold', label: 'Display · 30px' },
-    { utility: 'text-2xl font-bold', label: 'Heading · 24px' },
+    { utility: 'text-3xl font-semibold', label: 'Display · 30px' },
+    { utility: 'text-2xl font-semibold', label: 'Heading · 24px' },
     { utility: 'text-lg font-semibold', label: 'Title · 18px' },
     { utility: 'text-sm font-semibold', label: 'Label · 14px' },
     { utility: 'text-sm', label: 'Body · 14px' },
@@ -88,7 +88,7 @@ const motionCode = `<!-- Easing utilities -->
                         <div class="text-[11px] text-muted-foreground">{{ easing.usage }}</div>
                     </div>
                     <div class="relative h-10 rounded border border-dashed border-border bg-surface/50">
-                        <div :class="['absolute top-1/2 left-1 size-8 -translate-y-1/2 rounded bg-primary shadow-glow transition-[left] duration-1000', easing.utility, motionPlayed ? 'left-[calc(100%-2.25rem)]' : 'left-1']" />
+                        <div :class="['absolute top-1/2 left-1 size-8 -translate-y-1/2 rounded bg-primary transition-[left] duration-1000', easing.utility, motionPlayed ? 'left-[calc(100%-2.25rem)]' : 'left-1']" />
                     </div>
                 </div>
                 <Button class="self-start" @click="motionPlayed = !motionPlayed">

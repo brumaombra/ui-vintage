@@ -17,8 +17,8 @@ const props = withDefaults(defineProps<{
     <header class="relative flex flex-col gap-4 pb-2 sm:flex-row sm:items-end sm:justify-between">
         <div class="flex min-w-0 items-start gap-4">
             <!-- Page icon tile -->
-            <div v-if="props.icon" class="hidden size-14 shrink-0 animate-uv-pop items-center justify-center rounded border border-primary/30 bg-primary/10 text-primary shadow-glow sm:flex">
-                <HugeiconsIcon :icon="props.icon" class="size-7" :stroke-width="1.6" />
+            <div v-if="props.icon" class="hidden size-12 shrink-0 animate-uv-pop items-center justify-center rounded border border-primary/30 text-primary sm:flex">
+                <HugeiconsIcon :icon="props.icon" class="size-6" :stroke-width="1.6" />
             </div>
 
             <div class="min-w-0">
@@ -28,7 +28,7 @@ const props = withDefaults(defineProps<{
                 </div>
 
                 <!-- Title -->
-                <h1 class="mt-1 animate-uv-fade-up text-2xl font-bold tracking-tight [animation-delay:60ms] sm:text-3xl">
+                <h1 class="mt-1 animate-uv-fade-up text-2xl font-semibold tracking-tight [animation-delay:60ms] sm:text-3xl">
                     {{ props.title }}
                 </h1>
 

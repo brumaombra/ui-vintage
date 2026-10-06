@@ -47,11 +47,11 @@ const handleSelectLanguage = async (language: string) => {
             <!-- Brand -->
             <template #sidebar-header>
                 <NuxtLink to="/" class="group/brand flex items-center gap-3 px-1">
-                    <span class="flex size-9 items-center justify-center rounded border border-primary/40 bg-primary text-sm font-bold text-primary-foreground shadow-glow transition-[rotate,scale] duration-500 ease-bounce group-hover/brand:scale-105 group-hover/brand:-rotate-6">
+                    <span class="flex size-9 items-center justify-center rounded bg-primary text-sm font-semibold text-primary-foreground">
                         UV
                     </span>
                     <span class="flex flex-col leading-tight">
-                        <span class="text-sm font-bold tracking-tight">UI Vintage</span>
+                        <span class="text-sm font-semibold tracking-tight">UI Vintage</span>
                         <span class="text-[11px] text-muted-foreground">Nuxt component library</span>
                     </span>
                 </NuxtLink>

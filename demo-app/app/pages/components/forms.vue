@@ -136,10 +136,10 @@ const dropzoneCode = `<FileDropzone v-model="files" accept="image/*,.pdf" :max-s
 
 <template>
     <div class="flex flex-col gap-12">
-        <DemoPageHeader eyebrow="Components" title="Forms" description="Every control shares the same field chrome: a soft primary focus glow, a shake on invalid input, and spring feedback on every interaction." :icon="InputTextIcon" />
+        <DemoPageHeader eyebrow="Components" title="Forms" description="Every control shares the same field chrome: a soft primary focus ring, a shake on invalid input, and spring feedback on every interaction." :icon="InputTextIcon" />
 
         <!-- Text fields -->
-        <DemoSection id="text-fields" title="Text fields" badge="Updated" description="Inputs and textareas with a focus glow. Invalid fields shake once and show animated field errors." :code="textFieldCode">
+        <DemoSection id="text-fields" title="Text fields" badge="Updated" description="Inputs and textareas with a focus ring. Invalid fields shake once and show animated field errors." :code="textFieldCode">
             <FieldGroup class="grid gap-6 md:grid-cols-2">
                 <!-- Email with validation -->
                 <Field>
@@ -175,7 +175,7 @@ const dropzoneCode = `<FileDropzone v-model="files" accept="image/*,.pdf" :max-s
         </DemoSection>
 
         <!-- Select -->
-        <DemoSection id="select" title="Select" badge="Updated" description="The trigger glows while open and its chevron flips with a spring; the checkmark pops on the selected item.">
+        <DemoSection id="select" title="Select" badge="Updated" description="The trigger keeps its focus ring while open and its chevron flips with a spring; the checkmark pops on the selected item.">
             <div class="grid gap-6 md:grid-cols-2">
                 <Field>
                     <FieldLabel>Deployment region</FieldLabel>
@@ -225,7 +225,7 @@ const dropzoneCode = `<FileDropzone v-model="files" accept="image/*,.pdf" :max-s
         </DemoSection>
 
         <!-- Checkbox and radio -->
-        <DemoSection id="checkbox-radio" title="Checkbox & radio" badge="New" description="Check marks draw themselves, the indeterminate dash sweeps in, and radio dots bounce. Card radios glow when selected." :code="checkboxCode">
+        <DemoSection id="checkbox-radio" title="Checkbox & radio" badge="New" description="Check marks draw themselves, the indeterminate dash sweeps in, and radio dots bounce. Card radios take a primary outline and tint when selected." :code="checkboxCode">
             <div class="grid gap-8 lg:grid-cols-2">
                 <div class="flex flex-col gap-5">
                     <!-- Terms -->
@@ -275,7 +275,7 @@ const dropzoneCode = `<FileDropzone v-model="files" accept="image/*,.pdf" :max-s
         </DemoSection>
 
         <!-- Switch and slider -->
-        <DemoSection id="switch-slider" title="Switch & slider" badge="Updated" description="The switch thumb squishes while pressed and springs across. Slider thumbs grow and glow as you drag.">
+        <DemoSection id="switch-slider" title="Switch & slider" badge="Updated" description="The switch thumb squishes while pressed and springs across. Slider thumbs fill with a light tint as you hover and drag.">
             <div class="grid gap-8 lg:grid-cols-2">
                 <div class="flex flex-col gap-4">
                     <div class="flex items-center justify-between gap-4 rounded border border-border bg-card p-4">

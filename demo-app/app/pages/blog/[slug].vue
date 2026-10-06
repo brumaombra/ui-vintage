@@ -185,16 +185,16 @@ definePageMeta({
 
                 <!-- Category and tags -->
                 <div class="mt-8 flex flex-wrap items-center gap-2 animate-uv-fade-up [animation-delay:60ms]">
-                    <NuxtLinkLocale v-if="post.categoryText" :to="`/blog/categories/${post.categorySlug}`" class="rounded outline-none transition-[scale] duration-300 ease-spring hover:scale-105 focus-visible:ring-[3px] focus-visible:ring-ring/45">
+                    <NuxtLinkLocale v-if="post.categoryText" :to="`/blog/categories/${post.categorySlug}`" class="rounded outline-none transition-opacity duration-150 hover:opacity-80 focus-visible:ring-[3px] focus-visible:ring-ring/45">
                         <Badge color="yellow" :text="post.categoryText" pulse />
                     </NuxtLinkLocale>
-                    <NuxtLinkLocale v-for="tag in postTags" :key="tag.slug" :to="`/blog/tags/${tag.slug}`" class="rounded outline-none transition-[scale] duration-300 ease-spring hover:scale-105 focus-visible:ring-[3px] focus-visible:ring-ring/45">
+                    <NuxtLinkLocale v-for="tag in postTags" :key="tag.slug" :to="`/blog/tags/${tag.slug}`" class="rounded outline-none transition-opacity duration-150 hover:opacity-80 focus-visible:ring-[3px] focus-visible:ring-ring/45">
                         <Badge :text="`#${tag.name}`" />
                     </NuxtLinkLocale>
                 </div>
 
                 <!-- Title (each word rises in) -->
-                <h1 class="mt-5 text-3xl leading-[1.08] font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl">
+                <h1 class="mt-5 text-3xl leading-[1.08] font-semibold tracking-tight text-foreground sm:text-4xl md:text-5xl">
                     <template v-for="(word, index) in titleWords" :key="`${word}-${index}`">
                         <span class="inline-block animate-uv-word-in" :style="{ animationDelay: `${120 + Math.min(index, 12) * 50}ms` }">{{ word }}</span>{{ index < titleWords.length - 1 ? ' ' : '' }}
                     </template>

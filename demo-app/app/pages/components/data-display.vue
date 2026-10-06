@@ -210,7 +210,7 @@ const avatarCode = `<Avatar size="lg" status="online">
                 </div>
                 <div class="flex flex-col items-center gap-3 rounded border border-dashed border-border py-6">
                     <span class="text-[11px] font-semibold tracking-[0.18em] text-muted-foreground uppercase">Total processed</span>
-                    <AnimatedNumber :value="stats.revenue * 24" :format-options="{ style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }" class="text-4xl font-bold tracking-tight sm:text-5xl" />
+                    <AnimatedNumber :value="stats.revenue * 24" :format-options="{ style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }" class="text-4xl font-semibold tracking-tight sm:text-5xl" />
                     <Button variant="secondary" size="sm" @click="randomizeStats">
                         <HugeiconsIcon :icon="RefreshIcon" />
                         Randomize values
@@ -220,12 +220,12 @@ const avatarCode = `<Avatar size="lg" status="online">
         </DemoSection>
 
         <!-- Cards -->
-        <DemoSection id="cards" title="Cards" badge="Updated" description="Interactive cards lift and follow the pointer with a soft spotlight. Tone variants and InfoCard are available for status surfaces.">
+        <DemoSection id="cards" title="Cards" badge="Updated" description="Interactive cards lift gently with a soft shadow. Tone variants and InfoCard are available for status surfaces.">
             <div class="flex flex-col gap-4">
                 <div class="grid gap-4 md:grid-cols-3">
                     <Card v-for="card in [{ icon: Rocket01Icon, title: 'Deployments', text: 'Ship previews for every branch.' }, { icon: ShieldUserIcon, title: 'Access control', text: 'Roles, SSO and audit logs.' }, { icon: Invoice01Icon, title: 'Billing', text: 'Usage-based invoices in any currency.' }]" :key="card.title" interactive>
                         <CardHeader>
-                            <div class="mb-2 flex size-10 items-center justify-center rounded border border-border bg-surface text-primary">
+                            <div class="mb-2 flex size-10 items-center justify-center rounded border border-primary/30 text-primary">
                                 <HugeiconsIcon :icon="card.icon" class="size-5" />
                             </div>
                             <CardTitle>{{ card.title }}</CardTitle>
@@ -289,7 +289,7 @@ const avatarCode = `<Avatar size="lg" status="online">
         </DemoSection>
 
         <!-- Progress and skeleton -->
-        <DemoSection id="progress-skeleton" title="Progress & skeleton" badge="Updated" description="Progress fills with an expo ease and a moving sheen; an indeterminate mode is built in. Skeletons shimmer instead of blinking.">
+        <DemoSection id="progress-skeleton" title="Progress & skeleton" badge="Updated" description="Progress fills with a smooth expo ease, and an indeterminate mode is built in. Skeletons shimmer instead of blinking.">
             <div class="grid gap-8 lg:grid-cols-2">
                 <div class="flex flex-col gap-6">
                     <ProgressComponent title="Uploading assets" :value="uploadProgress" :max="100" bottom-left-label="design-tokens.zip" :bottom-right-label="uploadProgress >= 100 ? 'Done' : `${uploadProgress}%`" />

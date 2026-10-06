@@ -60,7 +60,7 @@ onBeforeUnmount(() => observer?.disconnect());
             <div class="min-w-0">
                 <div class="flex items-center gap-2">
                     <!-- Title with anchor link -->
-                    <h2 class="group/anchor flex items-center gap-2 text-base font-bold tracking-tight sm:text-lg">
+                    <h2 class="group/anchor flex items-center gap-2 text-base font-semibold tracking-tight sm:text-lg">
                         {{ props.title }}
                         <a :href="`#${props.id}`" class="text-muted-foreground opacity-0 transition-opacity duration-150 group-hover/anchor:opacity-100 hover:text-primary" :aria-label="`Link to ${props.title}`">
                             <HugeiconsIcon :icon="Link01Icon" class="size-4" />

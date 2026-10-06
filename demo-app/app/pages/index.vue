@@ -94,16 +94,13 @@ onMounted(() => {
     <div class="flex flex-col gap-16">
         <!-- Hero -->
         <section class="relative isolate flex flex-col items-center gap-6 pt-6 text-center sm:pt-12">
-            <!-- Ambient glow -->
-            <div class="pointer-events-none absolute top-0 left-1/2 -z-10 h-64 w-[38rem] max-w-full -translate-x-1/2 rounded-full bg-primary/12 blur-[90px]" />
-
             <!-- Announcement -->
             <button type="button" class="group/announce animate-uv-fade-up cursor-pointer rounded-full outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45" @click="navigateTo('/foundations#motion')">
-                <Badge text="New motion system · 20 new components" color="yellow" pulse class="rounded-full px-3 py-1 transition-[scale] duration-300 ease-spring group-hover/announce:scale-105" />
+                <Badge text="New motion system · 20 new components" color="yellow" pulse class="rounded-full px-3 py-1 transition-colors duration-150 group-hover/announce:border-yellow-300 dark:group-hover/announce:border-yellow-700/60" />
             </button>
 
             <!-- Title -->
-            <h1 class="max-w-3xl animate-uv-fade-up text-4xl leading-[1.05] font-bold tracking-tight [animation-delay:80ms] sm:text-6xl">
+            <h1 class="max-w-3xl animate-uv-fade-up text-4xl leading-[1.05] font-semibold tracking-tight [animation-delay:80ms] sm:text-6xl">
                 Interfaces that feel
                 <span class="relative inline-block text-primary">
                     alive
@@ -182,9 +179,9 @@ onMounted(() => {
                                 <Badge text="+12.4%" color="green" :icon="ChartLineData02Icon" />
                             </div>
                         </CardHeader>
-                        <CardContent>
-                            <!-- Bar chart -->
-                            <div class="flex h-44 items-end gap-1.5 sm:gap-2.5">
+                        <CardContent class="flex-1">
+                            <!-- Bar chart (fills the card when the side column is taller) -->
+                            <div class="flex min-h-44 flex-1 items-end gap-1.5 sm:gap-2.5">
                                 <div v-for="(value, index) in revenueBars" :key="index" class="group/bar relative flex h-full flex-1 items-end">
                                     <div class="w-full origin-bottom rounded-t-sm bg-primary/25 transition-[scale,background-color] duration-700 ease-spring group-hover/bar:bg-primary" :style="{ height: `${value}%`, scale: chartReady ? '1 1' : '1 0', transitionDelay: `${index * 45}ms` }" />
                                     <span class="pointer-events-none absolute -top-6 left-1/2 -translate-x-1/2 rounded-sm bg-foreground px-1.5 py-0.5 text-[10px] font-semibold text-background opacity-0 transition-[opacity,translate] duration-200 group-hover/bar:-translate-y-1 group-hover/bar:opacity-100">
@@ -300,7 +297,7 @@ onMounted(() => {
                 <NuxtLink v-for="page in explorePages" :key="page.id" :to="page.to" class="group/explore rounded outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45">
                     <Card interactive class="h-full gap-3!">
                         <CardHeader>
-                            <div class="mb-2 flex size-10 items-center justify-center rounded border border-border bg-surface text-primary transition-[rotate,scale] duration-500 ease-bounce group-hover/explore:scale-110 group-hover/explore:-rotate-6">
+                            <div class="mb-2 flex size-10 items-center justify-center rounded border border-primary/30 text-primary transition-colors duration-150 group-hover/explore:border-primary/60">
                                 <HugeiconsIcon :icon="page.icon" class="size-5" />
                             </div>
                             <CardTitle class="flex items-center gap-2">

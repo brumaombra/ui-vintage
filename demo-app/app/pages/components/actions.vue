@@ -103,7 +103,7 @@ const kbdCode = `<KbdGroup :keys="['mod', 'shift', 'p']" />
         <DemoPageHeader eyebrow="Components" title="Actions" description="Buttons, segmented controls, menus, and keyboard hints. Every press has spring feedback, and every async action has a loading state." :icon="Cursor01Icon" />
 
         <!-- Button -->
-        <DemoSection id="button" title="Button" badge="Updated" description="Spring press feedback, a sheen sweep on primary buttons, and a new loading prop that keeps the width stable." :code="buttonCode">
+        <DemoSection id="button" title="Button" badge="Updated" description="Spring press feedback, flat tones for every intent, and a loading prop that keeps the width stable." :code="buttonCode">
             <div class="flex flex-col gap-6">
                 <!-- Variants -->
                 <div class="flex flex-wrap items-center gap-3">

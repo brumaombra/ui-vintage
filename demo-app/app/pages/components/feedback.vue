@@ -231,7 +231,7 @@ const dialogCode = `const confirmed = await showConfirmDialog({
         </DemoSection>
 
         <!-- Empty and loading states -->
-        <DemoSection id="states" title="Empty & loading states" description="Drop-in cards for zero-data and loading moments. The empty icon floats gently.">
+        <DemoSection id="states" title="Empty & loading states" description="Drop-in cards for zero-data and loading moments, each with a calm icon tile.">
             <div class="grid gap-4 md:grid-cols-2">
                 <EmptyStateCard title="No results" description="Try a different search term or clear your filters." :icon="Search01Icon">
                     <template #action>
