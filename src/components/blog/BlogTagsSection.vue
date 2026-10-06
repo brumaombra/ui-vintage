@@ -15,7 +15,7 @@ const props = withDefaults(defineProps<{
     <div v-if="props.tags.length" class="flex flex-wrap gap-2">
         <!-- Tag chip -->
         <span v-for="(tag, index) in props.tags" :key="tag.slug" data-aos="blur-up" :data-aos-delay="Math.min(index * 40, 400)" class="inline-flex">
-            <NuxtLinkLocale :to="`/blog/tags/${tag.slug}`" class="group/tag inline-flex items-stretch overflow-hidden rounded border border-border text-xs outline-none transition-colors duration-150 hover:border-primary/40 focus-visible:ring-[3px] focus-visible:ring-ring/45 sm:text-sm">
+            <NuxtLinkLocale :to="`/blog/tags/${tag.slug}`" class="group/tag inline-flex items-stretch overflow-hidden rounded border border-border text-xs shadow-elevated-sm outline-none transition-colors duration-150 hover:border-primary/40 focus-visible:ring-[3px] focus-visible:ring-ring/45 sm:text-sm">
                 <!-- Name -->
                 <span class="inline-flex items-center gap-1.5 bg-card px-3 py-1.5 font-medium text-foreground transition-colors duration-150 group-hover/tag:bg-primary/10 group-hover/tag:text-primary">
                     <span aria-hidden="true" class="text-primary">#</span>

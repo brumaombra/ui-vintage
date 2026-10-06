@@ -187,7 +187,7 @@ const props = defineProps<{
 .blog-content :deep(img:not(.not-prose):not(.not-prose *)) {
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
-    box-shadow: var(--uv-shadow-md);
+    box-shadow: var(--uv-shadow-sm);
 }
 
 /* Plain markdown tables */
