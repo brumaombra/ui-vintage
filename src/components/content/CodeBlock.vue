@@ -63,7 +63,8 @@ const highlightCode = async () => {
     try {
         const html = await codeToHtml(displayedCode.value, {
             lang: props.language,
-            theme: 'github-dark'
+            themes: { light: 'github-light', dark: 'github-dark' },
+            defaultColor: false
         });
 
         if (requestId === highlightRequest) {
@@ -92,24 +93,24 @@ const copyCode = async () => {
 
 <template>
     <div class="not-prose my-6 sm:my-8">
-        <div data-aos="blur-up" data-code-window class="overflow-hidden rounded border border-[#2b2b2b] bg-[#1f1f1f] text-[#cccccc] shadow-elevated-sm dark:border-border">
+        <div data-aos="blur-up" data-code-window class="overflow-hidden rounded border border-border bg-card text-foreground shadow-elevated-sm">
             <!-- Window title bar -->
-            <div class="relative flex h-8 items-center border-b border-[#2b2b2b] bg-[#181818] px-3">
+            <div class="relative flex h-8 items-center border-b border-border bg-surface px-3">
                 <!-- Traffic lights -->
                 <span aria-hidden="true" class="flex items-center gap-2">
-                    <span class="size-3 rounded-full bg-[#ff5f57]" />
-                    <span class="size-3 rounded-full bg-[#febc2e]" />
-                    <span class="size-3 rounded-full bg-[#28c840]" />
+                    <span class="size-3 rounded-full bg-destructive/85" />
+                    <span class="size-3 rounded-full bg-warning/85" />
+                    <span class="size-3 rounded-full bg-success/85" />
                 </span>
 
                 <!-- Window title -->
-                <div class="pointer-events-none absolute inset-x-24 truncate text-center text-xs text-[#9d9d9d]">{{ resolvedTitle }}</div>
+                <div class="pointer-events-none absolute inset-x-24 truncate text-center text-xs text-muted-foreground">{{ resolvedTitle }}</div>
 
                 <!-- Copy code button -->
                 <Button v-if="props.copyable"
                     variant="ghost"
                     size="icon"
-                    class="ml-auto size-6 text-[#9d9d9d] hover:bg-white/10 hover:text-white"
+                    class="ml-auto size-6 text-muted-foreground hover:bg-accent hover:text-foreground"
                     :aria-label="t('uiVintage.code.copy')"
                     :title="t('uiVintage.code.copy')"
                     :disabled="!displayedCode"
@@ -119,22 +120,22 @@ const copyCode = async () => {
             </div>
 
             <!-- Editor tabs -->
-            <div class="flex h-9 items-stretch border-b border-[#2b2b2b] bg-[#181818]">
+            <div class="flex h-9 items-stretch border-b border-border bg-surface">
                 <!-- Active tab -->
-                <div class="flex min-w-0 items-center gap-2 border-r border-[#2b2b2b] border-t-2 border-t-primary bg-[#1f1f1f] px-3 text-[#ffffff]">
+                <div class="flex min-w-0 items-center gap-2 -mb-px border-r border-border border-t-2 border-t-primary bg-card px-3 text-foreground">
                     <HugeiconsIcon :icon="CodeIcon" class="size-3.5 shrink-0 text-primary" />
                     <span class="truncate text-xs">{{ resolvedTitle }}</span>
                 </div>
             </div>
 
             <!-- Code content -->
-            <div v-if="highlightedCode" class="code-block-content overflow-x-auto" v-html="highlightedCode" />
+            <div v-if="highlightedCode" class="code-block-content uv-code-block-content overflow-x-auto" v-html="highlightedCode" />
             <div v-else class="code-block-content overflow-x-auto">
                 <pre><code><template v-for="(line, index) in codeLines" :key="index"><span class="line">{{ line }}</span>{{ index < codeLines.length - 1 ? '\n' : '' }}</template></code></pre>
             </div>
 
             <!-- Status bar -->
-            <div class="flex h-6 items-center justify-between gap-3 border-t border-[#2b2b2b] bg-[#181818] px-3 text-[11px] text-[#9d9d9d]">
+            <div class="flex h-6 items-center justify-between gap-3 border-t border-border bg-surface px-3 text-[11px] text-muted-foreground">
                 <span class="truncate">Ln {{ codeLines.length }}, Col 1</span>
                 <span class="flex shrink-0 items-center gap-3">
                     <span>UTF-8</span>
@@ -151,7 +152,7 @@ const copyCode = async () => {
     min-width: max-content;
     padding: 0.75rem 1rem 0.75rem 0;
     background-color: transparent !important;
-    color: #e1e4e8;
+    color: var(--foreground);
     font-size: 0.75rem;
     line-height: 1.5rem;
     counter-reset: line;
@@ -166,7 +167,7 @@ const copyCode = async () => {
     margin-right: 1rem;
     padding-right: 0.25rem;
     text-align: right;
-    color: #6e7681;
+    color: color-mix(in oklab, var(--muted-foreground) 65%, transparent);
     user-select: none;
 }
 
@@ -175,5 +176,16 @@ const copyCode = async () => {
         padding: 1rem 1.25rem 1rem 0;
         font-size: 0.875rem;
     }
+}
+</style>
+
+<style>
+/* Shiki emits both themes as CSS variables; pick the one matching the library's `.dark` class */
+.uv-code-block-content .shiki span {
+    color: var(--shiki-light);
+}
+
+.dark .uv-code-block-content .shiki span {
+    color: var(--shiki-dark);
 }
 </style>
