@@ -9,16 +9,18 @@ const props = withDefaults(defineProps<{
 </script>
 
 <template>
-    <div data-aos="blur-up" class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between md:mb-8">
+    <div data-aos="blur-up" class="relative mb-6 flex flex-col gap-3 border-b border-border pb-4 sm:flex-row sm:items-end sm:justify-between md:mb-8">
+        <!-- Primary segment at the start of the rule -->
+        <span aria-hidden="true" class="absolute -bottom-px left-0 h-0.5 w-12 bg-primary" />
+
         <div class="min-w-0">
-            <!-- Title with accent bar -->
-            <h2 class="flex items-center gap-3 text-xl font-bold tracking-tight text-foreground md:text-2xl">
-                <span aria-hidden="true" class="h-6 w-1 shrink-0 rounded-full bg-primary shadow-glow md:h-7" />
+            <!-- Title -->
+            <h2 class="text-xl font-semibold tracking-tight text-foreground md:text-2xl">
                 {{ props.title }}
             </h2>
 
             <!-- Description -->
-            <p v-if="props.description" class="mt-2 max-w-2xl text-xs leading-6 text-muted-foreground md:text-sm">
+            <p v-if="props.description" class="mt-1 max-w-2xl text-xs leading-6 text-muted-foreground md:text-sm">
                 {{ props.description }}
             </p>
         </div>
