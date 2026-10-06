@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { computed, nextTick, onMounted, onUnmounted, ref, useId, watch } from 'vue';
+import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { ArrowDown01Icon, ArrowRight01Icon, Bookmark01Icon, Cancel01Icon } from '@hugeicons/core-free-icons';
+import { ArrowRight01Icon, Bookmark01Icon, Cancel01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
+import { Accordion } from '../ui/accordion';
 import { Button } from '../ui/button';
-import { Card } from '../ui/card';
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '../ui/sheet';
 
 interface BlogTocLink {
@@ -43,9 +43,7 @@ const MAX_HEADING_OBSERVER_RETRIES = 20;
 const MOBILE_CLOSE_SCROLL_DELAY_MS = 320;
 const ACTIVE_HEADING_OFFSET_PX = 120;
 
-const inlineListId = useId();
 const inlineRef = ref<HTMLElement | null>(null);
-const isInlineOpen = ref(false);
 const mobileTriggerRef = ref<HTMLElement | null>(null);
 const isDesktop = ref(false);
 const isDocked = ref(false);
@@ -352,37 +350,27 @@ onUnmounted(() => {
 
 <template>
     <div v-if="headings.length > 0">
-        <!-- In-flow collapsible card; replaced by the mobile control after it scrolls away -->
+        <!-- In-flow accordion; replaced by the mobile control after it scrolls away -->
         <div ref="inlineRef" class="mb-6" :aria-hidden="isDocked" :inert="isDocked">
-            <Card class="gap-0! overflow-hidden p-0! sm:gap-0!">
-                <!-- Header -->
-                <button type="button" :aria-expanded="isInlineOpen" :aria-controls="inlineListId" class="group/toc flex w-full cursor-pointer items-center gap-3 px-5 py-3.5 text-left outline-none focus-visible:bg-surface focus-visible:ring-[3px] focus-visible:ring-inset focus-visible:ring-ring/40" @click="isInlineOpen = !isInlineOpen">
-                    <span class="flex size-7 shrink-0 items-center justify-center rounded border border-primary/30 text-primary">
-                        <HugeiconsIcon :icon="Bookmark01Icon" class="size-3.5" />
-                    </span>
-                    <span class="min-w-0 truncate text-sm font-semibold text-foreground">{{ tocTitle }}</span>
-                    <span class="ml-auto shrink-0 text-xs text-muted-foreground">{{ tocSections }}</span>
-                    <HugeiconsIcon :icon="ArrowDown01Icon" :class="['size-4 shrink-0 text-muted-foreground transition-[rotate,color] duration-[420ms] ease-spring group-hover/toc:text-primary', isInlineOpen && 'rotate-180 text-primary']" />
-                </button>
+            <Accordion :title="tocTitle" :icon="Bookmark01Icon">
+                <!-- Section count -->
+                <template #trailing>
+                    <span class="shrink-0 text-xs text-muted-foreground">{{ tocSections }}</span>
+                </template>
 
-                <!-- Collapsible list -->
-                <div :id="inlineListId" role="region" :aria-hidden="!isInlineOpen" :inert="!isInlineOpen || undefined" :class="['grid transition-[grid-template-rows,opacity] duration-[380ms] ease-out-expo', isInlineOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0']">
-                    <div class="overflow-hidden">
-                        <nav :aria-label="tocTitle" class="border-t border-border px-5 py-4">
-                            <ol>
-                                <li v-for="heading in headings" :key="`inline-${heading.id}`" class="relative border-l border-border">
-                                    <!-- Active marker on the track -->
-                                    <span aria-hidden="true" :class="['absolute inset-y-1 -left-px w-0.5 origin-center bg-primary transition-transform duration-300 ease-spring', heading.id === activeHeadingId ? 'scale-y-100' : 'scale-y-0']" />
-                                    <button type="button" :class="getHeadingButtonClasses(heading.level, heading.id === activeHeadingId)" :aria-current="heading.id === activeHeadingId ? 'location' : undefined" @click="scrollToHeading(heading.id)">
-                                        <span v-if="heading.number" :class="['w-5 shrink-0 text-[11px] leading-5 tabular-nums transition-colors', heading.id === activeHeadingId ? 'text-primary' : 'text-muted-foreground']">{{ heading.number }}</span>
-                                        <span>{{ heading.text }}</span>
-                                    </button>
-                                </li>
-                            </ol>
-                        </nav>
-                    </div>
-                </div>
-            </Card>
+                <nav :aria-label="tocTitle">
+                    <ol>
+                        <li v-for="heading in headings" :key="`inline-${heading.id}`" class="relative border-l border-border">
+                            <!-- Active marker on the track -->
+                            <span aria-hidden="true" :class="['absolute inset-y-1 -left-px w-0.5 origin-center bg-primary transition-transform duration-300 ease-spring', heading.id === activeHeadingId ? 'scale-y-100' : 'scale-y-0']" />
+                            <button type="button" :class="getHeadingButtonClasses(heading.level, heading.id === activeHeadingId)" :aria-current="heading.id === activeHeadingId ? 'location' : undefined" @click="scrollToHeading(heading.id)">
+                                <span v-if="heading.number" :class="['w-5 shrink-0 text-[11px] leading-5 tabular-nums transition-colors', heading.id === activeHeadingId ? 'text-primary' : 'text-muted-foreground']">{{ heading.number }}</span>
+                                <span>{{ heading.text }}</span>
+                            </button>
+                        </li>
+                    </ol>
+                </nav>
+            </Accordion>
         </div>
 
         <Teleport to="body">

@@ -1769,7 +1769,7 @@ import { Accordion } from '@brumaombra/ui-vintage/accordion';
 | `class` | `HTMLAttributes['class']` |  |
 
 - **Emits:** `update:open` (value: boolean).
-- **Slots:** `default`.
+- **Slots:** `trailing`, `default`.
 
 ---
 
