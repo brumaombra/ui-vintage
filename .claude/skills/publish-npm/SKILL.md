@@ -64,10 +64,10 @@ git push --follow-tags
 
 ## 4. Automatic publish flow
 
-The GitHub Actions workflow in `.github/workflows/publish-npm.yml` runs on every pushed branch and publishes when you push a tag like `v0.1.1`. It has two jobs:
+The GitHub Actions workflow in `.github/workflows/publish-npm.yml` runs when you push a tag like `v0.1.1`. It has two jobs:
 
-1. `test` (every branch and tag): installs the library and the demo app with `npm ci`, runs `npm run typecheck`, checks that `COMPONENTS.md` is up to date with `npm run docs:components:check`, and runs `npm test`
-2. `publish` (version tags only, after `test` passes): installs with `npm ci`, verifies the tag matches `package.json`, inspects the tarball with `npm pack --dry-run`, publishes to npm, and creates a GitHub Release
+1. `test`: installs the library and the demo app with `npm ci`, runs `npm run typecheck`, checks that `COMPONENTS.md` is up to date with `npm run docs:components:check`, and runs `npm test`
+2. `publish` (only after `test` passes): installs with `npm ci`, verifies the tag matches `package.json`, inspects the tarball with `npm pack --dry-run`, publishes to npm, and creates a GitHub Release
 
 For trusted publishing, configure npm to trust this GitHub repository before using the workflow.
 

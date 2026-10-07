@@ -365,7 +365,7 @@ npm --prefix demo-app run build
 
 The tests live in `demo-app/tests`: `unit` covers the helpers, the dialog and toast state, theme storage, and the locale files in plain Node, while `app` mounts the components inside the demo Nuxt app with `@nuxt/test-utils`.
 
-There is no build step: the published files are `module.mjs`, `src/`, `COMPONENTS.md`, and `AGENTS.md`. The GitHub Actions workflow runs the type check, the catalog check, and the tests on every pushed branch, and publishes to npm only when a version tag passes them. Before opening a pull request or publishing, run the same checks locally:
+There is no build step: the published files are `module.mjs`, `src/`, `COMPONENTS.md`, and `AGENTS.md`. When a version tag is pushed, the GitHub Actions workflow runs the type check, the catalog check, and the tests, and publishes to npm only if they pass. Before opening a pull request or publishing, run the same checks locally:
 
 ```bash
 # Type-check the published TypeScript and Vue source
