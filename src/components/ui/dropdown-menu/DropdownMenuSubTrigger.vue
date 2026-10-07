@@ -22,7 +22,7 @@ const forwardedProps = useForwardProps(delegatedProps);
     <DropdownMenuSubTrigger data-slot="dropdown-menu-sub-trigger" :data-inset="props.inset ? '' : undefined" v-bind="forwardedProps" :class="cn(
         'group/dropdown-sub-trigger',
         dropdownMenuItemClass,
-        'data-[state=open]:bg-accent data-[state=open]:text-foreground',
+        'data-[state=open]:bg-accent data-[state=open]:text-foreground data-[state=open]:before:scale-y-100',
         props.class
     )
         ">

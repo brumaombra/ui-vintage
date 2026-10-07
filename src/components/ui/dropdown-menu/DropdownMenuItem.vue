@@ -25,7 +25,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 <template>
     <DropdownMenuItem data-slot="dropdown-menu-item" :data-inset="props.inset ? '' : undefined" :data-variant="props.variant" v-bind="forwarded" :class="cn(
         dropdownMenuItemClass,
-        props.variant === 'destructive' && 'text-destructive data-highlighted:bg-destructive/10 data-highlighted:text-destructive',
+        props.variant === 'destructive' && 'text-destructive before:bg-destructive data-highlighted:bg-destructive/10 data-highlighted:text-destructive',
         props.class
     )
         ">

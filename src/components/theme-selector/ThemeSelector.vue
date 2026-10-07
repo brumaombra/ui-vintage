@@ -98,8 +98,8 @@ onUnmounted(() => {
         <!-- Theme options -->
         <PopoverContent side="bottom" align="end" :side-offset="8" class="w-44 p-0!">
             <Command :model-value="currentTheme">
-                <CommandList>
-                    <CommandGroup :heading="t('uiVintage.theme.title')">
+                <CommandList :aria-label="t('uiVintage.theme.title')">
+                    <CommandGroup :heading="t('uiVintage.theme.title')" stagger>
                         <CommandItem v-for="option in themeOptions" :key="option.key" :value="option.key" @select="handleSelectTheme(option.key)">
                             <HugeiconsIcon :icon="option.icon" class="size-4" />
                             <span class="flex-1">{{ option.label }}</span>

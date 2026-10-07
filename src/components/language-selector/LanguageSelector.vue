@@ -146,8 +146,8 @@ const handleSelectLanguage = (language: string) => {
         <!-- Popover content with language options -->
         <PopoverContent side="bottom" align="end" :side-offset="8" class="w-44 p-0!">
             <Command :model-value="props.modelValue">
-                <CommandList>
-                    <CommandGroup :heading="t('uiVintage.language.title')">
+                <CommandList :aria-label="t('uiVintage.language.title')">
+                    <CommandGroup :heading="t('uiVintage.language.title')" stagger>
                         <CommandItem v-for="option in normalizedLanguages" :key="option.code" :value="option.code" @select="handleSelectLanguage(option.code)">
                             <component :is="resolveFlagComponent(option.code)" class="h-4 w-[1.35rem] rounded-[2px]" />
                             <span class="flex-1">{{ option.label }}</span>

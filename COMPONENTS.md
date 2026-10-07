@@ -2389,6 +2389,7 @@ import { Command, CommandDialog, CommandEmpty, CommandGroup, CommandInput, Comma
 | --- | --- | --- |
 | `class` | `HTMLAttributes['class']` |  |
 | `heading` | `string` |  |
+| `stagger` | `boolean` |  |
 
 - **Also accepts** all props of Reka `ListboxGroupProps`.
 - **Slots:** `default`.
