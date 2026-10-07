@@ -37,7 +37,7 @@ npm run typecheck
 # Fail when COMPONENTS.md is stale (regenerate with `npm run docs:components` and commit it)
 npm run docs:components:check
 
-# Inspect the tarball: it must contain only src/, module.mjs, COMPONENTS.md, skills/, README.md, LICENSE, and package.json
+# Inspect the tarball: it must contain only src/, module.mjs, COMPONENTS.md, AGENTS.md, README.md, LICENSE, and package.json
 npm pack --dry-run
 ```
 

@@ -30,7 +30,7 @@
         "src",
         "module.mjs",
         "COMPONENTS.md",
-        "skills"
+        "AGENTS.md"
     ],
     "exports": {
         ".": {

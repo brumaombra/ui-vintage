@@ -55,7 +55,7 @@ UI Vintage is a Nuxt 4 module and component library for dashboards, forms, landi
 - **Promise-based flows:** `showConfirmDialog`, `showMessageDialog`, stacked and swipeable `showMessageToast`, and a shared busy overlay with `setBusy`.
 - **A complete blog** for Nuxt Content: hero header, featured carousel, post header, table of contents, share sidebar, FAQ, reading progress, and VS Code-style code blocks.
 - **Localization** in English, Italian, French, Spanish, German, Portuguese, Chinese, Japanese, and Russian.
-- **Generated component catalog** ([`COMPONENTS.md`](COMPONENTS.md)) and an AI assistant skill that ship inside the package.
+- **Ready for AI coding agents:** a generated component catalog ([`COMPONENTS.md`](COMPONENTS.md)) and agent instructions ([`AGENTS.md`](AGENTS.md)) ship inside the package.
 
 ## Installation
 
@@ -274,16 +274,25 @@ Every screenshot comes from the [demo app](#demo-app), and each one follows your
 
 [`COMPONENTS.md`](COMPONENTS.md) documents every entry point: its import line, props and defaults, events, slots, helpers, and examples. It is generated from the source and ships inside the package, so your app can always read the version it installed at `node_modules/@brumaombra/ui-vintage/COMPONENTS.md`.
 
-### AI assistant skill
+### Using UI Vintage with AI coding agents
 
-The package ships a skill that teaches coding assistants to reuse UI Vintage and to read the catalog before writing UI. To enable it with Claude Code, copy it into your app:
+The package ships [`AGENTS.md`](AGENTS.md), a short set of instructions that teaches coding agents to reuse UI Vintage: read the catalog before writing UI, pick the right component, follow the library conventions, and check the result.
 
-```bash
-mkdir -p .claude/skills
-cp -r node_modules/@brumaombra/ui-vintage/skills/ui-vintage .claude/skills/
-```
+Point your agent to it from your app's own instructions file, so it always reads the version you installed:
 
-The skill only points to `COMPONENTS.md`, so it stays valid when you update the package.
+- **Codex, Cursor, GitHub Copilot, Gemini, and other tools that read `AGENTS.md`:** add this line to the `AGENTS.md` at the root of your app:
+
+  ```md
+  Before writing UI, read and follow node_modules/@brumaombra/ui-vintage/AGENTS.md.
+  ```
+
+- **Claude Code:** import it in your app's `CLAUDE.md`:
+
+  ```md
+  @node_modules/@brumaombra/ui-vintage/AGENTS.md
+  ```
+
+Both the instructions and the catalog update with the package, so you never need to copy them again.
 
 ## Theming
 
@@ -352,7 +361,7 @@ npm --prefix demo-app run build
 
 ## Development
 
-There is no build step: the published files are `module.mjs`, `src/`, `COMPONENTS.md`, and `skills/`. Before opening a pull request or publishing, run:
+There is no build step: the published files are `module.mjs`, `src/`, `COMPONENTS.md`, and `AGENTS.md`. Before opening a pull request or publishing, run:
 
 ```bash
 # Type-check the published TypeScript and Vue source
