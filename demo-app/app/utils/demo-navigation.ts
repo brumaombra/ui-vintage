@@ -133,6 +133,7 @@ export const demoNavigation: DemoNavigationGroup[] = [{
             { id: 'dialog-flows', title: 'Dialog flows', keywords: 'confirm message promise' },
             { id: 'busy', title: 'Busy overlay & spinner', keywords: 'loading' },
             { id: 'alerts', title: 'Alerts', keywords: 'callout banner' },
+            { id: 'cookie-consent', title: 'Cookie consent', keywords: 'gdpr privacy banner' },
             { id: 'states', title: 'Empty & loading states', keywords: 'placeholder' }
         ]
     }]
@@ -148,6 +149,7 @@ export const demoNavigation: DemoNavigationGroup[] = [{
         sections: [
             { id: 'page-header', title: 'Page header', keywords: 'title' },
             { id: 'card-grid', title: 'Card grid', keywords: 'load more list' },
+            { id: 'theme-logo', title: 'Theme-aware logo', keywords: 'dark mode brand image' },
             { id: 'shells', title: 'Application shells', keywords: 'dashboard landing sidebar error page' }
         ]
     }, {

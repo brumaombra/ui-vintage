@@ -59,9 +59,7 @@
         "allPostsDescription": "Everything we have published, newest first.",
         "categoriesDescription": "Jump straight to the topics you care about.",
         "tagsDescription": "Smaller threads that run across categories.",
-        "viewAll": "View all",
-        "minRead": "{minutes} min read",
-        "backToBlog": "Back to the blog"
+        "viewAll": "View all"
     },
     "navigation": {
         "breadcrumbs": {

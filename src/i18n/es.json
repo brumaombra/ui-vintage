@@ -3,6 +3,7 @@
         "common": {
             "breadcrumb": "Navegación de migas de pan",
             "more": "Más",
+            "home": "Inicio",
             "empty": {
                 "title": "Todavia no hay nada aqui",
                 "description": "No hay contenido para mostrar en este momento."

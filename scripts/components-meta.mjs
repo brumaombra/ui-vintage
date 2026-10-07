@@ -3,7 +3,7 @@
 
 export const categories = [
     { id: 'actions', title: 'Actions', description: 'Buttons, segmented controls, menus, and keyboard hints.' },
-    { id: 'forms', title: 'Forms', description: 'Inputs, pickers, and form layout. Text-like controls share the `uv-field` focus glow and shake on `aria-invalid`.' },
+    { id: 'forms', title: 'Forms', description: 'Inputs, pickers, and form layout. Text-like controls share the `uv-field` focus ring and shake on `aria-invalid`.' },
     { id: 'data', title: 'Data display', description: 'Surfaces, tables, stats, and status indicators.' },
     { id: 'navigation', title: 'Navigation', description: 'Tabs, steps, pagination, disclosures, and sidebars.' },
     { id: 'overlays', title: 'Overlays', description: 'Modals, sheets, and floating surfaces built on Reka UI.' },
@@ -18,7 +18,7 @@ export const entries = {
 
     'button': {
         category: 'actions',
-        description: 'Button with solid, outline, ghost, link, and tone variants. Spring press feedback, a sheen on primary buttons, and a `loading` state that keeps the width stable. Use `as-child` to render a link.',
+        description: 'Button with primary, secondary, ghost, link, and tone variants. Spring press feedback and a `loading` state that keeps the width stable. Use `as-child` to render a link.',
         example: `
 <Button variant="secondary" size="sm" :loading="saving" @click="save">
     <HugeiconsIcon :icon="SaveIcon" />
@@ -202,7 +202,7 @@ export const entries = {
 
     'card': {
         category: 'data',
-        description: 'Surface container with header, title, description, content, footer, and action slots. `interactive` adds a hover lift and pointer spotlight; `color` switches to a tone surface.',
+        description: 'Surface container with header, title, description, content, footer, and action slots. `interactive` adds a gentle hover lift with a stronger shadow; `color` switches to a tone surface.',
         example: `
 <Card interactive>
     <CardHeader>

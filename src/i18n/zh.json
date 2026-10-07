@@ -3,6 +3,7 @@
         "common": {
             "breadcrumb": "面包屑导航",
             "more": "更多",
+            "home": "首页",
             "empty": {
                 "title": "这里还没有内容",
                 "description": "当前没有可显示的内容。"

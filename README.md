@@ -274,9 +274,9 @@ The skill only points to `COMPONENTS.md`, so it stays valid when you update the 
 `src/styles.css` ships a small motion vocabulary that every component uses and that apps can reuse:
 
 - Easing utilities: `ease-spring`, `ease-bounce`, `ease-out-expo`, and `ease-snappy`.
-- Surface utilities: `uv-floating-motion` (popovers, menus, tooltips), `uv-modal-motion`, `uv-overlay-motion`, `uv-collapsible-motion`, and `uv-field` (focus glow and invalid states for inputs).
+- Surface utilities: `uv-floating-motion` (popovers, menus, tooltips), `uv-modal-motion`, `uv-overlay-motion`, `uv-collapsible-motion`, and `uv-field` (focus ring and invalid states for inputs).
 - Animations: `animate-uv-pop`, `animate-uv-fade-up`, `animate-uv-shake`, `animate-uv-shimmer`, `animate-uv-float`, and `animate-uv-ping-soft`.
-- Elevation: `shadow-elevated-sm` through `shadow-elevated-xl`, plus `shadow-glow`.
+- Elevation: `shadow-elevated-sm` through `shadow-elevated-xl`.
 
 All durations collapse automatically when the user prefers reduced motion. Tailwind v4 animates `scale`, `rotate`, and `translate` as individual properties, so list those names (not `transform`) in custom transitions.
 

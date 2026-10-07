@@ -24,7 +24,7 @@ const commands = computed(() => props.code.replace(/\n$/, '').split(/\r?\n/));
 
 <template>
     <!-- Terminal value -->
-    <Terminal v-if="isShellBlock" :commands="commands" />
+    <Terminal v-if="isShellBlock" :commands="commands" :title="props.filename" />
 
     <!-- Code block -->
     <CodeBlock v-else-if="normalizedLanguage" :code="props.code" :language="normalizedLanguage" :title="props.filename" />

@@ -7,13 +7,14 @@ import { cn } from '../../../lib/utils';
 
 // Props
 const props = defineProps<SliderRootProps & {
+    thumbLabel?: string;
     class?: HTMLAttributes['class'];
 }>();
 
 // Emits
 const emits = defineEmits<SliderRootEmits>();
 
-const delegatedProps = reactiveOmit(props, 'class');
+const delegatedProps = reactiveOmit(props, 'class', 'thumbLabel');
 const forwarded = useForwardPropsEmits(delegatedProps, emits);
 </script>
 
@@ -29,6 +30,6 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
         </SliderTrack>
 
         <!-- Thumbs -->
-        <SliderThumb v-for="(_, key) in modelValue" :key="key" data-slot="slider-thumb" class="block size-5 shrink-0 cursor-grab rounded border-2 border-primary bg-card shadow-elevated-sm outline-none transition-[background-color,box-shadow] duration-150 hover:bg-primary/10 focus-visible:ring-[3px] focus-visible:ring-ring/45 active:cursor-grabbing active:bg-primary/15 disabled:pointer-events-none disabled:opacity-50" />
+        <SliderThumb v-for="(_, key) in modelValue" :key="key" data-slot="slider-thumb" :aria-label="props.thumbLabel" class="block size-5 shrink-0 cursor-grab rounded border-2 border-primary bg-card shadow-elevated-sm outline-none transition-[background-color,box-shadow] duration-150 hover:bg-primary/10 focus-visible:ring-[3px] focus-visible:ring-ring/45 active:cursor-grabbing active:bg-primary/15 disabled:pointer-events-none disabled:opacity-50" />
     </SliderRoot>
 </template>

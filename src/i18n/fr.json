@@ -3,6 +3,7 @@
         "common": {
             "breadcrumb": "Fil d'Ariane",
             "more": "Plus",
+            "home": "Accueil",
             "empty": {
                 "title": "Rien ici pour le moment",
                 "description": "Il n'y a aucun contenu a afficher pour le moment."

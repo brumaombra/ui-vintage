@@ -3,6 +3,7 @@
         "common": {
             "breadcrumb": "Navegação estrutural",
             "more": "Mais",
+            "home": "Início",
             "empty": {
                 "title": "Ainda nao ha nada aqui",
                 "description": "Nao ha conteudo para mostrar neste momento."

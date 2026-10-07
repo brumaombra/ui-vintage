@@ -46,6 +46,9 @@ const valueClass = computed(() => {
 // Trend badge presentation
 const trendIsPositive = computed(() => (props.trend ?? 0) >= 0);
 const formattedTrend = computed(() => `${trendIsPositive.value ? '+' : ''}${props.trend}%`);
+
+// Value shown without the count-up (numbers are formatted only when formatOptions is given)
+const staticValue = computed(() => typeof props.value === 'number' && props.formatOptions ? new Intl.NumberFormat(undefined, props.formatOptions).format(props.value) : props.value);
 </script>
 
 <template>
@@ -64,7 +67,7 @@ const formattedTrend = computed(() => `${trendIsPositive.value ? '+' : ''}${prop
         <div class="mt-1 flex flex-wrap items-baseline gap-x-2 gap-y-1">
             <span :class="['text-2xl font-semibold tracking-tight tabular-nums', valueClass]">
                 <AnimatedNumber v-if="props.animate && typeof props.value === 'number'" :value="props.value" :format-options="props.formatOptions" />
-                <template v-else>{{ props.value }}</template>
+                <template v-else>{{ staticValue }}</template>
             </span>
 
             <!-- Trend badge -->

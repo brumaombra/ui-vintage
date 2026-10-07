@@ -120,10 +120,10 @@ const clearCurrentConfirmDialog = () => {
     openNextConfirmDialog();
 };
 
-// Close the current dialog after the leave transition
-const scheduleCloseCurrentConfirmDialog = () => {
-    // Guard against missing or already closed dialogs
-    if (!confirmDialogState.current || !confirmDialogState.isOpen) return;
+// Close the current dialog after the leave transition (only if it is still the given request)
+const scheduleCloseCurrentConfirmDialog = (request: ConfirmDialogRequest) => {
+    // Guard against missing, replaced, or already closed dialogs
+    if (confirmDialogState.current !== request || !confirmDialogState.isOpen) return;
     confirmDialogState.isOpen = false;
 
     // Clear any existing close timer to avoid racing conditions
@@ -138,40 +138,40 @@ const scheduleCloseCurrentConfirmDialog = () => {
     }, DIALOG_CLOSE_DURATION_MS);
 };
 
-// Resolve the dialog as cancelled
+// Resolve the dialog as cancelled (ignored while a confirm or cancel handler is still running)
 export const closeConfirmDialog = () => {
     const current = confirmDialogState.current;
-    if (!current || !confirmDialogState.isOpen) return;
+    if (!current || !confirmDialogState.isOpen || confirmDialogState.busy) return;
     current.resolve(false);
-    scheduleCloseCurrentConfirmDialog();
+    scheduleCloseCurrentConfirmDialog(current);
+};
+
+// Run a dialog handler, then resolve and close the dialog it belongs to
+const runConfirmDialogHandler = async (handler: (() => void | Promise<void>) | null, result: boolean) => {
+    const current = confirmDialogState.current;
+    if (!current || !confirmDialogState.isOpen || confirmDialogState.busy) return;
+    confirmDialogState.busy = true;
+
+    try {
+        await handler?.();
+        current.resolve(result);
+    } catch (error) {
+        // Settle the caller's promise even when the handler throws, then surface the error
+        current.resolve(false);
+        throw error;
+    } finally {
+        scheduleCloseCurrentConfirmDialog(current);
+    }
 };
 
 // Run the cancel handler for the active dialog
 export const cancelActiveConfirmDialog = async () => {
-    const current = confirmDialogState.current;
-    if (!current || confirmDialogState.busy) return;
-    confirmDialogState.busy = true;
-
-    try {
-        await current.options.onCancel?.();
-        current.resolve(false);
-    } finally {
-        scheduleCloseCurrentConfirmDialog();
-    }
+    await runConfirmDialogHandler(confirmDialogState.current?.options.onCancel ?? null, false);
 };
 
 // Run the confirm handler for the active dialog
 export const confirmActiveDialog = async () => {
-    const current = confirmDialogState.current;
-    if (!current || confirmDialogState.busy) return;
-    confirmDialogState.busy = true;
-
-    try {
-        await current.options.onConfirm?.();
-        current.resolve(true);
-    } finally {
-        scheduleCloseCurrentConfirmDialog();
-    }
+    await runConfirmDialogHandler(confirmDialogState.current?.options.onConfirm ?? null, true);
 };
 
 // Queue and show a confirm dialog

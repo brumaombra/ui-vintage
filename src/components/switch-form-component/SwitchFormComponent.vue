@@ -20,17 +20,17 @@ const emits = defineEmits<{
     <Card class="flex flex-col gap-2 px-4 py-3 sm:gap-3!">
         <!-- Switch label and control -->
         <div class="flex items-center justify-between gap-4">
-            <!-- Switch label -->
-            <div class="text-sm font-semibold">
+            <!-- Switch label (names the switch and toggles it on click) -->
+            <label :for="props.id" class="cursor-pointer text-sm font-semibold">
                 {{ props.label }}
-            </div>
+            </label>
 
             <!-- Switch control -->
-            <Switch :id="props.id" :model-value="props.modelValue" @update:model-value="emits('update:modelValue', $event)" />
+            <Switch :id="props.id" :aria-describedby="`${props.id}-description`" :model-value="props.modelValue" @update:model-value="emits('update:modelValue', $event)" />
         </div>
 
         <!-- Description -->
-        <div class="text-xs text-muted-foreground">
+        <div :id="`${props.id}-description`" class="text-xs text-muted-foreground">
             {{ props.description }}
         </div>
     </Card>

@@ -43,7 +43,7 @@ const time = computed({
 
 <template>
     <Input v-model="time" type="time" :step="props.step" :min="props.min" :max="props.max" :disabled="props.disabled" :class="cn(
-        'cursor-pointer font-normal hover:border-(--border-hover-light) hover:bg-(--bg-selected-light) dark:hover:border-(--border-hover-dark) dark:hover:bg-(--bg-selected-dark) [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-70 hover:[&::-webkit-calendar-picker-indicator]:opacity-100',
+        'cursor-pointer font-normal hover:border-border-strong hover:bg-accent [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-70 hover:[&::-webkit-calendar-picker-indicator]:opacity-100',
         props.inputClass,
         props.class
     )

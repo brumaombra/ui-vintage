@@ -153,7 +153,7 @@ const avatarCode = `<Avatar size="lg" status="online">
 
 <template>
     <div class="flex flex-col gap-12">
-        <DemoPageHeader eyebrow="Components" title="Data display" description="Tables that animate their rows on sort, numbers that count, and surfaces that respond to the pointer." :icon="Table01Icon" />
+        <DemoPageHeader eyebrow="Components" title="Data display" description="Tables that animate their rows on sort, numbers that count, and cards that lift on hover." :icon="Table01Icon" />
 
         <!-- Data table -->
         <DemoSection id="data-table" title="Data table" badge="New" description="Typed columns, natural sorting with FLIP-animated rows, selection with an indeterminate header, cell slots, and a skeleton loading state." :code="tableCode">

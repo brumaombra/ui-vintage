@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { NuxtImg } from '#components';
 import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 import type { Component, HTMLAttributes } from 'vue';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import BackgroundGrid from '../background-grid/BackgroundGrid.vue';
@@ -72,10 +73,15 @@ const getSidebarItemLinkProps = (item: NonNullable<typeof props.sidebarSections>
     };
 };
 
+const { t } = useI18n();
+
 // Logo sources for each theme (either one falls back to the other)
 const lightLogo = computed(() => props.appLogo || props.appLogoDark);
 const darkLogo = computed(() => props.appLogoDark || props.appLogo);
 const hasDarkLogo = computed(() => darkLogo.value !== lightLogo.value);
+
+// Logo alt text (also names the home link when the app name is not shown)
+const logoAlt = computed(() => props.appName ? `${props.appName} logo` : t('uiVintage.common.home'));
 </script>
 
 <template>
@@ -83,7 +89,7 @@ const hasDarkLogo = computed(() => darkLogo.value !== lightLogo.value);
         <!-- Sidebar -->
         <Sidebar :collapsible="props.collapsible" :compact="props.compact">
             <!-- Sidebar header -->
-            <SidebarHeader v-if="props.appName || $slots['sidebar-header']" class="h-16 justify-center border-b border-sidebar-border">
+            <SidebarHeader v-if="props.appName || lightLogo || $slots['sidebar-header']" class="h-16 justify-center border-b border-sidebar-border">
                 <slot name="sidebar-header">
                     <SidebarMenu>
                         <SidebarMenuItem>
@@ -92,8 +98,8 @@ const hasDarkLogo = computed(() => darkLogo.value !== lightLogo.value);
                                     <div class="inline-flex items-center gap-2">
                                         <!-- App logo -->
                                         <template v-if="lightLogo">
-                                            <NuxtImg :src="lightLogo" :alt="`${props.appName} logo`" width="32" height="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="eager" :class="['size-8 shrink-0 object-contain', hasDarkLogo && 'dark:hidden']" />
-                                            <NuxtImg v-if="hasDarkLogo" :src="darkLogo" :alt="`${props.appName} logo`" width="32" height="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="eager" class="hidden size-8 shrink-0 object-contain dark:block" />
+                                            <NuxtImg :src="lightLogo" :alt="logoAlt" width="32" height="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="eager" :class="['size-8 shrink-0 object-contain', hasDarkLogo && 'dark:hidden']" />
+                                            <NuxtImg v-if="hasDarkLogo" :src="darkLogo" :alt="logoAlt" width="32" height="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="eager" class="hidden size-8 shrink-0 object-contain dark:block" />
                                         </template>
 
                                         <!-- App name -->

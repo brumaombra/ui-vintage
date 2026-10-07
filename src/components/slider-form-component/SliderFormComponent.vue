@@ -57,6 +57,6 @@ const handleUpdateModelValue = (value?: number[]) => {
         </div>
 
         <!-- Slider control -->
-        <Slider :id="props.id" :model-value="sliderValue" :min="props.min" :max="props.max" :step="props.step" @update:model-value="handleUpdateModelValue" />
+        <Slider :id="props.id" :model-value="sliderValue" :min="props.min" :max="props.max" :step="props.step" :thumb-label="props.label" @update:model-value="handleUpdateModelValue" />
     </Card>
 </template>

@@ -3,6 +3,7 @@
         "common": {
             "breadcrumb": "Breadcrumb",
             "more": "More",
+            "home": "Home",
             "empty": {
                 "title": "Nothing here yet",
                 "description": "There is no content to show right now."

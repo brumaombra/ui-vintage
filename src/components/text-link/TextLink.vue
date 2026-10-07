@@ -31,7 +31,7 @@ const handleClick = (event: MouseEvent) => {
 </script>
 
 <template>
-    <component :is="props.linkComponent" v-bind="getLinkProps()" class="cursor-pointer font-semibold text-(--text-primary-light) hover:underline dark:text-(--text-primary-dark)" @click="handleClick">
+    <component :is="props.linkComponent" v-bind="getLinkProps()" class="cursor-pointer font-semibold text-foreground hover:underline" @click="handleClick">
         {{ props.text }}
     </component>
 </template>

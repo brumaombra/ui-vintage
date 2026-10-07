@@ -26,7 +26,7 @@ const percentage = computed(() => {
 </script>
 
 <template>
-    <ProgressRoot data-slot="progress" v-bind="delegatedProps" :class="cn(
+    <ProgressRoot data-slot="progress" v-bind="delegatedProps" :model-value="props.indeterminate ? null : props.modelValue" :class="cn(
         'relative h-2 w-full overflow-hidden rounded-sm bg-muted',
         props.class
     )">

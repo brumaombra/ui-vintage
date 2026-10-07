@@ -277,11 +277,14 @@ const scrollToHeading = (id: string, options: { closeMobile?: boolean } = {}) =>
             history.replaceState(null, '', `#${id}`);
         }
     };
-    restoreMobileTriggerFocus = false;
-
     if (options.closeMobile && isMobileOpen.value) {
+        // The heading takes focus after the scroll, so skip the trigger focus restore for this close only
+        restoreMobileTriggerFocus = false;
         mobileTriggerRef.value?.focus();
         isMobileOpen.value = false;
+        nextTick(() => {
+            restoreMobileTriggerFocus = true;
+        });
         window.clearTimeout(mobileScrollTimeout);
         mobileScrollTimeout = window.setTimeout(runScroll, MOBILE_CLOSE_SCROLL_DELAY_MS);
         return;

@@ -81,7 +81,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 <template>
     <DefineMonthTemplate v-slot="{ date }">
         <div class="**:data-[slot=native-select-icon]:right-1">
-            <div class="relative h-10 rounded border border-(--border-light) bg-(--button-secondary-light) transition-all duration-300 ease-in-out hover:border-(--border-hover-light) focus-within:border-(--border-hover-light) dark:border-(--border-dark) dark:bg-(--button-secondary-dark) dark:hover:border-(--border-hover-dark) dark:focus-within:border-(--border-hover-dark)">
+            <div class="relative h-10 rounded border border-border bg-secondary transition-all duration-300 ease-in-out hover:border-border-strong focus-within:border-border-strong">
                 <div class="absolute inset-0 z-10 flex h-full items-center text-sm pl-2 pointer-events-none">
                     {{ formatter.custom(toDate(date), { month: 'short' }) }}
                 </div>
@@ -104,7 +104,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 
     <DefineYearTemplate v-slot="{ date }">
         <div class="**:data-[slot=native-select-icon]:right-1">
-            <div class="relative h-10 rounded border border-(--border-light) bg-(--button-secondary-light) transition-all duration-300 ease-in-out hover:border-(--border-hover-light) focus-within:border-(--border-hover-light) dark:border-(--border-dark) dark:bg-(--button-secondary-dark) dark:hover:border-(--border-hover-dark) dark:focus-within:border-(--border-hover-dark)">
+            <div class="relative h-10 rounded border border-border bg-secondary transition-all duration-300 ease-in-out hover:border-border-strong focus-within:border-border-strong">
                 <div class="absolute inset-0 z-10 flex h-full items-center text-sm pl-2 pointer-events-none">
                     {{ formatter.custom(toDate(date), { year: 'numeric' }) }}
                 </div>

@@ -36,7 +36,7 @@ const props = defineProps<{
 
             <!-- Description -->
             <span v-if="props.description" data-slot="select-item-content-description" :class="cn(
-                'font-regular text-[11px] sm:text-xs leading-4 sm:leading-5 text-muted-foreground',
+                'font-normal text-[11px] sm:text-xs leading-4 sm:leading-5 text-muted-foreground',
                 props.descriptionClass
             )
                 ">

@@ -9,7 +9,7 @@ This file lists every public entry point of the package with its components, pro
 - Register the Nuxt module once in `nuxt.config`: `modules: ['@brumaombra/ui-vintage']`. It injects the stylesheet, installs `@nuxt/image`, and merges the library translations into vue-i18n.
 - Import from explicit subpaths only (for example `@brumaombra/ui-vintage/button`). There is no root barrel, and `src/` paths are internal.
 - Style with the semantic Tailwind tokens: `bg-background`, `bg-card`, `bg-surface`, `bg-accent`, `bg-primary`, `hover:bg-primary-hover`, `text-foreground`, `text-muted-foreground`, `border-border`, `border-border-strong`, `text-destructive`, `text-success`, `text-warning`, `text-info`. They switch automatically in dark mode, so do not add `dark:` color overrides.
-- Reuse the motion utilities from the stylesheet instead of custom animations: `ease-spring`, `ease-bounce`, `ease-out-expo`, `ease-snappy`, `uv-floating-motion`, `uv-modal-motion`, `uv-overlay-motion`, `uv-collapsible-motion`, `uv-field`, `animate-uv-pop`, `animate-uv-fade-up`, `animate-uv-shake`, `animate-uv-shimmer`, `animate-uv-float`, `animate-uv-ping-soft`, and elevation via `shadow-elevated-sm|md|lg|xl` and `shadow-glow`. Tailwind v4 animates `scale`, `rotate`, and `translate` as separate properties, so name them (not `transform`) in custom transitions.
+- Reuse the motion utilities from the stylesheet instead of custom animations: `ease-spring`, `ease-bounce`, `ease-out-expo`, `ease-snappy`, `uv-floating-motion`, `uv-modal-motion`, `uv-overlay-motion`, `uv-collapsible-motion`, `uv-field`, `animate-uv-pop`, `animate-uv-fade-up`, `animate-uv-shake`, `animate-uv-shimmer`, `animate-uv-float`, `animate-uv-ping-soft`, and elevation via `shadow-elevated-sm|md|lg|xl`. Tailwind v4 animates `scale`, `rotate`, and `translate` as separate properties, so name them (not `transform`) in custom transitions.
 - Icons are Hugeicons definitions passed as values: `import { Rocket01Icon } from '@hugeicons/core-free-icons'` then `:icon="Rocket01Icon"`, or render one with `<HugeiconsIcon :icon="Rocket01Icon" />` from `@hugeicons/vue`.
 - Every component accepts `class`, merged with `tailwind-merge`, so utility overrides win over the defaults.
 
@@ -31,7 +31,7 @@ Buttons, segmented controls, menus, and keyboard hints.
 
 ### `@brumaombra/ui-vintage/button`
 
-Button with solid, outline, ghost, link, and tone variants. Spring press feedback, a sheen on primary buttons, and a `loading` state that keeps the width stable. Use `as-child` to render a link.
+Button with primary, secondary, ghost, link, and tone variants. Spring press feedback and a `loading` state that keeps the width stable. Use `as-child` to render a link.
 
 ```ts
 import { Button, buttonVariants } from '@brumaombra/ui-vintage/button';
@@ -334,7 +334,7 @@ const toggleGroupContextKey: InjectionKey<{ size: Ref<ToggleGroupSize>; indicato
 
 ## Forms
 
-Inputs, pickers, and form layout. Text-like controls share the `uv-field` focus glow and shake on `aria-invalid`.
+Inputs, pickers, and form layout. Text-like controls share the `uv-field` focus ring and shake on `aria-invalid`.
 
 ### `@brumaombra/ui-vintage/calendar`
 
@@ -1049,7 +1049,11 @@ import { Slider } from '@brumaombra/ui-vintage/slider';
 
 #### `Slider`
 
-- **Props:** `class`.
+| Prop | Type | Default |
+| --- | --- | --- |
+| `thumbLabel` | `string` |  |
+| `class` | `HTMLAttributes['class']` |  |
+
 - **Also accepts** all props of Reka `SliderRootProps`.
 - **Emits:** all events of Reka `SliderRootEmits`.
 
@@ -1334,7 +1338,7 @@ import { Badge } from '@brumaombra/ui-vintage/badge';
 
 ### `@brumaombra/ui-vintage/card`
 
-Surface container with header, title, description, content, footer, and action slots. `interactive` adds a hover lift and pointer spotlight; `color` switches to a tone surface.
+Surface container with header, title, description, content, footer, and action slots. `interactive` adds a gentle hover lift with a stronger shadow; `color` switches to a tone surface.
 
 ```ts
 import { Card, CardAction, CardContent, CardText, CardDescription, CardFooter, CardHeader, CardTitle } from '@brumaombra/ui-vintage/card';
@@ -3322,7 +3326,7 @@ import { LandingShell } from '@brumaombra/ui-vintage/landing-shell';
 Flag icons for the supported locales.
 
 ```ts
-import { LanguageFlag, EnglishFlag, FrenchFlag, GermanFlag, ItalianFlag, ChineseFlag, JapaneseFlag, RussianFlag, SpanishFlag } from '@brumaombra/ui-vintage/language-flag';
+import { LanguageFlag, EnglishFlag, FrenchFlag, GermanFlag, ItalianFlag, ChineseFlag, JapaneseFlag, PortugueseFlag, RussianFlag, SpanishFlag } from '@brumaombra/ui-vintage/language-flag';
 import type { SupportedLanguageCode } from '@brumaombra/ui-vintage/language-flag';
 ```
 
@@ -3353,6 +3357,10 @@ import type { SupportedLanguageCode } from '@brumaombra/ui-vintage/language-flag
 - **Props:** none.
 
 #### `JapaneseFlag`
+
+- **Props:** none.
+
+#### `PortugueseFlag`
 
 - **Props:** none.
 
@@ -3543,6 +3551,7 @@ import { AllPostsSection, BlogContentRenderer, BlogFAQSection, BlogInfoSection, 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `tags` | `Array<{ name: string; slug: string; count: number }>` | `[]` |
+| `blogPath` | `string` | `'/blog'` |
 
 #### `CategoriesList`
 

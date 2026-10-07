@@ -37,7 +37,7 @@ const easings = [
 ];
 const motionPlayed = ref(false);
 
-const elevations = ['shadow-elevated-sm', 'shadow-elevated-md', 'shadow-elevated-lg', 'shadow-elevated-xl', 'shadow-glow'];
+const elevations = ['shadow-elevated-sm', 'shadow-elevated-md', 'shadow-elevated-lg', 'shadow-elevated-xl'];
 const typeScale = [
     { utility: 'text-3xl font-semibold', label: 'Display · 30px' },
     { utility: 'text-2xl font-semibold', label: 'Heading · 24px' },
@@ -99,8 +99,8 @@ const motionCode = `<!-- Easing utilities -->
         </DemoSection>
 
         <!-- Elevation -->
-        <DemoSection id="elevation" title="Elevation" badge="New" description="Five levels tuned for light and dark themes. Hover a tile to lift it.">
-            <div class="grid grid-cols-2 gap-6 sm:grid-cols-5">
+        <DemoSection id="elevation" title="Elevation" badge="New" description="Four levels tuned for light and dark themes. Hover a tile to lift it.">
+            <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
                 <Card v-for="level in elevations" :key="level" :class="['items-center justify-center py-10! transition-[translate] duration-300 ease-spring hover:-translate-y-1', level]">
                     <span class="text-[11px] font-semibold text-muted-foreground">{{ level.replace('shadow-', '') }}</span>
                 </Card>

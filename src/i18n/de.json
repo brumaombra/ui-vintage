@@ -3,6 +3,7 @@
         "common": {
             "breadcrumb": "Brotkrumennavigation",
             "more": "Mehr",
+            "home": "Startseite",
             "empty": {
                 "title": "Hier gibt es noch nichts",
                 "description": "Zurzeit gibt es keine Inhalte zum Anzeigen."

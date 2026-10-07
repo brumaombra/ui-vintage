@@ -28,8 +28,6 @@ export type ButtonVariants = {
     | undefined;
 };
 
-// Sheen sweep that crosses solid buttons on hover
-
 export const buttonVariants: (props?: ButtonVariants & ClassProp) => string = cva(
     [
         "relative isolate inline-flex shrink-0 cursor-pointer select-none items-center justify-center gap-2 overflow-hidden whitespace-nowrap rounded text-xs font-semibold outline-none sm:text-sm",

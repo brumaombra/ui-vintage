@@ -28,8 +28,8 @@ const resolvedLabel = computed(() => props.label || getUiVintageRuntimeMessage('
                 props.class,
             )">
                 <slot>
-                    <!-- Spinner -->
-                    <Spinner data-slot="busy-spinner" size="xl" class="text-primary" />
+                    <!-- Spinner (decorative: the container already announces the label) -->
+                    <Spinner data-slot="busy-spinner" size="xl" aria-hidden="true" class="text-primary" />
 
                     <!-- Label -->
                     <span v-if="resolvedLabel" data-slot="busy-label" class="text-xs font-semibold text-foreground sm:text-sm">

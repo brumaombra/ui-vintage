@@ -182,9 +182,9 @@ onBeforeUnmount(() => clearTimeout(rejectTimer));
             <!-- Marching dashed border while dragging -->
             <span aria-hidden="true" class="uv-dropzone-ants pointer-events-none absolute -inset-0.5 rounded opacity-0 transition-opacity duration-150 group-data-dragging/dropzone:opacity-100" />
 
-            <!-- Upload icon (floats up and grows while dragging) -->
-            <span aria-hidden="true" class="relative flex size-14 items-center justify-center rounded border border-border bg-card text-muted-foreground shadow-elevated-sm transition-[translate,scale,color,border-color,box-shadow] duration-420 ease-bounce group-hover/dropzone:-translate-y-0.5 group-hover/dropzone:text-foreground group-data-dragging/dropzone:-translate-y-2 group-data-dragging/dropzone:scale-115 group-data-dragging/dropzone:border-primary/50 group-data-dragging/dropzone:text-primary group-data-dragging/dropzone:shadow-glow">
-                <HugeiconsIcon :icon="CloudUploadIcon" class="size-6 group-data-dragging/dropzone:animate-uv-float" />
+            <!-- Upload icon (lifts and grows while dragging) -->
+            <span aria-hidden="true" class="relative flex size-14 items-center justify-center rounded border border-border bg-card text-muted-foreground shadow-elevated-sm transition-[translate,scale,color,border-color,box-shadow] duration-420 ease-bounce group-hover/dropzone:-translate-y-0.5 group-hover/dropzone:text-foreground group-data-dragging/dropzone:-translate-y-2 group-data-dragging/dropzone:scale-115 group-data-dragging/dropzone:border-primary/50 group-data-dragging/dropzone:text-primary group-data-dragging/dropzone:shadow-elevated-md">
+                <HugeiconsIcon :icon="CloudUploadIcon" class="size-6" />
             </span>
 
             <!-- Texts -->

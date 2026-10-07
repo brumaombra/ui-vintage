@@ -226,7 +226,7 @@ const dialogCode = `const confirmed = await showConfirmDialog({
                 </Button>
             </div>
             <ClientOnly>
-                <CookieConsent storage-key="uiVintageDemoConsent" policy-to="/foundations" />
+                <CookieConsent storage-key="uiVintageDemoConsent" policy-to="/components/feedback#cookie-consent" />
             </ClientOnly>
         </DemoSection>
 

@@ -62,12 +62,15 @@ const copyCommands = async () => {
                     variant="ghost"
                     size="icon"
                     class="ml-auto size-6 text-muted-foreground hover:bg-accent hover:text-foreground"
-                    :aria-label="t('uiVintage.terminal.copy')"
-                    :title="t('uiVintage.terminal.copy')"
+                    :aria-label="copied ? t('uiVintage.terminal.copied') : t('uiVintage.terminal.copy')"
+                    :title="copied ? t('uiVintage.terminal.copied') : t('uiVintage.terminal.copy')"
                     :disabled="!commandText"
                     @click="copyCommands">
                     <HugeiconsIcon :icon="copied ? CheckmarkCircle02Icon : Copy01Icon" class="size-3.5" />
                 </Button>
+
+                <!-- Announce the copy to screen readers -->
+                <span v-if="props.copyable" class="sr-only" aria-live="polite">{{ copied ? t('uiVintage.terminal.copied') : '' }}</span>
             </div>
 
             <!-- Terminal commands -->

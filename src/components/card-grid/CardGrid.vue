@@ -52,8 +52,8 @@ const handleLoadMore = () => {
             <slot name="card" v-for="item in props.items" :item="item" :key="item.id" />
         </div>
 
-        <!-- Load more button -->
-        <div v-if="props.hasMore || (props.loadMoreBusy && props.items.length > 0)" class="flex justify-center mt-6">
+        <!-- Load more button (only under a grid, never under the loading or empty state) -->
+        <div v-if="!props.busy && props.items.length > 0 && (props.hasMore || props.loadMoreBusy)" class="flex justify-center mt-6">
             <LoadMoreButton :busy="props.loadMoreBusy"
                 @load-more="handleLoadMore" />
         </div>

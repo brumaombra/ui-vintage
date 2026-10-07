@@ -63,7 +63,6 @@ const footerSections = computed(() => [{
 // Apply a selected language
 const handleSelectLanguage = async language => {
     await setLocale(language);
-    localStorage.setItem('language', language);
 };
 </script>
 

@@ -37,7 +37,6 @@ const currentPage = computed(() => findDemoPage(route.path));
 // Apply a selected language
 const handleSelectLanguage = async (language: string) => {
     await setLocale(language as typeof locale.value);
-    localStorage.setItem('language', language);
 };
 </script>
 

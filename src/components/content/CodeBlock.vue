@@ -111,12 +111,15 @@ const copyCode = async () => {
                     variant="ghost"
                     size="icon"
                     class="ml-auto size-6 text-muted-foreground hover:bg-accent hover:text-foreground"
-                    :aria-label="t('uiVintage.code.copy')"
-                    :title="t('uiVintage.code.copy')"
+                    :aria-label="copied ? t('uiVintage.code.copied') : t('uiVintage.code.copy')"
+                    :title="copied ? t('uiVintage.code.copied') : t('uiVintage.code.copy')"
                     :disabled="!displayedCode"
                     @click="copyCode">
                     <HugeiconsIcon :icon="copied ? CheckmarkCircle02Icon : Copy01Icon" class="size-3.5" />
                 </Button>
+
+                <!-- Announce the copy to screen readers -->
+                <span v-if="props.copyable" class="sr-only" aria-live="polite">{{ copied ? t('uiVintage.code.copied') : '' }}</span>
             </div>
 
             <!-- Editor tabs -->

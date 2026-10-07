@@ -27,8 +27,14 @@ export const isDarkTheme = (theme: ThemeMode) => {
 // Read the persisted theme mode
 export const getStoredTheme = (): ThemeMode => {
     if (typeof localStorage === 'undefined') return 'auto';
-    const storedTheme = localStorage.getItem(THEME_STORAGE_KEY);
-    return storedTheme === 'light' || storedTheme === 'dark' ? storedTheme : 'auto';
+
+    // Storage can throw when the browser blocks it (privacy settings, sandboxed frames)
+    try {
+        const storedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+        return storedTheme === 'light' || storedTheme === 'dark' ? storedTheme : 'auto';
+    } catch {
+        return 'auto';
+    }
 };
 
 // Apply the selected theme to the document and persist it
@@ -37,7 +43,13 @@ export const applyTheme = (theme: ThemeMode) => {
     const root = document.documentElement;
     root.classList.remove('light', 'dark');
     root.classList.add(isDarkTheme(theme) ? 'dark' : 'light');
-    localStorage.setItem(THEME_STORAGE_KEY, theme);
+
+    // Persisting is best effort: the theme still applies when storage is blocked
+    try {
+        localStorage.setItem(THEME_STORAGE_KEY, theme);
+    } catch {
+        // Ignore storage errors
+    }
 };
 
 // Apply a theme with a circular reveal that grows from the origin point (View Transitions API)

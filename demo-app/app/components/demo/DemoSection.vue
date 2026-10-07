@@ -54,7 +54,7 @@ onBeforeUnmount(() => observer?.disconnect());
 </script>
 
 <template>
-    <section :id="props.id" ref="sectionRef" :class="['scroll-mt-24 transition-[opacity,translate,filter] duration-700 ease-out-expo', revealed ? 'translate-y-0 opacity-100 blur-0' : 'translate-y-4 opacity-0 blur-[3px]']">
+    <section :id="props.id" ref="sectionRef" :class="['scroll-mt-24 transition-[opacity,translate,filter] duration-700 ease-out-expo', revealed ? 'translate-y-0 opacity-100 blur-none' : 'translate-y-4 opacity-0 blur-[3px]']">
         <!-- Section header -->
         <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div class="min-w-0">

@@ -52,6 +52,7 @@ const MAX_TOASTS = 5;
 const MESSAGE_TOAST_ROOT_ID = 'ui-vintage-message-toast-root';
 
 const toastTimers = new Map<number, ToastTimer>();
+const pendingToastIds = new Set<number>();
 let messageToastMountPromise: Promise<void> | null = null;
 let nextToastId = 0;
 
@@ -143,6 +144,13 @@ export const resumeMessageToasts = () => {
 export const closeMessageToast = (id?: number) => {
     const ids = id === undefined ? messageToastState.toasts.map(toast => toast.id) : [id];
 
+    // Cancel toasts that were requested but are still waiting for the toaster to mount
+    if (id === undefined) {
+        pendingToastIds.clear();
+    } else {
+        pendingToastIds.delete(id);
+    }
+
     // Clear timers and remove the toasts from the stack
     for (const toastId of ids) {
         stopToastTimer(toastId);
@@ -170,11 +178,23 @@ export const showMessageToast = (options: ShowMessageToastOptions) => {
         duration
     };
 
+    // Toasts are client-only: never store them in the module state shared across server requests
+    if (typeof document === 'undefined') {
+        return id;
+    }
+
     // Expose the newest toast synchronously, as the single-toast API always did
     messageToastState.current = { message: toast.message, type: toast.type };
 
     // Mount first so the enter transition runs once the renderer exists
+    pendingToastIds.add(id);
     void ensureMessageToastMounted().then(() => {
+        // Skip toasts that were closed before the toaster finished mounting
+        if (!pendingToastIds.delete(id)) {
+            syncLegacyState();
+            return;
+        }
+
         // Push the newest toast on top and trim the overflow
         messageToastState.toasts = [toast, ...messageToastState.toasts];
         for (const overflow of messageToastState.toasts.slice(MAX_TOASTS)) {

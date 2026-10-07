@@ -3,6 +3,7 @@
         "common": {
             "breadcrumb": "パンくずリスト",
             "more": "もっと見る",
+            "home": "ホーム",
             "empty": {
                 "title": "まだ何もありません",
                 "description": "現在表示できるコンテンツはありません。"

@@ -45,7 +45,6 @@ html {
 
     /*********************** Motion tokens ***********************/
 
-    --uv-duration-instant: 90ms;
     --uv-duration-fast: 150ms;
     --uv-duration-base: 220ms;
     --uv-duration-slow: 420ms;
@@ -168,7 +167,6 @@ html {
     --animate-uv-fade-up: uv-fade-up 0.5s var(--ease-out-expo) both;
     --animate-uv-ping-soft: uv-ping-soft 1.8s var(--ease-out-expo) infinite;
     --animate-uv-indeterminate: uv-indeterminate 1.4s var(--ease-snappy) infinite;
-    --animate-uv-gradient: uv-gradient 6s ease infinite;
     --animate-uv-word-in: uv-word-in 0.9s var(--ease-spring) both;
     --animate-uv-grow-x: uv-grow-x 0.9s var(--ease-out-expo) both;
     --animate-uv-ken-burns: uv-ken-burns 9s ease-out both;
@@ -232,11 +230,6 @@ html {
         0% { transform: translateX(-100%) scaleX(0.4); }
         50% { transform: translateX(40%) scaleX(0.6); }
         100% { transform: translateX(120%) scaleX(0.4); }
-    }
-
-    @keyframes uv-gradient {
-        0%, 100% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
     }
 }
 
@@ -341,15 +334,6 @@ html {
 
     &[data-state="closed"] {
         animation: uv-collapsible-up var(--uv-duration-fast) var(--ease-snappy);
-    }
-}
-
-/* Shared focus ring used by interactive primitives */
-@utility uv-focus-ring {
-    outline: none;
-
-    &:focus-visible {
-        box-shadow: 0 0 0 1px var(--background), 0 0 0 3px color-mix(in oklab, var(--ring) 55%, transparent);
     }
 }
 

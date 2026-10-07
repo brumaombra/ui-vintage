@@ -31,10 +31,10 @@ const isOpen = ref(false);
 const supportedLanguages = [
     { code: 'en', label: 'English', loadFlag: () => import('../language-flag/flags/EnglishFlag.vue') },
     { code: 'it', label: 'Italiano', loadFlag: () => import('../language-flag/flags/ItalianFlag.vue') },
-    { code: 'fr', label: 'Francais', loadFlag: () => import('../language-flag/flags/FrenchFlag.vue') },
-    { code: 'es', label: 'Espanol', loadFlag: () => import('../language-flag/flags/SpanishFlag.vue') },
+    { code: 'fr', label: 'Français', loadFlag: () => import('../language-flag/flags/FrenchFlag.vue') },
+    { code: 'es', label: 'Español', loadFlag: () => import('../language-flag/flags/SpanishFlag.vue') },
     { code: 'de', label: 'Deutsch', loadFlag: () => import('../language-flag/flags/GermanFlag.vue') },
-    { code: 'pt', label: 'Portugues', loadFlag: () => import('../language-flag/flags/PortugueseFlag.vue') },
+    { code: 'pt', label: 'Português', loadFlag: () => import('../language-flag/flags/PortugueseFlag.vue') },
     { code: 'zh', label: '中文', loadFlag: () => import('../language-flag/flags/ChineseFlag.vue') },
     { code: 'ja', label: '日本語', loadFlag: () => import('../language-flag/flags/JapaneseFlag.vue') },
     { code: 'ru', label: 'Русский', loadFlag: () => import('../language-flag/flags/RussianFlag.vue') }
@@ -73,10 +73,18 @@ const languageDisplayNames = computed(() => {
     return typeof Intl.DisplayNames === 'function' ? new Intl.DisplayNames([locale.value], { type: 'language' }) : null;
 });
 
+// Base language of a code ('it-IT' and 'it_IT' become 'it')
+const getBaseLanguageCode = (code: string) => code.toLowerCase().split(/[-_]/)[0] ?? '';
+
+// Supported flag code for a language code, including regional codes
+const getFlagCode = (code: string) => {
+    const languageCode = getBaseLanguageCode(code);
+    return isSupportedLanguageCode(languageCode) ? languageCode : null;
+};
+
 // Get the display label for a given language code
 const getLanguageLabel = (code: string) => {
-    const normalizedCode = code.toLowerCase();
-    const languageCode = normalizedCode.split('-')[0];
+    const languageCode = getBaseLanguageCode(code);
     const supportedLanguage = isSupportedLanguageCode(languageCode) ? getSupportedLanguage(languageCode) : null;
     return supportedLanguage?.label || languageDisplayNames.value?.of(languageCode) || code.toUpperCase();
 };
@@ -92,7 +100,7 @@ const normalizedLanguages = computed(() => {
 // Compute the available flag codes based on the provided language list
 const availableFlagCodes = computed<SupportedLanguageCode[]>(() => {
     // Extract supported language codes from the normalized list
-    const supportedCodes = normalizedLanguages.value.map(language => language.code).filter(isSupportedLanguageCode);
+    const supportedCodes = normalizedLanguages.value.map(language => getFlagCode(language.code)).filter((code): code is SupportedLanguageCode => code !== null);
     if (supportedCodes.length > 0) {
         return [...new Set(supportedCodes)];
     }
@@ -103,8 +111,8 @@ const availableFlagCodes = computed<SupportedLanguageCode[]>(() => {
 
 // Resolve the flag component for a specific code, falling back to the first available code
 const resolveFlagComponent = (code?: string) => {
-    const isValid = code && isSupportedLanguageCode(code) && availableFlagCodes.value.includes(code);
-    const resolvedCode = isValid ? code : availableFlagCodes.value[0];
+    const flagCode = code ? getFlagCode(code) : null;
+    const resolvedCode = flagCode && availableFlagCodes.value.includes(flagCode) ? flagCode : availableFlagCodes.value[0];
     return getAsyncFlagComponent(resolvedCode);
 };
 

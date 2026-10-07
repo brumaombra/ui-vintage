@@ -59,9 +59,7 @@
         "allPostsDescription": "Tutto quello che abbiamo pubblicato, dal più recente.",
         "categoriesDescription": "Vai dritto agli argomenti che ti interessano.",
         "tagsDescription": "Fili più piccoli che attraversano le categorie.",
-        "viewAll": "Vedi tutti",
-        "minRead": "{minutes} min di lettura",
-        "backToBlog": "Torna al blog"
+        "viewAll": "Vedi tutti"
     },
     "navigation": {
         "breadcrumbs": {

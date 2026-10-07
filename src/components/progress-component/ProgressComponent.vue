@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<{
 
 <template>
     <div class="space-y-3">
-        <!-- Header with icon and label -->
+        <!-- Header with label and value -->
         <div class="flex items-center justify-between">
             <!-- Title of the progress bar -->
             <span class="text-sm font-semibold text-foreground">
