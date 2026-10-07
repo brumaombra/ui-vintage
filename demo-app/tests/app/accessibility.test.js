@@ -3,6 +3,12 @@ import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { Accordion } from '@brumaombra/ui-vintage/accordion';
 import { DashboardShell } from '@brumaombra/ui-vintage/dashboard-shell';
 import { LandingNavbar } from '@brumaombra/ui-vintage/landing-navbar';
+import { Avatar, AvatarFallback } from '@brumaombra/ui-vintage/avatar';
+import { Button } from '@brumaombra/ui-vintage/button';
+import { DataTable } from '@brumaombra/ui-vintage/data-table';
+import { LoadMoreButton } from '@brumaombra/ui-vintage/load-more-button';
+import { ProgressComponent } from '@brumaombra/ui-vintage/progress-component';
+import { h } from 'vue';
 import { SwitchFormComponent } from '@brumaombra/ui-vintage/switch-form-component';
 
 // Accessible names: what screen readers announce for each control
@@ -44,6 +50,14 @@ describe('DashboardShell', () => {
         expect(dark.classes()).toEqual(expect.arrayContaining(['hidden', 'dark:block']));
         expect(light.attributes('alt')).toBe('Acme logo');
     });
+
+    // Screen readers hear which navigation link is the current page
+    it('marks the active link as the current page', async () => {
+        const sidebarSections = [{ id: 'main', label: 'Main', items: [{ id: 'home', label: 'Home', href: '/home', active: true }, { id: 'settings', label: 'Settings', href: '/settings' }] }];
+        const wrapper = await mountSuspended(DashboardShell, { props: { appName: 'Acme', sidebarSections } });
+        expect(wrapper.find('a[href="/home"]').attributes('aria-current')).toBe('page');
+        expect(wrapper.find('a[href="/settings"]').attributes('aria-current')).toBeUndefined();
+    });
 });
 
 describe('LandingNavbar', () => {
@@ -57,5 +71,59 @@ describe('LandingNavbar', () => {
     it('renders no brand link without a logo or a name', async () => {
         const wrapper = await mountSuspended(LandingNavbar, { props: { appLinkTo: '/' } });
         expect(wrapper.find('a[href="/"]').exists()).toBe(false);
+    });
+});
+
+describe('Button', () => {
+    // The disabled prop never hides the loading state
+    it('stays disabled while loading even when disabled is false', async () => {
+        const wrapper = await mountSuspended(Button, { props: { loading: true, disabled: false }, slots: { default: () => 'Save' } });
+        expect(wrapper.find('button').attributes('disabled')).toBeDefined();
+        expect(wrapper.find('button').attributes('aria-busy')).toBe('true');
+    });
+});
+
+describe('LoadMoreButton', () => {
+    // One button for both states, so keyboard focus survives the loading phase
+    it('keeps the same button while loading and ignores clicks', async () => {
+        const wrapper = await mountSuspended(LoadMoreButton, { props: { busy: false } });
+        const button = wrapper.find('button').element;
+        await wrapper.setProps({ busy: true });
+        expect(wrapper.find('button').element).toBe(button);
+        expect(wrapper.find('button').attributes('aria-disabled')).toBe('true');
+        await wrapper.find('button').trigger('click');
+        expect(wrapper.emitted('load-more')).toBeUndefined();
+    });
+});
+
+describe('DataTable', () => {
+    // Clickable rows are reachable with Tab and open with Enter or Space
+    it('activates clickable rows from the keyboard', async () => {
+        const wrapper = await mountSuspended(DataTable, { props: { columns: [{ key: 'name', label: 'Name' }], rows: [{ id: 1, name: 'Ada' }], rowClickable: true } });
+        const row = wrapper.findAll('tr').find(item => item.text().includes('Ada'));
+        expect(row.attributes('tabindex')).toBe('0');
+        await row.trigger('keydown', { key: 'Enter' });
+        await row.trigger('keydown', { key: ' ' });
+        await row.trigger('keydown', { key: 'a' });
+        expect(wrapper.emitted('row-click')).toHaveLength(2);
+    });
+});
+
+describe('ProgressComponent', () => {
+    // The progress bar is named after its visible title
+    it('names the progress bar after the title', async () => {
+        const wrapper = await mountSuspended(ProgressComponent, { props: { title: 'Storage', value: 3, max: 10 } });
+        const bar = wrapper.find('[role="progressbar"]');
+        expect(wrapper.find(`#${bar.attributes('aria-labelledby')}`).text()).toBe('Storage');
+    });
+});
+
+describe('AvatarFallback', () => {
+    // Screen readers hear the name, not the initials
+    it('announces the name instead of the initials', async () => {
+        const wrapper = await mountSuspended({ render: () => h(Avatar, null, () => h(AvatarFallback, { name: 'Jane Doe' })) });
+        const fallback = wrapper.find('[data-slot="avatar-fallback"]');
+        expect(fallback.attributes('role')).toBe('img');
+        expect(fallback.attributes('aria-label')).toBe('Jane Doe');
     });
 });

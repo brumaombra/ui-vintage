@@ -14,8 +14,8 @@ tags: ["Nuxt", "Contenuti", "Librerie di componenti"]
 faqs:
   - question: "Perché mantenere Nuxt Content nella demo app?"
     answer: "Perché la demo deve verificare lo stesso percorso di query e rendering dei contenuti che userebbe un consumer in produzione, non solo i componenti visivi in isolamento."
-  - question: "Perché usare solo due articoli di esempio?"
-    answer: "Due articoli bastano per verificare la pagina indice, una pagina di dettaglio reale, la navigazione per categoria, la logica dei contenuti correlati e i componenti condivisi dell'articolo senza aggiungere rumore."
+  - question: "Quanti articoli di esempio include la demo?"
+    answer: "Sei articoli per lingua. Bastano per riempire l'indice, dare agli articoli e alle categorie correlate una scelta reale, avere più di un articolo nella stessa categoria e condividere i tag tra articoli, restando abbastanza pochi da leggerli tutti in una volta."
 ---
 
 ## La migrazione cambia ciò che la demo deve dimostrare
@@ -42,9 +42,9 @@ La demo non ha bisogno di ogni card di conversione o helper SEO dell'app origina
 
 ---
 
-## Due articoli di esempio bastano per verificare il grafo delle route
+## Pochi articoli di esempio bastano per verificare il grafo delle route
 
-Con due articoli, la demo può verificare l'intero grafo delle route del blog:
+Con una manciata di articoli, la demo può verificare l'intero grafo delle route del blog:
 
 ::BlogList
 ---

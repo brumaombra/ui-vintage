@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue';
-import { useI18n } from 'vue-i18n';
 import { FolderLibraryIcon, News01Icon, Tag01Icon } from '@hugeicons/core-free-icons';
 import { AllPostsSection, BlogHeaderSection, BlogSectionTitle, BlogTagsSection, CategoriesSection, HeaderCarousel } from '@brumaombra/ui-vintage/blog';
 import { createSEOMetatags, createPageSchema, buildTagsFromPosts } from '~/composables/useUtils.js';

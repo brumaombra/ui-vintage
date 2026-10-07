@@ -92,7 +92,8 @@ export default defineNuxtConfig({
     },
 
     image: {
-        provider: 'ipx'
+        // Remote hosts the default IPX provider may fetch and optimise (blog covers and avatars)
+        domains: ['images.unsplash.com']
     },
 
     devtools: {

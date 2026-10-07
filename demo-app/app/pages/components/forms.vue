@@ -82,12 +82,12 @@ const range = ref([20, 80]);
 // Number, pin, and tags
 const seats = ref(5);
 const price = ref(49.9);
-const code = ref<string[]>([]);
+const code = ref<number[]>([]);
 const codeInvalid = ref(false);
 const skills = ref(['Vue', 'Nuxt', 'Motion design']);
 
 // Verify the PIN when all cells are filled
-const handleCodeComplete = (value: string[]) => {
+const handleCodeComplete = (value: number[]) => {
     codeInvalid.value = value.join('') !== '424242';
     showMessageToast(codeInvalid.value
         ? { message: 'That code is not valid. Hint: 424242', type: 'error' }
@@ -343,7 +343,7 @@ const dropzoneCode = `<FileDropzone v-model="files" accept="image/*,.pdf" :max-s
                 </Field>
                 <Field>
                     <FieldLabel>Reminder</FieldLabel>
-                    <TimePicker v-model="reminder" :step="60" />
+                    <TimePicker v-model="reminder" />
                 </Field>
                 <Field class="md:col-span-3">
                     <FieldLabel>Meeting</FieldLabel>

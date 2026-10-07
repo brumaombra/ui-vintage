@@ -12,15 +12,17 @@ const props = withDefaults(defineProps<PrimitiveProps & {
     variant?: ButtonVariants['variant'];
     size?: ButtonVariants['size'];
     loading?: boolean;
+    disabled?: boolean;
     class?: HTMLAttributes['class'];
 }>(), {
     as: 'button',
-    loading: false
+    loading: false,
+    disabled: false
 });
 </script>
 
 <template>
-    <Primitive data-slot="button" :data-variant="variant" :data-size="size" :data-loading="props.loading ? '' : undefined" :aria-busy="props.loading || undefined" :disabled="props.loading || undefined" :as="as" :as-child="asChild" :class="cn(buttonVariants({ variant, size }), props.class)">
+    <Primitive data-slot="button" :data-variant="variant" :data-size="size" :data-loading="props.loading ? '' : undefined" :aria-busy="props.loading || undefined" :disabled="props.disabled || props.loading || undefined" :as="as" :as-child="asChild" :class="cn(buttonVariants({ variant, size }), props.class)">
         <!-- As-child buttons delegate rendering to the slotted element -->
         <slot v-if="asChild" />
 

@@ -13,9 +13,20 @@ import DemoCommandPalette from '~/components/demo/DemoCommandPalette.vue';
 import { demoNavigation, findDemoPage } from '~/utils/demo-navigation';
 
 const route = useRoute();
+const localePath = useLocalePath();
 const { locale, locales, setLocale } = useI18n();
 const languageOptions = computed(() => locales.value.map(language => language.code));
 const paletteOpen = useState('demo-palette-open', () => false);
+
+// Route path without the locale prefix (e.g. /it/foundations -> /foundations)
+const basePath = computed(() => {
+    const prefix = route.path.split('/')[1] ?? '';
+    const isLocalePrefix = locales.value.some(language => language.code === prefix);
+    return isLocalePrefix ? route.path.slice(prefix.length + 1) || '/' : route.path;
+});
+
+// Page that matches the current route in any locale
+const currentPage = computed(() => findDemoPage(basePath.value));
 
 // Sidebar navigation derived from the shared navigation model
 const sidebarSections = computed(() => demoNavigation.map(group => ({
@@ -26,13 +37,10 @@ const sidebarSections = computed(() => demoNavigation.map(group => ({
         label: page.label,
         description: page.description,
         icon: page.icon,
-        to: page.to,
-        active: findDemoPage(route.path)?.id === page.id
+        to: localePath(page.to),
+        active: currentPage.value?.id === page.id
     }))
 })));
-
-// Topbar title of the current page
-const currentPage = computed(() => findDemoPage(route.path));
 
 // Apply a selected language
 const handleSelectLanguage = async (language: string) => {
@@ -45,7 +53,7 @@ const handleSelectLanguage = async (language: string) => {
         <DashboardShell :title="currentPage?.label ?? 'UI Vintage'" :description="currentPage?.description ?? ''" :sidebar-sections="sidebarSections" :sidebar-link-component="NuxtLink" compact>
             <!-- Brand -->
             <template #sidebar-header>
-                <NuxtLink to="/" class="group/brand flex items-center gap-3 px-1">
+                <NuxtLink :to="localePath('/')" class="group/brand flex items-center gap-3 px-1">
                     <span class="flex size-9 items-center justify-center rounded bg-primary text-sm font-semibold text-primary-foreground">
                         UV
                     </span>

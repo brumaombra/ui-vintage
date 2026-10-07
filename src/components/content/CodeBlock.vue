@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { CheckmarkCircle02Icon, Copy01Icon, CodeIcon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
-import { codeToHtml } from 'shiki';
 import { computed, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { Button } from '../ui/button';
@@ -39,9 +38,8 @@ const languageLabels: Record<string, string> = {
     markdown: 'Markdown',
     yaml: 'YAML',
     yml: 'YAML',
-    text: 'Plain Text'
 };
-const languageLabel = computed(() => languageLabels[props.language] || props.language);
+const languageLabel = computed(() => props.language === 'text' ? t('uiVintage.code.plainText') : languageLabels[props.language] || props.language);
 const displayedCode = computed(() => {
     if (props.language !== 'json') return props.code.replace(/\n$/, '');
 
@@ -61,6 +59,8 @@ const highlightCode = async () => {
     if (!displayedCode.value || props.language === 'text') return;
 
     try {
+        // Load the highlighter only when a code block is rendered, so pages without code never download it
+        const { codeToHtml } = await import('shiki');
         const html = await codeToHtml(displayedCode.value, {
             lang: props.language,
             themes: { light: 'github-light', dark: 'github-dark' },
@@ -139,7 +139,7 @@ const copyCode = async () => {
 
             <!-- Status bar -->
             <div class="flex h-6 items-center justify-between gap-3 border-t border-border bg-surface px-3 text-[11px] text-muted-foreground">
-                <span class="truncate">Ln {{ codeLines.length }}, Col 1</span>
+                <span class="truncate">{{ t('uiVintage.code.position', { line: codeLines.length, column: 1 }) }}</span>
                 <span class="flex shrink-0 items-center gap-3">
                     <span>UTF-8</span>
                     <span>{{ languageLabel }}</span>

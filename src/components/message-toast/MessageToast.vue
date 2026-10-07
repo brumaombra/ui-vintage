@@ -30,18 +30,18 @@ const getToastIcon = (toast: MessageToastItem) => {
 
 // Resolve the tinted icon tile classes for each toast type
 const toneClasses: Record<MessageToastType, string> = {
-    success: 'border-green-200 bg-green-50 text-green-600 dark:border-green-900/50 dark:bg-green-950/30 dark:text-green-400',
-    info: 'border-blue-200 bg-blue-50 text-blue-600 dark:border-blue-900/50 dark:bg-blue-950/30 dark:text-blue-400',
-    warning: 'border-amber-200 bg-amber-50 text-amber-600 dark:border-amber-900/50 dark:bg-amber-950/30 dark:text-amber-400',
-    error: 'border-red-200 bg-red-50 text-red-600 dark:border-red-900/50 dark:bg-red-950/30 dark:text-red-400'
+    success: 'border-success/25 bg-success/10 text-success',
+    info: 'border-info/25 bg-info/10 text-info',
+    warning: 'border-warning/25 bg-warning/10 text-warning',
+    error: 'border-destructive/25 bg-destructive/10 text-destructive'
 };
 
 // Progress bar color for each toast type
 const progressClasses: Record<MessageToastType, string> = {
-    success: 'bg-green-500',
-    info: 'bg-blue-500',
-    warning: 'bg-amber-500',
-    error: 'bg-red-500'
+    success: 'bg-success',
+    info: 'bg-info',
+    warning: 'bg-warning',
+    error: 'bg-destructive'
 };
 
 const toasts = computed(() => messageToastState.toasts);
@@ -86,11 +86,17 @@ const getToastStyle = (toast: MessageToastItem, index: number) => {
     };
 };
 
+// Toast content elements currently watched by the observer, by toast id
+const observedElements = new Map<number, HTMLElement>();
+
 // Measure toast content heights so the stack can lay itself out
 const resizeObserver = typeof ResizeObserver !== 'undefined'
     ? new ResizeObserver((entries) => {
         for (const entry of entries) {
             const id = Number((entry.target as HTMLElement).dataset.toastId);
+
+            // Skip late notifications for toasts that already left
+            if (observedElements.get(id) !== entry.target) continue;
             heights.set(id, (entry.target as HTMLElement).offsetHeight);
         }
     })
@@ -99,7 +105,10 @@ const resizeObserver = typeof ResizeObserver !== 'undefined'
 // Register toast content elements with the observer
 const observeToast = (element: unknown) => {
     if (element instanceof HTMLElement && resizeObserver) {
-        heights.set(Number(element.dataset.toastId), element.offsetHeight);
+        const id = Number(element.dataset.toastId);
+        if (observedElements.get(id) === element) return;
+        heights.set(id, element.offsetHeight);
+        observedElements.set(id, element);
         resizeObserver.observe(element);
     }
 };
@@ -153,6 +162,11 @@ const handleAction = async (toast: MessageToastItem) => {
 // Forget measurements of removed toasts
 const handleAfterLeave = (element: Element) => {
     const id = Number((element as HTMLElement).dataset.toastId);
+    const content = observedElements.get(id);
+    if (content) {
+        resizeObserver?.unobserve(content);
+        observedElements.delete(id);
+    }
     heights.delete(id);
     leaveDirection.delete(id);
 };
@@ -167,6 +181,7 @@ watch(() => toasts.value.length, (length) => {
 // Stop observing on unmount
 onBeforeUnmount(() => {
     resizeObserver?.disconnect();
+    observedElements.clear();
 });
 </script>
 

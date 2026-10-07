@@ -6,7 +6,8 @@ import { getLocalTimeZone, today } from '@internationalized/date';
 import { createReusableTemplate, reactiveOmit, useVModel } from '@vueuse/core';
 import { CalendarRoot, useDateFormatter, useForwardPropsEmits } from 'reka-ui';
 import { createYear, createYearRange, toDate } from 'reka-ui/date';
-import { computed, toRaw } from 'vue';
+import { computed, toRaw, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { cn } from '../../../lib/utils';
 import { NativeSelect, NativeSelectOption } from '../native-select';
 import {
@@ -43,7 +44,11 @@ const placeholder = useVModel(props, 'placeholder', emits, {
     defaultValue: props.defaultPlaceholder ?? today(getLocalTimeZone()),
 }) as Ref<DateValue>;
 
-const formatter = useDateFormatter(props.locale ?? 'en');
+// Follow the app language unless a locale is passed explicitly
+const { t, locale: appLocale } = useI18n();
+const resolvedLocale = computed(() => props.locale || appLocale.value || 'en');
+const formatter = useDateFormatter(resolvedLocale.value);
+watch(resolvedLocale, value => formatter.setLocale(value));
 
 const yearRange = computed(() => {
     return (
@@ -85,7 +90,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
                 <div class="absolute inset-0 z-10 flex h-full items-center text-sm pl-2 pointer-events-none">
                     {{ formatter.custom(toDate(date), { month: 'short' }) }}
                 </div>
-                <NativeSelect class="relative z-20 h-full min-h-0 w-23 rounded-none border-0 bg-transparent pl-2 pr-6 text-xs font-semibold text-transparent shadow-none transition-all duration-300 ease-in-out outline-none ring-0 focus-visible:border-0 focus-visible:ring-0 dark:bg-transparent sm:text-sm" :model-value="date.month" @change="
+                <NativeSelect :aria-label="t('uiVintage.datePicker.month')" class="relative z-20 h-full min-h-0 w-23 rounded-none border-0 bg-transparent pl-2 pr-6 text-xs font-semibold text-transparent shadow-none transition-all duration-300 ease-in-out outline-none ring-0 focus-visible:border-0 focus-visible:ring-0 dark:bg-transparent sm:text-sm" :model-value="date.month" @change="
                     (e: Event) => {
                         placeholder = placeholder.set({
                             month: Number((e?.target as any)?.value),
@@ -108,7 +113,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
                 <div class="absolute inset-0 z-10 flex h-full items-center text-sm pl-2 pointer-events-none">
                     {{ formatter.custom(toDate(date), { year: 'numeric' }) }}
                 </div>
-                <NativeSelect class="relative z-20 h-full min-h-0 w-24 rounded-none border-0 bg-transparent pl-2 pr-6 text-xs font-semibold text-transparent shadow-none transition-all duration-300 ease-in-out outline-none ring-0 focus-visible:border-0 focus-visible:ring-0 dark:bg-transparent sm:text-sm" :model-value="date.year" @change="
+                <NativeSelect :aria-label="t('uiVintage.datePicker.year')" class="relative z-20 h-full min-h-0 w-24 rounded-none border-0 bg-transparent pl-2 pr-6 text-xs font-semibold text-transparent shadow-none transition-all duration-300 ease-in-out outline-none ring-0 focus-visible:border-0 focus-visible:ring-0 dark:bg-transparent sm:text-sm" :model-value="date.year" @change="
                     (e: Event) => {
                         placeholder = placeholder.set({
                             year: Number((e?.target as any)?.value),
@@ -125,7 +130,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
         </div>
     </DefineYearTemplate>
 
-    <CalendarRoot v-slot="{ grid, weekDays, date }" v-bind="forwarded" v-model:placeholder="placeholder" data-slot="calendar" :class="cn('p-3', props.class)">
+    <CalendarRoot v-slot="{ grid, weekDays, date }" v-bind="forwarded" v-model:placeholder="placeholder" :locale="resolvedLocale" data-slot="calendar" :class="cn('p-3', props.class)">
         <CalendarHeader class="pt-0">
             <nav class="flex items-center gap-1 absolute top-0 inset-x-0 justify-between">
                 <CalendarPrevButton>

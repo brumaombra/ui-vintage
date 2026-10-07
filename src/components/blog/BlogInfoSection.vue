@@ -32,7 +32,7 @@ const showModifiedDate = computed(() => Boolean(props.dateModified) && formatted
 
 <template>
     <!-- Author and date information -->
-    <Card data-aos="blur-up" class="gap-0! overflow-hidden p-0! sm:gap-0!">
+    <Card data-aos="blur-up" class="gap-0! overflow-hidden p-0!">
         <!-- Author -->
         <div :class="['flex gap-3 px-5 py-4', props.authorBio ? 'items-start' : 'items-center']">
             <!-- Author image -->

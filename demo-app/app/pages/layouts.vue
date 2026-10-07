@@ -97,7 +97,7 @@ const themeLogoCode = `<LandingNavbar app-name="Acme" app-logo="/logo.svg" app-l
 
         <DemoSection id="shells" title="Application shells" description="Complete layouts that own navigation, theming, and responsive behavior.">
             <div class="grid gap-4 md:grid-cols-3">
-                <NuxtLink v-for="shell in shells" :key="shell.title" :to="shell.to" :external="shell.external" class="group/shell rounded outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45">
+                <NuxtLinkLocale v-for="shell in shells" :key="shell.title" :to="shell.to" :external="shell.external" class="group/shell rounded outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45">
                     <Card interactive class="h-full">
                         <CardHeader>
                             <div class="mb-2 flex items-center justify-between">
@@ -113,7 +113,7 @@ const themeLogoCode = `<LandingNavbar app-name="Acme" app-logo="/logo.svg" app-l
                             <CardDescription>{{ shell.description }}</CardDescription>
                         </CardHeader>
                     </Card>
-                </NuxtLink>
+                </NuxtLinkLocale>
             </div>
         </DemoSection>
     </div>

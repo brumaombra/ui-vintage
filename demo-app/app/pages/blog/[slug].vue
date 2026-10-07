@@ -1,9 +1,7 @@
 <script setup>
 import { computed } from 'vue';
-import { useI18n } from 'vue-i18n';
 import { BlogContentRenderer, BlogFAQSection, BlogInfoSection, BlogPostHeader, BlogSectionTitle, CategoryCard, PostCard, SocialShareSidebar, TableOfContents } from '@brumaombra/ui-vintage/blog';
 import { createSEOMetatags, createPageSchema, slugify } from '~/composables/useUtils.js';
-import ProseHr from '~/components/content/ProseHr.vue';
 import ViewAllLink from '~/components/blog/ViewAllLink.vue';
 
 const { t, locale } = useI18n();
@@ -36,6 +34,11 @@ const sortByStableSeed = (items, getKey) => {
 const { data: post } = await useAsyncData(`post-${slug}-${locale.value}`, async () => {
     return await queryCollection('blog').path(route.path).first();
 });
+
+// Unknown post: show the 404 page
+if (!post.value) {
+    throw createError({ statusCode: 404, statusMessage: 'Post not found', fatal: true });
+}
 
 // Fetch related posts
 const { data: relatedPosts } = await useAsyncData(`related-posts-${slug}-${locale.value}`, async () => {
@@ -151,14 +154,14 @@ definePageMeta({
             <!-- Article content -->
             <BlogContentRenderer :value="post" />
 
-            <!-- Divider -->
-            <ProseHr />
+            <!-- Divider (lazy, like the copy Nuxt Content loads for markdown) -->
+            <LazyProseHr />
 
             <!-- FAQ section -->
             <BlogFAQSection v-if="post.faqs && post.faqs?.length > 0" :faqs="post.faqs" />
 
             <!-- Divider -->
-            <ProseHr />
+            <LazyProseHr />
 
             <!-- Blog info section -->
             <BlogInfoSection :author="post.author"

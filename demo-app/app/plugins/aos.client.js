@@ -5,8 +5,11 @@ import 'aos/dist/aos.css';
 export default defineNuxtPlugin(nuxtApp => {
     let isInitialized = false;
 
-    // Initialize AOS with desired settings
+    // Initialize AOS with desired settings (only once)
     const initAOS = () => {
+        // Skip if page:finish or onNuxtReady already initialized it
+        if (isInitialized) return;
+
         // Initialize AOS
         AOS.init({
             duration: 1000,

@@ -25,7 +25,8 @@ const initials = computed(() => getInitials(props.name));
 </script>
 
 <template>
-    <AvatarFallback data-slot="avatar-fallback" v-bind="delegatedProps" :aria-label="props.name || undefined" :class="cn('flex size-full items-center justify-center bg-surface font-semibold uppercase text-muted-foreground', textClass, shapeClass, props.class)">
+    <!-- With a name the initials act as an image of the person, so screen readers announce the name instead of the letters -->
+    <AvatarFallback data-slot="avatar-fallback" v-bind="delegatedProps" :role="props.name ? 'img' : undefined" :aria-label="props.name || undefined" :class="cn('flex size-full items-center justify-center bg-surface font-semibold uppercase text-muted-foreground', textClass, shapeClass, props.class)">
         <slot>{{ initials }}</slot>
     </AvatarFallback>
 </template>

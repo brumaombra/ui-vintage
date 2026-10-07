@@ -15,8 +15,8 @@ const props = withDefaults(defineProps<{
 // Marker classes
 const getMarkerClasses = () => {
     const toneClasses = {
-        checkmark: 'rounded bg-green-500/10 text-green-600 dark:text-green-400',
-        cross: 'rounded bg-red-500/10 text-red-600 dark:text-red-400',
+        checkmark: 'rounded bg-success/10 text-success',
+        cross: 'rounded bg-destructive/10 text-destructive',
         numbered: 'text-[11px] font-semibold tabular-nums text-primary',
         circle: ''
     };

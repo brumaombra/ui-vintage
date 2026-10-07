@@ -22,7 +22,7 @@ const props = withDefaults(defineProps<{
 </script>
 
 <template>
-    <Card class="group/post h-full gap-0! overflow-hidden p-0! transition-[translate,box-shadow] duration-300 ease-out-expo hover:-translate-y-0.5 hover:shadow-elevated-md sm:gap-0!">
+    <Card class="group/post h-full gap-0! overflow-hidden p-0! transition-[translate,box-shadow] duration-300 ease-out-expo hover:-translate-y-0.5 hover:shadow-elevated-md">
         <!-- Featured image -->
         <div v-if="props.image" class="aspect-video w-full overflow-hidden border-b border-border bg-surface">
             <NuxtImg :src="props.image" :alt="props.title" height="225" width="400" format="avif" quality="35" :sizes="{ 480: '480px', 1280: '400px' }" loading="lazy" decoding="async" class="size-full object-cover transition-[scale] duration-700 ease-out-expo group-hover/post:scale-[1.03]" />

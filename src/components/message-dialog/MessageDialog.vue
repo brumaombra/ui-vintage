@@ -37,20 +37,20 @@ const defaultMessageIcon = computed(() => {
 const messageIconClasses = computed(() => {
     const current = currentDialog.value;
     if (!current) return 'border-border bg-surface';
-    if (current.options.type === 'error') return 'border-red-200 bg-red-50 dark:border-red-900/50 dark:bg-red-950/30';
-    if (current.options.type === 'warning') return 'border-amber-200 bg-amber-50 dark:border-amber-900/50 dark:bg-amber-950/30';
-    if (current.options.type === 'success') return 'border-green-200 bg-green-50 dark:border-green-900/50 dark:bg-green-950/30';
+    if (current.options.type === 'error') return 'border-destructive/25 bg-destructive/10';
+    if (current.options.type === 'warning') return 'border-warning/25 bg-warning/10';
+    if (current.options.type === 'success') return 'border-success/25 bg-success/10';
     return 'border-border bg-surface';
 });
 
 // Resolved glyph color classes
 const messageGlyphClasses = computed(() => {
     const current = currentDialog.value;
-    if (!current) return 'text-blue-600 dark:text-blue-400';
-    if (current.options.type === 'error') return 'text-red-600 dark:text-red-400';
-    if (current.options.type === 'warning') return 'text-amber-600 dark:text-amber-400';
-    if (current.options.type === 'success') return 'text-green-600 dark:text-green-400';
-    return 'text-blue-600 dark:text-blue-400';
+    if (!current) return 'text-info';
+    if (current.options.type === 'error') return 'text-destructive';
+    if (current.options.type === 'warning') return 'text-warning';
+    if (current.options.type === 'success') return 'text-success';
+    return 'text-info';
 });
 
 // Close the dialog when the shell requests it
@@ -91,7 +91,7 @@ const handleOpenChange = (open: boolean) => {
 
             <!-- Dialog actions -->
             <AlertDialogFooter class="items-end">
-                <Button variant="secondary" :disabled="messageDialogState.busy" @click="resolveActiveMessageDialog">
+                <Button variant="secondary" @click="resolveActiveMessageDialog">
                     <HugeiconsIcon v-if="currentDialog.options.closeButtonIcon" :icon="currentDialog.options.closeButtonIcon" class="size-4" />
                     {{ resolvedCloseText }}
                 </Button>

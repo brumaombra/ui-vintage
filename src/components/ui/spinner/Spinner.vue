@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue';
 import { computed } from 'vue';
-import { getUiVintageRuntimeMessage } from '../../../lib/i18n';
+import { useUiVintageMessage } from '../../../lib/i18n';
 import { cn } from '../../../lib/utils';
 
 // Props
@@ -14,7 +14,8 @@ const props = withDefaults(defineProps<{
     label: ''
 });
 
-const resolvedLabel = computed(() => props.label || getUiVintageRuntimeMessage('uiVintage.buttons.loading', 'Loading'));
+const message = useUiVintageMessage();
+const resolvedLabel = computed(() => props.label || message('uiVintage.buttons.loading', 'Loading'));
 
 // Size classes
 const sizeClasses: Record<NonNullable<typeof props.size>, string> = {

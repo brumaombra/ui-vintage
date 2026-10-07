@@ -71,8 +71,8 @@ const underlineDelay = computed(() => `${beforeWords.value.length * 55 + 600}ms`
     <header class="relative flex flex-col items-center gap-6 pt-6 pb-4 text-center md:pt-12 md:pb-6">
         <!-- Announcement (links to something new, such as the latest post) -->
         <NuxtLink v-if="props.announcement" :to="props.announcement.to" class="group/announce max-w-full animate-uv-fade-up rounded outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45">
-            <span class="inline-flex max-w-full items-center gap-2 rounded border border-yellow-200 bg-yellow-50 px-3 py-1 text-xs text-yellow-800 transition-colors duration-150 group-hover/announce:border-yellow-300 dark:border-yellow-700/40 dark:bg-yellow-500/10 dark:text-yellow-300 dark:group-hover/announce:border-yellow-700/70">
-                <span aria-hidden="true" class="relative flex size-1.5 shrink-0">
+            <span class="inline-flex max-w-full items-center gap-2 rounded border border-warning/35 bg-warning/10 px-3 py-1 text-xs text-foreground transition-colors duration-150 group-hover/announce:border-warning/70">
+                <span aria-hidden="true" class="relative flex size-1.5 shrink-0 text-warning">
                     <span class="absolute inline-flex size-full animate-uv-ping-soft rounded-full bg-current opacity-60" />
                     <span class="relative inline-flex size-1.5 rounded-full bg-current" />
                 </span>

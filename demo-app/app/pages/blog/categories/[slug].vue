@@ -1,7 +1,5 @@
 <script setup>
 import { ref } from 'vue';
-import { useRoute } from 'vue-router';
-import { useI18n } from 'vue-i18n';
 import { News01Icon } from '@hugeicons/core-free-icons';
 import { BlogHeaderSection, PostsList } from '@brumaombra/ui-vintage/blog';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@brumaombra/ui-vintage/breadcrumb';
@@ -31,7 +29,7 @@ const { data: categoryData } = await useAsyncData(`category-${slug}-${locale.val
         // Execute queries in parallel
         const [categoryPost, posts, totalPostsCount] = await Promise.all([
             queryCollection('blog').select('categoryText').where('categorySlug', '=', slug).where('language', '=', locale.value).first(),
-            queryCollection('blog').select('title', 'description', 'image', 'categoryText', 'path').where('language', '=', locale.value).where('categorySlug', '=', slug).limit(postsPerPage).all(),
+            queryCollection('blog').select('title', 'description', 'image', 'categoryText', 'path').where('language', '=', locale.value).where('categorySlug', '=', slug).order('datePublished', 'DESC').limit(postsPerPage).all(),
             queryCollection('blog').where('categorySlug', '=', slug).where('language', '=', locale.value).count()
         ]);
 
@@ -51,6 +49,11 @@ const { data: categoryData } = await useAsyncData(`category-${slug}-${locale.val
     }
 });
 
+// Unknown category (no posts): show the 404 page
+if (!categoryData.value?.totalPosts) {
+    throw createError({ statusCode: 404, statusMessage: 'Category not found', fatal: true });
+}
+
 // Initialize reactive states
 const categoryTitle = categoryData.value?.categoryTitle || slug;
 const posts = ref(categoryData.value?.posts || []);
@@ -62,7 +65,7 @@ const loadMorePosts = async () => {
     isLoading.value = true;
     try {
         currentPage.value++;
-        const morePosts = await queryCollection('blog').select('title', 'description', 'image', 'categoryText', 'path').where('categorySlug', '=', slug).where('language', '=', locale.value).skip((currentPage.value - 1) * postsPerPage).limit(postsPerPage).all();
+        const morePosts = await queryCollection('blog').select('title', 'description', 'image', 'categoryText', 'path').where('categorySlug', '=', slug).where('language', '=', locale.value).order('datePublished', 'DESC').skip((currentPage.value - 1) * postsPerPage).limit(postsPerPage).all();
         if (morePosts.length === 0) {
             hasMorePosts.value = false;
         } else {

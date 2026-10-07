@@ -15,7 +15,7 @@ const props = withDefaults(defineProps<{
 </script>
 
 <template>
-    <Card class="group/category h-full gap-0! overflow-hidden p-0! transition-[translate,box-shadow] duration-300 ease-out-expo hover:-translate-y-0.5 hover:shadow-elevated-md sm:gap-0!">
+    <Card class="group/category h-full gap-0! overflow-hidden p-0! transition-[translate,box-shadow] duration-300 ease-out-expo hover:-translate-y-0.5 hover:shadow-elevated-md">
         <!-- Image -->
         <div class="h-32 w-full overflow-hidden border-b border-border bg-surface">
             <NuxtImg v-if="props.image" :src="props.image" :alt="props.name" height="225" width="400" format="avif" quality="35" :sizes="{ 480: '480px', 1280: '400px' }" loading="lazy" decoding="async" class="size-full object-cover transition-[scale] duration-700 ease-out-expo group-hover/category:scale-[1.03]" />

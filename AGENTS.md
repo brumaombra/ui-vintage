@@ -30,7 +30,7 @@ Only build something new when no entry point fits, and compose it from library p
 - Customize components through their props and the `class` prop (merged with tailwind-merge) rather than wrapping them in extra styled elements.
 - Keep corners at `rounded` (the library's square look) and use `shadow-elevated-sm|md|lg|xl` for elevation, without glows or gradients.
 - For motion, reuse the library utilities (`ease-spring`, `ease-out-expo`, `animate-uv-fade-up`, `animate-uv-pop`, `uv-floating-motion`). In custom transitions, name `scale`, `rotate`, and `translate` explicitly; Tailwind v4 doesn't animate them through `transform`.
-- Icons are Hugeicons definitions: import them from `@hugeicons/core-free-icons` and pass them to `:icon` props, or render them with `HugeiconsIcon` from `@hugeicons/vue`.
+- Icons are Hugeicons definitions: import them from `@hugeicons/core-free-icons` and pass them to `:icon` props, or render them with `HugeiconsIcon` from `@hugeicons/vue`. Both packages are peer dependencies, so the app must list them in its own `package.json`.
 - Form controls use `v-model`. Mark invalid fields with `aria-invalid` and show messages with `FieldError`.
 - Library strings are translated through vue-i18n (`uiVintage.*` keys). App copy belongs in the app's own locale files.
 

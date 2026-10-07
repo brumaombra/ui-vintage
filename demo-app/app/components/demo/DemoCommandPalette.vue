@@ -9,6 +9,7 @@ import { applyThemeWithTransition } from '@brumaombra/ui-vintage/theme-selector'
 import { demoNavigation } from '~/utils/demo-navigation';
 
 const open = defineModel<boolean>('open', { default: false });
+const localePath = useLocalePath();
 
 // Toggle the palette with Ctrl/Cmd + K
 const handleKeydown = (event: KeyboardEvent) => {
@@ -18,10 +19,11 @@ const handleKeydown = (event: KeyboardEvent) => {
     }
 };
 
-// Navigate to a page section
+// Navigate to a page section (in the current locale)
 const handleNavigate = async (path: string, sectionId?: string) => {
     open.value = false;
-    await navigateTo(sectionId ? { path, hash: `#${sectionId}` } : path);
+    const localizedPath = localePath(path);
+    await navigateTo(sectionId ? { path: localizedPath, hash: `#${sectionId}` } : localizedPath);
 };
 
 // Switch theme with the circular reveal from the center of the screen

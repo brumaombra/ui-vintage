@@ -25,24 +25,19 @@ const { t } = useI18n();
 const resolvedText = computed(() => props.text || t('uiVintage.buttons.loadMore'));
 const resolvedLoadingText = computed(() => props.loadingText || t('uiVintage.buttons.loading'));
 
-// Handle click event
+// Handle click event (ignored while loading, so the button stays focusable without firing twice)
 const handleClick = () => {
+    if (props.busy) return;
     emits('load-more');
 };
 </script>
 
 <template>
     <div class="flex justify-center">
-        <!-- Loading button -->
-        <Button v-if="props.busy" variant="secondary" class="w-full md:w-auto" :disabled="true">
-            <HugeiconsIcon :icon="RefreshIcon" class="size-4 animate-spin" />
-            {{ resolvedLoadingText }}
-        </Button>
-
-        <!-- Load more button -->
-        <Button v-else variant="secondary" class="w-full md:w-auto" @click="handleClick">
-            <HugeiconsIcon :icon="ArrowDown01Icon" class="size-4" />
-            {{ resolvedText }}
+        <!-- A single button for both states keeps keyboard focus on it while the next page loads -->
+        <Button variant="secondary" :class="['w-full md:w-auto', props.busy && 'cursor-wait']" :aria-disabled="props.busy || undefined" :aria-busy="props.busy || undefined" @click="handleClick">
+            <HugeiconsIcon :icon="props.busy ? RefreshIcon : ArrowDown01Icon" :class="['size-4', props.busy && 'animate-spin']" />
+            {{ props.busy ? resolvedLoadingText : resolvedText }}
         </Button>
     </div>
 </template>

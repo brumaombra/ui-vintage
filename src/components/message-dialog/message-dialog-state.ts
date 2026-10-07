@@ -24,7 +24,6 @@ interface MessageDialogRequest {
 
 interface MessageDialogState {
     current: MessageDialogRequest | null;
-    busy: boolean;
     isOpen: boolean;
 }
 
@@ -39,7 +38,6 @@ const MESSAGE_DIALOG_ROOT_ID = 'ui-vintage-message-dialog-root';
 // Shared message dialog state
 export const messageDialogState: MessageDialogState = reactive({
     current: null,
-    busy: false,
     isOpen: false
 });
 
@@ -104,7 +102,6 @@ const enqueueMessageDialog = (request: MessageDialogRequest) => {
 
 // Clear the active dialog and continue the queue
 const clearCurrentMessageDialog = () => {
-    messageDialogState.busy = false;
     messageDialogState.isOpen = false;
     messageDialogState.current = null;
     openNextMessageDialog();
@@ -141,7 +138,7 @@ export const closeMessageDialog = () => {
 // Resolve the active message dialog
 export const resolveActiveMessageDialog = () => {
     const current = messageDialogState.current;
-    if (!current || messageDialogState.busy) return;
+    if (!current || !messageDialogState.isOpen) return;
     current.resolve();
     scheduleCloseCurrentMessageDialog();
 };

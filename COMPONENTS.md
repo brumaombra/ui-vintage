@@ -56,6 +56,7 @@ import type { ButtonVariants } from '@brumaombra/ui-vintage/button';
 | `variant` | `ButtonVariants['variant']` |  |
 | `size` | `ButtonVariants['size']` |  |
 | `loading` | `boolean` | `false` |
+| `disabled` | `boolean` | `false` |
 | `class` | `HTMLAttributes['class']` |  |
 
 - **Also accepts** all props of Reka `PrimitiveProps`.
@@ -1205,7 +1206,7 @@ import { TimePicker } from '@brumaombra/ui-vintage/time-picker';
 | --- | --- | --- |
 | `defaultValue` | `string` | `''` |
 | `modelValue` | `string` |  |
-| `step` | `string \| number` | `1` |
+| `step` | `string \| number` | `60` |
 | `min` | `string` |  |
 | `max` | `string` |  |
 | `disabled` | `boolean` | `false` |
@@ -1520,7 +1521,7 @@ import type { DataTableSortDirection, DataTableSort, DataTableColumn } from '@br
 | `stickyHeader` | `boolean` | `false` |
 | `class` | `HTMLAttributes['class']` |  |
 
-- **Emits:** `update:selected` (value: PropertyKey[]), `update:sort` (value: DataTableSort \| null), `row-click` (row: T, event: MouseEvent).
+- **Emits:** `update:selected` (value: PropertyKey[]), `update:sort` (value: DataTableSort \| null), `row-click` (row: T, event: MouseEvent \| KeyboardEvent).
 - **Slots:** `cell-${string}`, `header-${string}`, `empty`.
 
 #### Functions, constants, and types
@@ -2111,7 +2112,7 @@ import type { SidebarProps, SidebarMenuButtonVariants } from '@brumaombra/ui-vin
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `defaultOpen` | `boolean` | `!defaultDocument?.cookie.includes(`${SIDEBAR_COOKIE_NAME}=false`)` |
+| `defaultOpen` | `boolean` | `undefined` |
 | `open` | `boolean` | `undefined` |
 | `compact` | `boolean` | `false` |
 | `class` | `HTMLAttributes['class']` |  |

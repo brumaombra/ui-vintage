@@ -81,7 +81,7 @@ const darkLogo = computed(() => props.appLogoDark || props.appLogo);
 const hasDarkLogo = computed(() => darkLogo.value !== lightLogo.value);
 
 // Logo alt text (also names the home link when the app name is not shown)
-const logoAlt = computed(() => props.appName ? `${props.appName} logo` : t('uiVintage.common.home'));
+const logoAlt = computed(() => props.appName ? t('uiVintage.common.logo', { name: props.appName }) : t('uiVintage.common.home'));
 </script>
 
 <template>
@@ -125,7 +125,7 @@ const logoAlt = computed(() => props.appName ? `${props.appName} logo` : t('uiVi
                         <SidebarMenu :class="cn('gap-1', props.compact && 'gap-0.5')">
                             <SidebarMenuItem v-for="item in section.items" :key="item.id">
                                 <SidebarMenuButton as-child :is-active="item.active" :class="cn('group/nav relative h-auto min-h-11 overflow-hidden rounded px-3 py-2.5 text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground data-[active=true]:bg-primary/10 data-[active=true]:text-foreground sm:px-3.5', 'before:absolute before:inset-y-2 before:left-0 before:w-0.5 before:origin-center before:scale-y-0 before:bg-primary before:transition-transform before:duration-300 before:ease-spring data-[active=true]:before:scale-y-100', item.description ? 'items-start' : 'items-center')">
-                                    <component :is="props.sidebarLinkComponent" v-bind="getSidebarItemLinkProps(item)">
+                                    <component :is="props.sidebarLinkComponent" v-bind="getSidebarItemLinkProps(item)" :aria-current="item.active ? 'page' : undefined">
                                         <!-- Icon -->
                                         <HugeiconsIcon v-if="item.icon" :icon="item.icon" :stroke-width="1.8" :class="cn('shrink-0 opacity-90 transition-[opacity,color] duration-150 group-hover/nav:opacity-100 group-data-[active=true]/nav:text-primary', item.description ? 'mt-0.5 size-5 sm:h-5 sm:w-5' : 'size-5 self-center sm:h-6 sm:w-6')" />
 

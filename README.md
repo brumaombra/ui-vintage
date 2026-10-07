@@ -59,10 +59,10 @@ UI Vintage is a Nuxt 4 module and component library for dashboards, forms, landi
 
 ## Installation
 
-Install the package with its peer integrations in an existing Nuxt 4 app. The stylesheet is built with Tailwind CSS v4, and the components use Vue I18n for their labels:
+Install the package with its peer integrations in an existing Nuxt 4 app. The stylesheet is built with Tailwind CSS v4, the components use Vue I18n for their labels, and icons come from Hugeicons:
 
 ```bash
-npm install @brumaombra/ui-vintage @nuxt/image @nuxtjs/i18n tailwindcss @tailwindcss/vite
+npm install @brumaombra/ui-vintage @nuxt/image @nuxtjs/i18n tailwindcss @tailwindcss/vite @hugeicons/core-free-icons @hugeicons/vue
 ```
 
 Register the module, Nuxt I18n, and the Tailwind Vite plugin in `nuxt.config`:
@@ -401,6 +401,7 @@ New entry points need an export in `package.json` and a description and category
 
 - Nuxt 4 and Vue 3.5 or newer.
 - Tailwind CSS v4 with `@tailwindcss/vite` registered in `vite.plugins`.
+- `@hugeicons/core-free-icons` 4 and `@hugeicons/vue` 1 (the icons you pass to `:icon` props, and the ones the components render).
 - `vue-i18n` 9, 10, or 11 with an i18n setup, such as `@nuxtjs/i18n` (the components call `useI18n()`).
 - `@nuxt/image` 2 for image components (the module installs it when needed).
 - `@nuxt/content` 3, only for the `blog` and `content` components.

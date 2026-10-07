@@ -12,7 +12,7 @@ export const [useSidebar, provideSidebarContext] = createContext<{
     state: ComputedRef<'expanded' | 'collapsed'>;
     open: Ref<boolean>;
     setOpen: (value: boolean) => void;
-    isMobile: Ref<boolean>;
+    isMobile: Readonly<Ref<boolean>>;
     openMobile: Ref<boolean>;
     setOpenMobile: (value: boolean) => void;
     toggleSidebar: () => void;

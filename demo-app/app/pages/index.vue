@@ -20,6 +20,7 @@ import { demoNavigation } from '~/utils/demo-navigation';
 
 definePageMeta({ layout: 'dashboard' });
 
+const localePath = useLocalePath();
 const paletteOpen = useState('demo-palette-open', () => false);
 const installCopied = ref(false);
 const goalsReady = ref(false);
@@ -100,7 +101,7 @@ onMounted(() => {
         <!-- Hero -->
         <section class="relative isolate flex flex-col items-center gap-6 pt-6 text-center sm:pt-12">
             <!-- Announcement -->
-            <button type="button" class="group/announce animate-uv-fade-up cursor-pointer rounded outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45" @click="navigateTo('/foundations#motion')">
+            <button type="button" class="group/announce animate-uv-fade-up cursor-pointer rounded outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45" @click="navigateTo(localePath('/foundations#motion'))">
                 <Badge text="New motion system · 20 new components" color="yellow" pulse class="px-3 py-1 transition-colors duration-150 group-hover/announce:border-yellow-300 dark:group-hover/announce:border-yellow-700/60" />
             </button>
 
@@ -123,10 +124,10 @@ onMounted(() => {
             <!-- Actions -->
             <div class="flex animate-uv-fade-up flex-col gap-3 [animation-delay:240ms] sm:flex-row">
                 <Button size="lg" as-child>
-                    <NuxtLink to="/components/actions">
+                    <NuxtLinkLocale to="/components/actions">
                         Browse components
                         <HugeiconsIcon :icon="ArrowRight01Icon" />
-                    </NuxtLink>
+                    </NuxtLinkLocale>
                 </Button>
                 <Button variant="secondary" size="lg" @click="paletteOpen = true">
                     <HugeiconsIcon :icon="Search01Icon" />
@@ -281,7 +282,7 @@ onMounted(() => {
         <!-- Explore -->
         <DemoSection id="explore" title="Explore the library" description="Every category has live, interactive examples with copyable code.">
             <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-                <NuxtLink v-for="page in explorePages" :key="page.id" :to="page.to" class="group/explore rounded outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45">
+                <NuxtLinkLocale v-for="page in explorePages" :key="page.id" :to="page.to" class="group/explore rounded outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45">
                     <Card interactive class="h-full gap-3!">
                         <CardHeader>
                             <div class="mb-2 flex size-10 items-center justify-center rounded border border-primary/30 text-primary transition-colors duration-150 group-hover/explore:border-primary/60">
@@ -298,7 +299,7 @@ onMounted(() => {
                             <span v-if="page.sections.length > 4" class="px-1 py-0.5 text-[10px] font-semibold text-muted-foreground">+{{ page.sections.length - 4 }}</span>
                         </CardContent>
                     </Card>
-                </NuxtLink>
+                </NuxtLinkLocale>
             </div>
         </DemoSection>
 

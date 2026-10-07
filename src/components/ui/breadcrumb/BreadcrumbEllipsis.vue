@@ -14,10 +14,10 @@ const { t } = useI18n();
 </script>
 
 <template>
-    <span data-slot="breadcrumb-ellipsis" role="presentation" aria-hidden="true" :class="cn('flex size-6 items-center justify-center rounded-sm transition-colors duration-150 hover:bg-accent hover:text-primary', props.class)">
+    <span data-slot="breadcrumb-ellipsis" role="presentation" :class="cn('flex size-6 items-center justify-center rounded-sm transition-colors duration-150 hover:bg-accent hover:text-primary', props.class)">
         <!-- Default slot content -->
         <slot>
-            <HugeiconsIcon :icon="MoreHorizontalIcon" class="size-4" />
+            <HugeiconsIcon :icon="MoreHorizontalIcon" class="size-4" aria-hidden="true" />
         </slot>
 
         <!-- Screen reader text for accessibility -->

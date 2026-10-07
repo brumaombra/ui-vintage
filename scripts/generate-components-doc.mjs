@@ -378,7 +378,7 @@ const anchorOf = key => `${packageName}/${key}`.toLowerCase().replace(/[^a-z0-9 
 
 /*********************** Main ***********************/
 
-const entryKeys = Object.keys(packageJson.exports).filter(key => key.startsWith('./') && key !== './style.css').map(key => key.slice(2));
+const entryKeys = Object.keys(packageJson.exports).filter(key => key.startsWith('./') && !['./style.css', './package.json'].includes(key)).map(key => key.slice(2));
 
 // Every entry point needs metadata, and every metadata entry needs an entry point
 const missingMeta = entryKeys.filter(key => !entryMeta[key]);

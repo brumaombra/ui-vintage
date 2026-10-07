@@ -1,12 +1,12 @@
 <script setup>
 import { computed } from 'vue';
-import { useI18n } from 'vue-i18n';
 import { DashboardSquare01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Button } from '@brumaombra/ui-vintage/button';
 import { LandingContent, LandingFooter, LandingNavbar, LandingShell } from '@brumaombra/ui-vintage/landing';
 import { LanguageSelector } from '@brumaombra/ui-vintage/language-selector';
 import { ThemeSelector } from '@brumaombra/ui-vintage/theme-selector';
+import { NuxtLink } from '#components';
 
 const { t, locale, locales, setLocale } = useI18n();
 const localePath = useLocalePath();
@@ -27,15 +27,15 @@ const footerSections = computed(() => [{
     links: [{
         id: 'blog',
         label: t('blog.allPosts'),
-        href: localePath('/blog')
+        to: localePath('/blog')
     }, {
         id: 'categories',
         label: t('navigation.breadcrumbs.categories'),
-        href: localePath('/blog/categories')
+        to: localePath('/blog/categories')
     }, {
         id: 'tags',
         label: t('navigation.breadcrumbs.tags'),
-        href: localePath('/blog/tags')
+        to: localePath('/blog/tags')
     }]
 }, {
     id: 'library',
@@ -43,19 +43,19 @@ const footerSections = computed(() => [{
     links: [{
         id: 'overview',
         label: t('navigation.overview'),
-        href: '/'
+        to: localePath('/')
     }, {
         id: 'components',
         label: t('navigation.components'),
-        href: '/components/actions'
+        to: localePath('/components/actions')
     }, {
         id: 'foundations',
         label: t('navigation.foundations'),
-        href: '/foundations'
+        to: localePath('/foundations')
     }, {
         id: 'github',
         label: 'GitHub',
-        href: 'https://github.com/brumaombra/ui-vintage',
+        to: 'https://github.com/brumaombra/ui-vintage',
         newTab: true
     }]
 }]);
@@ -88,7 +88,7 @@ const handleSelectLanguage = async language => {
                 <template #right>
                     <!-- Back to the component docs -->
                     <Button variant="secondary" size="sm" as-child class="hidden sm:inline-flex">
-                        <NuxtLink to="/">
+                        <NuxtLink :to="localePath('/')">
                             <HugeiconsIcon :icon="DashboardSquare01Icon" />
                             {{ t('navigation.components') }}
                         </NuxtLink>
@@ -118,6 +118,7 @@ const handleSelectLanguage = async language => {
                 :app-link-to="localePath('/blog')"
                 :app-description="t('blog.footerDescription')"
                 :sections="footerSections"
+                :link-component="NuxtLink"
                 author-name="Bruma"
                 author-link="https://brumaombra.com" />
         </template>

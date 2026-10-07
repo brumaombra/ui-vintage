@@ -54,6 +54,7 @@ const props = withDefaults(defineProps<{
 });
 
 const { t } = useI18n();
+const logoAlt = computed(() => props.appName ? t('uiVintage.common.logo', { name: props.appName }) : t('uiVintage.common.home'));
 const hasSingleSection = computed(() => props.sections.length === 1);
 
 // Get link props based on the type of link component and whether the link should open in a new tab
@@ -90,8 +91,8 @@ const hasDarkLogo = computed(() => darkLogo.value !== lightLogo.value);
                     <!-- App logo and name -->
                     <a :href="props.appLinkTo" class="mb-4 inline-flex items-center gap-2 text-lg font-semibold tracking-tight text-foreground transition-opacity duration-150 hover:opacity-80">
                         <template v-if="lightLogo">
-                            <NuxtImg :src="lightLogo" :alt="`${props.appName} logo`" width="32" height="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="lazy" decoding="async" :class="cn('size-8 shrink-0 object-contain', hasDarkLogo && 'dark:hidden', props.logoClass)" />
-                            <NuxtImg v-if="hasDarkLogo" :src="darkLogo" :alt="`${props.appName} logo`" width="32" height="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="lazy" decoding="async" :class="cn('hidden size-8 shrink-0 object-contain dark:block', props.logoClass)" />
+                            <NuxtImg :src="lightLogo" :alt="logoAlt" width="32" height="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="lazy" decoding="async" :class="cn('size-8 shrink-0 object-contain', hasDarkLogo && 'dark:hidden', props.logoClass)" />
+                            <NuxtImg v-if="hasDarkLogo" :src="darkLogo" :alt="logoAlt" width="32" height="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="lazy" decoding="async" :class="cn('hidden size-8 shrink-0 object-contain dark:block', props.logoClass)" />
                         </template>
                         <span>{{ props.appName }}</span>
                     </a>
@@ -153,7 +154,7 @@ const hasDarkLogo = computed(() => darkLogo.value !== lightLogo.value);
                 <!-- Author -->
                 <div v-if="props.authorName && props.authorLink" class="flex flex-wrap items-center justify-center gap-1.5 md:justify-end">
                     <span>{{ t('uiVintage.footer.madeWith') }}</span>
-                    <HugeiconsIcon :icon="FavouriteIcon" class="size-4 shrink-0 text-red-600 dark:text-red-400" />
+                    <HugeiconsIcon :icon="FavouriteIcon" class="size-4 shrink-0 text-destructive" />
                     <span>{{ t('uiVintage.footer.by') }}</span>
                     <a :href="props.authorLink" target="_blank" rel="noopener noreferrer" class="font-semibold text-foreground hover:underline">
                         {{ props.authorName }}

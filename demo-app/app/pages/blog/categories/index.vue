@@ -1,7 +1,5 @@
 <script setup>
 import { computed } from 'vue';
-import { useRoute } from 'vue-router';
-import { useI18n } from 'vue-i18n';
 import { FolderLibraryIcon, News01Icon } from '@hugeicons/core-free-icons';
 import { BlogHeaderSection, CategoriesList } from '@brumaombra/ui-vintage/blog';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@brumaombra/ui-vintage/breadcrumb';

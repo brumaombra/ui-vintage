@@ -11,7 +11,8 @@
             "loading": {
                 "title": "加载中...",
                 "description": "请稍候，正在加载内容。"
-            }
+            },
+            "logo": "{name} 标志"
         },
         "buttons": {
             "remove": "移除",
@@ -51,7 +52,9 @@
             "description": "搜索要运行的命令..."
         },
         "datePicker": {
-            "placeholder": "选择日期"
+            "placeholder": "选择日期",
+            "month": "月份",
+            "year": "年份"
         },
         "terminal": {
             "title": "终端",
@@ -61,7 +64,9 @@
         "code": {
             "title": "代码",
             "copy": "复制代码",
-            "copied": "代码已复制"
+            "copied": "代码已复制",
+            "position": "第 {line} 行，第 {column} 列",
+            "plainText": "纯文本"
         },
         "footer": {
             "madeWith": "用",
@@ -103,9 +108,6 @@
                 "copy": "复制链接",
                 "copied": "链接已复制"
             }
-        },
-        "select": {
-            "defaultPlaceholder": "请选择一个选项"
         },
         "errorPage": {
             "notFound": {

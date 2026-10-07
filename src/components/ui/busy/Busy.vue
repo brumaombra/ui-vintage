@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, type HTMLAttributes } from 'vue';
-import { getUiVintageRuntimeMessage } from '../../../lib/i18n';
+import { useUiVintageMessage } from '../../../lib/i18n';
 import { cn } from '../../../lib/utils';
 import { Spinner } from '../spinner';
 
@@ -14,7 +14,8 @@ const props = withDefaults(defineProps<{
     show: false
 });
 
-const resolvedLabel = computed(() => props.label || getUiVintageRuntimeMessage('uiVintage.common.loading.title', 'Loading...'));
+const message = useUiVintageMessage();
+const resolvedLabel = computed(() => props.label || message('uiVintage.common.loading.title', 'Loading...'));
 </script>
 
 <template>

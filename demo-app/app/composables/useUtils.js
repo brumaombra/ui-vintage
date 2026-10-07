@@ -49,9 +49,8 @@ export const createSEOMetatags = ({ title = '', description = '', url = '', imag
         title,
         description,
 
-        // Canonical URL
+        // Page URL (the canonical link comes from useLocaleHead)
         ogUrl: fullUrl,
-        canonical: fullUrl,
 
         // Open Graph
         ogType: type,

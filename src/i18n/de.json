@@ -11,7 +11,8 @@
             "loading": {
                 "title": "Wird geladen...",
                 "description": "Bitte warte einen Moment, wahrend wir die Inhalte laden."
-            }
+            },
+            "logo": "{name}-Logo"
         },
         "buttons": {
             "remove": "Entfernen",
@@ -51,7 +52,9 @@
             "description": "Nach einem auszuführenden Befehl suchen..."
         },
         "datePicker": {
-            "placeholder": "Datum auswählen"
+            "placeholder": "Datum auswählen",
+            "month": "Monat",
+            "year": "Jahr"
         },
         "terminal": {
             "title": "Terminal",
@@ -61,7 +64,9 @@
         "code": {
             "title": "Code",
             "copy": "Code kopieren",
-            "copied": "Code kopiert"
+            "copied": "Code kopiert",
+            "position": "Zeile {line}, Spalte {column}",
+            "plainText": "Nur-Text"
         },
         "footer": {
             "madeWith": "Gemacht mit",
@@ -103,9 +108,6 @@
                 "copy": "Link kopieren",
                 "copied": "Link kopiert"
             }
-        },
-        "select": {
-            "defaultPlaceholder": "Option auswahlen"
         },
         "errorPage": {
             "notFound": {

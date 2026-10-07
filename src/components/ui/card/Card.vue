@@ -32,7 +32,7 @@ const colorClasses = computed(() => {
 
 <template>
     <div data-slot="card" :data-interactive="props.interactive ? '' : undefined" :class="cn(
-        'relative flex flex-col gap-4 sm:gap-6! rounded py-6 transition-[border-color,box-shadow,background-color,translate] duration-300 ease-out-expo',
+        'relative flex flex-col gap-4 sm:gap-6 rounded py-6 transition-[border-color,box-shadow,background-color,translate] duration-300 ease-out-expo',
         colorClasses,
         props.interactive && 'cursor-pointer hover:-translate-y-0.5 hover:shadow-elevated-md active:translate-y-0 active:duration-100',
         props.class,

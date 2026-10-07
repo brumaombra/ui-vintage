@@ -32,6 +32,18 @@ describe('getReadingMinutes', () => {
         const body = { children: [{ value: 'word '.repeat(300) }, ['word '.repeat(140)]] };
         expect(getReadingMinutes(body)).toBe(2);
     });
+
+    // Minimark bodies: tag names, props and the table of contents are not words
+    it('ignores tags, props and the table of contents', () => {
+        const heading = ['h2', { id: 'a-very-long-heading-id' }, 'Heading'];
+        const body = {
+            type: 'minimark',
+            value: Array.from({ length: 220 }, () => ['p', { class: 'lead text-lg' }, 'word']).concat([heading]),
+            toc: { title: '', depth: 2, links: [{ id: 'a-very-long-heading-id', text: 'Heading' }] }
+        };
+        expect(getReadingMinutes(body)).toBe(1);
+        expect(getReadingMinutes({ title: 'Post', body })).toBe(1);
+    });
 });
 
 // Long dates in the blog, always in the Italian timezone

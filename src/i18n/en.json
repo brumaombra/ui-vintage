@@ -11,7 +11,8 @@
             "loading": {
                 "title": "Loading...",
                 "description": "Please wait a moment while we load the content."
-            }
+            },
+            "logo": "{name} logo"
         },
         "buttons": {
             "remove": "Remove",
@@ -51,7 +52,9 @@
             "description": "Search for a command to run..."
         },
         "datePicker": {
-            "placeholder": "Pick a date"
+            "placeholder": "Pick a date",
+            "month": "Month",
+            "year": "Year"
         },
         "terminal": {
             "title": "Terminal",
@@ -61,7 +64,9 @@
         "code": {
             "title": "Code",
             "copy": "Copy code",
-            "copied": "Code copied"
+            "copied": "Code copied",
+            "position": "Ln {line}, Col {column}",
+            "plainText": "Plain text"
         },
         "footer": {
             "madeWith": "Made with",
@@ -103,9 +108,6 @@
                 "copy": "Copy link",
                 "copied": "Link copied"
             }
-        },
-        "select": {
-            "defaultPlaceholder": "Select an option"
         },
         "errorPage": {
             "notFound": {

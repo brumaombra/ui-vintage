@@ -92,7 +92,7 @@ onBeforeUnmount(() => observer?.disconnect());
 
         <!-- Preview / code body -->
         <Transition mode="out-in" enter-active-class="transition-[opacity,translate] duration-300 ease-out-expo" enter-from-class="opacity-0 translate-y-1" leave-active-class="transition-opacity duration-100" leave-to-class="opacity-0">
-            <Card v-if="view === 'preview'" key="preview" class="relative gap-0! overflow-hidden p-0! sm:gap-0!">
+            <Card v-if="view === 'preview'" key="preview" class="relative gap-0! overflow-hidden p-0!">
                 <!-- Dotted canvas -->
                 <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle,color-mix(in_oklab,var(--foreground)_9%,transparent)_1px,transparent_1px)] bg-size-[16px_16px] mask-[radial-gradient(ellipse_at_center,black_40%,transparent_85%)]" />
                 <div :class="['relative p-5 sm:p-8', props.previewClass]">

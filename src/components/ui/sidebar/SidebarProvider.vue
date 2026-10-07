@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { HTMLAttributes, Ref } from 'vue';
-import { defaultDocument, useEventListener, useMediaQuery, useVModel } from '@vueuse/core';
+import { useEventListener, useMediaQuery, useMounted, useVModel } from '@vueuse/core';
+import { useCookie } from 'nuxt/app';
 import { TooltipProvider } from 'reka-ui';
 import { computed, ref } from 'vue';
 import { cn } from '../../../lib/utils';
@@ -13,7 +14,7 @@ const props = withDefaults(defineProps<{
     compact?: boolean;
     class?: HTMLAttributes['class'];
 }>(), {
-    defaultOpen: !defaultDocument?.cookie.includes(`${SIDEBAR_COOKIE_NAME}=false`),
+    defaultOpen: undefined,
     open: undefined,
     compact: false
 });
@@ -23,19 +24,29 @@ const emits = defineEmits<{
     'update:open': [open: boolean];
 }>();
 
-const isMobile = useMediaQuery('(max-width: 768px)');
+// Remembered open state, read per instance on both server and client so the first render matches
+const sidebarCookie = useCookie<boolean | null>(SIDEBAR_COOKIE_NAME, {
+    default: () => null,
+    maxAge: SIDEBAR_COOKIE_MAX_AGE,
+    path: '/'
+});
+
+// The mobile layout only exists in the browser: render the desktop markup until hydration is done
+const isMounted = useMounted();
+const matchesMobile = useMediaQuery('(max-width: 768px)');
+const isMobile = computed(() => isMounted.value && matchesMobile.value);
 const openMobile = ref(false);
 
 const open = useVModel(props, 'open', emits, {
-    defaultValue: props.defaultOpen ?? false,
+    defaultValue: props.defaultOpen ?? sidebarCookie.value !== false,
     passive: (props.open === undefined) as false
 }) as Ref<boolean>;
 
 function setOpen(value: boolean) {
     open.value = value; // emits('update:open', value)
 
-    // This sets the cookie to keep the sidebar state.
-    document.cookie = `${SIDEBAR_COOKIE_NAME}=${open.value}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
+    // Keep the sidebar state for the next visit
+    sidebarCookie.value = value;
 }
 
 function setOpenMobile(value: boolean) {

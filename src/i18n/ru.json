@@ -11,7 +11,8 @@
             "loading": {
                 "title": "Загрузка...",
                 "description": "Подождите немного, пока мы загружаем содержимое."
-            }
+            },
+            "logo": "Логотип {name}"
         },
         "buttons": {
             "remove": "Убрать",
@@ -51,7 +52,9 @@
             "description": "Найти команду для выполнения..."
         },
         "datePicker": {
-            "placeholder": "Выберите дату"
+            "placeholder": "Выберите дату",
+            "month": "Месяц",
+            "year": "Год"
         },
         "terminal": {
             "title": "Терминал",
@@ -61,7 +64,9 @@
         "code": {
             "title": "Код",
             "copy": "Копировать код",
-            "copied": "Код скопирован"
+            "copied": "Код скопирован",
+            "position": "Стр. {line}, стлб. {column}",
+            "plainText": "Обычный текст"
         },
         "footer": {
             "madeWith": "Сделано с",
@@ -103,9 +108,6 @@
                 "copy": "Копировать ссылку",
                 "copied": "Ссылка скопирована"
             }
-        },
-        "select": {
-            "defaultPlaceholder": "Выберите вариант"
         },
         "errorPage": {
             "notFound": {

@@ -1,7 +1,5 @@
 <script setup>
 import { ref } from 'vue';
-import { useRoute } from 'vue-router';
-import { useI18n } from 'vue-i18n';
 import { News01Icon } from '@hugeicons/core-free-icons';
 import { BlogHeaderSection, PostsList } from '@brumaombra/ui-vintage/blog';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@brumaombra/ui-vintage/breadcrumb';
@@ -52,6 +50,12 @@ const { data: tagData } = await useAsyncData(`tag-${slug}-${locale.value}-posts`
     }
 });
 
+// Unknown tag (no posts): show the 404 page
+if (!tagData.value?.totalPosts) {
+    throw createError({ statusCode: 404, statusMessage: 'Tag not found', fatal: true });
+}
+
+// Initialize reactive states
 const tagTitle = tagData.value?.tagTitle || slug;
 const posts = ref(tagData.value?.posts || []);
 const totalPosts = tagData.value?.totalPosts || 0;

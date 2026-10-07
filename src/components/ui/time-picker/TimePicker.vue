@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<{
     inputClass?: HTMLAttributes['class'];
 }>(), {
     defaultValue: '',
-    step: 1,
+    step: 60,
     disabled: false
 });
 

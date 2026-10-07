@@ -41,7 +41,7 @@ const props = withDefaults(defineProps<{
 const emits = defineEmits<{
     'update:selected': [value: PropertyKey[]];
     'update:sort': [value: DataTableSort | null];
-    'row-click': [row: T, event: MouseEvent];
+    'row-click': [row: T, event: MouseEvent | KeyboardEvent];
 }>();
 
 // Slots
@@ -132,6 +132,14 @@ const handleRowClick = (row: T, event: MouseEvent) => {
     if ((event.target as HTMLElement).closest('button, a, input, [role=checkbox]')) return;
     emits('row-click', row, event);
 };
+
+// Let keyboard users activate a focused clickable row with Enter or Space
+const handleRowKeydown = (row: T, event: KeyboardEvent) => {
+    if (!props.rowClickable || event.target !== event.currentTarget) return;
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    event.preventDefault();
+    emits('row-click', row, event);
+};
 </script>
 
 <template>
@@ -188,7 +196,7 @@ const handleRowClick = (row: T, event: MouseEvent) => {
 
             <!-- Rows (animated when sorted, added, or removed) -->
             <TransitionGroup v-else tag="tbody" name="uv-data-table-row">
-                <tr v-for="(row, index) in sortedRows" :key="getRowKey(row)" :data-state="selectedSet.has(getRowKey(row)) ? 'selected' : undefined" :class="cn('border-b border-border transition-colors duration-150 last:border-b-0 hover:bg-surface/70 data-[state=selected]:bg-primary/5', props.rowClickable && 'cursor-pointer')" @click="handleRowClick(row, $event)">
+                <tr v-for="(row, index) in sortedRows" :key="getRowKey(row)" :data-state="selectedSet.has(getRowKey(row)) ? 'selected' : undefined" :class="cn('border-b border-border transition-colors duration-150 last:border-b-0 hover:bg-surface/70 data-[state=selected]:bg-primary/5', props.rowClickable && 'cursor-pointer focus-visible:bg-surface/70 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring')" :tabindex="props.rowClickable ? 0 : undefined" @click="handleRowClick(row, $event)" @keydown="handleRowKeydown(row, $event)">
                     <!-- Row selection -->
                     <td v-if="props.selectable" class="px-4 py-3">
                         <Checkbox :model-value="selectedSet.has(getRowKey(row))" :aria-label="t('uiVintage.dataTable.selectRow')" @update:model-value="toggleRow(row)" />

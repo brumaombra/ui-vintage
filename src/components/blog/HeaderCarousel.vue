@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { NuxtImg } from '#components';
-import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
+import { computed, onMounted, onUnmounted, ref, useId, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { ArrowLeft01Icon, ArrowRight01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
@@ -30,8 +30,10 @@ const SWIPE_THRESHOLD_PX = 50;
 // Carousel state
 const currentSlide = ref(0);
 const isPaused = ref(false);
-const autoplayEnabled = ref(false);
+const motionAllowed = ref(false);
 const slideCount = computed(() => props.featuredPosts.length || 0);
+const autoplayEnabled = computed(() => motionAllowed.value && slideCount.value > 1);
+const slideIdPrefix = `carousel-${useId()}-slide`;
 
 // Keep the active slide in range when the list of posts shrinks
 watch(slideCount, (count) => {
@@ -91,9 +93,9 @@ const handleProgressEnd = () => {
     if (autoplayEnabled.value) nextSlide();
 };
 
-// Start autoplay when component mounts (never with reduced motion)
+// Allow autoplay once mounted (never with reduced motion); it starts as soon as there are at least two posts
 onMounted(() => {
-    autoplayEnabled.value = slideCount.value > 1 && !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    motionAllowed.value = !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
     document.addEventListener('visibilitychange', handleVisibilityChange);
 });
 
@@ -107,7 +109,7 @@ onUnmounted(() => {
     <div v-if="props.featuredPosts.length > 0" role="region" aria-roledescription="carousel" :aria-label="t('uiVintage.blog.carouselNavigation')" class="group/carousel relative isolate overflow-hidden rounded border border-border bg-card shadow-elevated-lg outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45" tabindex="0" @mouseenter="pause" @mouseleave="resume" @focusin="pause" @focusout="resume" @keydown="handleKeydown" @pointerdown="handlePointerDown" @pointerup="handlePointerUp">
         <!-- Slides (stacked; the active one crossfades in) -->
         <div class="relative h-[28rem] w-full md:h-[32rem]">
-            <div v-for="(post, index) in props.featuredPosts" :id="`carousel-slide-${index}`" :key="post.path || post.title || index" role="group" aria-roledescription="slide" :aria-label="`${index + 1} / ${slideCount}`" :aria-hidden="currentSlide !== index" :inert="currentSlide !== index || undefined" :class="cn('absolute inset-0 transition-[opacity,scale] duration-700 ease-out-expo', currentSlide === index ? 'z-10 scale-100 opacity-100' : 'z-0 scale-[1.02] opacity-0')">
+            <div v-for="(post, index) in props.featuredPosts" :id="`${slideIdPrefix}-${index}`" :key="post.path || post.title || index" role="group" aria-roledescription="slide" :aria-label="`${index + 1} / ${slideCount}`" :aria-hidden="currentSlide !== index" :inert="currentSlide !== index || undefined" :class="cn('absolute inset-0 transition-[opacity,scale] duration-700 ease-out-expo', currentSlide === index ? 'z-10 scale-100 opacity-100' : 'z-0 scale-[1.02] opacity-0')">
                 <!-- Slide image with a slow zoom -->
                 <NuxtLink :to="post.path" tabindex="-1" aria-hidden="true" class="absolute inset-0 overflow-hidden">
                     <NuxtImg v-if="post.image" :src="post.image" :alt="post.title" width="1200" height="640" format="avif" quality="45" :sizes="{ 480: '480px', 1536: '1152px' }" :loading="index === 0 ? 'eager' : 'lazy'" :fetchpriority="index === 0 ? 'high' : 'auto'" :preload="index === 0" :class="cn('size-full object-cover', currentSlide === index && 'animate-uv-ken-burns')" />
@@ -154,7 +156,7 @@ onUnmounted(() => {
         <div v-if="slideCount > 1" class="absolute inset-x-0 bottom-0 z-20 flex items-center justify-between gap-4 p-6 md:px-10 md:pb-8">
             <!-- Slide indicators (the active one fills up until the next slide) -->
             <div class="flex items-center gap-2" role="tablist" :aria-label="t('uiVintage.blog.carouselNavigation')">
-                <button v-for="(_, index) in props.featuredPosts" :key="index" type="button" role="tab" :aria-selected="currentSlide === index" :aria-controls="`carousel-slide-${index}`" :aria-label="t('uiVintage.blog.goToSlide', { index: index + 1 })" :class="cn('relative h-1.5 cursor-pointer overflow-hidden rounded-full bg-white/30 outline-none transition-[width,background-color] duration-500 ease-spring hover:bg-white/50 focus-visible:ring-2 focus-visible:ring-white', currentSlide === index ? 'w-12' : 'w-4')" @click="goToSlide(index)">
+                <button v-for="(_, index) in props.featuredPosts" :key="index" type="button" role="tab" :aria-selected="currentSlide === index" :aria-controls="`${slideIdPrefix}-${index}`" :aria-label="t('uiVintage.blog.goToSlide', { index: index + 1 })" :class="cn('relative h-1.5 cursor-pointer overflow-hidden rounded-full bg-white/30 outline-none transition-[width,background-color] duration-500 ease-spring hover:bg-white/50 focus-visible:ring-2 focus-visible:ring-white', currentSlide === index ? 'w-12' : 'w-4')" @click="goToSlide(index)">
                     <span v-if="currentSlide === index" :key="`progress-${currentSlide}`" class="absolute inset-0 origin-left rounded-full bg-primary" :style="autoplayEnabled ? { animation: `uv-grow-x ${AUTOPLAY_DURATION_MS}ms linear both`, animationPlayState: isPaused ? 'paused' : 'running' } : undefined" @animationend="handleProgressEnd" />
                 </button>
             </div>

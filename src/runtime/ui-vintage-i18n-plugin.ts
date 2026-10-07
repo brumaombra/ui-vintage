@@ -1,9 +1,11 @@
 import { defineNuxtPlugin } from 'nuxt/app';
 import type { NuxtApp } from 'nuxt/app';
-import { uiVintageMessages } from '../lib/i18n';
+import { unref } from 'vue';
+import { setUiVintageRuntimeLocaleSource, uiVintageMessages } from '../lib/i18n';
 
 type MessageComposer = {
     mergeLocaleMessage: (locale: string, messages: unknown) => void;
+    locale?: unknown;
 };
 
 type I18nInstance = {
@@ -55,6 +57,14 @@ const applyUiVintageMessages = (nuxtApp: NuxtApp): void => {
     // Merge the library messages into the composer
     for (const [locale, messages] of Object.entries(uiVintageMessages)) {
         composer.mergeLocaleMessage(locale, messages);
+    }
+
+    // In the browser, the toasts and dialogs mounted outside the app follow the app locale (never on the server, where state is shared across requests)
+    if (import.meta.client) {
+        setUiVintageRuntimeLocaleSource(() => {
+            const locale = unref(composer.locale);
+            return typeof locale === 'string' ? locale : undefined;
+        });
     }
 };
 

@@ -41,7 +41,7 @@ const toggleExpanded = () => {
 </script>
 
 <template>
-    <Card :data-state="expanded ? 'open' : 'closed'" :class="cn('group/accordion gap-0! overflow-hidden p-0! sm:gap-0!', props.class)">
+    <Card :data-state="expanded ? 'open' : 'closed'" :class="cn('group/accordion gap-0! overflow-hidden p-0!', props.class)">
         <!-- Header -->
         <button :id="triggerId" type="button" :aria-expanded="expanded" :aria-controls="contentId" class="group/trigger flex w-full cursor-pointer items-center gap-3 px-5 py-3.5 text-left outline-none focus-visible:bg-surface focus-visible:ring-[3px] focus-visible:ring-inset focus-visible:ring-ring/40" @click="toggleExpanded">
             <!-- Icon -->

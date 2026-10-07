@@ -14,8 +14,8 @@ tags: ["Nuxt", "Content", "Component Libraries"]
 faqs:
   - question: "Why keep Nuxt Content in the demo app?"
     answer: "Because the demo should validate the same content querying and rendering path that a production consumer would use, not just the visual components in isolation."
-  - question: "Why only two example posts?"
-    answer: "Two posts are enough to validate the index page, a real detail page, category navigation, related content logic, and shared article components without adding noise."
+  - question: "How many example posts does the demo ship?"
+    answer: "Six posts per language. That is enough to fill the index, give related posts and categories real choices, put more than one post in a category, and share tags across posts, while staying small enough to read through in one sitting."
 ---
 
 ## The migration changes what the demo is proving
@@ -42,9 +42,9 @@ The demo does not need every conversion card or SEO helper from the original app
 
 ---
 
-## Two example posts are enough to validate the route graph
+## A small set of example posts is enough to validate the route graph
 
-With two posts, the demo can validate the full blog route graph:
+With a handful of posts, the demo can validate the full blog route graph:
 
 ::BlogList
 ---

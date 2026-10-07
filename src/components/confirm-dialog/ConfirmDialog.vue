@@ -11,6 +11,11 @@ const pendingAction = ref<'confirm' | 'cancel' | null>(null);
 
 // Run an action while showing a spinner on the button that triggered it
 const runAction = async (action: 'confirm' | 'cancel') => {
+    // Ignore clicks while another action is still running
+    if (pendingAction.value) {
+        return;
+    }
+
     pendingAction.value = action;
     try {
         await (action === 'confirm' ? confirmActiveDialog() : cancelActiveConfirmDialog());

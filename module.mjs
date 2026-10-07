@@ -28,24 +28,18 @@ const loadNuxtKit = async () => {
     throw new Error('Unable to resolve @nuxt/kit for @brumaombra/ui-vintage. Install the package dependencies or add Nuxt to the consuming app.');
 };
 
-const { addPlugin, createResolver, defineNuxtModule, installModule } = await loadNuxtKit();
+const { addPlugin, createResolver, defineNuxtModule, hasNuxtModule, installModule } = await loadNuxtKit();
+const { version } = moduleRequire('./package.json');
 const resolver = createResolver(import.meta.url);
 const sourceRoot = resolver.resolve('src');
 const stylesPath = resolver.resolve('src/styles.css');
-
-// Check whether the consuming app already has a specific module installed
-const hasModuleInstalled = (modules, moduleName) => {
-    return modules.some((entry) => {
-        if (typeof entry === 'string') return entry === moduleName;
-        if (Array.isArray(entry)) return entry[0] === moduleName;
-        return false;
-    });
-};
 
 export default defineNuxtModule({
     // Module meta information
     meta: {
         name: '@brumaombra/ui-vintage',
+        configKey: 'uiVintage',
+        version,
         compatibility: {
             nuxt: '>=4.0.0'
         }
@@ -63,7 +57,7 @@ export default defineNuxtModule({
         nuxt.options.build.transpile.push(new RegExp(`^${cleanSourceRoot}`));
 
         // Ensure Nuxt Image is available for components that render NuxtImg
-        if (!hasModuleInstalled(nuxt.options.modules, '@nuxt/image')) {
+        if (!hasNuxtModule('@nuxt/image', nuxt)) {
             await installModule('@nuxt/image');
         }
 

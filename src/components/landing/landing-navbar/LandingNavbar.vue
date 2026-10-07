@@ -53,7 +53,7 @@ const hasDarkLogo = computed(() => darkLogo.value !== lightLogo.value);
 const { t } = useI18n();
 
 // Logo alt text (also names the home link when the app name is not shown)
-const logoAlt = computed(() => props.appName ? `${props.appName} logo` : t('uiVintage.common.home'));
+const logoAlt = computed(() => props.appName ? t('uiVintage.common.logo', { name: props.appName }) : t('uiVintage.common.home'));
 </script>
 
 <template>

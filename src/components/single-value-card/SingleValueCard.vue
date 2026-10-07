@@ -33,11 +33,11 @@ const props = withDefaults(defineProps<{
 const valueClass = computed(() => {
     switch (props.valueColor) {
         case 'green':
-            return 'text-green-600 dark:text-green-400';
+            return 'text-success';
         case 'red':
-            return 'text-red-600 dark:text-red-400';
+            return 'text-destructive';
         case 'gray':
-            return 'text-gray-600 dark:text-gray-400';
+            return 'text-muted-foreground';
         default:
             return 'text-foreground';
     }
@@ -52,7 +52,7 @@ const staticValue = computed(() => typeof props.value === 'number' && props.form
 </script>
 
 <template>
-    <Card :class="cn('gap-0! p-4! sm:gap-0!', props.class)">
+    <Card :class="cn('gap-0! p-4!', props.class)">
         <!-- Label and icon -->
         <div class="flex items-start justify-between gap-3">
             <span class="min-w-0 text-[11px] font-semibold leading-5 tracking-wider text-muted-foreground uppercase">
@@ -71,7 +71,7 @@ const staticValue = computed(() => typeof props.value === 'number' && props.form
             </span>
 
             <!-- Trend badge -->
-            <span v-if="props.trend !== null" :class="cn('inline-flex items-center gap-0.5 rounded-sm px-1 py-0.5 text-[11px] font-semibold tabular-nums', trendIsPositive ? 'bg-green-500/10 text-green-600 dark:text-green-400' : 'bg-red-500/10 text-red-600 dark:text-red-400')">
+            <span v-if="props.trend !== null" :class="cn('inline-flex items-center gap-0.5 rounded-sm px-1 py-0.5 text-[11px] font-semibold tabular-nums', trendIsPositive ? 'bg-success/10 text-success' : 'bg-destructive/10 text-destructive')">
                 <HugeiconsIcon :icon="trendIsPositive ? ArrowUpRight01Icon : ArrowDownRight01Icon" class="size-3" />
                 {{ formattedTrend }}
             </span>

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useId } from 'vue';
 import { Progress } from '../ui/progress';
 
 // Props
@@ -12,6 +13,9 @@ const props = withDefaults(defineProps<{
     bottomLeftLabel: '',
     bottomRightLabel: ''
 });
+
+// Name the progress bar after the visible title
+const titleId = useId();
 </script>
 
 <template>
@@ -19,7 +23,7 @@ const props = withDefaults(defineProps<{
         <!-- Header with label and value -->
         <div class="flex items-center justify-between">
             <!-- Title of the progress bar -->
-            <span class="text-sm font-semibold text-foreground">
+            <span :id="titleId" class="text-sm font-semibold text-foreground">
                 {{ props.title }}
             </span>
 
@@ -30,7 +34,7 @@ const props = withDefaults(defineProps<{
         </div>
 
         <!-- Progress bar -->
-        <Progress :model-value="props.value" :max="props.max" />
+        <Progress :model-value="props.value" :max="props.max" :aria-labelledby="titleId" />
 
         <!-- Bottom labels -->
         <div v-if="props.bottomLeftLabel || props.bottomRightLabel" class="flex items-center justify-between text-xs">
