@@ -1,6 +1,7 @@
 <script setup>
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
+import { Tag01Icon, News01Icon } from '@hugeicons/core-free-icons';
 import { BlogHeaderSection, BlogTagsSection } from '@brumaombra/ui-vintage/blog';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@brumaombra/ui-vintage/breadcrumb';
 import { buildTagsFromPosts, createPageSchema, createSEOMetatags } from '~/composables/useUtils.js';
@@ -22,6 +23,13 @@ const { data: tagsData } = await useAsyncData(`blog-tags-${locale.value}`, async
 });
 
 const tags = tagsData.value || [];
+
+// Tag totals shown under the header
+const tagUses = tags.reduce((total, tag) => total + (tag.count || 0), 0);
+const headerStats = [
+    { icon: Tag01Icon, value: tags.length, label: t('blog.header.stats.tags', tags.length) },
+    { icon: News01Icon, value: tagUses, label: t('blog.header.stats.uses', tagUses) }
+];
 
 // Define SEO metadata
 useSeoMeta(createSEOMetatags({
@@ -58,7 +66,7 @@ definePageMeta({
 <template>
     <div>
         <!-- Breadcrumbs -->
-        <Breadcrumb class="mb-2 animate-uv-fade-up">
+        <Breadcrumb class="mb-2 flex animate-uv-fade-up justify-center">
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink as-child>
@@ -85,9 +93,13 @@ definePageMeta({
         </Breadcrumb>
 
         <!-- Blog header -->
-        <BlogHeaderSection :title="t('blog.tags.title')" :description="t('blog.tags.description')" class="mb-12 md:mb-16" />
+        <BlogHeaderSection :title="t('blog.tags.title')"
+            :highlight="t('blog.tags.title')"
+            :description="t('blog.tags.description')"
+            :stats="headerStats"
+            class="mb-12 md:mb-16" />
 
         <!-- Tags list -->
-        <BlogTagsSection :tags="tags" />
+        <BlogTagsSection :tags="tags" class="justify-center" />
     </div>
 </template>

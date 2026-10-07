@@ -89,9 +89,9 @@ const headerAnnouncement = featuredPosts[0] ? { text: featuredPosts[0].title, to
 
 // Blog totals shown under the header
 const headerStats = [
-    { icon: News01Icon, value: totalPosts.value, label: t('blog.header.stats.posts') },
-    { icon: FolderLibraryIcon, value: categories.length, label: t('blog.header.stats.categories') },
-    { icon: Tag01Icon, value: tags.length, label: t('blog.header.stats.tags') }
+    { icon: News01Icon, value: totalPosts.value, label: t('blog.header.stats.posts', totalPosts.value) },
+    { icon: FolderLibraryIcon, value: categories.length, label: t('blog.header.stats.categories', categories.length) },
+    { icon: Tag01Icon, value: tags.length, label: t('blog.header.stats.tags', tags.length) }
 ];
 
 // Load more posts

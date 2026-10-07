@@ -38,9 +38,10 @@
         "header": {
             "highlight": "Blog",
             "stats": {
-                "posts": "posts",
-                "categories": "categories",
-                "tags": "tags"
+                "posts": "post | posts",
+                "categories": "category | categories",
+                "tags": "tag | tags",
+                "uses": "use | uses"
             }
         },
         "categories": {

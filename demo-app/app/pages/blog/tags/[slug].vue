@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
+import { News01Icon } from '@hugeicons/core-free-icons';
 import { BlogHeaderSection, PostsList } from '@brumaombra/ui-vintage/blog';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@brumaombra/ui-vintage/breadcrumb';
 import { LoadMoreButton } from '@brumaombra/ui-vintage/load-more-button';
@@ -110,7 +111,7 @@ definePageMeta({
 <template>
     <div>
         <!-- Breadcrumbs -->
-        <Breadcrumb class="mb-2 animate-uv-fade-up">
+        <Breadcrumb class="mb-2 flex animate-uv-fade-up justify-center">
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink as-child>
@@ -145,7 +146,11 @@ definePageMeta({
         </Breadcrumb>
 
         <!-- Blog header -->
-        <BlogHeaderSection :title="tagTitle" :description="t('blog.tags.singleTagDescription', { tag: tagTitle })" class="mb-12 md:mb-16" />
+        <BlogHeaderSection :title="tagTitle"
+            :highlight="tagTitle"
+            :description="t('blog.tags.singleTagDescription', { tag: tagTitle })"
+            :stats="[{ icon: News01Icon, value: totalPosts, label: t('blog.header.stats.posts', totalPosts) }]"
+            class="mb-12 md:mb-16" />
 
         <!-- Posts -->
         <PostsList :posts="posts" />

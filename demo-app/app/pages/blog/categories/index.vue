@@ -1,6 +1,8 @@
 <script setup>
+import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
+import { FolderLibraryIcon, News01Icon } from '@hugeicons/core-free-icons';
 import { BlogHeaderSection, CategoriesList } from '@brumaombra/ui-vintage/blog';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@brumaombra/ui-vintage/breadcrumb';
 import { createPageSchema, createSEOMetatags } from '~/composables/useUtils.js';
@@ -35,6 +37,16 @@ const buildCategoriesFromPosts = posts => {
 const { data: blogCategories } = await useAsyncData(`demo-blog-categories-${locale.value}`, async () => {
     const posts = await queryCollection('blog').select('categorySlug', 'categoryText', 'image').where('language', '=', locale.value).all();
     return buildCategoriesFromPosts(posts);
+});
+
+// Category totals shown under the header
+const headerStats = computed(() => {
+    const categories = blogCategories.value || [];
+    const postCount = categories.reduce((total, category) => total + category.count, 0);
+    return [
+        { icon: FolderLibraryIcon, value: categories.length, label: t('blog.header.stats.categories', categories.length) },
+        { icon: News01Icon, value: postCount, label: t('blog.header.stats.posts', postCount) }
+    ];
 });
 
 // Define SEO metadata
@@ -72,7 +84,7 @@ definePageMeta({
 <template>
     <div>
         <!-- Breadcrumbs -->
-        <Breadcrumb class="mb-2 animate-uv-fade-up">
+        <Breadcrumb class="mb-2 flex animate-uv-fade-up justify-center">
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink as-child>
@@ -99,7 +111,11 @@ definePageMeta({
         </Breadcrumb>
 
         <!-- Blog header -->
-        <BlogHeaderSection :title="t('blog.categories.title')" :description="t('blog.categories.description')" class="mb-12 md:mb-16" />
+        <BlogHeaderSection :title="t('blog.categories.title')"
+            :highlight="t('blog.categories.title')"
+            :description="t('blog.categories.description')"
+            :stats="headerStats"
+            class="mb-12 md:mb-16" />
 
         <!-- Categories section -->
         <CategoriesList :categories="blogCategories || []" />
