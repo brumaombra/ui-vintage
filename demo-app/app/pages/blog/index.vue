@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { FolderLibraryIcon, News01Icon, Tag01Icon } from '@hugeicons/core-free-icons';
 import { AllPostsSection, BlogHeaderSection, BlogSectionTitle, BlogTagsSection, CategoriesSection, HeaderCarousel } from '@brumaombra/ui-vintage/blog';
 import { createSEOMetatags, createPageSchema, buildTagsFromPosts } from '~/composables/useUtils.js';
 import ViewAllLink from '~/components/blog/ViewAllLink.vue';
@@ -83,11 +84,14 @@ const categories = blogIndexData.value?.categories || [];
 const tags = blogIndexData.value?.tags || [];
 const hasMorePosts = ref(posts.value.length < totalPosts.value);
 
-// List of badges for the header section
-const headerBadges = [
-    { color: 'blue', text: t('blog.header.badge.topic') },
-    { color: 'green', text: t('blog.header.badge.content') },
-    { color: 'gray', text: t('blog.header.badge.free') }
+// Announce the latest post in the header
+const headerAnnouncement = featuredPosts[0] ? { text: featuredPosts[0].title, to: featuredPosts[0].path } : null;
+
+// Blog totals shown under the header
+const headerStats = [
+    { icon: News01Icon, value: totalPosts.value, label: t('blog.header.stats.posts') },
+    { icon: FolderLibraryIcon, value: categories.length, label: t('blog.header.stats.categories') },
+    { icon: Tag01Icon, value: tags.length, label: t('blog.header.stats.tags') }
 ];
 
 // Load more posts
@@ -148,7 +152,11 @@ definePageMeta({
 <template>
     <div class="space-y-16 md:space-y-24">
         <!-- Header section -->
-        <BlogHeaderSection :badges="headerBadges" :title="t('blog.title')" :description="t('blog.description')" />
+        <BlogHeaderSection :announcement="headerAnnouncement"
+            :title="t('blog.title')"
+            :highlight="t('blog.header.highlight')"
+            :description="t('blog.description')"
+            :stats="headerStats" />
 
         <!-- Header carousel -->
         <section>

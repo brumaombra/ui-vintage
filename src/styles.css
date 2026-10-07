@@ -172,6 +172,7 @@ html {
     --animate-uv-word-in: uv-word-in 0.9s var(--ease-spring) both;
     --animate-uv-grow-x: uv-grow-x 0.9s var(--ease-out-expo) both;
     --animate-uv-ken-burns: uv-ken-burns 9s ease-out both;
+    --animate-uv-draw: uv-draw 1s var(--ease-out-expo) both;
 
     @keyframes uv-word-in {
         0% { opacity: 0; transform: translateY(0.45em); filter: blur(8px); }
@@ -181,6 +182,12 @@ html {
     @keyframes uv-grow-x {
         0% { transform: scaleX(0); }
         100% { transform: scaleX(1); }
+    }
+
+    /* Draws an SVG stroke that uses pathLength="1" and stroke-dasharray: 1 */
+    @keyframes uv-draw {
+        0% { stroke-dashoffset: 1; }
+        100% { stroke-dashoffset: 0; }
     }
 
     @keyframes uv-ken-burns {

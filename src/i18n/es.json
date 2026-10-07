@@ -71,6 +71,7 @@
             "readingProgress": "Progreso de lectura",
             "readMore": "Leer mas",
             "goToPost": "Ir al articulo",
+            "new": "Nuevo",
             "tableOfContents": "Tabla de contenidos",
             "tableOfContentsDescription": "Ir a una seccion de este articulo",
             "tableOfContentsSections": "{count} seccion | {count} secciones",

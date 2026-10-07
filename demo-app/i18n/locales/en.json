@@ -36,10 +36,11 @@
         "exploreCategories": "Explore categories",
         "exploreAllCategories": "Explore all categories",
         "header": {
-            "badge": {
-                "topic": "Production-like demo",
-                "content": "Nuxt Content",
-                "free": "Real markdown posts"
+            "highlight": "Blog",
+            "stats": {
+                "posts": "posts",
+                "categories": "categories",
+                "tags": "tags"
             }
         },
         "categories": {

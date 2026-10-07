@@ -71,6 +71,7 @@
             "readingProgress": "阅读进度",
             "readMore": "阅读更多",
             "goToPost": "前往文章",
+            "new": "最新",
             "tableOfContents": "目录",
             "tableOfContentsDescription": "跳转到本文的一个部分",
             "tableOfContentsSections": "{count} 个章节",

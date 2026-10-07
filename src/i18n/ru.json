@@ -71,6 +71,7 @@
             "readingProgress": "Прогресс чтения",
             "readMore": "Читать далее",
             "goToPost": "Перейти к статье",
+            "new": "Новое",
             "tableOfContents": "Содержание",
             "tableOfContentsDescription": "Перейти к разделу статьи",
             "tableOfContentsSections": "Разделов: {count}",

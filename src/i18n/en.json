@@ -71,6 +71,7 @@
             "readingProgress": "Reading progress",
             "readMore": "Read more",
             "goToPost": "Go to post",
+            "new": "New",
             "tableOfContents": "Table of contents",
             "tableOfContentsDescription": "Jump to a section of this article",
             "tableOfContentsSections": "{count} section | {count} sections",

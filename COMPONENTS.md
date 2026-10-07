@@ -3492,8 +3492,11 @@ import { AllPostsSection, BlogContentRenderer, BlogFAQSection, BlogInfoSection, 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `badges` | `Array<{ color: ToneColor; text: string }>` | `[]` |
+| `announcement` | `{ text: string; to: string; label?: string } \| null` | `null` |
 | `title` *(required)* | `string` |  |
+| `highlight` | `string` | `''` |
 | `description` *(required)* | `string` |  |
+| `stats` | `Array<{ label: string; value: string \| number; icon?: HugeiconsIconDefinition }>` | `[]` |
 
 #### `BlogSectionTitle`
 

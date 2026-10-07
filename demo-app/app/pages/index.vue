@@ -105,7 +105,7 @@ onMounted(() => {
                 <span class="relative inline-block text-primary">
                     alive
                     <svg class="absolute -bottom-2 left-0 w-full text-primary/60" viewBox="0 0 200 12" fill="none" preserveAspectRatio="none" aria-hidden="true">
-                        <path d="M2 9C40 3 80 2 198 7" stroke="currentColor" stroke-width="4" stroke-linecap="round" pathLength="1" class="[stroke-dasharray:1] [stroke-dashoffset:1] animate-[uv-draw_1s_var(--ease-out-expo)_0.6s_forwards]" />
+                        <path d="M2 9C40 3 80 2 198 7" stroke="currentColor" stroke-width="4" stroke-linecap="round" pathLength="1" class="animate-uv-draw [stroke-dasharray:1] [animation-delay:0.6s]" />
                     </svg>
                 </span>.
             </h1>
@@ -322,9 +322,3 @@ onMounted(() => {
         </p>
     </div>
 </template>
-
-<style>
-@keyframes uv-draw {
-    to { stroke-dashoffset: 0; }
-}
-</style>
