@@ -114,6 +114,8 @@ const handleSelectLanguage = async language => {
         <!-- Footer -->
         <template #footer>
             <LandingFooter app-name="UI Vintage"
+                app-logo="/logo.svg"
+                app-logo-dark="/logo-dark.svg"
                 :app-link-to="localePath('/blog')"
                 :app-description="t('blog.footerDescription')"
                 :sections="footerSections"

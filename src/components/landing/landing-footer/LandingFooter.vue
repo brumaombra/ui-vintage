@@ -25,6 +25,7 @@ export interface LandingFooterSection {
 const props = withDefaults(defineProps<{
     appName: string;
     appLogo?: string;
+    appLogoDark?: string;
     appLinkTo?: string;
     logoClass?: HTMLAttributes['class'];
     appDescription?: string;
@@ -73,6 +74,11 @@ const getLinkProps = (link: LandingFooterLink) => {
         ...sharedProps
     };
 };
+
+// Logo sources for each theme (either one falls back to the other)
+const lightLogo = computed(() => props.appLogo || props.appLogoDark);
+const darkLogo = computed(() => props.appLogoDark || props.appLogo);
+const hasDarkLogo = computed(() => darkLogo.value !== lightLogo.value);
 </script>
 
 <template>
@@ -83,7 +89,10 @@ const getLinkProps = (link: LandingFooterLink) => {
                 <div :class="cn('max-w-md flex-1', props.brandClass)">
                     <!-- App logo and name -->
                     <a :href="props.appLinkTo" class="mb-4 inline-flex items-center gap-2 text-lg font-semibold tracking-tight text-foreground transition-opacity duration-150 hover:opacity-80">
-                        <NuxtImg v-if="props.appLogo" :src="props.appLogo" :alt="`${props.appName} logo`" width="32" height="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="lazy" decoding="async" :class="cn('size-8 shrink-0 object-contain', props.logoClass)" />
+                        <template v-if="lightLogo">
+                            <NuxtImg :src="lightLogo" :alt="`${props.appName} logo`" width="32" height="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="lazy" decoding="async" :class="cn('size-8 shrink-0 object-contain', hasDarkLogo && 'dark:hidden', props.logoClass)" />
+                            <NuxtImg v-if="hasDarkLogo" :src="darkLogo" :alt="`${props.appName} logo`" width="32" height="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="lazy" decoding="async" :class="cn('hidden size-8 shrink-0 object-contain dark:block', props.logoClass)" />
+                        </template>
                         <span>{{ props.appName }}</span>
                     </a>
 

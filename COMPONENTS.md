@@ -3071,6 +3071,7 @@ import { DashboardShell } from '@brumaombra/ui-vintage/dashboard-shell';
 | --- | --- | --- |
 | `appName` | `string` | `''` |
 | `appLogo` | `string` | `''` |
+| `appLogoDark` | `string` | `''` |
 | `appLinkTo` | `string` | `'/'` |
 | `title` | `string` | `''` |
 | `description` | `string` | `''` |
@@ -3148,6 +3149,7 @@ import type { LandingFooterLink, LandingFooterSection } from '@brumaombra/ui-vin
 | --- | --- | --- |
 | `appName` | `string` | `''` |
 | `appLogo` | `string` | `''` |
+| `appLogoDark` | `string` | `''` |
 | `appLinkTo` | `string` | `'/'` |
 | `logoClass` | `HTMLAttributes['class']` |  |
 | `class` | `HTMLAttributes['class']` |  |
@@ -3164,6 +3166,7 @@ import type { LandingFooterLink, LandingFooterSection } from '@brumaombra/ui-vin
 | --- | --- | --- |
 | `appName` *(required)* | `string` |  |
 | `appLogo` | `string` |  |
+| `appLogoDark` | `string` |  |
 | `appLinkTo` | `string` | `'/'` |
 | `logoClass` | `HTMLAttributes['class']` |  |
 | `appDescription` | `string` | `''` |
@@ -3229,6 +3232,7 @@ import type { LandingFooterLink, LandingFooterSection } from '@brumaombra/ui-vin
 | --- | --- | --- |
 | `appName` *(required)* | `string` |  |
 | `appLogo` | `string` |  |
+| `appLogoDark` | `string` |  |
 | `appLinkTo` | `string` | `'/'` |
 | `logoClass` | `HTMLAttributes['class']` |  |
 | `appDescription` | `string` | `''` |
@@ -3278,6 +3282,7 @@ import { LandingNavbar } from '@brumaombra/ui-vintage/landing-navbar';
 | --- | --- | --- |
 | `appName` | `string` | `''` |
 | `appLogo` | `string` | `''` |
+| `appLogoDark` | `string` | `''` |
 | `appLinkTo` | `string` | `'/'` |
 | `logoClass` | `HTMLAttributes['class']` |  |
 | `class` | `HTMLAttributes['class']` |  |

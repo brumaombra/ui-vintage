@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { NuxtImg } from '#components';
+import { computed } from 'vue';
 import type { Component, HTMLAttributes } from 'vue';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import BackgroundGrid from '../background-grid/BackgroundGrid.vue';
@@ -13,6 +14,7 @@ import type { HugeiconsIconDefinition } from '../../lib/common-types';
 const props = withDefaults(defineProps<{
     appName?: string;
     appLogo?: string;
+    appLogoDark?: string;
     appLinkTo?: string;
     title?: string;
     description?: string;
@@ -40,6 +42,7 @@ const props = withDefaults(defineProps<{
 }>(), {
     appName: '',
     appLogo: '',
+    appLogoDark: '',
     appLinkTo: '/',
     title: '',
     description: '',
@@ -68,6 +71,11 @@ const getSidebarItemLinkProps = (item: NonNullable<typeof props.sidebarSections>
         ...sharedProps
     };
 };
+
+// Logo sources for each theme (either one falls back to the other)
+const lightLogo = computed(() => props.appLogo || props.appLogoDark);
+const darkLogo = computed(() => props.appLogoDark || props.appLogo);
+const hasDarkLogo = computed(() => darkLogo.value !== lightLogo.value);
 </script>
 
 <template>
@@ -83,7 +91,10 @@ const getSidebarItemLinkProps = (item: NonNullable<typeof props.sidebarSections>
                                 <a :href="props.appLinkTo" class="inline-flex items-center gap-2">
                                     <div class="inline-flex items-center gap-2">
                                         <!-- App logo -->
-                                        <NuxtImg v-if="props.appLogo" :src="props.appLogo" :alt="`${props.appName} logo`" width="32" height="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="eager" class="size-8 shrink-0 object-contain" />
+                                        <template v-if="lightLogo">
+                                            <NuxtImg :src="lightLogo" :alt="`${props.appName} logo`" width="32" height="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="eager" :class="['size-8 shrink-0 object-contain', hasDarkLogo && 'dark:hidden']" />
+                                            <NuxtImg v-if="hasDarkLogo" :src="darkLogo" :alt="`${props.appName} logo`" width="32" height="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="eager" class="hidden size-8 shrink-0 object-contain dark:block" />
+                                        </template>
 
                                         <!-- App name -->
                                         <span v-if="props.appName" class="text-xl font-semibold tracking-tight text-foreground">{{ props.appName }}</span>

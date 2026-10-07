@@ -32,6 +32,17 @@ const shells = [
     { title: 'Landing & blog', description: 'Navbar with reading progress, content layout, footer, and a full Nuxt Content blog.', icon: News01Icon, to: '/blog', badge: '', external: false },
     { title: 'Error page', description: 'Branded 404 and 500 pages with a recovery action and toolbar slots.', icon: Alert02Icon, to: '/this-page-does-not-exist', badge: '', external: true }
 ];
+
+// Theme-aware logo demo
+const themeLogos = [
+    { src: '/logo.svg', label: 'Light theme', prop: 'app-logo="/logo.svg"', surfaceClass: 'border-zinc-200 bg-white text-zinc-900' },
+    { src: '/logo-dark.svg', label: 'Dark theme', prop: 'app-logo-dark="/logo-dark.svg"', surfaceClass: 'border-zinc-800 bg-zinc-950 text-zinc-100' }
+];
+const themeLogoCode = `<LandingNavbar app-name="Acme" app-logo="/logo.svg" app-logo-dark="/logo-dark.svg" />
+
+<LandingFooter app-name="Acme" app-logo="/logo.svg" app-logo-dark="/logo-dark.svg" />
+
+<DashboardShell app-name="Acme" app-logo="/logo.svg" app-logo-dark="/logo-dark.svg" />`;
 </script>
 
 <template>
@@ -72,6 +83,18 @@ const shells = [
         </DemoSection>
 
         <!-- Shells -->
+        <DemoSection id="theme-logo" title="Theme-aware logo" badge="New" description="LandingNavbar, LandingFooter, and DashboardShell take an optional appLogoDark. Both images render and the .dark class picks one, so the logo follows the theme toggle with no flash. Toggle the theme and watch the footer logo." :code="themeLogoCode">
+            <div class="grid gap-4 sm:grid-cols-2">
+                <div v-for="logo in themeLogos" :key="logo.src" :class="['flex items-center gap-3 rounded border p-5', logo.surfaceClass]">
+                    <img :src="logo.src" :alt="logo.label" width="40" height="40" class="size-10">
+                    <div class="flex flex-col gap-0.5 text-xs">
+                        <span class="font-semibold">{{ logo.label }}</span>
+                        <code class="opacity-70">{{ logo.prop }}</code>
+                    </div>
+                </div>
+            </div>
+        </DemoSection>
+
         <DemoSection id="shells" title="Application shells" description="Complete layouts that own navigation, theming, and responsive behavior.">
             <div class="grid gap-4 md:grid-cols-3">
                 <NuxtLink v-for="shell in shells" :key="shell.title" :to="shell.to" :external="shell.external" class="group/shell rounded outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45">
