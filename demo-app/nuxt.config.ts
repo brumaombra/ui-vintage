@@ -86,6 +86,12 @@ export default defineNuxtConfig({
         ]
     },
 
+    content: {
+        experimental: {
+            sqliteConnector: 'native' // Use the built-in node:sqlite module instead of better-sqlite3 (no native build)
+        }
+    },
+
     image: {
         provider: 'ipx'
     },

@@ -3,28 +3,41 @@
     "version": "0.0.0",
     "private": true,
     "type": "module",
+    "engines": {
+        "node": ">=22.19.0"
+    },
     "scripts": {
         "dev": "nuxt dev",
         "build": "nuxt build",
         "preview": "nuxt preview",
+        "test": "vitest run",
         "postinstall": "nuxt prepare"
     },
     "dependencies": {
         "@brumaombra/ui-vintage": "file:..",
         "@hugeicons/core-free-icons": "4.1.1",
         "@hugeicons/vue": "1.0.5",
-        "@nuxt/content": "3.13.0",
-        "@nuxt/image": "2.0.0",
-        "@nuxtjs/i18n": "10.2.3",
+        "@nuxt/content": "3.16.1",
+        "@nuxt/image": "2.1.0",
+        "@nuxtjs/i18n": "10.6.0",
         "aos": "2.3.4",
-        "better-sqlite3": "12.9.0",
-        "nuxt": "4.4.8"
-    },
-    "optionalDependencies": {
-        "@oxc-parser/binding-win32-x64-msvc": "0.128.0"
+        "nuxt": "4.5.2"
     },
     "devDependencies": {
+        "@nuxt/test-utils": "4.3.2",
         "@tailwindcss/vite": "4.2.4",
-        "tailwindcss": "4.2.4"
+        "@vue/test-utils": "2.5.1",
+        "happy-dom": "20.14.5",
+        "tailwindcss": "4.2.4",
+        "vitest": "5.0.1"
+    },
+    "overrides": {
+        "archiver-utils": {
+            "glob": "13.0.6"
+        },
+        "@intlify/vue-i18n-extensions": {
+            "vue-i18n": "11.4.13",
+            "@intlify/shared": "11.4.13"
+        }
     }
 }
