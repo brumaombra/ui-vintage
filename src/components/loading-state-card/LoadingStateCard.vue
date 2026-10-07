@@ -28,9 +28,9 @@ const resolvedDescription = computed(() => props.description || t('uiVintage.com
     <Card class="flex flex-col items-center justify-center px-4 py-8 text-center md:py-12">
         <CardContent class="flex flex-col items-center justify-center p-0! text-center">
             <!-- Loading spinner icon -->
-            <span aria-hidden="true" class="flex size-12 items-center justify-center rounded border border-border bg-surface text-primary">
-                <HugeiconsIcon :icon="props.icon" class="size-5 animate-spin" />
-            </span>
+            <div aria-hidden="true" class="flex items-center justify-center text-4xl text-muted-foreground opacity-60">
+                <HugeiconsIcon :icon="props.icon" class="size-10 animate-spin" />
+            </div>
 
             <!-- Title -->
             <component :is="`h${props.level}`"
