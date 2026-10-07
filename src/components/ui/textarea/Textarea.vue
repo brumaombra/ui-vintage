@@ -2,6 +2,7 @@
 import type { HTMLAttributes } from 'vue';
 import { useVModel } from '@vueuse/core';
 import { cn } from '../../../lib/utils';
+import { useFieldControlId } from '../field/field-context';
 
 // Props
 const props = defineProps<{
@@ -19,10 +20,13 @@ const modelValue = useVModel(props, 'modelValue', emits, {
     passive: true,
     defaultValue: props.defaultValue
 });
+
+// Let a surrounding Field label point to this control
+const fieldControlId = useFieldControlId();
 </script>
 
 <template>
-    <textarea v-model="modelValue" data-slot="textarea" :class="cn(
+    <textarea :id="fieldControlId" v-model="modelValue" data-slot="textarea" :class="cn(
         'uv-field flex field-sizing-content min-h-30 w-full min-w-0 rounded border border-input bg-secondary px-4 py-3 text-xs font-semibold text-foreground shadow-elevated-sm outline-none sm:text-sm',
         'selection:bg-primary selection:text-primary-foreground placeholder:text-muted-foreground placeholder:opacity-60',
         'disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-60 aria-invalid:animate-uv-shake',

@@ -4,6 +4,7 @@ import type { HTMLAttributes } from 'vue';
 import { reactiveOmit } from '@vueuse/core';
 import { CheckboxIndicator, CheckboxRoot, useForwardPropsEmits } from 'reka-ui';
 import { cn } from '../../../lib/utils';
+import { useFieldControlId } from '../field/field-context';
 
 // Props
 const props = defineProps<CheckboxRootProps & {
@@ -15,10 +16,13 @@ const emits = defineEmits<CheckboxRootEmits>();
 
 const delegatedProps = reactiveOmit(props, 'class');
 const forwarded = useForwardPropsEmits(delegatedProps, emits);
+
+// Let a surrounding Field label point to this control
+const fieldControlId = useFieldControlId(() => props.id);
 </script>
 
 <template>
-    <CheckboxRoot v-slot="slotProps" data-slot="checkbox" v-bind="forwarded" :class="cn(
+    <CheckboxRoot v-slot="slotProps" data-slot="checkbox" v-bind="forwarded" :id="fieldControlId" :class="cn(
         'group/checkbox peer relative inline-flex size-5 shrink-0 cursor-pointer items-center justify-center rounded-sm border border-input bg-secondary text-primary-foreground shadow-elevated-sm outline-none',
         '[transition:scale_320ms_var(--ease-spring),background-color_150ms_var(--ease-snappy),border-color_150ms_var(--ease-snappy),box-shadow_150ms_var(--ease-snappy)]',
         'hover:border-border-strong active:scale-[0.86] focus-visible:ring-[3px] focus-visible:ring-ring/45',

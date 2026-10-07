@@ -8,6 +8,12 @@ import { Button } from '@brumaombra/ui-vintage/button';
 import { DataTable } from '@brumaombra/ui-vintage/data-table';
 import { LoadMoreButton } from '@brumaombra/ui-vintage/load-more-button';
 import { ProgressComponent } from '@brumaombra/ui-vintage/progress-component';
+import { Command, CommandGroup, CommandItem, CommandList } from '@brumaombra/ui-vintage/command';
+import { Field, FieldLabel } from '@brumaombra/ui-vintage/field';
+import { Input } from '@brumaombra/ui-vintage/input';
+import { NumberField } from '@brumaombra/ui-vintage/number-field';
+import { Select, SelectTrigger, SelectValue } from '@brumaombra/ui-vintage/select';
+import { DateTimePicker } from '@brumaombra/ui-vintage/date-time-picker';
 import { h } from 'vue';
 import { SwitchFormComponent } from '@brumaombra/ui-vintage/switch-form-component';
 
@@ -125,5 +131,50 @@ describe('AvatarFallback', () => {
         const fallback = wrapper.find('[data-slot="avatar-fallback"]');
         expect(fallback.attributes('role')).toBe('img');
         expect(fallback.attributes('aria-label')).toBe('Jane Doe');
+    });
+});
+
+describe('Field', () => {
+    // The label points to the control placed in the same field, without ids written by hand
+    it('links the label to an input, a number field and a select trigger', async () => {
+        const wrapper = await mountSuspended({
+            render: () => [
+                h(Field, null, () => [h(FieldLabel, null, () => 'Name'), h(Input)]),
+                h(Field, null, () => [h(FieldLabel, null, () => 'Seats'), h(NumberField, { defaultValue: 1 })]),
+                h(Field, null, () => [h(FieldLabel, null, () => 'Region'), h(Select, null, () => h(SelectTrigger, null, () => h(SelectValue, { placeholder: 'Pick one' })))])
+            ]
+        });
+        const labels = wrapper.findAll('label');
+        expect(labels).toHaveLength(3);
+        for (const label of labels) {
+            const target = wrapper.find(`#${label.attributes('for')}`);
+            expect(target.exists()).toBe(true);
+            expect(['INPUT', 'BUTTON']).toContain(target.element.tagName);
+        }
+    });
+
+    // An id written on the control still wins
+    it('keeps an explicit control id', async () => {
+        const wrapper = await mountSuspended({ render: () => h(Field, null, () => [h(FieldLabel, null, () => 'Email'), h(Input, { id: 'email' })]) });
+        expect(wrapper.find('label').attributes('for')).toBe('email');
+        expect(wrapper.find('input').attributes('id')).toBe('email');
+    });
+
+    // The date button is named by the label plus its value, and the time input has its own name
+    it('names both parts of a date and time picker', async () => {
+        const wrapper = await mountSuspended({ render: () => h(Field, null, () => [h(FieldLabel, null, () => 'Meeting'), h(DateTimePicker)]) });
+        const label = wrapper.find('label');
+        const button = wrapper.find(`#${label.attributes('for')}`);
+        expect(button.element.tagName).toBe('BUTTON');
+        expect(button.attributes('aria-labelledby')).toBe(`${label.attributes('id')} ${button.attributes('id')}`);
+        expect(wrapper.find('input[type="time"]').attributes('aria-label')).toBe('Time');
+    });
+});
+
+describe('CommandList', () => {
+    // The list of results has a name for screen readers
+    it('names the result list', async () => {
+        const wrapper = await mountSuspended({ render: () => h(Command, null, () => h(CommandList, null, () => h(CommandGroup, null, () => h(CommandItem, { value: 'a' }, () => 'Open')))) });
+        expect(wrapper.find('[role="listbox"]').attributes('aria-label')).toBe('Command palette');
     });
 });

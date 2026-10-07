@@ -292,11 +292,11 @@ const dropzoneCode = `<FileDropzone v-model="files" accept="image/*,.pdf" :max-s
                 <div class="flex flex-col justify-center gap-8 px-2">
                     <div class="flex flex-col gap-3">
                         <div class="flex justify-between text-xs font-semibold"><span>Volume</span><span class="tabular-nums text-muted-foreground">{{ volume[0] }}%</span></div>
-                        <Slider v-model="volume" :max="100" />
+                        <Slider v-model="volume" :max="100" thumb-label="Volume" />
                     </div>
                     <div class="flex flex-col gap-3">
                         <div class="flex justify-between text-xs font-semibold"><span>Price range</span><span class="tabular-nums text-muted-foreground">€{{ range[0] }} – €{{ range[1] }}</span></div>
-                        <Slider v-model="range" :max="100" :min-steps-between-thumbs="5" />
+                        <Slider v-model="range" :max="100" :min-steps-between-thumbs="5" thumb-label="Price range" />
                     </div>
                 </div>
             </div>

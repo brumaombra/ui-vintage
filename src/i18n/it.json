@@ -54,7 +54,8 @@
         "datePicker": {
             "placeholder": "Scegli una data",
             "month": "Mese",
-            "year": "Anno"
+            "year": "Anno",
+            "time": "Ora"
         },
         "terminal": {
             "title": "Terminale",

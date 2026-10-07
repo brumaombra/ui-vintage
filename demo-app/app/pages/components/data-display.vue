@@ -309,7 +309,7 @@ const avatarCode = `<Avatar size="lg" status="online">
                     <ProgressComponent title="Uploading assets" :value="uploadProgress" :max="100" bottom-left-label="design-tokens.zip" :bottom-right-label="uploadProgress >= 100 ? 'Done' : `${uploadProgress}%`" />
                     <div class="flex flex-col gap-2">
                         <span class="text-xs font-semibold">Indeterminate</span>
-                        <Progress indeterminate />
+                        <Progress indeterminate aria-label="Indeterminate" />
                     </div>
                     <Button variant="secondary" size="sm" class="self-start" @click="advanceProgress">
                         {{ uploadProgress >= 100 ? 'Restart' : 'Advance' }}

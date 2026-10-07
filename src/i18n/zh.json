@@ -54,7 +54,8 @@
         "datePicker": {
             "placeholder": "选择日期",
             "month": "月份",
-            "year": "年份"
+            "year": "年份",
+            "time": "时间"
         },
         "terminal": {
             "title": "终端",

@@ -7,6 +7,7 @@ import type { DateValue } from 'reka-ui';
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { cn } from '../../../lib/utils';
+import { useFieldControlId, useFieldLabelId } from '../field/field-context';
 import { Button } from '../button';
 import { Calendar } from '../calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '../popover';
@@ -52,13 +53,18 @@ const defaultPlaceholder = computed(
 const formatter = computed(() => new DateFormatter(locale.value || 'en-US', {
     dateStyle: 'long',
 }));
+
+// Let a surrounding Field label point to the trigger, and name it "label + selected date" so the value is not lost
+const fieldControlId = useFieldControlId();
+const fieldLabelId = useFieldLabelId();
+const triggerLabelledBy = computed(() => fieldLabelId.value && fieldControlId.value ? `${fieldLabelId.value} ${fieldControlId.value}` : undefined);
 </script>
 
 <template>
     <Popover v-slot="{ close }">
         <!-- Date picker trigger -->
         <PopoverTrigger as-child>
-            <Button variant="secondary" :disabled="disabled" :class="cn('h-13 w-60 justify-start text-left font-normal enabled:active:scale-100', !date && 'text-muted-foreground', props.class,)">
+            <Button :id="fieldControlId" :aria-labelledby="triggerLabelledBy" variant="secondary" :disabled="disabled" :class="cn('h-13 w-60 justify-start text-left font-normal enabled:active:scale-100', !date && 'text-muted-foreground', props.class,)">
                 <HugeiconsIcon :icon="Calendar03Icon" class="size-4" />
                 {{ date ? formatter.format(date.toDate(getLocalTimeZone())) : resolvedPlaceholder }}
             </Button>

@@ -8,6 +8,7 @@ import { HugeiconsIcon } from '@hugeicons/vue';
 import { NumberFieldDecrement, NumberFieldIncrement, NumberFieldInput, NumberFieldRoot, useForwardPropsEmits } from 'reka-ui';
 import { useI18n } from 'vue-i18n';
 import { cn } from '../../../lib/utils';
+import { useFieldControlId } from '../field/field-context';
 
 // Props
 const props = defineProps<NumberFieldRootProps & {
@@ -77,10 +78,13 @@ const animateChange = async (value: number) => {
         };
     }
 };
+
+// Let a surrounding Field label point to this control
+const fieldControlId = useFieldControlId(() => props.id);
 </script>
 
 <template>
-    <NumberFieldRoot v-slot="slotProps" data-slot="number-field" v-bind="forwarded" :class="cn(
+    <NumberFieldRoot v-slot="slotProps" data-slot="number-field" v-bind="forwarded" :id="fieldControlId" :class="cn(
         'uv-field flex h-13 w-full items-center gap-1 rounded border border-input bg-secondary px-1.5 text-foreground shadow-elevated-sm',
         'data-disabled:cursor-not-allowed data-disabled:opacity-60 aria-invalid:animate-uv-shake',
         props.class

@@ -50,7 +50,7 @@ const props = withDefaults(defineProps<{
     authorLink: '',
     year: () => new Date().getFullYear(),
     showBottomBar: true,
-    level: 3
+    level: 2
 });
 
 const { t } = useI18n();

@@ -5,6 +5,7 @@ import { reactiveOmit, useVModel } from '@vueuse/core';
 import { ArrowDown01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { cn } from '../../../lib/utils';
+import { useFieldControlId } from '../field/field-context';
 
 defineOptions({
     inheritAttrs: false
@@ -24,11 +25,14 @@ const modelValue = useVModel(props, 'modelValue', emit, {
 });
 
 const delegatedProps = reactiveOmit(props, 'class');
+
+// Let a surrounding Field label point to this control
+const fieldControlId = useFieldControlId();
 </script>
 
 <template>
     <div class="group/native-select relative w-fit has-[select:disabled]:opacity-50" data-slot="native-select-wrapper">
-        <select v-bind="{ ...$attrs, ...delegatedProps }" v-model="modelValue" data-slot="native-select" :class="cn(
+        <select :id="fieldControlId" v-bind="{ ...$attrs, ...delegatedProps }" v-model="modelValue" data-slot="native-select" :class="cn(
             'border-input placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 dark:hover:bg-input/50 h-9 w-full min-w-0 appearance-none rounded border bg-transparent px-3 py-2 pr-9 text-sm shadow-elevated-sm transition-[color,box-shadow] outline-none disabled:pointer-events-none disabled:cursor-not-allowed',
             'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
             'aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive',

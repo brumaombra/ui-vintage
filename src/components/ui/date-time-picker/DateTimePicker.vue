@@ -3,6 +3,7 @@ import type { HTMLAttributes } from 'vue';
 import { fromDate, getLocalTimeZone, toCalendarDate, } from '@internationalized/date';
 import type { DateValue } from 'reka-ui';
 import { computed, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { cn } from '../../../lib/utils';
 import { DatePicker } from '../date-picker';
 import { TimePicker } from '../time-picker';
@@ -154,6 +155,9 @@ const maxTimeValue = computed(() => {
         ? toTimeString(props.maxDate)
         : undefined;
 });
+
+// The time input sits next to the date button, which takes the field label
+const { t } = useI18n();
 </script>
 
 <template>
@@ -163,7 +167,7 @@ const maxTimeValue = computed(() => {
         </div>
 
         <div>
-            <TimePicker v-model="timeValue" :disabled="props.disabled" :step="props.step" :min="minTimeValue" :max="maxTimeValue" :class="cn('w-full', props.timePickerClass)" />
+            <TimePicker v-model="timeValue" :aria-label="t('uiVintage.datePicker.time')" :disabled="props.disabled" :step="props.step" :min="minTimeValue" :max="maxTimeValue" :class="cn('w-full', props.timePickerClass)" />
         </div>
     </div>
 </template>

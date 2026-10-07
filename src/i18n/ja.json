@@ -54,7 +54,8 @@
         "datePicker": {
             "placeholder": "日付を選択",
             "month": "月",
-            "year": "年"
+            "year": "年",
+            "time": "時刻"
         },
         "terminal": {
             "title": "ターミナル",

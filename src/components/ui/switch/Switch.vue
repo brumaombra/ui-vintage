@@ -4,6 +4,7 @@ import type { HTMLAttributes } from 'vue';
 import { reactiveOmit } from '@vueuse/core';
 import { SwitchRoot, SwitchThumb, useForwardPropsEmits } from 'reka-ui';
 import { cn } from '../../../lib/utils';
+import { useFieldControlId } from '../field/field-context';
 
 // Props
 const props = defineProps<SwitchRootProps & {
@@ -15,10 +16,13 @@ const emits = defineEmits<SwitchRootEmits>();
 
 const delegatedProps = reactiveOmit(props, 'class');
 const forwarded = useForwardPropsEmits(delegatedProps, emits);
+
+// Let a surrounding Field label point to this control
+const fieldControlId = useFieldControlId(() => props.id);
 </script>
 
 <template>
-    <SwitchRoot v-slot="slotProps" data-slot="switch" v-bind="forwarded" :class="cn(
+    <SwitchRoot v-slot="slotProps" data-slot="switch" v-bind="forwarded" :id="fieldControlId" :class="cn(
         'group/switch peer relative inline-flex h-7 w-12 shrink-0 cursor-pointer items-center rounded border border-input bg-secondary shadow-elevated-sm outline-none',
         '[transition:background-color_200ms,border-color_200ms,box-shadow_250ms] hover:border-border-strong focus-visible:ring-[3px] focus-visible:ring-ring/45 disabled:cursor-not-allowed disabled:opacity-60',
         'data-[state=checked]:border-primary data-[state=checked]:bg-accent',

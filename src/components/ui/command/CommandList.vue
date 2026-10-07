@@ -3,6 +3,7 @@ import type { ListboxContentProps } from 'reka-ui';
 import type { HTMLAttributes } from 'vue';
 import { reactiveOmit } from '@vueuse/core';
 import { ListboxContent, useForwardProps } from 'reka-ui';
+import { useI18n } from 'vue-i18n';
 import { cn } from '../../../lib/utils';
 
 // Props
@@ -13,10 +14,13 @@ const delegatedProps = reactiveOmit(props, 'class');
 
 // Forward props
 const forwarded = useForwardProps(delegatedProps);
+
+// Name the list of results for screen readers (an aria-label passed by the app wins)
+const { t } = useI18n();
 </script>
 
 <template>
-    <ListboxContent data-slot="command-list" v-bind="forwarded" :class="cn(
+    <ListboxContent data-slot="command-list" :aria-label="t('uiVintage.commandDialog.title')" v-bind="forwarded" :class="cn(
         'max-h-75 scroll-py-1 overflow-x-hidden overflow-y-auto',
         props.class,
     )

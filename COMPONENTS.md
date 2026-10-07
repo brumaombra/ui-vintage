@@ -626,7 +626,7 @@ import { DateTimePicker } from '@brumaombra/ui-vintage/date-time-picker';
 Form layout primitives: label, description, error list, groups, and fieldsets. `FieldError` accepts strings or `{ message }` objects and hides itself when empty.
 
 ```ts
-import { fieldVariants, Field, FieldContent, FieldDescription, FieldError, FieldGroup, FieldLabel, FieldLegend, FieldSeparator, FieldSet, FieldTitle } from '@brumaombra/ui-vintage/field';
+import { fieldVariants, useFieldControlId, Field, FieldContent, FieldDescription, FieldError, FieldGroup, FieldLabel, FieldLegend, FieldSeparator, FieldSet, FieldTitle } from '@brumaombra/ui-vintage/field';
 import type { FieldVariants } from '@brumaombra/ui-vintage/field';
 ```
 
@@ -708,6 +708,7 @@ import type { FieldVariants } from '@brumaombra/ui-vintage/field';
 ```ts
 type FieldVariants = { orientation?: 'vertical' | 'horizontal' | 'responsive' | null | undefined }
 const fieldVariants: (props?: FieldVariants & ClassProp) => string
+function useFieldControlId(explicitId?: () => string | undefined)
 ```
 
 ---
@@ -3181,7 +3182,7 @@ import type { LandingFooterLink, LandingFooterSection } from '@brumaombra/ui-vin
 | `authorLink` | `string` | `''` |
 | `year` | `number` | `new Date().getFullYear()` |
 | `showBottomBar` | `boolean` | `true` |
-| `level` | `HeadingLevel` | `3` |
+| `level` | `HeadingLevel` | `2` |
 | `class` | `HTMLAttributes['class']` |  |
 | `containerClass` | `HTMLAttributes['class']` |  |
 | `brandClass` | `HTMLAttributes['class']` |  |
@@ -3247,7 +3248,7 @@ import type { LandingFooterLink, LandingFooterSection } from '@brumaombra/ui-vin
 | `authorLink` | `string` | `''` |
 | `year` | `number` | `new Date().getFullYear()` |
 | `showBottomBar` | `boolean` | `true` |
-| `level` | `HeadingLevel` | `3` |
+| `level` | `HeadingLevel` | `2` |
 | `class` | `HTMLAttributes['class']` |  |
 | `containerClass` | `HTMLAttributes['class']` |  |
 | `brandClass` | `HTMLAttributes['class']` |  |

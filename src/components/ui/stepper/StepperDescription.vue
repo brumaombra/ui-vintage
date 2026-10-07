@@ -5,10 +5,12 @@ import { reactiveOmit } from '@vueuse/core';
 import { StepperDescription } from 'reka-ui';
 import { cn } from '../../../lib/utils';
 
-// Props
-const props = defineProps<StepperDescriptionProps & {
+// Props (rendered as inline text by default: the stepper trigger is a button, which can't hold headings or paragraphs)
+const props = withDefaults(defineProps<StepperDescriptionProps & {
     class?: HTMLAttributes['class'];
-}>();
+}>(), {
+    as: 'span'
+});
 
 const delegatedProps = reactiveOmit(props, 'class');
 </script>

@@ -54,7 +54,8 @@
         "datePicker": {
             "placeholder": "Выберите дату",
             "month": "Месяц",
-            "year": "Год"
+            "year": "Год",
+            "time": "Время"
         },
         "terminal": {
             "title": "Терминал",

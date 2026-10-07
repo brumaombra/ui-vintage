@@ -29,6 +29,7 @@ export const fieldVariants: (props?: FieldVariants & ClassProp) => string = cva(
     }
 );
 
+export { useFieldControlId } from './field-context';
 export { default as Field } from './Field.vue';
 export { default as FieldContent } from './FieldContent.vue';
 export { default as FieldDescription } from './FieldDescription.vue';
