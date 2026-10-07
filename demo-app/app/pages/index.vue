@@ -95,8 +95,8 @@ onMounted(() => {
         <!-- Hero -->
         <section class="relative isolate flex flex-col items-center gap-6 pt-6 text-center sm:pt-12">
             <!-- Announcement -->
-            <button type="button" class="group/announce animate-uv-fade-up cursor-pointer rounded-full outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45" @click="navigateTo('/foundations#motion')">
-                <Badge text="New motion system · 20 new components" color="yellow" pulse class="rounded-full px-3 py-1 transition-colors duration-150 group-hover/announce:border-yellow-300 dark:group-hover/announce:border-yellow-700/60" />
+            <button type="button" class="group/announce animate-uv-fade-up cursor-pointer rounded outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45" @click="navigateTo('/foundations#motion')">
+                <Badge text="New motion system · 20 new components" color="yellow" pulse class="px-3 py-1 transition-colors duration-150 group-hover/announce:border-yellow-300 dark:group-hover/announce:border-yellow-700/60" />
             </button>
 
             <!-- Title -->
