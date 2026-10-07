@@ -3424,10 +3424,10 @@ Components for Nuxt Content pages and a complete blog.
 
 ### `@brumaombra/ui-vintage/blog`
 
-Blog building blocks: an animated hero header, a full-bleed featured carousel, post and category cards, tags, table of contents, reading progress, FAQ, share sidebar, and the content renderer. Scroll entrances use AOS: install `aos` in the app and initialize it (the components carry `data-aos="blur-up"`, and the library stylesheet defines that animation). Without AOS the content simply renders without entrances.
+Blog building blocks: an animated hero header, a post header (breadcrumbs, category and tags, title, author line, and featured image), a full-bleed featured carousel, post and category cards, tags, table of contents, reading progress, FAQ, share sidebar, and the content renderer. Scroll entrances use AOS: install `aos` in the app and initialize it (the components carry `data-aos="blur-up"`, and the library stylesheet defines that animation). Without AOS the content simply renders without entrances.
 
 ```ts
-import { AllPostsSection, BlogContentRenderer, BlogFAQSection, BlogInfoSection, BlogHeaderSection, BlogSectionTitle, BlogTagsSection, CategoriesList, CategoriesSection, CategoryCard, HeaderCarousel, PostCard, PostsList, SocialShareSidebar, TableOfContents } from '@brumaombra/ui-vintage/blog';
+import { AllPostsSection, BlogContentRenderer, BlogFAQSection, BlogInfoSection, BlogPostHeader, BlogHeaderSection, BlogSectionTitle, BlogTagsSection, CategoriesList, CategoriesSection, CategoryCard, HeaderCarousel, PostCard, PostsList, SocialShareSidebar, TableOfContents } from '@brumaombra/ui-vintage/blog';
 ```
 
 #### `AllPostsSection`
@@ -3465,6 +3465,27 @@ import { AllPostsSection, BlogContentRenderer, BlogFAQSection, BlogInfoSection, 
 | `authorBio` | `string` | `''` |
 | `datePublished` *(required)* | `string` |  |
 | `dateModified` | `string \| null` | `null` |
+
+#### `BlogPostHeader`
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `title` *(required)* | `string` |  |
+| `description` | `string` | `''` |
+| `image` | `string` | `''` |
+| `author` | `string` | `''` |
+| `authorImageUrl` | `string` | `''` |
+| `datePublished` | `string` | `''` |
+| `categoryText` | `string` | `''` |
+| `categorySlug` | `string` | `''` |
+| `tags` | `Array<{ name: string; slug: string }>` | `[]` |
+| `body` | `unknown` |  |
+| `readingMinutes` | `number \| null` | `null` |
+| `blogPath` | `string` | `'/blog'` |
+| `blogLabel` | `string` | `''` |
+| `animated` | `boolean` | `true` |
+
+- **Slots:** `meta`, `media`.
 
 #### `BlogHeaderSection`
 
@@ -3637,7 +3658,7 @@ type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6
 Class merging (`cn`) and formatting helpers.
 
 ```ts
-import { cn, formatDateLongItalyTimezone } from '@brumaombra/ui-vintage/utils';
+import { cn, formatDateLongItalyTimezone, getReadingMinutes } from '@brumaombra/ui-vintage/utils';
 ```
 
 #### Functions, constants, and types
@@ -3645,4 +3666,5 @@ import { cn, formatDateLongItalyTimezone } from '@brumaombra/ui-vintage/utils';
 ```ts
 function cn(...inputs: ClassValue[])
 function formatDateLongItalyTimezone(date: string | number | Date | null | undefined, locale: string)
+function getReadingMinutes(content: unknown, wordsPerMinute = 220)
 ```

@@ -80,6 +80,8 @@
             "author": "Auteur",
             "publishedDate": "Publie",
             "lastUpdatedDate": "Mis a jour",
+            "minRead": "{minutes} min de lecture",
+            "breadcrumbBlog": "Blog",
             "carouselNavigation": "Navigation du carrousel",
             "goToSlide": "Aller a la diapositive {index}",
             "previousSlide": "Diapositive precedente",

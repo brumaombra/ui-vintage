@@ -80,6 +80,8 @@
             "author": "著者",
             "publishedDate": "公開日",
             "lastUpdatedDate": "更新日",
+            "minRead": "{minutes}分で読めます",
+            "breadcrumbBlog": "ブログ",
             "carouselNavigation": "カルーセルナビゲーション",
             "goToSlide": "スライド {index} へ移動",
             "previousSlide": "前のスライド",

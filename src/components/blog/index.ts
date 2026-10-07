@@ -2,6 +2,7 @@ export { default as AllPostsSection } from './AllPostsSection.vue';
 export { default as BlogContentRenderer } from './BlogContentRenderer.vue';
 export { default as BlogFAQSection } from './BlogFAQSection.vue';
 export { default as BlogInfoSection } from './BlogInfoSection.vue';
+export { default as BlogPostHeader } from './BlogPostHeader.vue';
 export { default as BlogHeaderSection } from './BlogHeaderSection.vue';
 export { default as BlogSectionTitle } from './BlogSectionTitle.vue';
 export { default as BlogTagsSection } from './BlogTagsSection.vue';

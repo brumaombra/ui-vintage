@@ -27,3 +27,14 @@ export function formatDateLongItalyTimezone(date: string | number | Date | null 
         timeZone: 'Europe/Rome'
     }).format(parsedDate);
 };
+// Estimate the reading time in minutes from any text or content tree (about 220 words per minute)
+export function getReadingMinutes(content: unknown, wordsPerMinute = 220) {
+    const collectText = (node: unknown): string => {
+        if (typeof node === 'string') return node;
+        if (Array.isArray(node)) return node.map(collectText).join(' ');
+        if (node && typeof node === 'object') return Object.values(node).map(collectText).join(' ');
+        return '';
+    };
+    const words = collectText(content).split(/\s+/).filter(Boolean).length;
+    return Math.max(1, Math.round(words / wordsPerMinute));
+};

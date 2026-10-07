@@ -80,6 +80,8 @@
             "author": "Автор",
             "publishedDate": "Опубликовано",
             "lastUpdatedDate": "Обновлено",
+            "minRead": "{minutes} мин чтения",
+            "breadcrumbBlog": "Блог",
             "carouselNavigation": "Навигация карусели",
             "goToSlide": "Перейти к слайду {index}",
             "previousSlide": "Предыдущий слайд",
