@@ -114,8 +114,7 @@ const hasDarkLogo = computed(() => darkLogo.value !== lightLogo.value);
                         <!-- Section links -->
                         <ul class="space-y-3 text-xs sm:text-sm">
                             <li v-for="link in props.sections[0]?.links" :key="link.id">
-                                <component :is="props.linkComponent" v-bind="getLinkProps(link)" class="group/link inline-flex items-center text-muted-foreground transition-colors duration-150 hover:text-primary">
-                                    <span class="h-px w-0 bg-primary transition-[width,margin] duration-300 ease-spring group-hover/link:mr-1.5 group-hover/link:w-3" />
+                                <component :is="props.linkComponent" v-bind="getLinkProps(link)" class="bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_1px] bg-left-bottom bg-no-repeat text-muted-foreground transition-[color,background-size] duration-300 ease-out-expo hover:bg-[length:100%_1px] hover:text-primary">
                                     {{ link.label }}
                                 </component>
                             </li>
@@ -134,8 +133,7 @@ const hasDarkLogo = computed(() => darkLogo.value !== lightLogo.value);
                         <!-- Section links -->
                         <ul class="space-y-3 text-xs sm:text-sm">
                             <li v-for="link in section.links" :key="link.id">
-                                <component :is="props.linkComponent" v-bind="getLinkProps(link)" class="group/link inline-flex items-center text-muted-foreground transition-colors duration-150 hover:text-primary">
-                                    <span class="h-px w-0 bg-primary transition-[width,margin] duration-300 ease-spring group-hover/link:mr-1.5 group-hover/link:w-3" />
+                                <component :is="props.linkComponent" v-bind="getLinkProps(link)" class="bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_1px] bg-left-bottom bg-no-repeat text-muted-foreground transition-[color,background-size] duration-300 ease-out-expo hover:bg-[length:100%_1px] hover:text-primary">
                                     {{ link.label }}
                                 </component>
                             </li>

@@ -24,12 +24,12 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
         props.class
     )" v-bind="forwarded">
         <!-- Track -->
-        <SliderTrack data-slot="slider-track" class="relative grow overflow-hidden rounded bg-muted transition-[height,width] duration-200 ease-spring data-[orientation=horizontal]:h-2 data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-2 group-hover/slider:data-[orientation=horizontal]:h-2.5 group-hover/slider:data-[orientation=vertical]:w-2.5">
+        <SliderTrack data-slot="slider-track" class="relative grow overflow-hidden rounded bg-muted data-[orientation=horizontal]:h-2 data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-2">
             <!-- Filled range -->
             <SliderRange data-slot="slider-range" class="absolute bg-primary data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full" />
         </SliderTrack>
 
         <!-- Thumbs -->
-        <SliderThumb v-for="(_, key) in modelValue" :key="key" data-slot="slider-thumb" :aria-label="props.thumbLabel" class="block size-5 shrink-0 cursor-grab rounded border-2 border-primary bg-card shadow-elevated-sm outline-none transition-[background-color,box-shadow] duration-150 hover:bg-primary/10 focus-visible:ring-[3px] focus-visible:ring-ring/45 active:cursor-grabbing active:bg-primary/15 disabled:pointer-events-none disabled:opacity-50" />
+        <SliderThumb v-for="(_, key) in modelValue" :key="key" data-slot="slider-thumb" :aria-label="props.thumbLabel" class="block size-5 shrink-0 cursor-grab rounded border-2 border-primary bg-card shadow-elevated-sm outline-none transition-[background-color,box-shadow] duration-150 hover:bg-[color-mix(in_oklab,var(--primary)_10%,var(--card))] focus-visible:ring-[3px] focus-visible:ring-ring/45 active:cursor-grabbing active:bg-[color-mix(in_oklab,var(--primary)_15%,var(--card))] disabled:pointer-events-none disabled:opacity-50" />
     </SliderRoot>
 </template>
