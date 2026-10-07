@@ -37,6 +37,9 @@ npm run typecheck
 # Fail when COMPONENTS.md is stale (regenerate with `npm run docs:components` and commit it)
 npm run docs:components:check
 
+# Run the unit and component tests (needs `npm --prefix demo-app install` once)
+npm test
+
 # Inspect the tarball: it must contain only src/, module.mjs, COMPONENTS.md, AGENTS.md, README.md, LICENSE, and package.json
 npm pack --dry-run
 ```
@@ -61,17 +64,10 @@ git push --follow-tags
 
 ## 4. Automatic publish flow
 
-The GitHub Actions workflow in `.github/workflows/publish-npm.yml` publishes when you push a tag like `v0.1.1`.
+The GitHub Actions workflow in `.github/workflows/publish-npm.yml` runs on every pushed branch and publishes when you push a tag like `v0.1.1`. It has two jobs:
 
-It will:
-
-1. install dependencies with `npm ci`
-2. verify the tag matches `package.json`
-3. run `npm run typecheck`
-4. check that `COMPONENTS.md` is up to date with `npm run docs:components:check`
-5. inspect the npm tarball with `npm pack --dry-run`
-6. publish to npm
-7. create a GitHub Release
+1. `test` (every branch and tag): installs the library and the demo app with `npm ci`, runs `npm run typecheck`, checks that `COMPONENTS.md` is up to date with `npm run docs:components:check`, and runs `npm test`
+2. `publish` (version tags only, after `test` passes): installs with `npm ci`, verifies the tag matches `package.json`, inspects the tarball with `npm pack --dry-run`, publishes to npm, and creates a GitHub Release
 
 For trusted publishing, configure npm to trust this GitHub repository before using the workflow.
 

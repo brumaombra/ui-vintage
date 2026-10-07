@@ -1,19 +1,71 @@
-name: Publish npm package
+name: Test and publish npm package
 
 on:
-  # Publish when a version tag is pushed, for example v0.1.3
+  # Test every pushed branch, and publish when a version tag is pushed, for example v0.1.3
   push:
+    branches:
+      - '**'
     tags:
       - 'v*'
 
-# Grant the permissions needed to mint an OIDC token for npm trusted publishing and create a GitHub Release from the pushed version tag
-permissions:
-  contents: write
-  id-token: write
+# Cancel an older run of the same branch when a newer commit is pushed (tag runs are never cancelled)
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ !startsWith(github.ref, 'refs/tags/') }}
 
 jobs:
-  publish:
+  test:
     runs-on: ubuntu-latest
+
+    # Read-only access is enough to check out and test the code
+    permissions:
+      contents: read
+
+    steps:
+      # Check out the repository
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      # Setup Node.js (the demo app needs 22.19+ for the built-in node:sqlite module)
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            demo-app/package-lock.json
+
+      # Install the library dependencies from the lockfile
+      - name: Install library dependencies
+        run: npm ci
+
+      # Install the demo app, which hosts the tests and consumes the library through file:..
+      - name: Install demo app dependencies
+        run: npm ci --prefix demo-app
+
+      # Validate the types of the published source runtime package
+      - name: Type-check package
+        run: npm run typecheck
+
+      # Ensure the shipped component catalog matches the source
+      - name: Check component catalog
+        run: npm run docs:components:check
+
+      # Run the unit tests and the component tests mounted in the demo Nuxt app
+      - name: Run tests
+        run: npm test
+
+  publish:
+    # Publish only version tags, and only after the tests pass
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: test
+    runs-on: ubuntu-latest
+
+    # Grant the permissions needed to mint an OIDC token for npm trusted publishing and create a GitHub Release from the pushed version tag
+    permissions:
+      contents: write
+      id-token: write
 
     steps:
       # Check out the repository
@@ -43,14 +95,6 @@ jobs:
             echo "Tag version ($TAG_VERSION) does not match package.json version ($PACKAGE_VERSION)."
             exit 1
           fi
-
-      # Validate types before publishing the source runtime package
-      - name: Type-check package
-        run: npm run typecheck
-
-      # Ensure the shipped component catalog matches the source
-      - name: Check component catalog
-        run: npm run docs:components:check
 
       # Inspect the published tarball contents without building dist output
       - name: Inspect package contents
