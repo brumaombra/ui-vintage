@@ -1,145 +1,71 @@
 <div align="center">
 
-# 🎨 UI Vintage
+<a href="https://github.com/brumaombra/ui-vintage">
+    <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="docs/images/banner-dark.webp">
+        <img alt="UI Vintage: source-published Nuxt 4 components with a retro soul" src="docs/images/banner-light.webp" width="100%">
+    </picture>
+</a>
 
-### A source-published Nuxt UI runtime for focused, reusable interfaces
-
-`@brumaombra/ui-vintage` is a Nuxt 4 component library and runtime module for building consistent dashboards, forms, landing pages, overlays, and content experiences. It combines reusable Vue components, shared theme tokens, localization, and Nuxt integrations in one package that is compiled by the consuming application.
+<p><b>84 explicit entry points</b> · <b>light and dark themes</b> · <b>9 built-in locales</b> · <b>accessible primitives on Reka UI</b></p>
 
 <p>
-    <a href="https://github.com/brumaombra/ui-vintage"><img alt="GitHub Repo" src="https://img.shields.io/badge/github-brumaombra%2Fui--vintage-111111?logo=github"></a>
-    <img alt="Nuxt 4" src="https://img.shields.io/badge/nuxt-4-00DC82?logo=nuxt&logoColor=white">
-    <img alt="Vue 3" src="https://img.shields.io/badge/vue-3-42B883?logo=vue.js&logoColor=white">
-    <img alt="npm" src="https://img.shields.io/npm/v/@brumaombra/ui-vintage?color=CB3837&logo=npm">
-    <img alt="License MIT" src="https://img.shields.io/badge/license-MIT-2563EB">
+    <a href="https://www.npmjs.com/package/@brumaombra/ui-vintage"><img alt="npm version" src="https://img.shields.io/npm/v/@brumaombra/ui-vintage?style=flat-square&color=F7931E&label=npm"></a>
+    <a href="https://www.npmjs.com/package/@brumaombra/ui-vintage"><img alt="npm downloads" src="https://img.shields.io/npm/dm/@brumaombra/ui-vintage?style=flat-square&color=1C2029"></a>
+    <img alt="Nuxt 4" src="https://img.shields.io/badge/Nuxt-4-00DC82?style=flat-square&logo=nuxt&logoColor=white">
+    <img alt="Vue 3.5" src="https://img.shields.io/badge/Vue-3.5-42B883?style=flat-square&logo=vue.js&logoColor=white">
+    <img alt="Tailwind CSS v4" src="https://img.shields.io/badge/Tailwind_CSS-v4-38BDF8?style=flat-square&logo=tailwindcss&logoColor=white">
+    <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-1C2029?style=flat-square"></a>
 </p>
 
 <p>
-    🧩 Reusable Vue components • 🎨 Shared theme tokens • 🌍 Built-in locale messages • 🖼️ Nuxt Image integration • ⚡ Source-based publishing
-</p>
-
-<p>
-    <a href="#overview"><strong>Overview</strong></a> •
-    <a href="#images"><strong>Images</strong></a> •
-    <a href="#features"><strong>Features</strong></a> •
-    <a href="#architecture"><strong>Architecture</strong></a> •
-    <a href="#quick-start"><strong>Quick Start</strong></a> •
-    <a href="#usage"><strong>Usage</strong></a> •
-    <a href="#components"><strong>Components</strong></a> •
-    <a href="#demo-app"><strong>Demo App</strong></a> •
-    <a href="#configuration"><strong>Configuration</strong></a> •
-    <a href="#publishing"><strong>Publishing</strong></a> •
-    <a href="#troubleshooting"><strong>Troubleshooting</strong></a> •
-    <a href="#license"><strong>License</strong></a>
+    <a href="#installation"><strong>Installation</strong></a> ·
+    <a href="#usage"><strong>Usage</strong></a> ·
+    <a href="#showcase"><strong>Showcase</strong></a> ·
+    <a href="#components"><strong>Components</strong></a> ·
+    <a href="#theming"><strong>Theming</strong></a> ·
+    <a href="COMPONENTS.md"><strong>Component catalog</strong></a> ·
+    <a href="#demo-app"><strong>Demo app</strong></a>
 </p>
 
 </div>
 
-<a id="overview"></a>
-## 📘 Overview
+<br>
 
-UI Vintage is designed for Nuxt applications that need a coherent interface without rebuilding the same primitives for every project. The package provides low-level controls such as buttons, inputs, selects, dialogs, tabs, switches, and sidebars alongside higher-level building blocks such as dashboard shells, landing layouts, cards, data lists, and message flows.
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/hero-dark.webp">
+    <img alt="The UI Vintage demo app: dashboard shell, hero with animated highlight, stat cards, and live preview" src="docs/images/hero-light.webp" width="100%">
+</picture>
 
-The package is intentionally published as source. The consuming Nuxt application compiles the library together with its own runtime, which keeps Nuxt-specific integrations available and avoids maintaining a separate framework-agnostic build artifact.
+## Why UI Vintage
 
-This is a Nuxt library, not a generic Vue component bundle. Components rely on Nuxt runtime features including `#components`, `NuxtImg`, and module lifecycle hooks.
+UI Vintage is a Nuxt 4 module and component library for dashboards, forms, landing pages, overlays, and blogs that should look and feel like one product. It gives you low-level primitives (buttons, inputs, selects, dialogs, tabs) and complete building blocks (dashboard and landing shells, stat cards, data tables, a full blog) that share one set of theme tokens and one motion vocabulary.
 
-<a id="images"></a>
-## 🖼️ Images
+- **Source-published.** The package ships its Vue and TypeScript source. Your Nuxt app compiles it together with your own code, so there is no separate build artifact and every Nuxt integration (`NuxtImg`, `#components`, module hooks) keeps working.
+- **Explicit imports.** Every component lives behind its own subpath, such as `@brumaombra/ui-vintage/button`. Nothing is auto-registered, so your dependencies stay obvious and tree-shakeable.
+- **Accessible by default.** Interactive primitives are built on [Reka UI](https://reka-ui.com), with keyboard support, focus management, and ARIA wiring included.
+- **Motion that respects people.** Springs are pure CSS `linear()` easings, and every animation collapses when the user prefers reduced motion.
 
-### Screenshots
+## Features
 
-<div align="center">
-    <table width="100%" style="max-width: 768px;">
-        <tr>
-            <td align="center" valign="top">
-                <img src="https://raw.githubusercontent.com/brumaombra/ui-vintage/main/docs/images/screen-1.png" alt="UI Vintage component demo controls and primary actions" width="100%">
-            </td>
-            <td align="center" valign="top">
-                <img src="https://raw.githubusercontent.com/brumaombra/ui-vintage/main/docs/images/screen-2.png" alt="UI Vintage select, accordion, tabs, and component previews" width="100%">
-            </td>
-        </tr>
-        <tr>
-            <td align="center" valign="top">
-                <img src="https://raw.githubusercontent.com/brumaombra/ui-vintage/main/docs/images/screen-3.png" alt="UI Vintage surface variants, badges, dialogs, and feedback previews" width="100%">
-            </td>
-            <td align="center" valign="top">
-                <img src="https://raw.githubusercontent.com/brumaombra/ui-vintage/main/docs/images/screen-4.png" alt="UI Vintage loading, toast, and current state previews" width="100%">
-            </td>
-        </tr>
-    </table>
-    <p>
-        <img src="https://raw.githubusercontent.com/brumaombra/ui-vintage/main/docs/images/blog.png" alt="UI Vintage landing and blog showcase" width="100%" style="max-width: 768px;">
-    </p>
-    <p>
-        <sub>Component showcase, interactive states, landing surface, and full-width blog showcase</sub>
-    </p>
-</div>
+- **Nuxt 4 module** that injects the stylesheet, transpiles the source, installs `@nuxt/image` when needed, and merges the library locale messages into Vue I18n.
+- **Shared design tokens** for colors, borders, and elevation, with light, dark, and automatic themes and a circular View Transitions reveal when switching.
+- **Primitives on Reka UI:** select, combobox, dialog, sheet, popover, tooltip, tabs, stepper, slider, calendar, date and time pickers, PIN input, tags input, and more.
+- **Composite building blocks:** dashboard and landing shells, page headers, stat cards and stat strips, data tables with animated sorting, card grids with empty and loading states.
+- **Promise-based flows:** `showConfirmDialog`, `showMessageDialog`, stacked and swipeable `showMessageToast`, and a shared busy overlay with `setBusy`.
+- **A complete blog** for Nuxt Content: hero header, featured carousel, post header, table of contents, share sidebar, FAQ, reading progress, and VS Code-style code blocks.
+- **Localization** in English, Italian, French, Spanish, German, Portuguese, Chinese, Japanese, and Russian.
+- **Generated component catalog** ([`COMPONENTS.md`](COMPONENTS.md)) and an AI assistant skill that ship inside the package.
 
-<a id="features"></a>
-## ✨ Features
+## Installation
 
-- Nuxt 4 module with automatic runtime integration.
-- Shared stylesheet and design tokens injected from `src/styles.css`.
-- Explicit subpath imports that keep application dependencies clear.
-- Vue 3 components built with Composition API and TypeScript source.
-- Primitive UI controls based on Reka UI where accessible behavior is required.
-- Reusable dashboard, landing, blog, card, field, and data-display components.
-- Built-in busy, confirm-dialog, message-dialog, and stacked, swipeable message-toast flows.
-- A spring-based motion system (pure CSS `linear()` easings) that respects `prefers-reduced-motion`.
-- Theme selector with light, dark, and automatic modes and a circular View Transitions reveal.
-- Library locale messages merged into an existing Vue I18n instance when available.
-- Automatic `@nuxt/image` installation for components that use `NuxtImg`.
-- Source publishing with no required library build step before installation.
-
-<a id="architecture"></a>
-## 🏗️ Architecture
-
-UI Vintage is split into three cooperating layers:
-
-- 🧩 **Components** in `src/components/` contain the public Vue UI and composite layouts.
-- 🎨 **Styles and helpers** in `src/styles.css` and `src/lib/` provide theme tokens, class utilities, and shared behavior.
-- 🔌 **Nuxt runtime** in `module.mjs` and `src/runtime/` integrates the package with the consuming app.
-
-### 🔄 Module Behavior
-
-When the module is registered, it:
-
-1. Injects `src/styles.css` into the Nuxt application once.
-2. Adds the published `src/` directory to Nuxt transpilation.
-3. Installs `@nuxt/image` when the consuming app has not already registered it.
-4. Registers the library i18n plugin.
-5. Merges the library’s locale messages into the app’s Vue I18n composer when Vue I18n is present.
-
-The module does not auto-register every component. Import components and helpers explicitly from their public subpaths.
-
-### 📁 Repository Layout
-
-```text
-src/
-  components/       # Public components and UI primitives
-  i18n/              # Library locale messages
-  lib/               # Shared helpers and token utilities
-  runtime/           # Nuxt runtime plugins
-  styles.css         # Shared design tokens and component styles
-module.mjs          # Nuxt module entrypoint
-demo-app/            # Private Nuxt showcase and manual verification app
-```
-
-<a id="quick-start"></a>
-## 🚀 Quick Start
-
-### 📦 Install the package
-
-Install the UI Vintage library and the peer integrations used by the package in an existing Nuxt 4 application:
+Install the package and its peer integrations in an existing Nuxt 4 app:
 
 ```bash
 npm install @brumaombra/ui-vintage @nuxt/image vue-i18n
 ```
 
-### 🔌 Register the module
-
-Add the module to `nuxt.config.js`:
+Register the module in `nuxt.config`:
 
 ```js
 export default defineNuxtConfig({
@@ -149,64 +75,64 @@ export default defineNuxtConfig({
 });
 ```
 
-`@nuxt/image` is installed by the module when it is not already present in the app’s module list. Install it explicitly when your application also uses image components directly. Vue I18n is optional at runtime, but it is required for the library’s locale messages and translated components.
+That's it: the module injects the shared stylesheet, adds the source to Nuxt transpilation, installs `@nuxt/image` when your app has not registered it, and merges the library messages into your Vue I18n instance. Vue I18n is optional at runtime, but the translated components need it.
 
-<a id="usage"></a>
-## 🧪 Usage
+## Usage
 
-### 🧱 Use a component
+### Use a component
 
-Components are imported from explicit package subpaths:
+Import components from their public subpath:
 
 ```vue
 <script setup>
 import { Button } from '@brumaombra/ui-vintage/button';
-import { Card, CardContent } from '@brumaombra/ui-vintage/card';
+import { SingleValueCard } from '@brumaombra/ui-vintage/single-value-card';
+import { Money03Icon } from '@hugeicons/core-free-icons';
 </script>
 
 <template>
-    <Card>
-        <CardContent class="flex items-center justify-between gap-4">
-            <span>Workspace status</span>
+    <SingleValueCard label="Revenue" :value="48290" :icon="Money03Icon" :trend="12.4" trend-label="vs last month"
+        :format-options="{ style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }" />
 
-            <!-- For example, the Button component accepts variants such as primary, secondary, gray, and ghost -->
-            <Button variant="primary">Save changes</Button>
-        </CardContent>
-    </Card>
+    <Button variant="primary">Save changes</Button>
 </template>
 ```
 
-### 🔔 Use a message flow
+### Ask, confirm, and notify
 
-The dialog and busy helpers can be imported directly from their subpaths:
+Dialogs, toasts, and the busy overlay mount themselves on first use, so you never place them in a layout:
 
 ```js
 import { showConfirmDialog } from '@brumaombra/ui-vintage/confirm-dialog';
+import { showMessageToast } from '@brumaombra/ui-vintage/message-toast';
 import { setBusy } from '@brumaombra/ui-vintage/busy-indicator';
 
-// Ask for confirmation before starting a destructive action
+// Resolves true or false with the user's choice
 const confirmed = await showConfirmDialog({
     title: 'Delete project?',
-    message: 'This action cannot be undone.'
+    message: 'This action cannot be undone.',
+    confirmButtonType: 'red'
 });
 
 if (confirmed) {
-    // Keep the shared loading overlay visible while the request is running
+    // Keep the shared loading overlay visible while the request runs
     setBusy(true, { label: 'Deleting project...' });
     await deleteProject();
     setBusy(false);
+
+    showMessageToast({ type: 'success', title: 'Project deleted', message: 'Everything was removed.' });
 }
 ```
 
-### 🧭 Use a layout component
+### Build a layout
 
-Higher-level components accept slots so application navigation and content remain app-owned. The shell provides the layout; the application provides its navigation data:
+Shells own the layout and responsive behavior; your app owns the navigation data and the content:
 
 ```vue
 <script setup>
 import { DashboardShell } from '@brumaombra/ui-vintage/dashboard-shell';
 
-// List of sections
+// Sidebar sections and their links
 const sidebarSections = [{
     id: 'workspace',
     label: 'Workspace',
@@ -218,168 +144,243 @@ const sidebarSections = [{
 </script>
 
 <template>
-    <DashboardShell :sidebar-sections="sidebarSections">
+    <DashboardShell app-name="Acme" app-logo="/logo.svg" app-logo-dark="/logo-dark.svg" :sidebar-sections="sidebarSections">
         <slot />
     </DashboardShell>
 </template>
 ```
 
-<a id="components"></a>
-## 🧩 Components
+<a id="showcase"></a>
+## Showcase
 
-The package exposes components through explicit subpaths. The complete public export map is maintained in `package.json`; common groups include:
+Every screenshot comes from the [demo app](#demo-app), and each one follows your GitHub theme (light or dark).
 
-### 🎛️ UI primitives
+<table>
+    <tr>
+        <td width="50%" valign="top">
+            <picture>
+                <source media="(prefers-color-scheme: dark)" srcset="docs/images/buttons-dark.webp">
+                <img alt="Buttons in primary, secondary, ghost, link, and tone variants, with sizes, icon buttons, and a disabled state" src="docs/images/buttons-light.webp" width="100%">
+            </picture>
+            <p align="center"><b>Buttons</b><br><sub>Variants, tones, sizes, icon buttons, and states</sub></p>
+        </td>
+        <td width="50%" valign="top">
+            <picture>
+                <source media="(prefers-color-scheme: dark)" srcset="docs/images/forms-dark.webp">
+                <img alt="Text fields with validation, a textarea with a counter, and date and time pickers" src="docs/images/forms-light.webp" width="100%">
+            </picture>
+            <p align="center"><b>Forms</b><br><sub>Fields with validation, counters, and date and time pickers</sub></p>
+        </td>
+    </tr>
+    <tr>
+        <td width="50%" valign="top">
+            <picture>
+                <source media="(prefers-color-scheme: dark)" srcset="docs/images/data-table-dark.webp">
+                <img alt="Data table with selection, status badges, sorting, and pagination" src="docs/images/data-table-light.webp" width="100%">
+            </picture>
+            <p align="center"><b>Data table</b><br><sub>Typed columns, selection, animated sorting, and pagination</sub></p>
+        </td>
+        <td width="50%" valign="top">
+            <picture>
+                <source media="(prefers-color-scheme: dark)" srcset="docs/images/stats-dark.webp">
+                <img alt="Stat cards with trends, a stat strip, and an animated total" src="docs/images/stats-light.webp" width="100%">
+            </picture>
+            <p align="center"><b>Stats and numbers</b><br><sub>Stat cards, the compact stat strip, and numbers that count up</sub></p>
+        </td>
+    </tr>
+    <tr>
+        <td width="50%" valign="top">
+            <picture>
+                <source media="(prefers-color-scheme: dark)" srcset="docs/images/navigation-dark.webp">
+                <img alt="Horizontal and vertical tabs above horizontal and vertical steppers" src="docs/images/navigation-light.webp" width="100%">
+            </picture>
+            <p align="center"><b>Navigation</b><br><sub>Tabs with a gliding indicator and horizontal or vertical steppers</sub></p>
+        </td>
+        <td width="50%" valign="top">
+            <picture>
+                <source media="(prefers-color-scheme: dark)" srcset="docs/images/alerts-dark.webp">
+                <img alt="Alerts in neutral, success, warning, and error tones" src="docs/images/alerts-light.webp" width="100%">
+            </picture>
+            <p align="center"><b>Alerts</b><br><sub>Tone surfaces for neutral, success, warning, and error messages</sub></p>
+        </td>
+    </tr>
+    <tr>
+        <td width="50%" valign="top">
+            <picture>
+                <source media="(prefers-color-scheme: dark)" srcset="docs/images/toasts-dark.webp">
+                <img alt="A stack of success, info, and warning toasts fanned out in the corner" src="docs/images/toasts-light.webp" width="100%">
+            </picture>
+            <p align="center"><b>Toasts</b><br><sub>Stacked toasts that fan out on hover and can be swiped away</sub></p>
+        </td>
+        <td width="50%" valign="top">
+            <picture>
+                <source media="(prefers-color-scheme: dark)" srcset="docs/images/dialog-dark.webp">
+                <img alt="A destructive confirm dialog asking to delete three invoices" src="docs/images/dialog-light.webp" width="100%">
+            </picture>
+            <p align="center"><b>Confirm dialog</b><br><sub>Promise-based dialogs with async handlers</sub></p>
+        </td>
+    </tr>
+    <tr>
+        <td width="50%" valign="top">
+            <picture>
+                <source media="(prefers-color-scheme: dark)" srcset="docs/images/palette-dark.webp">
+                <img alt="The command palette searching the demo sections" src="docs/images/palette-light.webp" width="100%">
+            </picture>
+            <p align="center"><b>Command palette</b><br><sub>Searchable command menu with keyboard navigation</sub></p>
+        </td>
+        <td width="50%" valign="top">
+            <picture>
+                <source media="(prefers-color-scheme: dark)" srcset="docs/images/live-preview-dark.webp">
+                <img alt="A small dashboard built only with UI Vintage: revenue chart, goals, and activity" src="docs/images/live-preview-light.webp" width="100%">
+            </picture>
+            <p align="center"><b>Built with UI Vintage</b><br><sub>A small dashboard made only from library components</sub></p>
+        </td>
+    </tr>
+    <tr>
+        <td width="50%" valign="top">
+            <picture>
+                <source media="(prefers-color-scheme: dark)" srcset="docs/images/blog-dark.webp">
+                <img alt="The blog home with an announcement, a highlighted title, stats, and the featured carousel" src="docs/images/blog-light.webp" width="100%">
+            </picture>
+            <p align="center"><b>Blog home</b><br><sub>Hero header with stats and a featured carousel</sub></p>
+        </td>
+        <td width="50%" valign="top">
+            <picture>
+                <source media="(prefers-color-scheme: dark)" srcset="docs/images/post-dark.webp">
+                <img alt="A blog post header with breadcrumbs, labelled details, tags, and the cover image" src="docs/images/post-light.webp" width="100%">
+            </picture>
+            <p align="center"><b>Blog post</b><br><sub>Post header with labelled details, tags, and the share sidebar</sub></p>
+        </td>
+    </tr>
+</table>
 
-`alert`, `alert-dialog`, `accordion`, `animated-number`, `avatar`, `badge`, `breadcrumb`, `button`, `calendar`, `card`, `checkbox`, `collapsible`, `combobox`, `command`, `data-table`, `date-picker`, `date-time-picker`, `dialog`, `dropdown-menu`, `field`, `file-dropzone`, `hover-card`, `input`, `kbd`, `label`, `native-select`, `number-field`, `pagination`, `pin-input`, `popover`, `progress`, `radio-group`, `scroll-area`, `select`, `separator`, `sheet`, `sidebar`, `skeleton`, `slider`, `spinner`, `stepper`, `switch`, `table`, `tabs`, `tags-input`, `textarea`, `time-picker`, `toggle-group`, and `tooltip`.
+## Components
 
-### 🧱 Composite components
+84 entry points, grouped as in the catalog. Each name is also its import subpath, for example `@brumaombra/ui-vintage/data-table`.
 
-`background-grid`, `card-grid`, `chip`, `dashboard-shell`, `data-list`, `empty-state-card`, `error-page`, `info-card`, `landing`, `landing-content`, `landing-footer`, `landing-navbar`, `landing-shell`, `load-more-button`, `loading-state-card`, `page-header`, `progress-component`, `single-value-card`, `text-link`, and `theme-selector`.
+| Category | Entry points |
+| --- | --- |
+| **Actions** | `button`, `dropdown-menu`, `kbd`, `load-more-button`, `text-link`, `toggle-group` |
+| **Forms** | `calendar`, `checkbox`, `combobox`, `date-picker`, `date-time-picker`, `field`, `file-dropzone`, `input`, `label`, `native-select`, `number-field`, `pin-input`, `radio-group`, `select`, `slider`, `slider-form-component`, `switch`, `switch-form-component`, `tags-input`, `textarea`, `time-picker` |
+| **Data display** | `animated-number`, `avatar`, `badge`, `card`, `card-grid`, `chip`, `data-list`, `data-table`, `info-card`, `progress`, `progress-component`, `scroll-area`, `separator`, `single-value-card`, `skeleton`, `stat-strip`, `table` |
+| **Navigation** | `accordion`, `breadcrumb`, `collapsible`, `pagination`, `sidebar`, `stepper`, `tabs` |
+| **Overlays** | `alert-dialog`, `command`, `dialog`, `hover-card`, `popover`, `sheet`, `tooltip` |
+| **Feedback** | `alert`, `busy`, `busy-indicator`, `confirm-dialog`, `cookie-consent`, `empty-state-card`, `loading-state-card`, `message-dialog`, `message-toast`, `spinner` |
+| **Layouts and app shell** | `background-grid`, `dashboard-shell`, `error-page`, `landing`, `landing-content`, `landing-footer`, `landing-navbar`, `landing-shell`, `language-flag`, `language-selector`, `page-header`, `theme-selector` |
+| **Content and blog** | `blog`, `content` |
+| **Utilities and types** | `common-types`, `utils` |
 
-### 💬 Runtime flows and integrations
+### Component catalog
 
-`busy`, `busy-indicator`, `confirm-dialog`, `message-dialog`, `message-toast`, `language-flag`, `language-selector`, `blog`, `content`, and `utils`.
+[`COMPONENTS.md`](COMPONENTS.md) documents every entry point: its import line, props and defaults, events, slots, helpers, and examples. It is generated from the source and ships inside the package, so your app can always read the version it installed at `node_modules/@brumaombra/ui-vintage/COMPONENTS.md`.
 
-### 📚 Component catalog
+### AI assistant skill
 
-[`COMPONENTS.md`](COMPONENTS.md) lists every entry point with its import line, components, props and defaults, events, slots, helpers, and usage examples. It is generated from the source and ships inside the package, so apps can always read the version they installed at `node_modules/@brumaombra/ui-vintage/COMPONENTS.md`.
-
-Regenerate it after changing a public API, adding an entry point, or editing `scripts/components-meta.mjs`:
+The package ships a skill that teaches coding assistants to reuse UI Vintage and to read the catalog before writing UI. To enable it with Claude Code, copy it into your app:
 
 ```bash
-# Rewrite COMPONENTS.md from the source
+mkdir -p .claude/skills
+cp -r node_modules/@brumaombra/ui-vintage/skills/ui-vintage .claude/skills/
+```
+
+The skill only points to `COMPONENTS.md`, so it stays valid when you update the package.
+
+## Theming
+
+### Tokens and dark mode
+
+The stylesheet defines semantic tokens (`background`, `foreground`, `card`, `primary`, `muted`, `border`, and more) for both themes. Dark mode follows the `.dark` class on `<html>`; `ThemeSelector` sets it for you, with light, dark, and automatic modes. Extend the existing CSS custom properties in your app stylesheet instead of creating a second token system.
+
+The module injects the stylesheet automatically. Import it explicitly only when you need to control the loading order:
+
+```js
+import '@brumaombra/ui-vintage/style.css';
+```
+
+`LandingNavbar`, `LandingFooter`, and `DashboardShell` accept `app-logo` and `app-logo-dark`, so your logo can follow the theme too.
+
+### Motion
+
+Every component uses the same small vocabulary, and your app can reuse it:
+
+- **Easings:** `ease-spring`, `ease-bounce`, `ease-out-expo`, and `ease-snappy`.
+- **Surfaces:** `uv-floating-motion` (popovers, menus, tooltips), `uv-modal-motion`, `uv-overlay-motion`, `uv-collapsible-motion`, and `uv-field` (focus ring and invalid states for inputs).
+- **Animations:** `animate-uv-pop`, `animate-uv-fade-up`, `animate-uv-shake`, `animate-uv-shimmer`, `animate-uv-float`, `animate-uv-ping-soft`, `animate-uv-word-in`, `animate-uv-grow-x`, and `animate-uv-draw`.
+- **Elevation:** `shadow-elevated-sm` through `shadow-elevated-xl`.
+
+All durations collapse when the user prefers reduced motion. Tailwind v4 animates `scale`, `rotate`, and `translate` as separate properties, so name them (not `transform`) in custom transitions.
+
+### Localization
+
+Library strings live under the `uiVintage` namespace and are available in English, Italian, French, Spanish, German, Portuguese, Chinese, Japanese, and Russian. With `@nuxtjs/i18n` or Vue I18n configured, the runtime plugin merges them into your existing composer without replacing your messages.
+
+## How it works
+
+When the module is registered, it:
+
+1. Injects `src/styles.css` into the app once.
+2. Adds the published `src/` directory to Nuxt transpilation.
+3. Installs `@nuxt/image` when the app has not registered it.
+4. Registers the library i18n plugin, which merges the locale messages when Vue I18n is present.
+
+The module does not auto-register components. Always import from a public subpath; files under `src/components/` are implementation details and may change between versions.
+
+```text
+src/
+  components/   Public components and UI primitives
+  i18n/         Library locale messages
+  lib/          Shared helpers and token utilities
+  runtime/      Nuxt runtime plugin
+  styles.css    Design tokens, motion, and component styles
+module.mjs      Nuxt module entry point
+demo-app/       Private showcase app (not published)
+```
+
+<a id="demo-app"></a>
+## Demo app
+
+`demo-app/` is a documentation-style Nuxt 4 app that shows every component with a live preview and a copyable code tab, a live mini-app on the overview page, a complete blog built with Nuxt Content, and a command palette (`Ctrl/⌘ + K`) to jump to any section. It imports the package through `file:..`, so it runs the same source that is published to npm.
+
+```bash
+# Install and start the demo
+npm --prefix demo-app install
+npm --prefix demo-app run dev
+
+# Production build
+npm --prefix demo-app run build
+```
+
+## Development
+
+There is no build step: the published files are `module.mjs`, `src/`, `COMPONENTS.md`, and `skills/`. Before opening a pull request or publishing, run:
+
+```bash
+# Type-check the published TypeScript and Vue source
+npm run typecheck
+
+# Regenerate the component catalog after changing a public API
 npm run docs:components
 
 # Fail when COMPONENTS.md is out of date (runs in the publish workflow)
 npm run docs:components:check
 ```
 
-New entry points need a description and category in `scripts/components-meta.mjs`; the generator fails until they have one.
+New entry points need an export in `package.json` and a description and category in `scripts/components-meta.mjs`; the catalog generator fails until they have one. The release process is described in [`.claude/skills/publish-npm/SKILL.md`](.claude/skills/publish-npm/SKILL.md).
 
-### 🤖 AI assistant skill
+## Requirements
 
-The package also ships a skill that teaches coding assistants to reuse UI Vintage and to read the catalog before writing UI. To enable it in a consuming app with Claude Code, copy it into the app's skills directory:
+- Nuxt 4 and Vue 3.5 or newer.
+- `@nuxt/image` 2 for image components (the module installs it when needed).
+- `vue-i18n` 9, 10, or 11 for the translated components.
 
-```bash
-# Copy the skill shipped with the installed version
-mkdir -p .claude/skills
-cp -r node_modules/@brumaombra/ui-vintage/skills/ui-vintage .claude/skills/
-```
+## Troubleshooting
 
-The skill only points to `COMPONENTS.md`, so it stays valid when you update the package. Copy it again only when the skill itself changes.
+- **Components can't resolve Nuxt imports:** check that the app runs Nuxt 4 and that `@brumaombra/ui-vintage` is registered in `nuxt.config`.
+- **Styles are missing:** register the module once and restart the dev server after changing `nuxt.config`.
+- **`NuxtImg` is unavailable:** install `@nuxt/image`, or let the module install it during setup.
+- **Translations don't appear:** configure Vue I18n or `@nuxtjs/i18n`; messages are merged only when an i18n composer exists.
+- **An import fails:** use the public subpath from `package.json`, such as `@brumaombra/ui-vintage/button`, never an internal `src/` path.
 
-### 🎬 Motion system
+## License
 
-`src/styles.css` ships a small motion vocabulary that every component uses and that apps can reuse:
-
-- Easing utilities: `ease-spring`, `ease-bounce`, `ease-out-expo`, and `ease-snappy`.
-- Surface utilities: `uv-floating-motion` (popovers, menus, tooltips), `uv-modal-motion`, `uv-overlay-motion`, `uv-collapsible-motion`, and `uv-field` (focus ring and invalid states for inputs).
-- Animations: `animate-uv-pop`, `animate-uv-fade-up`, `animate-uv-shake`, `animate-uv-shimmer`, `animate-uv-float`, and `animate-uv-ping-soft`.
-- Elevation: `shadow-elevated-sm` through `shadow-elevated-xl`.
-
-All durations collapse automatically when the user prefers reduced motion. Tailwind v4 animates `scale`, `rotate`, and `translate` as individual properties, so list those names (not `transform`) in custom transitions.
-
-<a id="demo-app"></a>
-## 🖥️ Demo App
-
-The private `demo-app/` directory is a Nuxt 4 documentation-style showcase for manual verification. It is organized by category (Foundations, Actions, Forms, Data display, Navigation, Overlays, Feedback, Layouts), shows every component with a live preview and a copyable code tab, includes a live mini-app on the overview page, and has a global command palette (`Ctrl/⌘ + K`) to jump to any section. The navigation model lives in `demo-app/app/utils/demo-navigation.ts`.
-
-The demo app is not part of the published package and is not intended to be installed by consumers. It imports the package through `file:..`, so it exercises the same source that is published to npm.
-
-### ▶️ Run the showcase locally
-
-From the repository root:
-
-```bash
-# Install dependencies for the demo app
-npm --prefix demo-app install
-
-# Start the Nuxt development server
-npm --prefix demo-app run dev
-```
-
-Open the local URL printed by Nuxt. To create a production build of the showcase:
-
-```bash
-# Build the private verification app
-npm --prefix demo-app run build
-```
-
-<a id="configuration"></a>
-## ⚙️ Configuration
-
-### 🎨 Styles
-
-The module injects the shared stylesheet automatically. The stylesheet is also available as an explicit export when an app needs to control loading order:
-
-```js
-// Import the shared tokens and component styles explicitly when needed
-import '@brumaombra/ui-vintage/style.css';
-```
-
-Avoid creating a second theme-token system in the consuming app. Extend the existing CSS custom properties in your application stylesheet when a project needs additional brand values.
-
-### 🌍 Localization
-
-The package includes English, Italian, French, Spanish, German, Portuguese, Chinese, Japanese, and Russian library messages. When `@nuxtjs/i18n` or Vue I18n is configured, the runtime plugin merges these messages into the existing composer without replacing application messages.
-
-Application-specific translations remain owned by the consuming app. The library only contributes messages under its own `uiVintage` namespace.
-
-### 🧭 Imports
-
-Use explicit subpaths for public imports:
-
-```js
-// Import a component from its stable public entrypoint
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@brumaombra/ui-vintage/tabs';
-
-// Import shared helper behavior from its dedicated entrypoint
-import { showMessageToast } from '@brumaombra/ui-vintage/message-toast';
-```
-
-Do not import internal files from `src/components/` in application code. Internal paths are implementation details and may change independently of public entrypoints.
-
-<a id="publishing"></a>
-## 📦 Publishing Model
-
-UI Vintage publishes the Nuxt module entrypoint and source files directly:
-
-- `module.mjs` is the package entrypoint registered by Nuxt.
-- `src/` contains the published components, styles, helpers, locale messages, and runtime plugin.
-- `package.json` defines the public component subpath exports.
-- `COMPONENTS.md` and `skills/` ship the generated component catalog and the AI assistant skill.
-- `dist/` is generated repository output and is not the source of truth for consumers.
-
-There is no required library build step before publishing. The normal verification command is:
-
-```bash
-# Check the published TypeScript and Vue source without generating dist output
-npm run typecheck
-```
-
-For the release process, see the project skill in [`.claude/skills/publish-npm/SKILL.md`](.claude/skills/publish-npm/SKILL.md). The package is published under the public npm scope `@brumaombra/ui-vintage`.
-
-<a id="requirements"></a>
-## 🧰 Requirements
-
-- Node.js compatible with the Nuxt 4 version used by the consuming app.
-- Nuxt 4.
-- Vue 3.5 or newer.
-- `@nuxt/image` for image-enabled components. The module installs it when needed.
-- `vue-i18n` when using the library’s localization integration.
-
-<a id="troubleshooting"></a>
-## 🛠️ Troubleshooting
-
-- **Components cannot resolve Nuxt imports:** confirm the app is Nuxt 4 and that `@brumaombra/ui-vintage` is registered in `nuxt.config.js`.
-- **Styles are missing:** check that the module is registered once and restart the Nuxt dev server after changing `nuxt.config.js`.
-- **`NuxtImg` is unavailable:** install `@nuxt/image` or allow the UI Vintage module to install it during Nuxt setup.
-- **Translations do not appear:** configure Vue I18n or `@nuxtjs/i18n`; the runtime plugin merges messages only when an i18n composer is available.
-- **A component import fails:** use the public subpath listed in `package.json`, such as `@brumaombra/ui-vintage/button`, rather than an internal `src/` path.
-- **The demo app does not start:** run `npm --prefix demo-app install` from the repository root, then retry `npm --prefix demo-app run dev`.
-
-<a id="license"></a>
-## 📄 License
-
-This project is released under the MIT License. See [LICENSE](LICENSE) for the full license text.
+[MIT](LICENSE) © Mauro Brambilla
