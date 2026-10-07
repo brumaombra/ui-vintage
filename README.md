@@ -59,23 +59,37 @@ UI Vintage is a Nuxt 4 module and component library for dashboards, forms, landi
 
 ## Installation
 
-Install the package and its peer integrations in an existing Nuxt 4 app:
+Install the package with its peer integrations in an existing Nuxt 4 app. The stylesheet is built with Tailwind CSS v4, and the components use Vue I18n for their labels:
 
 ```bash
-npm install @brumaombra/ui-vintage @nuxt/image vue-i18n
+npm install @brumaombra/ui-vintage @nuxt/image @nuxtjs/i18n tailwindcss @tailwindcss/vite
 ```
 
-Register the module in `nuxt.config`:
+Register the module, Nuxt I18n, and the Tailwind Vite plugin in `nuxt.config`:
 
 ```js
+import tailwindcss from '@tailwindcss/vite';
+
 export default defineNuxtConfig({
     modules: [
-        '@brumaombra/ui-vintage'
-    ]
+        '@brumaombra/ui-vintage',
+        '@nuxtjs/i18n'
+    ],
+
+    vite: {
+        plugins: [
+            tailwindcss()
+        ]
+    },
+
+    i18n: {
+        defaultLocale: 'en',
+        locales: [{ code: 'en', language: 'en-US' }]
+    }
 });
 ```
 
-That's it: the module injects the shared stylesheet, adds the source to Nuxt transpilation, installs `@nuxt/image` when your app has not registered it, and merges the library messages into your Vue I18n instance. Vue I18n is optional at runtime, but the translated components need it.
+That's it: the module injects the shared stylesheet, adds the source to Nuxt transpilation, installs `@nuxt/image` when your app has not registered it, and merges the library messages into your i18n setup. The components call `useI18n()`, so an i18n setup is required even for a single-language app. Using the blog or content components? Install `@nuxt/content` too.
 
 ## Usage
 
@@ -386,15 +400,17 @@ New entry points need an export in `package.json` and a description and category
 ## Requirements
 
 - Nuxt 4 and Vue 3.5 or newer.
+- Tailwind CSS v4 with `@tailwindcss/vite` registered in `vite.plugins`.
+- `vue-i18n` 9, 10, or 11 with an i18n setup, such as `@nuxtjs/i18n` (the components call `useI18n()`).
 - `@nuxt/image` 2 for image components (the module installs it when needed).
-- `vue-i18n` 9, 10, or 11 for the translated components.
+- `@nuxt/content` 3, only for the `blog` and `content` components.
 
 ## Troubleshooting
 
 - **Components can't resolve Nuxt imports:** check that the app runs Nuxt 4 and that `@brumaombra/ui-vintage` is registered in `nuxt.config`.
-- **Styles are missing:** register the module once and restart the dev server after changing `nuxt.config`.
+- **Styles are missing:** register the module once, add `tailwindcss()` from `@tailwindcss/vite` to `vite.plugins`, and restart the dev server after changing `nuxt.config`.
 - **`NuxtImg` is unavailable:** install `@nuxt/image`, or let the module install it during setup.
-- **Translations don't appear:** configure Vue I18n or `@nuxtjs/i18n`; messages are merged only when an i18n composer exists.
+- **`useI18n` errors or missing translations:** register `@nuxtjs/i18n` (or install Vue I18n yourself); the components need an i18n composer, and the library messages are merged into it.
 - **An import fails:** use the public subpath from `package.json`, such as `@brumaombra/ui-vintage/button`, never an internal `src/` path.
 
 ## License

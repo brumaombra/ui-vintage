@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { Accordion } from '@brumaombra/ui-vintage/accordion';
 import { DashboardShell } from '@brumaombra/ui-vintage/dashboard-shell';
+import { LandingNavbar } from '@brumaombra/ui-vintage/landing-navbar';
 import { SwitchFormComponent } from '@brumaombra/ui-vintage/switch-form-component';
 
 // Accessible names: what screen readers announce for each control
@@ -42,5 +43,19 @@ describe('DashboardShell', () => {
         expect(light.classes()).toContain('dark:hidden');
         expect(dark.classes()).toEqual(expect.arrayContaining(['hidden', 'dark:block']));
         expect(light.attributes('alt')).toBe('Acme logo');
+    });
+});
+
+describe('LandingNavbar', () => {
+    // A logo without an app name is named "Home", like in the dashboard shell
+    it('gives a logo-only brand a fallback alt text', async () => {
+        const wrapper = await mountSuspended(LandingNavbar, { props: { appLogo: '/logo.svg' } });
+        expect(wrapper.find('img').attributes('alt')).toBe('Home');
+    });
+
+    // Without a logo or a name there is no empty home link
+    it('renders no brand link without a logo or a name', async () => {
+        const wrapper = await mountSuspended(LandingNavbar, { props: { appLinkTo: '/' } });
+        expect(wrapper.find('a[href="/"]').exists()).toBe(false);
     });
 });

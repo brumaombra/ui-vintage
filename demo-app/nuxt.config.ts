@@ -55,7 +55,6 @@ export default defineNuxtConfig({
         ],
         optimizeDeps: {
             include: [
-                '@brumaombra/ui-vintage',
                 '@hugeicons/core-free-icons',
                 '@hugeicons/vue',
                 '@internationalized/date',

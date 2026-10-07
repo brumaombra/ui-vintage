@@ -14,10 +14,7 @@
             "DOM",
             "DOM.Iterable"
         ],
-        "skipLibCheck": true,
-        "types": [
-            "node"
-        ]
+        "skipLibCheck": true
     },
     "include": [
         "src/**/*.ts",

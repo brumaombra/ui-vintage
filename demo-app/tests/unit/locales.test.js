@@ -1,9 +1,10 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 
-// Library source folder (the demo app lives next to it)
-const librarySource = join(process.cwd(), '..', 'src');
+// Library source folder, found from this file so the tests run from any folder
+const librarySource = fileURLToPath(new URL('../../../src', import.meta.url));
 
 // Flatten a locale into { "a.b.c": "text" }
 const flatten = (object, prefix = '') => Object.entries(object).flatMap(([key, value]) => {

@@ -58,6 +58,12 @@ describe('BlogHeaderSection', () => {
         expect(wrapper.find('h1').text().replace(/\s+/g, ' ')).toBe('Il blog della demo');
     });
 
+    // No space is added around the highlight unless the title has one there
+    it('keeps the title spacing around the highlight', async () => {
+        const wrapper = await mountSuspended(BlogHeaderSection, { props: { title: 'The (Nuxt) blog', highlight: 'Nuxt', description: 'Notes' } });
+        expect(wrapper.find('h1').text().replace(/\s+/g, ' ')).toBe('The (Nuxt) blog');
+    });
+
     // The announcement links to its target with the translated "New" label
     it('renders the announcement link', async () => {
         const wrapper = await mountSuspended(BlogHeaderSection, { props: { title: 'Blog', description: 'Notes', announcement: { text: 'Latest post', to: '/blog/latest' } } });

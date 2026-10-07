@@ -21,7 +21,8 @@
         "@nuxt/image": "2.1.0",
         "@nuxtjs/i18n": "10.6.0",
         "aos": "2.3.4",
-        "nuxt": "4.5.2"
+        "nuxt": "4.5.2",
+        "zod": "3.25.67"
     },
     "devDependencies": {
         "@nuxt/test-utils": "4.3.2",

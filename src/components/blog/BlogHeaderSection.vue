@@ -51,6 +51,11 @@ const titleParts = computed(() => {
 const splitWords = (text: string) => text.split(/\s+/).filter(Boolean);
 const beforeWords = computed(() => splitWords(titleParts.value.before));
 const afterWords = computed(() => splitWords(titleParts.value.after));
+// Space after a word before the highlight: always between words, and before the highlight only when the title has one there
+const wordGap = (index: number) => {
+    if (index < beforeWords.value.length - 1) return ' ';
+    return titleParts.value.highlight && /\s$/.test(titleParts.value.before) ? ' ' : '';
+};
 const wordDelay = (index: number) => `${120 + Math.min(index, 12) * 55}ms`;
 const highlightDelay = computed(() => wordDelay(beforeWords.value.length));
 const afterDelay = (index: number) => wordDelay(beforeWords.value.length + 1 + index);
@@ -91,11 +96,10 @@ const underlineDelay = computed(() => `${beforeWords.value.length * 55 + 600}ms`
         <!-- Title (each word rises in with a spring, the highlight gets a hand-drawn underline) -->
         <h1 class="max-w-4xl text-4xl leading-[1.05] font-semibold tracking-tight text-foreground sm:text-5xl md:text-6xl">
             <template v-for="(word, index) in beforeWords" :key="`before-${word}-${index}`">
-                <span class="inline-block animate-uv-word-in" :style="{ animationDelay: wordDelay(index) }">{{ word }}</span>{{ ' ' }}
+                <span class="inline-block animate-uv-word-in" :style="{ animationDelay: wordDelay(index) }">{{ word }}</span>{{ wordGap(index) }}
             </template>
-            <span v-if="titleParts.highlight" class="relative inline-block animate-uv-word-in text-primary" :style="{ animationDelay: highlightDelay }">
-                {{ titleParts.highlight }}
-                <svg class="absolute -bottom-2 left-0 h-3 w-full text-primary/60" viewBox="0 0 200 12" fill="none" preserveAspectRatio="none" aria-hidden="true">
+            <!-- The text and the underline sit on one line so no stray space ends up inside the highlight -->
+            <span v-if="titleParts.highlight" class="relative inline-block animate-uv-word-in text-primary" :style="{ animationDelay: highlightDelay }">{{ titleParts.highlight }}<svg class="absolute -bottom-2 left-0 h-3 w-full text-primary/60" viewBox="0 0 200 12" fill="none" preserveAspectRatio="none" aria-hidden="true">
                     <path d="M2 9C40 3 80 2 198 7" stroke="currentColor" stroke-width="4" stroke-linecap="round" pathLength="1" class="animate-uv-draw [stroke-dasharray:1]" :style="{ animationDelay: underlineDelay }" />
                 </svg>
             </span>

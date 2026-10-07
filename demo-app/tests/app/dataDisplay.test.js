@@ -8,6 +8,9 @@ import { StatStrip } from '@brumaombra/ui-vintage/stat-strip';
 // Euro amounts without decimals, as used across the demo
 const euro = { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 };
 
+// Numbers are formatted with the runtime locale, so build the expected text the same way (with plain spaces, like the text read from the page)
+const formatNumber = (value, options) => new Intl.NumberFormat(undefined, options).format(value).replace(/\s+/g, ' ');
+
 // Stat cards and strips: the numbers people read first
 describe('StatStrip', () => {
     // Each item shows its value and label, numbers formatted with their options
@@ -24,9 +27,9 @@ describe('StatStrip', () => {
         });
         const items = wrapper.findAll('li').map(item => item.text().replace(/\s+/g, ' '));
         expect(items).toHaveLength(3);
-        expect(items[0]).toContain('1,284');
+        expect(items[0]).toContain(formatNumber(1284));
         expect(items[0]).toContain('customers');
-        expect(items[1]).toContain('€48,290');
+        expect(items[1]).toContain(formatNumber(48290, euro));
         expect(items[1]).toContain('revenue');
         expect(items[2]).toContain('+12%');
         expect(items[2]).toContain('growth');
@@ -40,18 +43,17 @@ describe('StatStrip', () => {
 });
 
 describe('SingleValueCard', () => {
-    // Without format options a static number is shown exactly as given (years, IDs)
+    // Without format options a static number is shown exactly as given (IDs, years)
     it('keeps plain numbers unformatted when not animated', async () => {
-        const wrapper = await mountSuspended(SingleValueCard, { props: { label: 'Founded', value: 2024, icon: Money03Icon, animate: false } });
-        expect(wrapper.text()).toContain('2024');
-        expect(wrapper.text()).not.toContain('2,024');
+        const wrapper = await mountSuspended(SingleValueCard, { props: { label: 'Order ID', value: 1234567, icon: Money03Icon, animate: false } });
+        expect(wrapper.text()).toContain('1234567');
+        expect(wrapper.text()).not.toContain(formatNumber(1234567));
     });
 
     // Format options still apply when the count-up is turned off
     it('formats static numbers with formatOptions', async () => {
         const wrapper = await mountSuspended(SingleValueCard, { props: { label: 'Revenue', value: 48290, icon: Money03Icon, animate: false, formatOptions: euro } });
-        expect(wrapper.text()).toContain('48,290');
-        expect(wrapper.text()).toContain('€');
+        expect(wrapper.text().replace(/\s+/g, ' ')).toContain(formatNumber(48290, euro));
     });
 
     // The trend badge shows the sign and the label
