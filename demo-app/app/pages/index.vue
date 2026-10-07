@@ -22,7 +22,7 @@ definePageMeta({ layout: 'dashboard' });
 
 const paletteOpen = useState('demo-palette-open', () => false);
 const installCopied = ref(false);
-const chartReady = ref(false);
+const goalsReady = ref(false);
 
 // Copy the install command
 const handleCopyInstall = async () => {
@@ -33,8 +33,13 @@ const handleCopyInstall = async () => {
     }, 1600);
 };
 
-// Weekly revenue bars for the preview chart
-const revenueBars = [42, 58, 51, 73, 66, 88, 79, 95, 84, 100, 91, 97];
+// Key metrics for the dashboard preview
+const dashboardMetrics = [
+    { label: 'Revenue', value: 48290, icon: Money03Icon, trend: 12.4, trendLabel: 'last 12 weeks', formatOptions: { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 } },
+    { label: 'Active accounts', value: 1284, icon: UserGroupIcon, trend: 4.1, description: '312 joined this quarter' },
+    { label: 'Conversion', value: 0.038, icon: ChartLineData02Icon, trend: 0.6, valueColor: 'green', formatOptions: { style: 'percent', maximumFractionDigits: 1 } },
+    { label: 'Churn', value: 0.012, icon: ZapIcon, trend: -0.3, valueColor: 'red', description: 'Lowest in a year', formatOptions: { style: 'percent', maximumFractionDigits: 1 } }
+];
 const recentActivity = [
     { name: 'Ada Lovelace', action: 'upgraded to Enterprise', time: '2m', img: 'https://i.pravatar.cc/96?img=47' },
     { name: 'Alan Turing', action: 'invited 4 teammates', time: '18m', img: 'https://i.pravatar.cc/96?img=12' },
@@ -82,10 +87,10 @@ const handleSave = async () => {
 // Pages shown in the explore grid
 const explorePages = computed(() => demoNavigation.flatMap(group => group.items).filter(page => page.id !== 'overview'));
 
-// Grow the chart bars after mount
+// Fill the goal bars after mount
 onMounted(() => {
     window.setTimeout(() => {
-        chartReady.value = true;
+        goalsReady.value = true;
     }, 250);
 });
 </script>
@@ -168,31 +173,13 @@ onMounted(() => {
                 </TabsList>
 
                 <!-- Dashboard tab -->
-                <TabsContent value="dashboard" class="grid gap-4 lg:grid-cols-[1.6fr_1fr]">
-                    <Card>
-                        <CardHeader>
-                            <div class="flex items-start justify-between gap-4">
-                                <div>
-                                    <CardDescription>Revenue · last 12 weeks</CardDescription>
-                                    <CardTitle class="mt-2 text-2xl! sm:text-3xl!">€48,290</CardTitle>
-                                </div>
-                                <Badge text="+12.4%" color="green" :icon="ChartLineData02Icon" />
-                            </div>
-                        </CardHeader>
-                        <CardContent class="flex-1">
-                            <!-- Bar chart (fills the card when the side column is taller) -->
-                            <div class="flex min-h-44 flex-1 items-end gap-1.5 sm:gap-2.5">
-                                <div v-for="(value, index) in revenueBars" :key="index" class="group/bar relative flex h-full flex-1 items-end">
-                                    <div class="w-full origin-bottom rounded-t-sm bg-primary/25 transition-[scale,background-color] duration-700 ease-spring group-hover/bar:bg-primary" :style="{ height: `${value}%`, scale: chartReady ? '1 1' : '1 0', transitionDelay: `${index * 45}ms` }" />
-                                    <span class="pointer-events-none absolute -top-6 left-1/2 -translate-x-1/2 rounded-sm bg-foreground px-1.5 py-0.5 text-[10px] font-semibold text-background opacity-0 transition-[opacity,translate] duration-200 group-hover/bar:-translate-y-1 group-hover/bar:opacity-100">
-                                        €{{ Math.round(value * 48.3) }}
-                                    </span>
-                                </div>
-                            </div>
-                        </CardContent>
-                    </Card>
+                <TabsContent value="dashboard" class="flex flex-col gap-4">
+                    <!-- Key metrics -->
+                    <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                        <SingleValueCard v-for="metric in dashboardMetrics" :key="metric.label" v-bind="metric" />
+                    </div>
 
-                    <div class="flex flex-col gap-4">
+                    <div class="grid gap-4 lg:grid-cols-2">
                         <!-- Goals -->
                         <Card>
                             <CardHeader>
@@ -201,7 +188,7 @@ onMounted(() => {
                             <CardContent class="gap-4">
                                 <div v-for="goal in [{ label: 'New customers', value: 82 }, { label: 'Expansion revenue', value: 64 }, { label: 'NPS responses', value: 37 }]" :key="goal.label" class="flex flex-col gap-2">
                                     <div class="flex justify-between text-xs font-semibold"><span>{{ goal.label }}</span><span class="text-muted-foreground tabular-nums">{{ goal.value }}%</span></div>
-                                    <Progress :model-value="chartReady ? goal.value : 0" />
+                                    <Progress :model-value="goalsReady ? goal.value : 0" />
                                 </div>
                             </CardContent>
                         </Card>

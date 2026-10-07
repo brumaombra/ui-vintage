@@ -231,7 +231,7 @@ Every screenshot comes from the [demo app](#demo-app), and each one follows your
         <td width="50%" valign="top">
             <picture>
                 <source media="(prefers-color-scheme: dark)" srcset="docs/images/live-preview-dark.webp">
-                <img alt="A small dashboard built only with UI Vintage: revenue chart, goals, and activity" src="docs/images/live-preview-light.webp" width="100%">
+                <img alt="A small dashboard built only with UI Vintage: stat cards, goals, and activity" src="docs/images/live-preview-light.webp" width="100%">
             </picture>
             <p align="center"><b>Built with UI Vintage</b><br><sub>A small dashboard made only from library components</sub></p>
         </td>
