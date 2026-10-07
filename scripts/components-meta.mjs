@@ -237,6 +237,16 @@ export const entries = {
 <SingleValueCard label="Revenue" :value="48290" :icon="Money03Icon" :trend="12.4" trend-label="vs last month"
     :format-options="{ style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }" />`
     },
+    'stat-strip': {
+        category: 'data',
+        description: 'Compact row of stats in one bordered strip, each with an optional icon. Numeric values count up like `AnimatedNumber`.',
+        example: `
+<StatStrip :items="[
+    { icon: News01Icon, value: 6, label: 'posts' },
+    { icon: FolderLibraryIcon, value: 5, label: 'categories' },
+    { icon: Tag01Icon, value: 11, label: 'tags' }
+]" />`
+    },
     'animated-number': {
         category: 'data',
         description: 'Number that counts up on mount and tweens to new values, formatted with `Intl.NumberFormat`.'

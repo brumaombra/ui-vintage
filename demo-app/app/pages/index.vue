@@ -143,7 +143,7 @@ onMounted(() => {
 
         <!-- Library stats -->
         <section class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-            <SingleValueCard label="Public entry points" :value="82" :icon="Rocket01Icon" description="Explicit, tree-shakeable imports" />
+            <SingleValueCard label="Public entry points" :value="84" :icon="Rocket01Icon" description="Explicit, tree-shakeable imports" />
             <SingleValueCard label="Bundled locales" :value="9" :icon="Globe02Icon" description="Merged into your vue-i18n" />
             <SingleValueCard label="Motion curves" :value="4" :icon="MagicWand01Icon" description="Springs as pure CSS linear()" />
             <SingleValueCard label="Build steps" :value="0" :icon="ZapIcon" description="Compiled by your Nuxt app" />

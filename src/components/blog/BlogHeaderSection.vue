@@ -6,6 +6,7 @@ import { HugeiconsIcon } from '@hugeicons/vue';
 import type { HugeiconsIconDefinition } from '../../lib/common-types';
 import type { ToneColor } from '../../lib/color-tokens';
 import { Badge } from '../ui/badge';
+import { StatStrip } from '../stat-strip';
 
 // Props
 const props = withDefaults(defineProps<{
@@ -109,12 +110,6 @@ const underlineDelay = computed(() => `${beforeWords.value.length * 55 + 600}ms`
         </p>
 
         <!-- Stats strip -->
-        <ul v-if="props.stats.length > 0" class="inline-flex max-w-full animate-uv-fade-up flex-wrap items-stretch justify-center overflow-hidden rounded border border-border bg-card text-xs shadow-elevated-sm" :style="{ animationDelay: statsDelay }">
-            <li v-for="(stat, index) in props.stats" :key="stat.label" :class="['flex items-center gap-2 px-4 py-2.5', index > 0 && 'border-l border-border']">
-                <HugeiconsIcon v-if="stat.icon" :icon="stat.icon" class="size-4 shrink-0 text-primary" />
-                <span class="font-semibold text-foreground tabular-nums">{{ stat.value }}</span>
-                <span class="text-muted-foreground">{{ stat.label }}</span>
-            </li>
-        </ul>
+        <StatStrip :items="props.stats" class="animate-uv-fade-up justify-center" :style="{ animationDelay: statsDelay }" />
     </header>
 </template>

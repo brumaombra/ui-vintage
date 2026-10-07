@@ -18,6 +18,7 @@ import { SimplePagination } from '@brumaombra/ui-vintage/pagination';
 import { Progress } from '@brumaombra/ui-vintage/progress';
 import { ProgressComponent } from '@brumaombra/ui-vintage/progress-component';
 import { SingleValueCard } from '@brumaombra/ui-vintage/single-value-card';
+import { StatStrip } from '@brumaombra/ui-vintage/stat-strip';
 import { Skeleton } from '@brumaombra/ui-vintage/skeleton';
 import { Switch } from '@brumaombra/ui-vintage/switch';
 import DemoPageHeader from '~/components/demo/DemoPageHeader.vue';
@@ -134,6 +135,12 @@ const tableCode = `<DataTable v-model:selected="selected" v-model:sort="sort" :c
 const statsCode = `<SingleValueCard label="Revenue" :value="48290" :icon="Money03Icon" :trend="12.4" trend-label="vs last month"
     :format-options="{ style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }" />
 
+<StatStrip :items="[
+    { icon: UserGroupIcon, value: 1284, label: 'customers' },
+    { icon: Invoice01Icon, value: 312, label: 'invoices' },
+    { icon: Money03Icon, value: 48290, label: 'revenue', formatOptions: { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 } }
+]" />
+
 <AnimatedNumber :value="total" :duration="900" />`;
 
 const avatarCode = `<Avatar size="lg" status="online">
@@ -200,13 +207,20 @@ const avatarCode = `<Avatar size="lg" status="online">
         </DemoSection>
 
         <!-- Stats -->
-        <DemoSection id="stats" title="Stats & numbers" badge="Updated" description="Numeric values count up on mount and tween to new values. Trend badges and descriptions are optional." :code="statsCode">
+        <DemoSection id="stats" title="Stats & numbers" badge="Updated" description="Stat cards and the compact StatStrip. Numeric values count up on mount and tween to new values. Trend badges and descriptions are optional." :code="statsCode">
             <div class="flex flex-col gap-6">
                 <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
                     <SingleValueCard label="Revenue" :value="stats.revenue" :icon="Money03Icon" :trend="12.4" trend-label="vs last month" :format-options="{ style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }" />
                     <SingleValueCard label="Customers" :value="stats.customers" :icon="UserGroupIcon" :trend="4.1" />
                     <SingleValueCard label="Conversion" :value="stats.conversion / 100" :icon="ChartLineData02Icon" :trend="-0.6" :format-options="{ style: 'percent', maximumFractionDigits: 1 }" value-color="green" />
                     <SingleValueCard label="Churn" :value="`${stats.churn}%`" :icon="ZapIcon" value-color="red" description="Static string values render as-is." />
+                </div>
+                <div class="flex justify-center">
+                    <StatStrip :items="[
+                        { icon: UserGroupIcon, value: stats.customers, label: 'customers' },
+                        { icon: Invoice01Icon, value: Math.round(stats.customers / 4.1), label: 'invoices' },
+                        { icon: Money03Icon, value: stats.revenue, label: 'revenue', formatOptions: { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 } }
+                    ]" />
                 </div>
                 <div class="flex flex-col items-center gap-3 rounded border border-dashed border-border py-6">
                     <span class="text-[11px] font-semibold tracking-[0.18em] text-muted-foreground uppercase">Total processed</span>
@@ -246,7 +260,7 @@ const avatarCode = `<Avatar size="lg" status="online">
         </DemoSection>
 
         <!-- Avatar -->
-        <DemoSection id="avatar" title="Avatar" badge="New" description="Images fade in when loaded, initials are generated from names, and status dots pulse. Hover the group to spread it." :code="avatarCode">
+        <DemoSection id="avatar" title="Avatar" badge="New" description="Images fade in when loaded, initials are generated from names, and status dots pulse." :code="avatarCode">
             <div class="flex flex-col gap-8">
                 <div class="flex flex-wrap items-end gap-4">
                     <Avatar v-for="(size, index) in ['xs', 'sm', 'md', 'lg', 'xl'] as const" :key="size" :size="size" :status="team[index]!.status">
