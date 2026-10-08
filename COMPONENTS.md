@@ -3539,6 +3539,7 @@ import { AllPostsSection, BlogContentRenderer, BlogFAQSection, BlogInfoSection, 
 | `highlight` | `string` | `''` |
 | `description` *(required)* | `string` |  |
 | `stats` | `Array<{ label: string; value: string \| number; icon?: HugeiconsIconDefinition }>` | `[]` |
+| `align` | `'left' \| 'center' \| 'right'` | `'center'` |
 
 #### `BlogSectionTitle`
 

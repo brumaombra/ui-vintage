@@ -5,6 +5,7 @@ import { ArrowRight01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import type { HugeiconsIconDefinition } from '../../lib/common-types';
 import type { ToneColor } from '../../lib/color-tokens';
+import { cn } from '../../lib/utils';
 import { Badge } from '../ui/badge';
 import { StatStrip } from '../stat-strip';
 
@@ -27,14 +28,24 @@ const props = withDefaults(defineProps<{
         value: string | number;
         icon?: HugeiconsIconDefinition;
     }>;
+    align?: 'left' | 'center' | 'right';
 }>(), {
     badges: () => [],
     announcement: null,
     highlight: '',
-    stats: () => []
+    stats: () => [],
+    align: 'center'
 });
 
 const { t } = useI18n();
+
+// Alignment of the whole header: the column, its text, and the rows of badges and stats
+const alignClasses = {
+    left: { header: 'items-start text-left', row: 'justify-start' },
+    center: { header: 'items-center text-center', row: 'justify-center' },
+    right: { header: 'items-end text-right', row: 'justify-end' }
+} as const;
+const alignClass = computed(() => alignClasses[props.align] ?? alignClasses.center);
 
 // Split the title around the highlighted part (when it appears in the title)
 const titleParts = computed(() => {
@@ -68,7 +79,7 @@ const underlineDelay = computed(() => `${beforeWords.value.length * 55 + 600}ms`
 </script>
 
 <template>
-    <header class="relative flex flex-col items-center gap-6 pt-6 pb-4 text-center md:pt-12 md:pb-6">
+    <header :class="cn('relative flex flex-col gap-6 pt-6 md:pt-12', alignClass.header)">
         <!-- Announcement (links to something new, such as the latest post) -->
         <NuxtLink v-if="props.announcement" :to="props.announcement.to" class="group/announce max-w-full animate-uv-fade-up rounded outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45">
             <span class="inline-flex max-w-full items-center gap-2 rounded border border-warning/35 bg-warning/10 px-3 py-1 text-xs text-foreground transition-colors duration-150 group-hover/announce:border-warning/70">
@@ -83,7 +94,7 @@ const underlineDelay = computed(() => `${beforeWords.value.length * 55 + 600}ms`
         </NuxtLink>
 
         <!-- Badges -->
-        <div v-if="props.badges.length > 0" class="flex flex-wrap justify-center gap-2">
+        <div v-if="props.badges.length > 0" :class="cn('flex flex-wrap gap-2', alignClass.row)">
             <Badge v-for="(badge, index) in props.badges"
                 :key="`${badge.color}-${badge.text}`"
                 :color="badge.color"
@@ -114,6 +125,6 @@ const underlineDelay = computed(() => `${beforeWords.value.length * 55 + 600}ms`
         </p>
 
         <!-- Stats strip -->
-        <StatStrip :items="props.stats" class="animate-uv-fade-up justify-center" :style="{ animationDelay: statsDelay }" />
+        <StatStrip :items="props.stats" :class="cn('animate-uv-fade-up', alignClass.row)" :style="{ animationDelay: statsDelay }" />
     </header>
 </template>

@@ -51,6 +51,18 @@ describe('BlogTagsSection', () => {
 });
 
 describe('BlogHeaderSection', () => {
+    // Centered by default; left and right move the column, its text, and the stats row together
+    it('aligns the header content', async () => {
+        const stats = [{ label: 'posts', value: 6 }];
+        const centered = await mountSuspended(BlogHeaderSection, { props: { title: 'Blog', description: 'Notes', stats } });
+        expect(centered.find('header').classes()).toEqual(expect.arrayContaining(['items-center', 'text-center']));
+        const left = await mountSuspended(BlogHeaderSection, { props: { title: 'Blog', description: 'Notes', stats, align: 'left' } });
+        expect(left.find('header').classes()).toEqual(expect.arrayContaining(['items-start', 'text-left']));
+        expect(left.find('[data-slot="stat-strip"]').classes()).toContain('justify-start');
+        const right = await mountSuspended(BlogHeaderSection, { props: { title: 'Blog', description: 'Notes', stats, align: 'right' } });
+        expect(right.find('header').classes()).toEqual(expect.arrayContaining(['items-end', 'text-right']));
+    });
+
     // The highlighted part of the title is rendered on its own, wherever it appears
     it('highlights part of the title', async () => {
         const wrapper = await mountSuspended(BlogHeaderSection, { props: { title: 'Il blog della demo', highlight: 'blog', description: 'Notes' } });
