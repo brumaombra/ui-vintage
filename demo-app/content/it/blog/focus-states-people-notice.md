@@ -10,7 +10,7 @@ authorImageUrl: "/images/authors/bruma.jpg"
 categorySlug: "accessibility"
 categoryText: "Accessibilità"
 language: "it"
-tags: ["Accessibilità", "CSS", "Sistemi di design"]
+tags: ["Accessibility", "CSS", "Design Systems"]
 faqs:
   - question: "Perché usare focus-visible invece di focus?"
     answer: "Il selettore :focus-visible si attiva solo quando il browser ritiene utile un indicatore visibile, di solito durante la navigazione da tastiera. Chi usa il mouse non vede un anello dopo ogni clic, chi usa la tastiera lo vede sempre."

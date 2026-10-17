@@ -37,72 +37,127 @@ const addLocalizationToRoutes = routes => {
     return [...routes, ...localizedRoutes];
 };
 
-// Prefix a route with the locale (the default locale has no prefix)
-const localizeRoute = (locale, route) => {
-    return locale === 'en' ? route : `/${locale}${route}`;
-};
-
-// Read the blog posts of a locale (slug and frontmatter)
-const getBlogPosts = async locale => {
+// Get all blog post paths from content/blog for each locale
+const getAllBlogRoutes = async () => {
     const rootDir = process.cwd();
-    const blogDir = locale === 'en' ? path.join(rootDir, 'content', 'blog') : path.join(rootDir, 'content', locale, 'blog');
-
-    // Read the blog directory entries
-    let entries = [];
-    try {
-        entries = await fs.readdir(blogDir, { withFileTypes: true });
-    } catch (error) {
-        return []; // Directory may not exist for some locales, skip
-    }
-
-    // Parse each markdown file
-    const posts = [];
-    for (const entry of entries) {
-        if (entry.isFile() && entry.name.endsWith('.md')) {
-            const content = await fs.readFile(path.join(blogDir, entry.name), 'utf-8');
-            posts.push({
-                slug: entry.name.replace(/\.md$/, ''),
-                frontmatter: extractFrontmatter(content)
-            });
-        }
-    }
-
-    return posts;
-};
-
-// Get the post, category and tag routes of every locale
-const getBlogRoutes = async () => {
     const routes = [];
 
-    // Loop through each locale (tags are translated, so each locale has its own tag slugs)
+    // Loop through each locale to get blog posts
     for (const locale of availableLocales) {
-        const posts = await getBlogPosts(locale);
-        const categories = new Set();
-        const tags = new Set();
+        // Determine the blog directory for each locale
+        const blogDir = locale === 'en' ? path.join(rootDir, 'content', 'blog') : path.join(rootDir, 'content', locale, 'blog');
 
-        // Collect the post routes, categories and tags
-        for (const { slug, frontmatter } of posts) {
-            routes.push(localizeRoute(locale, `/blog/${slug}`));
-
-            // Category slug
-            if (frontmatter.categorySlug) {
-                categories.add(frontmatter.categorySlug.replace(/^['"]|['"]$/g, '')); // Remove surrounding quotes if present
-            }
-
-            // Tag slugs
-            const postTags = Array.isArray(frontmatter.tags) ? frontmatter.tags : [];
-            for (const tag of postTags) {
-                const tagSlug = slugify(tag);
-                if (tagSlug) tags.add(tagSlug);
-            }
+        // Read the blog directory entries
+        let entries = [];
+        try {
+            entries = await fs.readdir(blogDir, { withFileTypes: true });
+        } catch (error) {
+            continue; // Directory may not exist for some locales, skip
         }
 
-        // Map categories and tags to routes
-        for (const category of categories) routes.push(localizeRoute(locale, `/blog/categories/${category}`));
-        for (const tag of tags) routes.push(localizeRoute(locale, `/blog/tags/${tag}`));
+        // Filter and map entries to routes
+        for (const entry of entries) {
+            if (entry.isFile() && entry.name.endsWith('.md')) {
+                const slug = entry.name.replace(/\.md$/, '');
+                if (locale === 'en') {
+                    routes.push(`/blog/${slug}`);
+                } else {
+                    routes.push(`/${locale}/blog/${slug}`);
+                }
+            }
+        }
     }
 
     return routes;
+};
+
+// Get all the category routes
+const getCategoryRoutes = async () => {
+    const categories = await getUniqueCategories(); // Get unique categories from blog posts
+    const routes = [];
+
+    // Map categories to routes for each locale
+    for (const locale of availableLocales) {
+        for (const category of categories) {
+            if (locale === 'en') {
+                routes.push(`/blog/categories/${category}`); // English routes without locale prefix
+            } else {
+                routes.push(`/${locale}/blog/categories/${category}`); // Localized routes for other languages
+            }
+        }
+    }
+
+    return routes;
+};
+
+// Get all the tag routes
+const getTagRoutes = async () => {
+    const tags = await getUniqueTags(); // Get unique tags from blog posts
+    const routes = [];
+
+    // Map tags to routes for each locale
+    for (const locale of availableLocales) {
+        for (const tag of tags) {
+            if (locale === 'en') {
+                routes.push(`/blog/tags/${tag}`); // English routes without locale prefix
+            } else {
+                routes.push(`/${locale}/blog/tags/${tag}`); // Localized routes for other languages
+            }
+        }
+    }
+
+    return routes;
+};
+
+// Get all unique categories from blog post markdowns
+const getUniqueCategories = async () => {
+    const rootDir = process.cwd();
+    const blogDir = path.join(rootDir, 'content/blog'); // Default blog directory for 'en' locale
+    const entries = await fs.readdir(blogDir, { withFileTypes: true });
+    const categoriesSet = new Set();
+
+    // Loop through entries and extract categories from frontmatter
+    for (const entry of entries) {
+        if (entry.isFile() && entry.name.endsWith('.md')) {
+            const filePath = path.join(blogDir, entry.name);
+            const content = await fs.readFile(filePath, 'utf-8');
+            const frontmatter = extractFrontmatter(content);
+
+            // Check if category exists in frontmatter
+            if (frontmatter.categorySlug) {
+                const cleanCategory = frontmatter.categorySlug.replace(/^['"]|['"]$/g, ''); // Remove surrounding quotes if present
+                categoriesSet.add(cleanCategory);
+            }
+        }
+    }
+
+    return Array.from(categoriesSet);
+};
+
+// Get all unique tags from blog post markdowns (tags are in English in every locale, so they share the same slugs)
+const getUniqueTags = async () => {
+    const rootDir = process.cwd();
+    const blogDir = path.join(rootDir, 'content/blog'); // Default blog directory for 'en' locale
+    const entries = await fs.readdir(blogDir, { withFileTypes: true });
+    const tagsSet = new Set();
+
+    // Loop through entries and extract tags from frontmatter
+    for (const entry of entries) {
+        if (entry.isFile() && entry.name.endsWith('.md')) {
+            const filePath = path.join(blogDir, entry.name);
+            const content = await fs.readFile(filePath, 'utf-8');
+            const frontmatter = extractFrontmatter(content);
+            const tags = Array.isArray(frontmatter.tags) ? frontmatter.tags : [];
+
+            // Add each tag slug to the set
+            for (const tag of tags) {
+                const tagSlug = slugify(String(tag).replace(/^['"]|['"]$/g, ''));
+                if (tagSlug) tagsSet.add(tagSlug);
+            }
+        }
+    }
+
+    return Array.from(tagsSet);
 };
 
 // Extract frontmatter from markdown content
@@ -119,7 +174,6 @@ const extractFrontmatter = markdown => {
         if (m) {
             let value = m[2].trim();
             if (value.startsWith('[') && value.endsWith(']')) value = value.slice(1, -1).split(',').map(s => s.trim().replace(/^['"]|['"]$/g, '')); // Handle arrays
-            else value = value.replace(/^['"]|['"]$/g, ''); // Remove surrounding quotes
             frontmatter[m[1]] = value;
         }
     }
@@ -130,11 +184,17 @@ const extractFrontmatter = markdown => {
 // Main function for build-time route list
 export const createAppRoutesList = async () => {
     const staticRoutes = getStaticPageRoutes(); // Get all static page routes
-    const blogRoutes = await getBlogRoutes(); // Get all blog post, category and tag routes
+    const blogRoutes = await getAllBlogRoutes(); // Get all blog post routes
+    const categoryRoutes = await getCategoryRoutes(); // Get all category routes
+    const tagRoutes = await getTagRoutes(); // Get all tag routes
 
     // Merge and deduplicate
-    return Array.from(new Set([
+    const routes = Array.from(new Set([
         ...staticRoutes,
-        ...blogRoutes
+        ...blogRoutes,
+        ...categoryRoutes,
+        ...tagRoutes
     ]));
+
+    return routes;
 };

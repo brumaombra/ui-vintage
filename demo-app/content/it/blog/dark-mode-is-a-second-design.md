@@ -10,7 +10,7 @@ authorImageUrl: "/images/authors/bruma.jpg"
 categorySlug: "design-systems"
 categoryText: "Sistemi di design"
 language: "it"
-tags: ["Sistemi di design", "Temi", "CSS"]
+tags: ["Design Systems", "Theming", "CSS"]
 faqs:
   - question: "La modalità scura dovrebbe seguire il sistema operativo?"
     answer: "Come impostazione predefinita, sì. Il selettore del tema di UI Vintage parte in modalità automatica e segue il sistema, ma permette di scegliere esplicitamente chiaro o scuro e ricorda la scelta."

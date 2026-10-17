@@ -10,7 +10,7 @@ authorImageUrl: "/images/authors/bruma.jpg"
 categorySlug: "product-updates"
 categoryText: "Aggiornamenti prodotto"
 language: "it"
-tags: ["Nuxt", "Contenuti", "Librerie di componenti"]
+tags: ["Nuxt", "Content", "Component Libraries"]
 faqs:
   - question: "Perché mantenere Nuxt Content nella demo app?"
     answer: "Perché la demo deve verificare lo stesso percorso di query e rendering dei contenuti che userebbe un consumer in produzione, non solo i componenti visivi in isolamento."

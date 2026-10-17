@@ -10,7 +10,7 @@ authorImageUrl: "/images/authors/bruma.jpg"
 categorySlug: "design-systems"
 categoryText: "Sistemi di design"
 language: "it"
-tags: ["Sistemi di design", "Contenuti", "Vue"]
+tags: ["Design Systems", "Content", "Vue"]
 faqs:
   - question: "Perché spostare l'interfaccia blog in una libreria condivisa?"
     answer: "Perché permette a più progetti di riutilizzare le stesse superfici editoriali, le scelte di spaziatura e i pattern di interazione senza ricostruirli ogni volta."

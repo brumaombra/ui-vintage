@@ -10,7 +10,7 @@ authorImageUrl: "/images/authors/bruma.jpg"
 categorySlug: "engineering"
 categoryText: "Sviluppo"
 language: "it"
-tags: ["Nuxt", "Librerie di componenti", "Strumenti"]
+tags: ["Nuxt", "Component Libraries", "Tooling"]
 faqs:
   - question: "Pubblicare il sorgente rende più lenta la build delle app?"
     answer: "Un po', perché l'app compila la libreria insieme al proprio codice. In pratica la differenza è piccola, e l'app compila solo i componenti che importa davvero."
