@@ -117,13 +117,13 @@ const advanceProgress = () => {
 };
 
 const team = [
-    { name: 'Ada Lovelace', img: 'https://i.pravatar.cc/96?img=47', status: 'online' as const },
-    { name: 'Alan Turing', img: 'https://i.pravatar.cc/96?img=12', status: 'busy' as const },
-    { name: 'Grace Hopper', img: 'https://i.pravatar.cc/96?img=32', status: 'away' as const },
+    { name: 'Ada Lovelace', img: '/images/avatars/ada-lovelace.jpg', status: 'online' as const },
+    { name: 'Alan Turing', img: '/images/avatars/alan-turing.jpg', status: 'busy' as const },
+    { name: 'Grace Hopper', img: '/images/avatars/grace-hopper.jpg', status: 'away' as const },
     { name: 'Linus Torvalds', img: '', status: 'offline' as const },
-    { name: 'Margaret Hamilton', img: 'https://i.pravatar.cc/96?img=45', status: 'online' as const },
+    { name: 'Margaret Hamilton', img: '/images/avatars/margaret-hamilton.jpg', status: 'online' as const },
     { name: 'Dennis Ritchie', img: '', status: 'online' as const },
-    { name: 'Barbara Liskov', img: 'https://i.pravatar.cc/96?img=44', status: 'online' as const }
+    { name: 'Barbara Liskov', img: '/images/avatars/barbara-liskov.jpg', status: 'online' as const }
 ];
 
 const tableCode = `<DataTable v-model:selected="selected" v-model:sort="sort" :columns="columns" :rows="rows" selectable :loading="loading">

@@ -42,9 +42,9 @@ const dashboardMetrics = [
     { label: 'Churn', value: 0.012, icon: ZapIcon, trend: -0.3, valueColor: 'red', description: 'Lowest in a year', formatOptions: { style: 'percent', maximumFractionDigits: 1 } }
 ];
 const recentActivity = [
-    { name: 'Ada Lovelace', action: 'upgraded to Enterprise', time: '2m', img: 'https://i.pravatar.cc/96?img=47' },
-    { name: 'Alan Turing', action: 'invited 4 teammates', time: '18m', img: 'https://i.pravatar.cc/96?img=12' },
-    { name: 'Grace Hopper', action: 'paid invoice INV-2041', time: '1h', img: 'https://i.pravatar.cc/96?img=32' }
+    { name: 'Ada Lovelace', action: 'upgraded to Enterprise', time: '2m', img: '/images/avatars/ada-lovelace.jpg' },
+    { name: 'Alan Turing', action: 'invited 4 teammates', time: '18m', img: '/images/avatars/alan-turing.jpg' },
+    { name: 'Grace Hopper', action: 'paid invoice INV-2041', time: '1h', img: '/images/avatars/grace-hopper.jpg' }
 ];
 
 // Customers table

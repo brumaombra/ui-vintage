@@ -1,4 +1,4 @@
-const demoBaseUrl = 'https://ui-vintage-demo.local';
+export const demoBaseUrl = 'https://ui-vintage.brumaombra.com';
 
 // Create a URL-safe slug from a blog tag label
 export const slugify = value => {

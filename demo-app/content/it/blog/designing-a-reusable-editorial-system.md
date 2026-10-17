@@ -1,12 +1,12 @@
 ---
 title: "Progettare un sistema editoriale riutilizzabile"
 description: "Come abbiamo trasformato un'interfaccia blog usata una sola volta in una superficie editoriale riutilizzabile, capace di mantenere la propria identità anche fuori dal prodotto originale."
-image: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1400&q=80"
+image: "/images/blog/designing-a-reusable-editorial-system/cover.jpg"
 datePublished: "2026-06-10T00:00:00Z"
 dateModified: "2026-06-12T00:00:00Z"
 author: "Bruma"
 authorUrl: "https://brumaombra.com"
-authorImageUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80"
+authorImageUrl: "/images/authors/bruma.jpg"
 categorySlug: "design-systems"
 categoryText: "Sistemi di design"
 language: "it"
@@ -76,7 +76,7 @@ Gli array simulati sono utili all'inizio, ma nascondono la forma reale di una pa
 
 È qui che il comportamento simile alla produzione diventa importante. Una pagina articolo funzionante non è solo un'immagine hero con qualche paragrafo. Include:
 
-![Spazio di lavoro per la pianificazione editoriale](https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1400&q=80){width="1400" height="933"}
+![Spazio di lavoro per la pianificazione editoriale](/images/blog/designing-a-reusable-editorial-system/cover.jpg){width="1400" height="933"}
 
 ::BlogList
 ---

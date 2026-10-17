@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue';
 import { BlogContentRenderer, BlogFAQSection, BlogInfoSection, BlogPostHeader, BlogSectionTitle, CategoryCard, PostCard, SocialShareSidebar, TableOfContents } from '@brumaombra/ui-vintage/blog';
-import { createSEOMetatags, createPageSchema, slugify } from '~/composables/useUtils.js';
+import { createSEOMetatags, createPageSchema, demoBaseUrl, slugify } from '~/composables/useUtils.js';
 import ViewAllLink from '~/components/blog/ViewAllLink.vue';
 
 const { t, locale } = useI18n();
@@ -9,7 +9,7 @@ const localeHead = useLocaleHead();
 const localePath = useLocalePath();
 const route = useRoute();
 const { slug } = route.params;
-const fullURL = `https://ui-vintage-demo.local${route.path}`;
+const fullURL = `${demoBaseUrl}${route.path}`;
 
 // Create a deterministic hash for stable related content ordering
 const hashString = value => {

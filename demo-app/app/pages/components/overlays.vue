@@ -188,7 +188,7 @@ const sheetCode = `<Sheet>
                     <HoverCardContent class="w-80">
                         <div class="flex gap-4">
                             <Avatar size="lg">
-                                <AvatarImage src="https://github.com/brumaombra.png" alt="brumaombra" />
+                                <AvatarImage src="/images/avatars/brumaombra.jpg" alt="brumaombra" />
                                 <AvatarFallback name="Mauro Brambilla" />
                             </Avatar>
                             <div class="flex flex-col gap-1.5">

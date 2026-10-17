@@ -1,12 +1,12 @@
 ---
 title: "Designing a Reusable Editorial System"
 description: "How we turned a one-off blog UI into a reusable content surface that still feels intentional once it leaves the original product."
-image: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1400&q=80"
+image: "/images/blog/designing-a-reusable-editorial-system/cover.jpg"
 datePublished: "2026-06-10T00:00:00Z"
 dateModified: "2026-06-12T00:00:00Z"
 author: "Bruma"
 authorUrl: "https://brumaombra.com"
-authorImageUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80"
+authorImageUrl: "/images/authors/bruma.jpg"
 categorySlug: "design-systems"
 categoryText: "Design Systems"
 language: "en"
@@ -76,7 +76,7 @@ Mock arrays are useful for initial exploration, but they hide the real shape of 
 
 This is where production-like behavior matters. A working post page is not just a hero image plus a few paragraphs. It includes:
 
-![Editorial planning workspace](https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1400&q=80){width="1400" height="933"}
+![Editorial planning workspace](/images/blog/designing-a-reusable-editorial-system/cover.jpg){width="1400" height="933"}
 
 ::BlogList
 ---

@@ -364,7 +364,7 @@ demo-app/       Private showcase app (not published)
 
 `demo-app/` is a documentation-style Nuxt 4 app that shows every component with a live preview and a copyable code tab, a live mini-app on the overview page, a complete blog built with Nuxt Content, and a command palette (`Ctrl/⌘ + K`) to jump to any section. It imports the package through `file:..`, so it runs the same source that is published to npm.
 
-It needs Node.js 22.19 or newer, because Nuxt Content uses the built-in `node:sqlite` module instead of a native SQLite build.
+It needs Node.js 24.21 or newer. Nuxt Content uses the built-in `node:sqlite` module instead of a native SQLite build.
 
 ```bash
 # Install and start the demo

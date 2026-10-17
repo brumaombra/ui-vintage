@@ -1,9 +1,10 @@
 import tailwindcss from '@tailwindcss/vite';
+import { createAppRoutesList } from './app/composables/useCreateAppRoutesList.js';
 
 export default defineNuxtConfig({
     srcDir: 'app/',
 
-    ssr: false,
+    ssr: true,
 
     app: {
         // Blur-and-rise transition between pages (styles live in the library stylesheet)
@@ -32,6 +33,11 @@ export default defineNuxtConfig({
                 as: 'font',
                 type: 'font/woff2',
                 crossorigin: 'anonymous'
+            }],
+
+            // Apply the saved theme before the first paint (the prerendered HTML would otherwise flash light until the theme selector mounts)
+            script: [{
+                innerHTML: "try{var t=localStorage.getItem('theme');document.documentElement.classList.add(t==='dark'||(t!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light')}catch(e){}"
             }]
         }
     },
@@ -53,6 +59,10 @@ export default defineNuxtConfig({
         plugins: [
             tailwindcss()
         ],
+        resolve: {
+            // The library is linked from the parent folder, which has its own node_modules: resolve these from the demo app so the server render has a single copy of Vue
+            dedupe: ['vue', 'vue-i18n', 'nuxt', '@hugeicons/vue']
+        },
         optimizeDeps: {
             include: [
                 '@hugeicons/core-free-icons',
@@ -74,8 +84,13 @@ export default defineNuxtConfig({
         '~/assets/main.css'
     ],
 
+    build: {
+        // Library dependencies installed only in the parent folder: bundle them, otherwise at runtime they import the parent's copy of Vue
+        transpile: ['reka-ui', '@floating-ui/vue', 'vue-demi', '@tanstack/vue-virtual', '@vueuse/core', '@vueuse/shared']
+    },
+
     i18n: {
-        baseUrl: 'https://ui-vintage-demo.local',
+        baseUrl: 'https://ui-vintage.brumaombra.com',
         defaultLocale: 'en',
         detectBrowserLanguage: false,
         langDir: 'locales',
@@ -92,12 +107,24 @@ export default defineNuxtConfig({
     },
 
     image: {
-        // Remote hosts the default IPX provider may fetch and optimise (blog covers and avatars)
-        domains: ['images.unsplash.com']
+        provider: 'ipx'
     },
 
     devtools: {
         enabled: false
+    },
+
+    nitro: {
+        prerender: {
+            // Write each page as "about.html" (not "about/index.html"): Cloudflare Pages then serves it at "/about" and redirects "/about/" there
+            autoSubfolderIndex: false,
+            routes: await createAppRoutesList(),
+            ignore: ['/this-page-does-not-exist'] // Linked on purpose by the layouts page to show the 404 page
+        }
+    },
+
+    features: {
+        inlineStyles: true
     },
 
     compatibilityDate: '2026-04-07'

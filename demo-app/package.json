@@ -1,17 +1,30 @@
 {
     "name": "ui-vintage-demo-app",
     "version": "0.0.0",
+    "description": "UI Vintage demo app: live previews of every component, layout and pattern of the @brumaombra/ui-vintage Nuxt library.",
+    "homepage": "https://ui-vintage.brumaombra.com",
+    "bugs": {
+        "url": "https://github.com/brumaombra/ui-vintage/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/brumaombra/ui-vintage.git",
+        "directory": "demo-app"
+    },
+    "license": "MIT",
+    "author": "Mauro Brambilla",
     "private": true,
     "type": "module",
     "engines": {
-        "node": ">=22.19.0"
+        "node": ">=24.21.0"
     },
     "scripts": {
         "dev": "nuxt dev",
         "build": "nuxt build",
+        "generate": "nuxt generate",
         "preview": "nuxt preview",
-        "test": "vitest run",
-        "postinstall": "nuxt prepare"
+        "postinstall": "nuxt prepare",
+        "test": "vitest run"
     },
     "dependencies": {
         "@brumaombra/ui-vintage": "file:..",
