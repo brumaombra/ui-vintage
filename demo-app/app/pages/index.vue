@@ -237,7 +237,7 @@ onMounted(() => {
                         </template>
                         <template #cell-health="{ row }">
                             <div class="flex items-center gap-3">
-                                <Progress :model-value="row.health" :class="row.health < 50 ? '[&>[data-slot=progress-indicator]]:bg-destructive' : ''" />
+                                <Progress :model-value="row.health" :class="row.health < 50 ? '*:data-[slot=progress-indicator]:bg-destructive' : ''" />
                                 <span class="w-8 text-right text-xs tabular-nums text-muted-foreground">{{ row.health }}</span>
                             </div>
                         </template>
