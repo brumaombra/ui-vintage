@@ -1,0 +1,21 @@
+# Cloudflare Pages response headers (https://developers.cloudflare.com/pages/configuration/headers/)
+
+# Security headers for every response
+/*
+  Strict-Transport-Security: max-age=31536000
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# Optimized images
+/_ipx/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
+# Static images, icons and fonts
+/images/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+/icons/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
