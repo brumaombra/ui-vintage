@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { DashboardSquare01Icon } from '@hugeicons/core-free-icons';
+import type DashboardSquare01Icon from '@hugeicons/core-free-icons/DashboardSquare01Icon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 
 // Props

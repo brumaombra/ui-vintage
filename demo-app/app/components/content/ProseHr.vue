@@ -1,5 +1,5 @@
 <script setup>
-import { ChartLineData02Icon } from '@hugeicons/core-free-icons';
+import ChartLineData02Icon from '@hugeicons/core-free-icons/ChartLineData02Icon';
 import { ProseHr as UiVintageProseHr } from '@brumaombra/ui-vintage/content';
 </script>
 

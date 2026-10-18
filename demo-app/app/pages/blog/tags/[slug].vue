@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import { News01Icon } from '@hugeicons/core-free-icons';
+import News01Icon from '@hugeicons/core-free-icons/News01Icon';
 import { BlogHeaderSection, PostsList } from '@brumaombra/ui-vintage/blog';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@brumaombra/ui-vintage/breadcrumb';
 import { LoadMoreButton } from '@brumaombra/ui-vintage/load-more-button';

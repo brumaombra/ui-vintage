@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { Alert02Icon, ArrowRight01Icon, DashboardSquare01Icon, Folder01Icon, LayoutTwoColumnIcon, News01Icon, PlusSignIcon } from '@hugeicons/core-free-icons';
+import Alert02Icon from '@hugeicons/core-free-icons/Alert02Icon';
+import ArrowRight01Icon from '@hugeicons/core-free-icons/ArrowRight01Icon';
+import DashboardSquare01Icon from '@hugeicons/core-free-icons/DashboardSquare01Icon';
+import Folder01Icon from '@hugeicons/core-free-icons/Folder01Icon';
+import LayoutTwoColumnIcon from '@hugeicons/core-free-icons/LayoutTwoColumnIcon';
+import News01Icon from '@hugeicons/core-free-icons/News01Icon';
+import PlusSignIcon from '@hugeicons/core-free-icons/PlusSignIcon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Badge } from '@brumaombra/ui-vintage/badge';
 import { Button } from '@brumaombra/ui-vintage/button';

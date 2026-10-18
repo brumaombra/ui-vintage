@@ -1,6 +1,27 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue';
-import { ArrowRight01Icon, Cursor01Icon, CreditCardIcon, Delete02Icon, Download01Icon, GridViewIcon, LeftToRightListBulletIcon, Logout01Icon, Menu01Icon, MoreHorizontalIcon, PlusSignIcon, Rocket01Icon, Settings02Icon, Share08Icon, Table01Icon, TextAlignCenterIcon, TextAlignLeftIcon, TextAlignRightIcon, TextBoldIcon, TextItalicIcon, TextUnderlineIcon, UserIcon } from '@hugeicons/core-free-icons';
+import ArrowRight01Icon from '@hugeicons/core-free-icons/ArrowRight01Icon';
+import CreditCardIcon from '@hugeicons/core-free-icons/CreditCardIcon';
+import Cursor01Icon from '@hugeicons/core-free-icons/Cursor01Icon';
+import Delete02Icon from '@hugeicons/core-free-icons/Delete02Icon';
+import Download01Icon from '@hugeicons/core-free-icons/Download01Icon';
+import GridViewIcon from '@hugeicons/core-free-icons/GridViewIcon';
+import LeftToRightListBulletIcon from '@hugeicons/core-free-icons/LeftToRightListBulletIcon';
+import Logout01Icon from '@hugeicons/core-free-icons/Logout01Icon';
+import Menu01Icon from '@hugeicons/core-free-icons/Menu01Icon';
+import MoreHorizontalIcon from '@hugeicons/core-free-icons/MoreHorizontalIcon';
+import PlusSignIcon from '@hugeicons/core-free-icons/PlusSignIcon';
+import Rocket01Icon from '@hugeicons/core-free-icons/Rocket01Icon';
+import Settings02Icon from '@hugeicons/core-free-icons/Settings02Icon';
+import Share08Icon from '@hugeicons/core-free-icons/Share08Icon';
+import Table01Icon from '@hugeicons/core-free-icons/Table01Icon';
+import TextAlignCenterIcon from '@hugeicons/core-free-icons/TextAlignCenterIcon';
+import TextAlignLeftIcon from '@hugeicons/core-free-icons/TextAlignLeftIcon';
+import TextAlignRightIcon from '@hugeicons/core-free-icons/TextAlignRightIcon';
+import TextBoldIcon from '@hugeicons/core-free-icons/TextBoldIcon';
+import TextItalicIcon from '@hugeicons/core-free-icons/TextItalicIcon';
+import TextUnderlineIcon from '@hugeicons/core-free-icons/TextUnderlineIcon';
+import UserIcon from '@hugeicons/core-free-icons/UserIcon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Button } from '@brumaombra/ui-vintage/button';
 import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger } from '@brumaombra/ui-vintage/dropdown-menu';

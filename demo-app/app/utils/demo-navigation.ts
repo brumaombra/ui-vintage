@@ -1,4 +1,13 @@
-import { DashboardSquare01Icon, Cursor01Icon, InputTextIcon, Layers01Icon, LayoutTwoColumnIcon, Navigation03Icon, News01Icon, Notification01Icon, PaintBoardIcon, Table01Icon } from '@hugeicons/core-free-icons';
+import Cursor01Icon from '@hugeicons/core-free-icons/Cursor01Icon';
+import DashboardSquare01Icon from '@hugeicons/core-free-icons/DashboardSquare01Icon';
+import InputTextIcon from '@hugeicons/core-free-icons/InputTextIcon';
+import Layers01Icon from '@hugeicons/core-free-icons/Layers01Icon';
+import LayoutTwoColumnIcon from '@hugeicons/core-free-icons/LayoutTwoColumnIcon';
+import Navigation03Icon from '@hugeicons/core-free-icons/Navigation03Icon';
+import News01Icon from '@hugeicons/core-free-icons/News01Icon';
+import Notification01Icon from '@hugeicons/core-free-icons/Notification01Icon';
+import PaintBoardIcon from '@hugeicons/core-free-icons/PaintBoardIcon';
+import Table01Icon from '@hugeicons/core-free-icons/Table01Icon';
 
 export interface DemoSectionLink {
     id: string;

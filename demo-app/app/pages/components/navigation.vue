@@ -1,6 +1,14 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { ArrowDown01Icon, ChartLineData02Icon, CreditCardIcon, Folder01Icon, Home01Icon, Navigation03Icon, Settings02Icon, ShieldUserIcon, UserIcon } from '@hugeicons/core-free-icons';
+import ArrowDown01Icon from '@hugeicons/core-free-icons/ArrowDown01Icon';
+import ChartLineData02Icon from '@hugeicons/core-free-icons/ChartLineData02Icon';
+import CreditCardIcon from '@hugeicons/core-free-icons/CreditCardIcon';
+import Folder01Icon from '@hugeicons/core-free-icons/Folder01Icon';
+import Home01Icon from '@hugeicons/core-free-icons/Home01Icon';
+import Navigation03Icon from '@hugeicons/core-free-icons/Navigation03Icon';
+import Settings02Icon from '@hugeicons/core-free-icons/Settings02Icon';
+import ShieldUserIcon from '@hugeicons/core-free-icons/ShieldUserIcon';
+import UserIcon from '@hugeicons/core-free-icons/UserIcon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Accordion } from '@brumaombra/ui-vintage/accordion';
 import { Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@brumaombra/ui-vintage/breadcrumb';

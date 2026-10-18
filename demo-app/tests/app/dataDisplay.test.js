@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
-import { Money03Icon, UserGroupIcon } from '@hugeicons/core-free-icons';
+import Money03Icon from '@hugeicons/core-free-icons/Money03Icon';
+import UserGroupIcon from '@hugeicons/core-free-icons/UserGroupIcon';
 import { Progress } from '@brumaombra/ui-vintage/progress';
 import { SingleValueCard } from '@brumaombra/ui-vintage/single-value-card';
 import { StatStrip } from '@brumaombra/ui-vintage/stat-strip';

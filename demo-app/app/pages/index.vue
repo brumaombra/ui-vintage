@@ -1,6 +1,20 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
-import { ArrowRight01Icon, Building03Icon, ChartLineData02Icon, Copy01Icon, Globe02Icon, MagicWand01Icon, Money03Icon, Rocket01Icon, Search01Icon, Settings02Icon, SparklesIcon, StarIcon, Tick02Icon, UserGroupIcon, ZapIcon } from '@hugeicons/core-free-icons';
+import ArrowRight01Icon from '@hugeicons/core-free-icons/ArrowRight01Icon';
+import Building03Icon from '@hugeicons/core-free-icons/Building03Icon';
+import ChartLineData02Icon from '@hugeicons/core-free-icons/ChartLineData02Icon';
+import Copy01Icon from '@hugeicons/core-free-icons/Copy01Icon';
+import Globe02Icon from '@hugeicons/core-free-icons/Globe02Icon';
+import MagicWand01Icon from '@hugeicons/core-free-icons/MagicWand01Icon';
+import Money03Icon from '@hugeicons/core-free-icons/Money03Icon';
+import Rocket01Icon from '@hugeicons/core-free-icons/Rocket01Icon';
+import Search01Icon from '@hugeicons/core-free-icons/Search01Icon';
+import Settings02Icon from '@hugeicons/core-free-icons/Settings02Icon';
+import SparklesIcon from '@hugeicons/core-free-icons/SparklesIcon';
+import StarIcon from '@hugeicons/core-free-icons/StarIcon';
+import Tick02Icon from '@hugeicons/core-free-icons/Tick02Icon';
+import UserGroupIcon from '@hugeicons/core-free-icons/UserGroupIcon';
+import ZapIcon from '@hugeicons/core-free-icons/ZapIcon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Avatar, AvatarFallback, AvatarGroup, AvatarImage } from '@brumaombra/ui-vintage/avatar';
 import { Badge } from '@brumaombra/ui-vintage/badge';

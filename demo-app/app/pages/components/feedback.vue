@@ -1,5 +1,14 @@
 <script setup lang="ts">
-import { Alert02Icon, CheckmarkCircle02Icon, Delete02Icon, InformationCircleIcon, Notification01Icon, PlusSignIcon, RefreshIcon, Rocket01Icon, SaveIcon, Search01Icon } from '@hugeicons/core-free-icons';
+import Alert02Icon from '@hugeicons/core-free-icons/Alert02Icon';
+import CheckmarkCircle02Icon from '@hugeicons/core-free-icons/CheckmarkCircle02Icon';
+import Delete02Icon from '@hugeicons/core-free-icons/Delete02Icon';
+import InformationCircleIcon from '@hugeicons/core-free-icons/InformationCircleIcon';
+import Notification01Icon from '@hugeicons/core-free-icons/Notification01Icon';
+import PlusSignIcon from '@hugeicons/core-free-icons/PlusSignIcon';
+import RefreshIcon from '@hugeicons/core-free-icons/RefreshIcon';
+import Rocket01Icon from '@hugeicons/core-free-icons/Rocket01Icon';
+import SaveIcon from '@hugeicons/core-free-icons/SaveIcon';
+import Search01Icon from '@hugeicons/core-free-icons/Search01Icon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Alert, AlertDescription, AlertTitle } from '@brumaombra/ui-vintage/alert';
 import { setBusy } from '@brumaombra/ui-vintage/busy-indicator';

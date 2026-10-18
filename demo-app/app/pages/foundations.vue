@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { PaintBoardIcon, PlayIcon } from '@hugeicons/core-free-icons';
+import PaintBoardIcon from '@hugeicons/core-free-icons/PaintBoardIcon';
+import PlayIcon from '@hugeicons/core-free-icons/PlayIcon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Button } from '@brumaombra/ui-vintage/button';
 import { Card } from '@brumaombra/ui-vintage/card';

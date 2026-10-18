@@ -1,5 +1,6 @@
 <script setup>
-import { Tag01Icon, News01Icon } from '@hugeicons/core-free-icons';
+import News01Icon from '@hugeicons/core-free-icons/News01Icon';
+import Tag01Icon from '@hugeicons/core-free-icons/Tag01Icon';
 import { BlogHeaderSection, BlogTagsSection } from '@brumaombra/ui-vintage/blog';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@brumaombra/ui-vintage/breadcrumb';
 import { buildTagsFromPosts, createPageSchema, createSEOMetatags } from '~/composables/useUtils.js';

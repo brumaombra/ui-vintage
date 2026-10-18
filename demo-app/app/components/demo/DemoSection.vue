@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue';
-import { CodeIcon, Link01Icon, ViewIcon } from '@hugeicons/core-free-icons';
+import CodeIcon from '@hugeicons/core-free-icons/CodeIcon';
+import Link01Icon from '@hugeicons/core-free-icons/Link01Icon';
+import ViewIcon from '@hugeicons/core-free-icons/ViewIcon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Badge } from '@brumaombra/ui-vintage/badge';
 import { Card } from '@brumaombra/ui-vintage/card';

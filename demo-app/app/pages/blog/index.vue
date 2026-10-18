@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from 'vue';
-import { FolderLibraryIcon, News01Icon, Tag01Icon } from '@hugeicons/core-free-icons';
+import FolderLibraryIcon from '@hugeicons/core-free-icons/FolderLibraryIcon';
+import News01Icon from '@hugeicons/core-free-icons/News01Icon';
+import Tag01Icon from '@hugeicons/core-free-icons/Tag01Icon';
 import { AllPostsSection, BlogHeaderSection, BlogSectionTitle, BlogTagsSection, CategoriesSection, HeaderCarousel } from '@brumaombra/ui-vintage/blog';
 import { createSEOMetatags, createPageSchema, buildTagsFromPosts } from '~/composables/useUtils.js';
 import ViewAllLink from '~/components/blog/ViewAllLink.vue';

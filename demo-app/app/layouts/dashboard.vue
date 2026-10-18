@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { NuxtLink } from '#components';
-import { Search01Icon } from '@hugeicons/core-free-icons';
+import Search01Icon from '@hugeicons/core-free-icons/Search01Icon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Button } from '@brumaombra/ui-vintage/button';
 import { DashboardShell } from '@brumaombra/ui-vintage/dashboard-shell';

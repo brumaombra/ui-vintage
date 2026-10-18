@@ -1,6 +1,17 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import { ChartLineData02Icon, Delete02Icon, Invoice01Icon, Money03Icon, PackageIcon, RefreshIcon, Rocket01Icon, Search01Icon, ShieldUserIcon, Table01Icon, UserGroupIcon, ZapIcon } from '@hugeicons/core-free-icons';
+import ChartLineData02Icon from '@hugeicons/core-free-icons/ChartLineData02Icon';
+import Delete02Icon from '@hugeicons/core-free-icons/Delete02Icon';
+import Invoice01Icon from '@hugeicons/core-free-icons/Invoice01Icon';
+import Money03Icon from '@hugeicons/core-free-icons/Money03Icon';
+import PackageIcon from '@hugeicons/core-free-icons/PackageIcon';
+import RefreshIcon from '@hugeicons/core-free-icons/RefreshIcon';
+import Rocket01Icon from '@hugeicons/core-free-icons/Rocket01Icon';
+import Search01Icon from '@hugeicons/core-free-icons/Search01Icon';
+import ShieldUserIcon from '@hugeicons/core-free-icons/ShieldUserIcon';
+import Table01Icon from '@hugeicons/core-free-icons/Table01Icon';
+import UserGroupIcon from '@hugeicons/core-free-icons/UserGroupIcon';
+import ZapIcon from '@hugeicons/core-free-icons/ZapIcon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { AnimatedNumber } from '@brumaombra/ui-vintage/animated-number';
 import { Avatar, AvatarFallback, AvatarGroup, AvatarImage } from '@brumaombra/ui-vintage/avatar';

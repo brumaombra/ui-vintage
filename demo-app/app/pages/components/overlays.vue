@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { Calendar03Icon, CommandIcon, Delete02Icon, Layers01Icon, Link01Icon, Search01Icon, Settings02Icon, UserIcon } from '@hugeicons/core-free-icons';
+import Calendar03Icon from '@hugeicons/core-free-icons/Calendar03Icon';
+import CommandIcon from '@hugeicons/core-free-icons/CommandIcon';
+import Delete02Icon from '@hugeicons/core-free-icons/Delete02Icon';
+import Layers01Icon from '@hugeicons/core-free-icons/Layers01Icon';
+import Link01Icon from '@hugeicons/core-free-icons/Link01Icon';
+import Search01Icon from '@hugeicons/core-free-icons/Search01Icon';
+import Settings02Icon from '@hugeicons/core-free-icons/Settings02Icon';
+import UserIcon from '@hugeicons/core-free-icons/UserIcon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@brumaombra/ui-vintage/alert-dialog';
 import { Avatar, AvatarFallback, AvatarImage } from '@brumaombra/ui-vintage/avatar';

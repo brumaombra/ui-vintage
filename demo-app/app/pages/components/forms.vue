@@ -1,6 +1,15 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import { Building03Icon, CodeIcon, CreditCardIcon, Globe02Icon, InputTextIcon, Mail01Icon, Rocket01Icon, ShieldUserIcon, StarIcon, ZapIcon } from '@hugeicons/core-free-icons';
+import Building03Icon from '@hugeicons/core-free-icons/Building03Icon';
+import CodeIcon from '@hugeicons/core-free-icons/CodeIcon';
+import CreditCardIcon from '@hugeicons/core-free-icons/CreditCardIcon';
+import Globe02Icon from '@hugeicons/core-free-icons/Globe02Icon';
+import InputTextIcon from '@hugeicons/core-free-icons/InputTextIcon';
+import Mail01Icon from '@hugeicons/core-free-icons/Mail01Icon';
+import Rocket01Icon from '@hugeicons/core-free-icons/Rocket01Icon';
+import ShieldUserIcon from '@hugeicons/core-free-icons/ShieldUserIcon';
+import StarIcon from '@hugeicons/core-free-icons/StarIcon';
+import ZapIcon from '@hugeicons/core-free-icons/ZapIcon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Button } from '@brumaombra/ui-vintage/button';
 import { Checkbox } from '@brumaombra/ui-vintage/checkbox';

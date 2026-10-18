@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted } from 'vue';
-import { ArrowRight01Icon, Moon01Icon, Notification01Icon, Sun01Icon } from '@hugeicons/core-free-icons';
+import ArrowRight01Icon from '@hugeicons/core-free-icons/ArrowRight01Icon';
+import Moon01Icon from '@hugeicons/core-free-icons/Moon01Icon';
+import Notification01Icon from '@hugeicons/core-free-icons/Notification01Icon';
+import Sun01Icon from '@hugeicons/core-free-icons/Sun01Icon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator } from '@brumaombra/ui-vintage/command';
 import { KbdGroup } from '@brumaombra/ui-vintage/kbd';

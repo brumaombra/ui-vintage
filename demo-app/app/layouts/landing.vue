@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue';
-import { DashboardSquare01Icon } from '@hugeicons/core-free-icons';
+import DashboardSquare01Icon from '@hugeicons/core-free-icons/DashboardSquare01Icon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Button } from '@brumaombra/ui-vintage/button';
 import { LandingContent, LandingFooter, LandingNavbar, LandingShell } from '@brumaombra/ui-vintage/landing';

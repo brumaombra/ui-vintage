@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from 'vue';
-import { FolderLibraryIcon, News01Icon } from '@hugeicons/core-free-icons';
+import FolderLibraryIcon from '@hugeicons/core-free-icons/FolderLibraryIcon';
+import News01Icon from '@hugeicons/core-free-icons/News01Icon';
 import { BlogHeaderSection, CategoriesList } from '@brumaombra/ui-vintage/blog';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@brumaombra/ui-vintage/breadcrumb';
 import { createPageSchema, createSEOMetatags } from '~/composables/useUtils.js';
