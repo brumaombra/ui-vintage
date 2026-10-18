@@ -28,8 +28,8 @@
     },
     "dependencies": {
         "@brumaombra/ui-vintage": "file:..",
-        "@hugeicons/core-free-icons": "4.1.1",
-        "@hugeicons/vue": "1.0.5",
+        "@hugeicons/core-free-icons": "4.3.5",
+        "@hugeicons/vue": "1.0.8",
         "@nuxt/content": "3.16.1",
         "@nuxt/image": "2.1.0",
         "@nuxtjs/i18n": "10.6.0",
