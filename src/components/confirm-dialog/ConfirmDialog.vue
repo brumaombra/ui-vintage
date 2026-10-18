@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { computed, ref } from 'vue';
-import { InformationCircleIcon } from '@hugeicons/core-free-icons';
+import InformationCircleIcon from '@hugeicons/core-free-icons/InformationCircleIcon';
 import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '../ui/alert-dialog';
 import { Button } from '../ui/button';
 import { cancelActiveConfirmDialog, closeConfirmDialog, confirmActiveDialog, confirmDialogState } from './confirm-dialog-state';

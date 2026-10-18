@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue';
 import { DateFormatter, getLocalTimeZone, today, } from '@internationalized/date';
-import { Calendar03Icon } from '@hugeicons/core-free-icons';
+import Calendar03Icon from '@hugeicons/core-free-icons/Calendar03Icon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import type { DateValue } from 'reka-ui';
 import { computed, ref } from 'vue';

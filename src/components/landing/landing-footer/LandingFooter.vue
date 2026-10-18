@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { NuxtImg } from '#components';
-import { FavouriteIcon } from '@hugeicons/core-free-icons';
+import FavouriteIcon from '@hugeicons/core-free-icons/FavouriteIcon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { computed, type Component, type HTMLAttributes } from 'vue';
 import { useI18n } from 'vue-i18n';

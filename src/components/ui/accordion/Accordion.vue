@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue';
 import { computed, ref, useId } from 'vue';
-import { ArrowDown01Icon } from '@hugeicons/core-free-icons';
+import ArrowDown01Icon from '@hugeicons/core-free-icons/ArrowDown01Icon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Card } from '../card';
 import { cn } from '../../../lib/utils';

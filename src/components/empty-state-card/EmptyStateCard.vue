@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { PackageIcon } from '@hugeicons/core-free-icons';
+import PackageIcon from '@hugeicons/core-free-icons/PackageIcon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Card, CardContent } from '../ui/card';
 import type { HeadingLevel, HugeiconsIconDefinition } from '../../lib/common-types';

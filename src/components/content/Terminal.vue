@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { CheckmarkCircle02Icon, Copy01Icon, TerminalIcon } from '@hugeicons/core-free-icons';
+import CheckmarkCircle02Icon from '@hugeicons/core-free-icons/CheckmarkCircle02Icon';
+import Copy01Icon from '@hugeicons/core-free-icons/Copy01Icon';
+import TerminalIcon from '@hugeicons/core-free-icons/TerminalIcon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';

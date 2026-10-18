@@ -2,7 +2,7 @@
 import type { TagsInputItemDeleteProps } from 'reka-ui';
 import type { HTMLAttributes } from 'vue';
 import { reactiveOmit } from '@vueuse/core';
-import { Cancel01Icon } from '@hugeicons/core-free-icons';
+import Cancel01Icon from '@hugeicons/core-free-icons/Cancel01Icon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { TagsInputItemDelete, useForwardProps } from 'reka-ui';
 import { cn } from '../../../lib/utils';

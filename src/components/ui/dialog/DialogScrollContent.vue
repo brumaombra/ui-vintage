@@ -3,7 +3,7 @@ import type { DialogContentEmits, DialogContentProps } from 'reka-ui';
 import type { HTMLAttributes } from 'vue';
 import { reactiveOmit } from '@vueuse/core';
 import { DialogClose, DialogContent, DialogOverlay, DialogPortal, useForwardPropsEmits } from 'reka-ui';
-import { Cancel01Icon } from '@hugeicons/core-free-icons';
+import Cancel01Icon from '@hugeicons/core-free-icons/Cancel01Icon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { useI18n } from 'vue-i18n';
 import { cn } from '../../../lib/utils';

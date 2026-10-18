@@ -2,7 +2,7 @@
 import type { CalendarNextProps } from 'reka-ui';
 import type { HTMLAttributes } from 'vue';
 import { reactiveOmit } from '@vueuse/core';
-import { ArrowRight01Icon } from '@hugeicons/core-free-icons';
+import ArrowRight01Icon from '@hugeicons/core-free-icons/ArrowRight01Icon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { CalendarNext, useForwardProps } from 'reka-ui';
 import { cn } from '../../../lib/utils';

@@ -2,7 +2,8 @@
 import type { HTMLAttributes } from 'vue';
 import type { AcceptableValue } from 'reka-ui';
 import { computed, ref } from 'vue';
-import { Cancel01Icon, Search01Icon } from '@hugeicons/core-free-icons';
+import Cancel01Icon from '@hugeicons/core-free-icons/Cancel01Icon';
+import Search01Icon from '@hugeicons/core-free-icons/Search01Icon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { useI18n } from 'vue-i18n';
 import { cn } from '../../../lib/utils';

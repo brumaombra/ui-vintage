@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { ArrowRight01Icon, Bookmark01Icon, Cancel01Icon } from '@hugeicons/core-free-icons';
+import ArrowRight01Icon from '@hugeicons/core-free-icons/ArrowRight01Icon';
+import Bookmark01Icon from '@hugeicons/core-free-icons/Bookmark01Icon';
+import Cancel01Icon from '@hugeicons/core-free-icons/Cancel01Icon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Accordion } from '../ui/accordion';
 import { Button } from '../ui/button';

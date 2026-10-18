@@ -2,7 +2,7 @@
 import type { ComboboxItemEmits, ComboboxItemProps } from 'reka-ui';
 import type { HTMLAttributes } from 'vue';
 import { reactiveOmit } from '@vueuse/core';
-import { Tick02Icon } from '@hugeicons/core-free-icons';
+import Tick02Icon from '@hugeicons/core-free-icons/Tick02Icon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { ComboboxItem, ComboboxItemIndicator, useForwardPropsEmits } from 'reka-ui';
 import { cn } from '../../../lib/utils';

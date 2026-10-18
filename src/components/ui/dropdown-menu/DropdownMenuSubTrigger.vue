@@ -2,7 +2,7 @@
 import type { DropdownMenuSubTriggerProps } from 'reka-ui';
 import type { HTMLAttributes } from 'vue';
 import { reactiveOmit } from '@vueuse/core';
-import { ArrowRight01Icon } from '@hugeicons/core-free-icons';
+import ArrowRight01Icon from '@hugeicons/core-free-icons/ArrowRight01Icon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { DropdownMenuSubTrigger, useForwardProps } from 'reka-ui';
 import { cn } from '../../../lib/utils';

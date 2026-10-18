@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { StepperIndicatorProps } from 'reka-ui';
 import type { HTMLAttributes } from 'vue';
-import { Tick02Icon } from '@hugeicons/core-free-icons';
+import Tick02Icon from '@hugeicons/core-free-icons/Tick02Icon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { reactiveOmit } from '@vueuse/core';
 import { injectStepperItemContext, StepperIndicator } from 'reka-ui';

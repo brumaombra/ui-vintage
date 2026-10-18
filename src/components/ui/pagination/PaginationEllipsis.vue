@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { PaginationEllipsisProps } from 'reka-ui';
 import type { HTMLAttributes } from 'vue';
-import { MoreHorizontalIcon } from '@hugeicons/core-free-icons';
+import MoreHorizontalIcon from '@hugeicons/core-free-icons/MoreHorizontalIcon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { reactiveOmit } from '@vueuse/core';
 import { PaginationEllipsis } from 'reka-ui';

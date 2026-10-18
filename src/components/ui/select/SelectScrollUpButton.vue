@@ -2,7 +2,7 @@
 import type { SelectScrollUpButtonProps } from 'reka-ui';
 import type { HTMLAttributes } from 'vue';
 import { reactiveOmit } from '@vueuse/core';
-import { ArrowUp01Icon } from '@hugeicons/core-free-icons';
+import ArrowUp01Icon from '@hugeicons/core-free-icons/ArrowUp01Icon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { SelectScrollUpButton, useForwardProps } from 'reka-ui';
 import { cn } from '../../../lib/utils';

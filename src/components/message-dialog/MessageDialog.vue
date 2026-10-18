@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { computed } from 'vue';
-import { AlertCircleIcon, InformationCircleIcon, Tick02Icon } from '@hugeicons/core-free-icons';
+import AlertCircleIcon from '@hugeicons/core-free-icons/AlertCircleIcon';
+import InformationCircleIcon from '@hugeicons/core-free-icons/InformationCircleIcon';
+import Tick02Icon from '@hugeicons/core-free-icons/Tick02Icon';
 import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '../ui/alert-dialog';
 import { Button } from '../ui/button';
 import { getUiVintageRuntimeMessage } from '../../lib/i18n';

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ArrowLeft01Icon } from '@hugeicons/core-free-icons';
+import ArrowLeft01Icon from '@hugeicons/core-free-icons/ArrowLeft01Icon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { computed, type HTMLAttributes } from 'vue';
 import { useI18n } from 'vue-i18n';

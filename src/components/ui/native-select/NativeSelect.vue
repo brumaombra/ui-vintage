@@ -2,7 +2,7 @@
 import type { AcceptableValue } from 'reka-ui';
 import type { HTMLAttributes } from 'vue';
 import { reactiveOmit, useVModel } from '@vueuse/core';
-import { ArrowDown01Icon } from '@hugeicons/core-free-icons';
+import ArrowDown01Icon from '@hugeicons/core-free-icons/ArrowDown01Icon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { cn } from '../../../lib/utils';
 import { useFieldControlId } from '../field/field-context';

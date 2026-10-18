@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, onUnmounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { LaptopIcon, Moon01Icon, Sun01Icon, Tick02Icon } from '@hugeicons/core-free-icons';
+import LaptopIcon from '@hugeicons/core-free-icons/LaptopIcon';
+import Moon01Icon from '@hugeicons/core-free-icons/Moon01Icon';
+import Sun01Icon from '@hugeicons/core-free-icons/Sun01Icon';
+import Tick02Icon from '@hugeicons/core-free-icons/Tick02Icon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Button } from '../ui/button';
 import { Command, CommandGroup, CommandItem, CommandList } from '../ui/command';

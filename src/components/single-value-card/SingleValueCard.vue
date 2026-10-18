@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import type { HTMLAttributes } from 'vue';
-import { ArrowDownRight01Icon, ArrowUpRight01Icon } from '@hugeicons/core-free-icons';
+import ArrowDownRight01Icon from '@hugeicons/core-free-icons/ArrowDownRight01Icon';
+import ArrowUpRight01Icon from '@hugeicons/core-free-icons/ArrowUpRight01Icon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { AnimatedNumber } from '../ui/animated-number';
 import { Card } from '../ui/card';

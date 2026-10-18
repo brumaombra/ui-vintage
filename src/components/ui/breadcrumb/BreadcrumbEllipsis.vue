@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue';
-import { MoreHorizontalIcon } from '@hugeicons/core-free-icons';
+import MoreHorizontalIcon from '@hugeicons/core-free-icons/MoreHorizontalIcon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { useI18n } from 'vue-i18n';
 import { cn } from '../../../lib/utils';

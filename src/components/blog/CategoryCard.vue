@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { NuxtImg } from '#components';
-import { ArrowRight01Icon, Folder01Icon } from '@hugeicons/core-free-icons';
+import ArrowRight01Icon from '@hugeicons/core-free-icons/ArrowRight01Icon';
+import Folder01Icon from '@hugeicons/core-free-icons/Folder01Icon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Card } from '../ui/card';
 

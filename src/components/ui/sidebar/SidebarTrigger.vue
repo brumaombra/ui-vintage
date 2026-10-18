@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue';
-import { PanelLeftIcon } from '@hugeicons/core-free-icons';
+import PanelLeftIcon from '@hugeicons/core-free-icons/PanelLeftIcon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { useI18n } from 'vue-i18n';
 import { cn } from '../../../lib/utils';

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { Cancel01Icon, Tick02Icon } from '@hugeicons/core-free-icons';
+import Cancel01Icon from '@hugeicons/core-free-icons/Cancel01Icon';
+import Tick02Icon from '@hugeicons/core-free-icons/Tick02Icon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Card } from '../ui/card';
 

@@ -2,7 +2,9 @@
 import { NuxtImg } from '#components';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { ArrowUpRight01Icon, Calendar03Icon, RefreshIcon } from '@hugeicons/core-free-icons';
+import ArrowUpRight01Icon from '@hugeicons/core-free-icons/ArrowUpRight01Icon';
+import Calendar03Icon from '@hugeicons/core-free-icons/Calendar03Icon';
+import RefreshIcon from '@hugeicons/core-free-icons/RefreshIcon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Card } from '../ui/card';
 import { formatDateLongItalyTimezone } from '../../lib/utils';

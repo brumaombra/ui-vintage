@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue';
 import type { StepperStep } from '.';
-import { Tick02Icon } from '@hugeicons/core-free-icons';
+import Tick02Icon from '@hugeicons/core-free-icons/Tick02Icon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { computed } from 'vue';
 import { cn } from '../../../lib/utils';

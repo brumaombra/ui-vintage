@@ -1,5 +1,5 @@
 <script setup lang="ts" generic="T extends { id: PropertyKey }">
-import { PackageIcon } from '@hugeicons/core-free-icons';
+import PackageIcon from '@hugeicons/core-free-icons/PackageIcon';
 import { EmptyStateCard } from '../empty-state-card';
 import { LoadMoreButton } from '../load-more-button';
 import { LoadingStateCard } from '../loading-state-card';

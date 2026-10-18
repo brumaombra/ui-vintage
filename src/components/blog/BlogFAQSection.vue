@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { HelpCircleIcon } from '@hugeicons/core-free-icons';
+import HelpCircleIcon from '@hugeicons/core-free-icons/HelpCircleIcon';
 import { Accordion } from '../ui/accordion';
 import BlogSectionTitle from './BlogSectionTitle.vue';
 

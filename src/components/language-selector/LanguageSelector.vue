@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, defineAsyncComponent, ref, type Component } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { Tick02Icon } from '@hugeicons/core-free-icons';
+import Tick02Icon from '@hugeicons/core-free-icons/Tick02Icon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Button } from '../ui/button';
 import { Command, CommandGroup, CommandItem, CommandList } from '../ui/command';

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ChartLineData02Icon } from '@hugeicons/core-free-icons';
+import ChartLineData02Icon from '@hugeicons/core-free-icons/ChartLineData02Icon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import type { HugeiconsIconDefinition } from '../../lib/common-types';
 

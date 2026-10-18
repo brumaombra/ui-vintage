@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { AlertCircleIcon, Cancel01Icon, CheckmarkCircle02Icon, InformationCircleIcon } from '@hugeicons/core-free-icons';
+import AlertCircleIcon from '@hugeicons/core-free-icons/AlertCircleIcon';
+import Cancel01Icon from '@hugeicons/core-free-icons/Cancel01Icon';
+import CheckmarkCircle02Icon from '@hugeicons/core-free-icons/CheckmarkCircle02Icon';
+import InformationCircleIcon from '@hugeicons/core-free-icons/InformationCircleIcon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { computed, onBeforeUnmount, reactive, ref, watch } from 'vue';
 import { getUiVintageRuntimeMessage } from '../../lib/i18n';

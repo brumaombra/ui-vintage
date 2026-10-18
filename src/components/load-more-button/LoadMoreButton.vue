@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { ArrowDown01Icon, RefreshIcon } from '@hugeicons/core-free-icons';
+import ArrowDown01Icon from '@hugeicons/core-free-icons/ArrowDown01Icon';
+import RefreshIcon from '@hugeicons/core-free-icons/RefreshIcon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Button } from '../ui/button';
 

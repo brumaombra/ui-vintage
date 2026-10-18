@@ -1,7 +1,14 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { Facebook01Icon, Link01Icon, Linkedin01Icon, NewTwitterIcon, Share08Icon, TelegramIcon, Tick02Icon, WhatsappIcon } from '@hugeicons/core-free-icons';
+import Facebook01Icon from '@hugeicons/core-free-icons/Facebook01Icon';
+import Link01Icon from '@hugeicons/core-free-icons/Link01Icon';
+import Linkedin01Icon from '@hugeicons/core-free-icons/Linkedin01Icon';
+import NewTwitterIcon from '@hugeicons/core-free-icons/NewTwitterIcon';
+import Share08Icon from '@hugeicons/core-free-icons/Share08Icon';
+import TelegramIcon from '@hugeicons/core-free-icons/TelegramIcon';
+import Tick02Icon from '@hugeicons/core-free-icons/Tick02Icon';
+import WhatsappIcon from '@hugeicons/core-free-icons/WhatsappIcon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 
 // Props

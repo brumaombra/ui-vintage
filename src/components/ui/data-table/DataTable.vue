@@ -2,7 +2,8 @@
 import type { HTMLAttributes } from 'vue';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { ArrowUp01Icon, PackageIcon } from '@hugeicons/core-free-icons';
+import ArrowUp01Icon from '@hugeicons/core-free-icons/ArrowUp01Icon';
+import PackageIcon from '@hugeicons/core-free-icons/PackageIcon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { cn } from '../../../lib/utils';
 import { Checkbox } from '../checkbox';

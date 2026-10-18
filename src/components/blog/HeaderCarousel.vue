@@ -2,7 +2,8 @@
 import { NuxtImg } from '#components';
 import { computed, onMounted, onUnmounted, ref, useId, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { ArrowLeft01Icon, ArrowRight01Icon } from '@hugeicons/core-free-icons';
+import ArrowLeft01Icon from '@hugeicons/core-free-icons/ArrowLeft01Icon';
+import ArrowRight01Icon from '@hugeicons/core-free-icons/ArrowRight01Icon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';

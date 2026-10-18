@@ -2,7 +2,16 @@
 import type { HTMLAttributes } from 'vue';
 import type { HugeiconsIconDefinition } from '../../../lib/common-types';
 import type { FileRejection } from '.';
-import { Cancel01Icon, CloudUploadIcon, Doc01Icon, File01Icon, FileZipIcon, Image01Icon, MusicNote01Icon, Pdf01Icon, Video01Icon, Xls01Icon } from '@hugeicons/core-free-icons';
+import Cancel01Icon from '@hugeicons/core-free-icons/Cancel01Icon';
+import CloudUploadIcon from '@hugeicons/core-free-icons/CloudUploadIcon';
+import Doc01Icon from '@hugeicons/core-free-icons/Doc01Icon';
+import File01Icon from '@hugeicons/core-free-icons/File01Icon';
+import FileZipIcon from '@hugeicons/core-free-icons/FileZipIcon';
+import Image01Icon from '@hugeicons/core-free-icons/Image01Icon';
+import MusicNote01Icon from '@hugeicons/core-free-icons/MusicNote01Icon';
+import Pdf01Icon from '@hugeicons/core-free-icons/Pdf01Icon';
+import Video01Icon from '@hugeicons/core-free-icons/Video01Icon';
+import Xls01Icon from '@hugeicons/core-free-icons/Xls01Icon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { computed, onBeforeUnmount, ref } from 'vue';
 import { useI18n } from 'vue-i18n';

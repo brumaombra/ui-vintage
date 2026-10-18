@@ -2,7 +2,7 @@
 import type { PaginationFirstProps } from 'reka-ui';
 import type { HTMLAttributes } from 'vue';
 import type { ButtonVariants } from '../button';
-import { ArrowLeftDoubleIcon } from '@hugeicons/core-free-icons';
+import ArrowLeftDoubleIcon from '@hugeicons/core-free-icons/ArrowLeftDoubleIcon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { reactiveOmit } from '@vueuse/core';
 import { PaginationFirst } from 'reka-ui';
