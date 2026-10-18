@@ -134,7 +134,7 @@
         "test": "npm --prefix demo-app run test"
     },
     "peerDependencies": {
-        "@hugeicons/core-free-icons": "^4.1.0",
+        "@hugeicons/core-free-icons": "^4.3.0",
         "@hugeicons/vue": "^1.0.0",
         "@nuxt/content": "^3.0.0",
         "@nuxt/image": "^2.0.0",
@@ -159,8 +159,8 @@
         "tailwind-merge": "3.5.0"
     },
     "devDependencies": {
-        "@hugeicons/core-free-icons": "4.1.1",
-        "@hugeicons/vue": "1.0.5",
+        "@hugeicons/core-free-icons": "4.3.5",
+        "@hugeicons/vue": "1.0.8",
         "nuxt": "4.5.2",
         "tailwindcss": "4.2.4",
         "typescript": "5.9.3",
