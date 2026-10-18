@@ -75,20 +75,38 @@ After pushing, follow the run with `gh run watch` (or `gh run list --workflow pu
 
 ## 5. Align the other branches
 
-Releases are cut from `feature`. Once the workflow has published successfully, bring `develop` and `main` up to the released commit, then return to `feature`:
+Releases are cut from `feature`. Once the workflow has published successfully, bring `develop`, `test` and `main` up to the released commit, then return to `feature`:
 
 ```bash
 git checkout develop
 git merge feature
 git push
 
-git checkout main
+git checkout test
 git merge develop
+git push
+
+git checkout main
+git merge test
 git push
 
 git checkout feature
 ```
 
-- Only run this after the publish succeeded, so `develop` and `main` never point at an unreleased version.
+- Only run this after the publish succeeded, so `develop`, `test` and `main` never point at an unreleased version.
+- Pushing `test` and `main` deploys the demo app (see below). Push `test` first and check its preview before pushing `main`.
 - Stop and ask the user if a merge has conflicts or a push is rejected. Never force-push, and never resolve conflicts on `main` without the user's approval.
-- Finish with `git status` and `git branch -v` to confirm all three branches point at the release commit and the working tree is back on `feature`.
+- Finish with `git status` and `git branch -v` to confirm all four branches point at the release commit and the working tree is back on `feature`.
+
+## 6. Demo app deploys
+
+The demo app (`demo-app/`) is hosted on Cloudflare Pages (project `ui-vintage`) and builds automatically from git. Only two branches trigger a deploy:
+
+- **`test`**: preview deploy, at `https://test.ui-vintage.pages.dev`
+- **`main`**: production deploy, at `https://ui-vintage.brumaombra.com`
+
+Pushes to `feature` and `develop` deploy nothing. Any push to `test` or `main` deploys, not just releases, so don't push them unless you mean to update the demo.
+
+The project builds from the root directory `demo-app` with `npm ci --prefix .. && npm run generate` (the demo links the library from the repo root through `file:..`, so the root dependencies are needed too), publishes `dist`, and uses `NODE_VERSION=24.21.0`.
+
+After pushing `test` or `main`, check that the deploy succeeded, either on the project's Deployments page in the Cloudflare dashboard or by opening the URL above. If a build fails, read its build log, fix the cause on `feature`, and bring the fix through the branches again. The demo build prerenders every page, so `npm --prefix demo-app run generate` locally reproduces most build failures.
