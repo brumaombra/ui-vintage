@@ -1,5 +1,33 @@
-.nuxt
+# Nuxt dev/build outputs
 .output
-node_modules
-dist
 .data
+.nuxt
+.nitro
+.cache
+dist
+
+# Node dependencies
+node_modules
+
+# Logs
+logs
+*.log
+
+# Misc
+.DS_Store
+.fleet
+.idea
+
+# Local env files
+.env
+.env.*
+!.env.example
+
+# Credentials (service accounts, keys and certificates)
+*serviceAccount*.json
+*service-account*.json
+*-adminsdk-*.json
+*.pem
+*.key
+*.p12
+id_rsa*
