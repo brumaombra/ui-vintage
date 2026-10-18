@@ -101,7 +101,7 @@ Import components from their public subpath:
 <script setup>
 import { Button } from '@brumaombra/ui-vintage/button';
 import { SingleValueCard } from '@brumaombra/ui-vintage/single-value-card';
-import { Money03Icon } from '@hugeicons/core-free-icons';
+import Money03Icon from '@hugeicons/core-free-icons/Money03Icon';
 </script>
 
 <template>
@@ -401,7 +401,7 @@ New entry points need an export in `package.json` and a description and category
 
 - Nuxt 4 and Vue 3.5 or newer.
 - Tailwind CSS v4 with `@tailwindcss/vite` registered in `vite.plugins`.
-- `@hugeicons/core-free-icons` 4 and `@hugeicons/vue` 1 (the icons you pass to `:icon` props, and the ones the components render).
+- `@hugeicons/core-free-icons` 4.3 or newer and `@hugeicons/vue` 1 (the icons you pass to `:icon` props, and the ones the components render). Import each icon from its own module, as in the example above: the package barrel makes the build parse the whole icon set.
 - `vue-i18n` 9, 10, or 11 with an i18n setup, such as `@nuxtjs/i18n` (the components call `useI18n()`).
 - `@nuxt/image` 2 for image components (the module installs it when needed).
 - `@nuxt/content` 3, only for the `blog` and `content` components.
