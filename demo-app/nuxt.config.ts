@@ -33,9 +33,10 @@ export default defineNuxtConfig({
 				crossorigin: 'anonymous'
 			}],
 
-			// Apply the saved theme before the first paint (the prerendered HTML would otherwise flash light until the theme selector mounts)
+			// Apply the saved theme before the first paint, to avoid the light flash for dark mode users (kept in sync with ThemeSelector.vue)
 			script: [{
-				innerHTML: "try{var t=localStorage.getItem('theme');document.documentElement.classList.add(t==='dark'||(t!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light')}catch(e){}"
+				innerHTML: `(function(){try{var t=localStorage.getItem('theme')||'auto';var d=t==='dark'||(t==='auto'&&window.matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.add(d?'dark':'light')}catch(e){document.documentElement.classList.add('light')}})()`,
+				tagPriority: 'critical'
 			}],
 
 			// Without JavaScript (some crawlers), show the elements that AOS keeps hidden until it animates them
@@ -93,7 +94,6 @@ export default defineNuxtConfig({
 		// Vite optimization options
 		optimizeDeps: {
 			include: [
-				'@hugeicons/core-free-icons',
 				'@hugeicons/vue',
 				'@internationalized/date',
 				'@vueuse/core',
@@ -159,5 +159,5 @@ export default defineNuxtConfig({
 		inlineStyles: true
 	},
 
-	compatibilityDate: '2026-04-07'
+	compatibilityDate: '2026-09-26'
 });
