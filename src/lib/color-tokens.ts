@@ -32,7 +32,7 @@ export const getInteractiveSurfaceToneClasses = (color: ToneColor) => {
 // Return the list of classes for button variants
 export const buttonVariantClasses: Record<ButtonVariantName, string> = {
     // Custom button variants
-    primary: "bg-primary text-primary-foreground shadow-elevated-sm hover:bg-primary-hover",
+    primary: "bg-primary text-primary-foreground shadow-elevated-sm hover:bg-primary-hover before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:-translate-x-full before:bg-[linear-gradient(105deg,transparent_35%,rgb(255_255_255/0.38)_50%,transparent_65%)] before:transition-[translate] before:duration-700 before:ease-out-expo hover:before:translate-x-full motion-reduce:before:hidden",
     secondary: "border border-border bg-secondary text-foreground shadow-elevated-sm hover:border-border-strong hover:bg-accent",
     ghost: "text-muted-foreground hover:bg-accent hover:text-foreground",
     link: "text-primary underline-offset-4 decoration-2 hover:underline enabled:active:scale-100",
