@@ -1,82 +1,82 @@
 {
-    "seo": {
-        "home": {
-            "breadcrumb": "Home"
-        },
-        "blog": {
-            "title": "Il blog della demo UI Vintage",
-            "description": "Una superficie blog simile a una produzione reale, basata sulla libreria di componenti UI Vintage e su Nuxt Content.",
-            "breadcrumb": "Blog",
-            "category": {
-                "title": "{category} - Demo UI Vintage",
-                "description": "Esplora i post della demo UI Vintage nella categoria '{category}'."
-            },
-            "tag": {
-                "title": "{tag} - Demo UI Vintage",
-                "description": "Esplora i post della demo UI Vintage con il tag '{tag}'."
-            }
-        },
-        "categories": {
-            "title": "Categorie del blog - Demo UI Vintage",
-            "description": "Esplora le categorie usate dal blog della demo UI Vintage.",
-            "breadcrumb": "Categorie"
-        },
-        "tags": {
-            "title": "Tag del blog - Demo UI Vintage",
-            "description": "Esplora i tag usati dal blog della demo UI Vintage.",
-            "breadcrumb": "Tag"
-        }
-    },
-    "blog": {
-        "title": "Il blog della demo UI Vintage",
-        "description": "Una superficie blog simile a una produzione reale, basata sulla libreria di componenti UI Vintage e su Nuxt Content.",
-        "latestPosts": "Ultimi post",
-        "allPosts": "Tutti i post",
-        "readAlso": "Leggi anche",
-        "exploreCategories": "Esplora le categorie",
-        "exploreAllCategories": "Esplora tutte le categorie",
-        "header": {
-            "highlight": "blog",
-            "stats": {
-                "posts": "post | post",
-                "categories": "categoria | categorie",
-                "tags": "tag | tag",
-                "uses": "utilizzo | utilizzi"
-            }
-        },
-        "categories": {
-            "title": "Categorie",
-            "description": "Esplora le categorie derivate dai post Markdown della demo.",
-            "singleCategoryDescription": "Tutti i post della demo nella categoria '{category}'."
-        },
-        "tags": {
-            "title": "Tag",
-            "description": "Esplora i tag derivati dai post Markdown della demo.",
-            "singleTagDescription": "Tutti i post della demo con il tag '{tag}'."
-        },
-        "footerDescription": "Storie, guide e note di rilascio dal team che sviluppa la libreria di componenti UI Vintage.",
-        "latestPostsDescription": "Una selezione di articoli scelti dalla redazione.",
-        "allPostsDescription": "Tutto quello che abbiamo pubblicato, dal più recente.",
-        "categoriesDescription": "Vai dritto agli argomenti che ti interessano.",
-        "tagsDescription": "Fili più piccoli che attraversano le categorie.",
-        "viewAll": "Vedi tutti"
-    },
-    "navigation": {
-        "breadcrumbs": {
-            "home": "Home",
-            "blog": "Blog",
-            "categories": "Categorie",
-            "tags": "Tag"
-        },
-        "library": "Libreria",
-        "overview": "Panoramica",
-        "components": "Componenti",
-        "foundations": "Fondamenta"
-    },
-    "common": {
-        "loadMoreWithNumbers": "Carica altro ({current} di {total})"
-    },
-    "demo": {
-        "title": "Demo UI Vintage"
-    }
+	"seo": {
+		"home": {
+			"breadcrumb": "Home"
+		},
+		"blog": {
+			"title": "Il blog della demo UI Vintage",
+			"description": "Una superficie blog simile a una produzione reale, basata sulla libreria di componenti UI Vintage e su Nuxt Content.",
+			"breadcrumb": "Blog",
+			"category": {
+				"title": "{category} - Demo UI Vintage",
+				"description": "Esplora i post della demo UI Vintage nella categoria '{category}'."
+			},
+			"tag": {
+				"title": "{tag} - Demo UI Vintage",
+				"description": "Esplora i post della demo UI Vintage con il tag '{tag}'."
+			}
+		},
+		"categories": {
+			"title": "Categorie del blog - Demo UI Vintage",
+			"description": "Esplora le categorie usate dal blog della demo UI Vintage.",
+			"breadcrumb": "Categorie"
+		},
+		"tags": {
+			"title": "Tag del blog - Demo UI Vintage",
+			"description": "Esplora i tag usati dal blog della demo UI Vintage.",
+			"breadcrumb": "Tag"
+		}
+	},
+	"blog": {
+		"title": "Il blog della demo UI Vintage",
+		"description": "Una superficie blog simile a una produzione reale, basata sulla libreria di componenti UI Vintage e su Nuxt Content.",
+		"latestPosts": "Ultimi post",
+		"allPosts": "Tutti i post",
+		"readAlso": "Leggi anche",
+		"exploreCategories": "Esplora le categorie",
+		"exploreAllCategories": "Esplora tutte le categorie",
+		"header": {
+			"highlight": "blog",
+			"stats": {
+				"posts": "post | post",
+				"categories": "categoria | categorie",
+				"tags": "tag | tag",
+				"uses": "utilizzo | utilizzi"
+			}
+		},
+		"categories": {
+			"title": "Categorie",
+			"description": "Esplora le categorie derivate dai post Markdown della demo.",
+			"singleCategoryDescription": "Tutti i post della demo nella categoria '{category}'."
+		},
+		"tags": {
+			"title": "Tag",
+			"description": "Esplora i tag derivati dai post Markdown della demo.",
+			"singleTagDescription": "Tutti i post della demo con il tag '{tag}'."
+		},
+		"footerDescription": "Storie, guide e note di rilascio dal team che sviluppa la libreria di componenti UI Vintage.",
+		"latestPostsDescription": "Una selezione di articoli scelti dalla redazione.",
+		"allPostsDescription": "Tutto quello che abbiamo pubblicato, dal più recente.",
+		"categoriesDescription": "Vai dritto agli argomenti che ti interessano.",
+		"tagsDescription": "Fili più piccoli che attraversano le categorie.",
+		"viewAll": "Vedi tutti"
+	},
+	"navigation": {
+		"breadcrumbs": {
+			"home": "Home",
+			"blog": "Blog",
+			"categories": "Categorie",
+			"tags": "Tag"
+		},
+		"library": "Libreria",
+		"overview": "Panoramica",
+		"components": "Componenti",
+		"foundations": "Fondamenta"
+	},
+	"common": {
+		"loadMoreWithNumbers": "Carica altro ({current} di {total})"
+	},
+	"demo": {
+		"title": "Demo UI Vintage"
+	}
 }

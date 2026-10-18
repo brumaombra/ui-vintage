@@ -25,24 +25,24 @@ const loadingMore = ref(false);
 
 // Append the next page of projects
 const handleLoadMore = async () => {
-    loadingMore.value = true;
-    await new Promise(resolve => setTimeout(resolve, 900));
-    const next = projectNames.slice(projects.value.length, projects.value.length + 4).map((name, index) => ({ id: projects.value.length + index + 1, name }));
-    projects.value = [...projects.value, ...next];
-    loadingMore.value = false;
+	loadingMore.value = true;
+	await new Promise(resolve => setTimeout(resolve, 900));
+	const next = projectNames.slice(projects.value.length, projects.value.length + 4).map((name, index) => ({ id: projects.value.length + index + 1, name }));
+	projects.value = [...projects.value, ...next];
+	loadingMore.value = false;
 };
 
 // Application shells available in the library
 const shells = [
-    { title: 'Dashboard shell', description: 'Collapsible sidebar, sticky blurred topbar, and grid background. You are looking at it right now.', icon: DashboardSquare01Icon, to: '/', badge: 'You are here', external: false },
-    { title: 'Landing & blog', description: 'Navbar with reading progress, content layout, footer, and a full Nuxt Content blog.', icon: News01Icon, to: '/blog', badge: '', external: false },
-    { title: 'Error page', description: 'Branded 404 and 500 pages with a recovery action and toolbar slots.', icon: Alert02Icon, to: '/this-page-does-not-exist', badge: '', external: true }
+	{ title: 'Dashboard shell', description: 'Collapsible sidebar, sticky blurred topbar, and grid background. You are looking at it right now.', icon: DashboardSquare01Icon, to: '/', badge: 'You are here', external: false },
+	{ title: 'Landing & blog', description: 'Navbar with reading progress, content layout, footer, and a full Nuxt Content blog.', icon: News01Icon, to: '/blog', badge: '', external: false },
+	{ title: 'Error page', description: 'Branded 404 and 500 pages with a recovery action and toolbar slots.', icon: Alert02Icon, to: '/this-page-does-not-exist', badge: '', external: true }
 ];
 
 // Theme-aware logo demo
 const themeLogos = [
-    { src: '/logo.svg', label: 'Light theme', prop: 'app-logo="/logo.svg"', surfaceClass: 'border-zinc-200 bg-white text-zinc-900' },
-    { src: '/logo-dark.svg', label: 'Dark theme', prop: 'app-logo-dark="/logo-dark.svg"', surfaceClass: 'border-zinc-800 bg-zinc-950 text-zinc-100' }
+	{ src: '/logo.svg', label: 'Light theme', prop: 'app-logo="/logo.svg"', surfaceClass: 'border-zinc-200 bg-white text-zinc-900' },
+	{ src: '/logo-dark.svg', label: 'Dark theme', prop: 'app-logo-dark="/logo-dark.svg"', surfaceClass: 'border-zinc-800 bg-zinc-950 text-zinc-100' }
 ];
 const themeLogoCode = `<LandingNavbar app-name="Acme" app-logo="/logo.svg" app-logo-dark="/logo-dark.svg" />
 
@@ -52,75 +52,75 @@ const themeLogoCode = `<LandingNavbar app-name="Acme" app-logo="/logo.svg" app-l
 </script>
 
 <template>
-    <div class="flex flex-col gap-12">
-        <DemoPageHeader eyebrow="Patterns" title="Layouts" description="Higher-level building blocks for pages: headers, paginated grids, and complete application shells." :icon="LayoutTwoColumnIcon" />
+	<div class="flex flex-col gap-12">
+		<DemoPageHeader eyebrow="Patterns" title="Layouts" description="Higher-level building blocks for pages: headers, paginated grids, and complete application shells." :icon="LayoutTwoColumnIcon" />
 
-        <!-- Page header -->
-        <DemoSection id="page-header" title="Page header" description="A responsive title row with an optional actions slot, in three sizes.">
-            <div class="flex flex-col gap-2">
-                <PageHeader title="Projects" size="large">
-                    <Button>
-                        <HugeiconsIcon :icon="PlusSignIcon" />
-                        New project
-                    </Button>
-                </PageHeader>
-                <PageHeader title="Recent activity" size="medium" :heading-level="2" />
-                <PageHeader title="Members" size="small" :heading-level="3">
-                    <Button variant="secondary" size="sm">Invite</Button>
-                </PageHeader>
-            </div>
-        </DemoSection>
+		<!-- Page header -->
+		<DemoSection id="page-header" title="Page header" description="A responsive title row with an optional actions slot, in three sizes.">
+			<div class="flex flex-col gap-2">
+				<PageHeader title="Projects" size="large">
+					<Button>
+						<HugeiconsIcon :icon="PlusSignIcon" />
+						New project
+					</Button>
+				</PageHeader>
+				<PageHeader title="Recent activity" size="medium" :heading-level="2" />
+				<PageHeader title="Members" size="small" :heading-level="3">
+					<Button variant="secondary" size="sm">Invite</Button>
+				</PageHeader>
+			</div>
+		</DemoSection>
 
-        <!-- Card grid -->
-        <DemoSection id="card-grid" title="Card grid" description="Responsive grid with built-in empty, loading, and load-more states.">
-            <CardGrid :items="projects" :has-more="projects.length < projectNames.length" :load-more-busy="loadingMore" empty-message="No projects yet." @load-more="handleLoadMore">
-                <template #card="{ item }">
-                    <Card interactive class="animate-uv-fade-up">
-                        <CardHeader>
-                            <div class="mb-2 flex size-9 items-center justify-center rounded border border-primary/30 text-primary">
-                                <HugeiconsIcon :icon="Folder01Icon" class="size-4" />
-                            </div>
-                            <CardTitle>{{ item.name }}</CardTitle>
-                            <CardDescription>Project #{{ item.id }}</CardDescription>
-                        </CardHeader>
-                    </Card>
-                </template>
-            </CardGrid>
-        </DemoSection>
+		<!-- Card grid -->
+		<DemoSection id="card-grid" title="Card grid" description="Responsive grid with built-in empty, loading, and load-more states.">
+			<CardGrid :items="projects" :has-more="projects.length < projectNames.length" :load-more-busy="loadingMore" empty-message="No projects yet." @load-more="handleLoadMore">
+				<template #card="{ item }">
+					<Card interactive class="animate-uv-fade-up">
+						<CardHeader>
+							<div class="mb-2 flex size-9 items-center justify-center rounded border border-primary/30 text-primary">
+								<HugeiconsIcon :icon="Folder01Icon" class="size-4" />
+							</div>
+							<CardTitle>{{ item.name }}</CardTitle>
+							<CardDescription>Project #{{ item.id }}</CardDescription>
+						</CardHeader>
+					</Card>
+				</template>
+			</CardGrid>
+		</DemoSection>
 
-        <!-- Shells -->
-        <DemoSection id="theme-logo" title="Theme-aware logo" badge="New" description="LandingNavbar, LandingFooter, and DashboardShell take an optional appLogoDark. Both images render and the .dark class picks one, so the logo follows the theme toggle with no flash. Toggle the theme and watch the footer logo." :code="themeLogoCode">
-            <div class="grid gap-4 sm:grid-cols-2">
-                <div v-for="logo in themeLogos" :key="logo.src" :class="['flex items-center gap-3 rounded border p-5', logo.surfaceClass]">
-                    <img :src="logo.src" :alt="logo.label" width="40" height="40" class="size-10">
-                    <div class="flex flex-col gap-0.5 text-xs">
-                        <span class="font-semibold">{{ logo.label }}</span>
-                        <code class="opacity-70">{{ logo.prop }}</code>
-                    </div>
-                </div>
-            </div>
-        </DemoSection>
+		<!-- Shells -->
+		<DemoSection id="theme-logo" title="Theme-aware logo" badge="New" description="LandingNavbar, LandingFooter, and DashboardShell take an optional appLogoDark. Both images render and the .dark class picks one, so the logo follows the theme toggle with no flash. Toggle the theme and watch the footer logo." :code="themeLogoCode">
+			<div class="grid gap-4 sm:grid-cols-2">
+				<div v-for="logo in themeLogos" :key="logo.src" :class="['flex items-center gap-3 rounded border p-5', logo.surfaceClass]">
+					<img :src="logo.src" :alt="logo.label" width="40" height="40" class="size-10">
+					<div class="flex flex-col gap-0.5 text-xs">
+						<span class="font-semibold">{{ logo.label }}</span>
+						<code class="opacity-70">{{ logo.prop }}</code>
+					</div>
+				</div>
+			</div>
+		</DemoSection>
 
-        <DemoSection id="shells" title="Application shells" description="Complete layouts that own navigation, theming, and responsive behavior.">
-            <div class="grid gap-4 md:grid-cols-3">
-                <NuxtLinkLocale v-for="shell in shells" :key="shell.title" :to="shell.to" :external="shell.external" class="group/shell rounded outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45">
-                    <Card interactive class="h-full">
-                        <CardHeader>
-                            <div class="mb-2 flex items-center justify-between">
-                                <div class="flex size-10 items-center justify-center rounded border border-primary/30 text-primary">
-                                    <HugeiconsIcon :icon="shell.icon" class="size-5" />
-                                </div>
-                                <Badge v-if="shell.badge" :text="shell.badge" color="yellow" pulse />
-                            </div>
-                            <CardTitle class="flex items-center gap-2">
-                                {{ shell.title }}
-                                <HugeiconsIcon :icon="ArrowRight01Icon" class="size-4 text-muted-foreground transition-[translate,color] duration-300 ease-spring group-hover/shell:translate-x-1 group-hover/shell:text-primary" />
-                            </CardTitle>
-                            <CardDescription>{{ shell.description }}</CardDescription>
-                        </CardHeader>
-                    </Card>
-                </NuxtLinkLocale>
-            </div>
-        </DemoSection>
-    </div>
+		<DemoSection id="shells" title="Application shells" description="Complete layouts that own navigation, theming, and responsive behavior.">
+			<div class="grid gap-4 md:grid-cols-3">
+				<NuxtLinkLocale v-for="shell in shells" :key="shell.title" :to="shell.to" :external="shell.external" class="group/shell rounded outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45">
+					<Card interactive class="h-full">
+						<CardHeader>
+							<div class="mb-2 flex items-center justify-between">
+								<div class="flex size-10 items-center justify-center rounded border border-primary/30 text-primary">
+									<HugeiconsIcon :icon="shell.icon" class="size-5" />
+								</div>
+								<Badge v-if="shell.badge" :text="shell.badge" color="yellow" pulse />
+							</div>
+							<CardTitle class="flex items-center gap-2">
+								{{ shell.title }}
+								<HugeiconsIcon :icon="ArrowRight01Icon" class="size-4 text-muted-foreground transition-[translate,color] duration-300 ease-spring group-hover/shell:translate-x-1 group-hover/shell:text-primary" />
+							</CardTitle>
+							<CardDescription>{{ shell.description }}</CardDescription>
+						</CardHeader>
+					</Card>
+				</NuxtLinkLocale>
+			</div>
+		</DemoSection>
+	</div>
 </template>

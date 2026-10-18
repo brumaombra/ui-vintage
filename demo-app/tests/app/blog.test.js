@@ -7,81 +7,81 @@ const readDetailLabels = wrapper => wrapper.findAll('dt').map(label => label.tex
 
 // Blog headers: the first thing readers see on every blog page
 describe('BlogPostHeader', () => {
-    // A full post shows the four labelled details
-    it('shows author, date, reading time, and category', async () => {
-        const wrapper = await mountSuspended(BlogPostHeader, {
-            props: { title: 'Shipping the blog', author: 'Bruma', datePublished: '2026-06-14', categoryText: 'Product Updates', categorySlug: 'product-updates', readingMinutes: 6 }
-        });
-        expect(readDetailLabels(wrapper)).toEqual(['Author', 'Published', 'Reading time', 'Category']);
-        expect(wrapper.text()).toContain('June 14, 2026');
-        expect(wrapper.text()).toContain('6 min');
-    });
+	// A full post shows the four labelled details
+	it('shows author, date, reading time, and category', async () => {
+		const wrapper = await mountSuspended(BlogPostHeader, {
+			props: { title: 'Shipping the blog', author: 'Bruma', datePublished: '2026-06-14', categoryText: 'Product Updates', categorySlug: 'product-updates', readingMinutes: 6 }
+		});
+		expect(readDetailLabels(wrapper)).toEqual(['Author', 'Published', 'Reading time', 'Category']);
+		expect(wrapper.text()).toContain('June 14, 2026');
+		expect(wrapper.text()).toContain('6 min');
+	});
 
-    // Columns without data are left out instead of showing empty cells
-    it('leaves out the details that are missing', async () => {
-        const wrapper = await mountSuspended(BlogPostHeader, { props: { title: 'Draft', readingMinutes: 3 } });
-        expect(readDetailLabels(wrapper)).toEqual(['Reading time']);
-    });
+	// Columns without data are left out instead of showing empty cells
+	it('leaves out the details that are missing', async () => {
+		const wrapper = await mountSuspended(BlogPostHeader, { props: { title: 'Draft', readingMinutes: 3 } });
+		expect(readDetailLabels(wrapper)).toEqual(['Reading time']);
+	});
 
-    // Category and tag links follow the blog base path
-    it('builds category and tag links from blogPath', async () => {
-        const wrapper = await mountSuspended(BlogPostHeader, {
-            props: { title: 'Post', blogPath: '/news', categoryText: 'Design', categorySlug: 'design', tags: [{ name: 'Vue', slug: 'vue' }] }
-        });
-        const hrefs = wrapper.findAll('a').map(link => link.attributes('href'));
-        expect(hrefs).toContain('/news/categories/design');
-        expect(hrefs).toContain('/news/tags/vue');
-    });
+	// Category and tag links follow the blog base path
+	it('builds category and tag links from blogPath', async () => {
+		const wrapper = await mountSuspended(BlogPostHeader, {
+			props: { title: 'Post', blogPath: '/news', categoryText: 'Design', categorySlug: 'design', tags: [{ name: 'Vue', slug: 'vue' }] }
+		});
+		const hrefs = wrapper.findAll('a').map(link => link.attributes('href'));
+		expect(hrefs).toContain('/news/categories/design');
+		expect(hrefs).toContain('/news/tags/vue');
+	});
 
-    // Without an explicit value, the reading time comes from the body
-    it('estimates the reading time from the body', async () => {
-        const wrapper = await mountSuspended(BlogPostHeader, { props: { title: 'Post', body: 'word '.repeat(440) } });
-        expect(wrapper.text()).toContain('2 min');
-    });
+	// Without an explicit value, the reading time comes from the body
+	it('estimates the reading time from the body', async () => {
+		const wrapper = await mountSuspended(BlogPostHeader, { props: { title: 'Post', body: 'word '.repeat(440) } });
+		expect(wrapper.text()).toContain('2 min');
+	});
 });
 
 describe('BlogTagsSection', () => {
-    // Tag chips link to the tag pages under the blog base path
-    it('links every tag under blogPath', async () => {
-        const wrapper = await mountSuspended(BlogTagsSection, { props: { blogPath: '/journal', tags: [{ name: 'CSS', slug: 'css', count: 3 }] } });
-        expect(wrapper.find('a').attributes('href')).toBe('/journal/tags/css');
-        expect(wrapper.text()).toContain('CSS');
-        expect(wrapper.text()).toContain('3');
-    });
+	// Tag chips link to the tag pages under the blog base path
+	it('links every tag under blogPath', async () => {
+		const wrapper = await mountSuspended(BlogTagsSection, { props: { blogPath: '/journal', tags: [{ name: 'CSS', slug: 'css', count: 3 }] } });
+		expect(wrapper.find('a').attributes('href')).toBe('/journal/tags/css');
+		expect(wrapper.text()).toContain('CSS');
+		expect(wrapper.text()).toContain('3');
+	});
 });
 
 describe('BlogHeaderSection', () => {
-    // Centered by default; left and right move the column, its text, and the stats row together
-    it('aligns the header content', async () => {
-        const stats = [{ label: 'posts', value: 6 }];
-        const centered = await mountSuspended(BlogHeaderSection, { props: { title: 'Blog', description: 'Notes', stats } });
-        expect(centered.find('header').classes()).toEqual(expect.arrayContaining(['items-center', 'text-center']));
-        const left = await mountSuspended(BlogHeaderSection, { props: { title: 'Blog', description: 'Notes', stats, align: 'left' } });
-        expect(left.find('header').classes()).toEqual(expect.arrayContaining(['items-start', 'text-left']));
-        expect(left.find('[data-slot="stat-strip"]').classes()).toContain('justify-start');
-        const right = await mountSuspended(BlogHeaderSection, { props: { title: 'Blog', description: 'Notes', stats, align: 'right' } });
-        expect(right.find('header').classes()).toEqual(expect.arrayContaining(['items-end', 'text-right']));
-    });
+	// Centered by default; left and right move the column, its text, and the stats row together
+	it('aligns the header content', async () => {
+		const stats = [{ label: 'posts', value: 6 }];
+		const centered = await mountSuspended(BlogHeaderSection, { props: { title: 'Blog', description: 'Notes', stats } });
+		expect(centered.find('header').classes()).toEqual(expect.arrayContaining(['items-center', 'text-center']));
+		const left = await mountSuspended(BlogHeaderSection, { props: { title: 'Blog', description: 'Notes', stats, align: 'left' } });
+		expect(left.find('header').classes()).toEqual(expect.arrayContaining(['items-start', 'text-left']));
+		expect(left.find('[data-slot="stat-strip"]').classes()).toContain('justify-start');
+		const right = await mountSuspended(BlogHeaderSection, { props: { title: 'Blog', description: 'Notes', stats, align: 'right' } });
+		expect(right.find('header').classes()).toEqual(expect.arrayContaining(['items-end', 'text-right']));
+	});
 
-    // The highlighted part of the title is rendered on its own, wherever it appears
-    it('highlights part of the title', async () => {
-        const wrapper = await mountSuspended(BlogHeaderSection, { props: { title: 'Il blog della demo', highlight: 'blog', description: 'Notes' } });
-        expect(wrapper.find('h1 .text-primary').text()).toBe('blog');
-        expect(wrapper.find('h1').text().replace(/\s+/g, ' ')).toBe('Il blog della demo');
-    });
+	// The highlighted part of the title is rendered on its own, wherever it appears
+	it('highlights part of the title', async () => {
+		const wrapper = await mountSuspended(BlogHeaderSection, { props: { title: 'Il blog della demo', highlight: 'blog', description: 'Notes' } });
+		expect(wrapper.find('h1 .text-primary').text()).toBe('blog');
+		expect(wrapper.find('h1').text().replace(/\s+/g, ' ')).toBe('Il blog della demo');
+	});
 
-    // No space is added around the highlight unless the title has one there
-    it('keeps the title spacing around the highlight', async () => {
-        const wrapper = await mountSuspended(BlogHeaderSection, { props: { title: 'The (Nuxt) blog', highlight: 'Nuxt', description: 'Notes' } });
-        expect(wrapper.find('h1').text().replace(/\s+/g, ' ')).toBe('The (Nuxt) blog');
-    });
+	// No space is added around the highlight unless the title has one there
+	it('keeps the title spacing around the highlight', async () => {
+		const wrapper = await mountSuspended(BlogHeaderSection, { props: { title: 'The (Nuxt) blog', highlight: 'Nuxt', description: 'Notes' } });
+		expect(wrapper.find('h1').text().replace(/\s+/g, ' ')).toBe('The (Nuxt) blog');
+	});
 
-    // The announcement links to its target with the translated "New" label
-    it('renders the announcement link', async () => {
-        const wrapper = await mountSuspended(BlogHeaderSection, { props: { title: 'Blog', description: 'Notes', announcement: { text: 'Latest post', to: '/blog/latest' } } });
-        const link = wrapper.find('a');
-        expect(link.attributes('href')).toBe('/blog/latest');
-        expect(link.text()).toContain('New');
-        expect(link.text()).toContain('Latest post');
-    });
+	// The announcement links to its target with the translated "New" label
+	it('renders the announcement link', async () => {
+		const wrapper = await mountSuspended(BlogHeaderSection, { props: { title: 'Blog', description: 'Notes', announcement: { text: 'Latest post', to: '/blog/latest' } } });
+		const link = wrapper.find('a');
+		expect(link.attributes('href')).toBe('/blog/latest');
+		expect(link.text()).toContain('New');
+		expect(link.text()).toContain('Latest post');
+	});
 });

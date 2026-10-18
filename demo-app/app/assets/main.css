@@ -2,5 +2,5 @@
 
 /* The UI Vintage stylesheet (Tailwind + theme tokens) is injected by the Nuxt module */
 body {
-    font-family: 'JetBrains Mono', monospace;
+	font-family: 'JetBrains Mono', monospace;
 }
