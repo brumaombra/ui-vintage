@@ -4,5 +4,5 @@ import { ProseHr as UiVintageProseHr } from '@brumaombra/ui-vintage/content';
 </script>
 
 <template>
-    <UiVintageProseHr :icon="ChartLineData02Icon" />
+	<UiVintageProseHr :icon="ChartLineData02Icon" />
 </template>
