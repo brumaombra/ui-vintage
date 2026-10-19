@@ -75,7 +75,7 @@ const headerStats = computed(() => [
 </script>
 
 <template>
-	<div class="space-y-16 md:space-y-24">
+	<div class="space-y-14 md:space-y-18">
 		<!-- Header section -->
 		<BlogHeaderSection :announcement="headerAnnouncement"
 			:title="props.title"
