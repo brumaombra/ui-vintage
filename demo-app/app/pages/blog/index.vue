@@ -82,11 +82,16 @@ useSeoMeta(createSEOMetatags({
 
 // Define head metadata
 useHead({
+	// HTML attributes
 	htmlAttrs: {
-		lang: localeHead.value.htmlAttrs.lang,
-		dir: localeHead.value.htmlAttrs.dir
+		lang: localeHead.value.htmlAttrs.lang, // Language
+		dir: localeHead.value.htmlAttrs.dir // Text direction
 	},
+
+	// Hreflang attributes for different languages
 	link: [...(localeHead.value.link || [])],
+
+	// JSON-LD schema for the page
 	...createPageSchema({
 		title: t('seo.blog.title'),
 		description: t('seo.blog.description'),

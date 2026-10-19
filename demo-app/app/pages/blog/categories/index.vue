@@ -10,7 +10,10 @@ const route = useRoute();
 
 // Fetch blog categories data
 const { data: categories } = await useAsyncData(`blog-categories-${locale.value}`, async () => {
+	// Fetch all blog posts
 	const posts = await queryCollection('blog').select('categorySlug', 'categoryText', 'image').where('language', '=', locale.value).order('datePublished', 'DESC').all();
+
+	// Return built categories
 	return buildCategoriesFromPosts(posts);
 });
 
@@ -23,11 +26,16 @@ useSeoMeta(createSEOMetatags({
 
 // Define head metadata
 useHead({
+	// HTML attributes
 	htmlAttrs: {
-		lang: localeHead.value.htmlAttrs.lang,
-		dir: localeHead.value.htmlAttrs.dir
+		lang: localeHead.value.htmlAttrs.lang, // Language
+		dir: localeHead.value.htmlAttrs.dir // Text direction
 	},
+
+	// Hreflang attributes for different languages
 	link: [...(localeHead.value.link || [])],
+
+	// JSON-LD schema for the page
 	...createPageSchema({
 		title: t('seo.categories.title'),
 		description: t('seo.categories.description'),

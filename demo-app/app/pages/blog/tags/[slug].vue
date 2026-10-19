@@ -21,10 +21,12 @@ const filterPostsByTag = posts => {
 // Fetch prerendered tag page data
 const { data: tagData } = await useAsyncData(`tag-${slug}-${locale.value}-posts`, async () => {
 	try {
+		// Execute the tag query
 		const allPosts = await queryCollection('blog').select('title', 'description', 'image', 'categoryText', 'path', 'tags').where('language', '=', locale.value).order('datePublished', 'DESC').all();
 		const matchingPosts = filterPostsByTag(allPosts);
 		const matchingTag = matchingPosts.flatMap(post => post.tags || []).find(tag => slugify(tag) === slug);
 
+		// Return the data
 		return {
 			tagTitle: matchingTag || slug,
 			posts: matchingPosts.slice(0, postsPerPage),
@@ -40,7 +42,7 @@ const { data: tagData } = await useAsyncData(`tag-${slug}-${locale.value}-posts`
 	}
 });
 
-// Unknown tag (no posts): show the 404 page
+// Show the error page (with a real 404 status) for tags without posts
 if (!tagData.value?.totalPosts) {
 	throw createError({ statusCode: 404, statusMessage: 'Tag not found', fatal: true });
 }
@@ -78,11 +80,16 @@ useSeoMeta(createSEOMetatags({
 
 // Define head metadata
 useHead({
+	// HTML attributes
 	htmlAttrs: {
-		lang: localeHead.value.htmlAttrs.lang,
-		dir: localeHead.value.htmlAttrs.dir
+		lang: localeHead.value.htmlAttrs.lang, // Language
+		dir: localeHead.value.htmlAttrs.dir // Text direction
 	},
+
+	// Hreflang attributes for different languages
 	link: [...(localeHead.value.link || [])],
+
+	// JSON-LD schema for the page
 	...createPageSchema({
 		title: t('seo.blog.tag.title', { tag: tagTitle }),
 		description: t('seo.blog.tag.description', { tag: tagTitle }),

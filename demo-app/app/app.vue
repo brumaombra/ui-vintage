@@ -2,9 +2,10 @@
 // Every page declares its language and direction (the blog pages also add their SEO links)
 const localeHead = useLocaleHead();
 useHead({
+	// HTML attributes
 	htmlAttrs: {
-		lang: () => localeHead.value.htmlAttrs.lang,
-		dir: () => localeHead.value.htmlAttrs.dir
+		lang: () => localeHead.value.htmlAttrs.lang, // Language
+		dir: () => localeHead.value.htmlAttrs.dir // Text direction
 	}
 });
 </script>

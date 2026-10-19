@@ -17,7 +17,7 @@ const { data: post } = await useAsyncData(`post-${slug}-${locale.value}`, async 
 	return await queryCollection('blog').path(postPath).first();
 });
 
-// Unknown post: show the 404 page
+// Show the error page (with a real 404 status) when the post does not exist
 if (!post.value) {
 	throw createError({ statusCode: 404, statusMessage: 'Post not found', fatal: true });
 }
@@ -54,11 +54,16 @@ useSeoMeta(createSEOMetatags({
 
 // Define head metadata
 useHead({
+	// HTML attributes
 	htmlAttrs: {
-		lang: localeHead.value.htmlAttrs.lang,
-		dir: localeHead.value.htmlAttrs.dir
+		lang: localeHead.value.htmlAttrs.lang, // Language
+		dir: localeHead.value.htmlAttrs.dir // Text direction
 	},
+
+	// Hreflang attributes for different languages
 	link: [...(localeHead.value.link || [])],
+
+	// JSON-LD schema for the page
 	...createPageSchema({
 		title: post.value?.title,
 		description: post.value?.description,

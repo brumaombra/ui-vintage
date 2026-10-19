@@ -39,7 +39,7 @@ const { data: categoryData } = await useAsyncData(`category-${slug}-${locale.val
 	}
 });
 
-// Unknown category (no posts): show the 404 page
+// Show the error page (with a real 404 status) for categories without posts
 if (!categoryData.value?.totalPosts) {
 	throw createError({ statusCode: 404, statusMessage: 'Category not found', fatal: true });
 }
@@ -78,11 +78,16 @@ useSeoMeta(createSEOMetatags({
 
 // Define head metadata
 useHead({
+	// HTML attributes
 	htmlAttrs: {
-		lang: localeHead.value.htmlAttrs.lang,
-		dir: localeHead.value.htmlAttrs.dir
+		lang: localeHead.value.htmlAttrs.lang, // Language
+		dir: localeHead.value.htmlAttrs.dir // Text direction
 	},
+
+	// Hreflang attributes for different languages
 	link: [...(localeHead.value.link || [])],
+
+	// JSON-LD schema for the page
 	...createPageSchema({
 		title: t('seo.blog.category.title', { category: categoryTitle }),
 		description: t('seo.blog.category.description', { category: categoryTitle }),
