@@ -1,26 +1,41 @@
 import fs from 'fs/promises';
 import path from 'path';
-import { slugify } from './useUtils.js';
+
+// ---------------------------------- Settings of this app ----------------------------------
 
 // List of available locales
 const availableLocales = ['en', 'it'];
 
+// Pages that exist in every locale (the locale prefix is added for the other languages)
+const staticPages = [
+	'/',
+	'/foundations',
+	'/components/actions',
+	'/components/forms',
+	'/components/data-display',
+	'/components/navigation',
+	'/components/overlays',
+	'/components/feedback',
+	'/layouts',
+	'/blog',
+	'/blog/categories',
+	'/blog/tags'
+];
+
+// Blog: content folder of the posts ('' for the content root), path of the posts, categories and tags, and whether there are tag pages (null without a blog)
+const blog = { folder: 'blog', basePath: '/blog', tags: true };
+
+// Other content folders whose markdown files are pages, with their path (e.g. content/projects/clock.md -> /projects/clock)
+const contentPageSections = [];
+
+// Get the other routes of this app
+const getExtraRoutes = async () => [];
+
+// ---------------------------------- Route engine (shared by the apps) ----------------------------------
+
 // Get the static pages
 const getStaticPageRoutes = () => {
-	return addLocalizationToRoutes([
-		'/',
-		'/foundations',
-		'/components/actions',
-		'/components/forms',
-		'/components/data-display',
-		'/components/navigation',
-		'/components/overlays',
-		'/components/feedback',
-		'/layouts',
-		'/blog',
-		'/blog/categories',
-		'/blog/tags'
-	]);
+	return addLocalizationToRoutes(staticPages);
 };
 
 // Add the locale prefix to each route
@@ -37,20 +52,21 @@ const addLocalizationToRoutes = routes => {
 	return [...routes, ...localizedRoutes];
 };
 
-// Get all blog post paths from content/blog for each locale
-const getAllBlogRoutes = async () => {
-	const rootDir = process.cwd();
+// Get the folder of a content section for a locale (e.g. content/it/blog), the English one has no locale folder
+const getContentDir = ({ folder, locale }) => {
+	return path.join(process.cwd(), 'content', ...(locale === 'en' ? [] : [locale]), ...(folder ? [folder] : []));
+};
+
+// Get the routes of the markdown pages of a content section, for each locale (e.g. content/it/blog/post.md -> /it/blog/post)
+const getContentPageRoutes = async ({ folder, basePath }) => {
 	const routes = [];
 
-	// Loop through each locale to get blog posts
+	// Loop through each locale to get the pages
 	for (const locale of availableLocales) {
-		// Determine the blog directory for each locale
-		const blogDir = locale === 'en' ? path.join(rootDir, 'content', 'blog') : path.join(rootDir, 'content', locale, 'blog');
-
-		// Read the blog directory entries
+		// Read the directory entries
 		let entries = [];
 		try {
-			entries = await fs.readdir(blogDir, { withFileTypes: true });
+			entries = await fs.readdir(getContentDir({ folder, locale }), { withFileTypes: true });
 		} catch (error) {
 			continue; // Directory may not exist for some locales, skip
 		}
@@ -59,11 +75,7 @@ const getAllBlogRoutes = async () => {
 		for (const entry of entries) {
 			if (entry.isFile() && entry.name.endsWith('.md')) {
 				const slug = entry.name.replace(/\.md$/, '');
-				if (locale === 'en') {
-					routes.push(`/blog/${slug}`);
-				} else {
-					routes.push(`/${locale}/blog/${slug}`);
-				}
+				routes.push(locale === 'en' ? `${basePath}/${slug}` : `/${locale}${basePath}/${slug}`);
 			}
 		}
 	}
@@ -71,18 +83,17 @@ const getAllBlogRoutes = async () => {
 	return routes;
 };
 
-// Get all the category routes
-const getCategoryRoutes = async () => {
-	const categories = await getUniqueCategories(); // Get unique categories from blog posts
+// Map a list of slugs to their routes under a path, for each locale
+const getSlugRoutes = ({ slugs, basePath }) => {
 	const routes = [];
 
-	// Map categories to routes for each locale
+	// Map the slugs to routes for each locale
 	for (const locale of availableLocales) {
-		for (const category of categories) {
+		for (const slug of slugs) {
 			if (locale === 'en') {
-				routes.push(`/blog/categories/${category}`); // English routes without locale prefix
+				routes.push(`${basePath}/${slug}`); // English routes without locale prefix
 			} else {
-				routes.push(`/${locale}/blog/categories/${category}`); // Localized routes for other languages
+				routes.push(`/${locale}${basePath}/${slug}`); // Localized routes for other languages
 			}
 		}
 	}
@@ -90,44 +101,32 @@ const getCategoryRoutes = async () => {
 	return routes;
 };
 
-// Get all the tag routes
-const getTagRoutes = async () => {
-	const tags = await getUniqueTags(); // Get unique tags from blog posts
-	const routes = [];
+// Read the frontmatter of every English blog post
+const readBlogFrontmatters = async () => {
+	const blogDir = getContentDir({ folder: blog.folder, locale: 'en' });
+	const entries = await fs.readdir(blogDir, { withFileTypes: true });
+	const frontmatters = [];
 
-	// Map tags to routes for each locale
-	for (const locale of availableLocales) {
-		for (const tag of tags) {
-			if (locale === 'en') {
-				routes.push(`/blog/tags/${tag}`); // English routes without locale prefix
-			} else {
-				routes.push(`/${locale}/blog/tags/${tag}`); // Localized routes for other languages
-			}
+	// Loop through the markdown files and extract their frontmatter
+	for (const entry of entries) {
+		if (entry.isFile() && entry.name.endsWith('.md')) {
+			const content = await fs.readFile(path.join(blogDir, entry.name), 'utf-8');
+			frontmatters.push(extractFrontmatter(content));
 		}
 	}
 
-	return routes;
+	return frontmatters;
 };
 
 // Get all unique categories from blog post markdowns
 const getUniqueCategories = async () => {
-	const rootDir = process.cwd();
-	const blogDir = path.join(rootDir, 'content/blog'); // Default blog directory for 'en' locale
-	const entries = await fs.readdir(blogDir, { withFileTypes: true });
 	const categoriesSet = new Set();
 
-	// Loop through entries and extract categories from frontmatter
-	for (const entry of entries) {
-		if (entry.isFile() && entry.name.endsWith('.md')) {
-			const filePath = path.join(blogDir, entry.name);
-			const content = await fs.readFile(filePath, 'utf-8');
-			const frontmatter = extractFrontmatter(content);
-
-			// Check if category exists in frontmatter
-			if (frontmatter.categorySlug) {
-				const cleanCategory = frontmatter.categorySlug.replace(/^['"]|['"]$/g, ''); // Remove surrounding quotes if present
-				categoriesSet.add(cleanCategory);
-			}
+	// Check if category exists in frontmatter
+	for (const frontmatter of await readBlogFrontmatters()) {
+		if (frontmatter.categorySlug) {
+			const cleanCategory = frontmatter.categorySlug.replace(/^['"]|['"]$/g, ''); // Remove surrounding quotes if present
+			categoriesSet.add(cleanCategory);
 		}
 	}
 
@@ -136,28 +135,37 @@ const getUniqueCategories = async () => {
 
 // Get all unique tags from blog post markdowns (tags are in English in every locale, so they share the same slugs)
 const getUniqueTags = async () => {
-	const rootDir = process.cwd();
-	const blogDir = path.join(rootDir, 'content/blog'); // Default blog directory for 'en' locale
-	const entries = await fs.readdir(blogDir, { withFileTypes: true });
 	const tagsSet = new Set();
 
-	// Loop through entries and extract tags from frontmatter
-	for (const entry of entries) {
-		if (entry.isFile() && entry.name.endsWith('.md')) {
-			const filePath = path.join(blogDir, entry.name);
-			const content = await fs.readFile(filePath, 'utf-8');
-			const frontmatter = extractFrontmatter(content);
-			const tags = Array.isArray(frontmatter.tags) ? frontmatter.tags : [];
+	// Add each tag slug to the set
+	for (const frontmatter of await readBlogFrontmatters()) {
+		const tags = Array.isArray(frontmatter.tags) ? frontmatter.tags : [];
+		for (const tag of tags) {
+			const cleanTag = String(tag).replace(/^['"]|['"]$/g, '').trim();
+			if (!cleanTag) continue;
 
-			// Add each tag slug to the set
-			for (const tag of tags) {
-				const tagSlug = slugify(String(tag).replace(/^['"]|['"]$/g, ''));
-				if (tagSlug) tagsSet.add(tagSlug);
-			}
+			const tagSlug = cleanTag
+				.toLowerCase()
+				.replace(/[^a-z0-9]+/g, '-')
+				.replace(/^-+|-+$/g, '');
+
+			if (tagSlug) tagsSet.add(tagSlug);
 		}
 	}
 
 	return Array.from(tagsSet);
+};
+
+// Get the routes of the blog: posts, categories and tags
+const getBlogRoutes = async () => {
+	if (!blog) return []; // This app has no blog
+
+	// Get the post, category and tag routes
+	const postRoutes = await getContentPageRoutes({ folder: blog.folder, basePath: blog.basePath });
+	const categoryRoutes = getSlugRoutes({ slugs: await getUniqueCategories(), basePath: `${blog.basePath}/categories` });
+	const tagRoutes = blog.tags ? getSlugRoutes({ slugs: await getUniqueTags(), basePath: `${blog.basePath}/tags` }) : [];
+
+	return [...postRoutes, ...categoryRoutes, ...tagRoutes];
 };
 
 // Extract frontmatter from markdown content
@@ -184,16 +192,23 @@ const extractFrontmatter = markdown => {
 // Main function for build-time route list
 export const createAppRoutesList = async () => {
 	const staticRoutes = getStaticPageRoutes(); // Get all static page routes
-	const blogRoutes = await getAllBlogRoutes(); // Get all blog post routes
-	const categoryRoutes = await getCategoryRoutes(); // Get all category routes
-	const tagRoutes = await getTagRoutes(); // Get all tag routes
+	const blogRoutes = await getBlogRoutes(); // Get all blog post, category and tag routes
+
+	// Get the pages of the other content sections
+	const contentPageRoutes = [];
+	for (const section of contentPageSections) {
+		contentPageRoutes.push(...await getContentPageRoutes(section));
+	}
+
+	// Get the routes specific to this app
+	const extraRoutes = await getExtraRoutes();
 
 	// Merge and deduplicate
 	const routes = Array.from(new Set([
 		...staticRoutes,
 		...blogRoutes,
-		...categoryRoutes,
-		...tagRoutes
+		...contentPageRoutes,
+		...extraRoutes
 	]));
 
 	return routes;
