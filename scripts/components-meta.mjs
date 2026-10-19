@@ -564,7 +564,7 @@ setBusy(false);`
 
 	'blog': {
 		category: 'content',
-		description: 'Blog building blocks: an animated hero header, a post header (breadcrumbs, category and tags, title, author line, and featured image), a full-bleed featured carousel, post and category cards, tags, table of contents, reading progress, FAQ, share sidebar, and the content renderer. Scroll entrances use AOS: install `aos` in the app and initialize it (the components carry `data-aos="blur-up"`, and the library stylesheet defines that animation). Without AOS the content simply renders without entrances.'
+		description: 'Complete blog pages and their building blocks. The page components (`BlogIndexPage`, `BlogPostPage`, `BlogCategoriesPage`, `BlogTagsPage`, `BlogPostsPage` for the posts of a category or a tag) render the whole design: the app keeps one thin file per route that queries Nuxt Content, sets the SEO and passes the data and its own copy (titles and descriptions), with the helpers (`slugify`, `normalizeContentPath`, `buildCategoriesFromPosts`, `buildTagsFromPosts`, `sortByStableSeed`) shaping the data. The post page renders the app\'s `ProseHr` content component as divider and has an `after-article` slot for a call to action. The building blocks: an animated hero header, a post header (breadcrumbs, category and tags, title, author line, and featured image), a full-bleed featured carousel, post and category cards, tags, table of contents, reading progress, FAQ, share sidebar, and the content renderer. Scroll entrances use AOS: install `aos` in the app and initialize it (the components carry `data-aos="blur-up"`, and the library stylesheet defines that animation). Without AOS the content simply renders without entrances.'
 	},
 	'content': {
 		category: 'content',

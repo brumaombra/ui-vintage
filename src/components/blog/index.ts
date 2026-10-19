@@ -14,3 +14,14 @@ export { default as PostCard } from './PostCard.vue';
 export { default as PostsList } from './PostsList.vue';
 export { default as SocialShareSidebar } from './SocialShareSidebar.vue';
 export { default as TableOfContents } from './TableOfContents.vue';
+// Complete blog pages (the app fetches the content and sets the SEO, these render the page)
+export { default as BlogIndexPage } from './BlogIndexPage.vue';
+export { default as BlogPostPage } from './BlogPostPage.vue';
+export { default as BlogCategoriesPage } from './BlogCategoriesPage.vue';
+export { default as BlogTagsPage } from './BlogTagsPage.vue';
+export { default as BlogPostsPage } from './BlogPostsPage.vue';
+export { default as BlogViewAllLink } from './BlogViewAllLink.vue';
+
+// Helpers for the data of the blog pages
+export { slugify, normalizeContentPath, buildCategoriesFromPosts, buildTagsFromPosts, sortByStableSeed } from './blogPageUtils';
+export type { BlogPostData, BlogCategoryData, BlogTagData } from './blogPageUtils';

@@ -108,6 +108,27 @@
 				"telegram": "Telegram で共有",
 				"copy": "リンクをコピー",
 				"copied": "リンクをコピーしました"
+			},
+			"latestPosts": "最新の記事",
+			"latestPostsDescription": "編集部が選んだ記事です。",
+			"categories": "カテゴリー",
+			"categoriesDescription": "気になるトピックへすぐに移動できます。",
+			"tags": "タグ",
+			"tagsDescription": "カテゴリーを横断する小さなテーマです。",
+			"allPosts": "すべての記事",
+			"allPostsDescription": "これまでに公開したすべての記事を新しい順に。",
+			"viewAll": "すべて見る",
+			"readAlso": "あわせて読みたい",
+			"exploreCategories": "カテゴリーを見る",
+			"exploreAllCategories": "すべてのカテゴリーを見る",
+			"breadcrumbHome": "ホーム",
+			"breadcrumbCategories": "カテゴリー",
+			"breadcrumbTags": "タグ",
+			"stats": {
+				"posts": "件の記事",
+				"categories": "カテゴリー",
+				"tags": "タグ",
+				"uses": "回使用"
 			}
 		},
 		"errorPage": {

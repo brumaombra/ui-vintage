@@ -108,6 +108,27 @@
 				"telegram": "Share on Telegram",
 				"copy": "Copy link",
 				"copied": "Link copied"
+			},
+			"latestPosts": "Latest posts",
+			"latestPostsDescription": "Hand-picked stories from the editorial desk.",
+			"categories": "Categories",
+			"categoriesDescription": "Jump straight to the topics you care about.",
+			"tags": "Tags",
+			"tagsDescription": "Smaller threads that run across categories.",
+			"allPosts": "All posts",
+			"allPostsDescription": "Everything we have published, newest first.",
+			"viewAll": "View all",
+			"readAlso": "Read also",
+			"exploreCategories": "Explore categories",
+			"exploreAllCategories": "Explore all categories",
+			"breadcrumbHome": "Home",
+			"breadcrumbCategories": "Categories",
+			"breadcrumbTags": "Tags",
+			"stats": {
+				"posts": "post | posts",
+				"categories": "category | categories",
+				"tags": "tag | tags",
+				"uses": "use | uses"
 			}
 		},
 		"errorPage": {

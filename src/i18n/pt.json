@@ -108,6 +108,27 @@
 				"telegram": "Partilhar no Telegram",
 				"copy": "Copiar link",
 				"copied": "Link copiado"
+			},
+			"latestPosts": "Publicações recentes",
+			"latestPostsDescription": "Uma seleção de artigos escolhidos pela redação.",
+			"categories": "Categorias",
+			"categoriesDescription": "Vá direto aos temas que lhe interessam.",
+			"tags": "Tags",
+			"tagsDescription": "Fios menores que atravessam as categorias.",
+			"allPosts": "Todas as publicações",
+			"allPostsDescription": "Tudo o que publicamos, do mais recente ao mais antigo.",
+			"viewAll": "Ver tudo",
+			"readAlso": "Leia também",
+			"exploreCategories": "Explore as categorias",
+			"exploreAllCategories": "Explore todas as categorias",
+			"breadcrumbHome": "Início",
+			"breadcrumbCategories": "Categorias",
+			"breadcrumbTags": "Tags",
+			"stats": {
+				"posts": "publicação | publicações",
+				"categories": "categoria | categorias",
+				"tags": "tag | tags",
+				"uses": "uso | usos"
 			}
 		},
 		"errorPage": {

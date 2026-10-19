@@ -108,6 +108,27 @@
 				"telegram": "Поделиться в Telegram",
 				"copy": "Копировать ссылку",
 				"copied": "Ссылка скопирована"
+			},
+			"latestPosts": "Последние статьи",
+			"latestPostsDescription": "Подборка статей от редакции.",
+			"categories": "Категории",
+			"categoriesDescription": "Переходите сразу к интересующим вас темам.",
+			"tags": "Теги",
+			"tagsDescription": "Небольшие темы, проходящие через разные категории.",
+			"allPosts": "Все статьи",
+			"allPostsDescription": "Всё, что мы опубликовали, сначала новые.",
+			"viewAll": "Смотреть все",
+			"readAlso": "Читайте также",
+			"exploreCategories": "Исследуйте категории",
+			"exploreAllCategories": "Все категории",
+			"breadcrumbHome": "Главная",
+			"breadcrumbCategories": "Категории",
+			"breadcrumbTags": "Теги",
+			"stats": {
+				"posts": "статья | статей",
+				"categories": "категория | категорий",
+				"tags": "тег | тегов",
+				"uses": "использование | использований"
 			}
 		},
 		"errorPage": {

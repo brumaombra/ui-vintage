@@ -108,6 +108,27 @@
 				"telegram": "分享到 Telegram",
 				"copy": "复制链接",
 				"copied": "链接已复制"
+			},
+			"latestPosts": "最新文章",
+			"latestPostsDescription": "编辑精选的文章。",
+			"categories": "分类",
+			"categoriesDescription": "直接跳转到你关心的主题。",
+			"tags": "标签",
+			"tagsDescription": "贯穿各个分类的小主题。",
+			"allPosts": "全部文章",
+			"allPostsDescription": "我们发布的所有内容，最新的在前。",
+			"viewAll": "查看全部",
+			"readAlso": "延伸阅读",
+			"exploreCategories": "浏览分类",
+			"exploreAllCategories": "浏览全部分类",
+			"breadcrumbHome": "首页",
+			"breadcrumbCategories": "分类",
+			"breadcrumbTags": "标签",
+			"stats": {
+				"posts": "篇文章",
+				"categories": "个分类",
+				"tags": "个标签",
+				"uses": "次使用"
 			}
 		},
 		"errorPage": {
