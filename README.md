@@ -140,7 +140,7 @@ if (confirmed) {
 
 ### Build a layout
 
-Shells own the layout and responsive behavior; your app owns the navigation data and the content:
+Shells own the layout and responsive behavior; your app owns the navigation data and the content. Links take plain paths (`to: '/settings'`): the components render `NuxtLinkLocale`, which adds the current language prefix and navigates client-side, and leaves external URLs as they are:
 
 ```vue
 <script setup>
@@ -151,8 +151,8 @@ const sidebarSections = [{
     id: 'workspace',
     label: 'Workspace',
     items: [
-        { id: 'overview', label: 'Overview', href: '/', active: true },
-        { id: 'settings', label: 'Settings', href: '/settings' }
+        { id: 'overview', label: 'Overview', to: '/', active: true },
+        { id: 'settings', label: 'Settings', to: '/settings' }
     ]
 }];
 </script>
@@ -402,7 +402,7 @@ New entry points need an export in `package.json` and a description and category
 - Nuxt 4 and Vue 3.5 or newer.
 - Tailwind CSS v4 with `@tailwindcss/vite` registered in `vite.plugins`.
 - `@hugeicons/core-free-icons` 4.3 or newer and `@hugeicons/vue` 1 (the icons you pass to `:icon` props, and the ones the components render). Import each icon from its own module, as in the example above: the package barrel makes the build parse the whole icon set.
-- `vue-i18n` 9, 10, or 11 with an i18n setup, such as `@nuxtjs/i18n` (the components call `useI18n()`).
+- `@nuxtjs/i18n` 10 (the components call `useI18n()`, and every link renders `NuxtLinkLocale`).
 - `@nuxt/image` 2 for image components (the module installs it when needed).
 - `@nuxt/content` 3, only for the `blog` and `content` components.
 
@@ -411,7 +411,7 @@ New entry points need an export in `package.json` and a description and category
 - **Components can't resolve Nuxt imports:** check that the app runs Nuxt 4 and that `@brumaombra/ui-vintage` is registered in `nuxt.config`.
 - **Styles are missing:** register the module once, add `tailwindcss()` from `@tailwindcss/vite` to `vite.plugins`, and restart the dev server after changing `nuxt.config`.
 - **`NuxtImg` is unavailable:** install `@nuxt/image`, or let the module install it during setup.
-- **`useI18n` errors or missing translations:** register `@nuxtjs/i18n` (or install Vue I18n yourself); the components need an i18n composer, and the library messages are merged into it.
+- **`useI18n` errors, missing translations, or `NuxtLinkLocale` failing to resolve:** register `@nuxtjs/i18n`; the components need its composer and link component, and the library messages are merged into it.
 - **An import fails:** use the public subpath from `package.json`, such as `@brumaombra/ui-vintage/button`, never an internal `src/` path.
 
 ## License

@@ -64,7 +64,7 @@ export const entries = {
 	},
 	'text-link': {
 		category: 'actions',
-		description: 'Inline text link that renders an anchor or a router link component (pass `NuxtLink` as `link-component`).'
+		description: 'Inline text link for an internal path (localized with `NuxtLinkLocale`) or an external URL.'
 	},
 	'load-more-button': {
 		category: 'actions',
@@ -504,9 +504,9 @@ setBusy(false);`
 
 	'dashboard-shell': {
 		category: 'layout',
-		description: 'Complete dashboard layout: collapsible sidebar built from `sidebar-sections`, mobile sheet, sticky topbar, and grid background. Pass `NuxtLink` as `sidebar-link-component` for client-side navigation.',
+		description: 'Complete dashboard layout: collapsible sidebar built from `sidebar-sections`, mobile sheet, sticky topbar, and grid background. Item `to` paths are localized and navigate client-side (`NuxtLinkLocale`).',
 		example: `
-<DashboardShell title="Projects" :sidebar-sections="sections" :sidebar-link-component="NuxtLink">
+<DashboardShell title="Projects" :sidebar-sections="sections">
     <template #topbar-trailing>
         <ThemeSelector />
     </template>

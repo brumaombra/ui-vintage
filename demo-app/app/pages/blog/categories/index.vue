@@ -10,7 +10,7 @@ const route = useRoute();
 // Fetch blog categories data
 const { data: categories } = await useAsyncData(`blog-categories-${locale.value}`, async () => {
 	const posts = await queryCollection('blog').select('categorySlug', 'categoryText', 'image').where('language', '=', locale.value).order('datePublished', 'DESC').all();
-	return buildCategoriesFromPosts(posts, category => localePath(`/blog/categories/${category}`));
+	return buildCategoriesFromPosts(posts);
 });
 
 // Define SEO metadata

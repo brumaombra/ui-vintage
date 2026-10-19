@@ -112,10 +112,10 @@ onUnmounted(() => {
 		<div class="relative h-[28rem] w-full md:h-[32rem]">
 			<div v-for="(post, index) in props.featuredPosts" :id="`${slideIdPrefix}-${index}`" :key="post.path || post.title || index" role="group" aria-roledescription="slide" :aria-label="`${index + 1} / ${slideCount}`" :aria-hidden="currentSlide !== index" :inert="currentSlide !== index || undefined" :class="cn('absolute inset-0 transition-[opacity,scale] duration-700 ease-out-expo', currentSlide === index ? 'z-10 scale-100 opacity-100' : 'z-0 scale-[1.02] opacity-0')">
 				<!-- Slide image with a slow zoom -->
-				<NuxtLink :to="post.path" tabindex="-1" aria-hidden="true" class="absolute inset-0 overflow-hidden">
+				<NuxtLinkLocale :to="post.path" tabindex="-1" aria-hidden="true" class="absolute inset-0 overflow-hidden">
 					<NuxtImg v-if="post.image" :src="post.image" :alt="post.title" width="1200" height="640" format="avif" quality="45" :sizes="{ 480: '480px', 1536: '1152px' }" :loading="index === 0 ? 'eager' : 'lazy'" :fetchpriority="index === 0 ? 'high' : 'auto'" :preload="index === 0" :class="cn('size-full object-cover', currentSlide === index && 'animate-uv-ken-burns')" />
 					<div v-else class="size-full bg-[radial-gradient(circle_at_20%_20%,color-mix(in_oklab,var(--primary)_45%,transparent),transparent_60%)] bg-surface" />
-				</NuxtLink>
+				</NuxtLinkLocale>
 
 				<!-- Legibility shade -->
 				<div aria-hidden="true" class="pointer-events-none absolute inset-0 bg-linear-to-t from-black/90 via-black/45 to-black/5" />
@@ -124,16 +124,16 @@ onUnmounted(() => {
 				<!-- Slide content (replays its entrance every time the slide becomes active) -->
 				<div class="absolute inset-x-0 bottom-0 flex flex-col gap-4 p-6 pb-20 text-white md:max-w-3xl md:p-10 md:pb-24">
 					<!-- Category badge -->
-					<NuxtLink v-if="post.categoryText && post.categoryPath" :to="post.categoryPath" :class="cn('w-fit', currentSlide === index && 'animate-uv-fade-up')">
+					<NuxtLinkLocale v-if="post.categoryText && post.categoryPath" :to="post.categoryPath" :class="cn('w-fit', currentSlide === index && 'animate-uv-fade-up')">
 						<Badge :text="post.categoryText" pulse class="border-white/25 bg-white/15 text-white backdrop-blur-md transition-colors hover:bg-white/25" />
-					</NuxtLink>
+					</NuxtLinkLocale>
 
 					<!-- Title -->
-					<NuxtLink :to="post.path" :class="cn('outline-none', currentSlide === index && 'animate-uv-fade-up [animation-delay:90ms]')">
+					<NuxtLinkLocale :to="post.path" :class="cn('outline-none', currentSlide === index && 'animate-uv-fade-up [animation-delay:90ms]')">
 						<h3 class="line-clamp-3 text-2xl leading-tight font-bold tracking-tight text-balance drop-shadow-sm md:text-5xl">
 							{{ post.title }}
 						</h3>
-					</NuxtLink>
+					</NuxtLinkLocale>
 
 					<!-- Description -->
 					<p v-if="post.description" :class="cn('line-clamp-2 max-w-2xl text-xs leading-relaxed text-white/80 md:text-base', currentSlide === index && 'animate-uv-fade-up [animation-delay:180ms]')">
@@ -143,10 +143,10 @@ onUnmounted(() => {
 					<!-- Read post button -->
 					<div :class="cn(currentSlide === index && 'animate-uv-fade-up [animation-delay:260ms]')">
 						<Button as-child size="lg" class="group/cta">
-							<NuxtLink :to="post.path">
+							<NuxtLinkLocale :to="post.path">
 								{{ t('uiVintage.blog.goToPost') }}
 								<HugeiconsIcon :icon="ArrowRight01Icon" class="size-4 transition-[translate] duration-300 ease-spring group-hover/cta:translate-x-1" />
-							</NuxtLink>
+							</NuxtLinkLocale>
 						</Button>
 					</div>
 				</div>

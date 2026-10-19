@@ -33,6 +33,7 @@ Only build something new when no entry point fits, and compose it from library p
 - Icons are Hugeicons definitions: import each one from its own module (`import Rocket01Icon from '@hugeicons/core-free-icons/Rocket01Icon'`, never the `@hugeicons/core-free-icons` barrel, which makes the build parse the whole icon set) and pass them to `:icon` props, or render them with `HugeiconsIcon` from `@hugeicons/vue`. Both packages are peer dependencies, so the app must list them in its own `package.json`.
 - Form controls use `v-model`. Mark invalid fields with `aria-invalid` and show messages with `FieldError`.
 - Library strings are translated through vue-i18n (`uiVintage.*` keys). App copy belongs in the app's own locale files.
+- Pass links as plain paths (`to: '/settings'`, `app-link-to="/"`), never `localePath()` results: the components render `NuxtLinkLocale`, which adds the language prefix and navigates client-side. External URLs work in the same props. For your own link buttons, use `<Button as-child>` around a `NuxtLinkLocale`.
 
 ## 4. Check your work
 

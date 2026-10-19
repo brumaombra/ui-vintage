@@ -255,7 +255,7 @@ import { LoadMoreButton } from '@brumaombra/ui-vintage/load-more-button';
 
 ### `@brumaombra/ui-vintage/text-link`
 
-Inline text link that renders an anchor or a router link component (pass `NuxtLink` as `link-component`).
+Inline text link for an internal path (localized with `NuxtLinkLocale`) or an external URL.
 
 ```ts
 import { TextLink } from '@brumaombra/ui-vintage/text-link';
@@ -267,7 +267,6 @@ import { TextLink } from '@brumaombra/ui-vintage/text-link';
 | --- | --- | --- |
 | `to` *(required)* | `string` |  |
 | `text` *(required)* | `string` |  |
-| `linkComponent` | `Component \| string` | `'a'` |
 
 - **Emits:** `click` (event: MouseEvent).
 
@@ -3057,14 +3056,14 @@ import { BackgroundGrid } from '@brumaombra/ui-vintage/background-grid';
 
 ### `@brumaombra/ui-vintage/dashboard-shell`
 
-Complete dashboard layout: collapsible sidebar built from `sidebar-sections`, mobile sheet, sticky topbar, and grid background. Pass `NuxtLink` as `sidebar-link-component` for client-side navigation.
+Complete dashboard layout: collapsible sidebar built from `sidebar-sections`, mobile sheet, sticky topbar, and grid background. Item `to` paths are localized and navigate client-side (`NuxtLinkLocale`).
 
 ```ts
 import { DashboardShell } from '@brumaombra/ui-vintage/dashboard-shell';
 ```
 
 ```vue
-<DashboardShell title="Projects" :sidebar-sections="sections" :sidebar-link-component="NuxtLink">
+<DashboardShell title="Projects" :sidebar-sections="sections">
     <template #topbar-trailing>
         <ThemeSelector />
     </template>
@@ -3084,8 +3083,7 @@ import { DashboardShell } from '@brumaombra/ui-vintage/dashboard-shell';
 | `description` | `string` | `''` |
 | `collapsible` | `'offcanvas' \| 'icon' \| 'none'` | `'offcanvas'` |
 | `compact` | `boolean` | `false` |
-| `sidebarSections` | `Array<{ id: string; label?: string; items: Array<{ id: string; label: string; description?: string; icon?: HugeiconsIconDefinition \| null; href?: string; to?: unknown; active?: boolean; newTab?: boolean }> }>` | `[]` |
-| `sidebarLinkComponent` | `Component \| string` | `'a'` |
+| `sidebarSections` | `Array<{ id: string; label?: string; items: Array<{ id: string; label: string; description?: string; icon?: HugeiconsIconDefinition \| null; to: string; active?: boolean; newTab?: boolean }> }>` | `[]` |
 | `showBackground` | `boolean` | `true` |
 | `insetClass` | `HTMLAttributes['class']` |  |
 | `topbarClass` | `HTMLAttributes['class']` |  |
@@ -3178,7 +3176,6 @@ import type { LandingFooterLink, LandingFooterSection } from '@brumaombra/ui-vin
 | `logoClass` | `HTMLAttributes['class']` |  |
 | `appDescription` | `string` | `''` |
 | `sections` | `LandingFooterSection[]` | `[]` |
-| `linkComponent` | `Component \| string` | `'a'` |
 | `authorName` | `string` | `''` |
 | `authorLink` | `string` | `''` |
 | `year` | `number` | `new Date().getFullYear()` |
@@ -3196,8 +3193,7 @@ import type { LandingFooterLink, LandingFooterSection } from '@brumaombra/ui-vin
 interface LandingFooterLink {
     id: string;
     label: string;
-    href?: string;
-    to?: unknown;
+    to: string;
     newTab?: boolean;
 }
 interface LandingFooterSection {
@@ -3244,7 +3240,6 @@ import type { LandingFooterLink, LandingFooterSection } from '@brumaombra/ui-vin
 | `logoClass` | `HTMLAttributes['class']` |  |
 | `appDescription` | `string` | `''` |
 | `sections` | `LandingFooterSection[]` | `[]` |
-| `linkComponent` | `Component \| string` | `'a'` |
 | `authorName` | `string` | `''` |
 | `authorLink` | `string` | `''` |
 | `year` | `number` | `new Date().getFullYear()` |
@@ -3262,8 +3257,7 @@ import type { LandingFooterLink, LandingFooterSection } from '@brumaombra/ui-vin
 interface LandingFooterLink {
     id: string;
     label: string;
-    href?: string;
-    to?: unknown;
+    to: string;
     newTab?: boolean;
 }
 interface LandingFooterSection {
@@ -3684,7 +3678,7 @@ import type { BlogPostData, BlogCategoryData, BlogTagData } from '@brumaombra/ui
 ```ts
 function slugify(value: unknown)
 function normalizeContentPath(path: string)
-function buildCategoriesFromPosts(posts: BlogPostData[], getPath: (slug: string) => string): BlogCategoryData[]
+function buildCategoriesFromPosts(posts: BlogPostData[], getPath: (slug: string) => string = slug => `/blog/categories/${slug}`): BlogCategoryData[]
 function buildTagsFromPosts(posts: BlogPostData[]): BlogTagData[]
 function sortByStableSeed(items: T[], seed: string, getKey: (item: T) => string)
 interface BlogPostData {

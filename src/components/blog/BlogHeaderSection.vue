@@ -81,7 +81,7 @@ const underlineDelay = computed(() => `${beforeWords.value.length * 55 + 600}ms`
 <template>
 	<header :class="cn('relative flex flex-col gap-6 pt-6 md:pt-12', alignClass.header)">
 		<!-- Announcement (links to something new, such as the latest post) -->
-		<NuxtLink v-if="props.announcement" :to="props.announcement.to" class="group/announce max-w-full animate-uv-fade-up rounded outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45">
+		<NuxtLinkLocale v-if="props.announcement" :to="props.announcement.to" class="group/announce max-w-full animate-uv-fade-up rounded outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45">
 			<span class="inline-flex max-w-full items-center gap-2 rounded border border-warning/35 bg-warning/10 px-3 py-1 text-xs text-foreground transition-colors duration-150 group-hover/announce:border-warning/70">
 				<span aria-hidden="true" class="relative flex size-1.5 shrink-0 text-warning">
 					<span class="absolute inline-flex size-full animate-uv-ping-soft rounded-full bg-current opacity-60" />
@@ -91,7 +91,7 @@ const underlineDelay = computed(() => `${beforeWords.value.length * 55 + 600}ms`
 				<span class="truncate opacity-80">{{ props.announcement.text }}</span>
 				<HugeiconsIcon :icon="ArrowRight01Icon" class="size-3.5 shrink-0 transition-transform duration-300 ease-spring group-hover/announce:translate-x-0.5" />
 			</span>
-		</NuxtLink>
+		</NuxtLinkLocale>
 
 		<!-- Badges -->
 		<div v-if="props.badges.length > 0" :class="cn('flex flex-wrap gap-2', alignClass.row)">

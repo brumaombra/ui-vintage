@@ -6,10 +6,8 @@ import { Button } from '@brumaombra/ui-vintage/button';
 import { LandingContent, LandingFooter, LandingNavbar, LandingShell } from '@brumaombra/ui-vintage/landing';
 import { LanguageSelector } from '@brumaombra/ui-vintage/language-selector';
 import { ThemeSelector } from '@brumaombra/ui-vintage/theme-selector';
-import { NuxtLink } from '#components';
 
 const { t, locale, locales, setLocale } = useI18n();
-const localePath = useLocalePath();
 const route = useRoute();
 
 // Show reading progress on individual blog posts only
@@ -27,15 +25,15 @@ const footerSections = computed(() => [{
 	links: [{
 		id: 'blog',
 		label: t('blog.allPosts'),
-		to: localePath('/blog')
+		to: '/blog'
 	}, {
 		id: 'categories',
 		label: t('navigation.breadcrumbs.categories'),
-		to: localePath('/blog/categories')
+		to: '/blog/categories'
 	}, {
 		id: 'tags',
 		label: t('navigation.breadcrumbs.tags'),
-		to: localePath('/blog/tags')
+		to: '/blog/tags'
 	}]
 }, {
 	id: 'library',
@@ -43,15 +41,15 @@ const footerSections = computed(() => [{
 	links: [{
 		id: 'overview',
 		label: t('navigation.overview'),
-		to: localePath('/')
+		to: '/'
 	}, {
 		id: 'components',
 		label: t('navigation.components'),
-		to: localePath('/components/actions')
+		to: '/components/actions'
 	}, {
 		id: 'foundations',
 		label: t('navigation.foundations'),
-		to: localePath('/foundations')
+		to: '/foundations'
 	}, {
 		id: 'github',
 		label: 'GitHub',
@@ -73,7 +71,7 @@ const handleSelectLanguage = async language => {
 			<LandingNavbar :show-progress="showBlogProgress">
 				<!-- Brand (same mark as the component docs) -->
 				<template #left>
-					<NuxtLink :to="localePath('/blog')" class="group/brand flex items-center gap-3 rounded outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45">
+					<NuxtLinkLocale to="/blog" class="group/brand flex items-center gap-3 rounded outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45">
 						<span class="flex size-9 items-center justify-center rounded bg-primary text-sm font-semibold text-primary-foreground">
 							UV
 						</span>
@@ -81,17 +79,17 @@ const handleSelectLanguage = async language => {
 							<span class="text-sm font-semibold tracking-tight">UI Vintage</span>
 							<span class="text-[11px] text-muted-foreground">{{ t('navigation.breadcrumbs.blog') }}</span>
 						</span>
-					</NuxtLink>
+					</NuxtLinkLocale>
 				</template>
 
 				<!-- Right side -->
 				<template #right>
 					<!-- Back to the component docs -->
 					<Button variant="secondary" size="sm" as-child class="hidden sm:inline-flex">
-						<NuxtLink :to="localePath('/')">
+						<NuxtLinkLocale to="/">
 							<HugeiconsIcon :icon="DashboardSquare01Icon" />
 							{{ t('navigation.components') }}
-						</NuxtLink>
+						</NuxtLinkLocale>
 					</Button>
 
 					<!-- Language selector -->
@@ -115,10 +113,9 @@ const handleSelectLanguage = async language => {
 			<LandingFooter app-name="UI Vintage"
 				app-logo="/logo.svg"
 				app-logo-dark="/logo-dark.svg"
-				:app-link-to="localePath('/blog')"
+				app-link-to="/blog"
 				:app-description="t('blog.footerDescription')"
 				:sections="footerSections"
-				:link-component="NuxtLink"
 				author-name="Bruma"
 				author-link="https://brumaombra.com" />
 		</template>

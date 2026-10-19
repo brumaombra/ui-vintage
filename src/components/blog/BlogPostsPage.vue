@@ -7,7 +7,7 @@ import BlogHeaderSection from './BlogHeaderSection.vue';
 import BlogPageBreadcrumbs from './BlogPageBreadcrumbs.vue';
 import PostsList from './PostsList.vue';
 
-// Props (the posts of a category or a tag, their paths already localized)
+// Props (the posts of a category or a tag, the links localize their paths)
 const props = withDefaults(defineProps<{
 	section: 'categories' | 'tags';
 	title: string;

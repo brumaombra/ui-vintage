@@ -43,6 +43,11 @@ describe('buildCategoriesFromPosts', () => {
 			{ name: 'News', slug: 'news', path: '/it/blog/categories/news', count: 1, image: '/news.jpg' }
 		]);
 	});
+
+	// Without a path builder the cards link to the blog category pages (localized by the links)
+	it('links the categories to the blog category pages by default', () => {
+		expect(buildCategoriesFromPosts(posts).map(category => category.path)).toEqual(['/blog/categories/guides', '/blog/categories/news']);
+	});
 });
 
 // Tags: one badge per slug, counting how many posts use it

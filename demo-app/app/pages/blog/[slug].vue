@@ -34,7 +34,7 @@ const { data: relatedPosts } = await useAsyncData(`related-posts-${slug}-${local
 const { data: relatedCategories } = await useAsyncData(`related-categories-${slug}-${locale.value}`, async () => {
 	// Get all posts excluding current post's category
 	const posts = await queryCollection('blog').select('categorySlug', 'categoryText', 'image').where('language', '=', locale.value).where('categorySlug', '<>', post.value?.categorySlug).order('datePublished', 'DESC').all();
-	const categories = buildCategoriesFromPosts(posts || [], category => localePath(`/blog/categories/${category}`));
+	const categories = buildCategoriesFromPosts(posts || []);
 
 	// Return 4 categories in a stable order for this post
 	return sortByStableSeed(categories, relatedSeed, category => category.slug || category.name).slice(0, 4);

@@ -2,16 +2,16 @@
 import { NuxtImg } from '#components';
 import FavouriteIcon from '@hugeicons/core-free-icons/FavouriteIcon';
 import { HugeiconsIcon } from '@hugeicons/vue';
-import { computed, type Component, type HTMLAttributes } from 'vue';
+import { computed, type HTMLAttributes } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { cn } from '../../../lib/utils';
 import type { HeadingLevel } from '../../../lib/common-types';
 
+// Footer link (the path is localized by the link, external URLs work too)
 export interface LandingFooterLink {
 	id: string;
 	label: string;
-	href?: string;
-	to?: unknown;
+	to: string;
 	newTab?: boolean;
 }
 
@@ -30,7 +30,6 @@ const props = withDefaults(defineProps<{
 	logoClass?: HTMLAttributes['class'];
 	appDescription?: string;
 	sections?: LandingFooterSection[];
-	linkComponent?: Component | string;
 	authorName?: string;
 	authorLink?: string;
 	year?: number;
@@ -45,7 +44,6 @@ const props = withDefaults(defineProps<{
 	appLinkTo: '/',
 	appDescription: '',
 	sections: () => [],
-	linkComponent: 'a',
 	authorName: '',
 	authorLink: '',
 	year: () => new Date().getFullYear(),
@@ -57,22 +55,11 @@ const { t } = useI18n();
 const logoAlt = computed(() => props.appName ? t('uiVintage.common.logo', { name: props.appName }) : t('uiVintage.common.home'));
 const hasSingleSection = computed(() => props.sections.length === 1);
 
-// Get link props based on the type of link component and whether the link should open in a new tab
+// Get the link props (new tab links open in a separate, unlinked tab)
 const getLinkProps = (link: LandingFooterLink) => {
-	const sharedProps = link.newTab ? { target: '_blank', rel: 'noopener noreferrer' } : {};
-
-	// If the link component is an anchor, use href. Otherwise, use to for router links.
-	if (props.linkComponent === 'a') {
-		return {
-			href: link.href ?? '#',
-			...sharedProps
-		};
-	}
-
-	// For non-anchor link components, assume they use a "to" prop (like Vue Router's <RouterLink>).
 	return {
-		to: link.to ?? link.href ?? '/',
-		...sharedProps
+		to: link.to,
+		...(link.newTab ? { target: '_blank', rel: 'noopener noreferrer' } : {})
 	};
 };
 
@@ -88,14 +75,14 @@ const hasDarkLogo = computed(() => darkLogo.value !== lightLogo.value);
 			<div :class="cn('flex flex-col gap-8 md:flex-row md:items-start md:justify-between')">
 				<!-- Brand section -->
 				<div :class="cn('max-w-md flex-1', props.brandClass)">
-					<!-- App logo and name -->
-					<a :href="props.appLinkTo" class="mb-4 inline-flex items-center gap-2 text-lg font-semibold tracking-tight text-foreground transition-opacity duration-150 hover:opacity-80">
+					<!-- App logo and name (home link, the path is localized) -->
+					<NuxtLinkLocale :to="props.appLinkTo" class="mb-4 inline-flex items-center gap-2 text-lg font-semibold tracking-tight text-foreground transition-opacity duration-150 hover:opacity-80">
 						<template v-if="lightLogo">
 							<NuxtImg :src="lightLogo" :alt="logoAlt" width="32" height="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="lazy" decoding="async" :class="cn('size-8 shrink-0 object-contain', hasDarkLogo && 'dark:hidden', props.logoClass)" />
 							<NuxtImg v-if="hasDarkLogo" :src="darkLogo" :alt="logoAlt" width="32" height="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="lazy" decoding="async" :class="cn('hidden size-8 shrink-0 object-contain dark:block', props.logoClass)" />
 						</template>
 						<span>{{ props.appName }}</span>
-					</a>
+					</NuxtLinkLocale>
 
 					<!-- App description -->
 					<p v-if="props.appDescription" class="max-w-sm text-xs md:text-sm leading-relaxed text-muted-foreground">
@@ -114,9 +101,9 @@ const hasDarkLogo = computed(() => darkLogo.value !== lightLogo.value);
 						<!-- Section links -->
 						<ul class="space-y-3 text-xs sm:text-sm">
 							<li v-for="link in props.sections[0]?.links" :key="link.id">
-								<component :is="props.linkComponent" v-bind="getLinkProps(link)" class="bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_1px] bg-left-bottom bg-no-repeat text-muted-foreground transition-[color,background-size] duration-300 ease-out-expo hover:bg-[length:100%_1px] hover:text-primary">
+								<NuxtLinkLocale v-bind="getLinkProps(link)" class="bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_1px] bg-left-bottom bg-no-repeat text-muted-foreground transition-[color,background-size] duration-300 ease-out-expo hover:bg-[length:100%_1px] hover:text-primary">
 									{{ link.label }}
-								</component>
+								</NuxtLinkLocale>
 							</li>
 						</ul>
 					</div>
@@ -133,9 +120,9 @@ const hasDarkLogo = computed(() => darkLogo.value !== lightLogo.value);
 						<!-- Section links -->
 						<ul class="space-y-3 text-xs sm:text-sm">
 							<li v-for="link in section.links" :key="link.id">
-								<component :is="props.linkComponent" v-bind="getLinkProps(link)" class="bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_1px] bg-left-bottom bg-no-repeat text-muted-foreground transition-[color,background-size] duration-300 ease-out-expo hover:bg-[length:100%_1px] hover:text-primary">
+								<NuxtLinkLocale v-bind="getLinkProps(link)" class="bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_1px] bg-left-bottom bg-no-repeat text-muted-foreground transition-[color,background-size] duration-300 ease-out-expo hover:bg-[length:100%_1px] hover:text-primary">
 									{{ link.label }}
-								</component>
+								</NuxtLinkLocale>
 							</li>
 						</ul>
 					</div>

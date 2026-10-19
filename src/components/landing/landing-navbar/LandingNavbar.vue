@@ -64,7 +64,8 @@ const logoAlt = computed(() => props.appName ? t('uiVintage.common.logo', { name
 				<!-- Left-aligned content -->
 				<div :class="cn('flex items-center', props.leftClass)">
 					<slot name="left">
-						<a v-if="lightLogo || props.appName" :href="props.appLinkTo" class="inline-flex items-center gap-2 transition-opacity duration-150 hover:opacity-80">
+						<!-- Home link (the path is localized) -->
+						<NuxtLinkLocale v-if="lightLogo || props.appName" :to="props.appLinkTo" class="inline-flex items-center gap-2 transition-opacity duration-150 hover:opacity-80">
 							<!-- App logo -->
 							<template v-if="lightLogo">
 								<NuxtImg :src="lightLogo" :alt="logoAlt" width="44" height="44" :sizes="{ 320: '44px', 640: '36px' }" loading="eager" fetchpriority="high" :class="cn('size-11 sm:size-9 shrink-0 object-contain', hasDarkLogo && 'dark:hidden', props.logoClass)" />
@@ -75,7 +76,7 @@ const logoAlt = computed(() => props.appName ? t('uiVintage.common.logo', { name
 							<span v-if="props.appName" class="hidden sm:inline! text-xl font-semibold tracking-tight text-foreground">
 								{{ props.appName }}
 							</span>
-						</a>
+						</NuxtLinkLocale>
 					</slot>
 				</div>
 

@@ -12,14 +12,6 @@ const currentPage = ref(1);
 const postsPerPage = 9;
 const isLoading = ref(false);
 
-// Map post links to include localized paths
-const mapPostLinks = posts => {
-	return posts.map(post => ({
-		...post,
-		path: localePath(post.path)
-	}));
-};
-
 // Keep posts whose tags match the current tag slug
 const filterPostsByTag = posts => {
 	return posts.filter(post => (post.tags || []).some(tag => slugify(tag) === slug));
@@ -34,7 +26,7 @@ const { data: tagData } = await useAsyncData(`tag-${slug}-${locale.value}-posts`
 
 		return {
 			tagTitle: matchingTag || slug,
-			posts: mapPostLinks(matchingPosts.slice(0, postsPerPage)),
+			posts: matchingPosts.slice(0, postsPerPage),
 			totalPosts: matchingPosts.length
 		};
 	} catch (error) {
@@ -64,7 +56,7 @@ const loadMorePosts = async () => {
 	try {
 		currentPage.value++;
 		const allPosts = await queryCollection('blog').select('title', 'description', 'image', 'categoryText', 'path', 'tags').where('language', '=', locale.value).order('datePublished', 'DESC').all();
-		const matchingPosts = mapPostLinks(filterPostsByTag(allPosts));
+		const matchingPosts = filterPostsByTag(allPosts);
 		const nextPosts = matchingPosts.slice(0, currentPage.value * postsPerPage);
 
 		posts.value = nextPosts;

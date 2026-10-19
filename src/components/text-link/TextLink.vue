@@ -1,28 +1,14 @@
 <script setup lang="ts">
-import type { Component } from 'vue';
-
-// Props
-const props = withDefaults(defineProps<{
+// Props (the path is localized by the link, external URLs work too)
+const props = defineProps<{
 	to: string;
 	text: string;
-	linkComponent?: Component | string;
-}>(), {
-	linkComponent: 'a'
-});
+}>();
 
 // Emits
 const emits = defineEmits<{
 	click: [event: MouseEvent];
 }>();
-
-// Get link props based on the type of link component
-const getLinkProps = () => {
-	if (props.linkComponent === 'a') {
-		return { href: props.to };
-	} else {
-		return { to: props.to };
-	}
-};
 
 // Handle click
 const handleClick = (event: MouseEvent) => {
@@ -31,7 +17,7 @@ const handleClick = (event: MouseEvent) => {
 </script>
 
 <template>
-	<component :is="props.linkComponent" v-bind="getLinkProps()" class="cursor-pointer font-semibold text-foreground hover:underline" @click="handleClick">
+	<NuxtLinkLocale :to="props.to" class="cursor-pointer font-semibold text-foreground hover:underline" @click="handleClick">
 		{{ props.text }}
-	</component>
+	</NuxtLinkLocale>
 </template>

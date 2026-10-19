@@ -59,7 +59,7 @@ describe('DashboardShell', () => {
 
 	// Screen readers hear which navigation link is the current page
 	it('marks the active link as the current page', async () => {
-		const sidebarSections = [{ id: 'main', label: 'Main', items: [{ id: 'home', label: 'Home', href: '/home', active: true }, { id: 'settings', label: 'Settings', href: '/settings' }] }];
+		const sidebarSections = [{ id: 'main', label: 'Main', items: [{ id: 'home', label: 'Home', to: '/home', active: true }, { id: 'settings', label: 'Settings', to: '/settings' }] }];
 		const wrapper = await mountSuspended(DashboardShell, { props: { appName: 'Acme', sidebarSections } });
 		expect(wrapper.find('a[href="/home"]').attributes('aria-current')).toBe('page');
 		expect(wrapper.find('a[href="/settings"]').attributes('aria-current')).toBeUndefined();

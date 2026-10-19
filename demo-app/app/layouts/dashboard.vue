@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import { NuxtLink } from '#components';
 import Search01Icon from '@hugeicons/core-free-icons/Search01Icon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Button } from '@brumaombra/ui-vintage/button';
@@ -13,7 +12,6 @@ import DemoCommandPalette from '~/components/demo/DemoCommandPalette.vue';
 import { demoNavigation, findDemoPage } from '~/utils/demo-navigation';
 
 const route = useRoute();
-const localePath = useLocalePath();
 const { locale, locales, setLocale } = useI18n();
 const languageOptions = computed(() => locales.value.map(language => language.code));
 const paletteOpen = useState('demo-palette-open', () => false);
@@ -37,7 +35,7 @@ const sidebarSections = computed(() => demoNavigation.map(group => ({
 		label: page.label,
 		description: page.description,
 		icon: page.icon,
-		to: localePath(page.to),
+		to: page.to,
 		active: currentPage.value?.id === page.id
 	}))
 })));
@@ -50,10 +48,10 @@ const handleSelectLanguage = async (language: string) => {
 
 <template>
 	<TooltipProvider>
-		<DashboardShell :title="currentPage?.label ?? 'UI Vintage'" :description="currentPage?.description ?? ''" :sidebar-sections="sidebarSections" :sidebar-link-component="NuxtLink" compact>
+		<DashboardShell :title="currentPage?.label ?? 'UI Vintage'" :description="currentPage?.description ?? ''" :sidebar-sections="sidebarSections" compact>
 			<!-- Brand -->
 			<template #sidebar-header>
-				<NuxtLink :to="localePath('/')" class="group/brand flex items-center gap-3 px-1">
+				<NuxtLinkLocale to="/" class="group/brand flex items-center gap-3 px-1">
 					<span class="flex size-9 items-center justify-center rounded bg-primary text-sm font-semibold text-primary-foreground">
 						UV
 					</span>
@@ -61,7 +59,7 @@ const handleSelectLanguage = async (language: string) => {
 						<span class="text-sm font-semibold tracking-tight">UI Vintage</span>
 						<span class="text-[11px] text-muted-foreground">Nuxt component library</span>
 					</span>
-				</NuxtLink>
+				</NuxtLinkLocale>
 			</template>
 
 			<!-- Search trigger -->

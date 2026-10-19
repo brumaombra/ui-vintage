@@ -2,7 +2,7 @@
 import { NuxtImg } from '#components';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import type { Component, HTMLAttributes } from 'vue';
+import type { HTMLAttributes } from 'vue';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import BackgroundGrid from '../background-grid/BackgroundGrid.vue';
 import { ThemeSelector } from '../theme-selector';
@@ -11,7 +11,7 @@ import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupConte
 import { cn } from '../../lib/utils';
 import type { HugeiconsIconDefinition } from '../../lib/common-types';
 
-// Props
+// Props (item and home paths are localized by the links, external URLs work too)
 const props = withDefaults(defineProps<{
 	appName?: string;
 	appLogo?: string;
@@ -29,13 +29,11 @@ const props = withDefaults(defineProps<{
 			label: string;
 			description?: string;
 			icon?: HugeiconsIconDefinition | null;
-			href?: string;
-			to?: unknown;
+			to: string;
 			active?: boolean;
 			newTab?: boolean;
 		}>;
 	}>;
-	sidebarLinkComponent?: Component | string;
 	showBackground?: boolean;
 	insetClass?: HTMLAttributes['class'];
 	topbarClass?: HTMLAttributes['class'];
@@ -50,26 +48,14 @@ const props = withDefaults(defineProps<{
 	collapsible: 'offcanvas',
 	compact: false,
 	sidebarSections: () => [],
-	sidebarLinkComponent: 'a',
 	showBackground: true
 });
 
-// Resolve link props for sidebar items
+// Get the link props of a sidebar item (new tab links open in a separate, unlinked tab)
 const getSidebarItemLinkProps = (item: NonNullable<typeof props.sidebarSections>[number]['items'][number]) => {
-	const sharedProps = item.newTab ? { target: '_blank', rel: 'noopener noreferrer' } : {};
-
-	// If the link component is an anchor, use href. Otherwise, use to for router links.
-	if (props.sidebarLinkComponent === 'a') {
-		return {
-			href: item.href ?? '#',
-			...sharedProps
-		};
-	}
-
-	// For non-anchor link components, assume they use a "to" prop (like Vue Router's <RouterLink>).
 	return {
-		to: item.to ?? item.href ?? '/',
-		...sharedProps
+		to: item.to,
+		...(item.newTab ? { target: '_blank', rel: 'noopener noreferrer' } : {})
 	};
 };
 
@@ -93,8 +79,9 @@ const logoAlt = computed(() => props.appName ? t('uiVintage.common.logo', { name
 				<slot name="sidebar-header">
 					<SidebarMenu>
 						<SidebarMenuItem>
+							<!-- Home link (the path is localized) -->
 							<SidebarMenuButton as-child size="lg">
-								<a :href="props.appLinkTo" class="inline-flex items-center gap-2">
+								<NuxtLinkLocale :to="props.appLinkTo" class="inline-flex items-center gap-2">
 									<div class="inline-flex items-center gap-2">
 										<!-- App logo -->
 										<template v-if="lightLogo">
@@ -105,7 +92,7 @@ const logoAlt = computed(() => props.appName ? t('uiVintage.common.logo', { name
 										<!-- App name -->
 										<span v-if="props.appName" class="text-xl font-semibold tracking-tight text-foreground">{{ props.appName }}</span>
 									</div>
-								</a>
+								</NuxtLinkLocale>
 							</SidebarMenuButton>
 						</SidebarMenuItem>
 					</SidebarMenu>
@@ -125,7 +112,7 @@ const logoAlt = computed(() => props.appName ? t('uiVintage.common.logo', { name
 						<SidebarMenu :class="cn('gap-1', props.compact && 'gap-0.5')">
 							<SidebarMenuItem v-for="item in section.items" :key="item.id">
 								<SidebarMenuButton as-child :is-active="item.active" :class="cn('group/nav relative h-auto min-h-11 overflow-hidden rounded px-3 py-2.5 text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground data-[active=true]:bg-primary/10 data-[active=true]:text-foreground sm:px-3.5', 'before:absolute before:inset-y-2 before:left-0 before:w-0.5 before:origin-center before:scale-y-0 before:bg-primary before:transition-transform before:duration-300 before:ease-spring data-[active=true]:before:scale-y-100', item.description ? 'items-start' : 'items-center')">
-									<component :is="props.sidebarLinkComponent" v-bind="getSidebarItemLinkProps(item)" :aria-current="item.active ? 'page' : undefined">
+									<NuxtLinkLocale v-bind="getSidebarItemLinkProps(item)" :aria-current="item.active ? 'page' : undefined">
 										<!-- Icon -->
 										<HugeiconsIcon v-if="item.icon" :icon="item.icon" :stroke-width="1.8" :class="cn('shrink-0 opacity-90 transition-[opacity,color] duration-150 group-hover/nav:opacity-100 group-data-[active=true]/nav:text-primary', item.description ? 'mt-0.5 size-5 sm:h-5 sm:w-5' : 'size-5 self-center sm:h-6 sm:w-6')" />
 
@@ -139,7 +126,7 @@ const logoAlt = computed(() => props.appName ? t('uiVintage.common.logo', { name
 												{{ item.description }}
 											</span>
 										</div>
-									</component>
+									</NuxtLinkLocale>
 								</SidebarMenuButton>
 							</SidebarMenuItem>
 						</SidebarMenu>

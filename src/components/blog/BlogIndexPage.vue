@@ -13,14 +13,14 @@ import BlogViewAllLink from './BlogViewAllLink.vue';
 import CategoriesSection from './CategoriesSection.vue';
 import HeaderCarousel from './HeaderCarousel.vue';
 
-// Post shown in the carousel and in the list (paths already localized)
+// Post shown in the carousel and in the list (the links localize the paths)
 type BlogListPost = {
 	path: string;
 	title: string;
 	description?: string;
 	image?: string;
 	categoryText?: string;
-	categoryPath?: string;
+	categorySlug?: string;
 };
 
 // Props
@@ -57,6 +57,12 @@ const emit = defineEmits<{
 
 const { t } = useI18n();
 
+// Featured posts with the link to their category page
+const carouselPosts = computed(() => props.featuredPosts.map(post => ({
+	...post,
+	categoryPath: post.categorySlug ? `/blog/categories/${post.categorySlug}` : undefined
+})));
+
 // Announce the latest post in the header
 const headerAnnouncement = computed(() => props.featuredPosts[0] ? { text: props.featuredPosts[0].title, to: props.featuredPosts[0].path } : null);
 
@@ -80,7 +86,7 @@ const headerStats = computed(() => [
 		<!-- Header carousel -->
 		<section>
 			<BlogSectionTitle :title="t('uiVintage.blog.latestPosts')" :description="t('uiVintage.blog.latestPostsDescription')" />
-			<HeaderCarousel :featured-posts="props.featuredPosts" />
+			<HeaderCarousel :featured-posts="carouselPosts" />
 		</section>
 
 		<!-- Categories section -->

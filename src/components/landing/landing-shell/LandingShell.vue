@@ -23,7 +23,8 @@ const hasStructuredSlots = computed(() => {
 </script>
 
 <template>
-	<div :class="cn('relative flex min-h-screen flex-col bg-background text-foreground', props.rootClass)">
+	<!-- Clip the horizontal overflow of decorations (glows, marquees), so the page never scrolls sideways on mobile -->
+	<div :class="cn('relative flex min-h-screen flex-col overflow-x-clip bg-background text-foreground', props.rootClass)">
 		<!-- Background grid -->
 		<BackgroundGrid v-if="props.showBackground" />
 

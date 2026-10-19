@@ -11,15 +11,6 @@ const currentPage = ref(1);
 const postsPerPage = 9;
 const isLoading = ref(false);
 
-// Map post links to include localized paths
-const mapPostLinks = posts => {
-	return posts.map(post => ({
-		...post,
-		path: localePath(post.path),
-		categoryPath: post.categorySlug ? localePath(`/blog/categories/${post.categorySlug}`) : undefined
-	}));
-};
-
 // Fetch blog index data
 const { data: blogIndexData } = await useAsyncData(`blog-index-${locale.value}`, async () => {
 	try {
@@ -34,10 +25,10 @@ const { data: blogIndexData } = await useAsyncData(`blog-index-${locale.value}`,
 
 		// Return the data
 		return {
-			featuredPosts: mapPostLinks(featuredPosts),
-			initialPosts: mapPostLinks(initialPosts),
+			featuredPosts,
+			initialPosts,
 			totalPosts,
-			categories: buildCategoriesFromPosts(categoryPosts, category => localePath(`/blog/categories/${category}`)),
+			categories: buildCategoriesFromPosts(categoryPosts),
 			tags: buildTagsFromPosts(tagPosts)
 		};
 	} catch (error) {
@@ -72,7 +63,7 @@ const loadMorePosts = async () => {
 		}
 
 		// Append new posts and update pagination state
-		posts.value = [...posts.value, ...mapPostLinks(morePosts)];
+		posts.value = [...posts.value, ...morePosts];
 		hasMorePosts.value = posts.value.length < totalPosts;
 	} catch (error) {
 		console.error('Error loading more blog posts:', error);

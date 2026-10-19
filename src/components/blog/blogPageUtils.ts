@@ -38,8 +38,8 @@ export const slugify = (value: unknown) => {
 // Remove the trailing slashes of a route path, since content paths never have one ("/blog/post/" -> "/blog/post")
 export const normalizeContentPath = (path: string) => path.replace(/(.)\/+$/, '$1');
 
-// Build the unique categories of the posts, with their post count and the image of their first post
-export const buildCategoriesFromPosts = (posts: BlogPostData[], getPath: (slug: string) => string): BlogCategoryData[] => {
+// Build the unique categories of the posts, with their post count and the image of their first post (the path is the blog category page by default)
+export const buildCategoriesFromPosts = (posts: BlogPostData[], getPath: (slug: string) => string = slug => `/blog/categories/${slug}`): BlogCategoryData[] => {
 	const categoriesList = posts.map(post => post.categorySlug);
 	const uniqueCategories = categoriesList.filter((category, index, self): category is string => !!category && self.indexOf(category) === index);
 
