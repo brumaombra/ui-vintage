@@ -62,12 +62,24 @@ git push --follow-tags
 
 `npm version` updates `package.json` and `package-lock.json`, commits them, and creates the `vX.Y.Z` tag. Replace `patch` only if the user asked for `minor` or `major`. `git push --follow-tags` pushes the commit and the tag, which starts the automatic publish flow below.
 
+### Without pushing a tag (manual run)
+
+Where tags can't be pushed (for example from a cloud session, whose git access only allows branch pushes), commit the version without a tag and start the workflow by hand:
+
+```bash
+npm version patch --no-git-tag-version
+git commit -am "X.Y.Z"
+git push
+```
+
+Then run the `Test and publish npm package` workflow on the release branch (GitHub: Actions > Run workflow, or the GitHub API `workflow_dispatch`). It reads the version from `package.json`, refuses to run if the `vX.Y.Z` tag or the npm version already exists, and pushes the tag itself once the package is published.
+
 ## 4. Automatic publish flow
 
-The GitHub Actions workflow in `.github/workflows/publish-npm.yml` runs when you push a tag like `v0.1.1`. It has two jobs:
+The GitHub Actions workflow in `.github/workflows/publish-npm.yml` runs when you push a tag like `v0.1.1`, or when it is started by hand (see the manual run above). It has two jobs:
 
 1. `test`: installs the library and the demo app with `npm ci`, runs `npm run typecheck`, checks that `COMPONENTS.md` is up to date with `npm run docs:components:check`, and runs `npm test`
-2. `publish` (only after `test` passes): installs with `npm ci`, verifies the tag matches `package.json`, inspects the tarball with `npm pack --dry-run`, publishes to npm, and creates a GitHub Release
+2. `publish` (only after `test` passes): installs with `npm ci`, verifies the tag matches `package.json` (or, for a manual run, that the version is new), inspects the tarball with `npm pack --dry-run`, publishes to npm, pushes the version tag (manual runs only), and creates a GitHub Release
 
 For trusted publishing, configure npm to trust this GitHub repository before using the workflow.
 

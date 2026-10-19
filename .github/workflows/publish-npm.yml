@@ -6,6 +6,9 @@ on:
     tags:
       - 'v*'
 
+  # Test, publish, and tag the version in package.json when started by hand (Actions > Run workflow, on the branch to release)
+  workflow_dispatch:
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -54,7 +57,7 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
 
-    # Grant the permissions needed to mint an OIDC token for npm trusted publishing and create a GitHub Release from the pushed version tag
+    # Grant the permissions needed to mint an OIDC token for npm trusted publishing, push the version tag of a manual run, and create a GitHub Release
     permissions:
       contents: write
       id-token: write
@@ -78,13 +81,40 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # Ensure the pushed tag matches the version declared in package.json
-      - name: Validate tag version
+      # Resolve the release tag: the pushed tag, or the package.json version for a manual run
+      - name: Resolve release tag
+        id: release
         run: |
           PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          if [ "$GITHUB_EVENT_NAME" = "push" ]; then
+            TAG="$GITHUB_REF_NAME"
+          else
+            TAG="v$PACKAGE_VERSION"
+          fi
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "version=$PACKAGE_VERSION" >> "$GITHUB_OUTPUT"
+
+      # Ensure the pushed tag matches the version declared in package.json
+      - name: Validate tag version
+        if: github.event_name == 'push'
+        run: |
           TAG_VERSION="${GITHUB_REF_NAME#v}"
-          if [ "$PACKAGE_VERSION" != "$TAG_VERSION" ]; then
-            echo "Tag version ($TAG_VERSION) does not match package.json version ($PACKAGE_VERSION)."
+          if [ "${{ steps.release.outputs.version }}" != "$TAG_VERSION" ]; then
+            echo "Tag version ($TAG_VERSION) does not match package.json version (${{ steps.release.outputs.version }})."
+            exit 1
+          fi
+
+      # Ensure a manual run releases a new version (no existing tag, not on npm yet)
+      - name: Check the version is new
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          TAG="${{ steps.release.outputs.tag }}"
+          if git rev-parse -q --verify "refs/tags/$TAG" > /dev/null; then
+            echo "Tag $TAG already exists: bump the version in package.json first."
+            exit 1
+          fi
+          if npm view "@brumaombra/ui-vintage@${{ steps.release.outputs.version }}" version > /dev/null 2>&1; then
+            echo "Version ${{ steps.release.outputs.version }} is already on npm: bump the version in package.json first."
             exit 1
           fi
 
@@ -96,10 +126,19 @@ jobs:
       - name: Publish to npm
         run: npm publish --access public --provenance
 
+      # Tag the released commit for a manual run, only once the package is published (a failed publish leaves no tag behind)
+      - name: Push version tag
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a "${{ steps.release.outputs.tag }}" -m "${{ steps.release.outputs.version }}"
+          git push origin "${{ steps.release.outputs.tag }}"
+
       # Create a GitHub Release for the same tag with generated release notes
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.ref_name }}
-          name: ${{ github.ref_name }}
+          tag_name: ${{ steps.release.outputs.tag }}
+          name: ${{ steps.release.outputs.tag }}
           generate_release_notes: true
