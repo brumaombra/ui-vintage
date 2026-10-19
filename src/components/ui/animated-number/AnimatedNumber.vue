@@ -95,8 +95,9 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
+	<!-- The server and the browser can format the same number differently (e.g. Node writes "1000" and Chrome "1.000" in Italian, their locale data differ), so a text mismatch is expected and the browser's formatting wins -->
 	<span data-slot="animated-number" :data-direction="direction ?? undefined" :class="cn('inline-block tabular-nums', props.class)">
-		<span aria-hidden="true">{{ formattedValue }}</span>
-		<span class="sr-only">{{ accessibleValue }}</span>
+		<span aria-hidden="true" data-allow-mismatch="text">{{ formattedValue }}</span>
+		<span class="sr-only" data-allow-mismatch="text">{{ accessibleValue }}</span>
 	</span>
 </template>
