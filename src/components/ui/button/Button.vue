@@ -25,15 +25,25 @@ const props = withDefaults(defineProps<PrimitiveProps & {
 // Disabled or loading: the button can't be pressed (or followed, for a navigation button)
 const isInactive = computed(() => props.disabled || props.loading);
 
-// Element to render: a localized link for navigation buttons (a plain span while inactive, so it can't be followed), otherwise the as element
+// Same-page anchor (like #setup): a plain link, since there is no route to localize
+const isAnchor = computed(() => !!props.to?.startsWith('#'));
+
+// Element to render: a localized link for navigation buttons (a plain anchor for same-page links, a span while inactive so it can't be followed), otherwise the as element
 const element = computed(() => {
 	if (!props.to) return props.as;
-	return isInactive.value ? 'span' : NuxtLinkLocale;
+	if (isInactive.value) return 'span';
+	return isAnchor.value ? 'a' : NuxtLinkLocale;
+});
+
+// Link attribute for the rendered element (href for a plain anchor, to for the localized link)
+const linkAttributes = computed(() => {
+	if (!props.to || isInactive.value) return {};
+	return isAnchor.value ? { href: props.to } : { to: props.to };
 });
 </script>
 
 <template>
-	<Primitive data-slot="button" :data-variant="variant" :data-size="size" :data-loading="props.loading ? '' : undefined" :aria-busy="props.loading || undefined" :disabled="(!props.to && isInactive) || undefined" :aria-disabled="(props.to && isInactive) || undefined" :to="props.to && !isInactive ? props.to : undefined" :as="element" :as-child="asChild" :class="cn(buttonVariants({ variant, size }), props.class)">
+	<Primitive data-slot="button" :data-variant="variant" :data-size="size" :data-loading="props.loading ? '' : undefined" :aria-busy="props.loading || undefined" :disabled="(!props.to && isInactive) || undefined" :aria-disabled="(props.to && isInactive) || undefined" v-bind="linkAttributes" :as="element" :as-child="asChild" :class="cn(buttonVariants({ variant, size }), props.class)">
 		<!-- As-child buttons delegate rendering to the slotted element -->
 		<slot v-if="asChild" />
 

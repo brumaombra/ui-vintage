@@ -30,6 +30,12 @@ describe('Button with to', () => {
 		expect(link.attributes('target')).toBe('_blank');
 	});
 
+	// Same-page anchors have no route to localize, so they stay plain links
+	it('renders a same-page anchor as a plain link', async () => {
+		const wrapper = await mountSuspended(Button, { props: { to: '#setup' }, slots: { default: () => 'Start' } });
+		expect(wrapper.find('a').attributes('href')).toBe('#setup');
+	});
+
 	// A disabled navigation button can't be followed
 	it('renders a disabled navigation button without a link', async () => {
 		const wrapper = await mountSuspended(Button, { props: { to: '/blog', disabled: true }, slots: { default: () => 'Blog' } });
