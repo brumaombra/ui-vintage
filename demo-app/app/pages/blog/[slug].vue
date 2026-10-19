@@ -1,4 +1,5 @@
 <script setup>
+import { useI18n } from 'vue-i18n';
 import { BlogPostPage, buildCategoriesFromPosts, normalizeContentPath, sortByStableSeed } from '@brumaombra/ui-vintage/blog';
 import { createSEOMetatags, createPageSchema, SITE_URL } from '~/composables/useUtils.js';
 import BlogPostCta from '~/components/blog/BlogPostCta.vue';

@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { BlogPostsPage, slugify } from '@brumaombra/ui-vintage/blog';
 import { createSEOMetatags, createPageSchema } from '~/composables/useUtils.js';
 

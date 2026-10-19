@@ -1,4 +1,5 @@
 <script setup>
+import { useI18n } from 'vue-i18n';
 import { BlogCategoriesPage, buildCategoriesFromPosts } from '@brumaombra/ui-vintage/blog';
 import { createSEOMetatags, createPageSchema } from '~/composables/useUtils.js';
 
