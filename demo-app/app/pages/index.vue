@@ -137,11 +137,9 @@ onMounted(() => {
 
 			<!-- Actions -->
 			<div class="flex animate-uv-fade-up flex-col gap-3 [animation-delay:240ms] sm:flex-row">
-				<Button size="lg" as-child>
-					<NuxtLinkLocale to="/components/actions">
-						Browse components
-						<HugeiconsIcon :icon="ArrowRight01Icon" />
-					</NuxtLinkLocale>
+				<Button to="/components/actions" size="lg">
+					Browse components
+					<HugeiconsIcon :icon="ArrowRight01Icon" />
 				</Button>
 				<Button variant="secondary" size="lg" @click="paletteOpen = true">
 					<HugeiconsIcon :icon="Search01Icon" />

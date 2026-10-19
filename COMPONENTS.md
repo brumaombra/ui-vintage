@@ -31,7 +31,7 @@ Buttons, segmented controls, menus, and keyboard hints.
 
 ### `@brumaombra/ui-vintage/button`
 
-Button with primary, secondary, ghost, link, and tone variants. Spring press feedback and a `loading` state that keeps the width stable. Use `as-child` to render a link.
+Button with primary, secondary, ghost, link, and tone variants. Spring press feedback and a `loading` state that keeps the width stable. Give it a `to` to make it a navigation button (a localized link, external URLs work too).
 
 ```ts
 import { Button, buttonVariants } from '@brumaombra/ui-vintage/button';
@@ -44,8 +44,8 @@ import type { ButtonVariants } from '@brumaombra/ui-vintage/button';
     Save changes
 </Button>
 
-<Button as-child>
-    <NuxtLink to="/pricing">Pricing</NuxtLink>
+<Button to="/pricing" variant="secondary">
+    Pricing
 </Button>
 ```
 
@@ -57,6 +57,7 @@ import type { ButtonVariants } from '@brumaombra/ui-vintage/button';
 | `size` | `ButtonVariants['size']` |  |
 | `loading` | `boolean` | `false` |
 | `disabled` | `boolean` | `false` |
+| `to` | `string` |  |
 | `class` | `HTMLAttributes['class']` |  |
 
 - **Also accepts** all props of Reka `PrimitiveProps`.

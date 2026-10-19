@@ -86,11 +86,9 @@ const handleSelectLanguage = async language => {
 				<!-- Right side -->
 				<template #right>
 					<!-- Back to the component docs -->
-					<Button variant="secondary" size="sm" as-child class="hidden sm:inline-flex">
-						<NuxtLinkLocale to="/">
-							<HugeiconsIcon :icon="DashboardSquare01Icon" />
-							{{ t('navigation.components') }}
-						</NuxtLinkLocale>
+					<Button to="/" variant="secondary" size="sm" class="hidden sm:inline-flex">
+						<HugeiconsIcon :icon="DashboardSquare01Icon" />
+						{{ t('navigation.components') }}
 					</Button>
 
 					<!-- Language selector -->

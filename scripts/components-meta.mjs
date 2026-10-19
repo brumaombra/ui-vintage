@@ -18,15 +18,15 @@ export const entries = {
 
 	'button': {
 		category: 'actions',
-		description: 'Button with primary, secondary, ghost, link, and tone variants. Spring press feedback and a `loading` state that keeps the width stable. Use `as-child` to render a link.',
+		description: 'Button with primary, secondary, ghost, link, and tone variants. Spring press feedback and a `loading` state that keeps the width stable. Give it a `to` to make it a navigation button (a localized link, external URLs work too).',
 		example: `
 <Button variant="secondary" size="sm" :loading="saving" @click="save">
     <HugeiconsIcon :icon="SaveIcon" />
     Save changes
 </Button>
 
-<Button as-child>
-    <NuxtLink to="/pricing">Pricing</NuxtLink>
+<Button to="/pricing" variant="secondary">
+    Pricing
 </Button>`
 	},
 	'toggle-group': {

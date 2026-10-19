@@ -32,7 +32,7 @@ export const buttonVariants: (props?: ButtonVariants & ClassProp) => string = cv
 	[
 		"relative isolate inline-flex shrink-0 cursor-pointer select-none items-center justify-center gap-2 overflow-hidden whitespace-nowrap rounded text-xs font-semibold outline-none sm:text-sm",
 		"[transition:color_150ms,background-color_150ms,border-color_150ms,box-shadow_220ms,opacity_150ms,scale_380ms_var(--ease-spring)]",
-		"enabled:active:scale-[0.97] enabled:active:duration-75 disabled:pointer-events-none disabled:opacity-50 data-loading:cursor-wait data-loading:disabled:opacity-100",
+		"not-disabled:not-aria-disabled:active:scale-[0.97] not-disabled:not-aria-disabled:active:duration-75 disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-loading:cursor-wait data-loading:disabled:opacity-100 data-loading:aria-disabled:opacity-100",
 		"focus-visible:ring-[3px] focus-visible:ring-ring/45",
 		"aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40",
 		"[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
