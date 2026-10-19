@@ -4,12 +4,12 @@ import { cn } from '../../../lib/utils';
 
 // Props
 const props = defineProps<{
-    class?: HTMLAttributes['class'];
+	class?: HTMLAttributes['class'];
 }>();
 </script>
 
 <template>
-    <div data-slot="card-content" :class="cn('flex flex-col gap-4 px-6', props.class)">
-        <slot />
-    </div>
+	<div data-slot="card-content" :class="cn('flex flex-col gap-4 px-6', props.class)">
+		<slot />
+	</div>
 </template>

@@ -4,16 +4,16 @@ import { cn } from '../../../lib/utils';
 
 // Props
 const props = defineProps<{
-    class?: HTMLAttributes['class'];
+	class?: HTMLAttributes['class'];
 }>();
 </script>
 
 <template>
-    <tr data-slot="table-row" :class="cn(
-        'hover:bg-muted/50 data-[state=selected]:bg-muted border-b border-border transition-colors',
-        props.class
-    )
-        ">
-        <slot />
-    </tr>
+	<tr data-slot="table-row" :class="cn(
+		'hover:bg-muted/50 data-[state=selected]:bg-muted border-b border-border transition-colors',
+		props.class
+	)
+		">
+		<slot />
+	</tr>
 </template>

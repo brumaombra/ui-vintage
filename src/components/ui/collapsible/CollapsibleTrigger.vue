@@ -13,7 +13,7 @@ const forwardedProps = useForwardProps(delegatedProps);
 </script>
 
 <template>
-    <CollapsibleTrigger data-slot="collapsible-trigger" v-bind="forwardedProps" :class="cn(props.class)">
-        <slot />
-    </CollapsibleTrigger>
+	<CollapsibleTrigger data-slot="collapsible-trigger" v-bind="forwardedProps" :class="cn(props.class)">
+		<slot />
+	</CollapsibleTrigger>
 </template>

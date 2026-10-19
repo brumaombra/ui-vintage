@@ -7,7 +7,7 @@ import { cn } from '../../../lib/utils';
 import { useFieldControlId } from '../field/field-context';
 
 defineOptions({
-    inheritAttrs: false
+	inheritAttrs: false
 });
 
 // Props
@@ -24,9 +24,9 @@ const fieldControlId = useFieldControlId();
 </script>
 
 <template>
-    <ComboboxInput :id="fieldControlId" data-slot="combobox-input" v-bind="{ ...$attrs, ...forwarded }" :class="cn(
-        'h-9 min-w-16 flex-1 truncate bg-transparent font-semibold text-foreground outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed',
-        props.class
-    )
-        " />
+	<ComboboxInput :id="fieldControlId" data-slot="combobox-input" v-bind="{ ...$attrs, ...forwarded }" :class="cn(
+		'h-9 min-w-16 flex-1 truncate bg-transparent font-semibold text-foreground outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed',
+		props.class
+	)
+		" />
 </template>

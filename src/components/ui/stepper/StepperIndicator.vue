@@ -10,7 +10,7 @@ import { cn } from '../../../lib/utils';
 
 // Props
 const props = defineProps<StepperIndicatorProps & {
-    class?: HTMLAttributes['class'];
+	class?: HTMLAttributes['class'];
 }>();
 
 const delegatedProps = reactiveOmit(props, 'class');
@@ -21,21 +21,21 @@ const state = computed(() => itemContext.state.value);
 </script>
 
 <template>
-    <StepperIndicator v-slot="{ step }" data-slot="stepper-indicator" :data-state="state" v-bind="delegatedProps" :class="cn(
-        'relative inline-flex size-9 shrink-0 items-center justify-center rounded border border-border bg-card text-xs font-semibold text-muted-foreground tabular-nums',
-        '[transition:color_150ms,background-color_220ms,border-color_220ms,box-shadow_380ms_var(--ease-spring),transform_380ms_var(--ease-spring)]',
-        'group-hover/stepper-trigger:border-border-strong group-active/stepper-trigger:scale-95 group-active/stepper-trigger:duration-75',
-        'data-[state=active]:border-primary data-[state=active]:bg-primary/10 data-[state=active]:text-primary data-[state=active]:group-hover/stepper-trigger:border-primary',
-        'data-[state=completed]:border-primary data-[state=completed]:bg-primary data-[state=completed]:text-primary-foreground data-[state=completed]:group-hover/stepper-trigger:border-primary',
-        '[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*=\'size-\'])]:size-4',
-        props.class
-    )">
-        <slot :step="step" :state="state">
-            <!-- Completed check -->
-            <HugeiconsIcon v-if="state === 'completed'" :icon="Tick02Icon" class="size-4 animate-uv-pop" :stroke-width="2.5" />
+	<StepperIndicator v-slot="{ step }" data-slot="stepper-indicator" :data-state="state" v-bind="delegatedProps" :class="cn(
+		'relative inline-flex size-9 shrink-0 items-center justify-center rounded border border-border bg-card text-xs font-semibold text-muted-foreground tabular-nums',
+		'[transition:color_150ms,background-color_220ms,border-color_220ms,box-shadow_380ms_var(--ease-spring),transform_380ms_var(--ease-spring)]',
+		'group-hover/stepper-trigger:border-border-strong group-active/stepper-trigger:scale-95 group-active/stepper-trigger:duration-75',
+		'data-[state=active]:border-primary data-[state=active]:bg-primary/10 data-[state=active]:text-primary data-[state=active]:group-hover/stepper-trigger:border-primary',
+		'data-[state=completed]:border-primary data-[state=completed]:bg-primary data-[state=completed]:text-primary-foreground data-[state=completed]:group-hover/stepper-trigger:border-primary',
+		'[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*=\'size-\'])]:size-4',
+		props.class
+	)">
+		<slot :step="step" :state="state">
+			<!-- Completed check -->
+			<HugeiconsIcon v-if="state === 'completed'" :icon="Tick02Icon" class="size-4 animate-uv-pop" :stroke-width="2.5" />
 
-            <!-- Step number -->
-            <span v-else>{{ step }}</span>
-        </slot>
-    </StepperIndicator>
+			<!-- Step number -->
+			<span v-else>{{ step }}</span>
+		</slot>
+	</StepperIndicator>
 </template>

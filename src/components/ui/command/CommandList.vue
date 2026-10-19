@@ -20,13 +20,13 @@ const { t } = useI18n();
 </script>
 
 <template>
-    <ListboxContent data-slot="command-list" :aria-label="t('uiVintage.commandDialog.title')" v-bind="forwarded" :class="cn(
-        'max-h-75 scroll-py-1 overflow-x-hidden overflow-y-auto',
-        props.class,
-    )
-        ">
-        <div role="presentation">
-            <slot />
-        </div>
-    </ListboxContent>
+	<ListboxContent data-slot="command-list" :aria-label="t('uiVintage.commandDialog.title')" v-bind="forwarded" :class="cn(
+		'max-h-75 scroll-py-1 overflow-x-hidden overflow-y-auto',
+		props.class,
+	)
+		">
+		<div role="presentation">
+			<slot />
+		</div>
+	</ListboxContent>
 </template>

@@ -7,7 +7,7 @@ import { cn } from '../../../lib/utils';
 
 // Props
 const props = withDefaults(defineProps<ComboboxRootProps & { class?: HTMLAttributes['class'] }>(), {
-    openOnClick: true
+	openOnClick: true
 });
 
 // Emits
@@ -18,7 +18,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 </script>
 
 <template>
-    <ComboboxRoot v-slot="slotProps" data-slot="combobox" v-bind="forwarded" :class="cn('relative', props.class)">
-        <slot v-bind="slotProps" />
-    </ComboboxRoot>
+	<ComboboxRoot v-slot="slotProps" data-slot="combobox" v-bind="forwarded" :class="cn('relative', props.class)">
+		<slot v-bind="slotProps" />
+	</ComboboxRoot>
 </template>

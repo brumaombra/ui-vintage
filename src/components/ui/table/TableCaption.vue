@@ -4,12 +4,12 @@ import { cn } from '../../../lib/utils';
 
 // Props
 const props = defineProps<{
-    class?: HTMLAttributes['class'];
+	class?: HTMLAttributes['class'];
 }>();
 </script>
 
 <template>
-    <caption data-slot="table-caption" :class="cn('text-muted-foreground mt-4 text-sm', props.class)">
-        <slot />
-    </caption>
+	<caption data-slot="table-caption" :class="cn('text-muted-foreground mt-4 text-sm', props.class)">
+		<slot />
+	</caption>
 </template>

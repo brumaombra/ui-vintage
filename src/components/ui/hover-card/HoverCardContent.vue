@@ -6,14 +6,14 @@ import { HoverCardContent, HoverCardPortal, useForwardProps } from 'reka-ui';
 import { cn } from '../../../lib/utils';
 
 defineOptions({
-    inheritAttrs: false
+	inheritAttrs: false
 });
 
 // Props
 const props = withDefaults(defineProps<HoverCardContentProps & { class?: HTMLAttributes['class'] }>(), {
-    align: 'center',
-    sideOffset: 8,
-    collisionPadding: 8
+	align: 'center',
+	sideOffset: 8,
+	collisionPadding: 8
 });
 
 const delegatedProps = reactiveOmit(props, 'class');
@@ -21,13 +21,13 @@ const forwardedProps = useForwardProps(delegatedProps);
 </script>
 
 <template>
-    <HoverCardPortal>
-        <HoverCardContent data-slot="hover-card-content" v-bind="{ ...$attrs, ...forwardedProps }" :class="cn(
-            'uv-floating-motion bg-popover text-popover-foreground z-50 w-72 rounded border border-border p-4 text-sm shadow-elevated-lg outline-hidden',
-            props.class
-        )
-            ">
-            <slot />
-        </HoverCardContent>
-    </HoverCardPortal>
+	<HoverCardPortal>
+		<HoverCardContent data-slot="hover-card-content" v-bind="{ ...$attrs, ...forwardedProps }" :class="cn(
+			'uv-floating-motion bg-popover text-popover-foreground z-50 w-72 rounded border border-border p-4 text-sm shadow-elevated-lg outline-hidden',
+			props.class
+		)
+			">
+			<slot />
+		</HoverCardContent>
+	</HoverCardPortal>
 </template>

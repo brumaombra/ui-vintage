@@ -6,13 +6,13 @@ import { PopoverContent, PopoverPortal, useForwardPropsEmits } from 'reka-ui';
 import { cn } from '../../../lib/utils';
 
 defineOptions({
-    inheritAttrs: false
+	inheritAttrs: false
 });
 
 // Props
 const props = withDefaults(defineProps<PopoverContentProps & { class?: HTMLAttributes['class'] }>(), {
-    align: 'center',
-    sideOffset: 4
+	align: 'center',
+	sideOffset: 4
 });
 
 // Emits
@@ -24,13 +24,13 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 </script>
 
 <template>
-    <PopoverPortal>
-        <PopoverContent data-slot="popover-content" v-bind="{ ...$attrs, ...forwarded }" :class="cn(
-            'uv-floating-motion bg-popover text-popover-foreground z-50 w-72 rounded border border-border p-4 shadow-elevated-lg outline-hidden',
-            props.class
-        )
-            ">
-            <slot />
-        </PopoverContent>
-    </PopoverPortal>
+	<PopoverPortal>
+		<PopoverContent data-slot="popover-content" v-bind="{ ...$attrs, ...forwarded }" :class="cn(
+			'uv-floating-motion bg-popover text-popover-foreground z-50 w-72 rounded border border-border p-4 shadow-elevated-lg outline-hidden',
+			props.class
+		)
+			">
+			<slot />
+		</PopoverContent>
+	</PopoverPortal>
 </template>

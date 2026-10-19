@@ -7,14 +7,14 @@ import { cn } from '../../../lib/utils';
 
 // Props
 const props = defineProps<PaginationListProps & {
-    class?: HTMLAttributes['class'];
+	class?: HTMLAttributes['class'];
 }>();
 
 const delegatedProps = reactiveOmit(props, 'class');
 </script>
 
 <template>
-    <PaginationList v-slot="slotProps" data-slot="pagination-content" v-bind="delegatedProps" :class="cn('flex flex-row flex-wrap items-center justify-center gap-1.5', props.class)">
-        <slot v-bind="slotProps" />
-    </PaginationList>
+	<PaginationList v-slot="slotProps" data-slot="pagination-content" v-bind="delegatedProps" :class="cn('flex flex-row flex-wrap items-center justify-center gap-1.5', props.class)">
+		<slot v-bind="slotProps" />
+	</PaginationList>
 </template>

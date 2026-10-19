@@ -11,17 +11,17 @@ export type LanguageSelectorCode = string;
 
 // Props
 const props = withDefaults(defineProps<{
-    modelValue?: string;
-    languages?: LanguageSelectorCode[];
+	modelValue?: string;
+	languages?: LanguageSelectorCode[];
 }>(), {
-    modelValue: '',
-    languages: () => ['en', 'it']
+	modelValue: '',
+	languages: () => ['en', 'it']
 });
 
 // Emits
 const emits = defineEmits<{
-    'update:modelValue': [value: string];
-    select: [value: string];
+	'update:modelValue': [value: string];
+	select: [value: string];
 }>();
 
 const { locale, t } = useI18n();
@@ -29,15 +29,15 @@ const isOpen = ref(false);
 
 // Single source of truth for supported language codes, labels, and flag loaders
 const supportedLanguages = [
-    { code: 'en', label: 'English', loadFlag: () => import('../language-flag/flags/EnglishFlag.vue') },
-    { code: 'it', label: 'Italiano', loadFlag: () => import('../language-flag/flags/ItalianFlag.vue') },
-    { code: 'fr', label: 'Français', loadFlag: () => import('../language-flag/flags/FrenchFlag.vue') },
-    { code: 'es', label: 'Español', loadFlag: () => import('../language-flag/flags/SpanishFlag.vue') },
-    { code: 'de', label: 'Deutsch', loadFlag: () => import('../language-flag/flags/GermanFlag.vue') },
-    { code: 'pt', label: 'Português', loadFlag: () => import('../language-flag/flags/PortugueseFlag.vue') },
-    { code: 'zh', label: '中文', loadFlag: () => import('../language-flag/flags/ChineseFlag.vue') },
-    { code: 'ja', label: '日本語', loadFlag: () => import('../language-flag/flags/JapaneseFlag.vue') },
-    { code: 'ru', label: 'Русский', loadFlag: () => import('../language-flag/flags/RussianFlag.vue') }
+	{ code: 'en', label: 'English', loadFlag: () => import('../language-flag/flags/EnglishFlag.vue') },
+	{ code: 'it', label: 'Italiano', loadFlag: () => import('../language-flag/flags/ItalianFlag.vue') },
+	{ code: 'fr', label: 'Français', loadFlag: () => import('../language-flag/flags/FrenchFlag.vue') },
+	{ code: 'es', label: 'Español', loadFlag: () => import('../language-flag/flags/SpanishFlag.vue') },
+	{ code: 'de', label: 'Deutsch', loadFlag: () => import('../language-flag/flags/GermanFlag.vue') },
+	{ code: 'pt', label: 'Português', loadFlag: () => import('../language-flag/flags/PortugueseFlag.vue') },
+	{ code: 'zh', label: '中文', loadFlag: () => import('../language-flag/flags/ChineseFlag.vue') },
+	{ code: 'ja', label: '日本語', loadFlag: () => import('../language-flag/flags/JapaneseFlag.vue') },
+	{ code: 'ru', label: 'Русский', loadFlag: () => import('../language-flag/flags/RussianFlag.vue') }
 ] as const;
 
 type SupportedLanguage = (typeof supportedLanguages)[number];
@@ -46,31 +46,31 @@ const asyncFlagComponentCache = new Map<SupportedLanguageCode, Component>();
 
 // Type guard to ensure a code is one of the supported flag codes
 const isSupportedLanguageCode = (code: string): code is SupportedLanguageCode => {
-    return supportedLanguages.some((language) => language.code === code);
+	return supportedLanguages.some((language) => language.code === code);
 };
 
 // Get the supported language object for a given code
 const getSupportedLanguage = (code: SupportedLanguageCode) => {
-    return supportedLanguages.find((language) => language.code === code)!;
+	return supportedLanguages.find((language) => language.code === code)!;
 };
 
 // Load and cache the async component for a given supported language code
 const getAsyncFlagComponent = (code: SupportedLanguageCode) => {
-    // Check cache first
-    const cachedComponent = asyncFlagComponentCache.get(code);
-    if (cachedComponent) {
-        return cachedComponent;
-    }
+	// Check cache first
+	const cachedComponent = asyncFlagComponentCache.get(code);
+	if (cachedComponent) {
+		return cachedComponent;
+	}
 
-    // Load the async component and cache it
-    const asyncComponent = defineAsyncComponent(getSupportedLanguage(code).loadFlag);
-    asyncFlagComponentCache.set(code, asyncComponent);
-    return asyncComponent;
+	// Load the async component and cache it
+	const asyncComponent = defineAsyncComponent(getSupportedLanguage(code).loadFlag);
+	asyncFlagComponentCache.set(code, asyncComponent);
+	return asyncComponent;
 };
 
 // Build localized language labels from the provided language codes
 const languageDisplayNames = computed(() => {
-    return typeof Intl.DisplayNames === 'function' ? new Intl.DisplayNames([locale.value], { type: 'language' }) : null;
+	return typeof Intl.DisplayNames === 'function' ? new Intl.DisplayNames([locale.value], { type: 'language' }) : null;
 });
 
 // Base language of a code ('it-IT' and 'it_IT' become 'it')
@@ -78,84 +78,84 @@ const getBaseLanguageCode = (code: string) => code.toLowerCase().split(/[-_]/)[0
 
 // Supported flag code for a language code, including regional codes
 const getFlagCode = (code: string) => {
-    const languageCode = getBaseLanguageCode(code);
-    return isSupportedLanguageCode(languageCode) ? languageCode : null;
+	const languageCode = getBaseLanguageCode(code);
+	return isSupportedLanguageCode(languageCode) ? languageCode : null;
 };
 
 // Get the display label for a given language code
 const getLanguageLabel = (code: string) => {
-    const languageCode = getBaseLanguageCode(code);
-    const supportedLanguage = isSupportedLanguageCode(languageCode) ? getSupportedLanguage(languageCode) : null;
-    return supportedLanguage?.label || languageDisplayNames.value?.of(languageCode) || code.toUpperCase();
+	const languageCode = getBaseLanguageCode(code);
+	const supportedLanguage = isSupportedLanguageCode(languageCode) ? getSupportedLanguage(languageCode) : null;
+	return supportedLanguage?.label || languageDisplayNames.value?.of(languageCode) || code.toUpperCase();
 };
 
 // Normalize languages to pair each language code with its label
 const normalizedLanguages = computed(() => {
-    return props.languages.map(code => ({
-        code,
-        label: getLanguageLabel(code)
-    }));
+	return props.languages.map(code => ({
+		code,
+		label: getLanguageLabel(code)
+	}));
 });
 
 // Compute the available flag codes based on the provided language list
 const availableFlagCodes = computed<SupportedLanguageCode[]>(() => {
-    // Extract supported language codes from the normalized list
-    const supportedCodes = normalizedLanguages.value.map(language => getFlagCode(language.code)).filter((code): code is SupportedLanguageCode => code !== null);
-    if (supportedCodes.length > 0) {
-        return [...new Set(supportedCodes)];
-    }
+	// Extract supported language codes from the normalized list
+	const supportedCodes = normalizedLanguages.value.map(language => getFlagCode(language.code)).filter((code): code is SupportedLanguageCode => code !== null);
+	if (supportedCodes.length > 0) {
+		return [...new Set(supportedCodes)];
+	}
 
-    // If no valid codes are provided, default to English
-    return ['en'];
+	// If no valid codes are provided, default to English
+	return ['en'];
 });
 
 // Resolve the flag component for a specific code, falling back to the first available code
 const resolveFlagComponent = (code?: string) => {
-    const flagCode = code ? getFlagCode(code) : null;
-    const resolvedCode = flagCode && availableFlagCodes.value.includes(flagCode) ? flagCode : availableFlagCodes.value[0];
-    return getAsyncFlagComponent(resolvedCode);
+	const flagCode = code ? getFlagCode(code) : null;
+	const resolvedCode = flagCode && availableFlagCodes.value.includes(flagCode) ? flagCode : availableFlagCodes.value[0];
+	return getAsyncFlagComponent(resolvedCode);
 };
 
 // Get the currently selected language based on modelValue
 const currentLanguage = computed(() => {
-    return normalizedLanguages.value.find(language => language.code === props.modelValue) || normalizedLanguages.value[0] || null;
+	return normalizedLanguages.value.find(language => language.code === props.modelValue) || normalizedLanguages.value[0] || null;
 });
 
 // Resolve the async flag component for the currently selected language
 const currentFlagComponent = computed(() => {
-    return currentLanguage.value ? resolveFlagComponent(currentLanguage.value.code) : null;
+	return currentLanguage.value ? resolveFlagComponent(currentLanguage.value.code) : null;
 });
 
 // Handle language selection
 const handleSelectLanguage = (language: string) => {
-    emits('update:modelValue', language);
-    emits('select', language);
-    isOpen.value = false;
+	emits('update:modelValue', language);
+	emits('select', language);
+	isOpen.value = false;
 };
 </script>
 
 <template>
-    <Popover v-model:open="isOpen">
-        <!-- Trigger button showing the current language flag -->
-        <PopoverTrigger as-child>
-            <Button variant="secondary" size="icon" :aria-label="t('uiVintage.language.ariaLabel')">
-                <component :is="currentFlagComponent" v-if="currentFlagComponent" class="h-4 w-[1.35rem] rounded-[2px]" />
-            </Button>
-        </PopoverTrigger>
+	<Popover v-model:open="isOpen">
+		<!-- Trigger button showing the current language flag -->
+		<PopoverTrigger as-child>
+			<Button variant="secondary" size="icon" :aria-label="t('uiVintage.language.ariaLabel')">
+				<component :is="currentFlagComponent" v-if="currentFlagComponent" class="h-4 w-[1.35rem] rounded-[2px]" />
+			</Button>
+		</PopoverTrigger>
 
-        <!-- Popover content with language options -->
-        <PopoverContent side="bottom" align="end" :side-offset="8" class="w-44 p-0!">
-            <Command :model-value="props.modelValue">
-                <CommandList :aria-label="t('uiVintage.language.title')">
-                    <CommandGroup :heading="t('uiVintage.language.title')" stagger>
-                        <CommandItem v-for="option in normalizedLanguages" :key="option.code" :value="option.code" @select="handleSelectLanguage(option.code)">
-                            <component :is="resolveFlagComponent(option.code)" class="h-4 w-[1.35rem] rounded-[2px]" />
-                            <span class="flex-1">{{ option.label }}</span>
-                            <HugeiconsIcon :icon="Tick02Icon" class="ml-auto size-4 shrink-0" :class="props.modelValue === option.code ? 'opacity-100' : 'opacity-0'" />
-                        </CommandItem>
-                    </CommandGroup>
-                </CommandList>
-            </Command>
-        </PopoverContent>
-    </Popover>
+		<!-- Popover content with language options -->
+		<PopoverContent side="bottom" align="end" :side-offset="8" class="w-44 p-0!">
+			<Command :model-value="props.modelValue">
+				<CommandList :aria-label="t('uiVintage.language.title')">
+					<CommandGroup :heading="t('uiVintage.language.title')" stagger>
+						<CommandItem v-for="option in normalizedLanguages" :key="option.code" :value="option.code" @select="handleSelectLanguage(option.code)">
+							<component :is="resolveFlagComponent(option.code)" class="h-4 w-[1.35rem] rounded-[2px]" />
+							<span class="flex-1">{{ option.label }}</span>
+							<HugeiconsIcon :icon="Tick02Icon" class="ml-auto size-4 shrink-0" :class="props.modelValue === option.code ? 'opacity-100' : 'opacity-0'" />
+						</CommandItem>
+					</CommandGroup>
+				</CommandList>
+			</Command>
+		</PopoverContent>
+	</Popover>
 </template>

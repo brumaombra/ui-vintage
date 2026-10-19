@@ -3,20 +3,20 @@ import CategoriesList from './CategoriesList.vue';
 
 // Props
 const props = withDefaults(defineProps<{
-    categories?: Array<{
-        path: string;
-        slug?: string;
-        name: string;
-        image?: string;
-        count: number;
-    }>;
+	categories?: Array<{
+		path: string;
+		slug?: string;
+		name: string;
+		image?: string;
+		count: number;
+	}>;
 }>(), {
-    categories: () => []
+	categories: () => []
 });
 </script>
 
 <template>
-    <div>
-        <CategoriesList :categories="props.categories" />
-    </div>
+	<div>
+		<CategoriesList :categories="props.categories" />
+	</div>
 </template>

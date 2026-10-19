@@ -10,7 +10,7 @@ import { cn } from '../../../lib/utils';
 
 // Props
 const props = defineProps<PaginationEllipsisProps & {
-    class?: HTMLAttributes['class'];
+	class?: HTMLAttributes['class'];
 }>();
 
 const delegatedProps = reactiveOmit(props, 'class');
@@ -19,13 +19,13 @@ const { t } = useI18n();
 </script>
 
 <template>
-    <PaginationEllipsis data-slot="pagination-ellipsis" v-bind="delegatedProps" :class="cn('flex size-10 items-center justify-center text-muted-foreground', props.class)">
-        <!-- Default slot content -->
-        <slot>
-            <HugeiconsIcon :icon="MoreHorizontalIcon" class="size-4" aria-hidden="true" />
-        </slot>
+	<PaginationEllipsis data-slot="pagination-ellipsis" v-bind="delegatedProps" :class="cn('flex size-10 items-center justify-center text-muted-foreground', props.class)">
+		<!-- Default slot content -->
+		<slot>
+			<HugeiconsIcon :icon="MoreHorizontalIcon" class="size-4" aria-hidden="true" />
+		</slot>
 
-        <!-- Screen reader text for accessibility -->
-        <span class="sr-only">{{ t('uiVintage.pagination.more') }}</span>
-    </PaginationEllipsis>
+		<!-- Screen reader text for accessibility -->
+		<span class="sr-only">{{ t('uiVintage.pagination.more') }}</span>
+	</PaginationEllipsis>
 </template>

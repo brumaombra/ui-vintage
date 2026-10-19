@@ -1,187 +1,187 @@
 {
-    "uiVintage": {
-        "common": {
-            "breadcrumb": "Brotkrumennavigation",
-            "more": "Mehr",
-            "home": "Startseite",
-            "empty": {
-                "title": "Hier gibt es noch nichts",
-                "description": "Zurzeit gibt es keine Inhalte zum Anzeigen."
-            },
-            "loading": {
-                "title": "Wird geladen...",
-                "description": "Bitte warte einen Moment, wahrend wir die Inhalte laden."
-            },
-            "logo": "{name}-Logo"
-        },
-        "buttons": {
-            "remove": "Entfernen",
-            "all": "Alle",
-            "close": "Schliessen",
-            "cancel": "Abbrechen",
-            "delete": "Loschen",
-            "confirm": "Bestatigen",
-            "filter": "Filtern",
-            "search": "Suchen",
-            "apply": "Anwenden",
-            "clear": "Leeren",
-            "loading": "Ladt",
-            "loadMore": "Mehr laden",
-            "save": "Speichern",
-            "update": "Aktualisieren",
-            "goBack": "Zuruck"
-        },
-        "theme": {
-            "light": "Hell",
-            "dark": "Dunkel",
-            "auto": "Auto",
-            "title": "Thema wahlen",
-            "ariaLabel": "Themenauswahl"
-        },
-        "language": {
-            "title": "Sprache wahlen",
-            "ariaLabel": "Sprachauswahl"
-        },
-        "sidebar": {
-            "title": "Seitenleiste",
-            "description": "Zeigt die mobile Seitenleiste an.",
-            "toggle": "Seitenleiste umschalten"
-        },
-        "commandDialog": {
-            "title": "Befehlspalette",
-            "description": "Nach einem auszuführenden Befehl suchen..."
-        },
-        "datePicker": {
-            "placeholder": "Datum auswählen",
-            "month": "Monat",
-            "year": "Jahr",
-            "time": "Uhrzeit"
-        },
-        "terminal": {
-            "title": "Terminal",
-            "copy": "Befehle kopieren",
-            "copied": "Befehle kopiert"
-        },
-        "code": {
-            "title": "Code",
-            "copy": "Code kopieren",
-            "copied": "Code kopiert",
-            "position": "Zeile {line}, Spalte {column}",
-            "plainText": "Nur-Text"
-        },
-        "footer": {
-            "madeWith": "Gemacht mit",
-            "by": "von",
-            "allRightsReserved": "Alle Rechte vorbehalten."
-        },
-        "blog": {
-            "readingProgress": "Lesefortschritt",
-            "readMore": "Weiterlesen",
-            "goToPost": "Zum Beitrag",
-            "new": "Neu",
-            "tableOfContents": "Inhaltsverzeichnis",
-            "tableOfContentsDescription": "Zu einem Abschnitt dieses Artikels springen",
-            "tableOfContentsSections": "{count} Abschnitt | {count} Abschnitte",
-            "openTableOfContents": "Inhaltsverzeichnis offnen",
-            "closeTableOfContents": "Inhaltsverzeichnis schliessen",
-            "loadMoreWithNumbers": "Mehr laden ({current}/{total})",
-            "author": "Autor",
-            "publishedDate": "Veroffentlicht",
-            "lastUpdatedDate": "Aktualisiert",
-            "readingTime": "Lesezeit",
-            "readingTimeValue": "{minutes} Min.",
-            "category": "Kategorie",
-            "breadcrumbBlog": "Blog",
-            "carouselNavigation": "Karussellnavigation",
-            "goToSlide": "Zur Folie {index} wechseln",
-            "previousSlide": "Vorherige Folie",
-            "nextSlide": "Nachste Folie",
-            "faq": {
-                "title": "Haufig gestellte Fragen",
-                "description": "Finden Sie schnelle Antworten auf die haufigsten Fragen zu diesem Thema."
-            },
-            "share": {
-                "facebook": "Auf Facebook teilen",
-                "x": "Auf X teilen",
-                "whatsapp": "Auf WhatsApp teilen",
-                "linkedin": "Auf LinkedIn teilen",
-                "telegram": "Auf Telegram teilen",
-                "copy": "Link kopieren",
-                "copied": "Link kopiert"
-            }
-        },
-        "errorPage": {
-            "notFound": {
-                "title": "Seite nicht gefunden",
-                "message": "Die angeforderte Seite wurde nicht gefunden oder wurde möglicherweise verschoben."
-            },
-            "unexpected": {
-                "title": "Etwas ist schiefgelaufen",
-                "message": "Ein unerwarteter Fehler hat den aktuellen Ablauf unterbrochen. Bitte versuche es erneut oder gehe zu einer sicheren Seite zurück."
-            }
-        },
-        "messageDialog": {
-            "confirm": "Bestatigen",
-            "error": "Fehler",
-            "success": "Erfolg",
-            "info": "Information",
-            "warning": "Warnung"
-        },
-        "toast": {
-            "region": "Benachrichtigungen"
-        },
-        "cookieConsent": {
-            "region": "Cookie-Einwilligung",
-            "message": "Wir verwenden optionale Cookies, um zu verstehen, wie die Website genutzt wird. Sie werden nur gesetzt, wenn du zustimmst.",
-            "policy": "Cookie-Richtlinie",
-            "accept": "Akzeptieren",
-            "decline": "Ablehnen"
-        },
-        "dataTable": {
-            "selectAll": "Alle Zeilen auswählen",
-            "selectRow": "Zeile auswählen"
-        },
-        "numberField": {
-            "decrement": "Verringern",
-            "increment": "Erhöhen"
-        },
-        "tagsInput": {
-            "placeholder": "Tag hinzufügen…"
-        },
-        "combobox": {
-            "placeholder": "Option auswählen",
-            "searchPlaceholder": "Suchen...",
-            "empty": "Keine Ergebnisse gefunden."
-        },
-        "avatar": {
-            "status": {
-                "online": "Online",
-                "offline": "Offline",
-                "busy": "Beschäftigt",
-                "away": "Abwesend"
-            }
-        },
-        "pagination": {
-            "label": "Seitennavigation",
-            "page": "Seite {page}",
-            "first": "Erste Seite",
-            "previous": "Vorherige Seite",
-            "next": "Nächste Seite",
-            "last": "Letzte Seite",
-            "more": "Weitere Seiten"
-        },
-        "stepper": {
-            "label": "Fortschritt"
-        },
-        "fileDropzone": {
-            "title": "Dateien hierher ziehen",
-            "description": "oder klicken, um dein Gerät zu durchsuchen",
-            "dropActive": "Zum Hochladen loslassen",
-            "browse": "Dateien auswählen",
-            "remove": "{name} entfernen",
-            "maxSize": "Max. {size} pro Datei",
-            "maxFiles": "Bis zu {count} Dateien",
-            "files": "Ausgewählte Dateien"
-        }
-    }
+	"uiVintage": {
+		"common": {
+			"breadcrumb": "Brotkrumennavigation",
+			"more": "Mehr",
+			"home": "Startseite",
+			"empty": {
+				"title": "Hier gibt es noch nichts",
+				"description": "Zurzeit gibt es keine Inhalte zum Anzeigen."
+			},
+			"loading": {
+				"title": "Wird geladen...",
+				"description": "Bitte warte einen Moment, wahrend wir die Inhalte laden."
+			},
+			"logo": "{name}-Logo"
+		},
+		"buttons": {
+			"remove": "Entfernen",
+			"all": "Alle",
+			"close": "Schliessen",
+			"cancel": "Abbrechen",
+			"delete": "Loschen",
+			"confirm": "Bestatigen",
+			"filter": "Filtern",
+			"search": "Suchen",
+			"apply": "Anwenden",
+			"clear": "Leeren",
+			"loading": "Ladt",
+			"loadMore": "Mehr laden",
+			"save": "Speichern",
+			"update": "Aktualisieren",
+			"goBack": "Zuruck"
+		},
+		"theme": {
+			"light": "Hell",
+			"dark": "Dunkel",
+			"auto": "Auto",
+			"title": "Thema wahlen",
+			"ariaLabel": "Themenauswahl"
+		},
+		"language": {
+			"title": "Sprache wahlen",
+			"ariaLabel": "Sprachauswahl"
+		},
+		"sidebar": {
+			"title": "Seitenleiste",
+			"description": "Zeigt die mobile Seitenleiste an.",
+			"toggle": "Seitenleiste umschalten"
+		},
+		"commandDialog": {
+			"title": "Befehlspalette",
+			"description": "Nach einem auszuführenden Befehl suchen..."
+		},
+		"datePicker": {
+			"placeholder": "Datum auswählen",
+			"month": "Monat",
+			"year": "Jahr",
+			"time": "Uhrzeit"
+		},
+		"terminal": {
+			"title": "Terminal",
+			"copy": "Befehle kopieren",
+			"copied": "Befehle kopiert"
+		},
+		"code": {
+			"title": "Code",
+			"copy": "Code kopieren",
+			"copied": "Code kopiert",
+			"position": "Zeile {line}, Spalte {column}",
+			"plainText": "Nur-Text"
+		},
+		"footer": {
+			"madeWith": "Gemacht mit",
+			"by": "von",
+			"allRightsReserved": "Alle Rechte vorbehalten."
+		},
+		"blog": {
+			"readingProgress": "Lesefortschritt",
+			"readMore": "Weiterlesen",
+			"goToPost": "Zum Beitrag",
+			"new": "Neu",
+			"tableOfContents": "Inhaltsverzeichnis",
+			"tableOfContentsDescription": "Zu einem Abschnitt dieses Artikels springen",
+			"tableOfContentsSections": "{count} Abschnitt | {count} Abschnitte",
+			"openTableOfContents": "Inhaltsverzeichnis offnen",
+			"closeTableOfContents": "Inhaltsverzeichnis schliessen",
+			"loadMoreWithNumbers": "Mehr laden ({current}/{total})",
+			"author": "Autor",
+			"publishedDate": "Veroffentlicht",
+			"lastUpdatedDate": "Aktualisiert",
+			"readingTime": "Lesezeit",
+			"readingTimeValue": "{minutes} Min.",
+			"category": "Kategorie",
+			"breadcrumbBlog": "Blog",
+			"carouselNavigation": "Karussellnavigation",
+			"goToSlide": "Zur Folie {index} wechseln",
+			"previousSlide": "Vorherige Folie",
+			"nextSlide": "Nachste Folie",
+			"faq": {
+				"title": "Haufig gestellte Fragen",
+				"description": "Finden Sie schnelle Antworten auf die haufigsten Fragen zu diesem Thema."
+			},
+			"share": {
+				"facebook": "Auf Facebook teilen",
+				"x": "Auf X teilen",
+				"whatsapp": "Auf WhatsApp teilen",
+				"linkedin": "Auf LinkedIn teilen",
+				"telegram": "Auf Telegram teilen",
+				"copy": "Link kopieren",
+				"copied": "Link kopiert"
+			}
+		},
+		"errorPage": {
+			"notFound": {
+				"title": "Seite nicht gefunden",
+				"message": "Die angeforderte Seite wurde nicht gefunden oder wurde möglicherweise verschoben."
+			},
+			"unexpected": {
+				"title": "Etwas ist schiefgelaufen",
+				"message": "Ein unerwarteter Fehler hat den aktuellen Ablauf unterbrochen. Bitte versuche es erneut oder gehe zu einer sicheren Seite zurück."
+			}
+		},
+		"messageDialog": {
+			"confirm": "Bestatigen",
+			"error": "Fehler",
+			"success": "Erfolg",
+			"info": "Information",
+			"warning": "Warnung"
+		},
+		"toast": {
+			"region": "Benachrichtigungen"
+		},
+		"cookieConsent": {
+			"region": "Cookie-Einwilligung",
+			"message": "Wir verwenden optionale Cookies, um zu verstehen, wie die Website genutzt wird. Sie werden nur gesetzt, wenn du zustimmst.",
+			"policy": "Cookie-Richtlinie",
+			"accept": "Akzeptieren",
+			"decline": "Ablehnen"
+		},
+		"dataTable": {
+			"selectAll": "Alle Zeilen auswählen",
+			"selectRow": "Zeile auswählen"
+		},
+		"numberField": {
+			"decrement": "Verringern",
+			"increment": "Erhöhen"
+		},
+		"tagsInput": {
+			"placeholder": "Tag hinzufügen…"
+		},
+		"combobox": {
+			"placeholder": "Option auswählen",
+			"searchPlaceholder": "Suchen...",
+			"empty": "Keine Ergebnisse gefunden."
+		},
+		"avatar": {
+			"status": {
+				"online": "Online",
+				"offline": "Offline",
+				"busy": "Beschäftigt",
+				"away": "Abwesend"
+			}
+		},
+		"pagination": {
+			"label": "Seitennavigation",
+			"page": "Seite {page}",
+			"first": "Erste Seite",
+			"previous": "Vorherige Seite",
+			"next": "Nächste Seite",
+			"last": "Letzte Seite",
+			"more": "Weitere Seiten"
+		},
+		"stepper": {
+			"label": "Fortschritt"
+		},
+		"fileDropzone": {
+			"title": "Dateien hierher ziehen",
+			"description": "oder klicken, um dein Gerät zu durchsuchen",
+			"dropActive": "Zum Hochladen loslassen",
+			"browse": "Dateien auswählen",
+			"remove": "{name} entfernen",
+			"maxSize": "Max. {size} pro Datei",
+			"maxFiles": "Bis zu {count} Dateien",
+			"files": "Ausgewählte Dateien"
+		}
+	}
 }

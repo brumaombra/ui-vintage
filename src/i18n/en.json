@@ -1,187 +1,187 @@
 {
-    "uiVintage": {
-        "common": {
-            "breadcrumb": "Breadcrumb",
-            "more": "More",
-            "home": "Home",
-            "empty": {
-                "title": "Nothing here yet",
-                "description": "There is no content to show right now."
-            },
-            "loading": {
-                "title": "Loading...",
-                "description": "Please wait a moment while we load the content."
-            },
-            "logo": "{name} logo"
-        },
-        "buttons": {
-            "remove": "Remove",
-            "all": "All",
-            "close": "Close",
-            "cancel": "Cancel",
-            "delete": "Delete",
-            "confirm": "Confirm",
-            "filter": "Filter",
-            "search": "Search",
-            "apply": "Apply",
-            "clear": "Clear",
-            "loading": "Loading",
-            "loadMore": "Load more",
-            "save": "Save",
-            "update": "Update",
-            "goBack": "Go back"
-        },
-        "theme": {
-            "light": "Light",
-            "dark": "Dark",
-            "auto": "Auto",
-            "title": "Choose theme",
-            "ariaLabel": "Toggle theme selector"
-        },
-        "language": {
-            "title": "Choose language",
-            "ariaLabel": "Language selector"
-        },
-        "sidebar": {
-            "title": "Sidebar",
-            "description": "Displays the mobile sidebar.",
-            "toggle": "Toggle sidebar"
-        },
-        "commandDialog": {
-            "title": "Command palette",
-            "description": "Search for a command to run..."
-        },
-        "datePicker": {
-            "placeholder": "Pick a date",
-            "month": "Month",
-            "year": "Year",
-            "time": "Time"
-        },
-        "terminal": {
-            "title": "Terminal",
-            "copy": "Copy commands",
-            "copied": "Commands copied"
-        },
-        "code": {
-            "title": "Code",
-            "copy": "Copy code",
-            "copied": "Code copied",
-            "position": "Ln {line}, Col {column}",
-            "plainText": "Plain text"
-        },
-        "footer": {
-            "madeWith": "Made with",
-            "by": "by",
-            "allRightsReserved": "All rights reserved."
-        },
-        "blog": {
-            "readingProgress": "Reading progress",
-            "readMore": "Read more",
-            "goToPost": "Go to post",
-            "new": "New",
-            "tableOfContents": "Table of contents",
-            "tableOfContentsDescription": "Jump to a section of this article",
-            "tableOfContentsSections": "{count} section | {count} sections",
-            "openTableOfContents": "Open table of contents",
-            "closeTableOfContents": "Close table of contents",
-            "loadMoreWithNumbers": "Load more ({current}/{total})",
-            "author": "Author",
-            "publishedDate": "Published",
-            "lastUpdatedDate": "Updated",
-            "readingTime": "Reading time",
-            "readingTimeValue": "{minutes} min",
-            "category": "Category",
-            "breadcrumbBlog": "Blog",
-            "carouselNavigation": "Carousel navigation",
-            "goToSlide": "Go to slide {index}",
-            "previousSlide": "Previous slide",
-            "nextSlide": "Next slide",
-            "faq": {
-                "title": "Frequently asked questions",
-                "description": "Find quick answers to the most common questions about this topic."
-            },
-            "share": {
-                "facebook": "Share on Facebook",
-                "x": "Share on X",
-                "whatsapp": "Share on WhatsApp",
-                "linkedin": "Share on LinkedIn",
-                "telegram": "Share on Telegram",
-                "copy": "Copy link",
-                "copied": "Link copied"
-            }
-        },
-        "errorPage": {
-            "notFound": {
-                "title": "Page not found",
-                "message": "The page you requested could not be found or may have been moved."
-            },
-            "unexpected": {
-                "title": "Something went wrong",
-                "message": "An unexpected error interrupted the current flow. Please try again or go back to a safe page."
-            }
-        },
-        "messageDialog": {
-            "confirm": "Confirm",
-            "error": "Error",
-            "success": "Success",
-            "info": "Information",
-            "warning": "Warning"
-        },
-        "toast": {
-            "region": "Notifications"
-        },
-        "cookieConsent": {
-            "region": "Cookie consent",
-            "message": "We use optional cookies to understand how the site is used. They are only set if you accept.",
-            "policy": "Cookie policy",
-            "accept": "Accept",
-            "decline": "Decline"
-        },
-        "dataTable": {
-            "selectAll": "Select all rows",
-            "selectRow": "Select row"
-        },
-        "numberField": {
-            "decrement": "Decrease",
-            "increment": "Increase"
-        },
-        "tagsInput": {
-            "placeholder": "Add a tag…"
-        },
-        "combobox": {
-            "placeholder": "Select an option",
-            "searchPlaceholder": "Search...",
-            "empty": "No results found."
-        },
-        "avatar": {
-            "status": {
-                "online": "Online",
-                "offline": "Offline",
-                "busy": "Busy",
-                "away": "Away"
-            }
-        },
-        "pagination": {
-            "label": "Pagination",
-            "page": "Page {page}",
-            "first": "First page",
-            "previous": "Previous page",
-            "next": "Next page",
-            "last": "Last page",
-            "more": "More pages"
-        },
-        "stepper": {
-            "label": "Progress"
-        },
-        "fileDropzone": {
-            "title": "Drag & drop files here",
-            "description": "or click to browse your device",
-            "dropActive": "Drop to upload",
-            "browse": "Browse files",
-            "remove": "Remove {name}",
-            "maxSize": "Max {size} per file",
-            "maxFiles": "Up to {count} files",
-            "files": "Selected files"
-        }
-    }
+	"uiVintage": {
+		"common": {
+			"breadcrumb": "Breadcrumb",
+			"more": "More",
+			"home": "Home",
+			"empty": {
+				"title": "Nothing here yet",
+				"description": "There is no content to show right now."
+			},
+			"loading": {
+				"title": "Loading...",
+				"description": "Please wait a moment while we load the content."
+			},
+			"logo": "{name} logo"
+		},
+		"buttons": {
+			"remove": "Remove",
+			"all": "All",
+			"close": "Close",
+			"cancel": "Cancel",
+			"delete": "Delete",
+			"confirm": "Confirm",
+			"filter": "Filter",
+			"search": "Search",
+			"apply": "Apply",
+			"clear": "Clear",
+			"loading": "Loading",
+			"loadMore": "Load more",
+			"save": "Save",
+			"update": "Update",
+			"goBack": "Go back"
+		},
+		"theme": {
+			"light": "Light",
+			"dark": "Dark",
+			"auto": "Auto",
+			"title": "Choose theme",
+			"ariaLabel": "Toggle theme selector"
+		},
+		"language": {
+			"title": "Choose language",
+			"ariaLabel": "Language selector"
+		},
+		"sidebar": {
+			"title": "Sidebar",
+			"description": "Displays the mobile sidebar.",
+			"toggle": "Toggle sidebar"
+		},
+		"commandDialog": {
+			"title": "Command palette",
+			"description": "Search for a command to run..."
+		},
+		"datePicker": {
+			"placeholder": "Pick a date",
+			"month": "Month",
+			"year": "Year",
+			"time": "Time"
+		},
+		"terminal": {
+			"title": "Terminal",
+			"copy": "Copy commands",
+			"copied": "Commands copied"
+		},
+		"code": {
+			"title": "Code",
+			"copy": "Copy code",
+			"copied": "Code copied",
+			"position": "Ln {line}, Col {column}",
+			"plainText": "Plain text"
+		},
+		"footer": {
+			"madeWith": "Made with",
+			"by": "by",
+			"allRightsReserved": "All rights reserved."
+		},
+		"blog": {
+			"readingProgress": "Reading progress",
+			"readMore": "Read more",
+			"goToPost": "Go to post",
+			"new": "New",
+			"tableOfContents": "Table of contents",
+			"tableOfContentsDescription": "Jump to a section of this article",
+			"tableOfContentsSections": "{count} section | {count} sections",
+			"openTableOfContents": "Open table of contents",
+			"closeTableOfContents": "Close table of contents",
+			"loadMoreWithNumbers": "Load more ({current}/{total})",
+			"author": "Author",
+			"publishedDate": "Published",
+			"lastUpdatedDate": "Updated",
+			"readingTime": "Reading time",
+			"readingTimeValue": "{minutes} min",
+			"category": "Category",
+			"breadcrumbBlog": "Blog",
+			"carouselNavigation": "Carousel navigation",
+			"goToSlide": "Go to slide {index}",
+			"previousSlide": "Previous slide",
+			"nextSlide": "Next slide",
+			"faq": {
+				"title": "Frequently asked questions",
+				"description": "Find quick answers to the most common questions about this topic."
+			},
+			"share": {
+				"facebook": "Share on Facebook",
+				"x": "Share on X",
+				"whatsapp": "Share on WhatsApp",
+				"linkedin": "Share on LinkedIn",
+				"telegram": "Share on Telegram",
+				"copy": "Copy link",
+				"copied": "Link copied"
+			}
+		},
+		"errorPage": {
+			"notFound": {
+				"title": "Page not found",
+				"message": "The page you requested could not be found or may have been moved."
+			},
+			"unexpected": {
+				"title": "Something went wrong",
+				"message": "An unexpected error interrupted the current flow. Please try again or go back to a safe page."
+			}
+		},
+		"messageDialog": {
+			"confirm": "Confirm",
+			"error": "Error",
+			"success": "Success",
+			"info": "Information",
+			"warning": "Warning"
+		},
+		"toast": {
+			"region": "Notifications"
+		},
+		"cookieConsent": {
+			"region": "Cookie consent",
+			"message": "We use optional cookies to understand how the site is used. They are only set if you accept.",
+			"policy": "Cookie policy",
+			"accept": "Accept",
+			"decline": "Decline"
+		},
+		"dataTable": {
+			"selectAll": "Select all rows",
+			"selectRow": "Select row"
+		},
+		"numberField": {
+			"decrement": "Decrease",
+			"increment": "Increase"
+		},
+		"tagsInput": {
+			"placeholder": "Add a tag…"
+		},
+		"combobox": {
+			"placeholder": "Select an option",
+			"searchPlaceholder": "Search...",
+			"empty": "No results found."
+		},
+		"avatar": {
+			"status": {
+				"online": "Online",
+				"offline": "Offline",
+				"busy": "Busy",
+				"away": "Away"
+			}
+		},
+		"pagination": {
+			"label": "Pagination",
+			"page": "Page {page}",
+			"first": "First page",
+			"previous": "Previous page",
+			"next": "Next page",
+			"last": "Last page",
+			"more": "More pages"
+		},
+		"stepper": {
+			"label": "Progress"
+		},
+		"fileDropzone": {
+			"title": "Drag & drop files here",
+			"description": "or click to browse your device",
+			"dropActive": "Drop to upload",
+			"browse": "Browse files",
+			"remove": "Remove {name}",
+			"maxSize": "Max {size} per file",
+			"maxFiles": "Up to {count} files",
+			"files": "Selected files"
+		}
+	}
 }

@@ -8,49 +8,49 @@ import { cn } from '../../../lib/utils';
 import type { HeadingLevel } from '../../../lib/common-types';
 
 export interface LandingFooterLink {
-    id: string;
-    label: string;
-    href?: string;
-    to?: unknown;
-    newTab?: boolean;
+	id: string;
+	label: string;
+	href?: string;
+	to?: unknown;
+	newTab?: boolean;
 }
 
 export interface LandingFooterSection {
-    id: string;
-    title: string;
-    links: LandingFooterLink[];
+	id: string;
+	title: string;
+	links: LandingFooterLink[];
 }
 
 // Props
 const props = withDefaults(defineProps<{
-    appName: string;
-    appLogo?: string;
-    appLogoDark?: string;
-    appLinkTo?: string;
-    logoClass?: HTMLAttributes['class'];
-    appDescription?: string;
-    sections?: LandingFooterSection[];
-    linkComponent?: Component | string;
-    authorName?: string;
-    authorLink?: string;
-    year?: number;
-    showBottomBar?: boolean;
-    level?: HeadingLevel;
-    class?: HTMLAttributes['class'];
-    containerClass?: HTMLAttributes['class'];
-    brandClass?: HTMLAttributes['class'];
-    sectionsClass?: HTMLAttributes['class'];
-    bottomBarClass?: HTMLAttributes['class'];
+	appName: string;
+	appLogo?: string;
+	appLogoDark?: string;
+	appLinkTo?: string;
+	logoClass?: HTMLAttributes['class'];
+	appDescription?: string;
+	sections?: LandingFooterSection[];
+	linkComponent?: Component | string;
+	authorName?: string;
+	authorLink?: string;
+	year?: number;
+	showBottomBar?: boolean;
+	level?: HeadingLevel;
+	class?: HTMLAttributes['class'];
+	containerClass?: HTMLAttributes['class'];
+	brandClass?: HTMLAttributes['class'];
+	sectionsClass?: HTMLAttributes['class'];
+	bottomBarClass?: HTMLAttributes['class'];
 }>(), {
-    appLinkTo: '/',
-    appDescription: '',
-    sections: () => [],
-    linkComponent: 'a',
-    authorName: '',
-    authorLink: '',
-    year: () => new Date().getFullYear(),
-    showBottomBar: true,
-    level: 2
+	appLinkTo: '/',
+	appDescription: '',
+	sections: () => [],
+	linkComponent: 'a',
+	authorName: '',
+	authorLink: '',
+	year: () => new Date().getFullYear(),
+	showBottomBar: true,
+	level: 2
 });
 
 const { t } = useI18n();
@@ -59,21 +59,21 @@ const hasSingleSection = computed(() => props.sections.length === 1);
 
 // Get link props based on the type of link component and whether the link should open in a new tab
 const getLinkProps = (link: LandingFooterLink) => {
-    const sharedProps = link.newTab ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+	const sharedProps = link.newTab ? { target: '_blank', rel: 'noopener noreferrer' } : {};
 
-    // If the link component is an anchor, use href. Otherwise, use to for router links.
-    if (props.linkComponent === 'a') {
-        return {
-            href: link.href ?? '#',
-            ...sharedProps
-        };
-    }
+	// If the link component is an anchor, use href. Otherwise, use to for router links.
+	if (props.linkComponent === 'a') {
+		return {
+			href: link.href ?? '#',
+			...sharedProps
+		};
+	}
 
-    // For non-anchor link components, assume they use a "to" prop (like Vue Router's <RouterLink>).
-    return {
-        to: link.to ?? link.href ?? '/',
-        ...sharedProps
-    };
+	// For non-anchor link components, assume they use a "to" prop (like Vue Router's <RouterLink>).
+	return {
+		to: link.to ?? link.href ?? '/',
+		...sharedProps
+	};
 };
 
 // Logo sources for each theme (either one falls back to the other)
@@ -83,82 +83,82 @@ const hasDarkLogo = computed(() => darkLogo.value !== lightLogo.value);
 </script>
 
 <template>
-    <footer :class="cn('relative z-10 border-t border-border bg-card', props.class)">
-        <div :class="cn('mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8', props.containerClass)">
-            <div :class="cn('flex flex-col gap-8 md:flex-row md:items-start md:justify-between')">
-                <!-- Brand section -->
-                <div :class="cn('max-w-md flex-1', props.brandClass)">
-                    <!-- App logo and name -->
-                    <a :href="props.appLinkTo" class="mb-4 inline-flex items-center gap-2 text-lg font-semibold tracking-tight text-foreground transition-opacity duration-150 hover:opacity-80">
-                        <template v-if="lightLogo">
-                            <NuxtImg :src="lightLogo" :alt="logoAlt" width="32" height="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="lazy" decoding="async" :class="cn('size-8 shrink-0 object-contain', hasDarkLogo && 'dark:hidden', props.logoClass)" />
-                            <NuxtImg v-if="hasDarkLogo" :src="darkLogo" :alt="logoAlt" width="32" height="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="lazy" decoding="async" :class="cn('hidden size-8 shrink-0 object-contain dark:block', props.logoClass)" />
-                        </template>
-                        <span>{{ props.appName }}</span>
-                    </a>
+	<footer :class="cn('relative z-10 border-t border-border bg-card', props.class)">
+		<div :class="cn('mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8', props.containerClass)">
+			<div :class="cn('flex flex-col gap-8 md:flex-row md:items-start md:justify-between')">
+				<!-- Brand section -->
+				<div :class="cn('max-w-md flex-1', props.brandClass)">
+					<!-- App logo and name -->
+					<a :href="props.appLinkTo" class="mb-4 inline-flex items-center gap-2 text-lg font-semibold tracking-tight text-foreground transition-opacity duration-150 hover:opacity-80">
+						<template v-if="lightLogo">
+							<NuxtImg :src="lightLogo" :alt="logoAlt" width="32" height="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="lazy" decoding="async" :class="cn('size-8 shrink-0 object-contain', hasDarkLogo && 'dark:hidden', props.logoClass)" />
+							<NuxtImg v-if="hasDarkLogo" :src="darkLogo" :alt="logoAlt" width="32" height="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="lazy" decoding="async" :class="cn('hidden size-8 shrink-0 object-contain dark:block', props.logoClass)" />
+						</template>
+						<span>{{ props.appName }}</span>
+					</a>
 
-                    <!-- App description -->
-                    <p v-if="props.appDescription" class="max-w-sm text-xs md:text-sm leading-relaxed text-muted-foreground">
-                        {{ props.appDescription }}
-                    </p>
-                </div>
+					<!-- App description -->
+					<p v-if="props.appDescription" class="max-w-sm text-xs md:text-sm leading-relaxed text-muted-foreground">
+						{{ props.appDescription }}
+					</p>
+				</div>
 
-                <!-- Single link section -->
-                <div v-if="hasSingleSection" :class="cn('min-w-0 md:flex md:justify-end', props.sectionsClass)">
-                    <div class="md:text-right">
-                        <!-- Section title -->
-                        <component :is="`h${props.level}`" class="mb-4 font-semibold text-foreground">
-                            {{ props.sections[0]?.title }}
-                        </component>
+				<!-- Single link section -->
+				<div v-if="hasSingleSection" :class="cn('min-w-0 md:flex md:justify-end', props.sectionsClass)">
+					<div class="md:text-right">
+						<!-- Section title -->
+						<component :is="`h${props.level}`" class="mb-4 font-semibold text-foreground">
+							{{ props.sections[0]?.title }}
+						</component>
 
-                        <!-- Section links -->
-                        <ul class="space-y-3 text-xs sm:text-sm">
-                            <li v-for="link in props.sections[0]?.links" :key="link.id">
-                                <component :is="props.linkComponent" v-bind="getLinkProps(link)" class="bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_1px] bg-left-bottom bg-no-repeat text-muted-foreground transition-[color,background-size] duration-300 ease-out-expo hover:bg-[length:100%_1px] hover:text-primary">
-                                    {{ link.label }}
-                                </component>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+						<!-- Section links -->
+						<ul class="space-y-3 text-xs sm:text-sm">
+							<li v-for="link in props.sections[0]?.links" :key="link.id">
+								<component :is="props.linkComponent" v-bind="getLinkProps(link)" class="bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_1px] bg-left-bottom bg-no-repeat text-muted-foreground transition-[color,background-size] duration-300 ease-out-expo hover:bg-[length:100%_1px] hover:text-primary">
+									{{ link.label }}
+								</component>
+							</li>
+						</ul>
+					</div>
+				</div>
 
-                <!-- Link sections -->
-                <div v-else class="flex flex-col gap-8 md:max-w-[60%] md:flex-row md:flex-wrap md:justify-end md:gap-16">
-                    <div v-for="section in props.sections" :key="section.id" :class="cn('min-w-28', props.sectionsClass)">
-                        <!-- Section title -->
-                        <component :is="`h${props.level}`" class="mb-4 font-semibold text-foreground">
-                            {{ section.title }}
-                        </component>
+				<!-- Link sections -->
+				<div v-else class="flex flex-col gap-8 md:max-w-[60%] md:flex-row md:flex-wrap md:justify-end md:gap-16">
+					<div v-for="section in props.sections" :key="section.id" :class="cn('min-w-28', props.sectionsClass)">
+						<!-- Section title -->
+						<component :is="`h${props.level}`" class="mb-4 font-semibold text-foreground">
+							{{ section.title }}
+						</component>
 
-                        <!-- Section links -->
-                        <ul class="space-y-3 text-xs sm:text-sm">
-                            <li v-for="link in section.links" :key="link.id">
-                                <component :is="props.linkComponent" v-bind="getLinkProps(link)" class="bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_1px] bg-left-bottom bg-no-repeat text-muted-foreground transition-[color,background-size] duration-300 ease-out-expo hover:bg-[length:100%_1px] hover:text-primary">
-                                    {{ link.label }}
-                                </component>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+						<!-- Section links -->
+						<ul class="space-y-3 text-xs sm:text-sm">
+							<li v-for="link in section.links" :key="link.id">
+								<component :is="props.linkComponent" v-bind="getLinkProps(link)" class="bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_1px] bg-left-bottom bg-no-repeat text-muted-foreground transition-[color,background-size] duration-300 ease-out-expo hover:bg-[length:100%_1px] hover:text-primary">
+									{{ link.label }}
+								</component>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
 
-            <!-- Bottom bar -->
-            <div v-if="props.showBottomBar" :class="cn('mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 text-xs md:text-sm text-muted-foreground md:flex-row', props.bottomBarClass)">
-                <!-- Copyright -->
-                <div>
-                    &copy; {{ props.year }} {{ props.appName }}. {{ t('uiVintage.footer.allRightsReserved') }}
-                </div>
+			<!-- Bottom bar -->
+			<div v-if="props.showBottomBar" :class="cn('mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 text-xs md:text-sm text-muted-foreground md:flex-row', props.bottomBarClass)">
+				<!-- Copyright -->
+				<div>
+					&copy; {{ props.year }} {{ props.appName }}. {{ t('uiVintage.footer.allRightsReserved') }}
+				</div>
 
-                <!-- Author -->
-                <div v-if="props.authorName && props.authorLink" class="flex flex-wrap items-center justify-center gap-1.5 md:justify-end">
-                    <span>{{ t('uiVintage.footer.madeWith') }}</span>
-                    <HugeiconsIcon :icon="FavouriteIcon" class="size-4 shrink-0 text-destructive" />
-                    <span>{{ t('uiVintage.footer.by') }}</span>
-                    <a :href="props.authorLink" target="_blank" rel="noopener noreferrer" class="font-semibold text-foreground hover:underline">
-                        {{ props.authorName }}
-                    </a>
-                </div>
-            </div>
-        </div>
-    </footer>
+				<!-- Author -->
+				<div v-if="props.authorName && props.authorLink" class="flex flex-wrap items-center justify-center gap-1.5 md:justify-end">
+					<span>{{ t('uiVintage.footer.madeWith') }}</span>
+					<HugeiconsIcon :icon="FavouriteIcon" class="size-4 shrink-0 text-destructive" />
+					<span>{{ t('uiVintage.footer.by') }}</span>
+					<a :href="props.authorLink" target="_blank" rel="noopener noreferrer" class="font-semibold text-foreground hover:underline">
+						{{ props.authorName }}
+					</a>
+				</div>
+			</div>
+		</div>
+	</footer>
 </template>

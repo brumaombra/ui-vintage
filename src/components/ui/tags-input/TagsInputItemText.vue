@@ -7,7 +7,7 @@ import { cn } from '../../../lib/utils';
 
 // Props
 const props = defineProps<TagsInputItemTextProps & {
-    class?: HTMLAttributes['class'];
+	class?: HTMLAttributes['class'];
 }>();
 
 const delegatedProps = reactiveOmit(props, 'class');
@@ -15,7 +15,7 @@ const forwardedProps = useForwardProps(delegatedProps);
 </script>
 
 <template>
-    <TagsInputItemText data-slot="tags-input-item-text" v-bind="forwardedProps" :class="cn('truncate leading-none', props.class)">
-        <slot />
-    </TagsInputItemText>
+	<TagsInputItemText data-slot="tags-input-item-text" v-bind="forwardedProps" :class="cn('truncate leading-none', props.class)">
+		<slot />
+	</TagsInputItemText>
 </template>

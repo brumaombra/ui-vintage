@@ -4,16 +4,16 @@ import { cn } from '../../../lib/utils';
 
 // Props
 const props = defineProps<{
-    class?: HTMLAttributes['class'];
+	class?: HTMLAttributes['class'];
 }>();
 </script>
 
 <template>
-    <p data-slot="card-text" :class="cn(
-        'text-xs sm:text-sm text-muted-foreground',
-        props.class,
-    )
-        ">
-        <slot />
-    </p>
+	<p data-slot="card-text" :class="cn(
+		'text-xs sm:text-sm text-muted-foreground',
+		props.class,
+	)
+		">
+		<slot />
+	</p>
 </template>

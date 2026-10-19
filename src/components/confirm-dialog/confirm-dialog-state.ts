@@ -7,35 +7,35 @@ export type DialogButtonVariant = NonNullable<ButtonVariants['variant']>;
 export type { HugeiconsIconDefinition };
 
 export interface ShowConfirmDialogOptions {
-    title?: string;
-    message: string;
-    confirmText?: string;
-    cancelText?: string;
-    confirmButtonType?: DialogButtonVariant;
-    cancelButtonType?: DialogButtonVariant;
-    icon?: HugeiconsIconDefinition | null;
-    confirmButtonIcon?: HugeiconsIconDefinition | null;
-    cancelButtonIcon?: HugeiconsIconDefinition | null;
-    onConfirm?: (() => void | Promise<void>) | null;
-    onCancel?: (() => void | Promise<void>) | null;
+	title?: string;
+	message: string;
+	confirmText?: string;
+	cancelText?: string;
+	confirmButtonType?: DialogButtonVariant;
+	cancelButtonType?: DialogButtonVariant;
+	icon?: HugeiconsIconDefinition | null;
+	confirmButtonIcon?: HugeiconsIconDefinition | null;
+	cancelButtonIcon?: HugeiconsIconDefinition | null;
+	onConfirm?: (() => void | Promise<void>) | null;
+	onCancel?: (() => void | Promise<void>) | null;
 }
 
 interface ConfirmDialogRequest {
-    id: number;
-    options: Required<Omit<ShowConfirmDialogOptions, 'icon' | 'confirmButtonIcon' | 'cancelButtonIcon' | 'onConfirm' | 'onCancel'>> & {
-        icon: HugeiconsIconDefinition | null;
-        confirmButtonIcon: HugeiconsIconDefinition | null;
-        cancelButtonIcon: HugeiconsIconDefinition | null;
-        onConfirm: (() => void | Promise<void>) | null;
-        onCancel: (() => void | Promise<void>) | null;
-    };
-    resolve: (value: boolean) => void;
+	id: number;
+	options: Required<Omit<ShowConfirmDialogOptions, 'icon' | 'confirmButtonIcon' | 'cancelButtonIcon' | 'onConfirm' | 'onCancel'>> & {
+		icon: HugeiconsIconDefinition | null;
+		confirmButtonIcon: HugeiconsIconDefinition | null;
+		cancelButtonIcon: HugeiconsIconDefinition | null;
+		onConfirm: (() => void | Promise<void>) | null;
+		onCancel: (() => void | Promise<void>) | null;
+	};
+	resolve: (value: boolean) => void;
 }
 
 interface ConfirmDialogState {
-    current: ConfirmDialogRequest | null;
-    busy: boolean;
-    isOpen: boolean;
+	current: ConfirmDialogRequest | null;
+	busy: boolean;
+	isOpen: boolean;
 }
 
 const confirmDialogQueue: ConfirmDialogRequest[] = [];
@@ -48,9 +48,9 @@ const CONFIRM_DIALOG_ROOT_ID = 'ui-vintage-confirm-dialog-root';
 
 // Shared confirm dialog state
 export const confirmDialogState: ConfirmDialogState = reactive({
-    current: null,
-    busy: false,
-    isOpen: false
+	current: null,
+	busy: false,
+	isOpen: false
 });
 
 // Keep icon definitions non-reactive
@@ -58,145 +58,145 @@ const markIcon = (icon: HugeiconsIconDefinition | null | undefined) => icon ? ma
 
 // Mount the dialog once on demand
 const ensureConfirmDialogMounted = () => {
-    // Skip mounting during SSR
-    if (typeof document === 'undefined') {
-        return Promise.resolve();
-    }
+	// Skip mounting during SSR
+	if (typeof document === 'undefined') {
+		return Promise.resolve();
+	}
 
-    // Reuse the existing mount root
-    const existingRoot = document.getElementById(CONFIRM_DIALOG_ROOT_ID);
-    if (existingRoot) {
-        return Promise.resolve();
-    }
+	// Reuse the existing mount root
+	const existingRoot = document.getElementById(CONFIRM_DIALOG_ROOT_ID);
+	if (existingRoot) {
+		return Promise.resolve();
+	}
 
-    // Reuse the in-flight mount
-    if (confirmDialogMountPromise) {
-        return confirmDialogMountPromise;
-    }
+	// Reuse the in-flight mount
+	if (confirmDialogMountPromise) {
+		return confirmDialogMountPromise;
+	}
 
-    // Start the lazy mount
-    confirmDialogMountPromise = (async () => {
-        // Load the component only when needed
-        const { default: ConfirmDialog } = await import('./ConfirmDialog.vue');
+	// Start the lazy mount
+	confirmDialogMountPromise = (async () => {
+		// Load the component only when needed
+		const { default: ConfirmDialog } = await import('./ConfirmDialog.vue');
 
-        // Guard against a concurrent mount
-        if (document.getElementById(CONFIRM_DIALOG_ROOT_ID)) {
-            return;
-        }
+		// Guard against a concurrent mount
+		if (document.getElementById(CONFIRM_DIALOG_ROOT_ID)) {
+			return;
+		}
 
-        // Create the host element and render the component
-        const container = document.createElement('div');
-        container.id = CONFIRM_DIALOG_ROOT_ID;
-        document.body.appendChild(container);
-        render(h(ConfirmDialog), container);
-    })().finally(() => {
-        confirmDialogMountPromise = null;
-    });
+		// Create the host element and render the component
+		const container = document.createElement('div');
+		container.id = CONFIRM_DIALOG_ROOT_ID;
+		document.body.appendChild(container);
+		render(h(ConfirmDialog), container);
+	})().finally(() => {
+		confirmDialogMountPromise = null;
+	});
 
-    // Let callers await the mount
-    return confirmDialogMountPromise;
+	// Let callers await the mount
+	return confirmDialogMountPromise;
 };
 
 // Show the next queued dialog
 const openNextConfirmDialog = () => {
-    const nextDialog = confirmDialogQueue.shift() ?? null;
-    confirmDialogState.current = nextDialog;
-    confirmDialogState.isOpen = Boolean(nextDialog);
+	const nextDialog = confirmDialogQueue.shift() ?? null;
+	confirmDialogState.current = nextDialog;
+	confirmDialogState.isOpen = Boolean(nextDialog);
 };
 
 // Queue a new dialog request
 const enqueueConfirmDialog = (request: ConfirmDialogRequest) => {
-    confirmDialogQueue.push(request);
-    if (!confirmDialogState.current) {
-        openNextConfirmDialog();
-    }
+	confirmDialogQueue.push(request);
+	if (!confirmDialogState.current) {
+		openNextConfirmDialog();
+	}
 };
 
 // Clear the active dialog and continue the queue
 const clearCurrentConfirmDialog = () => {
-    confirmDialogState.busy = false;
-    confirmDialogState.isOpen = false;
-    confirmDialogState.current = null;
-    openNextConfirmDialog();
+	confirmDialogState.busy = false;
+	confirmDialogState.isOpen = false;
+	confirmDialogState.current = null;
+	openNextConfirmDialog();
 };
 
 // Close the current dialog after the leave transition (only if it is still the given request)
 const scheduleCloseCurrentConfirmDialog = (request: ConfirmDialogRequest) => {
-    // Guard against missing, replaced, or already closed dialogs
-    if (confirmDialogState.current !== request || !confirmDialogState.isOpen) return;
-    confirmDialogState.isOpen = false;
+	// Guard against missing, replaced, or already closed dialogs
+	if (confirmDialogState.current !== request || !confirmDialogState.isOpen) return;
+	confirmDialogState.isOpen = false;
 
-    // Clear any existing close timer to avoid racing conditions
-    if (closeTimer) {
-        clearTimeout(closeTimer);
-    }
+	// Clear any existing close timer to avoid racing conditions
+	if (closeTimer) {
+		clearTimeout(closeTimer);
+	}
 
-    // Schedule the dialog to be cleared after the leave transition
-    closeTimer = setTimeout(() => {
-        closeTimer = null;
-        clearCurrentConfirmDialog();
-    }, DIALOG_CLOSE_DURATION_MS);
+	// Schedule the dialog to be cleared after the leave transition
+	closeTimer = setTimeout(() => {
+		closeTimer = null;
+		clearCurrentConfirmDialog();
+	}, DIALOG_CLOSE_DURATION_MS);
 };
 
 // Resolve the dialog as cancelled (ignored while a confirm or cancel handler is still running)
 export const closeConfirmDialog = () => {
-    const current = confirmDialogState.current;
-    if (!current || !confirmDialogState.isOpen || confirmDialogState.busy) return;
-    current.resolve(false);
-    scheduleCloseCurrentConfirmDialog(current);
+	const current = confirmDialogState.current;
+	if (!current || !confirmDialogState.isOpen || confirmDialogState.busy) return;
+	current.resolve(false);
+	scheduleCloseCurrentConfirmDialog(current);
 };
 
 // Run a dialog handler, then resolve and close the dialog it belongs to
 const runConfirmDialogHandler = async (handler: (() => void | Promise<void>) | null, result: boolean) => {
-    const current = confirmDialogState.current;
-    if (!current || !confirmDialogState.isOpen || confirmDialogState.busy) return;
-    confirmDialogState.busy = true;
+	const current = confirmDialogState.current;
+	if (!current || !confirmDialogState.isOpen || confirmDialogState.busy) return;
+	confirmDialogState.busy = true;
 
-    try {
-        await handler?.();
-        current.resolve(result);
-    } catch (error) {
-        // Settle the caller's promise even when the handler throws, then surface the error
-        current.resolve(false);
-        throw error;
-    } finally {
-        scheduleCloseCurrentConfirmDialog(current);
-    }
+	try {
+		await handler?.();
+		current.resolve(result);
+	} catch (error) {
+		// Settle the caller's promise even when the handler throws, then surface the error
+		current.resolve(false);
+		throw error;
+	} finally {
+		scheduleCloseCurrentConfirmDialog(current);
+	}
 };
 
 // Run the cancel handler for the active dialog
 export const cancelActiveConfirmDialog = async () => {
-    await runConfirmDialogHandler(confirmDialogState.current?.options.onCancel ?? null, false);
+	await runConfirmDialogHandler(confirmDialogState.current?.options.onCancel ?? null, false);
 };
 
 // Run the confirm handler for the active dialog
 export const confirmActiveDialog = async () => {
-    await runConfirmDialogHandler(confirmDialogState.current?.options.onConfirm ?? null, true);
+	await runConfirmDialogHandler(confirmDialogState.current?.options.onConfirm ?? null, true);
 };
 
 // Queue and show a confirm dialog
 export const showConfirmDialog = (options: ShowConfirmDialogOptions) => {
-    // Ensure the renderer exists before queuing work
-    void ensureConfirmDialogMounted();
+	// Ensure the renderer exists before queuing work
+	void ensureConfirmDialogMounted();
 
-    // Return a promise that resolves with the user's choice
-    return new Promise<boolean>((resolve) => {
-        enqueueConfirmDialog({
-            id: nextConfirmDialogId += 1,
-            options: {
-                title: options.title ?? getUiVintageRuntimeMessage('uiVintage.messageDialog.confirm', 'Confirm'),
-                message: options.message,
-                confirmText: options.confirmText ?? getUiVintageRuntimeMessage('uiVintage.buttons.confirm', 'Confirm'),
-                cancelText: options.cancelText ?? getUiVintageRuntimeMessage('uiVintage.buttons.cancel', 'Cancel'),
-                confirmButtonType: options.confirmButtonType ?? 'primary',
-                cancelButtonType: options.cancelButtonType ?? 'secondary',
-                icon: markIcon(options.icon),
-                confirmButtonIcon: markIcon(options.confirmButtonIcon),
-                cancelButtonIcon: markIcon(options.cancelButtonIcon),
-                onConfirm: options.onConfirm ?? null,
-                onCancel: options.onCancel ?? null
-            },
-            resolve
-        });
-    });
+	// Return a promise that resolves with the user's choice
+	return new Promise<boolean>((resolve) => {
+		enqueueConfirmDialog({
+			id: nextConfirmDialogId += 1,
+			options: {
+				title: options.title ?? getUiVintageRuntimeMessage('uiVintage.messageDialog.confirm', 'Confirm'),
+				message: options.message,
+				confirmText: options.confirmText ?? getUiVintageRuntimeMessage('uiVintage.buttons.confirm', 'Confirm'),
+				cancelText: options.cancelText ?? getUiVintageRuntimeMessage('uiVintage.buttons.cancel', 'Cancel'),
+				confirmButtonType: options.confirmButtonType ?? 'primary',
+				cancelButtonType: options.cancelButtonType ?? 'secondary',
+				icon: markIcon(options.icon),
+				confirmButtonIcon: markIcon(options.confirmButtonIcon),
+				cancelButtonIcon: markIcon(options.cancelButtonIcon),
+				onConfirm: options.onConfirm ?? null,
+				onCancel: options.onCancel ?? null
+			},
+			resolve
+		});
+	});
 };

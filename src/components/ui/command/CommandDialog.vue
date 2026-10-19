@@ -11,9 +11,9 @@ import Command from './Command.vue';
 
 // Props
 const props = defineProps<DialogRootProps & {
-    title?: string;
-    description?: string;
-    contentClass?: HTMLAttributes['class'];
+	title?: string;
+	description?: string;
+	contentClass?: HTMLAttributes['class'];
 }>();
 
 const { t } = useI18n();
@@ -29,15 +29,15 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 </script>
 
 <template>
-    <Dialog v-slot="slotProps" v-bind="forwarded">
-        <DialogContent :class="cn('top-[12vh] translate-y-0 gap-0 overflow-hidden p-0 sm:max-w-xl', props.contentClass)">
-            <DialogHeader class="sr-only">
-                <DialogTitle>{{ resolvedTitle }}</DialogTitle>
-                <DialogDescription>{{ resolvedDescription }}</DialogDescription>
-            </DialogHeader>
-            <Command>
-                <slot v-bind="slotProps" />
-            </Command>
-        </DialogContent>
-    </Dialog>
+	<Dialog v-slot="slotProps" v-bind="forwarded">
+		<DialogContent :class="cn('top-[12vh] translate-y-0 gap-0 overflow-hidden p-0 sm:max-w-xl', props.contentClass)">
+			<DialogHeader class="sr-only">
+				<DialogTitle>{{ resolvedTitle }}</DialogTitle>
+				<DialogDescription>{{ resolvedDescription }}</DialogDescription>
+			</DialogHeader>
+			<Command>
+				<slot v-bind="slotProps" />
+			</Command>
+		</DialogContent>
+	</Dialog>
 </template>

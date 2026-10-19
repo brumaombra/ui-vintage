@@ -7,55 +7,55 @@ import type { HugeiconsIconDefinition } from '../../lib/common-types';
 
 // Props
 const props = withDefaults(defineProps<{
-    items?: T[];
-    busy?: boolean;
-    loadMoreBusy?: boolean;
-    hasMore?: boolean;
-    emptyMessage: string;
-    emptyIcon?: HugeiconsIconDefinition;
+	items?: T[];
+	busy?: boolean;
+	loadMoreBusy?: boolean;
+	hasMore?: boolean;
+	emptyMessage: string;
+	emptyIcon?: HugeiconsIconDefinition;
 }>(), {
-    items: () => [],
-    busy: false,
-    loadMoreBusy: false,
-    hasMore: false,
-    emptyIcon: () => PackageIcon
+	items: () => [],
+	busy: false,
+	loadMoreBusy: false,
+	hasMore: false,
+	emptyIcon: () => PackageIcon
 });
 
 // Emits
 const emits = defineEmits<{
-    'load-more': [];
+	'load-more': [];
 }>();
 
 // Slots
 defineSlots<{
-    card(props: { item: T; key?: PropertyKey }): unknown;
+	card(props: { item: T; key?: PropertyKey }): unknown;
 }>();
 
 // Handle load more
 const handleLoadMore = () => {
-    emits('load-more');
+	emits('load-more');
 };
 </script>
 
 <template>
-    <div>
-        <!-- Busy state for initial loading -->
-        <LoadingStateCard v-if="props.busy" />
+	<div>
+		<!-- Busy state for initial loading -->
+		<LoadingStateCard v-if="props.busy" />
 
-        <!-- Empty state -->
-        <EmptyStateCard v-else-if="props.items.length === 0"
-            :description="props.emptyMessage"
-            :icon="props.emptyIcon" />
+		<!-- Empty state -->
+		<EmptyStateCard v-else-if="props.items.length === 0"
+			:description="props.emptyMessage"
+			:icon="props.emptyIcon" />
 
-        <!-- Cards grid -->
-        <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-4">
-            <slot name="card" v-for="item in props.items" :item="item" :key="item.id" />
-        </div>
+		<!-- Cards grid -->
+		<div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-4">
+			<slot name="card" v-for="item in props.items" :item="item" :key="item.id" />
+		</div>
 
-        <!-- Load more button (only under a grid, never under the loading or empty state) -->
-        <div v-if="!props.busy && props.items.length > 0 && (props.hasMore || props.loadMoreBusy)" class="flex justify-center mt-6">
-            <LoadMoreButton :busy="props.loadMoreBusy"
-                @load-more="handleLoadMore" />
-        </div>
-    </div>
+		<!-- Load more button (only under a grid, never under the loading or empty state) -->
+		<div v-if="!props.busy && props.items.length > 0 && (props.hasMore || props.loadMoreBusy)" class="flex justify-center mt-6">
+			<LoadMoreButton :busy="props.loadMoreBusy"
+				@load-more="handleLoadMore" />
+		</div>
+	</div>
 </template>

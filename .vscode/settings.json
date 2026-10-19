@@ -1,6 +1,6 @@
 {
-    "css.customData": [
-        ".vscode/css-custom-data.json"
-    ],
-    "css.lint.unknownAtRules": "ignore"
+	"css.customData": [
+		".vscode/css-custom-data.json"
+	],
+	"css.lint.unknownAtRules": "ignore"
 }

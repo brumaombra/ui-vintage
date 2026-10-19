@@ -5,17 +5,17 @@ import type { HeadingLevel } from '../../../lib/common-types';
 
 // Props
 const props = withDefaults(defineProps<{
-    class?: HTMLAttributes['class'];
-    level?: HeadingLevel;
+	class?: HTMLAttributes['class'];
+	level?: HeadingLevel;
 }>(), {
-    level: 3
+	level: 3
 });
 </script>
 
 <template>
-    <component :is="`h${props.level}`"
-        data-slot="card-title"
-        :class="cn('leading-none font-semibold text-sm sm:text-base', props.class)">
-        <slot />
-    </component>
+	<component :is="`h${props.level}`"
+		data-slot="card-title"
+		:class="cn('leading-none font-semibold text-sm sm:text-base', props.class)">
+		<slot />
+	</component>
 </template>

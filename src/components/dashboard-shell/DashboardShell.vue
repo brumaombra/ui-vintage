@@ -13,64 +13,64 @@ import type { HugeiconsIconDefinition } from '../../lib/common-types';
 
 // Props
 const props = withDefaults(defineProps<{
-    appName?: string;
-    appLogo?: string;
-    appLogoDark?: string;
-    appLinkTo?: string;
-    title?: string;
-    description?: string;
-    collapsible?: 'offcanvas' | 'icon' | 'none';
-    compact?: boolean;
-    sidebarSections?: Array<{
-        id: string;
-        label?: string;
-        items: Array<{
-            id: string;
-            label: string;
-            description?: string;
-            icon?: HugeiconsIconDefinition | null;
-            href?: string;
-            to?: unknown;
-            active?: boolean;
-            newTab?: boolean;
-        }>;
-    }>;
-    sidebarLinkComponent?: Component | string;
-    showBackground?: boolean;
-    insetClass?: HTMLAttributes['class'];
-    topbarClass?: HTMLAttributes['class'];
-    contentContainerClass?: HTMLAttributes['class'];
+	appName?: string;
+	appLogo?: string;
+	appLogoDark?: string;
+	appLinkTo?: string;
+	title?: string;
+	description?: string;
+	collapsible?: 'offcanvas' | 'icon' | 'none';
+	compact?: boolean;
+	sidebarSections?: Array<{
+		id: string;
+		label?: string;
+		items: Array<{
+			id: string;
+			label: string;
+			description?: string;
+			icon?: HugeiconsIconDefinition | null;
+			href?: string;
+			to?: unknown;
+			active?: boolean;
+			newTab?: boolean;
+		}>;
+	}>;
+	sidebarLinkComponent?: Component | string;
+	showBackground?: boolean;
+	insetClass?: HTMLAttributes['class'];
+	topbarClass?: HTMLAttributes['class'];
+	contentContainerClass?: HTMLAttributes['class'];
 }>(), {
-    appName: '',
-    appLogo: '',
-    appLogoDark: '',
-    appLinkTo: '/',
-    title: '',
-    description: '',
-    collapsible: 'offcanvas',
-    compact: false,
-    sidebarSections: () => [],
-    sidebarLinkComponent: 'a',
-    showBackground: true
+	appName: '',
+	appLogo: '',
+	appLogoDark: '',
+	appLinkTo: '/',
+	title: '',
+	description: '',
+	collapsible: 'offcanvas',
+	compact: false,
+	sidebarSections: () => [],
+	sidebarLinkComponent: 'a',
+	showBackground: true
 });
 
 // Resolve link props for sidebar items
 const getSidebarItemLinkProps = (item: NonNullable<typeof props.sidebarSections>[number]['items'][number]) => {
-    const sharedProps = item.newTab ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+	const sharedProps = item.newTab ? { target: '_blank', rel: 'noopener noreferrer' } : {};
 
-    // If the link component is an anchor, use href. Otherwise, use to for router links.
-    if (props.sidebarLinkComponent === 'a') {
-        return {
-            href: item.href ?? '#',
-            ...sharedProps
-        };
-    }
+	// If the link component is an anchor, use href. Otherwise, use to for router links.
+	if (props.sidebarLinkComponent === 'a') {
+		return {
+			href: item.href ?? '#',
+			...sharedProps
+		};
+	}
 
-    // For non-anchor link components, assume they use a "to" prop (like Vue Router's <RouterLink>).
-    return {
-        to: item.to ?? item.href ?? '/',
-        ...sharedProps
-    };
+	// For non-anchor link components, assume they use a "to" prop (like Vue Router's <RouterLink>).
+	return {
+		to: item.to ?? item.href ?? '/',
+		...sharedProps
+	};
 };
 
 const { t } = useI18n();
@@ -85,122 +85,122 @@ const logoAlt = computed(() => props.appName ? t('uiVintage.common.logo', { name
 </script>
 
 <template>
-    <SidebarProvider>
-        <!-- Sidebar -->
-        <Sidebar :collapsible="props.collapsible" :compact="props.compact">
-            <!-- Sidebar header -->
-            <SidebarHeader v-if="props.appName || lightLogo || $slots['sidebar-header']" class="h-16 justify-center border-b border-sidebar-border">
-                <slot name="sidebar-header">
-                    <SidebarMenu>
-                        <SidebarMenuItem>
-                            <SidebarMenuButton as-child size="lg">
-                                <a :href="props.appLinkTo" class="inline-flex items-center gap-2">
-                                    <div class="inline-flex items-center gap-2">
-                                        <!-- App logo -->
-                                        <template v-if="lightLogo">
-                                            <NuxtImg :src="lightLogo" :alt="logoAlt" width="32" height="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="eager" :class="['size-8 shrink-0 object-contain', hasDarkLogo && 'dark:hidden']" />
-                                            <NuxtImg v-if="hasDarkLogo" :src="darkLogo" :alt="logoAlt" width="32" height="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="eager" class="hidden size-8 shrink-0 object-contain dark:block" />
-                                        </template>
+	<SidebarProvider>
+		<!-- Sidebar -->
+		<Sidebar :collapsible="props.collapsible" :compact="props.compact">
+			<!-- Sidebar header -->
+			<SidebarHeader v-if="props.appName || lightLogo || $slots['sidebar-header']" class="h-16 justify-center border-b border-sidebar-border">
+				<slot name="sidebar-header">
+					<SidebarMenu>
+						<SidebarMenuItem>
+							<SidebarMenuButton as-child size="lg">
+								<a :href="props.appLinkTo" class="inline-flex items-center gap-2">
+									<div class="inline-flex items-center gap-2">
+										<!-- App logo -->
+										<template v-if="lightLogo">
+											<NuxtImg :src="lightLogo" :alt="logoAlt" width="32" height="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="eager" :class="['size-8 shrink-0 object-contain', hasDarkLogo && 'dark:hidden']" />
+											<NuxtImg v-if="hasDarkLogo" :src="darkLogo" :alt="logoAlt" width="32" height="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="eager" class="hidden size-8 shrink-0 object-contain dark:block" />
+										</template>
 
-                                        <!-- App name -->
-                                        <span v-if="props.appName" class="text-xl font-semibold tracking-tight text-foreground">{{ props.appName }}</span>
-                                    </div>
-                                </a>
-                            </SidebarMenuButton>
-                        </SidebarMenuItem>
-                    </SidebarMenu>
-                </slot>
-            </SidebarHeader>
+										<!-- App name -->
+										<span v-if="props.appName" class="text-xl font-semibold tracking-tight text-foreground">{{ props.appName }}</span>
+									</div>
+								</a>
+							</SidebarMenuButton>
+						</SidebarMenuItem>
+					</SidebarMenu>
+				</slot>
+			</SidebarHeader>
 
-            <!-- Sidebar sections -->
-            <SidebarContent v-if="props.sidebarSections.length">
-                <SidebarGroup v-for="section in props.sidebarSections" :key="section.id" class="space-y-1">
-                    <!-- Section label -->
-                    <SidebarGroupLabel v-if="section.label">
-                        {{ section.label }}
-                    </SidebarGroupLabel>
+			<!-- Sidebar sections -->
+			<SidebarContent v-if="props.sidebarSections.length">
+				<SidebarGroup v-for="section in props.sidebarSections" :key="section.id" class="space-y-1">
+					<!-- Section label -->
+					<SidebarGroupLabel v-if="section.label">
+						{{ section.label }}
+					</SidebarGroupLabel>
 
-                    <!-- Section content -->
-                    <SidebarGroupContent>
-                        <SidebarMenu :class="cn('gap-1', props.compact && 'gap-0.5')">
-                            <SidebarMenuItem v-for="item in section.items" :key="item.id">
-                                <SidebarMenuButton as-child :is-active="item.active" :class="cn('group/nav relative h-auto min-h-11 overflow-hidden rounded px-3 py-2.5 text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground data-[active=true]:bg-primary/10 data-[active=true]:text-foreground sm:px-3.5', 'before:absolute before:inset-y-2 before:left-0 before:w-0.5 before:origin-center before:scale-y-0 before:bg-primary before:transition-transform before:duration-300 before:ease-spring data-[active=true]:before:scale-y-100', item.description ? 'items-start' : 'items-center')">
-                                    <component :is="props.sidebarLinkComponent" v-bind="getSidebarItemLinkProps(item)" :aria-current="item.active ? 'page' : undefined">
-                                        <!-- Icon -->
-                                        <HugeiconsIcon v-if="item.icon" :icon="item.icon" :stroke-width="1.8" :class="cn('shrink-0 opacity-90 transition-[opacity,color] duration-150 group-hover/nav:opacity-100 group-data-[active=true]/nav:text-primary', item.description ? 'mt-0.5 size-5 sm:h-5 sm:w-5' : 'size-5 self-center sm:h-6 sm:w-6')" />
+					<!-- Section content -->
+					<SidebarGroupContent>
+						<SidebarMenu :class="cn('gap-1', props.compact && 'gap-0.5')">
+							<SidebarMenuItem v-for="item in section.items" :key="item.id">
+								<SidebarMenuButton as-child :is-active="item.active" :class="cn('group/nav relative h-auto min-h-11 overflow-hidden rounded px-3 py-2.5 text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground data-[active=true]:bg-primary/10 data-[active=true]:text-foreground sm:px-3.5', 'before:absolute before:inset-y-2 before:left-0 before:w-0.5 before:origin-center before:scale-y-0 before:bg-primary before:transition-transform before:duration-300 before:ease-spring data-[active=true]:before:scale-y-100', item.description ? 'items-start' : 'items-center')">
+									<component :is="props.sidebarLinkComponent" v-bind="getSidebarItemLinkProps(item)" :aria-current="item.active ? 'page' : undefined">
+										<!-- Icon -->
+										<HugeiconsIcon v-if="item.icon" :icon="item.icon" :stroke-width="1.8" :class="cn('shrink-0 opacity-90 transition-[opacity,color] duration-150 group-hover/nav:opacity-100 group-data-[active=true]/nav:text-primary', item.description ? 'mt-0.5 size-5 sm:h-5 sm:w-5' : 'size-5 self-center sm:h-6 sm:w-6')" />
 
-                                        <!-- Label and optional description -->
-                                        <div :class="cn('min-w-0 flex-1 text-left leading-tight', item.description ? 'grid' : 'flex items-center')">
-                                            <!-- Label -->
-                                            <span class="truncate font-semibold">{{ item.label }}</span>
+										<!-- Label and optional description -->
+										<div :class="cn('min-w-0 flex-1 text-left leading-tight', item.description ? 'grid' : 'flex items-center')">
+											<!-- Label -->
+											<span class="truncate font-semibold">{{ item.label }}</span>
 
-                                            <!-- Description -->
-                                            <span v-if="item.description" class="mt-0.5 text-[11px] leading-4 text-sidebar-foreground/65">
-                                                {{ item.description }}
-                                            </span>
-                                        </div>
-                                    </component>
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
-                        </SidebarMenu>
-                    </SidebarGroupContent>
-                </SidebarGroup>
-            </SidebarContent>
+											<!-- Description -->
+											<span v-if="item.description" class="mt-0.5 text-[11px] leading-4 text-sidebar-foreground/65">
+												{{ item.description }}
+											</span>
+										</div>
+									</component>
+								</SidebarMenuButton>
+							</SidebarMenuItem>
+						</SidebarMenu>
+					</SidebarGroupContent>
+				</SidebarGroup>
+			</SidebarContent>
 
-            <!-- Sidebar footer -->
-            <SidebarFooter class="border-t border-sidebar-border">
-                <slot name="sidebar-footer">
-                    <div class="flex items-center gap-2">
-                        <ThemeSelector />
-                    </div>
-                </slot>
-            </SidebarFooter>
-        </Sidebar>
+			<!-- Sidebar footer -->
+			<SidebarFooter class="border-t border-sidebar-border">
+				<slot name="sidebar-footer">
+					<div class="flex items-center gap-2">
+						<ThemeSelector />
+					</div>
+				</slot>
+			</SidebarFooter>
+		</Sidebar>
 
-        <!-- Main shell -->
-        <SidebarInset :class="cn('relative min-h-screen min-w-0 bg-background text-foreground', props.insetClass)">
-            <!-- Background -->
-            <BackgroundGrid v-if="props.showBackground" />
+		<!-- Main shell -->
+		<SidebarInset :class="cn('relative min-h-screen min-w-0 bg-background text-foreground', props.insetClass)">
+			<!-- Background -->
+			<BackgroundGrid v-if="props.showBackground" />
 
-            <!-- Topbar -->
-            <header :class="cn('sticky top-0 z-20 flex h-16 shrink-0 items-center gap-2 border-b border-sidebar-border bg-sidebar/80 px-4 backdrop-blur-md backdrop-saturate-150', props.topbarClass)">
-                <!-- Sidebar trigger -->
-                <SidebarTrigger class="-ml-1" />
+			<!-- Topbar -->
+			<header :class="cn('sticky top-0 z-20 flex h-16 shrink-0 items-center gap-2 border-b border-sidebar-border bg-sidebar/80 px-4 backdrop-blur-md backdrop-saturate-150', props.topbarClass)">
+				<!-- Sidebar trigger -->
+				<SidebarTrigger class="-ml-1" />
 
-                <!-- Vertical separator -->
-                <Separator orientation="vertical" class="mr-2 data-[orientation=vertical]:h-4" />
+				<!-- Vertical separator -->
+				<Separator orientation="vertical" class="mr-2 data-[orientation=vertical]:h-4" />
 
-                <!-- Optional custom content on the leading side of the topbar -->
-                <slot name="topbar-leading" />
+				<!-- Optional custom content on the leading side of the topbar -->
+				<slot name="topbar-leading" />
 
-                <!-- Title and description -->
-                <div class="min-w-0 flex-1">
-                    <!-- Title -->
-                    <div class="truncate text-sm font-semibold">
-                        {{ props.title }}
-                    </div>
+				<!-- Title and description -->
+				<div class="min-w-0 flex-1">
+					<!-- Title -->
+					<div class="truncate text-sm font-semibold">
+						{{ props.title }}
+					</div>
 
-                    <!-- Description -->
-                    <div v-if="props.description" class="truncate text-xs text-muted-foreground">
-                        {{ props.description }}
-                    </div>
-                </div>
+					<!-- Description -->
+					<div v-if="props.description" class="truncate text-xs text-muted-foreground">
+						{{ props.description }}
+					</div>
+				</div>
 
-                <!-- Optional custom content on the trailing side of the topbar -->
-                <slot name="topbar-trailing" />
-            </header>
+				<!-- Optional custom content on the trailing side of the topbar -->
+				<slot name="topbar-trailing" />
+			</header>
 
-            <!-- Main content -->
-            <main class="relative z-10 min-w-0 flex-1">
-                <div :class="cn('mx-auto flex w-full min-w-0 max-w-7xl flex-col gap-6 px-3 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-8', props.contentContainerClass)">
-                    <slot />
-                </div>
-            </main>
+			<!-- Main content -->
+			<main class="relative z-10 min-w-0 flex-1">
+				<div :class="cn('mx-auto flex w-full min-w-0 max-w-7xl flex-col gap-6 px-3 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-8', props.contentContainerClass)">
+					<slot />
+				</div>
+			</main>
 
-            <!-- Full-width footer -->
-            <footer v-if="$slots.footer" class="relative z-10 mt-auto">
-                <slot name="footer" />
-            </footer>
-        </SidebarInset>
-    </SidebarProvider>
+			<!-- Full-width footer -->
+			<footer v-if="$slots.footer" class="relative z-10 mt-auto">
+				<slot name="footer" />
+			</footer>
+		</SidebarInset>
+	</SidebarProvider>
 </template>

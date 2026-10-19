@@ -7,20 +7,20 @@ import { cn } from '../../../lib/utils';
 
 // Props
 const props = defineProps<{
-    class?: HTMLAttributes['class'];
+	class?: HTMLAttributes['class'];
 }>();
 
 const { t } = useI18n();
 </script>
 
 <template>
-    <span data-slot="breadcrumb-ellipsis" role="presentation" :class="cn('flex size-6 items-center justify-center rounded-sm transition-colors duration-150 hover:bg-accent hover:text-primary', props.class)">
-        <!-- Default slot content -->
-        <slot>
-            <HugeiconsIcon :icon="MoreHorizontalIcon" class="size-4" aria-hidden="true" />
-        </slot>
+	<span data-slot="breadcrumb-ellipsis" role="presentation" :class="cn('flex size-6 items-center justify-center rounded-sm transition-colors duration-150 hover:bg-accent hover:text-primary', props.class)">
+		<!-- Default slot content -->
+		<slot>
+			<HugeiconsIcon :icon="MoreHorizontalIcon" class="size-4" aria-hidden="true" />
+		</slot>
 
-        <!-- Screen reader text for accessibility -->
-        <span class="sr-only">{{ t('uiVintage.common.more') }}</span>
-    </span>
+		<!-- Screen reader text for accessibility -->
+		<span class="sr-only">{{ t('uiVintage.common.more') }}</span>
+	</span>
 </template>

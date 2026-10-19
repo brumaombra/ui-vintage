@@ -11,7 +11,7 @@ export { default as StepperTrigger } from './StepperTrigger.vue';
 
 // Step definition used by SimpleStepper
 export type StepperStep = {
-    title: string;
-    description?: string;
-    icon?: HugeiconsIconDefinition;
+	title: string;
+	description?: string;
+	icon?: HugeiconsIconDefinition;
 };

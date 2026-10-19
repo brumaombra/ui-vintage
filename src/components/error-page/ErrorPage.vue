@@ -10,32 +10,32 @@ import { cn } from '../../lib/utils';
 
 // Props
 const props = withDefaults(defineProps<{
-    statusCode?: number | string;
-    label?: string;
-    title?: string;
-    message?: string;
-    actionLabel?: string;
-    showBackground?: boolean;
-    showDefaultAction?: boolean;
-    class?: HTMLAttributes['class'];
-    cardClass?: HTMLAttributes['class'];
-    contentClass?: HTMLAttributes['class'];
-    footerClass?: HTMLAttributes['class'];
+	statusCode?: number | string;
+	label?: string;
+	title?: string;
+	message?: string;
+	actionLabel?: string;
+	showBackground?: boolean;
+	showDefaultAction?: boolean;
+	class?: HTMLAttributes['class'];
+	cardClass?: HTMLAttributes['class'];
+	contentClass?: HTMLAttributes['class'];
+	footerClass?: HTMLAttributes['class'];
 }>(), {
-    statusCode: 500,
-    title: undefined,
-    message: undefined,
-    showBackground: true,
-    showDefaultAction: true,
-    class: undefined,
-    cardClass: undefined,
-    contentClass: undefined,
-    footerClass: undefined
+	statusCode: 500,
+	title: undefined,
+	message: undefined,
+	showBackground: true,
+	showDefaultAction: true,
+	class: undefined,
+	cardClass: undefined,
+	contentClass: undefined,
+	footerClass: undefined
 });
 
 // Emits
 const emit = defineEmits<{
-    action: [];
+	action: [];
 }>();
 
 const { t } = useI18n();
@@ -45,73 +45,73 @@ const resolvedActionLabel = computed(() => props.actionLabel || t('uiVintage.but
 
 // Resolve the heading copy
 const resolvedTitle = computed(() => {
-    if (props.title) return props.title;
-    if (resolvedStatusCode.value === '404') return t('uiVintage.errorPage.notFound.title');
-    return t('uiVintage.errorPage.unexpected.title');
+	if (props.title) return props.title;
+	if (resolvedStatusCode.value === '404') return t('uiVintage.errorPage.notFound.title');
+	return t('uiVintage.errorPage.unexpected.title');
 });
 
 // Resolve the supporting message
 const resolvedMessage = computed(() => {
-    if (props.message) return props.message;
-    if (resolvedStatusCode.value === '404') return t('uiVintage.errorPage.notFound.message');
-    return t('uiVintage.errorPage.unexpected.message');
+	if (props.message) return props.message;
+	if (resolvedStatusCode.value === '404') return t('uiVintage.errorPage.notFound.message');
+	return t('uiVintage.errorPage.unexpected.message');
 });
 
 // Emit the default action
 const handleAction = () => {
-    emit('action');
+	emit('action');
 };
 </script>
 
 <template>
-    <div :class="cn('relative min-h-screen bg-background text-foreground', props.class)">
-        <!-- Decorative background -->
-        <BackgroundGrid v-if="props.showBackground" />
+	<div :class="cn('relative min-h-screen bg-background text-foreground', props.class)">
+		<!-- Decorative background -->
+		<BackgroundGrid v-if="props.showBackground" />
 
-        <!-- Main content -->
-        <main class="relative z-10 mx-auto flex min-h-screen w-full max-w-6xl items-center justify-center px-4 py-10 sm:px-6 lg:px-8">
-            <div class="w-full max-w-xl">
-                <!-- Toolbar -->
-                <div v-if="$slots.toolbar" class="mb-4 flex justify-end gap-3">
-                    <slot name="toolbar" />
-                </div>
+		<!-- Main content -->
+		<main class="relative z-10 mx-auto flex min-h-screen w-full max-w-6xl items-center justify-center px-4 py-10 sm:px-6 lg:px-8">
+			<div class="w-full max-w-xl">
+				<!-- Toolbar -->
+				<div v-if="$slots.toolbar" class="mb-4 flex justify-end gap-3">
+					<slot name="toolbar" />
+				</div>
 
-                <!-- Error card -->
-                <Card :class="props.cardClass">
-                    <CardContent :class="cn('space-y-8', props.contentClass)">
-                        <!-- Brand -->
-                        <slot name="brand" />
+				<!-- Error card -->
+				<Card :class="props.cardClass">
+					<CardContent :class="cn('space-y-8', props.contentClass)">
+						<!-- Brand -->
+						<slot name="brand" />
 
-                        <!-- Error copy -->
-                        <div>
-                            <!-- Status code -->
-                            <div class="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
-                                {{ resolvedLabel }} {{ resolvedStatusCode }}
-                            </div>
+						<!-- Error copy -->
+						<div>
+							<!-- Status code -->
+							<div class="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+								{{ resolvedLabel }} {{ resolvedStatusCode }}
+							</div>
 
-                            <!-- Title -->
-                            <h1 class="mt-3 text-2xl font-semibold tracking-tight">
-                                {{ resolvedTitle }}
-                            </h1>
+							<!-- Title -->
+							<h1 class="mt-3 text-2xl font-semibold tracking-tight">
+								{{ resolvedTitle }}
+							</h1>
 
-                            <!-- Message -->
-                            <p class="text-sm leading-7 text-muted-foreground sm:text-base mt-4">
-                                {{ resolvedMessage }}
-                            </p>
-                        </div>
-                    </CardContent>
+							<!-- Message -->
+							<p class="text-sm leading-7 text-muted-foreground sm:text-base mt-4">
+								{{ resolvedMessage }}
+							</p>
+						</div>
+					</CardContent>
 
-                    <!-- Actions -->
-                    <CardFooter :class="cn('items-start flex-col gap-3 sm:flex-row sm:items-center', props.footerClass)">
-                        <slot name="actions" :on-action="handleAction">
-                            <Button v-if="props.showDefaultAction" variant="primary" @click="handleAction">
-                                <HugeiconsIcon :icon="ArrowLeft01Icon" :stroke-width="1.8" class="size-4" />
-                                {{ resolvedActionLabel }}
-                            </Button>
-                        </slot>
-                    </CardFooter>
-                </Card>
-            </div>
-        </main>
-    </div>
+					<!-- Actions -->
+					<CardFooter :class="cn('items-start flex-col gap-3 sm:flex-row sm:items-center', props.footerClass)">
+						<slot name="actions" :on-action="handleAction">
+							<Button v-if="props.showDefaultAction" variant="primary" @click="handleAction">
+								<HugeiconsIcon :icon="ArrowLeft01Icon" :stroke-width="1.8" class="size-4" />
+								{{ resolvedActionLabel }}
+							</Button>
+						</slot>
+					</CardFooter>
+				</Card>
+			</div>
+		</main>
+	</div>
 </template>

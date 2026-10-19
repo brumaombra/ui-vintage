@@ -6,8 +6,8 @@ import { cn } from '../../lib/utils';
 
 // Props
 const props = defineProps<{
-    class?: HTMLAttributes['class'];
-    ariaLabel?: string;
+	class?: HTMLAttributes['class'];
+	ariaLabel?: string;
 }>();
 
 const { t } = useI18n();
@@ -17,63 +17,63 @@ let animationFrame = 0;
 
 // Update progress based on scroll position
 const updateProgress = () => {
-    const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
-    progress.value = documentHeight > 0 ? Math.min(100, Math.max(0, (window.scrollY / documentHeight) * 100)) : 100;
+	const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+	progress.value = documentHeight > 0 ? Math.min(100, Math.max(0, (window.scrollY / documentHeight) * 100)) : 100;
 };
 
 // Handle scroll event with requestAnimationFrame for performance
 const handleScroll = () => {
-    cancelAnimationFrame(animationFrame);
-    animationFrame = requestAnimationFrame(updateProgress);
+	cancelAnimationFrame(animationFrame);
+	animationFrame = requestAnimationFrame(updateProgress);
 };
 
 // On component mounted
 onMounted(() => {
-    updateProgress();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', updateProgress);
+	updateProgress();
+	window.addEventListener('scroll', handleScroll, { passive: true });
+	window.addEventListener('resize', updateProgress);
 });
 
 // On component unmounted
 onUnmounted(() => {
-    cancelAnimationFrame(animationFrame);
-    window.removeEventListener('scroll', handleScroll);
-    window.removeEventListener('resize', updateProgress);
+	cancelAnimationFrame(animationFrame);
+	window.removeEventListener('scroll', handleScroll);
+	window.removeEventListener('resize', updateProgress);
 });
 </script>
 
 <template>
-    <div :class="cn('h-0.5 w-full bg-border/60 landing-navbar-progress', props.class)"
-        role="progressbar"
-        :aria-label="resolvedAriaLabel"
-        aria-valuemin="0"
-        aria-valuemax="100"
-        :aria-valuenow="Math.round(progress)">
-        <!-- Solid fill -->
-        <div class="h-full bg-primary transition-[width] duration-150 ease-out" :style="{ width: `${progress}%` }" />
-    </div>
+	<div :class="cn('h-0.5 w-full bg-border/60 landing-navbar-progress', props.class)"
+		role="progressbar"
+		:aria-label="resolvedAriaLabel"
+		aria-valuemin="0"
+		aria-valuemax="100"
+		:aria-valuenow="Math.round(progress)">
+		<!-- Solid fill -->
+		<div class="h-full bg-primary transition-[width] duration-150 ease-out" :style="{ width: `${progress}%` }" />
+	</div>
 </template>
 
 <style scoped>
 .landing-navbar-progress {
-    animation: landing-navbar-progress-fade linear both;
-    animation-range: 0 160px;
-    animation-timeline: scroll(root);
+	animation: landing-navbar-progress-fade linear both;
+	animation-range: 0 160px;
+	animation-timeline: scroll(root);
 }
 
 @keyframes landing-navbar-progress-fade {
-    from {
-        opacity: 0;
-    }
+	from {
+		opacity: 0;
+	}
 
-    to {
-        opacity: 1;
-    }
+	to {
+		opacity: 1;
+	}
 }
 
 @supports not (animation-timeline: scroll()) {
-    .landing-navbar-progress {
-        opacity: 1;
-    }
+	.landing-navbar-progress {
+		opacity: 1;
+	}
 }
 </style>

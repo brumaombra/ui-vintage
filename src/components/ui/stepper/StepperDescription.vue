@@ -7,16 +7,16 @@ import { cn } from '../../../lib/utils';
 
 // Props (rendered as inline text by default: the stepper trigger is a button, which can't hold headings or paragraphs)
 const props = withDefaults(defineProps<StepperDescriptionProps & {
-    class?: HTMLAttributes['class'];
+	class?: HTMLAttributes['class'];
 }>(), {
-    as: 'span'
+	as: 'span'
 });
 
 const delegatedProps = reactiveOmit(props, 'class');
 </script>
 
 <template>
-    <StepperDescription data-slot="stepper-description" v-bind="delegatedProps" :class="cn('text-xs text-muted-foreground', props.class)">
-        <slot />
-    </StepperDescription>
+	<StepperDescription data-slot="stepper-description" v-bind="delegatedProps" :class="cn('text-xs text-muted-foreground', props.class)">
+		<slot />
+	</StepperDescription>
 </template>

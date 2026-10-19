@@ -29,40 +29,40 @@ export { default as SidebarTrigger } from './SidebarTrigger.vue';
 export { useSidebar } from './utils';
 
 export interface SidebarProps {
-    side?: 'left' | 'right';
-    variant?: 'sidebar' | 'floating' | 'inset';
-    collapsible?: 'offcanvas' | 'icon' | 'none';
-    compact?: boolean;
-    class?: HTMLAttributes['class'];
+	side?: 'left' | 'right';
+	variant?: 'sidebar' | 'floating' | 'inset';
+	collapsible?: 'offcanvas' | 'icon' | 'none';
+	compact?: boolean;
+	class?: HTMLAttributes['class'];
 }
 
 export type SidebarMenuButtonVariants = {
-    variant?: 'default' | 'outline' | null | undefined;
-    size?: 'default' | 'sm' | 'lg' | null | undefined;
+	variant?: 'default' | 'outline' | null | undefined;
+	size?: 'default' | 'sm' | 'lg' | null | undefined;
 };
 
 export const sidebarMenuButtonVariants: (
-    props?: SidebarMenuButtonVariants & ClassProp
+	props?: SidebarMenuButtonVariants & ClassProp
 ) => string = cva(
-    'peer/menu-button flex w-full items-center gap-2 rounded p-2 text-left text-sm outline-hidden ring-sidebar-ring transition-[width,min-height,padding] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-accent data-[active=true]:font-semibold data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! group-data-[compact=true]/sidebar-wrapper:gap-1.5 group-data-[compact=true]/sidebar-wrapper:p-2.5 group-data-[compact=true]/sidebar-wrapper:[&>svg]:size-3.5 [&>svg]:size-4 [&>svg]:shrink-0',
-    {
-        variants: {
-            variant: {
-                default:
-                    'hover:bg-sidebar-accent hover:text-sidebar-accent-foreground',
-                outline:
-                    'bg-background shadow-[0_0_0_1px_var(--sidebar-border)] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground hover:shadow-[0_0_0_1px_var(--sidebar-accent)]'
-            },
-            size: {
-                default:
-                    'min-h-8 text-sm group-data-[compact=true]/sidebar-wrapper:min-h-7 group-data-[compact=true]/sidebar-wrapper:text-xs group-data-[compact=true]/sidebar-wrapper:py-3',
-                sm: 'min-h-7 text-xs group-data-[compact=true]/sidebar-wrapper:min-h-6 group-data-[compact=true]/sidebar-wrapper:py-2.5',
-                lg: 'min-h-12 text-sm group-data-[compact=true]/sidebar-wrapper:min-h-10 group-data-[collapsible=icon]:p-0!'
-            }
-        },
-        defaultVariants: {
-            variant: 'default',
-            size: 'default'
-        }
-    }
+	'peer/menu-button flex w-full items-center gap-2 rounded p-2 text-left text-sm outline-hidden ring-sidebar-ring transition-[width,min-height,padding] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-accent data-[active=true]:font-semibold data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! group-data-[compact=true]/sidebar-wrapper:gap-1.5 group-data-[compact=true]/sidebar-wrapper:p-2.5 group-data-[compact=true]/sidebar-wrapper:[&>svg]:size-3.5 [&>svg]:size-4 [&>svg]:shrink-0',
+	{
+		variants: {
+			variant: {
+				default:
+					'hover:bg-sidebar-accent hover:text-sidebar-accent-foreground',
+				outline:
+					'bg-background shadow-[0_0_0_1px_var(--sidebar-border)] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground hover:shadow-[0_0_0_1px_var(--sidebar-accent)]'
+			},
+			size: {
+				default:
+					'min-h-8 text-sm group-data-[compact=true]/sidebar-wrapper:min-h-7 group-data-[compact=true]/sidebar-wrapper:text-xs group-data-[compact=true]/sidebar-wrapper:py-3',
+				sm: 'min-h-7 text-xs group-data-[compact=true]/sidebar-wrapper:min-h-6 group-data-[compact=true]/sidebar-wrapper:py-2.5',
+				lg: 'min-h-12 text-sm group-data-[compact=true]/sidebar-wrapper:min-h-10 group-data-[collapsible=icon]:p-0!'
+			}
+		},
+		defaultVariants: {
+			variant: 'default',
+			size: 'default'
+		}
+	}
 );

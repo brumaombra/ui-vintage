@@ -6,13 +6,13 @@ import { alertClasses, type AlertColors } from '.';
 
 // Props
 const props = defineProps<{
-    class?: HTMLAttributes['class'];
-    color?: AlertColors['color'];
+	class?: HTMLAttributes['class'];
+	color?: AlertColors['color'];
 }>();
 </script>
 
 <template>
-    <div data-slot="alert" role="alert" :class="cn(alertClasses(), getSurfaceToneClasses(props.color ?? 'gray'), props.class)">
-        <slot />
-    </div>
+	<div data-slot="alert" role="alert" :class="cn(alertClasses(), getSurfaceToneClasses(props.color ?? 'gray'), props.class)">
+		<slot />
+	</div>
 </template>

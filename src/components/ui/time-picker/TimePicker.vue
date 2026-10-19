@@ -6,46 +6,46 @@ import { Input } from '../input';
 
 // Props
 const props = withDefaults(defineProps<{
-    defaultValue?: string;
-    modelValue?: string;
-    step?: string | number;
-    min?: string;
-    max?: string;
-    disabled?: boolean;
-    class?: HTMLAttributes['class'];
-    inputClass?: HTMLAttributes['class'];
+	defaultValue?: string;
+	modelValue?: string;
+	step?: string | number;
+	min?: string;
+	max?: string;
+	disabled?: boolean;
+	class?: HTMLAttributes['class'];
+	inputClass?: HTMLAttributes['class'];
 }>(), {
-    defaultValue: '',
-    step: 60,
-    disabled: false
+	defaultValue: '',
+	step: 60,
+	disabled: false
 });
 
 // Emits
 const emits = defineEmits<{
-    (e: 'update:modelValue', payload: string): void;
+	(e: 'update:modelValue', payload: string): void;
 }>();
 
 const internalValue = ref(props.defaultValue);
 const isControlled = computed(() => props.modelValue !== undefined);
 
 const time = computed({
-    get: () =>
-        (isControlled.value ? props.modelValue : internalValue.value) ?? '',
-    set: (value: string | number) => {
-        const nextValue = String(value);
+	get: () =>
+		(isControlled.value ? props.modelValue : internalValue.value) ?? '',
+	set: (value: string | number) => {
+		const nextValue = String(value);
 
-        if (!isControlled.value) internalValue.value = nextValue;
+		if (!isControlled.value) internalValue.value = nextValue;
 
-        emits('update:modelValue', nextValue);
-    }
+		emits('update:modelValue', nextValue);
+	}
 });
 </script>
 
 <template>
-    <Input v-model="time" type="time" :step="props.step" :min="props.min" :max="props.max" :disabled="props.disabled" :class="cn(
-        'cursor-pointer font-normal hover:border-border-strong hover:bg-accent [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-70 hover:[&::-webkit-calendar-picker-indicator]:opacity-100',
-        props.inputClass,
-        props.class
-    )
-        " />
+	<Input v-model="time" type="time" :step="props.step" :min="props.min" :max="props.max" :disabled="props.disabled" :class="cn(
+		'cursor-pointer font-normal hover:border-border-strong hover:bg-accent [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-70 hover:[&::-webkit-calendar-picker-indicator]:opacity-100',
+		props.inputClass,
+		props.class
+	)
+		" />
 </template>

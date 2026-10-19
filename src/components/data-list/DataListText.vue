@@ -4,12 +4,12 @@ import { cn } from '../../lib/utils';
 
 // Props
 const props = defineProps<{
-    class?: HTMLAttributes['class'];
+	class?: HTMLAttributes['class'];
 }>();
 </script>
 
 <template>
-    <div data-slot="data-list-text" :class="cn('line-clamp-3', props.class)">
-        <slot />
-    </div>
+	<div data-slot="data-list-text" :class="cn('line-clamp-3', props.class)">
+		<slot />
+	</div>
 </template>

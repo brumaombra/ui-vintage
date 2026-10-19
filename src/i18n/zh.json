@@ -1,187 +1,187 @@
 {
-    "uiVintage": {
-        "common": {
-            "breadcrumb": "面包屑导航",
-            "more": "更多",
-            "home": "首页",
-            "empty": {
-                "title": "这里还没有内容",
-                "description": "当前没有可显示的内容。"
-            },
-            "loading": {
-                "title": "加载中...",
-                "description": "请稍候，正在加载内容。"
-            },
-            "logo": "{name} 标志"
-        },
-        "buttons": {
-            "remove": "移除",
-            "all": "全部",
-            "close": "关闭",
-            "cancel": "取消",
-            "delete": "删除",
-            "confirm": "确认",
-            "filter": "筛选",
-            "search": "搜索",
-            "apply": "应用",
-            "clear": "清除",
-            "loading": "加载中",
-            "loadMore": "加载更多",
-            "save": "保存",
-            "update": "更新",
-            "goBack": "返回"
-        },
-        "theme": {
-            "light": "浅色",
-            "dark": "深色",
-            "auto": "自动",
-            "title": "选择主题",
-            "ariaLabel": "主题选择器"
-        },
-        "language": {
-            "title": "选择语言",
-            "ariaLabel": "语言选择器"
-        },
-        "sidebar": {
-            "title": "侧边栏",
-            "description": "显示移动侧边栏。",
-            "toggle": "切换侧边栏"
-        },
-        "commandDialog": {
-            "title": "命令面板",
-            "description": "搜索要运行的命令..."
-        },
-        "datePicker": {
-            "placeholder": "选择日期",
-            "month": "月份",
-            "year": "年份",
-            "time": "时间"
-        },
-        "terminal": {
-            "title": "终端",
-            "copy": "复制命令",
-            "copied": "命令已复制"
-        },
-        "code": {
-            "title": "代码",
-            "copy": "复制代码",
-            "copied": "代码已复制",
-            "position": "第 {line} 行，第 {column} 列",
-            "plainText": "纯文本"
-        },
-        "footer": {
-            "madeWith": "用",
-            "by": "由",
-            "allRightsReserved": "版权所有。"
-        },
-        "blog": {
-            "readingProgress": "阅读进度",
-            "readMore": "阅读更多",
-            "goToPost": "前往文章",
-            "new": "最新",
-            "tableOfContents": "目录",
-            "tableOfContentsDescription": "跳转到本文的一个部分",
-            "tableOfContentsSections": "{count} 个章节",
-            "openTableOfContents": "打开目录",
-            "closeTableOfContents": "关闭目录",
-            "loadMoreWithNumbers": "加载更多 ({current}/{total})",
-            "author": "作者",
-            "publishedDate": "发布时间",
-            "lastUpdatedDate": "更新时间",
-            "readingTime": "阅读时间",
-            "readingTimeValue": "{minutes} 分钟",
-            "category": "分类",
-            "breadcrumbBlog": "博客",
-            "carouselNavigation": "轮播导航",
-            "goToSlide": "转到第 {index} 张幻灯片",
-            "previousSlide": "上一张幻灯片",
-            "nextSlide": "下一张幻灯片",
-            "faq": {
-                "title": "常见问题",
-                "description": "快速找到有关此主题的常见问题答案。"
-            },
-            "share": {
-                "facebook": "分享到 Facebook",
-                "x": "分享到 X",
-                "whatsapp": "分享到 WhatsApp",
-                "linkedin": "分享到 LinkedIn",
-                "telegram": "分享到 Telegram",
-                "copy": "复制链接",
-                "copied": "链接已复制"
-            }
-        },
-        "errorPage": {
-            "notFound": {
-                "title": "找不到页面",
-                "message": "找不到您请求的页面，或者该页面可能已被移动。"
-            },
-            "unexpected": {
-                "title": "出了点问题",
-                "message": "发生意外错误，当前操作已中断。请重试或返回安全页面。"
-            }
-        },
-        "messageDialog": {
-            "confirm": "确认",
-            "error": "错误",
-            "success": "成功",
-            "info": "信息",
-            "warning": "警告"
-        },
-        "toast": {
-            "region": "通知"
-        },
-        "cookieConsent": {
-            "region": "Cookie 同意",
-            "message": "我们使用可选的 Cookie 来了解网站的使用情况。只有在您同意后才会设置。",
-            "policy": "Cookie 政策",
-            "accept": "接受",
-            "decline": "拒绝"
-        },
-        "dataTable": {
-            "selectAll": "全选所有行",
-            "selectRow": "选择行"
-        },
-        "numberField": {
-            "decrement": "减少",
-            "increment": "增加"
-        },
-        "tagsInput": {
-            "placeholder": "添加标签…"
-        },
-        "combobox": {
-            "placeholder": "请选择一个选项",
-            "searchPlaceholder": "搜索...",
-            "empty": "未找到结果。"
-        },
-        "avatar": {
-            "status": {
-                "online": "在线",
-                "offline": "离线",
-                "busy": "忙碌",
-                "away": "离开"
-            }
-        },
-        "pagination": {
-            "label": "分页",
-            "page": "第 {page} 页",
-            "first": "第一页",
-            "previous": "上一页",
-            "next": "下一页",
-            "last": "最后一页",
-            "more": "更多页面"
-        },
-        "stepper": {
-            "label": "进度"
-        },
-        "fileDropzone": {
-            "title": "将文件拖放到此处",
-            "description": "或点击浏览您的设备",
-            "dropActive": "松开即可上传",
-            "browse": "浏览文件",
-            "remove": "移除 {name}",
-            "maxSize": "每个文件最大 {size}",
-            "maxFiles": "最多 {count} 个文件",
-            "files": "已选文件"
-        }
-    }
+	"uiVintage": {
+		"common": {
+			"breadcrumb": "面包屑导航",
+			"more": "更多",
+			"home": "首页",
+			"empty": {
+				"title": "这里还没有内容",
+				"description": "当前没有可显示的内容。"
+			},
+			"loading": {
+				"title": "加载中...",
+				"description": "请稍候，正在加载内容。"
+			},
+			"logo": "{name} 标志"
+		},
+		"buttons": {
+			"remove": "移除",
+			"all": "全部",
+			"close": "关闭",
+			"cancel": "取消",
+			"delete": "删除",
+			"confirm": "确认",
+			"filter": "筛选",
+			"search": "搜索",
+			"apply": "应用",
+			"clear": "清除",
+			"loading": "加载中",
+			"loadMore": "加载更多",
+			"save": "保存",
+			"update": "更新",
+			"goBack": "返回"
+		},
+		"theme": {
+			"light": "浅色",
+			"dark": "深色",
+			"auto": "自动",
+			"title": "选择主题",
+			"ariaLabel": "主题选择器"
+		},
+		"language": {
+			"title": "选择语言",
+			"ariaLabel": "语言选择器"
+		},
+		"sidebar": {
+			"title": "侧边栏",
+			"description": "显示移动侧边栏。",
+			"toggle": "切换侧边栏"
+		},
+		"commandDialog": {
+			"title": "命令面板",
+			"description": "搜索要运行的命令..."
+		},
+		"datePicker": {
+			"placeholder": "选择日期",
+			"month": "月份",
+			"year": "年份",
+			"time": "时间"
+		},
+		"terminal": {
+			"title": "终端",
+			"copy": "复制命令",
+			"copied": "命令已复制"
+		},
+		"code": {
+			"title": "代码",
+			"copy": "复制代码",
+			"copied": "代码已复制",
+			"position": "第 {line} 行，第 {column} 列",
+			"plainText": "纯文本"
+		},
+		"footer": {
+			"madeWith": "用",
+			"by": "由",
+			"allRightsReserved": "版权所有。"
+		},
+		"blog": {
+			"readingProgress": "阅读进度",
+			"readMore": "阅读更多",
+			"goToPost": "前往文章",
+			"new": "最新",
+			"tableOfContents": "目录",
+			"tableOfContentsDescription": "跳转到本文的一个部分",
+			"tableOfContentsSections": "{count} 个章节",
+			"openTableOfContents": "打开目录",
+			"closeTableOfContents": "关闭目录",
+			"loadMoreWithNumbers": "加载更多 ({current}/{total})",
+			"author": "作者",
+			"publishedDate": "发布时间",
+			"lastUpdatedDate": "更新时间",
+			"readingTime": "阅读时间",
+			"readingTimeValue": "{minutes} 分钟",
+			"category": "分类",
+			"breadcrumbBlog": "博客",
+			"carouselNavigation": "轮播导航",
+			"goToSlide": "转到第 {index} 张幻灯片",
+			"previousSlide": "上一张幻灯片",
+			"nextSlide": "下一张幻灯片",
+			"faq": {
+				"title": "常见问题",
+				"description": "快速找到有关此主题的常见问题答案。"
+			},
+			"share": {
+				"facebook": "分享到 Facebook",
+				"x": "分享到 X",
+				"whatsapp": "分享到 WhatsApp",
+				"linkedin": "分享到 LinkedIn",
+				"telegram": "分享到 Telegram",
+				"copy": "复制链接",
+				"copied": "链接已复制"
+			}
+		},
+		"errorPage": {
+			"notFound": {
+				"title": "找不到页面",
+				"message": "找不到您请求的页面，或者该页面可能已被移动。"
+			},
+			"unexpected": {
+				"title": "出了点问题",
+				"message": "发生意外错误，当前操作已中断。请重试或返回安全页面。"
+			}
+		},
+		"messageDialog": {
+			"confirm": "确认",
+			"error": "错误",
+			"success": "成功",
+			"info": "信息",
+			"warning": "警告"
+		},
+		"toast": {
+			"region": "通知"
+		},
+		"cookieConsent": {
+			"region": "Cookie 同意",
+			"message": "我们使用可选的 Cookie 来了解网站的使用情况。只有在您同意后才会设置。",
+			"policy": "Cookie 政策",
+			"accept": "接受",
+			"decline": "拒绝"
+		},
+		"dataTable": {
+			"selectAll": "全选所有行",
+			"selectRow": "选择行"
+		},
+		"numberField": {
+			"decrement": "减少",
+			"increment": "增加"
+		},
+		"tagsInput": {
+			"placeholder": "添加标签…"
+		},
+		"combobox": {
+			"placeholder": "请选择一个选项",
+			"searchPlaceholder": "搜索...",
+			"empty": "未找到结果。"
+		},
+		"avatar": {
+			"status": {
+				"online": "在线",
+				"offline": "离线",
+				"busy": "忙碌",
+				"away": "离开"
+			}
+		},
+		"pagination": {
+			"label": "分页",
+			"page": "第 {page} 页",
+			"first": "第一页",
+			"previous": "上一页",
+			"next": "下一页",
+			"last": "最后一页",
+			"more": "更多页面"
+		},
+		"stepper": {
+			"label": "进度"
+		},
+		"fileDropzone": {
+			"title": "将文件拖放到此处",
+			"description": "或点击浏览您的设备",
+			"dropActive": "松开即可上传",
+			"browse": "浏览文件",
+			"remove": "移除 {name}",
+			"maxSize": "每个文件最大 {size}",
+			"maxFiles": "最多 {count} 个文件",
+			"files": "已选文件"
+		}
+	}
 }

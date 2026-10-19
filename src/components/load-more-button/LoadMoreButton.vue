@@ -8,18 +8,18 @@ import { Button } from '../ui/button';
 
 // Props
 const props = withDefaults(defineProps<{
-    busy?: boolean;
-    text?: string;
-    loadingText?: string;
+	busy?: boolean;
+	text?: string;
+	loadingText?: string;
 }>(), {
-    busy: false,
-    text: '',
-    loadingText: ''
+	busy: false,
+	text: '',
+	loadingText: ''
 });
 
 // Emits
 const emits = defineEmits<{
-    'load-more': [];
+	'load-more': [];
 }>();
 
 const { t } = useI18n();
@@ -28,17 +28,17 @@ const resolvedLoadingText = computed(() => props.loadingText || t('uiVintage.but
 
 // Handle click event (ignored while loading, so the button stays focusable without firing twice)
 const handleClick = () => {
-    if (props.busy) return;
-    emits('load-more');
+	if (props.busy) return;
+	emits('load-more');
 };
 </script>
 
 <template>
-    <div class="flex justify-center">
-        <!-- A single button for both states keeps keyboard focus on it while the next page loads -->
-        <Button variant="secondary" :class="['w-full md:w-auto', props.busy && 'cursor-wait']" :aria-disabled="props.busy || undefined" :aria-busy="props.busy || undefined" @click="handleClick">
-            <HugeiconsIcon :icon="props.busy ? RefreshIcon : ArrowDown01Icon" :class="['size-4', props.busy && 'animate-spin']" />
-            {{ props.busy ? resolvedLoadingText : resolvedText }}
-        </Button>
-    </div>
+	<div class="flex justify-center">
+		<!-- A single button for both states keeps keyboard focus on it while the next page loads -->
+		<Button variant="secondary" :class="['w-full md:w-auto', props.busy && 'cursor-wait']" :aria-disabled="props.busy || undefined" :aria-busy="props.busy || undefined" @click="handleClick">
+			<HugeiconsIcon :icon="props.busy ? RefreshIcon : ArrowDown01Icon" :class="['size-4', props.busy && 'animate-spin']" />
+			{{ props.busy ? resolvedLoadingText : resolvedText }}
+		</Button>
+	</div>
 </template>

@@ -1,187 +1,187 @@
 {
-    "uiVintage": {
-        "common": {
-            "breadcrumb": "Navegação estrutural",
-            "more": "Mais",
-            "home": "Início",
-            "empty": {
-                "title": "Ainda nao ha nada aqui",
-                "description": "Nao ha conteudo para mostrar neste momento."
-            },
-            "loading": {
-                "title": "Carregando...",
-                "description": "Aguarde um momento enquanto carregamos o conteudo."
-            },
-            "logo": "Logótipo de {name}"
-        },
-        "buttons": {
-            "remove": "Remover",
-            "all": "Todos",
-            "close": "Fechar",
-            "cancel": "Cancelar",
-            "delete": "Excluir",
-            "confirm": "Confirmar",
-            "filter": "Filtrar",
-            "search": "Pesquisar",
-            "apply": "Aplicar",
-            "clear": "Limpar",
-            "loading": "Carregando",
-            "loadMore": "Carregar mais",
-            "save": "Salvar",
-            "update": "Atualizar",
-            "goBack": "Voltar"
-        },
-        "theme": {
-            "light": "Claro",
-            "dark": "Escuro",
-            "auto": "Automatico",
-            "title": "Escolher tema",
-            "ariaLabel": "Seletor de tema"
-        },
-        "language": {
-            "title": "Escolher idioma",
-            "ariaLabel": "Seletor de idioma"
-        },
-        "sidebar": {
-            "title": "Barra lateral",
-            "description": "Exibe a barra lateral em dispositivos móveis.",
-            "toggle": "Alternar barra lateral"
-        },
-        "commandDialog": {
-            "title": "Paleta de comandos",
-            "description": "Pesquise um comando para executar..."
-        },
-        "datePicker": {
-            "placeholder": "Selecione uma data",
-            "month": "Mês",
-            "year": "Ano",
-            "time": "Hora"
-        },
-        "terminal": {
-            "title": "Terminal",
-            "copy": "Copiar comandos",
-            "copied": "Comandos copiados"
-        },
-        "code": {
-            "title": "Codigo",
-            "copy": "Copiar codigo",
-            "copied": "Codigo copiado",
-            "position": "Ln {line}, Col {column}",
-            "plainText": "Texto simples"
-        },
-        "footer": {
-            "madeWith": "Feito com",
-            "by": "por",
-            "allRightsReserved": "Todos os direitos reservados."
-        },
-        "blog": {
-            "readingProgress": "Progresso da leitura",
-            "readMore": "Ler mais",
-            "goToPost": "Ir para o artigo",
-            "new": "Novo",
-            "tableOfContents": "Indice",
-            "tableOfContentsDescription": "Ir para uma secao deste artigo",
-            "tableOfContentsSections": "{count} secao | {count} secoes",
-            "openTableOfContents": "Abrir indice",
-            "closeTableOfContents": "Fechar indice",
-            "loadMoreWithNumbers": "Carregar mais ({current}/{total})",
-            "author": "Autor",
-            "publishedDate": "Publicado",
-            "lastUpdatedDate": "Atualizado",
-            "readingTime": "Tempo de leitura",
-            "readingTimeValue": "{minutes} min",
-            "category": "Categoria",
-            "breadcrumbBlog": "Blog",
-            "carouselNavigation": "Navegacao do carrossel",
-            "goToSlide": "Ir para o slide {index}",
-            "previousSlide": "Slide anterior",
-            "nextSlide": "Proximo slide",
-            "faq": {
-                "title": "Perguntas frequentes",
-                "description": "Encontre respostas rapidas para as perguntas mais comuns sobre este tema."
-            },
-            "share": {
-                "facebook": "Partilhar no Facebook",
-                "x": "Partilhar no X",
-                "whatsapp": "Partilhar no WhatsApp",
-                "linkedin": "Partilhar no LinkedIn",
-                "telegram": "Partilhar no Telegram",
-                "copy": "Copiar link",
-                "copied": "Link copiado"
-            }
-        },
-        "errorPage": {
-            "notFound": {
-                "title": "Página não encontrada",
-                "message": "A página solicitada não foi encontrada ou pode ter sido movida."
-            },
-            "unexpected": {
-                "title": "Algo deu errado",
-                "message": "Um erro inesperado interrompeu o fluxo atual. Tente novamente ou volte para uma página segura."
-            }
-        },
-        "messageDialog": {
-            "confirm": "Confirmar",
-            "error": "Erro",
-            "success": "Sucesso",
-            "info": "Informacao",
-            "warning": "Aviso"
-        },
-        "toast": {
-            "region": "Notificações"
-        },
-        "cookieConsent": {
-            "region": "Consentimento de cookies",
-            "message": "Usamos cookies opcionais para entender como o site é usado. Eles só são definidos se você aceitar.",
-            "policy": "Política de cookies",
-            "accept": "Aceitar",
-            "decline": "Recusar"
-        },
-        "dataTable": {
-            "selectAll": "Selecionar todas as linhas",
-            "selectRow": "Selecionar linha"
-        },
-        "numberField": {
-            "decrement": "Diminuir",
-            "increment": "Aumentar"
-        },
-        "tagsInput": {
-            "placeholder": "Adicionar uma tag…"
-        },
-        "combobox": {
-            "placeholder": "Selecione uma opção",
-            "searchPlaceholder": "Pesquisar...",
-            "empty": "Nenhum resultado encontrado."
-        },
-        "avatar": {
-            "status": {
-                "online": "Online",
-                "offline": "Offline",
-                "busy": "Ocupado",
-                "away": "Ausente"
-            }
-        },
-        "pagination": {
-            "label": "Paginação",
-            "page": "Página {page}",
-            "first": "Primeira página",
-            "previous": "Página anterior",
-            "next": "Próxima página",
-            "last": "Última página",
-            "more": "Mais páginas"
-        },
-        "stepper": {
-            "label": "Progresso"
-        },
-        "fileDropzone": {
-            "title": "Arraste e solte arquivos aqui",
-            "description": "ou clique para procurar no seu dispositivo",
-            "dropActive": "Solte para enviar",
-            "browse": "Procurar arquivos",
-            "remove": "Remover {name}",
-            "maxSize": "Máx. {size} por arquivo",
-            "maxFiles": "Até {count} arquivos",
-            "files": "Arquivos selecionados"
-        }
-    }
+	"uiVintage": {
+		"common": {
+			"breadcrumb": "Navegação estrutural",
+			"more": "Mais",
+			"home": "Início",
+			"empty": {
+				"title": "Ainda nao ha nada aqui",
+				"description": "Nao ha conteudo para mostrar neste momento."
+			},
+			"loading": {
+				"title": "Carregando...",
+				"description": "Aguarde um momento enquanto carregamos o conteudo."
+			},
+			"logo": "Logótipo de {name}"
+		},
+		"buttons": {
+			"remove": "Remover",
+			"all": "Todos",
+			"close": "Fechar",
+			"cancel": "Cancelar",
+			"delete": "Excluir",
+			"confirm": "Confirmar",
+			"filter": "Filtrar",
+			"search": "Pesquisar",
+			"apply": "Aplicar",
+			"clear": "Limpar",
+			"loading": "Carregando",
+			"loadMore": "Carregar mais",
+			"save": "Salvar",
+			"update": "Atualizar",
+			"goBack": "Voltar"
+		},
+		"theme": {
+			"light": "Claro",
+			"dark": "Escuro",
+			"auto": "Automatico",
+			"title": "Escolher tema",
+			"ariaLabel": "Seletor de tema"
+		},
+		"language": {
+			"title": "Escolher idioma",
+			"ariaLabel": "Seletor de idioma"
+		},
+		"sidebar": {
+			"title": "Barra lateral",
+			"description": "Exibe a barra lateral em dispositivos móveis.",
+			"toggle": "Alternar barra lateral"
+		},
+		"commandDialog": {
+			"title": "Paleta de comandos",
+			"description": "Pesquise um comando para executar..."
+		},
+		"datePicker": {
+			"placeholder": "Selecione uma data",
+			"month": "Mês",
+			"year": "Ano",
+			"time": "Hora"
+		},
+		"terminal": {
+			"title": "Terminal",
+			"copy": "Copiar comandos",
+			"copied": "Comandos copiados"
+		},
+		"code": {
+			"title": "Codigo",
+			"copy": "Copiar codigo",
+			"copied": "Codigo copiado",
+			"position": "Ln {line}, Col {column}",
+			"plainText": "Texto simples"
+		},
+		"footer": {
+			"madeWith": "Feito com",
+			"by": "por",
+			"allRightsReserved": "Todos os direitos reservados."
+		},
+		"blog": {
+			"readingProgress": "Progresso da leitura",
+			"readMore": "Ler mais",
+			"goToPost": "Ir para o artigo",
+			"new": "Novo",
+			"tableOfContents": "Indice",
+			"tableOfContentsDescription": "Ir para uma secao deste artigo",
+			"tableOfContentsSections": "{count} secao | {count} secoes",
+			"openTableOfContents": "Abrir indice",
+			"closeTableOfContents": "Fechar indice",
+			"loadMoreWithNumbers": "Carregar mais ({current}/{total})",
+			"author": "Autor",
+			"publishedDate": "Publicado",
+			"lastUpdatedDate": "Atualizado",
+			"readingTime": "Tempo de leitura",
+			"readingTimeValue": "{minutes} min",
+			"category": "Categoria",
+			"breadcrumbBlog": "Blog",
+			"carouselNavigation": "Navegacao do carrossel",
+			"goToSlide": "Ir para o slide {index}",
+			"previousSlide": "Slide anterior",
+			"nextSlide": "Proximo slide",
+			"faq": {
+				"title": "Perguntas frequentes",
+				"description": "Encontre respostas rapidas para as perguntas mais comuns sobre este tema."
+			},
+			"share": {
+				"facebook": "Partilhar no Facebook",
+				"x": "Partilhar no X",
+				"whatsapp": "Partilhar no WhatsApp",
+				"linkedin": "Partilhar no LinkedIn",
+				"telegram": "Partilhar no Telegram",
+				"copy": "Copiar link",
+				"copied": "Link copiado"
+			}
+		},
+		"errorPage": {
+			"notFound": {
+				"title": "Página não encontrada",
+				"message": "A página solicitada não foi encontrada ou pode ter sido movida."
+			},
+			"unexpected": {
+				"title": "Algo deu errado",
+				"message": "Um erro inesperado interrompeu o fluxo atual. Tente novamente ou volte para uma página segura."
+			}
+		},
+		"messageDialog": {
+			"confirm": "Confirmar",
+			"error": "Erro",
+			"success": "Sucesso",
+			"info": "Informacao",
+			"warning": "Aviso"
+		},
+		"toast": {
+			"region": "Notificações"
+		},
+		"cookieConsent": {
+			"region": "Consentimento de cookies",
+			"message": "Usamos cookies opcionais para entender como o site é usado. Eles só são definidos se você aceitar.",
+			"policy": "Política de cookies",
+			"accept": "Aceitar",
+			"decline": "Recusar"
+		},
+		"dataTable": {
+			"selectAll": "Selecionar todas as linhas",
+			"selectRow": "Selecionar linha"
+		},
+		"numberField": {
+			"decrement": "Diminuir",
+			"increment": "Aumentar"
+		},
+		"tagsInput": {
+			"placeholder": "Adicionar uma tag…"
+		},
+		"combobox": {
+			"placeholder": "Selecione uma opção",
+			"searchPlaceholder": "Pesquisar...",
+			"empty": "Nenhum resultado encontrado."
+		},
+		"avatar": {
+			"status": {
+				"online": "Online",
+				"offline": "Offline",
+				"busy": "Ocupado",
+				"away": "Ausente"
+			}
+		},
+		"pagination": {
+			"label": "Paginação",
+			"page": "Página {page}",
+			"first": "Primeira página",
+			"previous": "Página anterior",
+			"next": "Próxima página",
+			"last": "Última página",
+			"more": "Mais páginas"
+		},
+		"stepper": {
+			"label": "Progresso"
+		},
+		"fileDropzone": {
+			"title": "Arraste e solte arquivos aqui",
+			"description": "ou clique para procurar no seu dispositivo",
+			"dropActive": "Solte para enviar",
+			"browse": "Procurar arquivos",
+			"remove": "Remover {name}",
+			"maxSize": "Máx. {size} por arquivo",
+			"maxFiles": "Até {count} arquivos",
+			"files": "Arquivos selecionados"
+		}
+	}
 }

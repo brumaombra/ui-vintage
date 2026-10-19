@@ -8,11 +8,11 @@ import { dropdownMenuItemClass } from './classes';
 
 // Props
 const props = withDefaults(defineProps<DropdownMenuItemProps & {
-    class?: HTMLAttributes['class'];
-    inset?: boolean;
-    variant?: 'default' | 'destructive';
+	class?: HTMLAttributes['class'];
+	inset?: boolean;
+	variant?: 'default' | 'destructive';
 }>(), {
-    variant: 'default'
+	variant: 'default'
 });
 
 // Emits
@@ -23,12 +23,12 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 </script>
 
 <template>
-    <DropdownMenuItem data-slot="dropdown-menu-item" :data-inset="props.inset ? '' : undefined" :data-variant="props.variant" v-bind="forwarded" :class="cn(
-        dropdownMenuItemClass,
-        props.variant === 'destructive' && 'text-destructive before:bg-destructive data-highlighted:bg-destructive/10 data-highlighted:text-destructive',
-        props.class
-    )
-        ">
-        <slot />
-    </DropdownMenuItem>
+	<DropdownMenuItem data-slot="dropdown-menu-item" :data-inset="props.inset ? '' : undefined" :data-variant="props.variant" v-bind="forwarded" :class="cn(
+		dropdownMenuItemClass,
+		props.variant === 'destructive' && 'text-destructive before:bg-destructive data-highlighted:bg-destructive/10 data-highlighted:text-destructive',
+		props.class
+	)
+		">
+		<slot />
+	</DropdownMenuItem>
 </template>

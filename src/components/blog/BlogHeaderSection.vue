@@ -11,51 +11,51 @@ import { StatStrip } from '../stat-strip';
 
 // Props
 const props = withDefaults(defineProps<{
-    badges?: Array<{
-        color: ToneColor;
-        text: string;
-    }>;
-    announcement?: {
-        text: string;
-        to: string;
-        label?: string;
-    } | null;
-    title: string;
-    highlight?: string;
-    description: string;
-    stats?: Array<{
-        label: string;
-        value: string | number;
-        icon?: HugeiconsIconDefinition;
-    }>;
-    align?: 'left' | 'center' | 'right';
+	badges?: Array<{
+		color: ToneColor;
+		text: string;
+	}>;
+	announcement?: {
+		text: string;
+		to: string;
+		label?: string;
+	} | null;
+	title: string;
+	highlight?: string;
+	description: string;
+	stats?: Array<{
+		label: string;
+		value: string | number;
+		icon?: HugeiconsIconDefinition;
+	}>;
+	align?: 'left' | 'center' | 'right';
 }>(), {
-    badges: () => [],
-    announcement: null,
-    highlight: '',
-    stats: () => [],
-    align: 'center'
+	badges: () => [],
+	announcement: null,
+	highlight: '',
+	stats: () => [],
+	align: 'center'
 });
 
 const { t } = useI18n();
 
 // Alignment of the whole header: the column, its text, and the rows of badges and stats
 const alignClasses = {
-    left: { header: 'items-start text-left', row: 'justify-start' },
-    center: { header: 'items-center text-center', row: 'justify-center' },
-    right: { header: 'items-end text-right', row: 'justify-end' }
+	left: { header: 'items-start text-left', row: 'justify-start' },
+	center: { header: 'items-center text-center', row: 'justify-center' },
+	right: { header: 'items-end text-right', row: 'justify-end' }
 } as const;
 const alignClass = computed(() => alignClasses[props.align] ?? alignClasses.center);
 
 // Split the title around the highlighted part (when it appears in the title)
 const titleParts = computed(() => {
-    const index = props.highlight ? props.title.indexOf(props.highlight) : -1;
-    if (index === -1) return { before: props.title, highlight: '', after: '' };
-    return {
-        before: props.title.slice(0, index),
-        highlight: props.highlight,
-        after: props.title.slice(index + props.highlight.length)
-    };
+	const index = props.highlight ? props.title.indexOf(props.highlight) : -1;
+	if (index === -1) return { before: props.title, highlight: '', after: '' };
+	return {
+		before: props.title.slice(0, index),
+		highlight: props.highlight,
+		after: props.title.slice(index + props.highlight.length)
+	};
 });
 
 // Words that rise in one by one (the highlight rises in as a single block between them)
@@ -64,8 +64,8 @@ const beforeWords = computed(() => splitWords(titleParts.value.before));
 const afterWords = computed(() => splitWords(titleParts.value.after));
 // Space after a word before the highlight: always between words, and before the highlight only when the title has one there
 const wordGap = (index: number) => {
-    if (index < beforeWords.value.length - 1) return ' ';
-    return titleParts.value.highlight && /\s$/.test(titleParts.value.before) ? ' ' : '';
+	if (index < beforeWords.value.length - 1) return ' ';
+	return titleParts.value.highlight && /\s$/.test(titleParts.value.before) ? ' ' : '';
 };
 const wordDelay = (index: number) => `${120 + Math.min(index, 12) * 55}ms`;
 const highlightDelay = computed(() => wordDelay(beforeWords.value.length));
@@ -79,52 +79,52 @@ const underlineDelay = computed(() => `${beforeWords.value.length * 55 + 600}ms`
 </script>
 
 <template>
-    <header :class="cn('relative flex flex-col gap-6 pt-6 md:pt-12', alignClass.header)">
-        <!-- Announcement (links to something new, such as the latest post) -->
-        <NuxtLink v-if="props.announcement" :to="props.announcement.to" class="group/announce max-w-full animate-uv-fade-up rounded outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45">
-            <span class="inline-flex max-w-full items-center gap-2 rounded border border-warning/35 bg-warning/10 px-3 py-1 text-xs text-foreground transition-colors duration-150 group-hover/announce:border-warning/70">
-                <span aria-hidden="true" class="relative flex size-1.5 shrink-0 text-warning">
-                    <span class="absolute inline-flex size-full animate-uv-ping-soft rounded-full bg-current opacity-60" />
-                    <span class="relative inline-flex size-1.5 rounded-full bg-current" />
-                </span>
-                <span class="shrink-0 font-semibold">{{ props.announcement.label || t('uiVintage.blog.new') }}</span>
-                <span class="truncate opacity-80">{{ props.announcement.text }}</span>
-                <HugeiconsIcon :icon="ArrowRight01Icon" class="size-3.5 shrink-0 transition-transform duration-300 ease-spring group-hover/announce:translate-x-0.5" />
-            </span>
-        </NuxtLink>
+	<header :class="cn('relative flex flex-col gap-6 pt-6 md:pt-12', alignClass.header)">
+		<!-- Announcement (links to something new, such as the latest post) -->
+		<NuxtLink v-if="props.announcement" :to="props.announcement.to" class="group/announce max-w-full animate-uv-fade-up rounded outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45">
+			<span class="inline-flex max-w-full items-center gap-2 rounded border border-warning/35 bg-warning/10 px-3 py-1 text-xs text-foreground transition-colors duration-150 group-hover/announce:border-warning/70">
+				<span aria-hidden="true" class="relative flex size-1.5 shrink-0 text-warning">
+					<span class="absolute inline-flex size-full animate-uv-ping-soft rounded-full bg-current opacity-60" />
+					<span class="relative inline-flex size-1.5 rounded-full bg-current" />
+				</span>
+				<span class="shrink-0 font-semibold">{{ props.announcement.label || t('uiVintage.blog.new') }}</span>
+				<span class="truncate opacity-80">{{ props.announcement.text }}</span>
+				<HugeiconsIcon :icon="ArrowRight01Icon" class="size-3.5 shrink-0 transition-transform duration-300 ease-spring group-hover/announce:translate-x-0.5" />
+			</span>
+		</NuxtLink>
 
-        <!-- Badges -->
-        <div v-if="props.badges.length > 0" :class="cn('flex flex-wrap gap-2', alignClass.row)">
-            <Badge v-for="(badge, index) in props.badges"
-                :key="`${badge.color}-${badge.text}`"
-                :color="badge.color"
-                :text="badge.text"
-                :pulse="index === 0 && !props.announcement"
-                class="animate-uv-fade-up"
-                :style="{ animationDelay: `${index * 70}ms` }" />
-        </div>
+		<!-- Badges -->
+		<div v-if="props.badges.length > 0" :class="cn('flex flex-wrap gap-2', alignClass.row)">
+			<Badge v-for="(badge, index) in props.badges"
+				:key="`${badge.color}-${badge.text}`"
+				:color="badge.color"
+				:text="badge.text"
+				:pulse="index === 0 && !props.announcement"
+				class="animate-uv-fade-up"
+				:style="{ animationDelay: `${index * 70}ms` }" />
+		</div>
 
-        <!-- Title (each word rises in with a spring, the highlight gets a hand-drawn underline) -->
-        <h1 class="max-w-4xl text-4xl leading-[1.05] font-semibold tracking-tight text-foreground sm:text-5xl md:text-6xl">
-            <template v-for="(word, index) in beforeWords" :key="`before-${word}-${index}`">
-                <span class="inline-block animate-uv-word-in" :style="{ animationDelay: wordDelay(index) }">{{ word }}</span>{{ wordGap(index) }}
-            </template>
-            <!-- The text and the underline sit on one line so no stray space ends up inside the highlight -->
-            <span v-if="titleParts.highlight" class="relative inline-block animate-uv-word-in text-primary" :style="{ animationDelay: highlightDelay }">{{ titleParts.highlight }}<svg class="absolute -bottom-2 left-0 h-3 w-full text-primary/60" viewBox="0 0 200 12" fill="none" preserveAspectRatio="none" aria-hidden="true">
-                    <path d="M2 9C40 3 80 2 198 7" stroke="currentColor" stroke-width="4" stroke-linecap="round" pathLength="1" class="animate-uv-draw [stroke-dasharray:1]" :style="{ animationDelay: underlineDelay }" />
-                </svg>
-            </span>
-            <template v-for="(word, index) in afterWords" :key="`after-${word}-${index}`">
-                {{ index === 0 && !/^\s/.test(titleParts.after) ? '' : ' ' }}<span class="inline-block animate-uv-word-in" :style="{ animationDelay: afterDelay(index) }">{{ word }}</span>
-            </template>
-        </h1>
+		<!-- Title (each word rises in with a spring, the highlight gets a hand-drawn underline) -->
+		<h1 class="max-w-4xl text-4xl leading-[1.05] font-semibold tracking-tight text-foreground sm:text-5xl md:text-6xl">
+			<template v-for="(word, index) in beforeWords" :key="`before-${word}-${index}`">
+				<span class="inline-block animate-uv-word-in" :style="{ animationDelay: wordDelay(index) }">{{ word }}</span>{{ wordGap(index) }}
+			</template>
+			<!-- The text and the underline sit on one line so no stray space ends up inside the highlight -->
+			<span v-if="titleParts.highlight" class="relative inline-block animate-uv-word-in text-primary" :style="{ animationDelay: highlightDelay }">{{ titleParts.highlight }}<svg class="absolute -bottom-2 left-0 h-3 w-full text-primary/60" viewBox="0 0 200 12" fill="none" preserveAspectRatio="none" aria-hidden="true">
+					<path d="M2 9C40 3 80 2 198 7" stroke="currentColor" stroke-width="4" stroke-linecap="round" pathLength="1" class="animate-uv-draw [stroke-dasharray:1]" :style="{ animationDelay: underlineDelay }" />
+				</svg>
+			</span>
+			<template v-for="(word, index) in afterWords" :key="`after-${word}-${index}`">
+				{{ index === 0 && !/^\s/.test(titleParts.after) ? '' : ' ' }}<span class="inline-block animate-uv-word-in" :style="{ animationDelay: afterDelay(index) }">{{ word }}</span>
+			</template>
+		</h1>
 
-        <!-- Description -->
-        <p class="max-w-2xl animate-uv-fade-up text-sm leading-7 text-muted-foreground sm:text-base" :style="{ animationDelay: descriptionDelay }">
-            {{ props.description }}
-        </p>
+		<!-- Description -->
+		<p class="max-w-2xl animate-uv-fade-up text-sm leading-7 text-muted-foreground sm:text-base" :style="{ animationDelay: descriptionDelay }">
+			{{ props.description }}
+		</p>
 
-        <!-- Stats strip -->
-        <StatStrip :items="props.stats" :class="cn('animate-uv-fade-up', alignClass.row)" :style="{ animationDelay: statsDelay }" />
-    </header>
+		<!-- Stats strip -->
+		<StatStrip :items="props.stats" :class="cn('animate-uv-fade-up', alignClass.row)" :style="{ animationDelay: statsDelay }" />
+	</header>
 </template>

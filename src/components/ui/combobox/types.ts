@@ -5,11 +5,11 @@ export type ComboboxSelectValue = string | number;
 
 // Option rendered by ComboboxSelect
 export interface ComboboxSelectOption {
-    value: ComboboxSelectValue;
-    label: string;
-    description?: string;
-    icon?: HugeiconsIconDefinition;
-    disabled?: boolean;
+	value: ComboboxSelectValue;
+	label: string;
+	description?: string;
+	icon?: HugeiconsIconDefinition;
+	disabled?: boolean;
 }
 
 // v-model shape of ComboboxSelect (array when `multiple`)

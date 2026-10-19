@@ -9,14 +9,14 @@ import { toggleVariants } from '.';
 
 // Props
 const props = withDefaults(defineProps<ToggleProps & {
-    variant?: ToggleVariants['variant'];
-    size?: ToggleVariants['size'];
-    class?: HTMLAttributes['class'];
+	variant?: ToggleVariants['variant'];
+	size?: ToggleVariants['size'];
+	class?: HTMLAttributes['class'];
 }>(), {
-    variant: 'default',
-    size: 'default',
-    disabled: false,
-    modelValue: undefined,
+	variant: 'default',
+	size: 'default',
+	disabled: false,
+	modelValue: undefined,
 });
 
 // Emits
@@ -27,7 +27,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 </script>
 
 <template>
-    <Toggle v-slot="slotProps" data-slot="toggle" :data-variant="props.variant" :data-size="props.size" v-bind="forwarded" :class="cn(toggleVariants({ variant: props.variant, size: props.size }), props.class)">
-        <slot v-bind="slotProps" />
-    </Toggle>
+	<Toggle v-slot="slotProps" data-slot="toggle" :data-variant="props.variant" :data-size="props.size" v-bind="forwarded" :class="cn(toggleVariants({ variant: props.variant, size: props.size }), props.class)">
+		<slot v-bind="slotProps" />
+	</Toggle>
 </template>

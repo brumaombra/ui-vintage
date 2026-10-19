@@ -5,25 +5,25 @@ import type { HugeiconsIconDefinition } from '../../lib/common-types';
 
 // Props
 const props = withDefaults(defineProps<{
-    icon?: HugeiconsIconDefinition;
+	icon?: HugeiconsIconDefinition;
 }>(), {
-    icon: () => ChartLineData02Icon
+	icon: () => ChartLineData02Icon
 });
 </script>
 
 <template>
-    <div aria-hidden="true" data-aos="blur-up" class="not-prose my-8 sm:my-14">
-        <div class="flex items-center gap-3 sm:gap-4">
-            <!-- Left line -->
-            <div class="h-px flex-1 bg-linear-to-r from-transparent via-border to-primary/40" />
+	<div aria-hidden="true" data-aos="blur-up" class="not-prose my-8 sm:my-14">
+		<div class="flex items-center gap-3 sm:gap-4">
+			<!-- Left line -->
+			<div class="h-px flex-1 bg-linear-to-r from-transparent via-border to-primary/40" />
 
-            <!-- Icon in the middle -->
-            <div class="flex size-7 shrink-0 items-center justify-center rounded border border-primary/30 bg-card text-primary">
-                <HugeiconsIcon :icon="props.icon" class="size-3.5" />
-            </div>
+			<!-- Icon in the middle -->
+			<div class="flex size-7 shrink-0 items-center justify-center rounded border border-primary/30 bg-card text-primary">
+				<HugeiconsIcon :icon="props.icon" class="size-3.5" />
+			</div>
 
-            <!-- Right line -->
-            <div class="h-px flex-1 bg-linear-to-l from-transparent via-border to-primary/40" />
-        </div>
-    </div>
+			<!-- Right line -->
+			<div class="h-px flex-1 bg-linear-to-l from-transparent via-border to-primary/40" />
+		</div>
+	</div>
 </template>

@@ -4,77 +4,77 @@ import { unref } from 'vue';
 import { setUiVintageRuntimeLocaleSource, uiVintageMessages } from '../lib/i18n';
 
 type MessageComposer = {
-    mergeLocaleMessage: (locale: string, messages: unknown) => void;
-    locale?: unknown;
+	mergeLocaleMessage: (locale: string, messages: unknown) => void;
+	locale?: unknown;
 };
 
 type I18nInstance = {
-    mergeLocaleMessage?: unknown;
-    global?: {
-        mergeLocaleMessage?: unknown;
-    };
+	mergeLocaleMessage?: unknown;
+	global?: {
+		mergeLocaleMessage?: unknown;
+	};
 };
 
 type NuxtAppWithI18n = NuxtApp & {
-    $i18n?: unknown;
+	$i18n?: unknown;
 };
 
 // Resolve the active i18n composer from either the Nuxt app or the Vue I18n instance
 const resolveMessageComposer = (i18n: unknown): MessageComposer | null => {
-    // If no i18n instance is provided, return null
-    if (!i18n || typeof i18n !== 'object') {
-        return null;
-    }
+	// If no i18n instance is provided, return null
+	if (!i18n || typeof i18n !== 'object') {
+		return null;
+	}
 
-    const instance = i18n as I18nInstance;
+	const instance = i18n as I18nInstance;
 
-    // Check if the provided i18n instance has the mergeLocaleMessage method (Vue I18n 9+ composer API)
-    if (typeof instance.mergeLocaleMessage === 'function') {
-        return i18n as MessageComposer;
-    }
+	// Check if the provided i18n instance has the mergeLocaleMessage method (Vue I18n 9+ composer API)
+	if (typeof instance.mergeLocaleMessage === 'function') {
+		return i18n as MessageComposer;
+	}
 
-    // Check if the provided i18n instance has a global property with the mergeLocaleMessage method (Vue I18n 9+ global API)
-    if (instance.global && typeof instance.global.mergeLocaleMessage === 'function') {
-        return instance.global as MessageComposer;
-    }
+	// Check if the provided i18n instance has a global property with the mergeLocaleMessage method (Vue I18n 9+ global API)
+	if (instance.global && typeof instance.global.mergeLocaleMessage === 'function') {
+		return instance.global as MessageComposer;
+	}
 
-    // If neither check succeeded, return null
-    return null;
+	// If neither check succeeded, return null
+	return null;
 };
 
 // Merge the library locale messages into the app composer
 const applyUiVintageMessages = (nuxtApp: NuxtApp): void => {
-    // Attempt to resolve the i18n composer from the Nuxt app or Vue I18n instance
-    const app = nuxtApp as NuxtAppWithI18n;
-    const globalProperties = app.vueApp.config.globalProperties as {
-        $i18n?: unknown;
-    };
-    const composer = resolveMessageComposer(app.$i18n || globalProperties.$i18n);
-    if (!composer) {
-        return;
-    }
+	// Attempt to resolve the i18n composer from the Nuxt app or Vue I18n instance
+	const app = nuxtApp as NuxtAppWithI18n;
+	const globalProperties = app.vueApp.config.globalProperties as {
+		$i18n?: unknown;
+	};
+	const composer = resolveMessageComposer(app.$i18n || globalProperties.$i18n);
+	if (!composer) {
+		return;
+	}
 
-    // Merge the library messages into the composer
-    for (const [locale, messages] of Object.entries(uiVintageMessages)) {
-        composer.mergeLocaleMessage(locale, messages);
-    }
+	// Merge the library messages into the composer
+	for (const [locale, messages] of Object.entries(uiVintageMessages)) {
+		composer.mergeLocaleMessage(locale, messages);
+	}
 
-    // In the browser, the toasts and dialogs mounted outside the app follow the app locale (never on the server, where state is shared across requests)
-    if (import.meta.client) {
-        setUiVintageRuntimeLocaleSource(() => {
-            const locale = unref(composer.locale);
-            return typeof locale === 'string' ? locale : undefined;
-        });
-    }
+	// In the browser, the toasts and dialogs mounted outside the app follow the app locale (never on the server, where state is shared across requests)
+	if (import.meta.client) {
+		setUiVintageRuntimeLocaleSource(() => {
+			const locale = unref(composer.locale);
+			return typeof locale === 'string' ? locale : undefined;
+		});
+	}
 };
 
 // Define the Nuxt plugin
 export default defineNuxtPlugin({
-    name: 'ui-vintage:i18n',
-    dependsOn: ['i18n:plugin'],
-    setup(nuxtApp) {
-        // Merge library messages during plugin setup and after app creation
-        applyUiVintageMessages(nuxtApp);
-        nuxtApp.hook('app:created', () => applyUiVintageMessages(nuxtApp));
-    }
+	name: 'ui-vintage:i18n',
+	dependsOn: ['i18n:plugin'],
+	setup(nuxtApp) {
+		// Merge library messages during plugin setup and after app creation
+		applyUiVintageMessages(nuxtApp);
+		nuxtApp.hook('app:created', () => applyUiVintageMessages(nuxtApp));
+	}
 });

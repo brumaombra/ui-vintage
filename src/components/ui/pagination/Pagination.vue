@@ -8,7 +8,7 @@ import { cn } from '../../../lib/utils';
 
 // Props
 const props = defineProps<PaginationRootProps & {
-    class?: HTMLAttributes['class'];
+	class?: HTMLAttributes['class'];
 }>();
 
 // Emits
@@ -21,7 +21,7 @@ const { t } = useI18n();
 </script>
 
 <template>
-    <PaginationRoot v-slot="slotProps" data-slot="pagination" :aria-label="t('uiVintage.pagination.label')" v-bind="forwarded" :class="cn('mx-auto flex w-full justify-center', props.class)">
-        <slot v-bind="slotProps" />
-    </PaginationRoot>
+	<PaginationRoot v-slot="slotProps" data-slot="pagination" :aria-label="t('uiVintage.pagination.label')" v-bind="forwarded" :class="cn('mx-auto flex w-full justify-center', props.class)">
+		<slot v-bind="slotProps" />
+	</PaginationRoot>
 </template>

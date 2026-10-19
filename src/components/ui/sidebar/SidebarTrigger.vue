@@ -9,7 +9,7 @@ import { useSidebar } from './utils';
 
 // Props
 const props = defineProps<{
-    class?: HTMLAttributes['class'];
+	class?: HTMLAttributes['class'];
 }>();
 
 const { t } = useI18n();
@@ -17,8 +17,8 @@ const { toggleSidebar } = useSidebar();
 </script>
 
 <template>
-    <Button data-sidebar="trigger" data-slot="sidebar-trigger" variant="secondary" size="icon" :class="cn(props.class)" @click="toggleSidebar">
-        <HugeiconsIcon :icon="PanelLeftIcon" />
-        <span class="sr-only">{{ t('uiVintage.sidebar.toggle') }}</span>
-    </Button>
+	<Button data-sidebar="trigger" data-slot="sidebar-trigger" variant="secondary" size="icon" :class="cn(props.class)" @click="toggleSidebar">
+		<HugeiconsIcon :icon="PanelLeftIcon" />
+		<span class="sr-only">{{ t('uiVintage.sidebar.toggle') }}</span>
+	</Button>
 </template>

@@ -10,8 +10,8 @@ import { toggleGroupContextKey, toggleGroupItemVariants } from '.';
 
 // Props
 const props = defineProps<ToggleGroupItemProps & {
-    size?: ToggleGroupSize;
-    class?: HTMLAttributes['class'];
+	size?: ToggleGroupSize;
+	class?: HTMLAttributes['class'];
 }>();
 
 const delegatedProps = reactiveOmit(props, 'class', 'size');
@@ -24,11 +24,11 @@ const hasIndicator = computed(() => context?.indicator.value ?? false);
 </script>
 
 <template>
-    <ToggleGroupItem v-slot="slotProps" data-slot="toggle-group-item" :data-size="size" v-bind="forwardedProps" :class="cn(
-        toggleGroupItemVariants({ size }),
-        !hasIndicator && 'hover:bg-accent data-[state=on]:bg-accent',
-        props.class
-    )">
-        <slot v-bind="slotProps" />
-    </ToggleGroupItem>
+	<ToggleGroupItem v-slot="slotProps" data-slot="toggle-group-item" :data-size="size" v-bind="forwardedProps" :class="cn(
+		toggleGroupItemVariants({ size }),
+		!hasIndicator && 'hover:bg-accent data-[state=on]:bg-accent',
+		props.class
+	)">
+		<slot v-bind="slotProps" />
+	</ToggleGroupItem>
 </template>

@@ -7,14 +7,14 @@ import { cn } from '../../../lib/utils';
 import { dropdownMenuStaggerClass, dropdownMenuSurfaceClass } from './classes';
 
 defineOptions({
-    inheritAttrs: false
+	inheritAttrs: false
 });
 
 // Props
 const props = withDefaults(defineProps<DropdownMenuContentProps & { class?: HTMLAttributes['class'] }>(), {
-    align: 'start',
-    sideOffset: 6,
-    collisionPadding: 8
+	align: 'start',
+	sideOffset: 6,
+	collisionPadding: 8
 });
 
 // Emits
@@ -25,15 +25,15 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 </script>
 
 <template>
-    <DropdownMenuPortal>
-        <DropdownMenuContent data-slot="dropdown-menu-content" v-bind="{ ...$attrs, ...forwarded }" :class="cn(
-            dropdownMenuSurfaceClass,
-            'max-h-(--reka-dropdown-menu-content-available-height)',
-            dropdownMenuStaggerClass,
-            props.class
-        )
-            ">
-            <slot />
-        </DropdownMenuContent>
-    </DropdownMenuPortal>
+	<DropdownMenuPortal>
+		<DropdownMenuContent data-slot="dropdown-menu-content" v-bind="{ ...$attrs, ...forwarded }" :class="cn(
+			dropdownMenuSurfaceClass,
+			'max-h-(--reka-dropdown-menu-content-available-height)',
+			dropdownMenuStaggerClass,
+			props.class
+		)
+			">
+			<slot />
+		</DropdownMenuContent>
+	</DropdownMenuPortal>
 </template>

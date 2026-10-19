@@ -17,19 +17,19 @@ const forwardedProps = useForwardProps(delegatedProps);
 </script>
 
 <template>
-    <CalendarPrev
-        data-slot="calendar-prev-button"
-        :class="
-            cn(
-                buttonVariants({ variant: 'secondary' }),
-                'size-7 min-h-10 bg-transparent p-0 text-muted-foreground hover:text-foreground',
-                props.class,
-            )
-        "
-        v-bind="forwardedProps"
-    >
-        <slot>
-            <HugeiconsIcon :icon="ArrowLeft01Icon" class="size-4" />
-        </slot>
-    </CalendarPrev>
+	<CalendarPrev
+		data-slot="calendar-prev-button"
+		:class="
+			cn(
+				buttonVariants({ variant: 'secondary' }),
+				'size-7 min-h-10 bg-transparent p-0 text-muted-foreground hover:text-foreground',
+				props.class,
+			)
+		"
+		v-bind="forwardedProps"
+	>
+		<slot>
+			<HugeiconsIcon :icon="ArrowLeft01Icon" class="size-4" />
+		</slot>
+	</CalendarPrev>
 </template>

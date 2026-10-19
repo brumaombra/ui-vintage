@@ -16,7 +16,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 </script>
 
 <template>
-    <CollapsibleContent data-slot="collapsible-content" v-bind="forwarded" :class="cn('uv-collapsible-motion', props.class)">
-        <slot />
-    </CollapsibleContent>
+	<CollapsibleContent data-slot="collapsible-content" v-bind="forwarded" :class="cn('uv-collapsible-motion', props.class)">
+		<slot />
+	</CollapsibleContent>
 </template>

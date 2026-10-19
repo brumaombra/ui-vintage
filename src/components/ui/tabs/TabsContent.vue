@@ -7,14 +7,14 @@ import { cn } from '../../../lib/utils';
 
 // Props
 const props = defineProps<TabsContentProps & {
-    class?: HTMLAttributes['class'];
+	class?: HTMLAttributes['class'];
 }>();
 
 const delegatedProps = reactiveOmit(props, 'class');
 </script>
 
 <template>
-    <TabsContent data-slot="tabs-content" :class="cn('flex-1 outline-none data-[state=active]:animate-uv-fade-up', props.class)" v-bind="delegatedProps">
-        <slot />
-    </TabsContent>
+	<TabsContent data-slot="tabs-content" :class="cn('flex-1 outline-none data-[state=active]:animate-uv-fade-up', props.class)" v-bind="delegatedProps">
+		<slot />
+	</TabsContent>
 </template>

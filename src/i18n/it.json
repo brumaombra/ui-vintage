@@ -1,187 +1,187 @@
 {
-    "uiVintage": {
-        "common": {
-            "breadcrumb": "Percorso di navigazione",
-            "more": "Altro",
-            "home": "Home",
-            "empty": {
-                "title": "Non c'è ancora niente qui",
-                "description": "Al momento non c'è alcun contenuto da mostrare."
-            },
-            "loading": {
-                "title": "Caricamento...",
-                "description": "Attendi un momento mentre carichiamo il contenuto."
-            },
-            "logo": "Logo di {name}"
-        },
-        "buttons": {
-            "remove": "Rimuovi",
-            "all": "Tutti",
-            "close": "Chiudi",
-            "cancel": "Annulla",
-            "delete": "Elimina",
-            "confirm": "Conferma",
-            "filter": "Filtra",
-            "search": "Cerca",
-            "apply": "Applica",
-            "clear": "Pulisci",
-            "loading": "Caricamento",
-            "loadMore": "Carica altro",
-            "save": "Salva",
-            "update": "Aggiorna",
-            "goBack": "Torna indietro"
-        },
-        "theme": {
-            "light": "Chiaro",
-            "dark": "Scuro",
-            "auto": "Automatico",
-            "title": "Scegli tema",
-            "ariaLabel": "Selettore tema"
-        },
-        "language": {
-            "title": "Scegli lingua",
-            "ariaLabel": "Selettore lingua"
-        },
-        "sidebar": {
-            "title": "Barra laterale",
-            "description": "Mostra la barra laterale sui dispositivi mobili.",
-            "toggle": "Attiva o disattiva la barra laterale"
-        },
-        "commandDialog": {
-            "title": "Tavolozza dei comandi",
-            "description": "Cerca un comando da eseguire..."
-        },
-        "datePicker": {
-            "placeholder": "Scegli una data",
-            "month": "Mese",
-            "year": "Anno",
-            "time": "Ora"
-        },
-        "terminal": {
-            "title": "Terminale",
-            "copy": "Copia comandi",
-            "copied": "Comandi copiati"
-        },
-        "code": {
-            "title": "Codice",
-            "copy": "Copia codice",
-            "copied": "Codice copiato",
-            "position": "Riga {line}, col. {column}",
-            "plainText": "Testo semplice"
-        },
-        "footer": {
-            "madeWith": "Fatto con",
-            "by": "da",
-            "allRightsReserved": "Tutti i diritti riservati."
-        },
-        "blog": {
-            "readingProgress": "Avanzamento della lettura",
-            "readMore": "Leggi di piu",
-            "goToPost": "Vai all'articolo",
-            "new": "Novità",
-            "tableOfContents": "Indice dei contenuti",
-            "tableOfContentsDescription": "Vai a una sezione dell'articolo",
-            "tableOfContentsSections": "{count} sezione | {count} sezioni",
-            "openTableOfContents": "Apri l'indice dei contenuti",
-            "closeTableOfContents": "Chiudi l'indice dei contenuti",
-            "loadMoreWithNumbers": "Carica altro ({current}/{total})",
-            "author": "Autore",
-            "publishedDate": "Pubblicato",
-            "lastUpdatedDate": "Aggiornato",
-            "readingTime": "Tempo di lettura",
-            "readingTimeValue": "{minutes} min",
-            "category": "Categoria",
-            "breadcrumbBlog": "Blog",
-            "carouselNavigation": "Navigazione carosello",
-            "goToSlide": "Vai alla slide {index}",
-            "previousSlide": "Slide precedente",
-            "nextSlide": "Slide successiva",
-            "faq": {
-                "title": "Domande frequenti",
-                "description": "Trova risposte rapide alle domande piu comuni su questo argomento."
-            },
-            "share": {
-                "facebook": "Condividi su Facebook",
-                "x": "Condividi su X",
-                "whatsapp": "Condividi su WhatsApp",
-                "linkedin": "Condividi su LinkedIn",
-                "telegram": "Condividi su Telegram",
-                "copy": "Copia link",
-                "copied": "Link copiato"
-            }
-        },
-        "errorPage": {
-            "notFound": {
-                "title": "Pagina non trovata",
-                "message": "La pagina richiesta non è stata trovata o potrebbe essere stata spostata."
-            },
-            "unexpected": {
-                "title": "Qualcosa è andato storto",
-                "message": "Un errore imprevisto ha interrotto il flusso corrente. Riprova o torna a una pagina sicura."
-            }
-        },
-        "messageDialog": {
-            "confirm": "Conferma",
-            "error": "Errore",
-            "success": "Successo",
-            "info": "Informazione",
-            "warning": "Attenzione"
-        },
-        "toast": {
-            "region": "Notifiche"
-        },
-        "cookieConsent": {
-            "region": "Consenso ai cookie",
-            "message": "Usiamo cookie facoltativi per capire come viene usato il sito. Vengono impostati solo se accetti.",
-            "policy": "Politica sui cookie",
-            "accept": "Accetta",
-            "decline": "Rifiuta"
-        },
-        "dataTable": {
-            "selectAll": "Seleziona tutte le righe",
-            "selectRow": "Seleziona riga"
-        },
-        "numberField": {
-            "decrement": "Diminuisci",
-            "increment": "Aumenta"
-        },
-        "tagsInput": {
-            "placeholder": "Aggiungi un tag…"
-        },
-        "combobox": {
-            "placeholder": "Seleziona un'opzione",
-            "searchPlaceholder": "Cerca...",
-            "empty": "Nessun risultato trovato."
-        },
-        "avatar": {
-            "status": {
-                "online": "Online",
-                "offline": "Offline",
-                "busy": "Occupato",
-                "away": "Assente"
-            }
-        },
-        "pagination": {
-            "label": "Paginazione",
-            "page": "Pagina {page}",
-            "first": "Prima pagina",
-            "previous": "Pagina precedente",
-            "next": "Pagina successiva",
-            "last": "Ultima pagina",
-            "more": "Altre pagine"
-        },
-        "stepper": {
-            "label": "Avanzamento"
-        },
-        "fileDropzone": {
-            "title": "Trascina qui i file",
-            "description": "oppure fai clic per sfogliare il dispositivo",
-            "dropActive": "Rilascia per caricare",
-            "browse": "Sfoglia file",
-            "remove": "Rimuovi {name}",
-            "maxSize": "Max {size} per file",
-            "maxFiles": "Fino a {count} file",
-            "files": "File selezionati"
-        }
-    }
+	"uiVintage": {
+		"common": {
+			"breadcrumb": "Percorso di navigazione",
+			"more": "Altro",
+			"home": "Home",
+			"empty": {
+				"title": "Non c'è ancora niente qui",
+				"description": "Al momento non c'è alcun contenuto da mostrare."
+			},
+			"loading": {
+				"title": "Caricamento...",
+				"description": "Attendi un momento mentre carichiamo il contenuto."
+			},
+			"logo": "Logo di {name}"
+		},
+		"buttons": {
+			"remove": "Rimuovi",
+			"all": "Tutti",
+			"close": "Chiudi",
+			"cancel": "Annulla",
+			"delete": "Elimina",
+			"confirm": "Conferma",
+			"filter": "Filtra",
+			"search": "Cerca",
+			"apply": "Applica",
+			"clear": "Pulisci",
+			"loading": "Caricamento",
+			"loadMore": "Carica altro",
+			"save": "Salva",
+			"update": "Aggiorna",
+			"goBack": "Torna indietro"
+		},
+		"theme": {
+			"light": "Chiaro",
+			"dark": "Scuro",
+			"auto": "Automatico",
+			"title": "Scegli tema",
+			"ariaLabel": "Selettore tema"
+		},
+		"language": {
+			"title": "Scegli lingua",
+			"ariaLabel": "Selettore lingua"
+		},
+		"sidebar": {
+			"title": "Barra laterale",
+			"description": "Mostra la barra laterale sui dispositivi mobili.",
+			"toggle": "Attiva o disattiva la barra laterale"
+		},
+		"commandDialog": {
+			"title": "Tavolozza dei comandi",
+			"description": "Cerca un comando da eseguire..."
+		},
+		"datePicker": {
+			"placeholder": "Scegli una data",
+			"month": "Mese",
+			"year": "Anno",
+			"time": "Ora"
+		},
+		"terminal": {
+			"title": "Terminale",
+			"copy": "Copia comandi",
+			"copied": "Comandi copiati"
+		},
+		"code": {
+			"title": "Codice",
+			"copy": "Copia codice",
+			"copied": "Codice copiato",
+			"position": "Riga {line}, col. {column}",
+			"plainText": "Testo semplice"
+		},
+		"footer": {
+			"madeWith": "Fatto con",
+			"by": "da",
+			"allRightsReserved": "Tutti i diritti riservati."
+		},
+		"blog": {
+			"readingProgress": "Avanzamento della lettura",
+			"readMore": "Leggi di piu",
+			"goToPost": "Vai all'articolo",
+			"new": "Novità",
+			"tableOfContents": "Indice dei contenuti",
+			"tableOfContentsDescription": "Vai a una sezione dell'articolo",
+			"tableOfContentsSections": "{count} sezione | {count} sezioni",
+			"openTableOfContents": "Apri l'indice dei contenuti",
+			"closeTableOfContents": "Chiudi l'indice dei contenuti",
+			"loadMoreWithNumbers": "Carica altro ({current}/{total})",
+			"author": "Autore",
+			"publishedDate": "Pubblicato",
+			"lastUpdatedDate": "Aggiornato",
+			"readingTime": "Tempo di lettura",
+			"readingTimeValue": "{minutes} min",
+			"category": "Categoria",
+			"breadcrumbBlog": "Blog",
+			"carouselNavigation": "Navigazione carosello",
+			"goToSlide": "Vai alla slide {index}",
+			"previousSlide": "Slide precedente",
+			"nextSlide": "Slide successiva",
+			"faq": {
+				"title": "Domande frequenti",
+				"description": "Trova risposte rapide alle domande piu comuni su questo argomento."
+			},
+			"share": {
+				"facebook": "Condividi su Facebook",
+				"x": "Condividi su X",
+				"whatsapp": "Condividi su WhatsApp",
+				"linkedin": "Condividi su LinkedIn",
+				"telegram": "Condividi su Telegram",
+				"copy": "Copia link",
+				"copied": "Link copiato"
+			}
+		},
+		"errorPage": {
+			"notFound": {
+				"title": "Pagina non trovata",
+				"message": "La pagina richiesta non è stata trovata o potrebbe essere stata spostata."
+			},
+			"unexpected": {
+				"title": "Qualcosa è andato storto",
+				"message": "Un errore imprevisto ha interrotto il flusso corrente. Riprova o torna a una pagina sicura."
+			}
+		},
+		"messageDialog": {
+			"confirm": "Conferma",
+			"error": "Errore",
+			"success": "Successo",
+			"info": "Informazione",
+			"warning": "Attenzione"
+		},
+		"toast": {
+			"region": "Notifiche"
+		},
+		"cookieConsent": {
+			"region": "Consenso ai cookie",
+			"message": "Usiamo cookie facoltativi per capire come viene usato il sito. Vengono impostati solo se accetti.",
+			"policy": "Politica sui cookie",
+			"accept": "Accetta",
+			"decline": "Rifiuta"
+		},
+		"dataTable": {
+			"selectAll": "Seleziona tutte le righe",
+			"selectRow": "Seleziona riga"
+		},
+		"numberField": {
+			"decrement": "Diminuisci",
+			"increment": "Aumenta"
+		},
+		"tagsInput": {
+			"placeholder": "Aggiungi un tag…"
+		},
+		"combobox": {
+			"placeholder": "Seleziona un'opzione",
+			"searchPlaceholder": "Cerca...",
+			"empty": "Nessun risultato trovato."
+		},
+		"avatar": {
+			"status": {
+				"online": "Online",
+				"offline": "Offline",
+				"busy": "Occupato",
+				"away": "Assente"
+			}
+		},
+		"pagination": {
+			"label": "Paginazione",
+			"page": "Pagina {page}",
+			"first": "Prima pagina",
+			"previous": "Pagina precedente",
+			"next": "Pagina successiva",
+			"last": "Ultima pagina",
+			"more": "Altre pagine"
+		},
+		"stepper": {
+			"label": "Avanzamento"
+		},
+		"fileDropzone": {
+			"title": "Trascina qui i file",
+			"description": "oppure fai clic per sfogliare il dispositivo",
+			"dropActive": "Rilascia per caricare",
+			"browse": "Sfoglia file",
+			"remove": "Rimuovi {name}",
+			"maxSize": "Max {size} per file",
+			"maxFiles": "Fino a {count} file",
+			"files": "File selezionati"
+		}
+	}
 }

@@ -4,34 +4,34 @@ import { Switch } from '../ui/switch';
 
 // Props
 const props = defineProps<{
-    id: string;
-    label: string;
-    description: string;
-    modelValue: boolean;
+	id: string;
+	label: string;
+	description: string;
+	modelValue: boolean;
 }>();
 
 // Emits
 const emits = defineEmits<{
-    (e: 'update:modelValue', value: boolean): void;
+	(e: 'update:modelValue', value: boolean): void;
 }>();
 </script>
 
 <template>
-    <Card class="flex flex-col gap-2 px-4 py-3 sm:gap-3!">
-        <!-- Switch label and control -->
-        <div class="flex items-center justify-between gap-4">
-            <!-- Switch label (names the switch and toggles it on click) -->
-            <label :for="props.id" class="cursor-pointer text-sm font-semibold">
-                {{ props.label }}
-            </label>
+	<Card class="flex flex-col gap-2 px-4 py-3 sm:gap-3!">
+		<!-- Switch label and control -->
+		<div class="flex items-center justify-between gap-4">
+			<!-- Switch label (names the switch and toggles it on click) -->
+			<label :for="props.id" class="cursor-pointer text-sm font-semibold">
+				{{ props.label }}
+			</label>
 
-            <!-- Switch control -->
-            <Switch :id="props.id" :aria-describedby="`${props.id}-description`" :model-value="props.modelValue" @update:model-value="emits('update:modelValue', $event)" />
-        </div>
+			<!-- Switch control -->
+			<Switch :id="props.id" :aria-describedby="`${props.id}-description`" :model-value="props.modelValue" @update:model-value="emits('update:modelValue', $event)" />
+		</div>
 
-        <!-- Description -->
-        <div :id="`${props.id}-description`" class="text-xs text-muted-foreground">
-            {{ props.description }}
-        </div>
-    </Card>
+		<!-- Description -->
+		<div :id="`${props.id}-description`" class="text-xs text-muted-foreground">
+			{{ props.description }}
+		</div>
+	</Card>
 </template>

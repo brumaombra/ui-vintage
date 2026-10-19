@@ -4,12 +4,12 @@ import { cn } from '../../lib/utils';
 
 // Props
 const props = defineProps<{
-    class?: HTMLAttributes['class'];
+	class?: HTMLAttributes['class'];
 }>();
 </script>
 
 <template>
-    <td data-slot="data-list-value" :class="cn('py-3 pl-2 align-top text-right font-semibold text-foreground', props.class)">
-        <slot />
-    </td>
+	<td data-slot="data-list-value" :class="cn('py-3 pl-2 align-top text-right font-semibold text-foreground', props.class)">
+		<slot />
+	</td>
 </template>

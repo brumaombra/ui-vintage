@@ -8,13 +8,13 @@ defineOptions({ inheritAttrs: false });
 
 // Props
 const props = withDefaults(defineProps<{
-    code?: string;
-    language?: string;
-    filename?: string;
+	code?: string;
+	language?: string;
+	filename?: string;
 }>(), {
-    code: '',
-    language: '',
-    filename: ''
+	code: '',
+	language: '',
+	filename: ''
 });
 
 const normalizedLanguage = computed(() => props.language.toLowerCase());
@@ -23,12 +23,12 @@ const commands = computed(() => props.code.replace(/\n$/, '').split(/\r?\n/));
 </script>
 
 <template>
-    <!-- Terminal value -->
-    <Terminal v-if="isShellBlock" :commands="commands" :title="props.filename" />
+	<!-- Terminal value -->
+	<Terminal v-if="isShellBlock" :commands="commands" :title="props.filename" />
 
-    <!-- Code block -->
-    <CodeBlock v-else-if="normalizedLanguage" :code="props.code" :language="normalizedLanguage" :title="props.filename" />
+	<!-- Code block -->
+	<CodeBlock v-else-if="normalizedLanguage" :code="props.code" :language="normalizedLanguage" :title="props.filename" />
 
-    <!-- Fallback pre block -->
-    <pre v-else v-bind="$attrs"><slot /></pre>
+	<!-- Fallback pre block -->
+	<pre v-else v-bind="$attrs"><slot /></pre>
 </template>

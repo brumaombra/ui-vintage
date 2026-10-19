@@ -1,187 +1,187 @@
 {
-    "uiVintage": {
-        "common": {
-            "breadcrumb": "Навигация по хлебным крошкам",
-            "more": "Ещё",
-            "home": "Главная",
-            "empty": {
-                "title": "Здесь пока ничего нет",
-                "description": "Сейчас нет контента для отображения."
-            },
-            "loading": {
-                "title": "Загрузка...",
-                "description": "Подождите немного, пока мы загружаем содержимое."
-            },
-            "logo": "Логотип {name}"
-        },
-        "buttons": {
-            "remove": "Убрать",
-            "all": "Все",
-            "close": "Закрыть",
-            "cancel": "Отмена",
-            "delete": "Удалить",
-            "confirm": "Подтвердить",
-            "filter": "Фильтр",
-            "search": "Поиск",
-            "apply": "Применить",
-            "clear": "Очистить",
-            "loading": "Загрузка",
-            "loadMore": "Загрузить еще",
-            "save": "Сохранить",
-            "update": "Обновить",
-            "goBack": "Назад"
-        },
-        "theme": {
-            "light": "Светлая",
-            "dark": "Темная",
-            "auto": "Авто",
-            "title": "Выберите тему",
-            "ariaLabel": "Переключатель темы"
-        },
-        "language": {
-            "title": "Выберите язык",
-            "ariaLabel": "Выбор языка"
-        },
-        "sidebar": {
-            "title": "Боковая панель",
-            "description": "Отображает мобильную боковую панель.",
-            "toggle": "Переключить боковую панель"
-        },
-        "commandDialog": {
-            "title": "Палитра команд",
-            "description": "Найти команду для выполнения..."
-        },
-        "datePicker": {
-            "placeholder": "Выберите дату",
-            "month": "Месяц",
-            "year": "Год",
-            "time": "Время"
-        },
-        "terminal": {
-            "title": "Терминал",
-            "copy": "Копировать команды",
-            "copied": "Команды скопированы"
-        },
-        "code": {
-            "title": "Код",
-            "copy": "Копировать код",
-            "copied": "Код скопирован",
-            "position": "Стр. {line}, стлб. {column}",
-            "plainText": "Обычный текст"
-        },
-        "footer": {
-            "madeWith": "Сделано с",
-            "by": "от",
-            "allRightsReserved": "Все права защищены."
-        },
-        "blog": {
-            "readingProgress": "Прогресс чтения",
-            "readMore": "Читать далее",
-            "goToPost": "Перейти к статье",
-            "new": "Новое",
-            "tableOfContents": "Содержание",
-            "tableOfContentsDescription": "Перейти к разделу статьи",
-            "tableOfContentsSections": "Разделов: {count}",
-            "openTableOfContents": "Открыть содержание",
-            "closeTableOfContents": "Закрыть содержание",
-            "loadMoreWithNumbers": "Загрузить еще ({current}/{total})",
-            "author": "Автор",
-            "publishedDate": "Опубликовано",
-            "lastUpdatedDate": "Обновлено",
-            "readingTime": "Время чтения",
-            "readingTimeValue": "{minutes} мин",
-            "category": "Категория",
-            "breadcrumbBlog": "Блог",
-            "carouselNavigation": "Навигация карусели",
-            "goToSlide": "Перейти к слайду {index}",
-            "previousSlide": "Предыдущий слайд",
-            "nextSlide": "Следующий слайд",
-            "faq": {
-                "title": "Часто задаваемые вопросы",
-                "description": "Быстрые ответы на самые распространенные вопросы по этой теме."
-            },
-            "share": {
-                "facebook": "Поделиться в Facebook",
-                "x": "Поделиться в X",
-                "whatsapp": "Поделиться в WhatsApp",
-                "linkedin": "Поделиться в LinkedIn",
-                "telegram": "Поделиться в Telegram",
-                "copy": "Копировать ссылку",
-                "copied": "Ссылка скопирована"
-            }
-        },
-        "errorPage": {
-            "notFound": {
-                "title": "Страница не найдена",
-                "message": "Запрошенная страница не найдена или могла быть перемещена."
-            },
-            "unexpected": {
-                "title": "Что-то пошло не так",
-                "message": "Неожиданная ошибка прервала текущий процесс. Попробуйте еще раз или вернитесь на безопасную страницу."
-            }
-        },
-        "messageDialog": {
-            "confirm": "Подтвердить",
-            "error": "Ошибка",
-            "success": "Успех",
-            "info": "Информация",
-            "warning": "Предупреждение"
-        },
-        "toast": {
-            "region": "Уведомления"
-        },
-        "cookieConsent": {
-            "region": "Согласие на cookie",
-            "message": "Мы используем необязательные файлы cookie, чтобы понимать, как используется сайт. Они устанавливаются только с вашего согласия.",
-            "policy": "Политика cookie",
-            "accept": "Принять",
-            "decline": "Отклонить"
-        },
-        "dataTable": {
-            "selectAll": "Выбрать все строки",
-            "selectRow": "Выбрать строку"
-        },
-        "numberField": {
-            "decrement": "Уменьшить",
-            "increment": "Увеличить"
-        },
-        "tagsInput": {
-            "placeholder": "Добавить тег…"
-        },
-        "combobox": {
-            "placeholder": "Выберите вариант",
-            "searchPlaceholder": "Поиск...",
-            "empty": "Ничего не найдено."
-        },
-        "avatar": {
-            "status": {
-                "online": "В сети",
-                "offline": "Не в сети",
-                "busy": "Занят",
-                "away": "Отошёл"
-            }
-        },
-        "pagination": {
-            "label": "Пагинация",
-            "page": "Страница {page}",
-            "first": "Первая страница",
-            "previous": "Предыдущая страница",
-            "next": "Следующая страница",
-            "last": "Последняя страница",
-            "more": "Другие страницы"
-        },
-        "stepper": {
-            "label": "Прогресс"
-        },
-        "fileDropzone": {
-            "title": "Перетащите файлы сюда",
-            "description": "или нажмите, чтобы выбрать на устройстве",
-            "dropActive": "Отпустите для загрузки",
-            "browse": "Выбрать файлы",
-            "remove": "Удалить {name}",
-            "maxSize": "Макс. {size} на файл",
-            "maxFiles": "До {count} файлов",
-            "files": "Выбранные файлы"
-        }
-    }
+	"uiVintage": {
+		"common": {
+			"breadcrumb": "Навигация по хлебным крошкам",
+			"more": "Ещё",
+			"home": "Главная",
+			"empty": {
+				"title": "Здесь пока ничего нет",
+				"description": "Сейчас нет контента для отображения."
+			},
+			"loading": {
+				"title": "Загрузка...",
+				"description": "Подождите немного, пока мы загружаем содержимое."
+			},
+			"logo": "Логотип {name}"
+		},
+		"buttons": {
+			"remove": "Убрать",
+			"all": "Все",
+			"close": "Закрыть",
+			"cancel": "Отмена",
+			"delete": "Удалить",
+			"confirm": "Подтвердить",
+			"filter": "Фильтр",
+			"search": "Поиск",
+			"apply": "Применить",
+			"clear": "Очистить",
+			"loading": "Загрузка",
+			"loadMore": "Загрузить еще",
+			"save": "Сохранить",
+			"update": "Обновить",
+			"goBack": "Назад"
+		},
+		"theme": {
+			"light": "Светлая",
+			"dark": "Темная",
+			"auto": "Авто",
+			"title": "Выберите тему",
+			"ariaLabel": "Переключатель темы"
+		},
+		"language": {
+			"title": "Выберите язык",
+			"ariaLabel": "Выбор языка"
+		},
+		"sidebar": {
+			"title": "Боковая панель",
+			"description": "Отображает мобильную боковую панель.",
+			"toggle": "Переключить боковую панель"
+		},
+		"commandDialog": {
+			"title": "Палитра команд",
+			"description": "Найти команду для выполнения..."
+		},
+		"datePicker": {
+			"placeholder": "Выберите дату",
+			"month": "Месяц",
+			"year": "Год",
+			"time": "Время"
+		},
+		"terminal": {
+			"title": "Терминал",
+			"copy": "Копировать команды",
+			"copied": "Команды скопированы"
+		},
+		"code": {
+			"title": "Код",
+			"copy": "Копировать код",
+			"copied": "Код скопирован",
+			"position": "Стр. {line}, стлб. {column}",
+			"plainText": "Обычный текст"
+		},
+		"footer": {
+			"madeWith": "Сделано с",
+			"by": "от",
+			"allRightsReserved": "Все права защищены."
+		},
+		"blog": {
+			"readingProgress": "Прогресс чтения",
+			"readMore": "Читать далее",
+			"goToPost": "Перейти к статье",
+			"new": "Новое",
+			"tableOfContents": "Содержание",
+			"tableOfContentsDescription": "Перейти к разделу статьи",
+			"tableOfContentsSections": "Разделов: {count}",
+			"openTableOfContents": "Открыть содержание",
+			"closeTableOfContents": "Закрыть содержание",
+			"loadMoreWithNumbers": "Загрузить еще ({current}/{total})",
+			"author": "Автор",
+			"publishedDate": "Опубликовано",
+			"lastUpdatedDate": "Обновлено",
+			"readingTime": "Время чтения",
+			"readingTimeValue": "{minutes} мин",
+			"category": "Категория",
+			"breadcrumbBlog": "Блог",
+			"carouselNavigation": "Навигация карусели",
+			"goToSlide": "Перейти к слайду {index}",
+			"previousSlide": "Предыдущий слайд",
+			"nextSlide": "Следующий слайд",
+			"faq": {
+				"title": "Часто задаваемые вопросы",
+				"description": "Быстрые ответы на самые распространенные вопросы по этой теме."
+			},
+			"share": {
+				"facebook": "Поделиться в Facebook",
+				"x": "Поделиться в X",
+				"whatsapp": "Поделиться в WhatsApp",
+				"linkedin": "Поделиться в LinkedIn",
+				"telegram": "Поделиться в Telegram",
+				"copy": "Копировать ссылку",
+				"copied": "Ссылка скопирована"
+			}
+		},
+		"errorPage": {
+			"notFound": {
+				"title": "Страница не найдена",
+				"message": "Запрошенная страница не найдена или могла быть перемещена."
+			},
+			"unexpected": {
+				"title": "Что-то пошло не так",
+				"message": "Неожиданная ошибка прервала текущий процесс. Попробуйте еще раз или вернитесь на безопасную страницу."
+			}
+		},
+		"messageDialog": {
+			"confirm": "Подтвердить",
+			"error": "Ошибка",
+			"success": "Успех",
+			"info": "Информация",
+			"warning": "Предупреждение"
+		},
+		"toast": {
+			"region": "Уведомления"
+		},
+		"cookieConsent": {
+			"region": "Согласие на cookie",
+			"message": "Мы используем необязательные файлы cookie, чтобы понимать, как используется сайт. Они устанавливаются только с вашего согласия.",
+			"policy": "Политика cookie",
+			"accept": "Принять",
+			"decline": "Отклонить"
+		},
+		"dataTable": {
+			"selectAll": "Выбрать все строки",
+			"selectRow": "Выбрать строку"
+		},
+		"numberField": {
+			"decrement": "Уменьшить",
+			"increment": "Увеличить"
+		},
+		"tagsInput": {
+			"placeholder": "Добавить тег…"
+		},
+		"combobox": {
+			"placeholder": "Выберите вариант",
+			"searchPlaceholder": "Поиск...",
+			"empty": "Ничего не найдено."
+		},
+		"avatar": {
+			"status": {
+				"online": "В сети",
+				"offline": "Не в сети",
+				"busy": "Занят",
+				"away": "Отошёл"
+			}
+		},
+		"pagination": {
+			"label": "Пагинация",
+			"page": "Страница {page}",
+			"first": "Первая страница",
+			"previous": "Предыдущая страница",
+			"next": "Следующая страница",
+			"last": "Последняя страница",
+			"more": "Другие страницы"
+		},
+		"stepper": {
+			"label": "Прогресс"
+		},
+		"fileDropzone": {
+			"title": "Перетащите файлы сюда",
+			"description": "или нажмите, чтобы выбрать на устройстве",
+			"dropActive": "Отпустите для загрузки",
+			"browse": "Выбрать файлы",
+			"remove": "Удалить {name}",
+			"maxSize": "Макс. {size} на файл",
+			"maxFiles": "До {count} файлов",
+			"files": "Выбранные файлы"
+		}
+	}
 }

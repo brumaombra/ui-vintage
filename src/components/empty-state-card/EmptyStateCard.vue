@@ -8,19 +8,19 @@ import type { HeadingLevel, HugeiconsIconDefinition } from '../../lib/common-typ
 
 // Props
 const props = withDefaults(defineProps<{
-    icon?: HugeiconsIconDefinition;
-    title?: string;
-    description?: string;
-    titleKey?: string;
-    descriptionKey?: string;
-    level?: HeadingLevel;
+	icon?: HugeiconsIconDefinition;
+	title?: string;
+	description?: string;
+	titleKey?: string;
+	descriptionKey?: string;
+	level?: HeadingLevel;
 }>(), {
-    icon: () => PackageIcon,
-    title: '',
-    description: '',
-    titleKey: '',
-    descriptionKey: '',
-    level: 3
+	icon: () => PackageIcon,
+	title: '',
+	description: '',
+	titleKey: '',
+	descriptionKey: '',
+	level: 3
 });
 
 const { t } = useI18n();
@@ -28,41 +28,41 @@ const hasCustomCopy = computed(() => Boolean(props.title || props.description ||
 
 // Title
 const resolvedTitle = computed(() => props.title
-    || (props.titleKey ? t(props.titleKey) : '')
-    || (!hasCustomCopy.value ? t('uiVintage.common.empty.title') : '')
-    || (!hasCustomCopy.value ? 'Nothing here yet' : ''));
+	|| (props.titleKey ? t(props.titleKey) : '')
+	|| (!hasCustomCopy.value ? t('uiVintage.common.empty.title') : '')
+	|| (!hasCustomCopy.value ? 'Nothing here yet' : ''));
 
 // Description
 const resolvedDescription = computed(() => props.description
-    || (props.descriptionKey ? t(props.descriptionKey) : '')
-    || (!hasCustomCopy.value ? t('uiVintage.common.empty.description') : '')
-    || (!hasCustomCopy.value ? 'There is no content to show right now.' : ''));
+	|| (props.descriptionKey ? t(props.descriptionKey) : '')
+	|| (!hasCustomCopy.value ? t('uiVintage.common.empty.description') : '')
+	|| (!hasCustomCopy.value ? 'There is no content to show right now.' : ''));
 </script>
 
 <template>
-    <Card class="flex flex-col items-center justify-center px-4 py-8 text-center md:py-12">
-        <CardContent class="flex flex-col items-center justify-center p-0! text-center">
-            <!-- Icon -->
-            <div aria-hidden="true" class="flex items-center justify-center text-4xl text-muted-foreground opacity-40">
-                <HugeiconsIcon :icon="props.icon" class="size-10 animate-uv-float" />
-            </div>
+	<Card class="flex flex-col items-center justify-center px-4 py-8 text-center md:py-12">
+		<CardContent class="flex flex-col items-center justify-center p-0! text-center">
+			<!-- Icon -->
+			<div aria-hidden="true" class="flex items-center justify-center text-4xl text-muted-foreground opacity-40">
+				<HugeiconsIcon :icon="props.icon" class="size-10 animate-uv-float" />
+			</div>
 
-            <!-- Title -->
-            <component :is="`h${props.level}`"
-                v-if="resolvedTitle"
-                class="text-sm font-semibold text-foreground md:text-base">
-                {{ resolvedTitle }}
-            </component>
+			<!-- Title -->
+			<component :is="`h${props.level}`"
+				v-if="resolvedTitle"
+				class="text-sm font-semibold text-foreground md:text-base">
+				{{ resolvedTitle }}
+			</component>
 
-            <!-- Description -->
-            <p v-if="resolvedDescription" class="max-w-md text-xs text-muted-foreground md:text-sm">
-                {{ resolvedDescription }}
-            </p>
+			<!-- Description -->
+			<p v-if="resolvedDescription" class="max-w-md text-xs text-muted-foreground md:text-sm">
+				{{ resolvedDescription }}
+			</p>
 
-            <!-- Action slot -->
-            <div v-if="$slots.action">
-                <slot name="action" />
-            </div>
-        </CardContent>
-    </Card>
+			<!-- Action slot -->
+			<div v-if="$slots.action">
+				<slot name="action" />
+			</div>
+		</CardContent>
+	</Card>
 </template>

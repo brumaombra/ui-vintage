@@ -22,31 +22,31 @@ const sourceCache = new Map();
 
 // Read a TS source (or the scripts of an SFC) as a TypeScript source file
 const loadSource = (filePath) => {
-    if (sourceCache.has(filePath)) return sourceCache.get(filePath);
-    const raw = readFileSync(filePath, 'utf8');
-    let code = raw;
-    let template = '';
+	if (sourceCache.has(filePath)) return sourceCache.get(filePath);
+	const raw = readFileSync(filePath, 'utf8');
+	let code = raw;
+	let template = '';
 
-    // Merge both script blocks of an SFC so local interfaces and imports are visible
-    if (filePath.endsWith('.vue')) {
-        const { descriptor } = parseSfc(raw, { filename: filePath });
-        code = [descriptor.script?.content, descriptor.scriptSetup?.content].filter(Boolean).join('\n');
-        template = descriptor.template?.content ?? '';
-    }
+	// Merge both script blocks of an SFC so local interfaces and imports are visible
+	if (filePath.endsWith('.vue')) {
+		const { descriptor } = parseSfc(raw, { filename: filePath });
+		code = [descriptor.script?.content, descriptor.scriptSetup?.content].filter(Boolean).join('\n');
+		template = descriptor.template?.content ?? '';
+	}
 
-    const source = { filePath, template, sourceFile: ts.createSourceFile(filePath, code, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS) };
-    sourceCache.set(filePath, source);
-    return source;
+	const source = { filePath, template, sourceFile: ts.createSourceFile(filePath, code, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS) };
+	sourceCache.set(filePath, source);
+	return source;
 };
 
 // Resolve a relative module specifier to a file on disk
 const resolveModule = (fromFile, specifier) => {
-    if (!specifier.startsWith('.')) return null;
-    const base = resolve(dirname(fromFile), specifier);
-    for (const candidate of [base, `${base}.ts`, join(base, 'index.ts')]) {
-        if (existsSync(candidate) && statSync(candidate).isFile() && /\.(ts|vue)$/.test(candidate)) return candidate;
-    }
-    return null;
+	if (!specifier.startsWith('.')) return null;
+	const base = resolve(dirname(fromFile), specifier);
+	for (const candidate of [base, `${base}.ts`, join(base, 'index.ts')]) {
+		if (existsSync(candidate) && statSync(candidate).isFile() && /\.(ts|vue)$/.test(candidate)) return candidate;
+	}
+	return null;
 };
 
 // Collapse whitespace so types fit on one table line
@@ -57,167 +57,167 @@ const cell = text => oneLine(text).replace(/\|/g, '\\|');
 
 // Find a named declaration (interface, type alias, variable, or function) in a source file
 const findDeclaration = (source, name) => {
-    let found = null;
-    const visit = (node) => {
-        if (found) return;
-        if ((ts.isInterfaceDeclaration(node) || ts.isTypeAliasDeclaration(node) || ts.isFunctionDeclaration(node)) && node.name?.text === name) found = node;
-        else if (ts.isVariableDeclaration(node) && ts.isIdentifier(node.name) && node.name.text === name) found = node;
-        else ts.forEachChild(node, visit);
-    };
-    visit(source.sourceFile);
-    return found;
+	let found = null;
+	const visit = (node) => {
+		if (found) return;
+		if ((ts.isInterfaceDeclaration(node) || ts.isTypeAliasDeclaration(node) || ts.isFunctionDeclaration(node)) && node.name?.text === name) found = node;
+		else if (ts.isVariableDeclaration(node) && ts.isIdentifier(node.name) && node.name.text === name) found = node;
+		else ts.forEachChild(node, visit);
+	};
+	visit(source.sourceFile);
+	return found;
 };
 
 // Find where an imported identifier comes from
 const findImport = (source, name) => {
-    for (const statement of source.sourceFile.statements) {
-        if (!ts.isImportDeclaration(statement) || !statement.importClause) continue;
-        const bindings = statement.importClause.namedBindings;
-        if (bindings && ts.isNamedImports(bindings)) {
-            for (const element of bindings.elements) {
-                if (element.name.text === name) {
-                    return { module: statement.moduleSpecifier.text, importedName: element.propertyName?.text ?? name };
-                }
-            }
-        }
-    }
-    return null;
+	for (const statement of source.sourceFile.statements) {
+		if (!ts.isImportDeclaration(statement) || !statement.importClause) continue;
+		const bindings = statement.importClause.namedBindings;
+		if (bindings && ts.isNamedImports(bindings)) {
+			for (const element of bindings.elements) {
+				if (element.name.text === name) {
+					return { module: statement.moduleSpecifier.text, importedName: element.propertyName?.text ?? name };
+				}
+			}
+		}
+	}
+	return null;
 };
 
 /*********************** Type expansion ***********************/
 
 // Collect members and inherited external types from a type node
 const collectMembers = (source, typeNode, result = { members: [], extendsTypes: [] }, depth = 0) => {
-    if (!typeNode || depth > 5) return result;
+	if (!typeNode || depth > 5) return result;
 
-    if (ts.isTypeLiteralNode(typeNode)) {
-        result.members.push(...typeNode.members.map(member => ({ member, source })));
-    } else if (ts.isIntersectionTypeNode(typeNode)) {
-        typeNode.types.forEach(part => collectMembers(source, part, result, depth + 1));
-    } else if (ts.isTypeReferenceNode(typeNode)) {
-        collectReference(source, typeNode.typeName.getText(source.sourceFile), result, depth);
-    } else if (ts.isParenthesizedTypeNode(typeNode)) {
-        collectMembers(source, typeNode.type, result, depth + 1);
-    }
-    return result;
+	if (ts.isTypeLiteralNode(typeNode)) {
+		result.members.push(...typeNode.members.map(member => ({ member, source })));
+	} else if (ts.isIntersectionTypeNode(typeNode)) {
+		typeNode.types.forEach(part => collectMembers(source, part, result, depth + 1));
+	} else if (ts.isTypeReferenceNode(typeNode)) {
+		collectReference(source, typeNode.typeName.getText(source.sourceFile), result, depth);
+	} else if (ts.isParenthesizedTypeNode(typeNode)) {
+		collectMembers(source, typeNode.type, result, depth + 1);
+	}
+	return result;
 };
 
 // Expand a named type: local declarations are inlined, external ones are listed as inherited
 const collectReference = (source, name, result, depth) => {
-    const local = findDeclaration(source, name);
-    if (local && ts.isInterfaceDeclaration(local)) {
-        for (const clause of local.heritageClauses ?? []) {
-            clause.types.forEach(type => collectReference(source, type.expression.getText(source.sourceFile), result, depth + 1));
-        }
-        result.members.push(...local.members.map(member => ({ member, source })));
-        return;
-    }
-    if (local && ts.isTypeAliasDeclaration(local)) {
-        collectMembers(source, local.type, result, depth + 1);
-        return;
-    }
+	const local = findDeclaration(source, name);
+	if (local && ts.isInterfaceDeclaration(local)) {
+		for (const clause of local.heritageClauses ?? []) {
+			clause.types.forEach(type => collectReference(source, type.expression.getText(source.sourceFile), result, depth + 1));
+		}
+		result.members.push(...local.members.map(member => ({ member, source })));
+		return;
+	}
+	if (local && ts.isTypeAliasDeclaration(local)) {
+		collectMembers(source, local.type, result, depth + 1);
+		return;
+	}
 
-    // Follow relative imports, record package imports as inherited types
-    const imported = findImport(source, name);
-    const importedPath = imported ? resolveModule(source.filePath, imported.module) : null;
-    if (importedPath) {
-        collectReference(loadSource(importedPath), imported.importedName, result, depth + 1);
-    } else {
-        result.extendsTypes.push(imported ? `${imported.module === 'reka-ui' ? 'Reka ' : ''}\`${imported.importedName}\`` : `\`${name}\``);
-    }
+	// Follow relative imports, record package imports as inherited types
+	const imported = findImport(source, name);
+	const importedPath = imported ? resolveModule(source.filePath, imported.module) : null;
+	if (importedPath) {
+		collectReference(loadSource(importedPath), imported.importedName, result, depth + 1);
+	} else {
+		result.extendsTypes.push(imported ? `${imported.module === 'reka-ui' ? 'Reka ' : ''}\`${imported.importedName}\`` : `\`${name}\``);
+	}
 };
 
 // Find a macro call such as defineProps<T>() anywhere in the script
 const findMacro = (source, macroName) => {
-    let found = null;
-    const visit = (node) => {
-        if (found) return;
-        if (ts.isCallExpression(node) && ts.isIdentifier(node.expression) && node.expression.text === macroName) found = node;
-        else ts.forEachChild(node, visit);
-    };
-    visit(source.sourceFile);
-    return found;
+	let found = null;
+	const visit = (node) => {
+		if (found) return;
+		if (ts.isCallExpression(node) && ts.isIdentifier(node.expression) && node.expression.text === macroName) found = node;
+		else ts.forEachChild(node, visit);
+	};
+	visit(source.sourceFile);
+	return found;
 };
 
 // Read prop defaults from withDefaults(defineProps<T>(), { ... })
 const readDefaults = (source) => {
-    const defaults = new Map();
-    const call = findMacro(source, 'withDefaults');
-    const objectLiteral = call?.arguments[1];
-    if (objectLiteral && ts.isObjectLiteralExpression(objectLiteral)) {
-        for (const property of objectLiteral.properties) {
-            if (!ts.isPropertyAssignment(property)) continue;
-            let value = property.initializer;
+	const defaults = new Map();
+	const call = findMacro(source, 'withDefaults');
+	const objectLiteral = call?.arguments[1];
+	if (objectLiteral && ts.isObjectLiteralExpression(objectLiteral)) {
+		for (const property of objectLiteral.properties) {
+			if (!ts.isPropertyAssignment(property)) continue;
+			let value = property.initializer;
 
-            // Unwrap factory defaults such as () => [] or () => PackageIcon
-            if (ts.isArrowFunction(value) && !ts.isBlock(value.body)) value = value.body;
-            defaults.set(property.name.getText(source.sourceFile), oneLine(value.getText(source.sourceFile)).replace(/ as never$/, ''));
-        }
-    }
-    return defaults;
+			// Unwrap factory defaults such as () => [] or () => PackageIcon
+			if (ts.isArrowFunction(value) && !ts.isBlock(value.body)) value = value.body;
+			defaults.set(property.name.getText(source.sourceFile), oneLine(value.getText(source.sourceFile)).replace(/ as never$/, ''));
+		}
+	}
+	return defaults;
 };
 
 // Describe the props of a component
 const readProps = (source) => {
-    const call = findMacro(source, 'defineProps');
-    const typeArgument = call?.typeArguments?.[0];
-    if (!typeArgument) return { props: [], extendsTypes: [] };
-    const { members, extendsTypes } = collectMembers(source, typeArgument);
-    const defaults = readDefaults(source);
-    const seen = new Set();
-    const props = [];
-    for (const { member, source: memberSource } of members) {
-        if (!ts.isPropertySignature(member)) continue;
-        const name = member.name.getText(memberSource.sourceFile).replace(/['"]/g, '');
-        if (seen.has(name)) continue;
-        seen.add(name);
-        props.push({
-            name,
-            type: member.type ? member.type.getText(memberSource.sourceFile) : 'unknown',
-            required: !member.questionToken,
-            default: defaults.get(name) ?? ''
-        });
-    }
-    return { props, extendsTypes };
+	const call = findMacro(source, 'defineProps');
+	const typeArgument = call?.typeArguments?.[0];
+	if (!typeArgument) return { props: [], extendsTypes: [] };
+	const { members, extendsTypes } = collectMembers(source, typeArgument);
+	const defaults = readDefaults(source);
+	const seen = new Set();
+	const props = [];
+	for (const { member, source: memberSource } of members) {
+		if (!ts.isPropertySignature(member)) continue;
+		const name = member.name.getText(memberSource.sourceFile).replace(/['"]/g, '');
+		if (seen.has(name)) continue;
+		seen.add(name);
+		props.push({
+			name,
+			type: member.type ? member.type.getText(memberSource.sourceFile) : 'unknown',
+			required: !member.questionToken,
+			default: defaults.get(name) ?? ''
+		});
+	}
+	return { props, extendsTypes };
 };
 
 // Describe the emits of a component
 const readEmits = (source) => {
-    const call = findMacro(source, 'defineEmits');
-    const typeArgument = call?.typeArguments?.[0];
-    if (!typeArgument) return { emits: [], extendsTypes: [] };
-    const { members, extendsTypes } = collectMembers(source, typeArgument);
-    const emits = [];
-    for (const { member, source: memberSource } of members) {
-        const text = node => node.getText(memberSource.sourceFile);
+	const call = findMacro(source, 'defineEmits');
+	const typeArgument = call?.typeArguments?.[0];
+	if (!typeArgument) return { emits: [], extendsTypes: [] };
+	const { members, extendsTypes } = collectMembers(source, typeArgument);
+	const emits = [];
+	for (const { member, source: memberSource } of members) {
+		const text = node => node.getText(memberSource.sourceFile);
 
-        // Named tuple syntax: 'update:open': [value: boolean]
-        if (ts.isPropertySignature(member) && member.type) {
-            const payload = ts.isTupleTypeNode(member.type) ? member.type.elements.map(text).join(', ') : text(member.type);
-            emits.push({ name: text(member.name).replace(/['"]/g, ''), payload });
-        }
+		// Named tuple syntax: 'update:open': [value: boolean]
+		if (ts.isPropertySignature(member) && member.type) {
+			const payload = ts.isTupleTypeNode(member.type) ? member.type.elements.map(text).join(', ') : text(member.type);
+			emits.push({ name: text(member.name).replace(/['"]/g, ''), payload });
+		}
 
-        // Call signature syntax: (e: 'update:modelValue', value: string): void
-        if (ts.isCallSignatureDeclaration(member) && member.parameters[0]?.type) {
-            emits.push({ name: text(member.parameters[0].type).replace(/['"]/g, ''), payload: member.parameters.slice(1).map(text).join(', ') });
-        }
-    }
-    return { emits, extendsTypes };
+		// Call signature syntax: (e: 'update:modelValue', value: string): void
+		if (ts.isCallSignatureDeclaration(member) && member.parameters[0]?.type) {
+			emits.push({ name: text(member.parameters[0].type).replace(/['"]/g, ''), payload: member.parameters.slice(1).map(text).join(', ') });
+		}
+	}
+	return { emits, extendsTypes };
 };
 
 // Describe the slots of a component (typed slots first, then template slots)
 const readSlots = (source) => {
-    const slots = new Set();
-    const typed = findMacro(source, 'defineSlots')?.typeArguments?.[0];
-    if (typed && ts.isTypeLiteralNode(typed)) {
-        for (const member of typed.members) {
-            const name = member.name ? member.name.getText(source.sourceFile) : member.parameters?.[0]?.type?.getText(source.sourceFile);
-            if (name) slots.add(name.replace(/['"]/g, '').replace(/^`(.*)`$/, '$1'));
-        }
-    }
-    for (const match of source.template.matchAll(/<slot\b([^>]*)>/g)) {
-        const staticName = match[1].match(/\sname="([^"]+)"/)?.[1];
-        const dynamicName = match[1].match(/:name="`([^`]+)`"/)?.[1];
+	const slots = new Set();
+	const typed = findMacro(source, 'defineSlots')?.typeArguments?.[0];
+	if (typed && ts.isTypeLiteralNode(typed)) {
+		for (const member of typed.members) {
+			const name = member.name ? member.name.getText(source.sourceFile) : member.parameters?.[0]?.type?.getText(source.sourceFile);
+			if (name) slots.add(name.replace(/['"]/g, '').replace(/^`(.*)`$/, '$1'));
+		}
+	}
+	for (const match of source.template.matchAll(/<slot\b([^>]*)>/g)) {
+		const staticName = match[1].match(/\sname="([^"]+)"/)?.[1];
+		const dynamicName = match[1].match(/:name="`([^`]+)`"/)?.[1];
         if (!typed) slots.add(staticName ?? dynamicName ?? 'default');
     }
     return [...slots];
@@ -349,9 +349,9 @@ const renderEntry = (key, filePath) => {
     const typeNames = exported.filter(item => item.kind === 'type').map(item => item.name);
     if (importable.length || typeNames.length) {
         lines.push('```ts');
-        if (importable.length) lines.push(`import { ${importable.join(', ')} } from '${importPath}';`);
-        if (typeNames.length) lines.push(`import type { ${typeNames.join(', ')} } from '${importPath}';`);
-        lines.push('```', '');
+		if (importable.length) lines.push(`import { ${importable.join(', ')} } from '${importPath}';`);
+		if (typeNames.length) lines.push(`import type { ${typeNames.join(', ')} } from '${importPath}';`);
+		lines.push('```', '');
     }
 
     // Curated usage example
@@ -367,8 +367,8 @@ const renderEntry = (key, filePath) => {
     // Functions, constants, and types
     if (others.length) {
         lines.push('#### Functions, constants, and types', '', '```ts');
-        for (const item of others) lines.push(item.signature || `${item.kind} ${item.name}`);
-        lines.push('```', '');
+		for (const item of others) lines.push(item.signature || `${item.kind} ${item.name}`);
+		lines.push('```', '');
     }
     return lines.join('\n').trim();
 };

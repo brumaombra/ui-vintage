@@ -4,20 +4,20 @@ import { cn } from '../../../lib/utils';
 
 // Props
 const props = defineProps<{
-    class?: HTMLAttributes['class'];
+	class?: HTMLAttributes['class'];
 }>();
 </script>
 
 <template>
-    <p
-        data-slot="card-description"
-        :class="
-            cn(
-                'text-muted-foreground text-xs sm:text-sm leading-5',
-                props.class,
-            )
-        "
-    >
-        <slot />
-    </p>
+	<p
+		data-slot="card-description"
+		:class="
+			cn(
+				'text-muted-foreground text-xs sm:text-sm leading-5',
+				props.class,
+			)
+		"
+	>
+		<slot />
+	</p>
 </template>
