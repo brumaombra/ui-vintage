@@ -113,8 +113,8 @@ const logoAlt = computed(() => props.appName ? t('uiVintage.common.logo', { name
 							<SidebarMenuItem v-for="item in section.items" :key="item.id">
 								<SidebarMenuButton as-child :is-active="item.active" :class="cn('group/nav relative h-auto min-h-11 overflow-hidden rounded px-3 py-2.5 text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground data-[active=true]:bg-primary/10 data-[active=true]:text-foreground sm:px-3.5', 'before:absolute before:inset-y-2 before:left-0 before:w-0.5 before:origin-center before:scale-y-0 before:bg-primary before:transition-transform before:duration-300 before:ease-spring data-[active=true]:before:scale-y-100', item.description ? 'items-start' : 'items-center')">
 									<NuxtLinkLocale v-bind="getSidebarItemLinkProps(item)" :aria-current="item.active ? 'page' : undefined">
-										<!-- Icon (the sizes are important: the menu button shrinks its direct svg children to size-4) -->
-										<HugeiconsIcon v-if="item.icon" :icon="item.icon" :stroke-width="1.8" :class="cn('shrink-0 opacity-90 transition-[opacity,color] duration-150 group-hover/nav:opacity-100 group-data-[active=true]/nav:text-primary', item.description ? 'mt-0.5 size-5!' : 'size-5! self-center sm:size-6!')" />
+										<!-- Icon, centered on the capitals of the label (or of its first line, 1.25em tall): the line box alone centers it 0.08em too low, because of the space the font keeps for descenders (the size is important: the menu button shrinks its direct svg children to size-4) -->
+										<HugeiconsIcon v-if="item.icon" :icon="item.icon" :stroke-width="1.8" :class="cn('size-5! shrink-0 opacity-90 transition-[opacity,color] duration-150 group-hover/nav:opacity-100 group-data-[active=true]/nav:text-primary', item.description ? 'mt-[calc((1.25em_-_20px)/2_-_0.08em)]' : 'self-center -translate-y-[0.08em]')" />
 
 										<!-- Label and optional description -->
 										<div :class="cn('min-w-0 flex-1 text-left leading-tight', item.description ? 'grid' : 'flex items-center')">
