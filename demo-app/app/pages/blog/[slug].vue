@@ -1,38 +1,19 @@
 <script setup>
-import { computed } from 'vue';
-import { BlogContentRenderer, BlogFAQSection, BlogInfoSection, BlogPostHeader, BlogSectionTitle, CategoryCard, PostCard, SocialShareSidebar, TableOfContents } from '@brumaombra/ui-vintage/blog';
-import { createSEOMetatags, createPageSchema, demoBaseUrl, slugify } from '~/composables/useUtils.js';
-import ViewAllLink from '~/components/blog/ViewAllLink.vue';
+import { BlogPostPage, buildCategoriesFromPosts, normalizeContentPath, sortByStableSeed } from '@brumaombra/ui-vintage/blog';
+import { createSEOMetatags, createPageSchema, SITE_URL } from '~/composables/useUtils.js';
+import BlogPostCta from '~/components/blog/BlogPostCta.vue';
 
 const { t, locale } = useI18n();
 const localeHead = useLocaleHead();
 const localePath = useLocalePath();
 const route = useRoute();
 const { slug } = route.params;
-const fullURL = `${demoBaseUrl}${route.path}`;
-
-// Create a deterministic hash for stable related content ordering
-const hashString = value => {
-	return value.split('').reduce((hash, char) => {
-		return ((hash << 5) - hash) + char.charCodeAt(0);
-	}, 0);
-};
-
-// Sort a list by a deterministic score derived from the current slug
-const sortByStableSeed = (items, getKey) => {
-	const seed = `${locale.value}-${slug}`;
-
-	// Sort items by their hash score based on the seed and key
-	return [...items].sort((itemA, itemB) => {
-		const scoreA = hashString(`${seed}-${getKey(itemA)}`);
-		const scoreB = hashString(`${seed}-${getKey(itemB)}`);
-		return scoreA - scoreB;
-	});
-};
+const postPath = normalizeContentPath(route.path); // The content path has no trailing slash, the URL may
+const relatedSeed = `${locale.value}-${slug}`; // Same related items for a post on every render
 
 // Fetch single post
 const { data: post } = await useAsyncData(`post-${slug}-${locale.value}`, async () => {
-	return await queryCollection('blog').path(route.path).first();
+	return await queryCollection('blog').path(postPath).first();
 });
 
 // Unknown post: show the 404 page
@@ -43,49 +24,21 @@ if (!post.value) {
 // Fetch related posts
 const { data: relatedPosts } = await useAsyncData(`related-posts-${slug}-${locale.value}`, async () => {
 	// Get all posts except current post
-	const posts = await queryCollection('blog').select('title', 'description', 'image', 'categoryText', 'path').where('language', '=', locale.value).where('path', '<>', route.path).all();
-	if (!posts || posts.length === 0) return [];
+	const posts = await queryCollection('blog').select('title', 'description', 'image', 'categoryText', 'path').where('language', '=', locale.value).where('path', '<>', postPath).all();
 
-	// Sort posts deterministically based on current slug/locale
-	const sortedPosts = sortByStableSeed(posts, postItem => postItem.path || postItem.title);
-
-	// Return first 4 items
-	return sortedPosts.slice(0, 4);
+	// Return 4 posts in a stable order for this post
+	return sortByStableSeed(posts || [], relatedSeed, relatedPost => relatedPost.path || relatedPost.title).slice(0, 4);
 });
 
 // Fetch related categories
 const { data: relatedCategories } = await useAsyncData(`related-categories-${slug}-${locale.value}`, async () => {
 	// Get all posts excluding current post's category
-	const allPosts = await queryCollection('blog').select('categorySlug', 'categoryText', 'image').where('language', '=', locale.value).where('categorySlug', '<>', post.value?.categorySlug).all();
-	if (!allPosts || allPosts.length === 0) return [];
+	const posts = await queryCollection('blog').select('categorySlug', 'categoryText', 'image').where('language', '=', locale.value).where('categorySlug', '<>', post.value?.categorySlug).order('datePublished', 'DESC').all();
+	const categories = buildCategoriesFromPosts(posts || [], category => localePath(`/blog/categories/${category}`));
 
-	// Extract unique categories
-	const categoriesList = allPosts.map(post => post.categorySlug);
-	const uniqueCategories = categoriesList.filter((category, index, self) => category && self.indexOf(category) === index);
-	const categoryCounts = uniqueCategories.map(category => {
-		const firstPost = allPosts.find(post => post.categorySlug === category);
-		return {
-			name: firstPost?.categoryText || category,
-			slug: category,
-			count: categoriesList.filter(item => item === category).length,
-			image: firstPost?.image
-		};
-	});
-
-	// Sort categories by a deterministic score based on the current slug
-	const sortedCategories = sortByStableSeed(categoryCounts, category => category.slug || category.name);
-
-	// Return first 4 categories
-	return sortedCategories.slice(0, 4);
+	// Return 4 categories in a stable order for this post
+	return sortByStableSeed(categories, relatedSeed, category => category.slug || category.name).slice(0, 4);
 });
-
-// Map current post tags to badge data
-const postTags = computed(() => (post.value?.tags || [])
-	.map(tag => ({
-		name: tag,
-		slug: slugify(tag)
-	}))
-	.filter(tag => tag.slug));
 
 // Define SEO metadata
 useSeoMeta(createSEOMetatags({
@@ -93,7 +46,9 @@ useSeoMeta(createSEOMetatags({
 	description: post.value?.description,
 	url: route.path,
 	image: post.value?.image,
-	type: 'article'
+	type: 'article',
+	publishedTime: post.value?.datePublished,
+	modifiedTime: post.value?.dateModified
 }));
 
 // Define head metadata
@@ -106,6 +61,7 @@ useHead({
 	...createPageSchema({
 		title: post.value?.title,
 		description: post.value?.description,
+		summary: post.value?.summary, // Short answer of the post, for answer engines (not shown on the page)
 		url: route.path,
 		isBlogPost: true,
 		image: post.value?.image,
@@ -131,74 +87,14 @@ definePageMeta({
 </script>
 
 <template>
-	<div class="mx-auto max-w-4xl">
-		<article v-if="post">
-			<!-- Article header -->
-			<BlogPostHeader :title="post.title"
-				:description="post.description"
-				:image="post.image"
-				:author="post.author"
-				:author-image-url="post.authorImageUrl"
-				:date-published="post.datePublished"
-				:category-text="post.categoryText"
-				:category-slug="post.categorySlug"
-				:tags="postTags"
-				:body="post.body" />
-
-			<!-- Table of contents -->
-			<TableOfContents :content="post" />
-
-			<!-- Social share sidebar -->
-			<SocialShareSidebar :title="post.title" :url="fullURL" />
-
-			<!-- Article content -->
-			<BlogContentRenderer :value="post" />
-
-			<!-- Divider (lazy, like the copy Nuxt Content loads for markdown) -->
-			<LazyProseHr />
-
-			<!-- FAQ section -->
-			<BlogFAQSection v-if="post.faqs && post.faqs?.length > 0" :faqs="post.faqs" />
-
-			<!-- Divider -->
-			<LazyProseHr />
-
-			<!-- Blog info section -->
-			<BlogInfoSection :author="post.author"
-				:author-url="post.authorUrl"
-				:author-image-url="post.authorImageUrl"
-				:date-published="post.datePublished"
-				:date-modified="post.dateModified" />
-		</article>
-
-		<!-- Related posts -->
-		<section v-if="relatedPosts?.length" class="mt-16 md:mt-24">
-			<BlogSectionTitle :title="t('blog.readAlso')" />
-			<div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-				<NuxtLinkLocale v-for="(relatedPost, index) in relatedPosts" :key="relatedPost.path" :to="relatedPost.path" data-aos="blur-up" :data-aos-delay="(index % 2) * 90" class="block h-full rounded outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45">
-					<PostCard :image="relatedPost.image"
-						:category="relatedPost.categoryText"
-						:title="relatedPost.title"
-						:description="relatedPost.description"
-						class="h-full" />
-				</NuxtLinkLocale>
-			</div>
-		</section>
-
-		<!-- Related categories -->
-		<section v-if="relatedCategories?.length" class="mt-16 md:mt-24">
-			<BlogSectionTitle :title="t('blog.exploreCategories')">
-				<template #action>
-					<ViewAllLink :to="localePath('/blog/categories')" :label="t('blog.exploreAllCategories')" />
-				</template>
-			</BlogSectionTitle>
-			<div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-				<NuxtLinkLocale v-for="(category, index) in relatedCategories" :key="category.slug" :to="`/blog/categories/${category.slug}`" data-aos="blur-up" :data-aos-delay="(index % 2) * 90" class="block h-full rounded outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45">
-					<CategoryCard :name="category.name"
-						:image="category.image"
-						:count="category.count" />
-				</NuxtLinkLocale>
-			</div>
-		</section>
-	</div>
+	<!-- Blog post: header, content, FAQ, author, related posts and categories -->
+	<BlogPostPage :post="post"
+		:url="`${SITE_URL}${route.path}`"
+		:related-posts="relatedPosts"
+		:related-categories="relatedCategories">
+		<!-- App call to action after the article -->
+		<template #after-article>
+			<BlogPostCta />
+		</template>
+	</BlogPostPage>
 </template>

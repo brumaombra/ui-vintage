@@ -1,42 +1,9 @@
-export const demoBaseUrl = 'https://ui-vintage.brumaombra.com';
-
-// Create a URL-safe slug from a blog tag label
-export const slugify = value => {
-	return String(value || '')
-		.trim()
-		.toLowerCase()
-		.replace(/[^a-z0-9]+/g, '-')
-		.replace(/^-+|-+$/g, '');
-};
-
-// Build unique tag data from blog posts
-export const buildTagsFromPosts = posts => {
-	const tagsBySlug = new Map();
-
-	// Loop through each post and tag
-	for (const post of posts) {
-		for (const tag of post.tags || []) {
-			const slug = slugify(tag);
-			// Skip tags that cannot produce a URL slug
-			if (!slug) continue;
-
-			const existingTag = tagsBySlug.get(slug);
-			// Preserve the first label while accumulating duplicate tags
-			tagsBySlug.set(slug, {
-				name: existingTag?.name || tag,
-				slug,
-				count: (existingTag?.count || 0) + 1
-			});
-		}
-	}
-
-	// Return unique tags with their post counts
-	return [...tagsBySlug.values()];
-};
+// Address of the site (absolute links for metadata and sharing)
+export const SITE_URL = 'https://ui-vintage.brumaombra.com';
 
 // Resolve a demo URL for metadata
 const getAbsoluteUrl = value => {
-	return new URL(value || '/', demoBaseUrl).toString();
+	return new URL(value || '/', SITE_URL).toString();
 };
 
 // Create page metadata for the demo blog
@@ -115,7 +82,7 @@ export const createPageSchema = ({
 			publisher: {
 				'@type': 'Organization',
 				name: 'UI Vintage Demo',
-				url: demoBaseUrl
+				url: SITE_URL
 			},
 			...(Array.isArray(tags) && tags.length > 0 ? { keywords: tags.join(', ') } : {})
 		});

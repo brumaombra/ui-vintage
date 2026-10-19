@@ -30,40 +30,22 @@
 	"blog": {
 		"title": "The UI Vintage Demo Blog",
 		"description": "A production-like blog surface powered by the UI Vintage component library and Nuxt Content.",
-		"latestPosts": "Latest posts",
 		"allPosts": "All posts",
-		"readAlso": "Read also",
-		"exploreCategories": "Explore categories",
-		"exploreAllCategories": "Explore all categories",
 		"header": {
-			"highlight": "Blog",
-			"stats": {
-				"posts": "post | posts",
-				"categories": "category | categories",
-				"tags": "tag | tags",
-				"uses": "use | uses"
-			}
+			"highlight": "Blog"
 		},
 		"categories": {
-			"title": "Categories",
 			"description": "Browse the categories derived from the demo's markdown posts.",
 			"singleCategoryDescription": "All demo posts in the '{category}' category."
 		},
 		"tags": {
-			"title": "Tags",
 			"description": "Browse the tags derived from the demo's markdown posts.",
 			"singleTagDescription": "All demo posts tagged '{tag}'."
 		},
-		"footerDescription": "Stories, guides, and release notes from the team behind the UI Vintage component library.",
-		"latestPostsDescription": "Hand-picked stories from the editorial desk.",
-		"allPostsDescription": "Everything we have published, newest first.",
-		"categoriesDescription": "Jump straight to the topics you care about.",
-		"tagsDescription": "Smaller threads that run across categories.",
-		"viewAll": "View all"
+		"footerDescription": "Stories, guides, and release notes from the team behind the UI Vintage component library."
 	},
 	"navigation": {
 		"breadcrumbs": {
-			"home": "Home",
 			"blog": "Blog",
 			"categories": "Categories",
 			"tags": "Tags"
@@ -72,9 +54,6 @@
 		"overview": "Overview",
 		"components": "Components",
 		"foundations": "Foundations"
-	},
-	"common": {
-		"loadMoreWithNumbers": "Load more ({current} of {total})"
 	},
 	"demo": {
 		"title": "UI Vintage Demo"

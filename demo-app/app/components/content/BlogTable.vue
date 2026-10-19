@@ -5,7 +5,7 @@ import { BlogTable as UiVintageBlogTable } from '@brumaombra/ui-vintage/content'
 const props = defineProps({
 	headers: { type: Array, default: () => [] },
 	rows: { type: Array, default: () => [] },
-	highlightCol: { type: Number, default: -1 }
+	highlightCol: { type: Number, default: -1 } // 0-based index of column to highlight
 });
 </script>
 

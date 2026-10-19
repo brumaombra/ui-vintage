@@ -1,10 +1,7 @@
 <script setup>
 import { ref } from 'vue';
-import News01Icon from '@hugeicons/core-free-icons/News01Icon';
-import { BlogHeaderSection, PostsList } from '@brumaombra/ui-vintage/blog';
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@brumaombra/ui-vintage/breadcrumb';
-import { LoadMoreButton } from '@brumaombra/ui-vintage/load-more-button';
-import { createPageSchema, createSEOMetatags, slugify } from '~/composables/useUtils.js';
+import { BlogPostsPage, slugify } from '@brumaombra/ui-vintage/blog';
+import { createSEOMetatags, createPageSchema } from '~/composables/useUtils.js';
 
 const { t, locale } = useI18n();
 const localeHead = useLocaleHead();
@@ -113,56 +110,15 @@ definePageMeta({
 </script>
 
 <template>
-	<div>
-		<!-- Breadcrumbs -->
-		<Breadcrumb class="mb-2 flex animate-uv-fade-up justify-center">
-			<BreadcrumbList>
-				<BreadcrumbItem>
-					<BreadcrumbLink as-child>
-						<NuxtLinkLocale to="/">
-							{{ t('navigation.breadcrumbs.home') }}
-						</NuxtLinkLocale>
-					</BreadcrumbLink>
-				</BreadcrumbItem>
-				<BreadcrumbSeparator />
-				<BreadcrumbItem>
-					<BreadcrumbLink as-child>
-						<NuxtLinkLocale to="/blog">
-							{{ t('navigation.breadcrumbs.blog') }}
-						</NuxtLinkLocale>
-					</BreadcrumbLink>
-				</BreadcrumbItem>
-				<BreadcrumbSeparator />
-				<BreadcrumbItem>
-					<BreadcrumbLink as-child>
-						<NuxtLinkLocale to="/blog/tags">
-							{{ t('navigation.breadcrumbs.tags') }}
-						</NuxtLinkLocale>
-					</BreadcrumbLink>
-				</BreadcrumbItem>
-				<BreadcrumbSeparator />
-				<BreadcrumbItem>
-					<BreadcrumbPage>
-						{{ tagTitle }}
-					</BreadcrumbPage>
-				</BreadcrumbItem>
-			</BreadcrumbList>
-		</Breadcrumb>
-
-		<!-- Blog header -->
-		<BlogHeaderSection :title="tagTitle"
-			:highlight="tagTitle"
-			:description="t('blog.tags.singleTagDescription', { tag: tagTitle })"
-			:stats="[{ icon: News01Icon, value: totalPosts, label: t('blog.header.stats.posts', totalPosts) }]"
-			class="mb-12 md:mb-16" />
-
-		<!-- Posts -->
-		<PostsList :posts="posts" />
-
-		<!-- Load more button -->
-		<LoadMoreButton v-if="hasMorePosts" :busy="isLoading" :text="t('common.loadMoreWithNumbers', {
-			current: Math.min(currentPage * postsPerPage, totalPosts),
-			total: totalPosts
-		})" @load-more="loadMorePosts" class="mt-8" data-aos="blur-up" />
-	</div>
+	<!-- Posts with a tag -->
+	<BlogPostsPage section="tags"
+		:title="tagTitle"
+		:description="t('blog.tags.singleTagDescription', { tag: tagTitle })"
+		:posts="posts"
+		:total-posts="totalPosts"
+		:current-page="currentPage"
+		:posts-per-page="postsPerPage"
+		:has-more-posts="hasMorePosts"
+		:is-loading="isLoading"
+		@load-more="loadMorePosts" />
 </template>
