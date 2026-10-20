@@ -11,6 +11,7 @@ import { DataListText } from '@brumaombra/ui-vintage/data-list';
 import { dialogSizeClasses } from '@brumaombra/ui-vintage/dialog';
 import { Input } from '@brumaombra/ui-vintage/input';
 import { Progress } from '@brumaombra/ui-vintage/progress';
+import { SelectItemContent } from '@brumaombra/ui-vintage/select';
 import { SectionTitle } from '@brumaombra/ui-vintage/section-title';
 import { Skeleton } from '@brumaombra/ui-vintage/skeleton';
 import { TableRow } from '@brumaombra/ui-vintage/table';
@@ -121,6 +122,21 @@ describe('Text, inputs and badges', () => {
 		const second = (await mountAvatar()).find('[data-slot="avatar-fallback"]');
 		expect(first.classes().join(' ')).toContain('var(--chart-');
 		expect(first.classes()).toEqual(second.classes());
+	});
+});
+
+describe('SelectItemContent', () => {
+	// The default slot takes the place of the icon (flags passed to it used to be dropped)
+	it('renders a leading visual from the default slot', async () => {
+		const wrapper = await mountSuspended(SelectItemContent, { props: { label: 'Italiano' }, slots: { default: () => h('span', { 'data-test': 'flag' }) } });
+		expect(wrapper.find('[data-slot="select-item-content-icon"] [data-test="flag"]').exists()).toBe(true);
+		expect(wrapper.text()).toContain('Italiano');
+	});
+
+	// Without a slot or an icon there is no empty leading box
+	it('leaves out the leading box without a slot or an icon', async () => {
+		const wrapper = await mountSuspended(SelectItemContent, { props: { label: 'English' } });
+		expect(wrapper.find('[data-slot="select-item-content-icon"]').exists()).toBe(false);
 	});
 });
 

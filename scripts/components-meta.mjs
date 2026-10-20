@@ -119,7 +119,7 @@ export const entries = {
 	},
 	'select': {
 		category: 'forms',
-		description: 'Styled Reka select. `SelectValueContent` and `SelectItemContent` render an icon, label, and description.',
+		description: 'Styled Reka select. `SelectValueContent` and `SelectItemContent` render an icon, label, and description; the default slot of `SelectItemContent` replaces the icon with any leading visual, such as a `LanguageFlag`.',
 		example: `
 <Select v-model="region">
     <SelectTrigger class="w-full">

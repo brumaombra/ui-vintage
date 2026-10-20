@@ -18,9 +18,11 @@ const props = defineProps<{
 
 <template>
 	<div data-slot="select-item-content" :class="cn('flex min-w-0 flex-1 items-center gap-2', props.class)">
-		<!-- Icon -->
-		<div v-if="props.icon" data-slot="select-item-content-icon" :class="cn('shrink-0 self-center', props.iconClass)">
-			<HugeiconsIcon :icon="props.icon" class="block size-3 sm:size-4" />
+		<!-- Leading visual: the default slot (for example a flag), or the icon -->
+		<div v-if="$slots.default || props.icon" data-slot="select-item-content-icon" :class="cn('shrink-0 self-center', props.iconClass)">
+			<slot>
+				<HugeiconsIcon :icon="props.icon" class="block size-3 sm:size-4" />
+			</slot>
 		</div>
 
 		<!-- Text and description -->

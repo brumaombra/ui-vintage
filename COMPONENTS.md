@@ -964,7 +964,7 @@ import { RadioGroup, RadioGroupItem, RadioGroupCard } from '@brumaombra/ui-vinta
 
 ### `@brumaombra/ui-vintage/select`
 
-Styled Reka select. `SelectValueContent` and `SelectItemContent` render an icon, label, and description.
+Styled Reka select. `SelectValueContent` and `SelectItemContent` render an icon, label, and description; the default slot of `SelectItemContent` replaces the icon with any leading visual, such as a `LanguageFlag`.
 
 ```ts
 import { Select, SelectContent, SelectGroup, SelectItem, SelectItemContent, SelectItemText, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue, SelectValueContent } from '@brumaombra/ui-vintage/select';
@@ -1018,6 +1018,8 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectItemContent, Sele
 | `iconClass` | `HTMLAttributes['class']` |  |
 | `textClass` | `HTMLAttributes['class']` |  |
 | `descriptionClass` | `HTMLAttributes['class']` |  |
+
+- **Slots:** `default`.
 
 #### `SelectItemText`
 
