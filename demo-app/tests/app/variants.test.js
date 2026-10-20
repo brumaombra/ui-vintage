@@ -131,6 +131,15 @@ describe('SectionTitle', () => {
 		expect(wrapper.find('h3').text()).toBe('Market FAQ');
 		expect(wrapper.text()).toContain('How it works');
 		expect(wrapper.find('svg').exists()).toBe(true);
+		expect(wrapper.classes()).toContain('flex-col');
+	});
+
+	// Without a description the action stays on the title row, even on mobile
+	it('keeps the action next to a title without description', async () => {
+		const wrapper = await mountSuspended(SectionTitle, { props: { title: 'Trending' }, slots: { action: () => 'View all' } });
+		expect(wrapper.classes()).not.toContain('flex-col');
+		expect(wrapper.classes()).toContain('items-center');
+		expect(wrapper.text()).toContain('View all');
 	});
 });
 

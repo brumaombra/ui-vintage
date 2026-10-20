@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<{
 </script>
 
 <template>
-	<div data-slot="section-title" class="relative mb-6 flex flex-col gap-3 border-b border-border pb-4 sm:flex-row sm:items-end sm:justify-between md:mb-8">
+	<div data-slot="section-title" :class="['relative mb-6 flex gap-3 border-b border-border pb-4 md:mb-8', props.description ? 'flex-col sm:flex-row sm:items-end sm:justify-between' : 'items-center justify-between']">
 		<!-- Primary segment at the start of the rule -->
 		<span aria-hidden="true" class="absolute -bottom-px left-0 h-0.5 w-12 bg-primary" />
 
