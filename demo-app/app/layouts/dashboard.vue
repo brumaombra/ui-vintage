@@ -65,8 +65,8 @@ const handleSelectLanguage = async (language: string) => {
 
 			<!-- Search trigger -->
 			<template #topbar-trailing>
-				<Button variant="secondary" size="sm" class="hidden w-64 justify-between text-muted-foreground md:inline-flex" @click="paletteOpen = true">
-					<span class="flex items-center gap-2">
+				<Button variant="secondary" size="sm" class="hidden w-64 md:inline-flex" @click="paletteOpen = true">
+					<span class="flex flex-1 items-center gap-2 text-muted-foreground">
 						<HugeiconsIcon :icon="Search01Icon" class="size-4" />
 						Search...
 					</span>

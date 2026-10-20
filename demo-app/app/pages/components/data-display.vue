@@ -172,8 +172,9 @@ const avatarCode = `<Avatar size="lg" status="online">
 				<!-- Toolbar -->
 				<div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
 					<div class="relative w-full sm:max-w-xs">
-						<HugeiconsIcon :icon="Search01Icon" class="pointer-events-none absolute top-1/2 left-3.5 z-10 size-4 -translate-y-1/2 text-muted-foreground" />
-						<Input v-model="query" placeholder="Filter customers..." class="h-10 pl-10" />
+						<Input v-model="query" placeholder="Filter customers..." size="sm">
+							<template #prefix><HugeiconsIcon :icon="Search01Icon" /></template>
+						</Input>
 					</div>
 					<div class="flex items-center gap-2">
 						<Transition enter-active-class="transition-[opacity,scale] duration-300 ease-bounce" enter-from-class="opacity-0 scale-75" leave-active-class="transition-[opacity,scale] duration-150" leave-to-class="opacity-0 scale-90">
@@ -259,8 +260,8 @@ const avatarCode = `<Avatar size="lg" status="online">
 					</Card>
 				</div>
 				<div class="grid gap-4 md:grid-cols-2">
-					<Card color="green" class="py-4"><CardContent class="text-xs sm:text-sm">All systems operational · 99.99% uptime</CardContent></Card>
-					<Card color="yellow" class="py-4"><CardContent class="text-xs sm:text-sm">Scheduled maintenance on Sunday at 02:00 UTC</CardContent></Card>
+					<Card color="green"><CardContent>All systems operational · 99.99% uptime</CardContent></Card>
+					<Card color="yellow"><CardContent>Scheduled maintenance on Sunday at 02:00 UTC</CardContent></Card>
 				</div>
 				<InfoCard :icon="PackageIcon" title="What's new" description="A motion system, 20 new components, and a brand-new demo.">
 					<template #right>
@@ -334,7 +335,7 @@ const avatarCode = `<Avatar size="lg" status="online">
 					</div>
 					<Transition mode="out-in" enter-active-class="transition-[opacity,filter] duration-300" enter-from-class="opacity-0 blur-sm" leave-active-class="transition-opacity duration-150" leave-to-class="opacity-0">
 						<div v-if="!contentLoaded" key="skeleton" class="flex items-center gap-4 rounded border border-border p-4">
-							<Skeleton class="size-12 rounded-full" />
+							<Skeleton circle class="size-12" />
 							<div class="flex flex-1 flex-col gap-2">
 								<Skeleton class="h-4 w-2/3" />
 								<Skeleton class="h-3 w-full" />

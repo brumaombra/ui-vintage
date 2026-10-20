@@ -149,37 +149,41 @@ const dropzoneCode = `<FileDropzone v-model="files" accept="image/*,.pdf" :max-s
 
 		<!-- Text fields -->
 		<DemoSection id="text-fields" title="Text fields" badge="Updated" description="Inputs and textareas with a focus ring. Invalid fields shake once and show animated field errors." :code="textFieldCode">
-			<FieldGroup class="grid gap-6 md:grid-cols-2">
-				<!-- Email with validation -->
-				<Field>
-					<FieldLabel for="demo-email">Work email</FieldLabel>
-					<FieldContent>
-						<Input id="demo-email" v-model="email" type="email" placeholder="name@company.com" :aria-invalid="!!emailError || undefined" @blur="emailTouched = true" />
-						<FieldError :errors="[emailError]" />
-						<FieldDescription v-if="!emailError">We'll send the invite to this address.</FieldDescription>
-					</FieldContent>
-				</Field>
+			<FieldGroup>
+				<div class="grid gap-6 md:grid-cols-2">
+					<!-- Email with validation -->
+					<Field>
+						<FieldLabel for="demo-email">Work email</FieldLabel>
+						<FieldContent>
+							<Input id="demo-email" v-model="email" type="email" placeholder="name@company.com" :aria-invalid="!!emailError || undefined" @blur="emailTouched = true" />
+							<FieldError :errors="[emailError]" />
+							<FieldDescription v-if="!emailError">We'll send the invite to this address.</FieldDescription>
+						</FieldContent>
+					</Field>
 
-				<!-- Disabled -->
-				<Field>
-					<FieldLabel for="demo-workspace">Workspace URL</FieldLabel>
-					<FieldContent>
-						<Input id="demo-workspace" model-value="vintage.app/acme" disabled />
-						<FieldDescription>Contact an admin to change the workspace URL.</FieldDescription>
-					</FieldContent>
-				</Field>
+					<!-- Disabled -->
+					<Field>
+						<FieldLabel for="demo-workspace">Workspace URL</FieldLabel>
+						<FieldContent>
+							<Input id="demo-workspace" model-value="vintage.app/acme" disabled />
+							<FieldDescription>Contact an admin to change the workspace URL.</FieldDescription>
+						</FieldContent>
+					</Field>
 
-				<!-- Textarea with counter -->
-				<Field class="md:col-span-2">
-					<FieldLabel for="demo-bio">Bio</FieldLabel>
-					<FieldContent>
-						<Textarea id="demo-bio" v-model="bio" maxlength="160" placeholder="Tell us about yourself" />
-						<FieldDescription class="flex justify-between">
-							<span>Shown on your public profile.</span>
-							<span :class="['tabular-nums transition-colors', bio.length > 140 ? 'text-warning' : '']">{{ bio.length }}/160</span>
-						</FieldDescription>
-					</FieldContent>
-				</Field>
+					<!-- Textarea with counter -->
+					<Field class="md:col-span-2">
+						<FieldLabel for="demo-bio">Bio</FieldLabel>
+						<FieldContent>
+							<Textarea id="demo-bio" v-model="bio" maxlength="160" placeholder="Tell us about yourself" />
+							<FieldDescription>
+								<span class="flex justify-between">
+									<span>Shown on your public profile.</span>
+									<span :class="['tabular-nums transition-colors', bio.length > 140 ? 'text-warning' : '']">{{ bio.length }}/160</span>
+								</span>
+							</FieldDescription>
+						</FieldContent>
+					</Field>
+				</div>
 			</FieldGroup>
 		</DemoSection>
 
@@ -252,15 +256,15 @@ const dropzoneCode = `<FileDropzone v-model="files" accept="image/*,.pdf" :max-s
 						<div class="ml-8 flex flex-col gap-3">
 							<div class="flex items-center gap-3">
 								<Checkbox id="demo-mentions" v-model="notifications.mentions" />
-								<Label for="demo-mentions" class="font-normal">Mentions and replies</Label>
+								<Label for="demo-mentions"><span class="font-normal">Mentions and replies</span></Label>
 							</div>
 							<div class="flex items-center gap-3">
 								<Checkbox id="demo-digest" v-model="notifications.digest" />
-								<Label for="demo-digest" class="font-normal">Weekly digest</Label>
+								<Label for="demo-digest"><span class="font-normal">Weekly digest</span></Label>
 							</div>
 							<div class="flex items-center gap-3">
 								<Checkbox id="demo-product" v-model="notifications.product" />
-								<Label for="demo-product" class="font-normal">Product updates</Label>
+								<Label for="demo-product"><span class="font-normal">Product updates</span></Label>
 							</div>
 						</div>
 					</div>
@@ -269,7 +273,7 @@ const dropzoneCode = `<FileDropzone v-model="files" accept="image/*,.pdf" :max-s
 					<RadioGroup v-model="shipping" orientation="horizontal">
 						<div v-for="option in ['standard', 'express', 'overnight']" :key="option" class="flex items-center gap-2">
 							<RadioGroupItem :id="`ship-${option}`" :value="option" />
-							<Label :for="`ship-${option}`" class="capitalize">{{ option }}</Label>
+							<Label :for="`ship-${option}`">{{ option[0].toUpperCase() + option.slice(1) }}</Label>
 						</div>
 					</RadioGroup>
 				</div>

@@ -79,35 +79,35 @@ const paginationCode = `<SimplePagination v-model:page="page" :total="240" :item
 							Settings
 						</TabsTrigger>
 					</TabsList>
-					<TabsContent value="overview" class="rounded border border-border bg-surface/50 p-4 text-xs leading-6 text-muted-foreground sm:text-sm">
-						Overview panel. Switch tabs to watch the indicator glide and the panel rise in.
+					<TabsContent value="overview" variant="boxed">
+						<p class="text-xs leading-6 text-muted-foreground sm:text-sm">Overview panel. Switch tabs to watch the indicator glide and the panel rise in.</p>
 					</TabsContent>
-					<TabsContent value="analytics" class="rounded border border-border bg-surface/50 p-4 text-xs leading-6 text-muted-foreground sm:text-sm">
-						Analytics panel. 12,480 visits this week, up 18% from last week.
+					<TabsContent value="analytics" variant="boxed">
+						<p class="text-xs leading-6 text-muted-foreground sm:text-sm">Analytics panel. 12,480 visits this week, up 18% from last week.</p>
 					</TabsContent>
-					<TabsContent value="settings" class="rounded border border-border bg-surface/50 p-4 text-xs leading-6 text-muted-foreground sm:text-sm">
-						Settings panel. Tweak notifications, members, and integrations.
+					<TabsContent value="settings" variant="boxed">
+						<p class="text-xs leading-6 text-muted-foreground sm:text-sm">Settings panel. Tweak notifications, members, and integrations.</p>
 					</TabsContent>
 				</Tabs>
 
 				<!-- Vertical tabs -->
-				<Tabs default-value="profile" orientation="vertical" class="flex-col gap-4 sm:flex-row">
+				<Tabs default-value="profile" orientation="vertical">
 					<TabsList>
-						<TabsTrigger value="profile" class="justify-start">
+						<TabsTrigger value="profile">
 							<HugeiconsIcon :icon="UserIcon" />
 							Profile
 						</TabsTrigger>
-						<TabsTrigger value="security" class="justify-start">
+						<TabsTrigger value="security">
 							<HugeiconsIcon :icon="ShieldUserIcon" />
 							Security
 						</TabsTrigger>
-						<TabsTrigger value="billing" class="justify-start">
+						<TabsTrigger value="billing">
 							<HugeiconsIcon :icon="CreditCardIcon" />
 							Billing
 						</TabsTrigger>
 					</TabsList>
-					<TabsContent v-for="tab in ['profile', 'security', 'billing']" :key="tab" :value="tab" class="text-xs sm:w-48 leading-6 text-muted-foreground">
-						Vertical orientation: the indicator slides on the Y axis. Current tab: <span class="font-semibold text-foreground capitalize">{{ tab }}</span>.
+					<TabsContent v-for="tab in ['profile', 'security', 'billing']" :key="tab" :value="tab" class="sm:w-48">
+						<p class="text-xs leading-6 text-muted-foreground">Vertical orientation: the indicator slides on the Y axis. Current tab: <span class="font-semibold text-foreground capitalize">{{ tab }}</span>.</p>
 					</TabsContent>
 				</Tabs>
 			</div>
@@ -153,21 +153,25 @@ const paginationCode = `<SimplePagination v-model:page="page" :total="240" :item
 				</div>
 
 				<!-- Collapsible -->
-				<Collapsible v-model:open="reposOpen" class="flex flex-col gap-2">
-					<div class="flex items-center justify-between gap-4">
-						<span class="text-sm font-semibold">Starred repositories</span>
-						<CollapsibleTrigger as-child>
-							<Button variant="ghost" size="icon-sm" aria-label="Toggle repositories">
-								<HugeiconsIcon :icon="ArrowDown01Icon" :class="['transition-transform duration-300 ease-spring', reposOpen && 'rotate-180']" />
-							</Button>
-						</CollapsibleTrigger>
-					</div>
-					<div class="rounded border border-border bg-card px-4 py-3 text-xs font-semibold">{{ repositories[0] }}</div>
-					<CollapsibleContent class="flex flex-col gap-2">
-						<div v-for="repository in repositories.slice(1)" :key="repository" class="rounded border border-border bg-card px-4 py-3 text-xs font-semibold">
-							{{ repository }}
+				<Collapsible v-model:open="reposOpen">
+					<div class="flex flex-col gap-2">
+						<div class="flex items-center justify-between gap-4">
+							<span class="text-sm font-semibold">Starred repositories</span>
+							<CollapsibleTrigger as-child>
+								<Button variant="ghost" size="icon-sm" aria-label="Toggle repositories">
+									<HugeiconsIcon :icon="ArrowDown01Icon" :class="['transition-transform duration-300 ease-spring', reposOpen && 'rotate-180']" />
+								</Button>
+							</CollapsibleTrigger>
 						</div>
-					</CollapsibleContent>
+						<div class="rounded border border-border bg-card px-4 py-3 text-xs font-semibold">{{ repositories[0] }}</div>
+						<CollapsibleContent>
+							<div class="flex flex-col gap-2">
+								<div v-for="repository in repositories.slice(1)" :key="repository" class="rounded border border-border bg-card px-4 py-3 text-xs font-semibold">
+									{{ repository }}
+								</div>
+							</div>
+						</CollapsibleContent>
+					</div>
 				</Collapsible>
 			</div>
 		</DemoSection>
@@ -182,8 +186,10 @@ const paginationCode = `<SimplePagination v-model:page="page" :total="240" :item
 					<BreadcrumbSeparator />
 					<BreadcrumbItem>
 						<DropdownMenu>
-							<DropdownMenuTrigger class="flex items-center gap-1 rounded-sm outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45">
-								<BreadcrumbEllipsis class="size-4" />
+							<DropdownMenuTrigger as-child>
+								<button type="button" aria-label="Show more" class="flex cursor-pointer items-center gap-1 rounded outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45">
+									<BreadcrumbEllipsis />
+								</button>
 							</DropdownMenuTrigger>
 							<DropdownMenuContent>
 								<DropdownMenuItem>Projects</DropdownMenuItem>

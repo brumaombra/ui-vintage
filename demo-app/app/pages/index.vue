@@ -116,7 +116,7 @@ onMounted(() => {
 		<section class="relative isolate flex flex-col items-center gap-6 pt-6 text-center sm:pt-12">
 			<!-- Announcement -->
 			<button type="button" class="group/announce animate-uv-fade-up cursor-pointer rounded outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45" @click="navigateTo(localePath('/foundations#motion'))">
-				<Badge text="New motion system · 20 new components" color="yellow" pulse class="px-3 py-1 transition-colors duration-150 group-hover/announce:border-yellow-300 dark:group-hover/announce:border-yellow-700/60" />
+				<Badge text="New motion system · 20 new components" color="yellow" pulse />
 			</button>
 
 			<!-- Title -->
@@ -169,7 +169,7 @@ onMounted(() => {
 
 		<!-- Live app preview -->
 		<DemoSection id="live-preview" title="Live app preview" description="A tiny product built only with UI Vintage components. Everything is interactive: switch tabs, sort the table, change the plan, save.">
-			<Tabs default-value="dashboard" class="gap-5">
+			<Tabs default-value="dashboard">
 				<TabsList>
 					<TabsTrigger value="dashboard">
 						<HugeiconsIcon :icon="ChartLineData02Icon" />
@@ -186,50 +186,52 @@ onMounted(() => {
 				</TabsList>
 
 				<!-- Dashboard tab -->
-				<TabsContent value="dashboard" class="flex flex-col gap-4">
-					<!-- Key metrics -->
-					<div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-						<SingleValueCard v-for="metric in dashboardMetrics" :key="metric.label" v-bind="metric" />
-					</div>
+				<TabsContent value="dashboard">
+					<div class="flex flex-col gap-4">
+						<!-- Key metrics -->
+						<div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+							<SingleValueCard v-for="metric in dashboardMetrics" :key="metric.label" v-bind="metric" />
+						</div>
 
-					<div class="grid gap-4 lg:grid-cols-2">
-						<!-- Goals -->
-						<Card>
-							<CardHeader>
-								<CardTitle>Quarter goals</CardTitle>
-							</CardHeader>
-							<CardContent class="gap-4">
-								<div v-for="goal in [{ label: 'New customers', value: 82 }, { label: 'Expansion revenue', value: 64 }, { label: 'NPS responses', value: 37 }]" :key="goal.label" class="flex flex-col gap-2">
-									<div class="flex justify-between text-xs font-semibold"><span>{{ goal.label }}</span><span class="text-muted-foreground tabular-nums">{{ goal.value }}%</span></div>
-									<Progress :model-value="goalsReady ? goal.value : 0" />
-								</div>
-							</CardContent>
-						</Card>
+						<div class="grid gap-4 lg:grid-cols-2">
+							<!-- Goals -->
+							<Card>
+								<CardHeader>
+									<CardTitle>Quarter goals</CardTitle>
+								</CardHeader>
+								<CardContent>
+									<div v-for="goal in [{ label: 'New customers', value: 82 }, { label: 'Expansion revenue', value: 64 }, { label: 'NPS responses', value: 37 }]" :key="goal.label" class="flex flex-col gap-2">
+										<div class="flex justify-between text-xs font-semibold"><span>{{ goal.label }}</span><span class="text-muted-foreground tabular-nums">{{ goal.value }}%</span></div>
+										<Progress :model-value="goalsReady ? goal.value : 0" />
+									</div>
+								</CardContent>
+							</Card>
 
-						<!-- Activity -->
-						<Card class="flex-1">
-							<CardHeader>
-								<div class="flex items-center justify-between">
-									<CardTitle>Activity</CardTitle>
-									<AvatarGroup :max="3" size="xs">
-										<Avatar v-for="item in recentActivity" :key="item.name" size="xs">
+							<!-- Activity -->
+							<Card class="flex-1">
+								<CardHeader>
+									<div class="flex items-center justify-between">
+										<CardTitle>Activity</CardTitle>
+										<AvatarGroup :max="3" size="xs">
+											<Avatar v-for="item in recentActivity" :key="item.name" size="xs">
+												<AvatarImage :src="item.img" :alt="item.name" />
+												<AvatarFallback :name="item.name" />
+											</Avatar>
+										</AvatarGroup>
+									</div>
+								</CardHeader>
+								<CardContent>
+									<div v-for="item in recentActivity" :key="item.name" class="flex items-center gap-3 text-xs">
+										<Avatar size="sm" status="online">
 											<AvatarImage :src="item.img" :alt="item.name" />
 											<AvatarFallback :name="item.name" />
 										</Avatar>
-									</AvatarGroup>
-								</div>
-							</CardHeader>
-							<CardContent class="gap-3">
-								<div v-for="item in recentActivity" :key="item.name" class="flex items-center gap-3 text-xs">
-									<Avatar size="sm" status="online">
-										<AvatarImage :src="item.img" :alt="item.name" />
-										<AvatarFallback :name="item.name" />
-									</Avatar>
-									<span class="min-w-0 flex-1 truncate"><span class="font-semibold">{{ item.name }}</span> <span class="text-muted-foreground">{{ item.action }}</span></span>
-									<span class="text-muted-foreground">{{ item.time }}</span>
-								</div>
-							</CardContent>
-						</Card>
+										<span class="min-w-0 flex-1 truncate"><span class="font-semibold">{{ item.name }}</span> <span class="text-muted-foreground">{{ item.action }}</span></span>
+										<span class="text-muted-foreground">{{ item.time }}</span>
+									</div>
+								</CardContent>
+							</Card>
+						</div>
 					</div>
 				</TabsContent>
 
@@ -249,7 +251,7 @@ onMounted(() => {
 						</template>
 						<template #cell-health="{ row }">
 							<div class="flex items-center gap-3">
-								<Progress :model-value="row.health" :class="row.health < 50 ? '*:data-[slot=progress-indicator]:bg-destructive' : ''" />
+								<Progress :model-value="row.health" :color="row.health < 50 ? 'red' : 'primary'" />
 								<span class="w-8 text-right text-xs tabular-nums text-muted-foreground">{{ row.health }}</span>
 							</div>
 						</template>
@@ -257,35 +259,37 @@ onMounted(() => {
 				</TabsContent>
 
 				<!-- Settings tab -->
-				<TabsContent value="settings" class="grid gap-6 lg:grid-cols-2">
-					<div class="flex flex-col gap-3">
-						<span class="text-sm font-semibold">Plan</span>
-						<RadioGroup v-model="plan">
-							<RadioGroupCard value="starter" label="Starter" description="Up to 3 projects" :icon="StarIcon" />
-							<RadioGroupCard value="pro" label="Pro" description="Unlimited projects, priority support" :icon="Rocket01Icon" />
-							<RadioGroupCard value="enterprise" label="Enterprise" description="SSO, audit logs, SLA" :icon="Building03Icon" />
-						</RadioGroup>
-					</div>
-					<div class="flex flex-col gap-3">
-						<span class="text-sm font-semibold">Notifications</span>
-						<div class="flex items-center justify-between gap-4 rounded border border-border bg-card p-4">
-							<div>
-								<div class="text-sm font-semibold">Weekly report</div>
-								<div class="text-xs text-muted-foreground">A summary every Monday morning.</div>
-							</div>
-							<Switch v-model="weeklyReport" />
+				<TabsContent value="settings">
+					<div class="grid gap-6 lg:grid-cols-2">
+						<div class="flex flex-col gap-3">
+							<span class="text-sm font-semibold">Plan</span>
+							<RadioGroup v-model="plan">
+								<RadioGroupCard value="starter" label="Starter" description="Up to 3 projects" :icon="StarIcon" />
+								<RadioGroupCard value="pro" label="Pro" description="Unlimited projects, priority support" :icon="Rocket01Icon" />
+								<RadioGroupCard value="enterprise" label="Enterprise" description="SSO, audit logs, SLA" :icon="Building03Icon" />
+							</RadioGroup>
 						</div>
-						<div class="flex items-center justify-between gap-4 rounded border border-border bg-card p-4">
-							<div>
-								<div class="text-sm font-semibold">Anomaly alerts</div>
-								<div class="text-xs text-muted-foreground">Get pinged when metrics spike.</div>
+						<div class="flex flex-col gap-3">
+							<span class="text-sm font-semibold">Notifications</span>
+							<div class="flex items-center justify-between gap-4 rounded border border-border bg-card p-4">
+								<div>
+									<div class="text-sm font-semibold">Weekly report</div>
+									<div class="text-xs text-muted-foreground">A summary every Monday morning.</div>
+								</div>
+								<Switch v-model="weeklyReport" />
 							</div>
-							<Switch v-model="anomalyAlerts" />
+							<div class="flex items-center justify-between gap-4 rounded border border-border bg-card p-4">
+								<div>
+									<div class="text-sm font-semibold">Anomaly alerts</div>
+									<div class="text-xs text-muted-foreground">Get pinged when metrics spike.</div>
+								</div>
+								<Switch v-model="anomalyAlerts" />
+							</div>
+							<Button class="mt-auto self-end" :loading="saving" @click="handleSave">
+								<HugeiconsIcon :icon="Money03Icon" />
+								Save settings
+							</Button>
 						</div>
-						<Button class="mt-auto self-end" :loading="saving" @click="handleSave">
-							<HugeiconsIcon :icon="Money03Icon" />
-							Save settings
-						</Button>
 					</div>
 				</TabsContent>
 			</Tabs>
@@ -295,20 +299,24 @@ onMounted(() => {
 		<DemoSection id="explore" title="Explore the library" description="Every category has live, interactive examples with copyable code.">
 			<div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
 				<NuxtLinkLocale v-for="page in explorePages" :key="page.id" :to="page.to" class="group/explore rounded outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45">
-					<Card interactive class="h-full gap-3!">
+					<Card interactive class="h-full">
 						<CardHeader>
 							<div class="mb-2 flex size-10 items-center justify-center rounded border border-primary/30 text-primary transition-colors duration-150 group-hover/explore:border-primary/60">
 								<HugeiconsIcon :icon="page.icon" class="size-5" />
 							</div>
-							<CardTitle class="flex items-center gap-2">
-								{{ page.label }}
-								<HugeiconsIcon :icon="ArrowRight01Icon" class="size-4 text-muted-foreground transition-[translate,color] duration-300 ease-spring group-hover/explore:translate-x-1 group-hover/explore:text-primary" />
+							<CardTitle>
+								<span class="flex items-center gap-2">
+									{{ page.label }}
+									<HugeiconsIcon :icon="ArrowRight01Icon" class="size-4 text-muted-foreground transition-[translate,color] duration-300 ease-spring group-hover/explore:translate-x-1 group-hover/explore:text-primary" />
+								</span>
 							</CardTitle>
 							<CardDescription>{{ page.description }}</CardDescription>
 						</CardHeader>
-						<CardContent v-if="page.sections.length" class="flex-row flex-wrap gap-1.5">
-							<span v-for="section in page.sections.slice(0, 4)" :key="section.id" class="rounded-sm border border-border bg-surface px-1.5 py-0.5 text-[10px] font-semibold text-muted-foreground">{{ section.title }}</span>
-							<span v-if="page.sections.length > 4" class="px-1 py-0.5 text-[10px] font-semibold text-muted-foreground">+{{ page.sections.length - 4 }}</span>
+						<CardContent v-if="page.sections.length">
+							<div class="flex flex-wrap gap-1.5">
+								<span v-for="section in page.sections.slice(0, 4)" :key="section.id" class="rounded border border-border bg-surface px-1.5 py-0.5 text-[10px] font-semibold text-muted-foreground">{{ section.title }}</span>
+								<span v-if="page.sections.length > 4" class="px-1 py-0.5 text-[10px] font-semibold text-muted-foreground">+{{ page.sections.length - 4 }}</span>
+							</div>
 						</CardContent>
 					</Card>
 				</NuxtLinkLocale>

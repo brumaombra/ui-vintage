@@ -190,7 +190,7 @@ const dialogCode = `const confirmed = await showConfirmDialog({
 					<Spinner size="sm" />
 					<Spinner size="md" />
 					<Spinner size="lg" />
-					<Spinner size="xl" class="text-foreground" />
+					<Spinner size="xl" />
 				</div>
 				<Button variant="secondary" @click="handleBusy">
 					<HugeiconsIcon :icon="RefreshIcon" />

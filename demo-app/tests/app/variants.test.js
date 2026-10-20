@@ -11,6 +11,7 @@ import { DataListText } from '@brumaombra/ui-vintage/data-list';
 import { dialogSizeClasses } from '@brumaombra/ui-vintage/dialog';
 import { Input } from '@brumaombra/ui-vintage/input';
 import { Progress } from '@brumaombra/ui-vintage/progress';
+import { Skeleton } from '@brumaombra/ui-vintage/skeleton';
 import { TableRow } from '@brumaombra/ui-vintage/table';
 
 // Props and variants that let apps style components without overriding their classes
@@ -80,6 +81,24 @@ describe('Text, inputs and badges', () => {
 		expect(wrapper.find('[data-slot="input-suffix"]').text()).toBe('Shares');
 		expect(wrapper.find('input').attributes('type')).toBe('number');
 		expect(wrapper.find('input').attributes('min')).toBe('1');
+	});
+
+	// A prefix (like a search icon) sits inside the field too
+	it('renders a prefix', async () => {
+		const wrapper = await mountSuspended(Input, { slots: { prefix: () => h('svg') } });
+		expect(wrapper.find('[data-slot="input-prefix"] svg').exists()).toBe(true);
+	});
+
+	// The small input matches the small select trigger
+	it('renders the small size', async () => {
+		const wrapper = await mountSuspended(Input, { props: { size: 'sm' } });
+		expect(wrapper.find('input').classes()).toContain('h-10');
+	});
+
+	// Circle skeletons stand in for avatars
+	it('renders a circle skeleton', async () => {
+		const wrapper = await mountSuspended(Skeleton, { props: { circle: true } });
+		expect(wrapper.classes()).toContain('rounded-full');
 	});
 
 	// The primary badge uses the brand tint

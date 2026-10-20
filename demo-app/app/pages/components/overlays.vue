@@ -13,6 +13,7 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { Avatar, AvatarFallback, AvatarImage } from '@brumaombra/ui-vintage/avatar';
 import { Badge } from '@brumaombra/ui-vintage/badge';
 import { Button } from '@brumaombra/ui-vintage/button';
+import { Card } from '@brumaombra/ui-vintage/card';
 import { Command, CommandGroup, CommandInput, CommandItem, CommandList, CommandShortcut } from '@brumaombra/ui-vintage/command';
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@brumaombra/ui-vintage/dialog';
 import { Field, FieldGroup, FieldLabel } from '@brumaombra/ui-vintage/field';
@@ -113,7 +114,7 @@ const sheetCode = `<Sheet>
 						</AlertDialogHeader>
 					</div>
 					<AlertDialogFooter>
-						<AlertDialogAction class="bg-destructive text-white hover:bg-destructive/90" @click="showMessageToast({ message: 'Project deleted.', type: 'error' })">Delete project</AlertDialogAction>
+						<AlertDialogAction variant="red" @click="showMessageToast({ message: 'Project deleted.', type: 'error' })">Delete project</AlertDialogAction>
 						<AlertDialogCancel>Cancel</AlertDialogCancel>
 					</AlertDialogFooter>
 				</AlertDialogContent>
@@ -124,7 +125,7 @@ const sheetCode = `<Sheet>
 		<DemoSection id="sheet" title="Sheet" badge="Updated" description="Side panels glide in from any edge with a spring and leave quickly." :code="sheetCode" preview-class="flex flex-wrap items-center justify-center gap-3 py-12!">
 			<Sheet v-for="side in sheetSides" :key="side">
 				<SheetTrigger as-child>
-					<Button variant="secondary" class="capitalize">{{ side }}</Button>
+					<Button variant="secondary">{{ side[0].toUpperCase() + side.slice(1) }}</Button>
 				</SheetTrigger>
 				<SheetContent :side="side">
 					<SheetHeader>
@@ -167,9 +168,9 @@ const sheetCode = `<Sheet>
 						</div>
 						<div class="grid grid-cols-[80px_1fr] items-center gap-3">
 							<label class="text-xs font-semibold" for="pop-width">Width</label>
-							<Input id="pop-width" model-value="100%" class="h-10" />
+							<Input id="pop-width" model-value="100%" size="sm" />
 							<label class="text-xs font-semibold" for="pop-height">Height</label>
-							<Input id="pop-height" model-value="auto" class="h-10" />
+							<Input id="pop-height" model-value="auto" size="sm" />
 						</div>
 					</div>
 				</PopoverContent>
@@ -178,7 +179,7 @@ const sheetCode = `<Sheet>
 			<!-- Tooltips on every side -->
 			<Tooltip v-for="side in ['top', 'right', 'bottom', 'left'] as const" :key="side">
 				<TooltipTrigger as-child>
-					<Button variant="ghost" class="capitalize">{{ side }}</Button>
+					<Button variant="ghost">{{ side[0].toUpperCase() + side.slice(1) }}</Button>
 				</TooltipTrigger>
 				<TooltipContent :side="side">Tooltip on the {{ side }}</TooltipContent>
 			</Tooltip>
@@ -217,38 +218,40 @@ const sheetCode = `<Sheet>
 
 		<!-- Command -->
 		<DemoSection id="command" title="Command palette" badge="Updated" description="Inline or in a dialog. Filtering matches text and keywords, and a primary bar springs onto the highlighted row." preview-class="flex flex-col items-center gap-6">
-			<Command class="max-w-md rounded border border-border shadow-elevated-md">
-				<CommandInput placeholder="Type a command or search..." />
-				<CommandList>
-					<CommandGroup heading="Suggestions">
-						<CommandItem value="calendar schedule">
-							<HugeiconsIcon :icon="Calendar03Icon" />
-							Calendar
-						</CommandItem>
-						<CommandItem value="search find">
-							<HugeiconsIcon :icon="Search01Icon" />
-							Search emoji
-						</CommandItem>
-						<CommandItem value="link copy url">
-							<HugeiconsIcon :icon="Link01Icon" />
-							Copy link
-							<CommandShortcut>⌘L</CommandShortcut>
-						</CommandItem>
-					</CommandGroup>
-					<CommandGroup heading="Settings">
-						<CommandItem value="profile account">
-							<HugeiconsIcon :icon="UserIcon" />
-							Profile
-							<CommandShortcut>⌘P</CommandShortcut>
-						</CommandItem>
-						<CommandItem value="settings preferences">
-							<HugeiconsIcon :icon="Settings02Icon" />
-							Settings
-							<CommandShortcut>⌘,</CommandShortcut>
-						</CommandItem>
-					</CommandGroup>
-				</CommandList>
-			</Command>
+			<Card padding="none" elevation="md" class="w-full max-w-md">
+				<Command>
+					<CommandInput placeholder="Type a command or search..." />
+					<CommandList>
+						<CommandGroup heading="Suggestions">
+							<CommandItem value="calendar schedule">
+								<HugeiconsIcon :icon="Calendar03Icon" />
+								Calendar
+							</CommandItem>
+							<CommandItem value="search find">
+								<HugeiconsIcon :icon="Search01Icon" />
+								Search emoji
+							</CommandItem>
+							<CommandItem value="link copy url">
+								<HugeiconsIcon :icon="Link01Icon" />
+								Copy link
+								<CommandShortcut>⌘L</CommandShortcut>
+							</CommandItem>
+						</CommandGroup>
+						<CommandGroup heading="Settings">
+							<CommandItem value="profile account">
+								<HugeiconsIcon :icon="UserIcon" />
+								Profile
+								<CommandShortcut>⌘P</CommandShortcut>
+							</CommandItem>
+							<CommandItem value="settings preferences">
+								<HugeiconsIcon :icon="Settings02Icon" />
+								Settings
+								<CommandShortcut>⌘,</CommandShortcut>
+							</CommandItem>
+						</CommandGroup>
+					</CommandList>
+				</Command>
+			</Card>
 			<Button variant="secondary" @click="paletteOpen = true">
 				<HugeiconsIcon :icon="CommandIcon" />
 				Open the global palette

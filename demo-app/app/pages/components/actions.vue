@@ -317,7 +317,7 @@ const kbdCode = `<KbdGroup :keys="['mod', 'shift', 'p']" />
 				<!-- Live keycaps -->
 				<div class="flex min-h-12 items-center gap-2">
 					<TransitionGroup enter-active-class="transition-[opacity,scale] duration-300 ease-bounce" enter-from-class="opacity-0 scale-50" leave-active-class="transition-[opacity,scale] duration-150" leave-to-class="opacity-0 scale-75">
-						<Kbd v-for="key in pressedKeys" :key="key" pressed class="h-10 min-w-10 px-3 text-sm">{{ key === ' ' ? 'Space' : key }}</Kbd>
+						<Kbd v-for="key in pressedKeys" :key="key" pressed size="lg">{{ key === ' ' ? 'Space' : key }}</Kbd>
 					</TransitionGroup>
 					<span v-if="!pressedKeys.length" class="text-xs text-muted-foreground">Press any key…</span>
 				</div>

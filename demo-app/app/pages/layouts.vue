@@ -112,9 +112,11 @@ const themeLogoCode = `<LandingNavbar app-name="Acme" app-logo="/logo.svg" app-l
 								</div>
 								<Badge v-if="shell.badge" :text="shell.badge" color="yellow" pulse />
 							</div>
-							<CardTitle class="flex items-center gap-2">
-								{{ shell.title }}
-								<HugeiconsIcon :icon="ArrowRight01Icon" class="size-4 text-muted-foreground transition-[translate,color] duration-300 ease-spring group-hover/shell:translate-x-1 group-hover/shell:text-primary" />
+							<CardTitle>
+								<span class="flex items-center gap-2">
+									{{ shell.title }}
+									<HugeiconsIcon :icon="ArrowRight01Icon" class="size-4 text-muted-foreground transition-[translate,color] duration-300 ease-spring group-hover/shell:translate-x-1 group-hover/shell:text-primary" />
+								</span>
 							</CardTitle>
 							<CardDescription>{{ shell.description }}</CardDescription>
 						</CardHeader>

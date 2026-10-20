@@ -801,10 +801,11 @@ import { Input } from '@brumaombra/ui-vintage/input';
 | --- | --- | --- |
 | `defaultValue` | `string \| number` |  |
 | `modelValue` | `string \| number` |  |
+| `size` | `'default' \| 'sm'` |  |
 | `class` | `HTMLAttributes['class']` |  |
 
 - **Emits:** `update:modelValue` (payload: string \| number).
-- **Slots:** `suffix`.
+- **Slots:** `prefix`, `suffix`.
 
 ---
 
@@ -1735,7 +1736,10 @@ import { Skeleton } from '@brumaombra/ui-vintage/skeleton';
 
 #### `Skeleton`
 
-- **Props:** `class`.
+| Prop | Type | Default |
+| --- | --- | --- |
+| `circle` | `boolean` | `false` |
+| `class` | `HTMLAttributes['class']` |  |
 
 ---
 
