@@ -1,6 +1,7 @@
 ---
 title: "Pubblicare una libreria Vue senza passaggio di build"
 description: "UI Vintage pubblica il proprio codice sorgente e lascia che ogni app Nuxt lo compili. Questa scelta elimina un'intera categoria di problemi e ne introduce un paio di nuovi."
+summary: "UI Vintage pubblica i sorgenti .vue e .ts così come sono e lascia che ogni app Nuxt li compili, quindi non c'è una build separata da mantenere. La libreria si comporta come il codice dell'app, con la scansione di Tailwind e il tree-shaking che funzionano normalmente. Il prezzo è il legame con Nuxt e un controllo dei tipi prima di ogni rilascio."
 image: "/images/blog/source-published-packages/cover.jpg"
 datePublished: "2026-08-12T00:00:00Z"
 dateModified: "2026-08-12T00:00:00Z"

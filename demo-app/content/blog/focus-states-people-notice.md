@@ -1,6 +1,7 @@
 ---
 title: "Designing Focus States People Actually Notice"
 description: "Keyboard users rely on the focus ring to know where they are. Most designs hide it or make it faint. A few small rules make it both visible and good-looking."
+summary: "Keyboard users depend on the focus ring, so never remove it without a replacement. Use a ring on :focus-visible that is visible but not loud, such as three pixels in the primary color drawn outside the element. Leave a gap so it contrasts with both element and page, and test by tabbing through."
 image: "/images/blog/focus-states-people-notice/cover.jpg"
 datePublished: "2026-07-21T00:00:00Z"
 dateModified: "2026-07-24T00:00:00Z"

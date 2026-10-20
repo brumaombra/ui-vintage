@@ -1,6 +1,7 @@
 ---
 title: "Progettare un sistema editoriale riutilizzabile"
 description: "Come abbiamo trasformato un'interfaccia blog usata una sola volta in una superficie editoriale riutilizzabile, capace di mantenere la propria identità anche fuori dal prodotto originale."
+summary: "Un'interfaccia blog diventa riutilizzabile quando tipografia e spaziatura sono stabili e i confini sono chiari. La libreria possiede i blocchi editoriali, mentre l'app gestisce query dei contenuti, SEO e card di conversione specifiche del prodotto. Verifica il tutto con contenuti markdown reali e usa la demo app come farebbe un vero consumer."
 image: "/images/blog/designing-a-reusable-editorial-system/cover.jpg"
 datePublished: "2026-06-10T00:00:00Z"
 dateModified: "2026-06-12T00:00:00Z"

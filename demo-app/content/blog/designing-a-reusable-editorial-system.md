@@ -1,6 +1,7 @@
 ---
 title: "Designing a Reusable Editorial System"
 description: "How we turned a one-off blog UI into a reusable content surface that still feels intentional once it leaves the original product."
+summary: "A blog UI becomes reusable when typography and spacing are stable and the boundaries are clear. The library owns the editorial blocks, while the app owns content queries, SEO and product-specific conversion cards. Test with real markdown content and use the demo app like a real consumer would."
 image: "/images/blog/designing-a-reusable-editorial-system/cover.jpg"
 datePublished: "2026-06-10T00:00:00Z"
 dateModified: "2026-06-12T00:00:00Z"

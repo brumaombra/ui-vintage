@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
-import { BlogHeaderSection, BlogPostHeader, BlogTagsSection } from '@brumaombra/ui-vintage/blog';
+import { BlogHeaderSection, BlogPostHeader, BlogSummary, BlogTagsSection } from '@brumaombra/ui-vintage/blog';
 
 // Labels of the details row in the post header
 const readDetailLabels = wrapper => wrapper.findAll('dt').map(label => label.text());
@@ -37,6 +37,17 @@ describe('BlogPostHeader', () => {
 	it('estimates the reading time from the body', async () => {
 		const wrapper = await mountSuspended(BlogPostHeader, { props: { title: 'Post', body: 'word '.repeat(440) } });
 		expect(wrapper.text()).toContain('2 min');
+	});
+});
+
+describe('BlogSummary', () => {
+	// The short answer of the post sits in a labelled region, so readers and assistive technologies find it
+	it('shows the summary under the In short label', async () => {
+		const wrapper = await mountSuspended(BlogSummary, { props: { summary: 'Springs feel faster because they move early.' } });
+		expect(wrapper.attributes('role')).toBe('region');
+		expect(wrapper.attributes('aria-label')).toBe('In short');
+		expect(wrapper.text()).toContain('In short');
+		expect(wrapper.text()).toContain('Springs feel faster because they move early.');
 	});
 });
 

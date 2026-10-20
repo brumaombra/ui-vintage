@@ -1,6 +1,7 @@
 ---
 title: "Perché le animazioni a molla sembrano più veloci di quanto siano"
 description: "Una molla che supera di poco il bersaglio può durare più di una semplice dissolvenza e sembrare comunque più rapida. Ecco perché, e dove il trucco smette di funzionare."
+summary: "Le animazioni a molla sembrano più veloci perché percorrono gran parte della distanza all'inizio, quindi il contenuto diventa leggibile prima anche se la durata totale è maggiore. Usa le molle per ciò che entra, ease-out brevi per le uscite e nessun movimento per chi chiede movimento ridotto. Con linear() in CSS non serve JavaScript."
 image: "/images/blog/why-spring-animations-feel-faster/cover.jpg"
 datePublished: "2026-07-02T00:00:00Z"
 dateModified: "2026-07-02T00:00:00Z"

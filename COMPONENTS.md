@@ -3568,10 +3568,10 @@ Components for Nuxt Content pages and a complete blog.
 
 ### `@brumaombra/ui-vintage/blog`
 
-Complete blog pages and their building blocks. The page components (`BlogIndexPage`, `BlogPostPage`, `BlogCategoriesPage`, `BlogTagsPage`, `BlogPostsPage` for the posts of a category or a tag) render the whole design: the app keeps one thin file per route that queries Nuxt Content, sets the SEO and passes the data and its own copy (titles and descriptions), with the helpers (`slugify`, `normalizeContentPath`, `buildCategoriesFromPosts`, `buildTagsFromPosts`, `sortByStableSeed`) shaping the data. The post page renders the app's `ProseHr` content component as divider and has an `after-article` slot for a call to action. The building blocks: an animated hero header, a post header (breadcrumbs, category and tags, title, author line, and featured image), a full-bleed featured carousel, post and category cards, tags, table of contents, reading progress, FAQ, share sidebar, and the content renderer. Scroll entrances use AOS: install `aos` in the app and initialize it (the components carry `data-aos="blur-up"`, and the library stylesheet defines that animation). Without AOS the content simply renders without entrances.
+Complete blog pages and their building blocks. The page components (`BlogIndexPage`, `BlogPostPage`, `BlogCategoriesPage`, `BlogTagsPage`, `BlogPostsPage` for the posts of a category or a tag) render the whole design: the app keeps one thin file per route that queries Nuxt Content, sets the SEO and passes the data and its own copy (titles and descriptions), with the helpers (`slugify`, `normalizeContentPath`, `buildCategoriesFromPosts`, `buildTagsFromPosts`, `sortByStableSeed`) shaping the data. The post page renders the app's `ProseHr` content component as divider and has an `after-article` slot for a call to action. The building blocks: an animated hero header, a post header (breadcrumbs, category and tags, title, author line, and featured image), an "In short" box with the `summary` field of the frontmatter (the post page shows it before the table of contents when the post has one), a full-bleed featured carousel, post and category cards, tags, table of contents, reading progress, FAQ, share sidebar, and the content renderer. Scroll entrances use AOS: install `aos` in the app and initialize it (the components carry `data-aos="blur-up"`, and the library stylesheet defines that animation). Without AOS the content simply renders without entrances.
 
 ```ts
-import { AllPostsSection, BlogContentRenderer, BlogFAQSection, BlogInfoSection, BlogPostHeader, BlogHeaderSection, BlogSectionTitle, BlogTagsSection, CategoriesList, CategoriesSection, CategoryCard, HeaderCarousel, PostCard, PostsList, SocialShareSidebar, TableOfContents, BlogIndexPage, BlogPostPage, BlogCategoriesPage, BlogTagsPage, BlogPostsPage, BlogViewAllLink, slugify, normalizeContentPath, buildCategoriesFromPosts, buildTagsFromPosts, sortByStableSeed } from '@brumaombra/ui-vintage/blog';
+import { AllPostsSection, BlogContentRenderer, BlogFAQSection, BlogInfoSection, BlogPostHeader, BlogHeaderSection, BlogSectionTitle, BlogSummary, BlogTagsSection, CategoriesList, CategoriesSection, CategoryCard, HeaderCarousel, PostCard, PostsList, SocialShareSidebar, TableOfContents, BlogIndexPage, BlogPostPage, BlogCategoriesPage, BlogTagsPage, BlogPostsPage, BlogViewAllLink, slugify, normalizeContentPath, buildCategoriesFromPosts, buildTagsFromPosts, sortByStableSeed } from '@brumaombra/ui-vintage/blog';
 import type { BlogPostData, BlogCategoryData, BlogTagData } from '@brumaombra/ui-vintage/blog';
 ```
 
@@ -3652,6 +3652,12 @@ import type { BlogPostData, BlogCategoryData, BlogTagData } from '@brumaombra/ui
 | `description` | `string` | `''` |
 
 - **Slots:** `action`.
+
+#### `BlogSummary`
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `summary` *(required)* | `string` |  |
 
 #### `BlogTagsSection`
 
@@ -3793,6 +3799,7 @@ interface BlogPostData {
     path?: string;
     title?: string;
     description?: string;
+    summary?: string;
     image?: string;
     categoryText?: string;
     categorySlug?: string;

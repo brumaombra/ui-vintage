@@ -1,6 +1,7 @@
 ---
 title: "Why Spring Animations Feel Faster Than They Are"
 description: "A spring that overshoots slightly can take longer than a plain fade and still feel quicker. Here is why, and where the trick stops working."
+summary: "Spring animations feel faster because they cover most of the distance early, so content becomes readable sooner even when the total duration is longer. Use springs for things that enter, short ease-out curves for exits, and no movement for users who prefer reduced motion. CSS linear() makes springs possible without JavaScript."
 image: "/images/blog/why-spring-animations-feel-faster/cover.jpg"
 datePublished: "2026-07-02T00:00:00Z"
 dateModified: "2026-07-02T00:00:00Z"

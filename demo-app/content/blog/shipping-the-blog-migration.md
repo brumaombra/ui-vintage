@@ -1,6 +1,7 @@
 ---
 title: "Shipping the Blog Migration Into the Library"
 description: "A practical summary of what changed once the original blog implementation was moved into a reusable Nuxt-friendly component library."
+summary: "Moving the blog UI into the library turns the demo from a static gallery into a real integration test. It should use real markdown, a content collection, an explicit frontmatter schema and the full blog route graph, with same-category related posts first. Production-like does not mean copying product-specific cards or SEO helpers."
 image: "/images/blog/shipping-the-blog-migration/cover.jpg"
 datePublished: "2026-06-14T00:00:00Z"
 dateModified: "2026-06-14T00:00:00Z"

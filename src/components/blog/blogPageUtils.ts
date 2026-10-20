@@ -3,6 +3,7 @@ export interface BlogPostData {
 	path?: string;
 	title?: string;
 	description?: string;
+	summary?: string;
 	image?: string;
 	categoryText?: string;
 	categorySlug?: string;

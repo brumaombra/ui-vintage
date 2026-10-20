@@ -79,6 +79,7 @@
 			"readMore": "Читать далее",
 			"goToPost": "Перейти к статье",
 			"new": "Новое",
+			"inShort": "Коротко",
 			"tableOfContents": "Содержание",
 			"tableOfContentsDescription": "Перейти к разделу статьи",
 			"tableOfContentsSections": "Разделов: {count}",

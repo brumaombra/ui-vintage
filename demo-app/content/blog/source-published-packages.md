@@ -1,6 +1,7 @@
 ---
 title: "Shipping a Vue Library Without a Build Step"
 description: "UI Vintage publishes its source and lets each Nuxt app compile it. That choice removes a whole class of problems, and adds a couple of new ones."
+summary: "UI Vintage publishes its raw .vue and .ts source and lets each Nuxt app compile it, so there is no separate build to maintain. The library behaves like app code, with Tailwind scanning and tree-shaking working normally. The cost is tying it to Nuxt and catching type errors before each release."
 image: "/images/blog/source-published-packages/cover.jpg"
 datePublished: "2026-08-12T00:00:00Z"
 dateModified: "2026-08-12T00:00:00Z"

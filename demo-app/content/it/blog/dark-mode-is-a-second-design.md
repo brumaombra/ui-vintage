@@ -1,6 +1,7 @@
 ---
 title: "La modalità scura è un secondo design, non un filtro"
 description: "Invertire i colori produce un tema scuro che funziona ma sembra leggermente sbagliato ovunque. I token semantici risolvono quasi tutto. Ombre e accenti richiedono più attenzione."
+summary: "Tratta la modalità scura come un design a sé, non come un tema chiaro invertito. Dai ai colori nomi legati al ruolo con token semantici e quasi tutte le superfici si aggiornano da sole. Accenti, ombre e immagini richiedono comunque cura: gli accenti vanno schiariti e scaldati, le ombre servono più opache, le foto possono volere versioni scure."
 image: "/images/blog/dark-mode-is-a-second-design/cover.jpg"
 datePublished: "2026-09-08T00:00:00Z"
 dateModified: "2026-09-10T00:00:00Z"

@@ -79,6 +79,7 @@
 			"readMore": "Ler mais",
 			"goToPost": "Ir para o artigo",
 			"new": "Novo",
+			"inShort": "Em resumo",
 			"tableOfContents": "Indice",
 			"tableOfContentsDescription": "Ir para uma secao deste artigo",
 			"tableOfContentsSections": "{count} secao | {count} secoes",

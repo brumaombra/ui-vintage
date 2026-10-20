@@ -1,6 +1,7 @@
 ---
 title: "Pubblicare la migrazione del blog nella libreria"
 description: "Una sintesi pratica di ciò che è cambiato quando l'implementazione originale del blog è stata spostata in una libreria di componenti compatibile con Nuxt."
+summary: "Spostare l'interfaccia del blog nella libreria trasforma la demo da galleria statica a vero test di integrazione. Deve usare markdown reale, una collezione di contenuti, uno schema del frontmatter esplicito e l'intero grafo delle route, con gli articoli della stessa categoria per primi. Simile alla produzione non significa copiare card o helper SEO specifici del prodotto."
 image: "/images/blog/shipping-the-blog-migration/cover.jpg"
 datePublished: "2026-06-14T00:00:00Z"
 dateModified: "2026-06-14T00:00:00Z"

@@ -79,6 +79,7 @@
 			"readMore": "Lire la suite",
 			"goToPost": "Aller a l'article",
 			"new": "Nouveau",
+			"inShort": "En bref",
 			"tableOfContents": "Table des matieres",
 			"tableOfContentsDescription": "Aller a une section de cet article",
 			"tableOfContentsSections": "{count} section | {count} sections",

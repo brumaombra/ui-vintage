@@ -1,6 +1,7 @@
 ---
 title: "Progettare stati di focus che le persone notano davvero"
 description: "Chi naviga con la tastiera si affida all'anello di focus per sapere dove si trova. Molti design lo nascondono o lo rendono sbiadito. Poche regole lo rendono visibile ed elegante."
+summary: "Chi usa la tastiera dipende dall'anello di focus, quindi non rimuoverlo mai senza sostituirlo. Usa un anello su :focus-visible che sia visibile ma non invadente, per esempio tre pixel nel colore primario disegnati fuori dall'elemento. Lascia uno spazio perché contrasti con elemento e pagina, e provalo navigando con Tab."
 image: "/images/blog/focus-states-people-notice/cover.jpg"
 datePublished: "2026-07-21T00:00:00Z"
 dateModified: "2026-07-24T00:00:00Z"

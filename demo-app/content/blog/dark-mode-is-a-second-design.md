@@ -1,6 +1,7 @@
 ---
 title: "Dark Mode Is a Second Design, Not a Filter"
 description: "Inverting colors gives you a dark theme that technically works and looks slightly wrong everywhere. Semantic tokens fix most of it. Shadows and accents need extra care."
+summary: "Treat dark mode as its own design, not an inverted light theme. Name colors by job with semantic tokens, and most surfaces update automatically. Accents, shadows and images still need manual care: accents need a lighter, warmer value, shadows need higher opacity, and photos may need dark versions."
 image: "/images/blog/dark-mode-is-a-second-design/cover.jpg"
 datePublished: "2026-09-08T00:00:00Z"
 dateModified: "2026-09-10T00:00:00Z"

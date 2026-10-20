@@ -8,6 +8,7 @@ import BlogFAQSection from './BlogFAQSection.vue';
 import BlogInfoSection from './BlogInfoSection.vue';
 import BlogPostHeader from './BlogPostHeader.vue';
 import BlogSectionTitle from './BlogSectionTitle.vue';
+import BlogSummary from './BlogSummary.vue';
 import BlogViewAllLink from './BlogViewAllLink.vue';
 import CategoryCard from './CategoryCard.vue';
 import PostCard from './PostCard.vue';
@@ -53,6 +54,9 @@ const postTags = computed(() => ((props.post.tags as string[] | undefined) || []
 				:category-slug="props.post.categorySlug"
 				:tags="postTags"
 				:body="props.post.body" />
+
+			<!-- Short answer of the post (the summary field of the frontmatter) -->
+			<BlogSummary v-if="props.post.summary" :summary="props.post.summary" />
 
 			<!-- Table of contents -->
 			<TableOfContents :content="props.post" />
