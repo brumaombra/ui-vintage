@@ -45,7 +45,7 @@ export const toggleVariants: (props?: ToggleVariants & ClassProp) => string = cv
 // Segmented control item (sits above the sliding indicator)
 export const toggleGroupItemVariants: (props?: { size?: ToggleGroupSize | null } & ClassProp) => string = cva(
 	[
-		"relative z-10 inline-flex shrink-0 cursor-pointer select-none items-center justify-center gap-1.5 whitespace-nowrap rounded-sm text-xs font-semibold text-muted-foreground outline-none sm:text-sm",
+		"relative z-10 inline-flex shrink-0 cursor-pointer select-none items-center justify-center gap-1.5 whitespace-nowrap rounded-xs text-xs font-semibold text-muted-foreground outline-none sm:text-sm",
 		"[transition:color_150ms,background-color_150ms,box-shadow_220ms,opacity_150ms,transform_380ms_var(--ease-spring)]",
 		"hover:text-foreground data-[state=on]:text-foreground active:scale-[0.96] active:duration-75 disabled:pointer-events-none disabled:opacity-50",
 		"focus-visible:ring-[3px] focus-visible:ring-ring/45",
