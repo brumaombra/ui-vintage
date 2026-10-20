@@ -153,7 +153,7 @@ const props = defineProps<{
 	padding: 1rem 1.25rem 1rem 1.5rem;
 	border: 1px solid var(--border);
 	border-left: 3px solid var(--primary);
-	border-radius: 0.25rem;
+	border-radius: var(--uv-radius);
 	background-color: var(--surface);
 	font-size: 15px;
 	font-style: italic;
@@ -169,7 +169,7 @@ const props = defineProps<{
 	color: var(--foreground);
 	background-color: var(--surface);
 	border: 1px solid var(--border);
-	border-radius: 0.25rem;
+	border-radius: var(--uv-radius);
 	display: inline-block;
 	font-size: 0.75rem;
 	font-weight: 600;
@@ -186,7 +186,7 @@ const props = defineProps<{
 /* Images */
 .blog-content :deep(img:not(.not-prose):not(.not-prose *)) {
 	border: 1px solid var(--border);
-	border-radius: 0.25rem;
+	border-radius: var(--uv-radius);
 	box-shadow: var(--uv-shadow-sm);
 }
 

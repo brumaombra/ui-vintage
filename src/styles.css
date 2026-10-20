@@ -57,9 +57,11 @@ html {
 	--uv-shadow-xl: 0 4px 8px rgb(16 24 40 / 0.04), 0 24px 64px -12px rgb(16 24 40 / 0.28);
 	--uv-shadow-glow: 0 0 0 1px color-mix(in oklab, var(--primary) 40%, transparent), 0 8px 24px -6px color-mix(in oklab, var(--primary) 45%, transparent);
 
+	/* The one corner radius of every component (cards, buttons, fields, badges...): change it here to restyle them all */
+	--uv-radius: 0.25rem;
+
 	/*********************** Shadcn UI variables ***********************/
 
-	--radius: 0.625rem;
 	--background: var(--bg-main-light);
 	--foreground: var(--text-primary-light);
 	--card: var(--bg-card-light);
@@ -100,10 +102,12 @@ html {
 }
 
 @theme inline {
-	--radius-sm: calc(var(--radius) - 4px);
-	--radius-md: calc(var(--radius) - 2px);
-	--radius-lg: var(--radius);
-	--radius-xl: calc(var(--radius) + 4px);
+	/* Every radius step resolves to the shared corner radius, so rounded, rounded-sm... rounded-xl all match (rounded-full stays a circle) */
+	--radius: var(--uv-radius);
+	--radius-sm: var(--uv-radius);
+	--radius-md: var(--uv-radius);
+	--radius-lg: var(--uv-radius);
+	--radius-xl: var(--uv-radius);
 	--color-background: var(--background);
 	--color-foreground: var(--foreground);
 	--color-card: var(--card);
