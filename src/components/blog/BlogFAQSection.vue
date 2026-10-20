@@ -20,7 +20,7 @@ const hasValidFAQs = computed(() => props.faqs && props.faqs.length > 0);
 </script>
 
 <template>
-	<div v-if="hasValidFAQs" class="mt-12 lg:mt-16">
+	<div v-if="hasValidFAQs" class="mt-10 lg:mt-12">
 		<!-- Title and description -->
 		<BlogSectionTitle :title="t('uiVintage.blog.faq.title')" :description="t('uiVintage.blog.faq.description')" />
 

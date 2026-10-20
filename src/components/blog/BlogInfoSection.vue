@@ -34,12 +34,12 @@ const showModifiedDate = computed(() => Boolean(props.dateModified) && formatted
 
 <template>
 	<!-- Author and date information -->
-	<Card data-aos="blur-up" class="gap-0! overflow-hidden p-0!">
+	<Card data-aos="blur-up" padding="none">
 		<!-- Author -->
-		<div :class="['flex gap-3 px-5 py-4', props.authorBio ? 'items-start' : 'items-center']">
-			<!-- Author image -->
+		<div :class="['group/author flex gap-3 px-5 py-4', props.authorBio ? 'items-start' : 'items-center']">
+			<!-- Author image (grows softly while the author row is hovered) -->
 			<NuxtLinkLocale :to="props.authorUrl" target="_blank" rel="noopener noreferrer" class="shrink-0 rounded outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45">
-				<NuxtImg :src="props.authorImageUrl" :alt="props.author" height="44" width="44" format="avif" quality="40" :sizes="{ 480: '44px', 1280: '44px' }" loading="lazy" decoding="async" class="size-11 rounded border border-border object-cover" />
+				<NuxtImg :src="props.authorImageUrl" :alt="props.author" height="44" width="44" format="avif" quality="40" :sizes="{ 480: '44px', 1280: '44px' }" loading="lazy" decoding="async" class="size-11 rounded border border-border object-cover transition-[scale] duration-500 ease-spring group-hover/author:scale-110" />
 			</NuxtLinkLocale>
 
 			<!-- Author name and bio -->

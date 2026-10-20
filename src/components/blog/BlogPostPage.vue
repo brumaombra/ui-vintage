@@ -88,7 +88,7 @@ const postTags = computed(() => ((props.post.tags as string[] | undefined) || []
 		</article>
 
 		<!-- Related posts -->
-		<section v-if="props.relatedPosts.length" class="mt-16 md:mt-24">
+		<section v-if="props.relatedPosts.length" class="mt-12 md:mt-16">
 			<BlogSectionTitle :title="t('uiVintage.blog.readAlso')" />
 			<div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
 				<NuxtLinkLocale v-for="(relatedPost, index) in props.relatedPosts" :key="relatedPost.path" :to="relatedPost.path" data-aos="blur-up" :data-aos-delay="(index % 2) * 90" class="block h-full rounded outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45">
@@ -102,7 +102,7 @@ const postTags = computed(() => ((props.post.tags as string[] | undefined) || []
 		</section>
 
 		<!-- Related categories -->
-		<section v-if="props.relatedCategories.length" class="mt-16 md:mt-24">
+		<section v-if="props.relatedCategories.length" class="mt-12 md:mt-16">
 			<BlogSectionTitle :title="t('uiVintage.blog.exploreCategories')">
 				<template #action>
 					<BlogViewAllLink to="/blog/categories" :label="t('uiVintage.blog.exploreAllCategories')" />

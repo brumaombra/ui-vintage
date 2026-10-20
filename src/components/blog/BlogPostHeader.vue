@@ -67,7 +67,7 @@ const hasCategory = computed(() => Boolean(props.categoryText && props.categoryS
 // Whether the details row has any column to show
 const hasDetails = computed(() => Boolean(props.author || formattedDate.value || resolvedReadingMinutes.value || hasCategory.value));
 
-const badgeLinkClasses = 'rounded outline-none transition-opacity duration-150 hover:opacity-80 focus-visible:ring-[3px] focus-visible:ring-ring/45';
+const badgeLinkClasses = 'rounded outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45';
 
 // Shared classes for the details cells (exposed to the meta slot)
 const detailCellClasses = 'min-w-0 border-t border-l border-border py-4 pl-4 pr-4';
@@ -153,7 +153,7 @@ const detailLabelClasses = 'text-[11px] font-semibold tracking-wider text-muted-
 					<dt :class="detailLabelClasses">{{ t('uiVintage.blog.category') }}</dt>
 					<dd class="mt-1.5">
 						<NuxtLinkLocale :to="categoryPath" :class="['inline-flex', badgeLinkClasses]">
-							<Badge color="yellow" :text="props.categoryText" pulse />
+							<Badge color="yellow" :text="props.categoryText" pulse interactive />
 						</NuxtLinkLocale>
 					</dd>
 				</div>
@@ -166,15 +166,14 @@ const detailLabelClasses = 'text-[11px] font-semibold tracking-wider text-muted-
 		<!-- Tags -->
 		<div v-if="props.tags.length > 0" :class="['mt-4 flex flex-wrap items-center gap-2', enter('animate-uv-fade-up [animation-delay:600ms]')]">
 			<NuxtLinkLocale v-for="tag in props.tags" :key="tag.slug" :to="tagPath(tag.slug)" :class="badgeLinkClasses">
-				<Badge :text="`#${tag.name}`" />
+				<Badge :text="`#${tag.name}`" interactive />
 			</NuxtLinkLocale>
 		</div>
 
 		<!-- Featured image (replaceable through the media slot) -->
 		<slot name="media">
-			<div v-if="props.image" :class="['relative mt-8 aspect-video w-full overflow-hidden rounded border border-border shadow-elevated-xl', enter('animate-uv-fade-up [animation-delay:650ms]')]">
+			<div v-if="props.image" :class="['relative mt-8 aspect-video w-full overflow-hidden rounded border border-border shadow-elevated-lg', enter('animate-uv-fade-up [animation-delay:650ms]')]">
 				<NuxtImg :src="props.image" :alt="props.title" format="avif" quality="50" :sizes="{ 480: '480px', 1536: '896px' }" loading="eager" fetchpriority="high" preload :class="['size-full object-cover', enter('animate-uv-ken-burns')]" />
-				<div aria-hidden="true" class="pointer-events-none absolute inset-0 bg-linear-to-t from-black/20 to-transparent" />
 			</div>
 		</slot>
 	</header>

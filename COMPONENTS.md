@@ -1375,6 +1375,7 @@ import { Badge } from '@brumaombra/ui-vintage/badge';
 | `color` | `ToneColor \| 'primary'` | `'gray'` |
 | `dot` | `boolean` | `false` |
 | `pulse` | `boolean` | `false` |
+| `interactive` | `boolean` | `false` |
 | `class` | `HTMLAttributes['class']` |  |
 
 ---

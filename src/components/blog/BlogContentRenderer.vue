@@ -91,13 +91,6 @@ const props = defineProps<{
 	line-height: 1.85;
 }
 
-/* Lede: the opening paragraph reads a little larger */
-.blog-content :deep(p:not(.not-prose):not(.not-prose *):first-of-type) {
-	font-size: 17px;
-	line-height: 1.8;
-	color: var(--muted-foreground);
-}
-
 .blog-content :deep(:is(p, blockquote, li):not(.not-prose):not(.not-prose *) strong) {
 	font-weight: 700;
 	color: var(--foreground);
@@ -213,10 +206,6 @@ const props = defineProps<{
 	.blog-content :deep(:is(p, li):not(.not-prose):not(.not-prose *)) {
 		font-size: 14px;
 		line-height: 1.8;
-	}
-
-	.blog-content :deep(p:not(.not-prose):not(.not-prose *):first-of-type) {
-		font-size: 15px;
 	}
 
 	.blog-content :deep(h2:not(.not-prose):not(.not-prose *)) {

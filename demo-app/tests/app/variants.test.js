@@ -115,6 +115,14 @@ describe('Text, inputs and badges', () => {
 		expect(wrapper.classes()).toContain('text-primary');
 	});
 
+	// A badge used as a link lifts and tints on hover (the blog tags used to fade instead)
+	it('lifts and tints an interactive badge', async () => {
+		const wrapper = await mountSuspended(Badge, { props: { text: '#Vue', interactive: true } });
+		expect(wrapper.classes()).toEqual(expect.arrayContaining(['hover:-translate-y-0.5', 'hover:bg-primary/10', 'hover:text-primary']));
+		const still = await mountSuspended(Badge, { props: { text: '#Vue' } });
+		expect(still.classes()).not.toContain('hover:-translate-y-0.5');
+	});
+
 	// Auto-colored initials always get the same tint for the same name
 	it('picks a stable tint from the name', async () => {
 		const mountAvatar = () => mountSuspended(Avatar, { slots: { default: () => h(AvatarFallback, { name: 'Giulia', color: 'auto' }) } });
