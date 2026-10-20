@@ -536,6 +536,16 @@ setBusy(false);`
 		category: 'layout',
 		description: 'Page title row with an optional actions slot, in three sizes.'
 	},
+	'section-title': {
+		category: 'layout',
+		description: 'Section heading over a rule that starts with a primary segment, with an optional icon tile, description, and trailing action (the blog sections use it too).',
+		example: `
+<SectionTitle title="Market FAQ" :icon="HelpCircleIcon" description="Everything about how this market works">
+    <template #action>
+        <Button variant="ghost" size="sm">View all</Button>
+    </template>
+</SectionTitle>`
+	},
 	'error-page': {
 		category: 'layout',
 		description: 'Branded 404/500 page for `error.vue`, with `toolbar` and `brand` slots and an `action` event.'

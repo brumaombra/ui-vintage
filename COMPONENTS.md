@@ -21,7 +21,7 @@ This file lists every public entry point of the package with its components, pro
 - **Navigation:** [accordion](#brumaombraui-vintageaccordion), [breadcrumb](#brumaombraui-vintagebreadcrumb), [collapsible](#brumaombraui-vintagecollapsible), [pagination](#brumaombraui-vintagepagination), [sidebar](#brumaombraui-vintagesidebar), [stepper](#brumaombraui-vintagestepper), [tabs](#brumaombraui-vintagetabs)
 - **Overlays:** [alert-dialog](#brumaombraui-vintagealert-dialog), [command](#brumaombraui-vintagecommand), [dialog](#brumaombraui-vintagedialog), [hover-card](#brumaombraui-vintagehover-card), [popover](#brumaombraui-vintagepopover), [sheet](#brumaombraui-vintagesheet), [tooltip](#brumaombraui-vintagetooltip)
 - **Feedback:** [alert](#brumaombraui-vintagealert), [busy](#brumaombraui-vintagebusy), [busy-indicator](#brumaombraui-vintagebusy-indicator), [confirm-dialog](#brumaombraui-vintageconfirm-dialog), [cookie-consent](#brumaombraui-vintagecookie-consent), [empty-state-card](#brumaombraui-vintageempty-state-card), [loading-state-card](#brumaombraui-vintageloading-state-card), [message-dialog](#brumaombraui-vintagemessage-dialog), [message-toast](#brumaombraui-vintagemessage-toast), [spinner](#brumaombraui-vintagespinner)
-- **Layouts and app shell:** [background-grid](#brumaombraui-vintagebackground-grid), [dashboard-shell](#brumaombraui-vintagedashboard-shell), [error-page](#brumaombraui-vintageerror-page), [landing](#brumaombraui-vintagelanding), [landing-content](#brumaombraui-vintagelanding-content), [landing-footer](#brumaombraui-vintagelanding-footer), [landing-navbar](#brumaombraui-vintagelanding-navbar), [landing-shell](#brumaombraui-vintagelanding-shell), [language-flag](#brumaombraui-vintagelanguage-flag), [language-selector](#brumaombraui-vintagelanguage-selector), [page-header](#brumaombraui-vintagepage-header), [theme-selector](#brumaombraui-vintagetheme-selector)
+- **Layouts and app shell:** [background-grid](#brumaombraui-vintagebackground-grid), [dashboard-shell](#brumaombraui-vintagedashboard-shell), [error-page](#brumaombraui-vintageerror-page), [landing](#brumaombraui-vintagelanding), [landing-content](#brumaombraui-vintagelanding-content), [landing-footer](#brumaombraui-vintagelanding-footer), [landing-navbar](#brumaombraui-vintagelanding-navbar), [landing-shell](#brumaombraui-vintagelanding-shell), [language-flag](#brumaombraui-vintagelanguage-flag), [language-selector](#brumaombraui-vintagelanguage-selector), [page-header](#brumaombraui-vintagepage-header), [section-title](#brumaombraui-vintagesection-title), [theme-selector](#brumaombraui-vintagetheme-selector)
 - **Content and blog:** [blog](#brumaombraui-vintageblog), [content](#brumaombraui-vintagecontent)
 - **Utilities and types:** [common-types](#brumaombraui-vintagecommon-types), [utils](#brumaombraui-vintageutils)
 
@@ -3499,6 +3499,35 @@ import { PageHeader } from '@brumaombra/ui-vintage/page-header';
 | `size` | `'small' \| 'medium' \| 'large'` | `'large'` |
 
 - **Slots:** `default`.
+
+---
+
+### `@brumaombra/ui-vintage/section-title`
+
+Section heading over a rule that starts with a primary segment, with an optional icon tile, description, and trailing action (the blog sections use it too).
+
+```ts
+import { SectionTitle } from '@brumaombra/ui-vintage/section-title';
+```
+
+```vue
+<SectionTitle title="Market FAQ" :icon="HelpCircleIcon" description="Everything about how this market works">
+    <template #action>
+        <Button variant="ghost" size="sm">View all</Button>
+    </template>
+</SectionTitle>
+```
+
+#### `SectionTitle`
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `title` *(required)* | `string` |  |
+| `description` | `string` | `''` |
+| `icon` | `HugeiconsIconDefinition \| null` | `null` |
+| `headingLevel` | `HeadingLevel` | `2` |
+
+- **Slots:** `action`.
 
 ---
 

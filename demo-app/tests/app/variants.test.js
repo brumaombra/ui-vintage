@@ -11,6 +11,7 @@ import { DataListText } from '@brumaombra/ui-vintage/data-list';
 import { dialogSizeClasses } from '@brumaombra/ui-vintage/dialog';
 import { Input } from '@brumaombra/ui-vintage/input';
 import { Progress } from '@brumaombra/ui-vintage/progress';
+import { SectionTitle } from '@brumaombra/ui-vintage/section-title';
 import { Skeleton } from '@brumaombra/ui-vintage/skeleton';
 import { TableRow } from '@brumaombra/ui-vintage/table';
 
@@ -57,6 +58,12 @@ describe('TableRow', () => {
 		const fixed = await mountSuspended(TableRow, { props: { static: true }, slots: { default: () => '' } });
 		expect(plain.classes()).toContain('hover:bg-muted/50');
 		expect(fixed.classes()).not.toContain('hover:bg-muted/50');
+	});
+
+	// Selected rows get the soft primary tint
+	it('tints selected rows with the primary color', async () => {
+		const wrapper = await mountSuspended(TableRow, { slots: { default: () => '' } });
+		expect(wrapper.classes()).toContain('data-[state=selected]:bg-primary/5');
 	});
 
 	// Interactive rows show a pointer
@@ -114,6 +121,16 @@ describe('Text, inputs and badges', () => {
 		const second = (await mountAvatar()).find('[data-slot="avatar-fallback"]');
 		expect(first.classes().join(' ')).toContain('var(--chart-');
 		expect(first.classes()).toEqual(second.classes());
+	});
+});
+
+describe('SectionTitle', () => {
+	// The heading level and the icon tile are configurable
+	it('renders the title, description and icon', async () => {
+		const wrapper = await mountSuspended(SectionTitle, { props: { title: 'Market FAQ', description: 'How it works', icon: SearchIcon, headingLevel: 3 } });
+		expect(wrapper.find('h3').text()).toBe('Market FAQ');
+		expect(wrapper.text()).toContain('How it works');
+		expect(wrapper.find('svg').exists()).toBe(true);
 	});
 });
 

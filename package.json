@@ -101,6 +101,7 @@
 		"./progress-component": "./src/components/progress-component/index.ts",
 		"./radio-group": "./src/components/ui/radio-group/index.ts",
 		"./scroll-area": "./src/components/ui/scroll-area/index.ts",
+		"./section-title": "./src/components/section-title/index.ts",
 		"./select": "./src/components/ui/select/index.ts",
 		"./separator": "./src/components/ui/separator/index.ts",
 		"./sheet": "./src/components/ui/sheet/index.ts",
