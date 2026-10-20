@@ -330,7 +330,7 @@ type ToggleVariants = { variant?: 'default' | 'outline' | null | undefined; size
 type ToggleGroupSize = 'default' | 'sm' | 'lg'
 const toggleVariants: (props?: ToggleVariants & ClassProp) => string
 const toggleGroupItemVariants: (props?: { size?: ToggleGroupSize | null } & ClassProp) => string
-const toggleGroupContextKey: InjectionKey<{ size: Ref<ToggleGroupSize>; indicator: Ref<boolean> }>
+const toggleGroupContextKey: InjectionKey<{ size: Ref<ToggleGroupSize>; indicator: Ref<boolean>; highlight: Ref<boolean> }>
 ```
 
 ## Forms

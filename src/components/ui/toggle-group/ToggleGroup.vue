@@ -34,7 +34,7 @@ const isSingle = computed(() => {
 });
 
 // Share size and indicator mode with the items
-provide(toggleGroupContextKey, { size: toRef(props, 'size'), indicator: isSingle });
+provide(toggleGroupContextKey, { size: toRef(props, 'size'), indicator: isSingle, highlight: toRef(props, 'highlight') });
 
 // Sliding indicator geometry
 const rootRef = ref();

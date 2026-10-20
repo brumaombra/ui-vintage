@@ -17,16 +17,18 @@ const props = defineProps<ToggleGroupItemProps & {
 const delegatedProps = reactiveOmit(props, 'class', 'size');
 const forwardedProps = useForwardProps(delegatedProps);
 
-// Size and indicator mode come from the group
+// Size, indicator mode and highlight come from the group
 const context = inject(toggleGroupContextKey, null);
 const size = computed(() => props.size ?? context?.size.value ?? 'default');
 const hasIndicator = computed(() => context?.indicator.value ?? false);
+const isHighlighted = computed(() => context?.highlight.value ?? false);
 </script>
 
 <template>
 	<ToggleGroupItem v-slot="slotProps" data-slot="toggle-group-item" :data-size="size" v-bind="forwardedProps" :class="cn(
 		toggleGroupItemVariants({ size }),
 		!hasIndicator && 'hover:bg-accent data-[state=on]:bg-accent',
+		isHighlighted && 'data-[state=on]:text-primary', // The highlighted group tints the active item like the active tab
 		props.class
 	)">
 		<slot v-bind="slotProps" />

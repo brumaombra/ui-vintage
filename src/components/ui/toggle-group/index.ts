@@ -66,4 +66,4 @@ export const toggleGroupItemVariants: (props?: { size?: ToggleGroupSize | null }
 );
 
 // Context shared by a toggle group with its items
-export const toggleGroupContextKey: InjectionKey<{ size: Ref<ToggleGroupSize>; indicator: Ref<boolean> }> = Symbol('uv-toggle-group');
+export const toggleGroupContextKey: InjectionKey<{ size: Ref<ToggleGroupSize>; indicator: Ref<boolean>; highlight: Ref<boolean> }> = Symbol('uv-toggle-group');
