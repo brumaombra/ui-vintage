@@ -1,5 +1,5 @@
 <template>
-	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" aria-hidden="true" focusable="false">
+	<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-[1.35rem] shrink-0 rounded-[2px]" viewBox="0 0 640 480" aria-hidden="true" focusable="false">
 		<g fill-rule="evenodd" stroke-width="1pt">
 			<path fill="#fff" d="M0 0h640v480H0z" />
 			<path fill="#009246" d="M0 0h213.3v480H0z" />

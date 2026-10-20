@@ -15,7 +15,7 @@ This file lists every public entry point of the package with its components, pro
 
 ## Contents
 
-- **Actions:** [button](#brumaombraui-vintagebutton), [dropdown-menu](#brumaombraui-vintagedropdown-menu), [kbd](#brumaombraui-vintagekbd), [load-more-button](#brumaombraui-vintageload-more-button), [text-link](#brumaombraui-vintagetext-link), [toggle-group](#brumaombraui-vintagetoggle-group)
+- **Actions:** [action-bar](#brumaombraui-vintageaction-bar), [button](#brumaombraui-vintagebutton), [dropdown-menu](#brumaombraui-vintagedropdown-menu), [kbd](#brumaombraui-vintagekbd), [load-more-button](#brumaombraui-vintageload-more-button), [text-link](#brumaombraui-vintagetext-link), [toggle-group](#brumaombraui-vintagetoggle-group)
 - **Forms:** [calendar](#brumaombraui-vintagecalendar), [checkbox](#brumaombraui-vintagecheckbox), [combobox](#brumaombraui-vintagecombobox), [date-picker](#brumaombraui-vintagedate-picker), [date-time-picker](#brumaombraui-vintagedate-time-picker), [field](#brumaombraui-vintagefield), [file-dropzone](#brumaombraui-vintagefile-dropzone), [input](#brumaombraui-vintageinput), [label](#brumaombraui-vintagelabel), [native-select](#brumaombraui-vintagenative-select), [number-field](#brumaombraui-vintagenumber-field), [pin-input](#brumaombraui-vintagepin-input), [radio-group](#brumaombraui-vintageradio-group), [select](#brumaombraui-vintageselect), [slider](#brumaombraui-vintageslider), [slider-form-component](#brumaombraui-vintageslider-form-component), [switch](#brumaombraui-vintageswitch), [switch-form-component](#brumaombraui-vintageswitch-form-component), [tags-input](#brumaombraui-vintagetags-input), [textarea](#brumaombraui-vintagetextarea), [time-picker](#brumaombraui-vintagetime-picker)
 - **Data display:** [animated-number](#brumaombraui-vintageanimated-number), [avatar](#brumaombraui-vintageavatar), [badge](#brumaombraui-vintagebadge), [card](#brumaombraui-vintagecard), [card-grid](#brumaombraui-vintagecard-grid), [chip](#brumaombraui-vintagechip), [data-list](#brumaombraui-vintagedata-list), [data-table](#brumaombraui-vintagedata-table), [info-card](#brumaombraui-vintageinfo-card), [progress](#brumaombraui-vintageprogress), [progress-component](#brumaombraui-vintageprogress-component), [scroll-area](#brumaombraui-vintagescroll-area), [separator](#brumaombraui-vintageseparator), [single-value-card](#brumaombraui-vintagesingle-value-card), [skeleton](#brumaombraui-vintageskeleton), [stat-strip](#brumaombraui-vintagestat-strip), [table](#brumaombraui-vintagetable)
 - **Navigation:** [accordion](#brumaombraui-vintageaccordion), [breadcrumb](#brumaombraui-vintagebreadcrumb), [collapsible](#brumaombraui-vintagecollapsible), [pagination](#brumaombraui-vintagepagination), [sidebar](#brumaombraui-vintagesidebar), [stepper](#brumaombraui-vintagestepper), [tabs](#brumaombraui-vintagetabs)
@@ -28,6 +28,34 @@ This file lists every public entry point of the package with its components, pro
 ## Actions
 
 Buttons, segmented controls, menus, and keyboard hints.
+
+### `@brumaombra/ui-vintage/action-bar`
+
+Row of action buttons that turns into a full-width bar of equal tiles (icon above the label) on mobile, like an app toolbar.
+
+```ts
+import { ActionBar } from '@brumaombra/ui-vintage/action-bar';
+```
+
+```vue
+<ActionBar>
+    <Button variant="secondary">
+        <HugeiconsIcon :icon="Edit01Icon" />
+        Edit
+    </Button>
+    <Button variant="secondary">
+        <HugeiconsIcon :icon="Share08Icon" />
+        Share
+    </Button>
+</ActionBar>
+```
+
+#### `ActionBar`
+
+- **Props:** `class`.
+- **Slots:** `default`.
+
+---
 
 ### `@brumaombra/ui-vintage/button`
 
@@ -225,6 +253,7 @@ import { Kbd, KbdGroup } from '@brumaombra/ui-vintage/kbd';
 | --- | --- | --- |
 | `class` | `HTMLAttributes['class']` |  |
 | `pressed` | `boolean` |  |
+| `size` | `'default' \| 'lg'` | `'default'` |
 
 - **Slots:** `default`.
 
@@ -775,6 +804,7 @@ import { Input } from '@brumaombra/ui-vintage/input';
 | `class` | `HTMLAttributes['class']` |  |
 
 - **Emits:** `update:modelValue` (payload: string \| number).
+- **Slots:** `suffix`.
 
 ---
 
@@ -1274,6 +1304,7 @@ import type { AvatarSize, AvatarShape, AvatarStatus } from '@brumaombra/ui-vinta
 | `size` | `AvatarSize` | `'md'` |
 | `shape` | `AvatarShape` | `'circle'` |
 | `status` | `AvatarStatus` |  |
+| `ring` | `boolean` | `false` |
 | `class` | `HTMLAttributes['class']` |  |
 
 - **Also accepts** all props of Reka `AvatarRootProps`.
@@ -1284,6 +1315,7 @@ import type { AvatarSize, AvatarShape, AvatarStatus } from '@brumaombra/ui-vinta
 | Prop | Type | Default |
 | --- | --- | --- |
 | `name` | `string` |  |
+| `color` | `'neutral' \| 'auto' \| 'primary'` | `'neutral'` |
 | `class` | `HTMLAttributes['class']` |  |
 
 - **Also accepts** all props of Reka `AvatarFallbackProps`.
@@ -1337,7 +1369,7 @@ import { Badge } from '@brumaombra/ui-vintage/badge';
 | --- | --- | --- |
 | `text` *(required)* | `string` |  |
 | `icon` | `HugeiconsIconDefinition \| null` | `null` |
-| `color` | `ToneColor` | `'gray'` |
+| `color` | `ToneColor \| 'primary'` | `'gray'` |
 | `dot` | `boolean` | `false` |
 | `pulse` | `boolean` | `false` |
 | `class` | `HTMLAttributes['class']` |  |
@@ -1349,7 +1381,7 @@ import { Badge } from '@brumaombra/ui-vintage/badge';
 Surface container with header, title, description, content, footer, and action slots. `interactive` adds a gentle hover lift with a stronger shadow; `color` switches to a tone surface.
 
 ```ts
-import { Card, CardAction, CardContent, CardText, CardDescription, CardFooter, CardHeader, CardTitle } from '@brumaombra/ui-vintage/card';
+import { Card, CardAction, CardContent, CardText, CardDescription, CardFooter, CardHeader, CardMedia, CardTitle } from '@brumaombra/ui-vintage/card';
 ```
 
 ```vue
@@ -1367,6 +1399,8 @@ import { Card, CardAction, CardContent, CardText, CardDescription, CardFooter, C
 | Prop | Type | Default |
 | --- | --- | --- |
 | `color` | `CardColor` |  |
+| `padding` | `CardPadding` | `'default'` |
+| `elevation` | `CardElevation` |  |
 | `interactive` | `boolean` | `false` |
 | `class` | `HTMLAttributes['class']` |  |
 
@@ -1402,12 +1436,18 @@ import { Card, CardAction, CardContent, CardText, CardDescription, CardFooter, C
 - **Props:** `class`.
 - **Slots:** `default`.
 
+#### `CardMedia`
+
+- **Props:** `class`.
+- **Slots:** `default`.
+
 #### `CardTitle`
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `class` | `HTMLAttributes['class']` |  |
 | `level` | `HeadingLevel` | `3` |
+| `icon` | `HugeiconsIconDefinition \| null` | `null` |
 
 - **Slots:** `default`.
 
@@ -1483,7 +1523,11 @@ import { DataList, DataListItem, DataListLabel, DataListText, DataListValue } fr
 
 #### `DataListText`
 
-- **Props:** `class`.
+| Prop | Type | Default |
+| --- | --- | --- |
+| `wrap` | `boolean` | `false` |
+| `class` | `HTMLAttributes['class']` |  |
+
 - **Slots:** `default`.
 
 #### `DataListValue`
@@ -1588,6 +1632,7 @@ import { Progress } from '@brumaombra/ui-vintage/progress';
 | Prop | Type | Default |
 | --- | --- | --- |
 | `indeterminate` | `boolean` | `false` |
+| `color` | `ProgressColor` | `'primary'` |
 | `class` | `HTMLAttributes['class']` |  |
 
 - **Also accepts** all props of Reka `ProgressRootProps`.
@@ -1774,7 +1819,12 @@ import { Table, TableBody, TableCaption, TableCell, TableEmpty, TableFooter, Tab
 
 #### `TableRow`
 
-- **Props:** `class`.
+| Prop | Type | Default |
+| --- | --- | --- |
+| `static` | `boolean` | `false` |
+| `interactive` | `boolean` | `false` |
+| `class` | `HTMLAttributes['class']` |  |
+
 - **Slots:** `default`.
 
 ## Navigation
@@ -2258,7 +2308,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@brumaombra/ui-vintage
 
 #### `TabsContent`
 
-- **Props:** `class`.
+| Prop | Type | Default |
+| --- | --- | --- |
+| `variant` | `'plain' \| 'boxed'` | `'plain'` |
+| `class` | `HTMLAttributes['class']` |  |
+
 - **Also accepts** all props of Reka `TabsContentProps`.
 - **Slots:** `default`.
 
@@ -2298,7 +2352,11 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 
 #### `AlertDialogAction`
 
-- **Props:** `class`.
+| Prop | Type | Default |
+| --- | --- | --- |
+| `variant` | `ButtonVariants['variant']` |  |
+| `class` | `HTMLAttributes['class']` |  |
+
 - **Also accepts** all props of Reka `AlertDialogActionProps`.
 - **Slots:** `default`.
 
@@ -2443,7 +2501,8 @@ value [useCommandGroup, provideCommandGroupContext]
 Modal dialog. `DialogContent` accepts `show-close-button`; use `DialogScrollContent` for long content.
 
 ```ts
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogScrollContent, DialogTitle, DialogTrigger } from '@brumaombra/ui-vintage/dialog';
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogScrollContent, DialogTitle, DialogTrigger, dialogSizeClasses } from '@brumaombra/ui-vintage/dialog';
+import type { DialogSize } from '@brumaombra/ui-vintage/dialog';
 ```
 
 ```vue
@@ -2481,6 +2540,7 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
 | --- | --- | --- |
 | `class` | `HTMLAttributes['class']` |  |
 | `showCloseButton` | `boolean` | `false` |
+| `size` | `DialogSize` | `'sm'` |
 
 - **Also accepts** all props of Reka `DialogContentProps`.
 - **Emits:** all events of Reka `DialogContentEmits`.
@@ -2514,6 +2574,7 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
 | --- | --- | --- |
 | `class` | `HTMLAttributes['class']` |  |
 | `showCloseButton` | `boolean` | `false` |
+| `size` | `DialogSize` | `'sm'` |
 
 - **Also accepts** all props of Reka `DialogContentProps`.
 - **Emits:** all events of Reka `DialogContentEmits`.
@@ -2529,6 +2590,13 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
 
 - **Also accepts** all props of Reka `DialogTriggerProps`.
 - **Slots:** `default`.
+
+#### Functions, constants, and types
+
+```ts
+type DialogSize = 'sm' | 'md' | 'lg' | 'xl'
+const dialogSizeClasses: Record<DialogSize, string>
+```
 
 ---
 

@@ -14,13 +14,15 @@ const props = withDefaults(defineProps<AvatarRootProps & {
 	size?: AvatarSize;
 	shape?: AvatarShape;
 	status?: AvatarStatus;
+	ring?: boolean;
 	class?: HTMLAttributes['class'];
 }>(), {
 	size: 'md',
 	shape: 'circle',
+	ring: false,
 });
 
-const delegatedProps = reactiveOmit(props, 'class', 'size', 'shape', 'status');
+const delegatedProps = reactiveOmit(props, 'class', 'size', 'shape', 'status', 'ring');
 
 const { t } = useI18n();
 
@@ -49,7 +51,7 @@ const statusPositionClass = computed(() => props.shape === 'square' ? '-right-0.
 </script>
 
 <template>
-	<span data-slot="avatar" :data-size="props.size" :data-shape="props.shape" :data-status="props.status" :class="cn('relative inline-flex shrink-0 select-none align-middle', avatarSizeClasses[props.size], avatarShapeClasses[props.shape], props.class)">
+	<span data-slot="avatar" :data-size="props.size" :data-shape="props.shape" :data-status="props.status" :class="cn('relative inline-flex shrink-0 select-none align-middle', avatarSizeClasses[props.size], avatarShapeClasses[props.shape], props.ring && 'ring-2 ring-card', props.class)">
 		<!-- Avatar surface -->
 		<AvatarRoot v-bind="delegatedProps" :class="cn('relative flex size-full items-center justify-center overflow-hidden bg-surface', avatarShapeClasses[props.shape])">
 			<slot />

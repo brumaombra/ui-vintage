@@ -139,7 +139,7 @@ const handleSelectLanguage = (language: string) => {
 		<!-- Trigger button showing the current language flag -->
 		<PopoverTrigger as-child>
 			<Button variant="secondary" size="icon" :aria-label="t('uiVintage.language.ariaLabel')">
-				<component :is="currentFlagComponent" v-if="currentFlagComponent" class="h-4 w-[1.35rem] rounded-[2px]" />
+				<component :is="currentFlagComponent" v-if="currentFlagComponent" />
 			</Button>
 		</PopoverTrigger>
 
@@ -149,7 +149,7 @@ const handleSelectLanguage = (language: string) => {
 				<CommandList :aria-label="t('uiVintage.language.title')">
 					<CommandGroup :heading="t('uiVintage.language.title')" stagger>
 						<CommandItem v-for="option in normalizedLanguages" :key="option.code" :value="option.code" @select="handleSelectLanguage(option.code)">
-							<component :is="resolveFlagComponent(option.code)" class="h-4 w-[1.35rem] rounded-[2px]" />
+							<component :is="resolveFlagComponent(option.code)" />
 							<span class="flex-1">{{ option.label }}</span>
 							<HugeiconsIcon :icon="Tick02Icon" class="ml-auto size-4 shrink-0" :class="props.modelValue === option.code ? 'opacity-100' : 'opacity-0'" />
 						</CommandItem>

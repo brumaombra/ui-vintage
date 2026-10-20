@@ -7,6 +7,7 @@ import Cancel01Icon from '@hugeicons/core-free-icons/Cancel01Icon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { useI18n } from 'vue-i18n';
 import { cn } from '../../../lib/utils';
+import { dialogSizeClasses, type DialogSize } from '.';
 import { Button } from '../button';
 
 defineOptions({
@@ -17,8 +18,10 @@ defineOptions({
 const props = withDefaults(defineProps<DialogContentProps & {
 	class?: HTMLAttributes['class'];
 	showCloseButton?: boolean;
+	size?: DialogSize;
 }>(), {
-	showCloseButton: false
+	showCloseButton: false,
+	size: 'sm'
 });
 
 const { t } = useI18n();
@@ -26,7 +29,7 @@ const { t } = useI18n();
 // Emits
 const emits = defineEmits<DialogContentEmits>();
 
-const delegatedProps = reactiveOmit(props, 'class');
+const delegatedProps = reactiveOmit(props, 'class', 'size');
 
 const forwarded = useForwardPropsEmits(delegatedProps, emits);
 </script>
@@ -35,7 +38,8 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 	<DialogPortal>
 		<DialogOverlay class="uv-overlay-motion fixed inset-0 isolate z-50 grid place-items-center overflow-y-auto bg-black/40 backdrop-blur-[3px] dark:bg-black/60">
 			<DialogContent :class="cn(
-				'uv-modal-motion relative z-50 my-6 grid w-full max-w-[calc(100%-2rem)] gap-4 rounded border border-border bg-card p-6 text-card-foreground shadow-elevated-xl outline-none sm:max-w-106.25',
+				'uv-modal-motion relative z-50 my-6 grid w-full max-w-[calc(100%-2rem)] gap-4 rounded border border-border bg-card p-6 text-card-foreground shadow-elevated-xl outline-none',
+				dialogSizeClasses[props.size],
 				props.class
 			)
 				" v-bind="{ ...$attrs, ...forwarded }" @pointer-down-outside="

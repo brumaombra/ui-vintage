@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue';
+import { computed } from 'vue';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { getSurfaceToneClasses, type ToneColor } from '../../../lib/color-tokens';
 import { cn } from '../../../lib/utils';
@@ -9,7 +10,7 @@ import type { HugeiconsIconDefinition } from '../../../lib/common-types';
 const props = withDefaults(defineProps<{
 	text: string;
 	icon?: HugeiconsIconDefinition | null;
-	color?: ToneColor;
+	color?: ToneColor | 'primary';
 	dot?: boolean;
 	pulse?: boolean;
 	class?: HTMLAttributes['class'];
@@ -19,10 +20,13 @@ const props = withDefaults(defineProps<{
 	dot: false,
 	pulse: false
 });
+
+// Surface of the badge: a tone, or a soft primary tint (for highlights like a category)
+const colorClasses = computed(() => props.color === 'primary' ? 'border border-primary/30 bg-primary/10 text-primary' : getSurfaceToneClasses(props.color));
 </script>
 
 <template>
-	<span data-slot="badge" :class="cn('inline-flex w-fit items-center justify-center gap-1.5 whitespace-nowrap rounded border px-2 py-0.5 text-xs font-semibold transition-colors duration-150', getSurfaceToneClasses(props.color), props.class)">
+	<span data-slot="badge" :class="cn('inline-flex w-fit items-center justify-center gap-1.5 whitespace-nowrap rounded border px-2 py-0.5 text-xs font-semibold transition-colors duration-150', colorClasses, props.class)">
 		<!-- Status dot -->
 		<span v-if="props.dot || props.pulse" class="relative flex size-1.5 shrink-0">
 			<span v-if="props.pulse" class="absolute inset-0 animate-uv-ping-soft rounded-full bg-current" />

@@ -33,6 +33,21 @@ export const entries = {
     <HugeiconsIcon :icon="Notification01Icon" />
 </Button>`
 	},
+	'action-bar': {
+		category: 'actions',
+		description: 'Row of action buttons that turns into a full-width bar of equal tiles (icon above the label) on mobile, like an app toolbar.',
+		example: `
+<ActionBar>
+    <Button variant="secondary">
+        <HugeiconsIcon :icon="Edit01Icon" />
+        Edit
+    </Button>
+    <Button variant="secondary">
+        <HugeiconsIcon :icon="Share08Icon" />
+        Share
+    </Button>
+</ActionBar>`
+	},
 	'toggle-group': {
 		category: 'actions',
 		description: 'Segmented control (`type="single"`, with a sliding indicator) or multi-select toggle group, plus a standalone `Toggle`.',

@@ -6,16 +6,28 @@ import { reactiveOmit } from '@vueuse/core';
 import { ProgressIndicator, ProgressRoot } from 'reka-ui';
 import { cn } from '../../../lib/utils';
 
+type ProgressColor = 'primary' | 'green' | 'red' | 'yellow';
+
 // Props
 const props = withDefaults(defineProps<ProgressRootProps & {
 	indeterminate?: boolean;
+	color?: ProgressColor;
 	class?: HTMLAttributes['class'];
 }>(), {
 	modelValue: 0,
-	indeterminate: false
+	indeterminate: false,
+	color: 'primary'
 });
 
-const delegatedProps = reactiveOmit(props, 'class', 'indeterminate');
+const delegatedProps = reactiveOmit(props, 'class', 'indeterminate', 'color');
+
+// Fill color of the bar
+const colorClasses: Record<ProgressColor, string> = {
+	primary: 'bg-primary',
+	green: 'bg-success',
+	red: 'bg-destructive',
+	yellow: 'bg-warning'
+};
 
 // Resolve the fill percentage against the configured max
 const percentage = computed(() => {
@@ -31,9 +43,9 @@ const percentage = computed(() => {
 		props.class
 	)">
 		<!-- Indeterminate bar -->
-		<div v-if="props.indeterminate" data-slot="progress-indicator" class="absolute inset-y-0 left-0 w-full origin-left animate-uv-indeterminate rounded bg-primary" />
+		<div v-if="props.indeterminate" data-slot="progress-indicator" :class="cn('absolute inset-y-0 left-0 w-full origin-left animate-uv-indeterminate rounded', colorClasses[props.color])" />
 
 		<!-- Determinate bar -->
-		<ProgressIndicator v-else data-slot="progress-indicator" class="relative h-full w-full flex-1 overflow-hidden rounded bg-primary transition-transform duration-700 ease-out-expo" :style="`transform: translateX(-${100 - percentage}%);`" />
+		<ProgressIndicator v-else data-slot="progress-indicator" :class="cn('relative h-full w-full flex-1 overflow-hidden rounded transition-transform duration-700 ease-out-expo', colorClasses[props.color])" :style="`transform: translateX(-${100 - percentage}%);`" />
 	</ProgressRoot>
 </template>

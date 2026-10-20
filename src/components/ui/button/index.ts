@@ -59,6 +59,10 @@ export const buttonVariants: (props?: ButtonVariants & ClassProp) => string = cv
 				'icon-lg': 'size-[52px]',
 			},
 		},
+		// Link buttons read as inline links, so they have no box padding
+		compoundVariants: [
+			{ variant: 'link', class: 'min-h-0 px-0 py-0 has-[>svg]:px-0' },
+		],
 		defaultVariants: {
 			variant: 'primary',
 			size: 'default',
