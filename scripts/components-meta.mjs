@@ -18,7 +18,7 @@ export const entries = {
 
 	'button': {
 		category: 'actions',
-		description: 'Button with primary, secondary, ghost, link, and tone variants. Spring press feedback and a `loading` state that keeps the width stable. Give it a `to` to make it a navigation button (a localized link, external URLs work too).',
+		description: 'Button with primary, secondary, ghost, link, and tone variants. Spring press feedback and a `loading` state that keeps the width stable. Give it a `to` to make it a navigation button (a localized link, external URLs work too), and a `count` to show a notification badge on its corner.',
 		example: `
 <Button variant="secondary" size="sm" :loading="saving" @click="save">
     <HugeiconsIcon :icon="SaveIcon" />
@@ -27,6 +27,10 @@ export const entries = {
 
 <Button to="/pricing" variant="secondary">
     Pricing
+</Button>
+
+<Button variant="secondary" size="icon" :count="unread" aria-label="Notifications">
+    <HugeiconsIcon :icon="Notification01Icon" />
 </Button>`
 	},
 	'toggle-group': {

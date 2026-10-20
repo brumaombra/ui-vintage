@@ -37,12 +37,12 @@ export const buttonVariantClasses: Record<ButtonVariantName, string> = {
 	ghost: "text-muted-foreground hover:bg-accent hover:text-foreground",
 	link: "text-primary underline-offset-4 decoration-2 hover:underline enabled:active:scale-100",
 
-	// Tone-based button variants
-	gray: getInteractiveSurfaceToneClasses("gray"),
-	green: getInteractiveSurfaceToneClasses("green"),
-	red: getInteractiveSurfaceToneClasses("red"),
-	blue: getInteractiveSurfaceToneClasses("blue"),
-	yellow: getInteractiveSurfaceToneClasses("yellow")
+	// Tone-based button variants (the secondary shadow, so they read as buttons next to it, and a stronger tint in dark mode)
+	gray: `${getInteractiveSurfaceToneClasses("gray")} shadow-elevated-sm`,
+	green: `${getInteractiveSurfaceToneClasses("green")} shadow-elevated-sm dark:bg-green-900/25 dark:hover:bg-green-900/40`,
+	red: `${getInteractiveSurfaceToneClasses("red")} shadow-elevated-sm dark:bg-red-900/25 dark:hover:bg-red-900/40`,
+	blue: `${getInteractiveSurfaceToneClasses("blue")} shadow-elevated-sm dark:bg-blue-900/25 dark:hover:bg-blue-900/40`,
+	yellow: `${getInteractiveSurfaceToneClasses("yellow")} shadow-elevated-sm dark:bg-yellow-900/25 dark:hover:bg-yellow-900/40`
 }
 
 // Get the appropriate classes for a given button variant

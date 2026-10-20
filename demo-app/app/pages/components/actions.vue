@@ -10,6 +10,7 @@ import LeftToRightListBulletIcon from '@hugeicons/core-free-icons/LeftToRightLis
 import Logout01Icon from '@hugeicons/core-free-icons/Logout01Icon';
 import Menu01Icon from '@hugeicons/core-free-icons/Menu01Icon';
 import MoreHorizontalIcon from '@hugeicons/core-free-icons/MoreHorizontalIcon';
+import Notification01Icon from '@hugeicons/core-free-icons/Notification01Icon';
 import PlusSignIcon from '@hugeicons/core-free-icons/PlusSignIcon';
 import Rocket01Icon from '@hugeicons/core-free-icons/Rocket01Icon';
 import Settings02Icon from '@hugeicons/core-free-icons/Settings02Icon';
@@ -158,6 +159,9 @@ const kbdCode = `<KbdGroup :keys="['mod', 'shift', 'p']" />
 					</Button>
 					<Button variant="secondary" size="icon-sm" aria-label="Download">
 						<HugeiconsIcon :icon="Download01Icon" />
+					</Button>
+					<Button variant="secondary" size="icon" :count="4" aria-label="Notifications (4 unread)">
+						<HugeiconsIcon :icon="Notification01Icon" />
 					</Button>
 					<Button variant="secondary" disabled>Disabled</Button>
 					<Button :loading="deploying" @click="handleDeploy">

@@ -49,3 +49,26 @@ describe('Button with to', () => {
 		expect(wrapper.find('button[data-slot="button"]').exists()).toBe(true);
 	});
 });
+
+// Notification count: a badge on the corner of the button
+describe('Button with count', () => {
+	// The count shows in a badge, and the button stops clipping so the badge can overflow it
+	it('shows the count in a badge on the corner', async () => {
+		const wrapper = await mountSuspended(Button, { props: { count: 4, size: 'icon' }, slots: { default: () => 'Bell' } });
+		expect(wrapper.find('[data-slot="button-count"]').text()).toBe('4');
+		expect(wrapper.find('[data-slot="button"]').classes()).toContain('overflow-visible');
+	});
+
+	// Large counts are capped
+	it('caps large counts', async () => {
+		const wrapper = await mountSuspended(Button, { props: { count: 150 }, slots: { default: () => 'Bell' } });
+		expect(wrapper.find('[data-slot="button-count"]').text()).toBe('99+');
+	});
+
+	// No badge (and the usual clipping) without unread items
+	it('hides the badge when the count is zero', async () => {
+		const wrapper = await mountSuspended(Button, { props: { count: 0 }, slots: { default: () => 'Bell' } });
+		expect(wrapper.find('[data-slot="button-count"]').exists()).toBe(false);
+		expect(wrapper.find('[data-slot="button"]').classes()).toContain('overflow-hidden');
+	});
+});

@@ -83,7 +83,7 @@ const indicatorStyle = computed<CSSProperties>(() => ({
 	<ToggleGroupRoot ref="rootRef" v-slot="slotProps" data-slot="toggle-group" :data-size="props.size" v-bind="forwarded" :class="cn('relative inline-flex w-fit items-center gap-1 rounded border border-border bg-card p-1 shadow-elevated-sm data-[orientation=vertical]:flex-col data-[orientation=vertical]:items-stretch', props.class)">
 		<!-- Sliding indicator behind the active item -->
 		<span v-if="isSingle" data-slot="toggle-group-indicator" aria-hidden="true" :style="indicatorStyle" :class="cn(
-			'pointer-events-none absolute top-0 left-0 z-0 rounded-xs border', // A small radius keeps the gap to the rounded container even around the corners
+			'pointer-events-none absolute top-0 left-0 z-0 rounded border', // Same radius as the tab triggers, so every switch looks alike
 			animated && '[transition:transform_380ms_var(--ease-spring),width_380ms_var(--ease-spring),height_380ms_var(--ease-spring),opacity_180ms_var(--ease-snappy)]',
 			props.highlight ? 'border-primary/40 bg-primary/10' : 'border-border-strong bg-surface shadow-elevated-sm'
 		)" />

@@ -31,7 +31,7 @@ Buttons, segmented controls, menus, and keyboard hints.
 
 ### `@brumaombra/ui-vintage/button`
 
-Button with primary, secondary, ghost, link, and tone variants. Spring press feedback and a `loading` state that keeps the width stable. Give it a `to` to make it a navigation button (a localized link, external URLs work too).
+Button with primary, secondary, ghost, link, and tone variants. Spring press feedback and a `loading` state that keeps the width stable. Give it a `to` to make it a navigation button (a localized link, external URLs work too), and a `count` to show a notification badge on its corner.
 
 ```ts
 import { Button, buttonVariants } from '@brumaombra/ui-vintage/button';
@@ -47,6 +47,10 @@ import type { ButtonVariants } from '@brumaombra/ui-vintage/button';
 <Button to="/pricing" variant="secondary">
     Pricing
 </Button>
+
+<Button variant="secondary" size="icon" :count="unread" aria-label="Notifications">
+    <HugeiconsIcon :icon="Notification01Icon" />
+</Button>
 ```
 
 #### `Button`
@@ -58,6 +62,8 @@ import type { ButtonVariants } from '@brumaombra/ui-vintage/button';
 | `loading` | `boolean` | `false` |
 | `disabled` | `boolean` | `false` |
 | `to` | `string` |  |
+| `count` | `number \| null` | `null` |
+| `countMax` | `number` | `99` |
 | `class` | `HTMLAttributes['class']` |  |
 
 - **Also accepts** all props of Reka `PrimitiveProps`.
