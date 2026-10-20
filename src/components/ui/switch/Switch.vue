@@ -29,7 +29,7 @@ const fieldControlId = useFieldControlId(() => props.id);
 		props.class
 	)">
 		<SwitchThumb data-slot="switch-thumb" :class="cn(
-			'pointer-events-none absolute left-1 top-1/2 flex h-4 w-4 -translate-y-1/2 items-center justify-center rounded-[0.2rem] bg-muted-foreground ring-0',
+			'pointer-events-none absolute left-1 top-1/2 flex h-4 w-4 -translate-y-1/2 items-center justify-center rounded bg-muted-foreground ring-0',
 			'[transition:translate_380ms_var(--ease-spring),width_220ms_var(--ease-spring),background-color_200ms]',
 			'group-active/switch:w-5 data-[state=checked]:translate-x-6 data-[state=checked]:bg-primary group-active/switch:data-[state=checked]:translate-x-5'
 		)">

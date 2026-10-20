@@ -157,7 +157,7 @@ const handleRowKeydown = (row: T, event: KeyboardEvent) => {
 					<!-- Column headers -->
 					<th v-for="column in props.columns" :key="column.key" :style="column.width ? { width: column.width } : undefined" :aria-sort="props.sort?.key === column.key ? (props.sort.direction === 'asc' ? 'ascending' : 'descending') : undefined" :class="cn('h-11 px-4 text-xs font-semibold whitespace-nowrap text-muted-foreground', alignClasses[column.align ?? 'left'], column.headerClass)">
 						<slot :name="`header-${column.key}`" :column="column">
-							<button v-if="column.sortable" type="button" :class="cn('group/sort -mx-1.5 inline-flex cursor-pointer items-center gap-1.5 rounded-sm px-1.5 py-1 outline-none transition-colors duration-150 hover:bg-accent hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/45', props.sort?.key === column.key && 'text-foreground', justifyClasses[column.align ?? 'left'])" @click="toggleSort(column)">
+							<button v-if="column.sortable" type="button" :class="cn('group/sort -mx-1.5 inline-flex cursor-pointer items-center gap-1.5 rounded px-1.5 py-1 outline-none transition-colors duration-150 hover:bg-accent hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/45', props.sort?.key === column.key && 'text-foreground', justifyClasses[column.align ?? 'left'])" @click="toggleSort(column)">
 								{{ column.label }}
 								<HugeiconsIcon :icon="ArrowUp01Icon" :class="cn('size-3.5 transition-[rotate,opacity,color] duration-300 ease-spring', props.sort?.key === column.key ? 'text-primary opacity-100' : 'opacity-0 group-hover/sort:opacity-50', props.sort?.key === column.key && props.sort.direction === 'desc' && 'rotate-180')" />
 							</button>

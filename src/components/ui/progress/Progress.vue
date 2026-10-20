@@ -27,13 +27,13 @@ const percentage = computed(() => {
 
 <template>
 	<ProgressRoot data-slot="progress" v-bind="delegatedProps" :model-value="props.indeterminate ? null : props.modelValue" :class="cn(
-		'relative h-2 w-full overflow-hidden rounded-sm bg-muted',
+		'relative h-2 w-full overflow-hidden rounded bg-muted',
 		props.class
 	)">
 		<!-- Indeterminate bar -->
-		<div v-if="props.indeterminate" data-slot="progress-indicator" class="absolute inset-y-0 left-0 w-full origin-left animate-uv-indeterminate rounded-sm bg-primary" />
+		<div v-if="props.indeterminate" data-slot="progress-indicator" class="absolute inset-y-0 left-0 w-full origin-left animate-uv-indeterminate rounded bg-primary" />
 
 		<!-- Determinate bar -->
-		<ProgressIndicator v-else data-slot="progress-indicator" class="relative h-full w-full flex-1 overflow-hidden rounded-sm bg-primary transition-transform duration-700 ease-out-expo" :style="`transform: translateX(-${100 - percentage}%);`" />
+		<ProgressIndicator v-else data-slot="progress-indicator" class="relative h-full w-full flex-1 overflow-hidden rounded bg-primary transition-transform duration-700 ease-out-expo" :style="`transform: translateX(-${100 - percentage}%);`" />
 	</ProgressRoot>
 </template>

@@ -92,7 +92,7 @@ const fieldControlId = useFieldControlId(() => props.id);
 	)" @update:model-value="animateChange">
 		<!-- Decrement button -->
 		<NumberFieldDecrement data-slot="number-field-decrement" :aria-label="resolvedDecrementLabel" :class="cn(
-			'inline-flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-sm text-muted-foreground outline-none',
+			'inline-flex size-10 shrink-0 cursor-pointer items-center justify-center rounded text-muted-foreground outline-none',
 			'[transition:scale_320ms_var(--ease-spring),background-color_150ms_var(--ease-snappy),color_150ms_var(--ease-snappy),opacity_150ms_var(--ease-snappy)]',
 			'hover:bg-accent hover:text-foreground active:scale-[0.84] data-pressed:scale-[0.84] focus-visible:ring-[3px] focus-visible:ring-ring/45',
 			'disabled:pointer-events-none disabled:opacity-35 data-disabled:pointer-events-none data-disabled:opacity-35'
@@ -119,7 +119,7 @@ const fieldControlId = useFieldControlId(() => props.id);
 
 		<!-- Increment button -->
 		<NumberFieldIncrement data-slot="number-field-increment" :aria-label="resolvedIncrementLabel" :class="cn(
-			'inline-flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-sm text-muted-foreground outline-none',
+			'inline-flex size-10 shrink-0 cursor-pointer items-center justify-center rounded text-muted-foreground outline-none',
 			'[transition:scale_320ms_var(--ease-spring),background-color_150ms_var(--ease-snappy),color_150ms_var(--ease-snappy),opacity_150ms_var(--ease-snappy)]',
 			'hover:bg-accent hover:text-foreground active:scale-[0.84] data-pressed:scale-[0.84] focus-visible:ring-[3px] focus-visible:ring-ring/45',
 			'disabled:pointer-events-none disabled:opacity-35 data-disabled:pointer-events-none data-disabled:opacity-35'

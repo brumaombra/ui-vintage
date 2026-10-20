@@ -221,7 +221,7 @@ onBeforeUnmount(() => clearTimeout(rejectTimer));
 					<div class="pb-2">
 						<!-- File row -->
 						<div data-slot="file-dropzone-item" class="flex items-center gap-3 rounded border border-border bg-card py-2 pr-2 pl-3 shadow-elevated-sm">
-							<span class="flex size-9 shrink-0 items-center justify-center rounded-sm bg-surface text-muted-foreground">
+							<span class="flex size-9 shrink-0 items-center justify-center rounded bg-surface text-muted-foreground">
 								<HugeiconsIcon :icon="getFileIcon(file)" class="size-4.5" />
 							</span>
 							<div class="flex min-w-0 flex-1 flex-col">

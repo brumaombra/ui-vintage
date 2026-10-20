@@ -70,7 +70,7 @@ const linkAttributes = computed(() => {
 
 			<!-- Notification count: a soft badge on an opaque backing (so the tint never shows the button through), its digits trimmed to the cap height so they sit centered in any font -->
 			<span v-if="hasCount" data-slot="button-count" class="pointer-events-none absolute -top-2 -right-2 z-10 flex rounded bg-background">
-				<span :class="cn('flex h-5 min-w-5 items-center justify-center rounded px-1 font-mono text-[0.6875rem] font-semibold leading-none tabular-nums', getSurfaceToneClasses('red'))">
+				<span :class="cn('flex h-5 min-w-5 items-center justify-center rounded px-1 text-[0.6875rem] font-semibold leading-none tabular-nums', getSurfaceToneClasses('red'))">
 					<span class="[text-box:trim-both_cap_alphabetic]">{{ countText }}</span>
 				</span>
 			</span>

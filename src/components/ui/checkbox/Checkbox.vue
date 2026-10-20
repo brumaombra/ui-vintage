@@ -23,7 +23,7 @@ const fieldControlId = useFieldControlId(() => props.id);
 
 <template>
 	<CheckboxRoot v-slot="slotProps" data-slot="checkbox" v-bind="forwarded" :id="fieldControlId" :class="cn(
-		'group/checkbox peer relative inline-flex size-5 shrink-0 cursor-pointer items-center justify-center rounded-sm border border-input bg-secondary text-primary-foreground shadow-elevated-sm outline-none',
+		'group/checkbox peer relative inline-flex size-5 shrink-0 cursor-pointer items-center justify-center rounded border border-input bg-secondary text-primary-foreground shadow-elevated-sm outline-none',
 		'[transition:scale_320ms_var(--ease-spring),background-color_150ms_var(--ease-snappy),border-color_150ms_var(--ease-snappy),box-shadow_150ms_var(--ease-snappy)]',
 		'hover:border-border-strong active:scale-[0.86] focus-visible:ring-[3px] focus-visible:ring-ring/45',
 		'data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=indeterminate]:border-primary data-[state=indeterminate]:bg-primary',

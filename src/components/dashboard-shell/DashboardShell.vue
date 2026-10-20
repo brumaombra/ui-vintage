@@ -75,7 +75,7 @@ const logoAlt = computed(() => props.appName ? t('uiVintage.common.logo', { name
 		<!-- Sidebar -->
 		<Sidebar :collapsible="props.collapsible" :compact="props.compact">
 			<!-- Sidebar header -->
-			<SidebarHeader v-if="props.appName || lightLogo || $slots['sidebar-header']" class="h-16 justify-center border-b border-sidebar-border">
+			<SidebarHeader v-if="props.appName || lightLogo || $slots['sidebar-header']" class="h-16 justify-center shadow-[inset_0_-1px_0_var(--sidebar-border)]">
 				<slot name="sidebar-header">
 					<SidebarMenu>
 						<SidebarMenuItem>
@@ -149,8 +149,8 @@ const logoAlt = computed(() => props.appName ? t('uiVintage.common.logo', { name
 			<!-- Background -->
 			<BackgroundGrid v-if="props.showBackground" />
 
-			<!-- Topbar -->
-			<header :class="cn('sticky top-0 z-20 flex h-16 shrink-0 items-center gap-2 border-b border-sidebar-border bg-sidebar/80 px-4 backdrop-blur-md backdrop-saturate-150', props.topbarClass)">
+			<!-- Topbar (its bottom line is an inset shadow, so the whole 64px is free and the content centers on whole pixels) -->
+			<header :class="cn('sticky top-0 z-20 flex h-16 shrink-0 items-center gap-2 shadow-[inset_0_-1px_0_var(--sidebar-border)] bg-sidebar/80 px-4 backdrop-blur-md backdrop-saturate-150', props.topbarClass)">
 				<!-- Sidebar trigger -->
 				<SidebarTrigger class="-ml-1" />
 

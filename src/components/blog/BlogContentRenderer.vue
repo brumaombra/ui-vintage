@@ -153,7 +153,7 @@ const props = defineProps<{
 	padding: 1rem 1.25rem 1rem 1.5rem;
 	border: 1px solid var(--border);
 	border-left: 3px solid var(--primary);
-	border-radius: var(--radius-sm);
+	border-radius: 0.25rem;
 	background-color: var(--surface);
 	font-size: 15px;
 	font-style: italic;
@@ -186,7 +186,7 @@ const props = defineProps<{
 /* Images */
 .blog-content :deep(img:not(.not-prose):not(.not-prose *)) {
 	border: 1px solid var(--border);
-	border-radius: var(--radius-sm);
+	border-radius: 0.25rem;
 	box-shadow: var(--uv-shadow-sm);
 }
 

@@ -134,10 +134,10 @@ const handleKeydown = (event: KeyboardEvent) => {
 			<div class="flex min-w-0 flex-1 flex-wrap items-center gap-1.5">
 				<!-- Selected tags (multiple mode) -->
 				<TransitionGroup v-if="props.multiple" leave-active-class="transition-[opacity,scale] duration-150 ease-snappy" leave-to-class="scale-75 opacity-0">
-					<span v-for="option in selectedOptions" :key="option.value" data-slot="combobox-select-tag" class="inline-flex h-7 max-w-full animate-uv-pop items-center gap-1 rounded-sm border border-border bg-surface pr-1 pl-2 text-[11px] font-semibold text-foreground sm:text-xs">
+					<span v-for="option in selectedOptions" :key="option.value" data-slot="combobox-select-tag" class="inline-flex h-7 max-w-full animate-uv-pop items-center gap-1 rounded border border-border bg-surface pr-1 pl-2 text-[11px] font-semibold text-foreground sm:text-xs">
 						<HugeiconsIcon v-if="option.icon" :icon="option.icon" class="size-3" />
 						<span class="truncate">{{ option.label }}</span>
-						<button type="button" :disabled="props.disabled" :aria-label="`${t('uiVintage.buttons.remove')} ${option.label}`" class="flex size-5 cursor-pointer items-center justify-center rounded-sm text-muted-foreground outline-none transition-[color,background-color,scale] duration-150 ease-spring hover:bg-accent hover:text-destructive focus-visible:ring-[3px] focus-visible:ring-ring/45 active:scale-90 disabled:pointer-events-none" @click.stop="removeValue(option.value)">
+						<button type="button" :disabled="props.disabled" :aria-label="`${t('uiVintage.buttons.remove')} ${option.label}`" class="flex size-5 cursor-pointer items-center justify-center rounded text-muted-foreground outline-none transition-[color,background-color,scale] duration-150 ease-spring hover:bg-accent hover:text-destructive focus-visible:ring-[3px] focus-visible:ring-ring/45 active:scale-90 disabled:pointer-events-none" @click.stop="removeValue(option.value)">
 							<HugeiconsIcon :icon="Cancel01Icon" class="size-3" />
 						</button>
 					</span>
