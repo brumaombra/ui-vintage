@@ -45,8 +45,9 @@ const showModifiedDate = computed(() => Boolean(props.dateModified) && formatted
 			<!-- Author name and bio -->
 			<div class="min-w-0 flex-1">
 				<p class="text-[11px] font-semibold tracking-wider text-muted-foreground uppercase">{{ t('uiVintage.blog.author') }}</p>
-				<NuxtLinkLocale :to="props.authorUrl" target="_blank" rel="noopener noreferrer" class="group/link inline-flex items-center gap-1 text-sm font-semibold text-foreground outline-none decoration-primary decoration-2 underline-offset-4 hover:underline focus-visible:underline md:text-base">
-					{{ props.author }}
+				<NuxtLinkLocale :to="props.authorUrl" target="_blank" rel="noopener noreferrer" class="group/link inline-flex items-center gap-1 text-sm font-semibold text-foreground outline-none md:text-base">
+					<!-- The orange underline draws in on hover and keyboard focus, like the card titles -->
+					<span class="bg-linear-to-r from-primary to-primary bg-[length:0%_2px] bg-[position:100%_100%] bg-no-repeat transition-[background-size] duration-500 ease-out-expo group-hover/link:bg-[length:100%_2px] group-hover/link:bg-[position:0_100%] group-focus-visible/link:bg-[length:100%_2px] group-focus-visible/link:bg-[position:0_100%]">{{ props.author }}</span>
 					<HugeiconsIcon :icon="ArrowUpRight01Icon" class="size-4 text-muted-foreground transition-[translate,color] duration-300 ease-spring group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 group-hover/link:text-primary" />
 				</NuxtLinkLocale>
 				<p v-if="props.authorBio" class="mt-1.5 text-xs leading-relaxed text-muted-foreground md:text-sm">

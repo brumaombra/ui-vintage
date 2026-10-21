@@ -173,4 +173,15 @@ describe('Blog orange text contrast', () => {
 			expect(title.classes()).toEqual(expect.arrayContaining(['bg-[length:0%_2px]', 'transition-[background-size]', `group-hover/${group}:bg-[length:100%_2px]`]));
 		}
 	});
+
+	// The author names had a static underline too: it draws in on hover and on keyboard focus (the links are focused themselves)
+	it('draws the underline of the author names on hover and focus', async () => {
+		const header = await mountSuspended(BlogPostHeader, { props: { title: 'Post', author: 'Bruma', authorUrl: 'https://brumaombra.com' } });
+		const info = await mountSuspended(BlogInfoSection, { props: { author: 'Bruma', authorUrl: 'https://brumaombra.com' } });
+		for (const wrapper of [header, info]) {
+			const name = wrapper.find('a.group\\/link span.bg-no-repeat');
+			expect(name.text()).toBe('Bruma');
+			expect(name.classes()).toEqual(expect.arrayContaining(['group-hover/link:bg-[length:100%_2px]', 'group-focus-visible/link:bg-[length:100%_2px]']));
+		}
+	});
 });
