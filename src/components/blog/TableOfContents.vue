@@ -379,9 +379,9 @@ onUnmounted(() => {
 		</div>
 
 		<Teleport to="body">
-			<!-- Mobile persistent control -->
+			<!-- Mobile persistent control (placed in svh, the viewport with the browser toolbars shown: a percentage follows the viewport height, which changes while the toolbars hide and show on scroll, so the tab jumped) -->
 			<Transition name="toc-tab">
-				<button v-if="!isDesktop && isDocked" ref="mobileTriggerRef" type="button" class="group/toc-tab fixed top-4/5 left-0 z-20 flex h-16 w-7 -translate-y-1/2 items-center justify-center rounded-r border border-l-0 border-border bg-card text-primary shadow-elevated-sm transition-[width] duration-300 ease-out-expo hover:w-8 focus-visible:z-30 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45" :aria-label="t('uiVintage.blog.openTableOfContents')" :aria-expanded="isMobileOpen" aria-haspopup="dialog" aria-controls="toc-mobile-overlay" @click="openMobileToc">
+				<button v-if="!isDesktop && isDocked" ref="mobileTriggerRef" type="button" class="group/toc-tab fixed top-[80svh] left-0 z-20 flex h-16 w-7 -translate-y-1/2 items-center justify-center rounded-r border border-l-0 border-border bg-card text-primary shadow-elevated-sm transition-[width] duration-300 ease-out-expo hover:w-8 focus-visible:z-30 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45" :aria-label="t('uiVintage.blog.openTableOfContents')" :aria-expanded="isMobileOpen" aria-haspopup="dialog" aria-controls="toc-mobile-overlay" @click="openMobileToc">
 					<HugeiconsIcon :icon="ArrowRight01Icon" class="size-3.5 transition-[translate] duration-300 ease-spring group-hover/toc-tab:translate-x-0.5" aria-hidden="true" />
 				</button>
 			</Transition>
