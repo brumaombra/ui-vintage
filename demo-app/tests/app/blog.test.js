@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
-import { BlogHeaderSection, BlogInfoSection, BlogPostHeader, BlogSummary, BlogTagsSection } from '@brumaombra/ui-vintage/blog';
+import { BlogHeaderSection, BlogInfoSection, BlogPostHeader, BlogSummary, BlogTagsSection, CategoryCard, PostCard } from '@brumaombra/ui-vintage/blog';
 
 // Labels of the details row in the post header
 const readDetailLabels = wrapper => wrapper.findAll('dt').map(label => label.text());
@@ -17,6 +17,9 @@ describe('BlogPostHeader', () => {
 
 		// Expect the photo to grow on its own hover only, and no link without a URL
 		expect(link.find('img').classes()).toContain('hover:scale-110');
+
+		// The photo repeated the name next to it (Lighthouse flagged the redundant alt): it is decorative now
+		expect(link.find('img').attributes('alt')).toBe('');
 		const plain = await mountSuspended(BlogPostHeader, { props: { title: 'Post', author: 'Bruma' } });
 		expect(plain.find('dd a').exists()).toBe(false);
 		expect(plain.find('dd').text()).toContain('Bruma');
@@ -95,7 +98,11 @@ describe('BlogHeaderSection', () => {
 	// The highlighted part of the title is rendered on its own, wherever it appears
 	it('highlights part of the title', async () => {
 		const wrapper = await mountSuspended(BlogHeaderSection, { props: { title: 'Il blog della demo', highlight: 'blog', description: 'Notes' } });
-		expect(wrapper.find('h1 .text-primary').text()).toBe('blog');
+		const highlight = wrapper.find('h1 span.relative');
+		expect(highlight.text()).toBe('blog');
+
+		// The brand orange was 2.2:1 on the light background: in light mode the word is just dark enough for large text, in dark mode it stays the brand orange
+		expect(highlight.classes()).toEqual(expect.arrayContaining(['text-[color-mix(in_oklab,var(--primary)_85%,black)]', 'dark:text-primary']));
 		expect(wrapper.find('h1').text().replace(/\s+/g, ' ')).toBe('Il blog della demo');
 	});
 
@@ -125,5 +132,24 @@ describe('BlogInfoSection', () => {
 		expect(row.classes().join(' ')).not.toContain('group/author');
 		expect(photoLink.classes()).toContain('group/author-image');
 		expect(photoLink.find('img').classes()).toContain('group-hover/author-image:scale-110');
+	});
+});
+
+// Small orange text was 2.2:1 on the light background (Lighthouse color-contrast): it uses the darker ink of the brand orange, or gray with an orange dot
+describe('Blog orange text contrast', () => {
+	// The category label of a post card
+	it('shows the post category in gray with an orange dot', async () => {
+		const wrapper = await mountSuspended(PostCard, { props: { title: 'Post', category: 'Design' } });
+		const label = wrapper.findAll('span').find(span => span.text() === 'Design' && span.classes().includes('uppercase'));
+		expect(label.classes()).toContain('text-muted-foreground');
+		expect(label.find('span[aria-hidden="true"]').classes()).toContain('bg-primary');
+	});
+
+	// The post count of a category card
+	it('writes the category count in the orange ink', async () => {
+		const wrapper = await mountSuspended(CategoryCard, { props: { name: 'Design', count: 3 } });
+		const count = wrapper.findAll('span').find(span => span.text() === '3');
+		expect(count.classes()).toContain('text-primary-ink');
+		expect(count.classes()).not.toContain('text-primary');
 	});
 });

@@ -31,10 +31,13 @@ const props = withDefaults(defineProps<{
 		<!-- Content -->
 		<div class="flex grow flex-col gap-2 px-5 py-4">
 			<!-- Category -->
-			<span v-if="props.category" class="text-[11px] font-semibold uppercase tracking-wider text-primary">{{ props.category }}</span>
+			<span v-if="props.category" class="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+				<span aria-hidden="true" class="size-1.5 shrink-0 rounded-full bg-primary" />
+				{{ props.category }}
+			</span>
 
 			<!-- Post title -->
-			<h2 class="line-clamp-2 text-sm leading-snug font-semibold text-foreground transition-colors duration-200 group-hover/post:text-primary md:text-base">
+			<h2 class="line-clamp-2 text-sm leading-snug font-semibold text-foreground transition-colors duration-200 group-hover/post:text-primary-ink md:text-base">
 				{{ props.title }}
 			</h2>
 
@@ -45,7 +48,7 @@ const props = withDefaults(defineProps<{
 		</div>
 
 		<!-- Read more -->
-		<div class="flex items-center justify-between border-t border-border bg-surface px-5 py-2.5 text-xs text-muted-foreground transition-colors duration-200 group-hover/post:bg-primary/10 group-hover/post:text-primary">
+		<div class="flex items-center justify-between border-t border-border bg-surface px-5 py-2.5 text-xs text-muted-foreground transition-colors duration-200 group-hover/post:bg-primary/10 group-hover/post:text-primary-ink">
 			<span class="font-medium">{{ t('uiVintage.blog.readMore') }}</span>
 			<HugeiconsIcon :icon="ArrowRight01Icon" class="size-4 transition-[translate] duration-300 ease-spring group-hover/post:translate-x-1" />
 		</div>

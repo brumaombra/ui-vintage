@@ -133,16 +133,16 @@ const detailLabelClasses = 'text-[11px] font-semibold tracking-wider text-muted-
 				<div v-if="props.author" :class="detailCellClasses">
 					<dt :class="detailLabelClasses">{{ t('uiVintage.blog.author') }}</dt>
 					<dd class="mt-2 flex min-w-0 items-center text-sm font-semibold text-foreground">
-						<!-- A link to the author like in the author card at the bottom: the name turns primary and its arrow nudges, the photo grows while the photo itself is hovered -->
-						<NuxtLinkLocale v-if="props.authorUrl" :to="props.authorUrl" target="_blank" rel="noopener noreferrer" class="group/link flex min-w-0 items-center gap-2 rounded outline-none transition-colors hover:text-primary focus-visible:underline">
-							<NuxtImg v-if="props.authorImageUrl" :src="props.authorImageUrl" :alt="props.author" width="24" height="24" format="avif" quality="40" class="size-6 shrink-0 rounded border border-border object-cover transition-[scale] duration-500 ease-spring hover:scale-110" />
+						<!-- A link to the author like in the author card at the bottom: the name turns primary and its arrow nudges, the photo grows while the photo itself is hovered; the photo has an empty alt since the name next to it already says who it is -->
+						<NuxtLinkLocale v-if="props.authorUrl" :to="props.authorUrl" target="_blank" rel="noopener noreferrer" class="group/link flex min-w-0 items-center gap-2 rounded outline-none transition-colors hover:text-primary-ink focus-visible:underline">
+							<NuxtImg v-if="props.authorImageUrl" :src="props.authorImageUrl" alt="" width="24" height="24" format="avif" quality="40" class="size-6 shrink-0 rounded border border-border object-cover transition-[scale] duration-500 ease-spring hover:scale-110" />
 							<span class="truncate">{{ props.author }}</span>
 							<HugeiconsIcon :icon="ArrowUpRight01Icon" aria-hidden="true" class="size-4 shrink-0 text-muted-foreground transition-[translate,color] duration-300 ease-spring group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 group-hover/link:text-primary" />
 						</NuxtLinkLocale>
 
 						<!-- Without a link, just the photo and the name -->
 						<span v-else class="flex min-w-0 items-center gap-2">
-							<NuxtImg v-if="props.authorImageUrl" :src="props.authorImageUrl" :alt="props.author" width="24" height="24" format="avif" quality="40" class="size-6 shrink-0 rounded border border-border object-cover" />
+							<NuxtImg v-if="props.authorImageUrl" :src="props.authorImageUrl" alt="" width="24" height="24" format="avif" quality="40" class="size-6 shrink-0 rounded border border-border object-cover" />
 							<span class="truncate">{{ props.author }}</span>
 						</span>
 					</dd>

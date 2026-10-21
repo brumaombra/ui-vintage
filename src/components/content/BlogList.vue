@@ -18,7 +18,7 @@ const getMarkerClasses = () => {
 	const toneClasses = {
 		checkmark: 'rounded bg-success/10 text-success',
 		cross: 'rounded bg-destructive/10 text-destructive',
-		numbered: 'text-[11px] font-semibold tabular-nums text-primary',
+		numbered: 'text-[11px] font-semibold tabular-nums text-primary-ink',
 		circle: ''
 	};
 	return ['mt-px flex size-5 shrink-0 items-center justify-center', toneClasses[props.variant]];

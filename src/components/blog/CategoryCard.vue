@@ -29,10 +29,10 @@ const props = withDefaults(defineProps<{
 
 		<!-- Name, post count and arrow -->
 		<div class="flex grow items-center gap-3 bg-surface px-4 py-3 transition-colors duration-200 group-hover/category:bg-primary/10">
-			<span class="min-w-0 flex-1 truncate text-sm font-semibold text-foreground transition-colors duration-200 group-hover/category:text-primary">
+			<span class="min-w-0 flex-1 truncate text-sm font-semibold text-foreground transition-colors duration-200 group-hover/category:text-primary-ink">
 				{{ props.name }}
 			</span>
-			<span class="shrink-0 rounded border border-primary/30 px-1.5 text-[11px] font-semibold leading-5 text-primary tabular-nums">
+			<span class="shrink-0 rounded border border-primary/30 px-1.5 text-[11px] font-semibold leading-5 text-primary-ink tabular-nums">
 				{{ props.count }}
 			</span>
 			<HugeiconsIcon :icon="ArrowRight01Icon" class="size-4 shrink-0 text-muted-foreground transition-[translate,color] duration-300 ease-spring group-hover/category:translate-x-1 group-hover/category:text-primary" />

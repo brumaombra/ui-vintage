@@ -110,7 +110,8 @@ const underlineDelay = computed(() => `${beforeWords.value.length * 55 + 600}ms`
 				<span class="inline-block animate-uv-word-in" :style="{ animationDelay: wordDelay(index) }">{{ word }}</span>{{ wordGap(index) }}
 			</template>
 			<!-- The text and the underline sit on one line so no stray space ends up inside the highlight -->
-			<span v-if="titleParts.highlight" class="relative inline-block animate-uv-word-in text-primary" :style="{ animationDelay: highlightDelay }">{{ titleParts.highlight }}<svg class="absolute -bottom-2 left-0 h-3 w-full text-primary/60" viewBox="0 0 200 12" fill="none" preserveAspectRatio="none" aria-hidden="true">
+			<!-- In light mode the word is a touch darker than the brand orange, the least that reaches 3:1 as large text (the brand orange is 2.2:1 on the light background), while the underline keeps the brand orange -->
+			<span v-if="titleParts.highlight" class="relative inline-block animate-uv-word-in text-[color-mix(in_oklab,var(--primary)_85%,black)] dark:text-primary" :style="{ animationDelay: highlightDelay }">{{ titleParts.highlight }}<svg class="absolute -bottom-2 left-0 h-3 w-full text-primary/60" viewBox="0 0 200 12" fill="none" preserveAspectRatio="none" aria-hidden="true">
 					<path d="M2 9C40 3 80 2 198 7" stroke="currentColor" stroke-width="4" stroke-linecap="round" pathLength="1" class="animate-uv-draw [stroke-dasharray:1]" :style="{ animationDelay: underlineDelay }" />
 				</svg>
 			</span>

@@ -369,7 +369,7 @@ onUnmounted(() => {
 							<!-- Active marker on the track -->
 							<span aria-hidden="true" :class="['absolute inset-y-1 -left-px w-0.5 origin-center bg-primary transition-transform duration-300 ease-spring', heading.id === activeHeadingId ? 'scale-y-100' : 'scale-y-0']" />
 							<button type="button" :class="getHeadingButtonClasses(heading.level, heading.id === activeHeadingId)" :aria-current="heading.id === activeHeadingId ? 'location' : undefined" @click="scrollToHeading(heading.id)">
-								<span v-if="heading.number" :class="['w-5 shrink-0 text-[11px] leading-5 tabular-nums transition-colors', heading.id === activeHeadingId ? 'text-primary' : 'text-muted-foreground']">{{ heading.number }}</span>
+								<span v-if="heading.number" :class="['w-5 shrink-0 text-[11px] leading-5 tabular-nums transition-colors', heading.id === activeHeadingId ? 'text-primary-ink' : 'text-muted-foreground']">{{ heading.number }}</span>
 								<span>{{ heading.text }}</span>
 							</button>
 						</li>
@@ -426,7 +426,7 @@ onUnmounted(() => {
 								<!-- Active marker on the track -->
 								<span aria-hidden="true" :class="['absolute inset-y-1 -left-px w-0.5 bg-primary', heading.id === activeHeadingId ? 'opacity-100' : 'opacity-0']" />
 								<button type="button" :class="getHeadingButtonClasses(heading.level, heading.id === activeHeadingId)" :aria-current="heading.id === activeHeadingId ? 'location' : undefined" @click="scrollToHeading(heading.id, { closeMobile: true })">
-									<span v-if="heading.number" :class="['w-5 shrink-0 text-[11px] leading-5 tabular-nums', heading.id === activeHeadingId ? 'text-primary' : 'text-muted-foreground']">{{ heading.number }}</span>
+									<span v-if="heading.number" :class="['w-5 shrink-0 text-[11px] leading-5 tabular-nums', heading.id === activeHeadingId ? 'text-primary-ink' : 'text-muted-foreground']">{{ heading.number }}</span>
 									<span>{{ heading.text }}</span>
 								</button>
 							</li>
