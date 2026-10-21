@@ -2,6 +2,8 @@
 import { NuxtImg } from '#components';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
+import ArrowUpRight01Icon from '@hugeicons/core-free-icons/ArrowUpRight01Icon';
+import { HugeiconsIcon } from '@hugeicons/vue';
 import { Badge } from '../ui/badge';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '../ui/breadcrumb';
 import { formatDateLongItalyTimezone, getReadingMinutes } from '../../lib/utils';
@@ -13,6 +15,7 @@ const props = withDefaults(defineProps<{
 	image?: string;
 	author?: string;
 	authorImageUrl?: string;
+	authorUrl?: string;
 	datePublished?: string;
 	categoryText?: string;
 	categorySlug?: string;
@@ -30,6 +33,7 @@ const props = withDefaults(defineProps<{
 	image: '',
 	author: '',
 	authorImageUrl: '',
+	authorUrl: '',
 	datePublished: '',
 	categoryText: '',
 	categorySlug: '',
@@ -128,9 +132,19 @@ const detailLabelClasses = 'text-[11px] font-semibold tracking-wider text-muted-
 				<!-- Author -->
 				<div v-if="props.author" :class="detailCellClasses">
 					<dt :class="detailLabelClasses">{{ t('uiVintage.blog.author') }}</dt>
-					<dd class="mt-2 flex min-w-0 items-center gap-2 text-sm font-semibold text-foreground">
-						<NuxtImg v-if="props.authorImageUrl" :src="props.authorImageUrl" :alt="props.author" width="24" height="24" format="avif" quality="40" class="size-6 shrink-0 rounded border border-border object-cover" />
-						<span class="truncate">{{ props.author }}</span>
+					<dd class="mt-2 flex min-w-0 items-center text-sm font-semibold text-foreground">
+						<!-- A link to the author like in the author card at the bottom: the name turns primary and its arrow nudges, the photo grows while the photo itself is hovered -->
+						<NuxtLinkLocale v-if="props.authorUrl" :to="props.authorUrl" target="_blank" rel="noopener noreferrer" class="group/link flex min-w-0 items-center gap-2 rounded outline-none transition-colors hover:text-primary focus-visible:underline">
+							<NuxtImg v-if="props.authorImageUrl" :src="props.authorImageUrl" :alt="props.author" width="24" height="24" format="avif" quality="40" class="size-6 shrink-0 rounded border border-border object-cover transition-[scale] duration-500 ease-spring hover:scale-110" />
+							<span class="truncate">{{ props.author }}</span>
+							<HugeiconsIcon :icon="ArrowUpRight01Icon" aria-hidden="true" class="size-4 shrink-0 text-muted-foreground transition-[translate,color] duration-300 ease-spring group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 group-hover/link:text-primary" />
+						</NuxtLinkLocale>
+
+						<!-- Without a link, just the photo and the name -->
+						<span v-else class="flex min-w-0 items-center gap-2">
+							<NuxtImg v-if="props.authorImageUrl" :src="props.authorImageUrl" :alt="props.author" width="24" height="24" format="avif" quality="40" class="size-6 shrink-0 rounded border border-border object-cover" />
+							<span class="truncate">{{ props.author }}</span>
+						</span>
 					</dd>
 				</div>
 

@@ -1,12 +1,27 @@
 import { describe, expect, it } from 'vitest';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
-import { BlogHeaderSection, BlogPostHeader, BlogSummary, BlogTagsSection } from '@brumaombra/ui-vintage/blog';
+import { BlogHeaderSection, BlogInfoSection, BlogPostHeader, BlogSummary, BlogTagsSection } from '@brumaombra/ui-vintage/blog';
 
 // Labels of the details row in the post header
 const readDetailLabels = wrapper => wrapper.findAll('dt').map(label => label.text());
 
 // Blog headers: the first thing readers see on every blog page
 describe('BlogPostHeader', () => {
+	// The author used to be plain text at the top, while the card at the bottom linked it
+	it('links the author like the author card', async () => {
+		const wrapper = await mountSuspended(BlogPostHeader, { props: { title: 'Post', author: 'Bruma', authorImageUrl: '/bruma.png', authorUrl: 'https://brumaombra.com' } });
+		const link = wrapper.find('dd a');
+		expect(link.attributes('href')).toBe('https://brumaombra.com');
+		expect(link.attributes('target')).toBe('_blank');
+		expect(link.text()).toContain('Bruma');
+
+		// Expect the photo to grow on its own hover only, and no link without a URL
+		expect(link.find('img').classes()).toContain('hover:scale-110');
+		const plain = await mountSuspended(BlogPostHeader, { props: { title: 'Post', author: 'Bruma' } });
+		expect(plain.find('dd a').exists()).toBe(false);
+		expect(plain.find('dd').text()).toContain('Bruma');
+	});
+
 	// A full post shows the four labelled details
 	it('shows author, date, reading time, and category', async () => {
 		const wrapper = await mountSuspended(BlogPostHeader, {
@@ -97,5 +112,18 @@ describe('BlogHeaderSection', () => {
 		expect(link.attributes('href')).toBe('/blog/latest');
 		expect(link.text()).toContain('New');
 		expect(link.text()).toContain('Latest post');
+	});
+});
+
+// Author card at the bottom of a post
+describe('BlogInfoSection', () => {
+	// The photo grew while any part of the row was hovered (the name, the bio): now only the photo itself triggers it
+	it('grows the photo only while the photo is hovered', async () => {
+		const wrapper = await mountSuspended(BlogInfoSection, { props: { author: 'Bruma', authorUrl: 'https://brumaombra.com', authorImageUrl: '/bruma.png', authorBio: 'Builds things.', datePublished: '2026-06-14' } });
+		const row = wrapper.find('[data-slot="blog-author"]');
+		const photoLink = row.find('a');
+		expect(row.classes().join(' ')).not.toContain('group/author');
+		expect(photoLink.classes()).toContain('group/author-image');
+		expect(photoLink.find('img').classes()).toContain('group-hover/author-image:scale-110');
 	});
 });

@@ -49,6 +49,7 @@ const postTags = computed(() => ((props.post.tags as string[] | undefined) || []
 				:image="props.post.image"
 				:author="props.post.author"
 				:author-image-url="props.post.authorImageUrl"
+				:author-url="props.post.authorUrl"
 				:date-published="props.post.datePublished"
 				:category-text="props.post.categoryText"
 				:category-slug="props.post.categorySlug"
