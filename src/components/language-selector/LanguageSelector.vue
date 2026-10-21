@@ -151,7 +151,7 @@ const handleSelectLanguage = (language: string) => {
 						<CommandItem v-for="option in normalizedLanguages" :key="option.code" :value="option.code" @select="handleSelectLanguage(option.code)">
 							<component :is="resolveFlagComponent(option.code)" />
 							<span class="flex-1">{{ option.label }}</span>
-							<HugeiconsIcon :icon="Tick02Icon" class="ml-auto size-4 shrink-0" :class="props.modelValue === option.code ? 'opacity-100' : 'opacity-0'" />
+							<HugeiconsIcon :icon="Tick02Icon" class="ml-auto size-4 shrink-0 text-primary! transition-[opacity,scale] duration-300 ease-bounce" :class="props.modelValue === option.code ? 'scale-100 opacity-100' : 'scale-50 opacity-0'" />
 						</CommandItem>
 					</CommandGroup>
 				</CommandList>

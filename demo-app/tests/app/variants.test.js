@@ -7,6 +7,7 @@ import { Avatar, AvatarFallback } from '@brumaombra/ui-vintage/avatar';
 import { Badge } from '@brumaombra/ui-vintage/badge';
 import { Button } from '@brumaombra/ui-vintage/button';
 import { Card, CardMedia, CardTitle } from '@brumaombra/ui-vintage/card';
+import { Command, CommandGroup, CommandItem, CommandList } from '@brumaombra/ui-vintage/command';
 import { DataListText } from '@brumaombra/ui-vintage/data-list';
 import { dialogSizeClasses } from '@brumaombra/ui-vintage/dialog';
 import { Input } from '@brumaombra/ui-vintage/input';
@@ -174,6 +175,27 @@ describe('SectionTitle', () => {
 		expect(wrapper.classes()).not.toContain('flex-col');
 		expect(wrapper.classes()).toContain('items-center');
 		expect(wrapper.text()).toContain('View all');
+	});
+});
+
+describe('CommandItem', () => {
+	// The theme and language selectors: the selected item used to look hovered all the time (background and bar), now only its tick marks it
+	it('marks the selection only with the tick, and hovers like the menu items', async () => {
+		const wrapper = await mountSuspended({
+			render: () => h(Command, { modelValue: 'dark' }, () => h(CommandList, null, () => h(CommandGroup, null, () => [
+				h(CommandItem, { value: 'light' }, () => [h(SearchIcon), 'Light']),
+				h(CommandItem, { value: 'dark' }, () => [h(SearchIcon), 'Dark'])
+			])))
+		});
+		const selected = wrapper.findAll('[data-slot="command-item"]')[1];
+		expect(selected.attributes('data-state')).toBe('checked');
+		expect(selected.classes().filter(name => name.includes('data-[state=checked]'))).toEqual([]);
+
+		// Expect the hover bar and the nudge of the leading icon, as in the dropdown menu (and the same look for keyboard focus)
+		expect(selected.classes()).toEqual(expect.arrayContaining(['hover:bg-accent', 'hover:before:scale-y-100', '[&:is(:hover,:focus-visible)>svg:first-child]:translate-x-0.5']));
+
+		// Expect the open listbox's own highlight (it focuses the selected item) not to paint the hover look by itself
+		expect(selected.classes().filter(name => name.startsWith('data-highlighted:'))).toEqual([]);
 	});
 });
 
