@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<{
 // Header cell classes
 const getHeaderClasses = (colIndex: number) => {
 	const baseClasses = 'h-10 px-4 text-left text-[11px] font-semibold uppercase tracking-wider text-muted-foreground sm:px-5';
-	const highlightClass = props.highlightCol === colIndex ? 'text-primary-ink shadow-[inset_0_-2px_0_var(--primary)]' : '';
+	const highlightClass = props.highlightCol === colIndex ? 'text-foreground shadow-[inset_0_-2px_0_var(--primary)]' : '';
 	return [baseClasses, highlightClass];
 };
 

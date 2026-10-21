@@ -101,8 +101,9 @@ describe('BlogHeaderSection', () => {
 		const highlight = wrapper.find('h1 span.relative');
 		expect(highlight.text()).toBe('blog');
 
-		// The brand orange was 2.2:1 on the light background: in light mode the word is just dark enough for large text, in dark mode it stays the brand orange
-		expect(highlight.classes()).toEqual(expect.arrayContaining(['text-[color-mix(in_oklab,var(--primary)_85%,black)]', 'dark:text-primary']));
+		// Orange text was 2.2:1 on the light background: the word keeps the text color and the underline carries the brand orange
+		expect(highlight.classes().some(name => name.startsWith('text-'))).toBe(false);
+		expect(highlight.find('svg').classes()).toContain('text-primary');
 		expect(wrapper.find('h1').text().replace(/\s+/g, ' ')).toBe('Il blog della demo');
 	});
 
@@ -135,7 +136,7 @@ describe('BlogInfoSection', () => {
 	});
 });
 
-// Small orange text was 2.2:1 on the light background (Lighthouse color-contrast): it uses the darker ink of the brand orange, or gray with an orange dot
+// Small orange text was 2.2:1 on the light background (Lighthouse color-contrast): the text is dark or gray, and the brand orange stays on dots, borders and underlines
 describe('Blog orange text contrast', () => {
 	// The category label of a post card
 	it('shows the post category in gray with an orange dot', async () => {
@@ -146,10 +147,17 @@ describe('Blog orange text contrast', () => {
 	});
 
 	// The post count of a category card
-	it('writes the category count in the orange ink', async () => {
+	it('shows the category count in gray with an orange dot', async () => {
 		const wrapper = await mountSuspended(CategoryCard, { props: { name: 'Design', count: 3 } });
-		const count = wrapper.findAll('span').find(span => span.text() === '3');
-		expect(count.classes()).toContain('text-primary-ink');
-		expect(count.classes()).not.toContain('text-primary');
+		const count = wrapper.findAll('span').find(span => span.text() === '3' && span.classes().includes('tabular-nums'));
+		expect(count.classes()).toContain('text-muted-foreground');
+		expect(count.find('span[aria-hidden="true"]').classes()).toContain('bg-primary');
+	});
+
+	// The tag chips
+	it('marks the tags with an orange dot instead of an orange #', async () => {
+		const wrapper = await mountSuspended(BlogTagsSection, { props: { tags: [{ slug: 'nuxt', name: 'Nuxt', count: 2 }], blogPath: '/blog' } });
+		expect(wrapper.text()).not.toContain('#');
+		expect(wrapper.find('span[aria-hidden="true"]').classes()).toContain('bg-primary');
 	});
 });

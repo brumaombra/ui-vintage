@@ -76,7 +76,7 @@ const copyCommands = async () => {
 			</div>
 
 			<!-- Terminal commands -->
-			<pre class="overflow-x-auto px-4 py-3 text-xs leading-6 sm:px-5 sm:py-4 sm:text-sm"><code><span v-for="(command, index) in props.commands" :key="`${command}-${index}`" class="flex min-w-max"><span class="mr-2 select-none text-primary-ink" aria-hidden="true">{{ props.prompt }}</span><span>{{ command }}</span><span v-if="index === props.commands.length - 1" class="terminal-cursor ml-1 inline-block w-[0.6em] bg-primary/70" aria-hidden="true" /></span></code></pre>
+			<pre class="overflow-x-auto px-4 py-3 text-xs leading-6 sm:px-5 sm:py-4 sm:text-sm"><code><span v-for="(command, index) in props.commands" :key="`${command}-${index}`" class="flex min-w-max"><span class="mr-2 select-none text-foreground" aria-hidden="true">{{ props.prompt }}</span><span>{{ command }}</span><span v-if="index === props.commands.length - 1" class="terminal-cursor ml-1 inline-block w-[0.6em] bg-primary/70" aria-hidden="true" /></span></code></pre>
 		</div>
 	</div>
 </template>

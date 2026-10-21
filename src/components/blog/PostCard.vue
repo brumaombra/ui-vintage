@@ -37,7 +37,7 @@ const props = withDefaults(defineProps<{
 			</span>
 
 			<!-- Post title -->
-			<h2 class="line-clamp-2 text-sm leading-snug font-semibold text-foreground transition-colors duration-200 group-hover/post:text-primary-ink md:text-base">
+			<h2 class="line-clamp-2 text-sm leading-snug font-semibold text-foreground decoration-primary decoration-2 underline-offset-4 group-hover/post:underline md:text-base">
 				{{ props.title }}
 			</h2>
 
@@ -48,7 +48,7 @@ const props = withDefaults(defineProps<{
 		</div>
 
 		<!-- Read more -->
-		<div class="flex items-center justify-between border-t border-border bg-surface px-5 py-2.5 text-xs text-muted-foreground transition-colors duration-200 group-hover/post:bg-primary/10 group-hover/post:text-primary-ink">
+		<div class="flex items-center justify-between border-t border-border bg-surface px-5 py-2.5 text-xs text-muted-foreground transition-colors duration-200 group-hover/post:bg-primary/10 group-hover/post:text-foreground">
 			<span class="font-medium">{{ t('uiVintage.blog.readMore') }}</span>
 			<HugeiconsIcon :icon="ArrowRight01Icon" class="size-4 transition-[translate] duration-300 ease-spring group-hover/post:translate-x-1" />
 		</div>

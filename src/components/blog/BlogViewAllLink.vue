@@ -11,8 +11,8 @@ const props = defineProps<{
 
 <template>
 	<!-- Link to the full list of a blog section (the path is localized) -->
-	<NuxtLinkLocale :to="props.to" class="group/view inline-flex items-center gap-1.5 rounded px-1 text-xs font-semibold text-primary-ink outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45 sm:text-sm">
+	<NuxtLinkLocale :to="props.to" class="group/view inline-flex items-center gap-1.5 rounded px-1 text-xs font-semibold text-foreground underline decoration-primary decoration-2 underline-offset-[5px] outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45 sm:text-sm">
 		{{ props.label }}
-		<HugeiconsIcon :icon="ArrowRight01Icon" class="size-4 transition-[translate] duration-300 ease-spring group-hover/view:translate-x-1" />
+		<HugeiconsIcon :icon="ArrowRight01Icon" class="size-4 text-primary transition-[translate] duration-300 ease-spring group-hover/view:translate-x-1" />
 	</NuxtLinkLocale>
 </template>

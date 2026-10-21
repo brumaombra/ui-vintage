@@ -69,7 +69,7 @@ const formatNumber = (index: number) => {
 						:data-aos-delay="100 + index * 90"
 						:class="['relative flex gap-4 pb-6 last:pb-0', !isVertical() && 'md:flex-1 md:flex-col md:gap-3 md:pb-0']">
 						<!-- Step number -->
-						<span class="relative z-10 flex size-7 shrink-0 items-center justify-center rounded border border-primary/30 bg-card text-[11px] font-semibold tabular-nums text-primary-ink">
+						<span class="relative z-10 flex size-7 shrink-0 items-center justify-center rounded border border-primary/45 bg-card text-[11px] font-semibold tabular-nums text-foreground">
 							{{ formatNumber(index) }}
 						</span>
 

@@ -71,8 +71,6 @@ html {
 	--primary: var(--button-primary-light);
 	--primary-hover: var(--button-primary-hover-light);
 	--primary-foreground: var(--button-primary-foreground-light);
-	/* The brand orange darkened for text (5:1 on white and on its own tint, while the brand orange is only 2.2:1): surfaces, borders and icons keep the brand orange */
-	--primary-ink: color-mix(in oklab, var(--primary) 72%, black);
 	--secondary: var(--button-secondary-light);
 	--secondary-foreground: var(--text-primary-light);
 	--surface: var(--bg-surface-light);
@@ -120,7 +118,6 @@ html {
 	--color-primary: var(--primary);
 	--color-primary-hover: var(--primary-hover);
 	--color-primary-foreground: var(--primary-foreground);
-	--color-primary-ink: var(--primary-ink);
 	--color-secondary: var(--secondary);
 	--color-secondary-foreground: var(--secondary-foreground);
 	--color-surface: var(--surface);
@@ -382,7 +379,6 @@ html {
 	--primary: var(--button-primary-dark);
 	--primary-hover: var(--button-primary-hover-dark);
 	--primary-foreground: var(--button-primary-foreground-dark);
-	--primary-ink: var(--primary); /* 8:1 on the dark backgrounds already */
 	--secondary: var(--button-secondary-dark);
 	--secondary-foreground: var(--text-primary-dark);
 	--surface: var(--bg-surface-dark);
