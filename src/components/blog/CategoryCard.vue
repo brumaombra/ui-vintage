@@ -29,8 +29,9 @@ const props = withDefaults(defineProps<{
 
 		<!-- Name, post count and arrow -->
 		<div class="flex grow items-center gap-3 bg-surface px-4 py-3 transition-colors duration-200 group-hover/category:bg-primary/10">
-			<span class="min-w-0 flex-1 truncate text-sm font-semibold text-foreground decoration-primary decoration-2 underline-offset-4 group-hover/category:underline">
-				{{ props.name }}
+			<!-- On hover the orange underline draws in from the left and wipes out to the right -->
+			<span class="min-w-0 flex-1 truncate text-sm font-semibold text-foreground">
+				<span class="bg-linear-to-r from-primary to-primary bg-[length:0%_2px] bg-[position:100%_100%] bg-no-repeat transition-[background-size] duration-500 ease-out-expo group-hover/category:bg-[length:100%_2px] group-hover/category:bg-[position:0_100%]">{{ props.name }}</span>
 			</span>
 			<span class="inline-flex shrink-0 items-center gap-1.5 text-[11px] font-semibold leading-5 text-muted-foreground tabular-nums">
 				<span aria-hidden="true" class="size-1.5 rounded-full bg-primary" />

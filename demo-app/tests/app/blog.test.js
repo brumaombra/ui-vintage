@@ -104,6 +104,9 @@ describe('BlogHeaderSection', () => {
 		// Orange text was 2.2:1 on the light background: the word keeps the text color and the underline carries the brand orange
 		expect(highlight.classes().some(name => name.startsWith('text-'))).toBe(false);
 		expect(highlight.find('svg').classes()).toContain('text-primary');
+
+		// With a dash pattern of "1" the gap ended right at the end of the path, so the round cap showed a dot there until the drawing started
+		expect(highlight.find('svg path').classes()).toContain('[stroke-dasharray:1_2]');
 		expect(wrapper.find('h1').text().replace(/\s+/g, ' ')).toBe('Il blog della demo');
 	});
 
@@ -159,5 +162,15 @@ describe('Blog orange text contrast', () => {
 		const wrapper = await mountSuspended(BlogTagsSection, { props: { tags: [{ slug: 'nuxt', name: 'Nuxt', count: 2 }], blogPath: '/blog' } });
 		expect(wrapper.text()).not.toContain('#');
 		expect(wrapper.find('span[aria-hidden="true"]').classes()).toContain('bg-primary');
+	});
+
+	// The hover underline of the card titles was static: it draws in from the left and wipes out to the right
+	it('draws the underline of the card titles on hover', async () => {
+		const post = await mountSuspended(PostCard, { props: { title: 'Post' } });
+		const category = await mountSuspended(CategoryCard, { props: { name: 'Design', count: 3 } });
+		for (const [wrapper, group] of [[post, 'post'], [category, 'category']]) {
+			const title = wrapper.findAll('span').find(span => span.text() === (group === 'post' ? 'Post' : 'Design') && span.classes().includes('bg-no-repeat'));
+			expect(title.classes()).toEqual(expect.arrayContaining(['bg-[length:0%_2px]', 'transition-[background-size]', `group-hover/${group}:bg-[length:100%_2px]`]));
+		}
 	});
 });

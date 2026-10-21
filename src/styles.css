@@ -187,7 +187,7 @@ html {
 		100% { transform: scaleX(1); }
 	}
 
-	/* Draws an SVG stroke that uses pathLength="1" and stroke-dasharray: 1 */
+	/* Draws an SVG stroke that uses pathLength="1" and stroke-dasharray: 1 2 (with "1" the gap ends right at the end of the path, so a round cap showed a dot there until the drawing started) */
 	@keyframes uv-draw {
 		0% { stroke-dashoffset: 1; }
 		100% { stroke-dashoffset: 0; }

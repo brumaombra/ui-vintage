@@ -112,7 +112,7 @@ const underlineDelay = computed(() => `${beforeWords.value.length * 55 + 600}ms`
 			<!-- The text and the underline sit on one line so no stray space ends up inside the highlight -->
 			<!-- The word stays in the text color and the bold underline carries the brand orange (orange text is only 2.2:1 on the light background) -->
 			<span v-if="titleParts.highlight" class="relative inline-block animate-uv-word-in" :style="{ animationDelay: highlightDelay }">{{ titleParts.highlight }}<svg class="absolute -bottom-2.5 left-0 h-4 w-full text-primary" viewBox="0 0 200 12" fill="none" preserveAspectRatio="none" aria-hidden="true">
-					<path d="M2 9C40 3 80 2 198 7" stroke="currentColor" stroke-width="6" stroke-linecap="round" pathLength="1" class="animate-uv-draw [stroke-dasharray:1]" :style="{ animationDelay: underlineDelay }" />
+					<path d="M2 9C40 3 80 2 198 7" stroke="currentColor" stroke-width="6" stroke-linecap="round" pathLength="1" class="animate-uv-draw [stroke-dasharray:1_2]" :style="{ animationDelay: underlineDelay }" />
 				</svg>
 			</span>
 			<template v-for="(word, index) in afterWords" :key="`after-${word}-${index}`">

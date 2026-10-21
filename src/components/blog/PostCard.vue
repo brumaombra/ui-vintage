@@ -37,8 +37,9 @@ const props = withDefaults(defineProps<{
 			</span>
 
 			<!-- Post title -->
-			<h2 class="line-clamp-2 text-sm leading-snug font-semibold text-foreground decoration-primary decoration-2 underline-offset-4 group-hover/post:underline md:text-base">
-				{{ props.title }}
+			<!-- On hover the orange underline draws in from the left and wipes out to the right (line after line on a two-line title) -->
+			<h2 class="line-clamp-2 text-sm leading-snug font-semibold text-foreground md:text-base">
+				<span class="bg-linear-to-r from-primary to-primary bg-[length:0%_2px] bg-[position:100%_100%] bg-no-repeat transition-[background-size] duration-500 ease-out-expo group-hover/post:bg-[length:100%_2px] group-hover/post:bg-[position:0_100%]">{{ props.title }}</span>
 			</h2>
 
 			<!-- Post description -->
