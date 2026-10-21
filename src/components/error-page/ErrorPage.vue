@@ -7,6 +7,7 @@ import BackgroundGrid from '../background-grid/BackgroundGrid.vue';
 import { Button } from '../ui/button';
 import { Card, CardContent, CardFooter } from '../ui/card';
 import { cn } from '../../lib/utils';
+import type { HugeiconsIconDefinition } from '../../lib/common-types';
 
 // Props
 const props = withDefaults(defineProps<{
@@ -15,6 +16,7 @@ const props = withDefaults(defineProps<{
 	title?: string;
 	message?: string;
 	actionLabel?: string;
+	actionIcon?: HugeiconsIconDefinition | null;
 	showBackground?: boolean;
 	showDefaultAction?: boolean;
 	class?: HTMLAttributes['class'];
@@ -24,6 +26,7 @@ const props = withDefaults(defineProps<{
 }>(), {
 	statusCode: 500,
 	title: undefined,
+	actionIcon: () => ArrowLeft01Icon,
 	message: undefined,
 	showBackground: true,
 	showDefaultAction: true,
@@ -105,7 +108,7 @@ const handleAction = () => {
 					<CardFooter :class="cn('items-start flex-col gap-3 sm:flex-row sm:items-center', props.footerClass)">
 						<slot name="actions" :on-action="handleAction">
 							<Button v-if="props.showDefaultAction" variant="primary" @click="handleAction">
-								<HugeiconsIcon :icon="ArrowLeft01Icon" :stroke-width="1.8" class="size-4" />
+								<HugeiconsIcon v-if="props.actionIcon" :icon="props.actionIcon" :stroke-width="1.8" class="size-4" />
 								{{ resolvedActionLabel }}
 							</Button>
 						</slot>

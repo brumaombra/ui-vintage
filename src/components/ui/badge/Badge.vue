@@ -26,13 +26,13 @@ const props = withDefaults(defineProps<{
 // Surface of the badge: a tone, or a soft primary tint (for highlights like a category)
 const colorClasses = computed(() => props.color === 'primary' ? 'border border-primary/30 bg-primary/10 text-primary' : getSurfaceToneClasses(props.color));
 
-// Hover of a badge used as a link: it lifts and tints like the cards (a gray badge takes the primary tint, a tone badge its stronger tone)
+// Hover of a badge used as a link: it lifts and tints like the cards (a gray badge takes the primary tint, a tone badge its stronger tone; the tints are solid, so the page grid never shows through)
 const interactiveClasses = computed(() => {
 	if (!props.interactive) return '';
 	const tint = props.color === 'gray'
-		? 'hover:border-primary/40 hover:bg-primary/10 hover:text-primary'
+		? 'hover:border-primary/40 hover:bg-[color-mix(in_oklab,var(--primary)_10%,var(--surface))] hover:text-primary'
 		: props.color === 'primary'
-			? 'hover:border-primary/50 hover:bg-primary/15'
+			? 'hover:border-primary/50 hover:bg-[color-mix(in_oklab,var(--primary)_15%,var(--card))]'
 			: getInteractiveSurfaceToneClasses(props.color);
 	return `cursor-pointer transition-[translate,color,background-color,border-color] duration-200 ease-out-expo hover:-translate-y-0.5 ${tint}`;
 });

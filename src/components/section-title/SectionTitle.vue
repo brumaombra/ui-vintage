@@ -16,19 +16,19 @@ const props = withDefaults(defineProps<{
 </script>
 
 <template>
-	<div data-slot="section-title" :class="['relative mb-6 flex gap-3 border-b border-border pb-4 md:mb-8', props.description ? 'flex-col sm:flex-row sm:items-end sm:justify-between' : 'items-center justify-between']">
+	<div data-slot="section-title" :class="['relative mb-5 flex gap-3 border-b border-border pb-3.5 md:mb-6 md:pb-4', props.description ? 'flex-col sm:flex-row sm:items-end sm:justify-between' : 'items-center justify-between']">
 		<!-- Primary segment at the start of the rule -->
 		<span aria-hidden="true" class="absolute -bottom-px left-0 h-0.5 w-12 bg-primary" />
 
 		<div class="flex min-w-0 items-center gap-3">
-			<!-- Icon tile -->
-			<span v-if="props.icon" class="flex size-9 shrink-0 items-center justify-center rounded border border-primary/30 text-primary">
-				<HugeiconsIcon :icon="props.icon" class="size-4.5" :stroke-width="1.6" />
+			<!-- Icon tile (a solid tint, so the page grid does not show through) -->
+			<span v-if="props.icon" class="flex size-8 shrink-0 items-center justify-center rounded border border-primary/30 bg-[color-mix(in_oklab,var(--primary)_10%,var(--card))] text-primary md:size-9">
+				<HugeiconsIcon :icon="props.icon" class="size-4 md:size-4.5" :stroke-width="1.6" />
 			</span>
 
 			<div class="min-w-0">
 				<!-- Title -->
-				<component :is="`h${props.headingLevel}`" class="text-xl font-semibold tracking-tight text-foreground md:text-2xl">
+				<component :is="`h${props.headingLevel}`" class="text-lg font-semibold tracking-tight text-foreground md:text-xl">
 					{{ props.title }}
 				</component>
 

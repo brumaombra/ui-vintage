@@ -56,6 +56,9 @@ describe('BlogTagsSection', () => {
 	it('links every tag under blogPath', async () => {
 		const wrapper = await mountSuspended(BlogTagsSection, { props: { blogPath: '/journal', tags: [{ name: 'CSS', slug: 'css', count: 3 }] } });
 		expect(wrapper.find('a').attributes('href')).toBe('/journal/tags/css');
+
+		// The hover tints are solid: translucent ones let the page grid show through the tag
+		expect(wrapper.html()).not.toMatch(/group-hover\/tag:bg-primary\//);
 		expect(wrapper.text()).toContain('CSS');
 		expect(wrapper.text()).toContain('3');
 	});

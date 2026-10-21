@@ -1,5 +1,7 @@
 <script setup>
-// Props
+import { ProseImg as UiVintageProseImg } from '@brumaombra/ui-vintage/content';
+
+// Props (other images pass their own size, and the attributes of the markdown image, like a max-height style, reach the library image)
 const props = defineProps({
 	src: { type: String, required: true },
 	alt: { type: String, default: '' },
@@ -10,16 +12,9 @@ const props = defineProps({
 </script>
 
 <template>
-	<NuxtImg :src="props.src"
+	<UiVintageProseImg :src="props.src"
 		:alt="props.alt"
 		:title="props.title"
 		:width="props.width"
-		:height="props.height"
-		format="avif"
-		quality="40"
-		:sizes="{ 480: '480px', 1536: '896px' }"
-		loading="lazy"
-		decoding="async"
-		data-aos="fade-up"
-		class="block w-full rounded my-6 sm:my-8" />
+		:height="props.height" />
 </template>

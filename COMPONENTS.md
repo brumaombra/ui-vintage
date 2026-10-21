@@ -3192,6 +3192,7 @@ import { ErrorPage } from '@brumaombra/ui-vintage/error-page';
 | `title` | `string` | `undefined` |
 | `message` | `string` | `undefined` |
 | `actionLabel` | `string` |  |
+| `actionIcon` | `HugeiconsIconDefinition \| null` | `ArrowLeft01Icon` |
 | `showBackground` | `boolean` | `true` |
 | `showDefaultAction` | `boolean` | `true` |
 | `class` | `HTMLAttributes['class']` | `undefined` |
@@ -3830,7 +3831,7 @@ interface BlogTagData {
 Prose components for Nuxt Content (MDC): code blocks highlighted with shiki, terminals, lists, tables, flows, and dividers.
 
 ```ts
-import { Terminal, CodeBlock, ProsePre, BlogList, BlogTable, Flow, ProseHr } from '@brumaombra/ui-vintage/content';
+import { Terminal, CodeBlock, ProsePre, BlogList, BlogTable, Flow, ProseHr, ProseImg, BlogQuote } from '@brumaombra/ui-vintage/content';
 ```
 
 #### `Terminal`
@@ -3890,6 +3891,24 @@ import { Terminal, CodeBlock, ProsePre, BlogList, BlogTable, Flow, ProseHr } fro
 | Prop | Type | Default |
 | --- | --- | --- |
 | `icon` | `HugeiconsIconDefinition` | `ChartLineData02Icon` |
+
+#### `ProseImg`
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `src` *(required)* | `string` |  |
+| `alt` | `string` | `''` |
+| `title` | `string` | `''` |
+| `width` | `string \| number` | `1672` |
+| `height` | `string \| number` | `941` |
+
+#### `BlogQuote`
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `author` | `string` | `''` |
+
+- **Slots:** `default`.
 
 ## Utilities and types
 

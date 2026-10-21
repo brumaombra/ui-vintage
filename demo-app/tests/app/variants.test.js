@@ -118,7 +118,10 @@ describe('Text, inputs and badges', () => {
 	// A badge used as a link lifts and tints on hover (the blog tags used to fade instead)
 	it('lifts and tints an interactive badge', async () => {
 		const wrapper = await mountSuspended(Badge, { props: { text: '#Vue', interactive: true } });
-		expect(wrapper.classes()).toEqual(expect.arrayContaining(['hover:-translate-y-0.5', 'hover:bg-primary/10', 'hover:text-primary']));
+		expect(wrapper.classes()).toEqual(expect.arrayContaining(['hover:-translate-y-0.5', 'hover:bg-[color-mix(in_oklab,var(--primary)_10%,var(--surface))]', 'hover:text-primary']));
+
+		// The hover tint is solid: a translucent one let the page grid show through the tag
+		expect(wrapper.classes().filter(name => /^hover:bg-primary\//.test(name))).toEqual([]);
 		const still = await mountSuspended(Badge, { props: { text: '#Vue' } });
 		expect(still.classes()).not.toContain('hover:-translate-y-0.5');
 	});
@@ -156,6 +159,13 @@ describe('SectionTitle', () => {
 		expect(wrapper.text()).toContain('How it works');
 		expect(wrapper.find('svg').exists()).toBe(true);
 		expect(wrapper.classes()).toContain('flex-col');
+	});
+
+	// The icon tile is solid, so the page grid does not show through it
+	it('draws the icon on a solid tile', async () => {
+		const wrapper = await mountSuspended(SectionTitle, { props: { title: 'Sports', icon: SearchIcon } });
+		const tile = wrapper.find('svg').element.parentElement;
+		expect(tile.className).toContain('bg-[color-mix(in_oklab,var(--primary)_10%,var(--card))]');
 	});
 
 	// Without a description the action stays on the title row, even on mobile

@@ -5,3 +5,5 @@ export { default as BlogList } from './BlogList.vue';
 export { default as BlogTable } from './BlogTable.vue';
 export { default as Flow } from './Flow.vue';
 export { default as ProseHr } from './ProseHr.vue';
+export { default as ProseImg } from './ProseImg.vue';
+export { default as BlogQuote } from './BlogQuote.vue';
