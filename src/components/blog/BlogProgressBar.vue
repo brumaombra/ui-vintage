@@ -49,8 +49,8 @@ onUnmounted(() => {
 		aria-valuemin="0"
 		aria-valuemax="100"
 		:aria-valuenow="Math.round(progress)">
-		<!-- Solid fill -->
-		<div class="h-full bg-primary transition-[width] duration-150 ease-out" :style="{ width: `${progress}%` }" />
+		<!-- Solid fill (scaled instead of resized, so scrolling never triggers a layout) -->
+		<div class="h-full origin-left bg-primary transition-[scale] duration-150 ease-out motion-reduce:transition-none" :style="{ scale: `${progress / 100} 1` }" />
 	</div>
 </template>
 

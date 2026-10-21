@@ -57,10 +57,20 @@ const logoAlt = computed(() => props.appName ? t('uiVintage.common.logo', { name
 </script>
 
 <template>
-	<!-- Transparent at the top of the page, a floating card once scrolled -->
-	<header :data-scrolled="isScrolled ? '' : undefined" :class="cn('sticky top-0 z-30 w-full text-card-foreground transition-[padding] duration-500 ease-out-expo', isScrolled ? 'px-2 pt-2 sm:px-4 sm:pt-3' : 'px-0 pt-0', props.class)">
-		<div :class="cn('relative mx-auto border transition-[max-width,border-radius,background-color,border-color,box-shadow] duration-500 ease-out-expo', isScrolled ? 'max-w-5xl rounded border-border bg-card shadow-elevated-md' : 'max-w-6xl rounded-none border-transparent bg-transparent shadow-none')">
-			<nav :class="cn('flex items-center justify-between px-3 transition-[height] duration-500 ease-out-expo sm:px-6 lg:px-8', isScrolled ? 'h-16 sm:px-5 lg:px-5' : 'h-20', props.containerClass)">
+	<!-- Transparent at the top of the page, a floating card once scrolled. The header keeps one height, so the page below never moves, and the card is its own layer that only fades and scales (no layout or repaint while it animates, which made phones stutter) -->
+	<header :data-scrolled="isScrolled ? '' : undefined" :class="cn('sticky top-0 z-30 h-20 w-full text-card-foreground', props.class)">
+		<!-- Floating card behind the content, with the reading progress along its bottom edge (clipped to its rounded corners) -->
+		<div class="pointer-events-none absolute inset-x-0 top-2 px-2 sm:px-4">
+			<div :class="cn('relative mx-auto h-16 max-w-5xl origin-top overflow-hidden rounded border border-border bg-card shadow-elevated-md transition-[opacity,scale] duration-500 ease-out-expo motion-reduce:transition-none', isScrolled ? 'scale-100 opacity-100' : 'scale-[0.98] opacity-0')">
+				<div v-if="props.showProgress" class="absolute inset-x-0 bottom-0">
+					<BlogProgressBar />
+				</div>
+			</div>
+		</div>
+
+		<!-- Content, moving in to line up with the card (only the header lays out again while it does) -->
+		<div :class="cn('relative h-full transition-[padding] duration-500 ease-out-expo motion-reduce:transition-none', isScrolled ? 'px-2 sm:px-4' : 'px-0')">
+			<nav :class="cn('mx-auto flex h-full items-center justify-between px-3 transition-[max-width,padding] duration-500 ease-out-expo motion-reduce:transition-none sm:px-6 lg:px-8', isScrolled ? 'max-w-5xl sm:px-5 lg:px-5' : 'max-w-6xl', props.containerClass)">
 				<!-- Left-aligned content -->
 				<div :class="cn('flex items-center', props.leftClass)">
 					<slot name="left">
@@ -85,11 +95,6 @@ const logoAlt = computed(() => props.appName ? t('uiVintage.common.logo', { name
 					<slot name="right" />
 				</div>
 			</nav>
-
-			<!-- Reading progress along the bottom edge of the floating bar (edge to edge, clipped to its rounded corners) -->
-			<div v-if="props.showProgress" :class="cn('absolute inset-x-0 bottom-0 overflow-hidden rounded-b-[inherit] transition-opacity duration-300', isScrolled ? 'opacity-100' : 'opacity-0')">
-				<BlogProgressBar />
-			</div>
 		</div>
 	</header>
 </template>
