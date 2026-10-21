@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { NuxtImg } from '#components';
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import type { HTMLAttributes } from 'vue';
 import { useI18n } from 'vue-i18n';
 import BlogProgressBar from '../../blog/BlogProgressBar.vue';
+import LogoImage from '../../logo-image/LogoImage.vue';
 import { cn } from '../../../lib/utils';
 
 // Props
@@ -68,8 +68,8 @@ const logoAlt = computed(() => props.appName ? t('uiVintage.common.logo', { name
 						<NuxtLinkLocale v-if="lightLogo || props.appName" :to="props.appLinkTo" class="inline-flex items-center gap-2 transition-opacity duration-150 hover:opacity-80">
 							<!-- App logo -->
 							<template v-if="lightLogo">
-								<NuxtImg :src="lightLogo" :alt="logoAlt" width="44" height="44" :sizes="{ 320: '44px', 640: '36px' }" loading="eager" fetchpriority="high" :class="cn('size-11 sm:size-9 shrink-0 object-contain', hasDarkLogo && 'dark:hidden', props.logoClass)" />
-								<NuxtImg v-if="hasDarkLogo" :src="darkLogo" :alt="logoAlt" width="44" height="44" :sizes="{ 320: '44px', 640: '36px' }" loading="eager" :class="cn('hidden size-11 sm:size-9 shrink-0 object-contain dark:block', props.logoClass)" />
+								<LogoImage :src="lightLogo" :alt="logoAlt" :size="44" :sizes="{ 320: '44px', 640: '36px' }" loading="eager" fetchpriority="high" :class="cn('size-11 sm:size-9 shrink-0 object-contain', hasDarkLogo && 'dark:hidden', props.logoClass)" />
+								<LogoImage v-if="hasDarkLogo" :src="darkLogo" :alt="logoAlt" :size="44" :sizes="{ 320: '44px', 640: '36px' }" loading="eager" :class="cn('hidden size-11 sm:size-9 shrink-0 object-contain dark:block', props.logoClass)" />
 							</template>
 
 							<!-- App name -->

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NuxtImg } from '#components';
+import LogoImage from '../../logo-image/LogoImage.vue';
 import FavouriteIcon from '@hugeicons/core-free-icons/FavouriteIcon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { computed, type HTMLAttributes } from 'vue';
@@ -64,8 +64,8 @@ const getLinkProps = (link: LandingFooterLink) => {
 };
 
 // Logo sources for each theme (either one falls back to the other)
-const lightLogo = computed(() => props.appLogo || props.appLogoDark);
-const darkLogo = computed(() => props.appLogoDark || props.appLogo);
+const lightLogo = computed(() => props.appLogo || props.appLogoDark || '');
+const darkLogo = computed(() => props.appLogoDark || props.appLogo || '');
 const hasDarkLogo = computed(() => darkLogo.value !== lightLogo.value);
 </script>
 
@@ -79,8 +79,8 @@ const hasDarkLogo = computed(() => darkLogo.value !== lightLogo.value);
 					<!-- App logo and name (home link, the path is localized) -->
 					<NuxtLinkLocale :to="props.appLinkTo" class="mb-4 inline-flex items-center gap-2 text-lg font-semibold tracking-tight text-foreground transition-opacity duration-150 hover:opacity-80">
 						<template v-if="lightLogo">
-							<NuxtImg :src="lightLogo" :alt="logoAlt" width="32" height="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="lazy" decoding="async" :class="cn('size-8 shrink-0 object-contain', hasDarkLogo && 'dark:hidden', props.logoClass)" />
-							<NuxtImg v-if="hasDarkLogo" :src="darkLogo" :alt="logoAlt" width="32" height="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="lazy" decoding="async" :class="cn('hidden size-8 shrink-0 object-contain dark:block', props.logoClass)" />
+							<LogoImage :src="lightLogo" :alt="logoAlt" :size="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="lazy" :class="cn('size-8 shrink-0 object-contain', hasDarkLogo && 'dark:hidden', props.logoClass)" />
+							<LogoImage v-if="hasDarkLogo" :src="darkLogo" :alt="logoAlt" :size="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="lazy" :class="cn('hidden size-8 shrink-0 object-contain dark:block', props.logoClass)" />
 						</template>
 						<span>{{ props.appName }}</span>
 					</NuxtLinkLocale>

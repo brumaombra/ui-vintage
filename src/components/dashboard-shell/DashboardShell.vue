@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NuxtImg } from '#components';
+import LogoImage from '../logo-image/LogoImage.vue';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import type { HTMLAttributes } from 'vue';
@@ -85,8 +85,8 @@ const logoAlt = computed(() => props.appName ? t('uiVintage.common.logo', { name
 									<div class="inline-flex items-center gap-2">
 										<!-- App logo -->
 										<template v-if="lightLogo">
-											<NuxtImg :src="lightLogo" :alt="logoAlt" width="32" height="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="eager" :class="['size-8 shrink-0 object-contain', hasDarkLogo && 'dark:hidden']" />
-											<NuxtImg v-if="hasDarkLogo" :src="darkLogo" :alt="logoAlt" width="32" height="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="eager" class="hidden size-8 shrink-0 object-contain dark:block" />
+											<LogoImage :src="lightLogo" :alt="logoAlt" :size="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="eager" :class="['size-8 shrink-0 object-contain', hasDarkLogo && 'dark:hidden']" />
+											<LogoImage v-if="hasDarkLogo" :src="darkLogo" :alt="logoAlt" :size="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="eager" class="hidden size-8 shrink-0 object-contain dark:block" />
 										</template>
 
 										<!-- App name -->
