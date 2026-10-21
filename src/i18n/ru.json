@@ -204,6 +204,19 @@
 			"maxSize": "Макс. {size} на файл",
 			"maxFiles": "До {count} файлов",
 			"files": "Выбранные файлы"
+		},
+		"supportButton": {
+			"patreon": {
+				"label": "Поддержите меня на Patreon",
+				"title": "Присоединяйтесь на Patreon",
+				"description": "Ежемесячная поддержка с бонусами"
+			},
+			"kofi": {
+				"label": "Угостите меня кофе на Ko-fi",
+				"title": "Угостите меня кофе",
+				"description": "Разовые чаевые на Ko-fi"
+			},
+			"newTab": "открывается в новой вкладке"
 		}
 	}
 }

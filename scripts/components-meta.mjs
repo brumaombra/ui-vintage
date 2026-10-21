@@ -81,6 +81,15 @@ export const entries = {
 <KbdGroup :keys="['mod', 'k']" />
 <Kbd>Esc</Kbd>`
 	},
+	'support-button': {
+		category: 'actions',
+		description: 'Patreon and Ko-fi buttons with the official marks, in five looks: `outline` (default, a secondary button with a brand tile), `split` (a brand stripe on the left edge), `solid` (official brand colors), `classic` (black Patreon, blue Ko-fi), and `card` (title, description, and an arrow, for support sections). `icon-only` works with every look but the card. Give it a `username` to link the creator page, or an `href`; it opens in a new tab.',
+		example: `
+<SupportButton platform="patreon" username="brumaombra" />
+<SupportButton platform="kofi" username="brumaombra" variant="split" />
+<SupportButton platform="kofi" username="brumaombra" variant="card" />
+<SupportButton platform="patreon" username="brumaombra" variant="solid" size="sm" icon-only />`
+	},
 	'text-link': {
 		category: 'actions',
 		description: 'Inline text link for an internal path (localized with `NuxtLinkLocale`) or an external URL.'

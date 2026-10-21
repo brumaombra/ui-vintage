@@ -204,6 +204,19 @@
 			"maxSize": "每个文件最大 {size}",
 			"maxFiles": "最多 {count} 个文件",
 			"files": "已选文件"
+		},
+		"supportButton": {
+			"patreon": {
+				"label": "在 Patreon 上支持我",
+				"title": "在 Patreon 上加入",
+				"description": "每月支持，享受福利"
+			},
+			"kofi": {
+				"label": "在 Ko-fi 上请我喝咖啡",
+				"title": "请我喝杯咖啡",
+				"description": "在 Ko-fi 上一次性打赏"
+			},
+			"newTab": "在新标签页中打开"
 		}
 	}
 }

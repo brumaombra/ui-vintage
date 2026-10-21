@@ -15,7 +15,7 @@ This file lists every public entry point of the package with its components, pro
 
 ## Contents
 
-- **Actions:** [action-bar](#brumaombraui-vintageaction-bar), [button](#brumaombraui-vintagebutton), [dropdown-menu](#brumaombraui-vintagedropdown-menu), [kbd](#brumaombraui-vintagekbd), [load-more-button](#brumaombraui-vintageload-more-button), [text-link](#brumaombraui-vintagetext-link), [toggle-group](#brumaombraui-vintagetoggle-group)
+- **Actions:** [action-bar](#brumaombraui-vintageaction-bar), [button](#brumaombraui-vintagebutton), [dropdown-menu](#brumaombraui-vintagedropdown-menu), [kbd](#brumaombraui-vintagekbd), [load-more-button](#brumaombraui-vintageload-more-button), [support-button](#brumaombraui-vintagesupport-button), [text-link](#brumaombraui-vintagetext-link), [toggle-group](#brumaombraui-vintagetoggle-group)
 - **Forms:** [calendar](#brumaombraui-vintagecalendar), [checkbox](#brumaombraui-vintagecheckbox), [combobox](#brumaombraui-vintagecombobox), [date-picker](#brumaombraui-vintagedate-picker), [date-time-picker](#brumaombraui-vintagedate-time-picker), [field](#brumaombraui-vintagefield), [file-dropzone](#brumaombraui-vintagefile-dropzone), [input](#brumaombraui-vintageinput), [label](#brumaombraui-vintagelabel), [native-select](#brumaombraui-vintagenative-select), [number-field](#brumaombraui-vintagenumber-field), [pin-input](#brumaombraui-vintagepin-input), [radio-group](#brumaombraui-vintageradio-group), [select](#brumaombraui-vintageselect), [slider](#brumaombraui-vintageslider), [slider-form-component](#brumaombraui-vintageslider-form-component), [switch](#brumaombraui-vintageswitch), [switch-form-component](#brumaombraui-vintageswitch-form-component), [tags-input](#brumaombraui-vintagetags-input), [textarea](#brumaombraui-vintagetextarea), [time-picker](#brumaombraui-vintagetime-picker)
 - **Data display:** [animated-number](#brumaombraui-vintageanimated-number), [avatar](#brumaombraui-vintageavatar), [badge](#brumaombraui-vintagebadge), [card](#brumaombraui-vintagecard), [card-grid](#brumaombraui-vintagecard-grid), [chip](#brumaombraui-vintagechip), [data-list](#brumaombraui-vintagedata-list), [data-table](#brumaombraui-vintagedata-table), [info-card](#brumaombraui-vintageinfo-card), [progress](#brumaombraui-vintageprogress), [progress-component](#brumaombraui-vintageprogress-component), [scroll-area](#brumaombraui-vintagescroll-area), [separator](#brumaombraui-vintageseparator), [single-value-card](#brumaombraui-vintagesingle-value-card), [skeleton](#brumaombraui-vintageskeleton), [stat-strip](#brumaombraui-vintagestat-strip), [table](#brumaombraui-vintagetable)
 - **Navigation:** [accordion](#brumaombraui-vintageaccordion), [breadcrumb](#brumaombraui-vintagebreadcrumb), [collapsible](#brumaombraui-vintagecollapsible), [pagination](#brumaombraui-vintagepagination), [sidebar](#brumaombraui-vintagesidebar), [stepper](#brumaombraui-vintagestepper), [tabs](#brumaombraui-vintagetabs)
@@ -286,6 +286,50 @@ import { LoadMoreButton } from '@brumaombra/ui-vintage/load-more-button';
 | `loadingText` | `string` | `''` |
 
 - **Emits:** `load-more`.
+
+---
+
+### `@brumaombra/ui-vintage/support-button`
+
+Patreon and Ko-fi buttons with the official marks, in five looks: `outline` (default, a secondary button with a brand tile), `split` (a brand stripe on the left edge), `solid` (official brand colors), `classic` (black Patreon, blue Ko-fi), and `card` (title, description, and an arrow, for support sections). `icon-only` works with every look but the card. Give it a `username` to link the creator page, or an `href`; it opens in a new tab.
+
+```ts
+import { SupportButton, supportPlatforms } from '@brumaombra/ui-vintage/support-button';
+import type { SupportPlatform, SupportPlatformData, SupportButtonVariant, SupportButtonSize } from '@brumaombra/ui-vintage/support-button';
+```
+
+```vue
+<SupportButton platform="patreon" username="brumaombra" />
+<SupportButton platform="kofi" username="brumaombra" variant="split" />
+<SupportButton platform="kofi" username="brumaombra" variant="card" />
+<SupportButton platform="patreon" username="brumaombra" variant="solid" size="sm" icon-only />
+```
+
+#### `SupportButton`
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `platform` *(required)* | `SupportPlatform` |  |
+| `username` | `string` | `''` |
+| `href` | `string` | `''` |
+| `variant` | `'outline' \| 'solid' \| 'classic' \| 'split' \| 'card'` | `'outline'` |
+| `size` | `'sm' \| 'default' \| 'lg'` | `'default'` |
+| `iconOnly` | `boolean` | `false` |
+| `label` | `string` | `''` |
+| `description` | `string` | `''` |
+| `class` | `HTMLAttributes['class']` |  |
+
+- **Slots:** `default`.
+
+#### Functions, constants, and types
+
+```ts
+const supportPlatforms: Record<SupportPlatform, SupportPlatformData>
+type SupportPlatform = 'patreon' | 'kofi'
+type SupportPlatformData = { name: string; url: (username: string) => string; color: string; classicColor: string; classicForeground: string; classicDarkColor?: string; classicDarkForeground?: string; heartColor?: string; path: string; heartPath?: string }
+type SupportButtonVariant = 'outline' | 'solid' | 'classic' | 'split' | 'card'
+type SupportButtonSize = 'sm' | 'default' | 'lg'
+```
 
 ---
 

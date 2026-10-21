@@ -204,6 +204,19 @@
 			"maxSize": "Máx. {size} por archivo",
 			"maxFiles": "Hasta {count} archivos",
 			"files": "Archivos seleccionados"
+		},
+		"supportButton": {
+			"patreon": {
+				"label": "Apóyame en Patreon",
+				"title": "Únete en Patreon",
+				"description": "Apoyo mensual, con ventajas"
+			},
+			"kofi": {
+				"label": "Invítame a un café en Ko-fi",
+				"title": "Invítame a un café",
+				"description": "Una propina única en Ko-fi"
+			},
+			"newTab": "se abre en una pestaña nueva"
 		}
 	}
 }

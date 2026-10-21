@@ -27,6 +27,7 @@ import { HugeiconsIcon } from '@hugeicons/vue';
 import { Button } from '@brumaombra/ui-vintage/button';
 import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger } from '@brumaombra/ui-vintage/dropdown-menu';
 import { Kbd, KbdGroup } from '@brumaombra/ui-vintage/kbd';
+import { SupportButton } from '@brumaombra/ui-vintage/support-button';
 import { showMessageToast } from '@brumaombra/ui-vintage/message-toast';
 import { Toggle, ToggleGroup, ToggleGroupItem } from '@brumaombra/ui-vintage/toggle-group';
 import DemoPageHeader from '~/components/demo/DemoPageHeader.vue';
@@ -43,6 +44,9 @@ const showStatusBar = ref(true);
 const showActivity = ref(false);
 const density = ref('comfortable');
 const pressedKeys = ref<string[]>([]);
+
+// Looks of the support buttons shown in the demo (the card has its own row)
+const supportVariants = ['outline', 'split', 'solid', 'classic'] as const;
 
 // Simulate an async action with the loading state
 const handleDeploy = async () => {
@@ -115,6 +119,13 @@ const dropdownCode = `<DropdownMenu>
         <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
     </DropdownMenuContent>
 </DropdownMenu>`;
+
+const supportCode = `<SupportButton platform="patreon" username="brumaombra" />
+<SupportButton platform="kofi" username="brumaombra" variant="split" />
+<SupportButton platform="patreon" username="brumaombra" variant="solid" />
+<SupportButton platform="kofi" username="brumaombra" variant="classic" />
+<SupportButton platform="kofi" username="brumaombra" variant="card" />
+<SupportButton platform="patreon" username="brumaombra" icon-only />`;
 
 const kbdCode = `<KbdGroup :keys="['mod', 'shift', 'p']" />
 <Kbd :pressed="isPressed">Esc</Kbd>`;
@@ -303,6 +314,31 @@ const kbdCode = `<KbdGroup :keys="['mod', 'shift', 'p']" />
 					</DropdownMenuRadioGroup>
 				</DropdownMenuContent>
 			</DropdownMenu>
+		</DemoSection>
+
+		<!-- Support button -->
+		<DemoSection id="support-button" title="Support button" badge="New" description="Patreon and Ko-fi buttons with the official marks: outline with a brand tile, split, solid, classic, a card for support sections, and icon-only." :code="supportCode">
+			<div class="flex flex-col gap-6">
+				<!-- Looks -->
+				<div v-for="variant in supportVariants" :key="variant" class="flex flex-wrap items-center gap-3">
+					<SupportButton platform="patreon" username="brumaombra" :variant="variant" />
+					<SupportButton platform="kofi" username="brumaombra" :variant="variant" />
+					<SupportButton platform="patreon" username="brumaombra" :variant="variant" size="sm" />
+					<SupportButton platform="kofi" username="brumaombra" :variant="variant" size="sm" />
+				</div>
+
+				<!-- Cards -->
+				<div class="grid gap-3 sm:grid-cols-2">
+					<SupportButton platform="patreon" username="brumaombra" variant="card" />
+					<SupportButton platform="kofi" username="brumaombra" variant="card" />
+				</div>
+
+				<!-- Icon only -->
+				<div class="flex flex-wrap items-center gap-3">
+					<SupportButton v-for="variant in supportVariants" :key="`patreon-${variant}`" platform="patreon" username="brumaombra" :variant="variant" icon-only />
+					<SupportButton v-for="variant in supportVariants" :key="`kofi-${variant}`" platform="kofi" username="brumaombra" :variant="variant" icon-only />
+				</div>
+			</div>
 		</DemoSection>
 
 		<!-- Kbd -->

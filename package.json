@@ -112,6 +112,7 @@
 		"./slider-form-component": "./src/components/slider-form-component/index.ts",
 		"./spinner": "./src/components/ui/spinner/index.ts",
 		"./stat-strip": "./src/components/stat-strip/index.ts",
+		"./support-button": "./src/components/support-button/index.ts",
 		"./stepper": "./src/components/ui/stepper/index.ts",
 		"./switch": "./src/components/ui/switch/index.ts",
 		"./switch-form-component": "./src/components/switch-form-component/index.ts",

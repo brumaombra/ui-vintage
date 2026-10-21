@@ -70,6 +70,7 @@ export const demoNavigation: DemoNavigationGroup[] = [{
 			{ id: 'button', title: 'Button', keywords: 'loading variants sizes' },
 			{ id: 'toggle-group', title: 'Toggle group', keywords: 'segmented control toggle' },
 			{ id: 'dropdown-menu', title: 'Dropdown menu', keywords: 'context actions submenu' },
+			{ id: 'support-button', title: 'Support button', keywords: 'patreon ko-fi kofi donate sponsor tip' },
 			{ id: 'kbd', title: 'Kbd', keywords: 'keyboard shortcut' }
 		]
 	}, {

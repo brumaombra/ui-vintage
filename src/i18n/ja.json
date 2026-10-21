@@ -204,6 +204,19 @@
 			"maxSize": "1ファイルあたり最大 {size}",
 			"maxFiles": "最大 {count} ファイル",
 			"files": "選択したファイル"
+		},
+		"supportButton": {
+			"patreon": {
+				"label": "Patreon で応援する",
+				"title": "Patreon で参加する",
+				"description": "毎月の支援、特典つき"
+			},
+			"kofi": {
+				"label": "Ko-fi でコーヒーをおごる",
+				"title": "コーヒーをおごる",
+				"description": "Ko-fi で一度だけチップ"
+			},
+			"newTab": "新しいタブで開きます"
 		}
 	}
 }

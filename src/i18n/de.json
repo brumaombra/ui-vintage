@@ -204,6 +204,19 @@
 			"maxSize": "Max. {size} pro Datei",
 			"maxFiles": "Bis zu {count} Dateien",
 			"files": "Ausgewählte Dateien"
+		},
+		"supportButton": {
+			"patreon": {
+				"label": "Unterstütze mich auf Patreon",
+				"title": "Werde Mitglied auf Patreon",
+				"description": "Monatliche Unterstützung mit Vorteilen"
+			},
+			"kofi": {
+				"label": "Spendiere mir einen Kaffee auf Ko-fi",
+				"title": "Spendiere mir einen Kaffee",
+				"description": "Einmaliges Trinkgeld auf Ko-fi"
+			},
+			"newTab": "öffnet sich in einem neuen Tab"
 		}
 	}
 }
