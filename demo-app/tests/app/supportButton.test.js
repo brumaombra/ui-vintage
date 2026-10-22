@@ -48,4 +48,12 @@ describe('support button', () => {
 		const wrapper = await mountSuspended(SupportButton, { props: { platform: 'patreon', username: 'brumaombra', label: 'Become a patron' } });
 		expect(wrapper.text()).toContain('Become a patron');
 	});
+
+	// The card could not shrink below its texts, so on narrow phones it stuck out of its container
+	it('lets the card shrink and wrap its texts', async () => {
+		const wrapper = await mountSuspended(SupportButton, { props: { platform: 'patreon', username: 'brumaombra', variant: 'card' } });
+		const link = wrapper.find('a');
+		expect(link.classes()).toContain('min-w-0');
+		expect(wrapper.findAll('span.truncate')).toHaveLength(0);
+	});
 });

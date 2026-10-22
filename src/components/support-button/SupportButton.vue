@@ -84,9 +84,9 @@ const buttonClasses = computed(() => {
 </script>
 
 <template>
-	<!-- Card: brand tile, title and description, and an arrow that nudges on hover -->
+	<!-- Card: brand tile, title and description, and an arrow that nudges on hover (it can shrink with its container, the texts wrap on narrow phones instead of pushing the card out) -->
 	<a v-if="props.variant === 'card'" :href="link" target="_blank" rel="noopener noreferrer" :aria-label="ariaLabel" :style="brandStyle" :class="cn(
-		'group/support flex items-center gap-4 rounded border border-border bg-card p-4 text-card-foreground shadow-elevated-sm outline-none',
+		'group/support flex min-w-0 items-center gap-4 rounded border border-border bg-card p-4 text-card-foreground shadow-elevated-sm outline-none',
 		'transition-[border-color,box-shadow,translate] duration-300 ease-out-expo hover:-translate-y-0.5 hover:border-border-strong hover:shadow-elevated-md focus-visible:ring-[3px] focus-visible:ring-ring/45',
 		props.class
 	)">
@@ -100,8 +100,8 @@ const buttonClasses = computed(() => {
 
 		<!-- Title and description -->
 		<span class="min-w-0 flex-1">
-			<span class="block truncate text-sm font-semibold"><slot>{{ cardTitle }}</slot></span>
-			<span class="mt-0.5 block truncate text-xs text-muted-foreground">{{ cardDescription }}</span>
+			<span class="block text-sm font-semibold wrap-break-word"><slot>{{ cardTitle }}</slot></span>
+			<span class="mt-0.5 block text-xs text-muted-foreground wrap-break-word">{{ cardDescription }}</span>
 		</span>
 
 		<!-- External link arrow -->
