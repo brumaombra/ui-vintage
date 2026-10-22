@@ -25,7 +25,7 @@ const { t } = useI18n();
 			<p class="text-sm font-semibold text-foreground">{{ t('uiVintage.blog.inShort') }}</p>
 		</div>
 
-		<!-- Summary -->
-		<p class="border-t border-border px-5 py-4 text-sm leading-7 text-foreground md:text-base">{{ props.summary }}</p>
+		<!-- Summary (same size and line height as the article body text) -->
+		<p class="border-t border-border px-5 py-4 text-[14px] leading-[1.8] text-foreground sm:text-[15px] sm:leading-[1.85]">{{ props.summary }}</p>
 	</Card>
 </template>
