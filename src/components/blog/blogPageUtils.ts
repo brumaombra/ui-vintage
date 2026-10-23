@@ -5,6 +5,7 @@ export interface BlogPostData {
 	description?: string;
 	summary?: string;
 	image?: string;
+	imageAlt?: string;
 	categoryText?: string;
 	categorySlug?: string;
 	tags?: string[];

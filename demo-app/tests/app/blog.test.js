@@ -56,6 +56,14 @@ describe('BlogPostHeader', () => {
 		const wrapper = await mountSuspended(BlogPostHeader, { props: { title: 'Post', body: 'word '.repeat(440) } });
 		expect(wrapper.text()).toContain('2 min');
 	});
+
+	// The featured image used the title as its alt text, so screen readers heard the title twice
+	it('describes the featured image with imageAlt, or the title without it', async () => {
+		const described = await mountSuspended(BlogPostHeader, { props: { title: 'Post', image: '/cover.png', imageAlt: 'Ants carrying seeds' } });
+		expect(described.find('img[src*="cover"]').attributes('alt')).toBe('Ants carrying seeds');
+		const fallback = await mountSuspended(BlogPostHeader, { props: { title: 'Post', image: '/cover.png' } });
+		expect(fallback.find('img[src*="cover"]').attributes('alt')).toBe('Post');
+	});
 });
 
 describe('BlogSummary', () => {

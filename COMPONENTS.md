@@ -3666,6 +3666,7 @@ import type { BlogPostData, BlogCategoryData, BlogTagData } from '@brumaombra/ui
 | `title` *(required)* | `string` |  |
 | `description` | `string` | `''` |
 | `image` | `string` | `''` |
+| `imageAlt` | `string` | `''` |
 | `author` | `string` | `''` |
 | `authorImageUrl` | `string` | `''` |
 | `authorUrl` | `string` | `''` |
@@ -3850,6 +3851,7 @@ interface BlogPostData {
     description?: string;
     summary?: string;
     image?: string;
+    imageAlt?: string;
     categoryText?: string;
     categorySlug?: string;
     tags?: string[];

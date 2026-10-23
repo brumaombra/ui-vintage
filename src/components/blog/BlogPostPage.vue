@@ -47,6 +47,7 @@ const postTags = computed(() => ((props.post.tags as string[] | undefined) || []
 			<BlogPostHeader :title="props.post.title"
 				:description="props.post.description"
 				:image="props.post.image"
+				:image-alt="props.post.imageAlt"
 				:author="props.post.author"
 				:author-image-url="props.post.authorImageUrl"
 				:author-url="props.post.authorUrl"

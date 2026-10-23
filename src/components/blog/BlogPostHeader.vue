@@ -13,6 +13,7 @@ const props = withDefaults(defineProps<{
 	title: string;
 	description?: string;
 	image?: string;
+	imageAlt?: string; // Description of the featured image (the title when missing)
 	author?: string;
 	authorImageUrl?: string;
 	authorUrl?: string;
@@ -31,6 +32,7 @@ const props = withDefaults(defineProps<{
 }>(), {
 	description: '',
 	image: '',
+	imageAlt: '',
 	author: '',
 	authorImageUrl: '',
 	authorUrl: '',
@@ -187,7 +189,7 @@ const detailLabelClasses = 'text-[11px] font-semibold tracking-wider text-muted-
 		<!-- Featured image (replaceable through the media slot) -->
 		<slot name="media">
 			<div v-if="props.image" :class="['relative mt-8 aspect-video w-full overflow-hidden rounded border border-border shadow-elevated-lg', enter('animate-uv-fade-up [animation-delay:650ms]')]">
-				<NuxtImg :src="props.image" :alt="props.title" format="avif" quality="50" :sizes="{ 480: '480px', 1536: '896px' }" loading="eager" fetchpriority="high" preload :class="['size-full object-cover', enter('animate-uv-ken-burns')]" />
+				<NuxtImg :src="props.image" :alt="props.imageAlt || props.title" format="avif" quality="50" :sizes="{ 480: '480px', 1536: '896px' }" loading="eager" fetchpriority="high" preload :class="['size-full object-cover', enter('animate-uv-ken-burns')]" />
 			</div>
 		</slot>
 	</header>
