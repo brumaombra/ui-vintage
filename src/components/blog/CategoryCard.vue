@@ -17,9 +17,9 @@ const props = withDefaults(defineProps<{
 
 <template>
 	<Card padding="none" interactive class="group/category h-full">
-		<!-- Image -->
+		<!-- Image (decorative: the card is a link that already says the category name) -->
 		<div class="h-32 w-full overflow-hidden border-b border-border bg-surface">
-			<NuxtImg v-if="props.image" :src="props.image" :alt="props.name" height="225" width="400" format="avif" quality="35" :sizes="{ 480: '480px', 1280: '400px' }" loading="lazy" decoding="async" class="size-full object-cover transition-[scale] duration-700 ease-out-expo group-hover/category:scale-[1.03]" />
+			<NuxtImg v-if="props.image" :src="props.image" alt="" height="225" width="400" format="avif" quality="35" :sizes="{ 480: '480px', 1280: '400px' }" loading="lazy" decoding="async" class="size-full object-cover transition-[scale] duration-700 ease-out-expo group-hover/category:scale-[1.03]" />
 
 			<!-- Fallback when there is no image -->
 			<div v-else aria-hidden="true" class="flex size-full items-center justify-center text-primary/60">

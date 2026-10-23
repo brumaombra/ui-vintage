@@ -23,9 +23,9 @@ const props = withDefaults(defineProps<{
 
 <template>
 	<Card padding="none" interactive class="group/post h-full">
-		<!-- Featured image -->
+		<!-- Featured image (decorative: the card is a link that already says its title) -->
 		<div v-if="props.image" class="aspect-video w-full overflow-hidden border-b border-border bg-surface">
-			<NuxtImg :src="props.image" :alt="props.title" height="225" width="400" format="avif" quality="35" :sizes="{ 480: '480px', 1280: '400px' }" loading="lazy" decoding="async" class="size-full object-cover transition-[scale] duration-700 ease-out-expo group-hover/post:scale-[1.03]" />
+			<NuxtImg :src="props.image" alt="" height="225" width="400" format="avif" quality="35" :sizes="{ 480: '480px', 1280: '400px' }" loading="lazy" decoding="async" class="size-full object-cover transition-[scale] duration-700 ease-out-expo group-hover/post:scale-[1.03]" />
 		</div>
 
 		<!-- Content -->

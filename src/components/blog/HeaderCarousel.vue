@@ -111,9 +111,9 @@ onUnmounted(() => {
 		<!-- Slides (stacked; the active one crossfades in) -->
 		<div class="relative h-[28rem] w-full md:h-[32rem]">
 			<div v-for="(post, index) in props.featuredPosts" :id="`${slideIdPrefix}-${index}`" :key="post.path || post.title || index" role="group" aria-roledescription="slide" :aria-label="`${index + 1} / ${slideCount}`" :aria-hidden="currentSlide !== index" :inert="currentSlide !== index || undefined" :class="cn('absolute inset-0 transition-[opacity,scale] duration-700 ease-out-expo', currentSlide === index ? 'z-10 scale-100 opacity-100' : 'z-0 scale-[1.02] opacity-0')">
-				<!-- Slide image with a slow zoom -->
+				<!-- Slide image with a slow zoom (decorative: the title link below says where it goes) -->
 				<NuxtLinkLocale :to="post.path" tabindex="-1" aria-hidden="true" class="absolute inset-0 overflow-hidden">
-					<NuxtImg v-if="post.image" :src="post.image" :alt="post.title" width="1200" height="640" format="avif" quality="45" :sizes="{ 480: '480px', 1536: '1152px' }" :loading="index === 0 ? 'eager' : 'lazy'" :fetchpriority="index === 0 ? 'high' : 'auto'" :preload="index === 0" :class="cn('size-full object-cover', currentSlide === index && 'animate-uv-ken-burns')" />
+					<NuxtImg v-if="post.image" :src="post.image" alt="" width="1200" height="640" format="avif" quality="45" :sizes="{ 480: '480px', 1536: '1152px' }" :loading="index === 0 ? 'eager' : 'lazy'" :fetchpriority="index === 0 ? 'high' : 'auto'" :preload="index === 0" :class="cn('size-full object-cover', currentSlide === index && 'animate-uv-ken-burns')" />
 					<div v-else class="size-full bg-[radial-gradient(circle_at_20%_20%,color-mix(in_oklab,var(--primary)_45%,transparent),transparent_60%)] bg-surface" />
 				</NuxtLinkLocale>
 

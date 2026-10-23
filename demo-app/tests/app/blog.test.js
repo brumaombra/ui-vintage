@@ -193,3 +193,14 @@ describe('Blog orange text contrast', () => {
 		}
 	});
 });
+
+// Card images: the cards are links that already say their title, so the image is decorative
+describe('Blog card images', () => {
+	// The image alt repeated the title right next to it, so screen readers heard it twice
+	it('keeps the post and category card images out of the link name', async () => {
+		const post = await mountSuspended(PostCard, { props: { title: 'Post', image: '/cover.png', description: 'About the post' } });
+		expect(post.find('img').attributes('alt')).toBe('');
+		const category = await mountSuspended(CategoryCard, { props: { name: 'Guides', image: '/guides.png', count: 3 } });
+		expect(category.find('img').attributes('alt')).toBe('');
+	});
+});
