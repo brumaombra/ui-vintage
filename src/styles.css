@@ -26,7 +26,7 @@ html {
 
 	--text-primary-light: #1b222d;
 	--text-primary-dark: #eef3f8;
-	--text-secondary-light: #66707d;
+	--text-secondary-light: #606976; /* 4.9:1 on the selected background (#66707d was 4.4:1) and 5.6:1 on white */
 	--text-secondary-dark: #97a2b2;
 
 	--button-primary-light: #f7931a;
@@ -78,7 +78,8 @@ html {
 	--muted-foreground: var(--text-secondary-light);
 	--accent: var(--bg-selected-light);
 	--accent-foreground: var(--text-primary-light);
-	--destructive: oklch(0.577 0.245 27.325);
+	/* 4.8:1 on the surface background, so small red text meets WCAG AA (0.577 was 4.5:1 there) */
+	--destructive: oklch(0.56 0.232 27.325);
 	/* 5.8:1 on white and 5:1 on its own tint, so small success text meets WCAG AA (green-600 is only 3.3:1) */
 	--success: oklch(0.49 0.15 150.07);
 	--warning: oklch(0.705 0.17 62.5);

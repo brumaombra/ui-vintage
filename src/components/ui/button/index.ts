@@ -59,9 +59,9 @@ export const buttonVariants: (props?: ButtonVariants & ClassProp) => string = cv
 				'icon-lg': 'size-[52px]',
 			},
 		},
-		// Link buttons read as inline links, so they have no box padding
+		// Link buttons read as inline links, so they have no box padding, and let their underline show below the box (the base hides overflow)
 		compoundVariants: [
-			{ variant: 'link', class: 'min-h-0 px-0 py-0 has-[>svg]:px-0' },
+			{ variant: 'link', class: 'min-h-0 overflow-visible px-0 py-0 has-[>svg]:px-0' },
 		],
 		defaultVariants: {
 			variant: 'primary',

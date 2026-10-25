@@ -110,16 +110,21 @@ describe('Text, inputs and badges', () => {
 		expect(wrapper.classes()).toContain('rounded-full');
 	});
 
-	// The primary badge uses the brand tint
-	it('tints the primary badge', async () => {
-		const wrapper = await mountSuspended(Badge, { props: { text: 'Sports', color: 'primary' } });
-		expect(wrapper.classes()).toContain('text-primary');
+	// The primary badge is neutral with dark text, its dot carrying the brand orange (orange text on its tint was only 2.1:1)
+	it('keeps the brand orange in the dot of the primary badge', async () => {
+		const wrapper = await mountSuspended(Badge, { props: { text: 'Sports', color: 'primary', dot: true } });
+		expect(wrapper.classes()).toContain('text-foreground');
+		expect(wrapper.classes()).not.toContain('text-primary');
+		expect(wrapper.find('.size-1\\.5.rounded-full').classes()).toContain('bg-primary');
 	});
 
 	// A badge used as a link lifts and tints on hover (the blog tags used to fade instead)
 	it('lifts and tints an interactive badge', async () => {
 		const wrapper = await mountSuspended(Badge, { props: { text: '#Vue', interactive: true } });
-		expect(wrapper.classes()).toEqual(expect.arrayContaining(['hover:-translate-y-0.5', 'hover:bg-[color-mix(in_oklab,var(--primary)_10%,var(--surface))]', 'hover:text-primary']));
+		expect(wrapper.classes()).toEqual(expect.arrayContaining(['hover:-translate-y-0.5', 'hover:bg-[color-mix(in_oklab,var(--primary)_10%,var(--surface))]']));
+
+		// The text keeps its color on hover (orange text on the hover tint was below 4.5:1)
+		expect(wrapper.classes()).not.toContain('hover:text-primary');
 
 		// The hover tint is solid: a translucent one let the page grid show through the tag
 		expect(wrapper.classes().filter(name => /^hover:bg-primary\//.test(name))).toEqual([]);

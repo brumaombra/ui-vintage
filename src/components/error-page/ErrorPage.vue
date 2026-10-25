@@ -88,7 +88,8 @@ const handleAction = () => {
 						<!-- Error copy -->
 						<div>
 							<!-- Status code -->
-							<div class="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+							<div class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-foreground">
+								<span aria-hidden="true" class="size-1.5 shrink-0 rounded-full bg-primary" />
 								{{ resolvedLabel }} {{ resolvedStatusCode }}
 							</div>
 

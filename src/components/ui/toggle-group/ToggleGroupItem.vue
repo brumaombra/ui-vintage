@@ -28,7 +28,7 @@ const isHighlighted = computed(() => context?.highlight.value ?? false);
 	<ToggleGroupItem v-slot="slotProps" data-slot="toggle-group-item" :data-size="size" v-bind="forwardedProps" :class="cn(
 		toggleGroupItemVariants({ size }),
 		!hasIndicator && 'hover:bg-accent data-[state=on]:bg-accent',
-		isHighlighted && 'data-[state=on]:text-primary', // The highlighted group tints the active item like the active tab
+		isHighlighted && 'data-[state=on]:text-primary-foreground', // Dark text on the solid orange indicator, like the active tab
 		props.class
 	)">
 		<slot v-bind="slotProps" />

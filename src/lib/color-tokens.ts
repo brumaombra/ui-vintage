@@ -35,7 +35,7 @@ export const buttonVariantClasses: Record<ButtonVariantName, string> = {
 	primary: "bg-primary text-primary-foreground shadow-elevated-sm hover:bg-primary-hover before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:-translate-x-full before:bg-[linear-gradient(105deg,transparent_35%,rgb(255_255_255/0.38)_50%,transparent_65%)] before:transition-[translate] before:duration-700 before:ease-out-expo hover:before:translate-x-full motion-reduce:before:hidden",
 	secondary: "border border-border bg-secondary text-foreground shadow-elevated-sm hover:border-border-strong hover:bg-accent",
 	ghost: "text-muted-foreground hover:bg-accent hover:text-foreground",
-	link: "text-primary underline-offset-4 decoration-2 hover:underline enabled:active:scale-100",
+	link: "text-foreground underline decoration-primary decoration-2 underline-offset-[5px] enabled:active:scale-100", // Dark text with the brand orange underline, like the blog links (orange text is only 2.3:1 on white)
 
 	// Tone-based button variants (the secondary shadow, so they read as buttons next to it, and a stronger tint in dark mode)
 	gray: `${getInteractiveSurfaceToneClasses("gray")} shadow-elevated-sm`,

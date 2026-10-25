@@ -85,7 +85,7 @@ const indicatorStyle = computed<CSSProperties>(() => ({
 		<span v-if="isSingle" data-slot="toggle-group-indicator" aria-hidden="true" :style="indicatorStyle" :class="cn(
 			'pointer-events-none absolute top-0 left-0 z-0 rounded border', // Same radius as the tab triggers, so every switch looks alike
 			animated && '[transition:transform_380ms_var(--ease-spring),width_380ms_var(--ease-spring),height_380ms_var(--ease-spring),opacity_180ms_var(--ease-snappy)]',
-			props.highlight ? 'border-primary/40 bg-primary/10' : 'border-border-strong bg-surface shadow-elevated-sm'
+			props.highlight ? 'border-primary bg-primary' : 'border-border-strong bg-surface shadow-elevated-sm' // The highlight is solid orange under dark text (orange text on its tint was only 2.1:1)
 		)" />
 
 		<slot v-bind="slotProps" />
