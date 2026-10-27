@@ -47,6 +47,9 @@
 			"description": "Mostra la barra laterale sui dispositivi mobili.",
 			"toggle": "Attiva o disattiva la barra laterale"
 		},
+		"bottomNav": {
+			"label": "Navigazione principale"
+		},
 		"commandDialog": {
 			"title": "Tavolozza dei comandi",
 			"description": "Cerca un comando da eseguire..."

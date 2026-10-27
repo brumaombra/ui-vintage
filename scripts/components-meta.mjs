@@ -376,6 +376,16 @@ export const entries = {
 		category: 'navigation',
 		description: 'Low-level sidebar system (provider, collapsible desktop sidebar, mobile sheet, menus, `useSidebar`). Prefer `dashboard-shell`, which composes it.'
 	},
+	'bottom-nav': {
+		category: 'navigation',
+		description: 'Bottom navigation for phones, fixed to the bottom edge and hidden from the `md` breakpoint. Each item is an icon and a label; mark the current page with `active` and the main action with `primary` (a primary icon button, its label for screen readers). Item `to` paths are localized. In a dashboard, pass the items to `DashboardShell` (`bottom-nav-items`) instead of placing it yourself.',
+		example: `
+<BottomNav :items="[
+    { id: 'home', label: 'Home', icon: Home01Icon, to: '/', active: true },
+    { id: 'create', label: 'Create', icon: Add01Icon, to: '/create', primary: true },
+    { id: 'profile', label: 'Profile', icon: UserCircleIcon, to: '/profile' }
+]" />`
+	},
 
 	/*********************** Overlays ***********************/
 
@@ -532,7 +542,7 @@ setBusy(false);`
 
 	'dashboard-shell': {
 		category: 'layout',
-		description: 'Complete dashboard layout: collapsible sidebar built from `sidebar-sections`, mobile sheet, sticky topbar, and grid background. Item `to` paths are localized and navigate client-side (`NuxtLinkLocale`).',
+		description: 'Complete dashboard layout: collapsible sidebar built from `sidebar-sections`, mobile sheet, sticky topbar, and grid background. Item `to` paths are localized and navigate client-side (`NuxtLinkLocale`). Pass `bottom-nav-items` (the `bottom-nav` items) to give phones a bottom navigation instead of the sidebar: the shell then hides the sidebar button on phones, shows the home link in its place, and keeps the bar\'s height free at the bottom. Without them nothing changes.',
 		example: `
 <DashboardShell title="Projects" :sidebar-sections="sections">
     <template #topbar-trailing>

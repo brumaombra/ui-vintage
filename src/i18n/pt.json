@@ -47,6 +47,9 @@
 			"description": "Exibe a barra lateral em dispositivos móveis.",
 			"toggle": "Alternar barra lateral"
 		},
+		"bottomNav": {
+			"label": "Navegação principal"
+		},
 		"commandDialog": {
 			"title": "Paleta de comandos",
 			"description": "Pesquise um comando para executar..."

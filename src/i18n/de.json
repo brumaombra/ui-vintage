@@ -47,6 +47,9 @@
 			"description": "Zeigt die mobile Seitenleiste an.",
 			"toggle": "Seitenleiste umschalten"
 		},
+		"bottomNav": {
+			"label": "Hauptnavigation"
+		},
 		"commandDialog": {
 			"title": "Befehlspalette",
 			"description": "Nach einem auszuführenden Befehl suchen..."

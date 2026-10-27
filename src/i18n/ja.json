@@ -47,6 +47,9 @@
 			"description": "モバイルサイドバーを表示します。",
 			"toggle": "サイドバーを切り替え"
 		},
+		"bottomNav": {
+			"label": "メインナビゲーション"
+		},
 		"commandDialog": {
 			"title": "コマンドパレット",
 			"description": "実行するコマンドを検索..."

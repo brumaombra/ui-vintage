@@ -47,6 +47,9 @@
 			"description": "Displays the mobile sidebar.",
 			"toggle": "Toggle sidebar"
 		},
+		"bottomNav": {
+			"label": "Main navigation"
+		},
 		"commandDialog": {
 			"title": "Command palette",
 			"description": "Search for a command to run..."

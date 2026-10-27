@@ -48,6 +48,7 @@
 		"./background-grid": "./src/components/background-grid/index.ts",
 		"./badge": "./src/components/ui/badge/index.ts",
 		"./blog": "./src/components/blog/index.ts",
+		"./bottom-nav": "./src/components/bottom-nav/index.ts",
 		"./breadcrumb": "./src/components/ui/breadcrumb/index.ts",
 		"./busy": "./src/components/ui/busy/index.ts",
 		"./busy-indicator": "./src/components/busy-indicator/index.ts",

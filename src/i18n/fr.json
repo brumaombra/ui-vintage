@@ -47,6 +47,9 @@
 			"description": "Affiche la barre latérale sur mobile.",
 			"toggle": "Afficher ou masquer la barre latérale"
 		},
+		"bottomNav": {
+			"label": "Navigation principale"
+		},
 		"commandDialog": {
 			"title": "Palette de commandes",
 			"description": "Rechercher une commande à exécuter..."

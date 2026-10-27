@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import LogoImage from '../logo-image/LogoImage.vue';
-import { computed } from 'vue';
+import { computed, useSlots } from 'vue';
 import { useI18n } from 'vue-i18n';
 import type { HTMLAttributes } from 'vue';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import BackgroundGrid from '../background-grid/BackgroundGrid.vue';
+import BottomNav from '../bottom-nav/BottomNav.vue';
 import { ThemeSelector } from '../theme-selector';
 import { Separator } from '../ui/separator';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarInset, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarProvider, SidebarTrigger } from '../ui/sidebar';
@@ -34,6 +35,14 @@ const props = withDefaults(defineProps<{
 			newTab?: boolean;
 		}>;
 	}>;
+	bottomNavItems?: Array<{
+		id: string;
+		label: string;
+		icon?: HugeiconsIconDefinition | null;
+		to: string;
+		active?: boolean;
+		primary?: boolean;
+	}>;
 	showBackground?: boolean;
 	insetClass?: HTMLAttributes['class'];
 	topbarClass?: HTMLAttributes['class'];
@@ -48,6 +57,7 @@ const props = withDefaults(defineProps<{
 	collapsible: 'offcanvas',
 	compact: false,
 	sidebarSections: () => [],
+	bottomNavItems: () => [],
 	showBackground: true
 });
 
@@ -60,6 +70,13 @@ const getSidebarItemLinkProps = (item: NonNullable<typeof props.sidebarSections>
 };
 
 const { t } = useI18n();
+const slots = useSlots();
+
+// Phones get a bottom navigation instead of the sidebar (only when the app passes its items)
+const hasBottomNav = computed(() => props.bottomNavItems.length > 0);
+
+// Something follows the sidebar button in the topbar (otherwise the separator after it is left hanging)
+const hasTopbarHeading = computed(() => Boolean(props.title || props.description || slots['topbar-leading']));
 
 // Logo sources for each theme (either one falls back to the other)
 const lightLogo = computed(() => props.appLogo || props.appLogoDark);
@@ -145,17 +162,29 @@ const logoAlt = computed(() => props.appName ? t('uiVintage.common.logo', { name
 		</Sidebar>
 
 		<!-- Main shell -->
-		<SidebarInset :class="cn('relative min-h-screen min-w-0 bg-background text-foreground', props.insetClass)">
+		<SidebarInset :class="cn('relative min-h-screen min-w-0 bg-background text-foreground', hasBottomNav && 'max-md:pb-[calc(4rem+env(safe-area-inset-bottom))]', props.insetClass)">
 			<!-- Background -->
 			<BackgroundGrid v-if="props.showBackground" />
 
 			<!-- Topbar (its bottom line is an inset shadow, so the whole 64px is free and the content centers on whole pixels) -->
 			<header :class="cn('sticky top-0 z-20 flex h-16 shrink-0 items-center gap-2 shadow-[inset_0_-1px_0_var(--sidebar-border)] bg-sidebar/80 px-4 backdrop-blur-md backdrop-saturate-150', props.topbarClass)">
-				<!-- Sidebar trigger -->
-				<SidebarTrigger class="-ml-1" />
+				<!-- Sidebar trigger (on phones with a bottom navigation, the sidebar is not needed) -->
+				<SidebarTrigger :class="cn('-ml-1', hasBottomNav && 'max-md:hidden')" />
 
-				<!-- Vertical separator -->
-				<Separator orientation="vertical" class="mr-2 data-[orientation=vertical]:h-4" />
+				<!-- Vertical separator (only when something follows it) -->
+				<Separator v-if="hasTopbarHeading" orientation="vertical" :class="cn('mr-2 data-[orientation=vertical]:h-4', hasBottomNav && 'max-md:hidden')" />
+
+				<!-- Home link on phones with a bottom navigation, in place of the sidebar button (the path is localized) -->
+				<NuxtLinkLocale v-if="hasBottomNav && (lightLogo || props.appName)" :to="props.appLinkTo" class="inline-flex shrink-0 items-center gap-2 md:hidden">
+					<!-- App logo -->
+					<template v-if="lightLogo">
+						<LogoImage :src="lightLogo" :alt="logoAlt" :size="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="eager" :class="['size-8 shrink-0 object-contain', hasDarkLogo && 'dark:hidden']" />
+						<LogoImage v-if="hasDarkLogo" :src="darkLogo" :alt="logoAlt" :size="32" :sizes="{ 320: '32px', 1280: '32px' }" loading="eager" class="hidden size-8 shrink-0 object-contain dark:block" />
+					</template>
+
+					<!-- App name, when there is no logo -->
+					<span v-else class="text-base font-semibold tracking-tight text-foreground">{{ props.appName }}</span>
+				</NuxtLinkLocale>
 
 				<!-- Optional custom content on the leading side of the topbar -->
 				<slot name="topbar-leading" />
@@ -188,6 +217,9 @@ const logoAlt = computed(() => props.appName ? t('uiVintage.common.logo', { name
 			<footer v-if="$slots.footer" class="relative z-10 mt-auto">
 				<slot name="footer" />
 			</footer>
+
+			<!-- Bottom navigation (phones only, the shell keeps its height free at the bottom) -->
+			<BottomNav v-if="hasBottomNav" :items="props.bottomNavItems" />
 		</SidebarInset>
 	</SidebarProvider>
 </template>
