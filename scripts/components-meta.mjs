@@ -326,7 +326,7 @@ export const entries = {
 	},
 	'card-grid': {
 		category: 'data',
-		description: 'Responsive grid of cards with built-in loading, empty, and load-more states. Render each item in the `card` slot.'
+		description: 'Responsive grid of cards with built-in loading, empty, and load-more states. Render each item in the `card` slot. `gap` sets the space between the cards (`sm`, `default`, `lg`), always less than the page padding on phones.'
 	},
 
 	/*********************** Navigation ***********************/

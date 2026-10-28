@@ -1503,10 +1503,11 @@ import { Card, CardAction, CardContent, CardText, CardDescription, CardFooter, C
 
 ### `@brumaombra/ui-vintage/card-grid`
 
-Responsive grid of cards with built-in loading, empty, and load-more states. Render each item in the `card` slot.
+Responsive grid of cards with built-in loading, empty, and load-more states. Render each item in the `card` slot. `gap` sets the space between the cards (`sm`, `default`, `lg`), always less than the page padding on phones.
 
 ```ts
 import { CardGrid } from '@brumaombra/ui-vintage/card-grid';
+import type { CardGridGap } from '@brumaombra/ui-vintage/card-grid';
 ```
 
 #### `CardGrid`
@@ -1519,9 +1520,16 @@ import { CardGrid } from '@brumaombra/ui-vintage/card-grid';
 | `hasMore` | `boolean` | `false` |
 | `emptyMessage` *(required)* | `string` |  |
 | `emptyIcon` | `HugeiconsIconDefinition` | `PackageIcon` |
+| `gap` | `CardGridGap` | `'default'` |
 
 - **Emits:** `load-more`.
 - **Slots:** `card`.
+
+#### Functions, constants, and types
+
+```ts
+type CardGridGap = 'sm' | 'default' | 'lg'
+```
 
 ---
 

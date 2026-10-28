@@ -5,6 +5,14 @@ import { LoadMoreButton } from '../load-more-button';
 import { LoadingStateCard } from '../loading-state-card';
 import type { HugeiconsIconDefinition } from '../../lib/common-types';
 
+// Space between the cards (on phones always less than the page padding)
+export type CardGridGap = 'sm' | 'default' | 'lg';
+const gapClasses: Record<CardGridGap, string> = {
+	sm: 'gap-2 md:gap-3',
+	default: 'gap-2 sm:gap-4 md:gap-6 xl:gap-4',
+	lg: 'gap-2.5 sm:gap-5 md:gap-8 xl:gap-6'
+};
+
 // Props
 const props = withDefaults(defineProps<{
 	items?: T[];
@@ -13,12 +21,14 @@ const props = withDefaults(defineProps<{
 	hasMore?: boolean;
 	emptyMessage: string;
 	emptyIcon?: HugeiconsIconDefinition;
+	gap?: CardGridGap;
 }>(), {
 	items: () => [],
 	busy: false,
 	loadMoreBusy: false,
 	hasMore: false,
-	emptyIcon: () => PackageIcon
+	emptyIcon: () => PackageIcon,
+	gap: 'default'
 });
 
 // Emits
@@ -47,8 +57,8 @@ const handleLoadMore = () => {
 			:description="props.emptyMessage"
 			:icon="props.emptyIcon" />
 
-		<!-- Cards grid (on phones the cards sit closer to each other than to the page edges) -->
-		<div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-4 md:gap-6 xl:gap-4">
+		<!-- Cards grid -->
+		<div v-else :class="['grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4', gapClasses[props.gap]]">
 			<slot name="card" v-for="item in props.items" :item="item" :key="item.id" />
 		</div>
 
