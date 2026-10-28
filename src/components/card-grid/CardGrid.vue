@@ -47,8 +47,8 @@ const handleLoadMore = () => {
 			:description="props.emptyMessage"
 			:icon="props.emptyIcon" />
 
-		<!-- Cards grid -->
-		<div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-4">
+		<!-- Cards grid (on phones the cards sit closer to each other than to the page edges) -->
+		<div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-4 md:gap-6 xl:gap-4">
 			<slot name="card" v-for="item in props.items" :item="item" :key="item.id" />
 		</div>
 
