@@ -9,12 +9,13 @@ const props = defineProps<{
 </script>
 
 <template>
-	<main data-slot="sidebar-inset" :class="cn(
+	<div data-slot="sidebar-inset" :class="cn(
 		'bg-background relative flex w-full flex-1 flex-col',
 		'md:peer-data-[variant=inset]:m-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded md:peer-data-[variant=inset]:shadow-elevated-sm md:peer-data-[variant=inset]:peer-data-[state=collapsed]:ml-2',
 		props.class
 	)
 		">
+		<!-- A plain container (not a main landmark): it also holds the header and the footer, so the page content inside it is the main landmark (DashboardShell renders it) -->
 		<slot />
-	</main>
+	</div>
 </template>

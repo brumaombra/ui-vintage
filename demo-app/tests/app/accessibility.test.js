@@ -64,6 +64,14 @@ describe('DashboardShell', () => {
 		expect(wrapper.find('a[href="/home"]').attributes('aria-current')).toBe('page');
 		expect(wrapper.find('a[href="/settings"]').attributes('aria-current')).toBeUndefined();
 	});
+
+	// One main landmark, around the page content only (the sidebar inset also renders one, so screen readers found two, one inside the other)
+	it('renders a single main landmark', async () => {
+		const wrapper = await mountSuspended(DashboardShell, { props: { appName: 'Acme' }, slots: { default: () => 'Page' } });
+		const mains = wrapper.findAll('main');
+		expect(mains).toHaveLength(1);
+		expect(mains[0].text()).toBe('Page');
+	});
 });
 
 describe('LandingNavbar', () => {
