@@ -3586,7 +3586,7 @@ import { PageHeader } from '@brumaombra/ui-vintage/page-header';
 
 ### `@brumaombra/ui-vintage/section-title`
 
-Section heading over a rule that starts with a primary segment, with an optional icon tile, description, and trailing action (the blog sections use it too). The space below it matches the DashboardShell page padding.
+Section heading over a rule that starts with a primary segment, with an optional icon tile, description, and trailing action (the blog sections use it too). On phones the space below it matches the DashboardShell page padding.
 
 ```ts
 import { SectionTitle } from '@brumaombra/ui-vintage/section-title';

@@ -557,7 +557,7 @@ setBusy(false);`
 	},
 	'section-title': {
 		category: 'layout',
-		description: 'Section heading over a rule that starts with a primary segment, with an optional icon tile, description, and trailing action (the blog sections use it too). The space below it matches the DashboardShell page padding.',
+		description: 'Section heading over a rule that starts with a primary segment, with an optional icon tile, description, and trailing action (the blog sections use it too). On phones the space below it matches the DashboardShell page padding.',
 		example: `
 <SectionTitle title="Market FAQ" :icon="HelpCircleIcon" description="Everything about how this market works">
     <template #action>
