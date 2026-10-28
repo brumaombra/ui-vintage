@@ -512,39 +512,51 @@ body {
 
 /*********************** Custom scrollbar ***********************/
 
-/* Webkit browsers */
-::-webkit-scrollbar {
-	width: 6px;
-	height: 6px;
+/* In the base layer, so the utilities (e.g. scrollbar-none) win over it */
+@layer base {
+	/* Webkit browsers */
+	::-webkit-scrollbar {
+		width: 6px;
+		height: 6px;
+	}
+
+	::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background-color: var(--border-light);
+		border-radius: 999px;
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		background-color: var(--text-secondary-light);
+	}
+
+	.dark ::-webkit-scrollbar-thumb {
+		background-color: var(--border-dark);
+	}
+
+	.dark ::-webkit-scrollbar-thumb:hover {
+		background-color: var(--text-secondary-dark);
+	}
+
+	/* Firefox */
+	* {
+		scrollbar-width: thin;
+		scrollbar-color: var(--border-light) transparent;
+	}
+
+	.dark * {
+		scrollbar-color: var(--border-dark) transparent;
+	}
 }
 
-::-webkit-scrollbar-track {
-	background: transparent;
-}
+/* Hide the scrollbar of an element that still scrolls (e.g. a row of chips swiped sideways) */
+@utility scrollbar-none {
+	scrollbar-width: none;
 
-::-webkit-scrollbar-thumb {
-	background-color: var(--border-light);
-	border-radius: 999px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-	background-color: var(--text-secondary-light);
-}
-
-.dark ::-webkit-scrollbar-thumb {
-	background-color: var(--border-dark);
-}
-
-.dark ::-webkit-scrollbar-thumb:hover {
-	background-color: var(--text-secondary-dark);
-}
-
-/* Firefox */
-* {
-	scrollbar-width: thin;
-	scrollbar-color: var(--border-light) transparent;
-}
-
-.dark * {
-	scrollbar-color: var(--border-dark) transparent;
+	&::-webkit-scrollbar {
+		display: none;
+	}
 }

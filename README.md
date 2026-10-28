@@ -333,6 +333,10 @@ Every component uses the same small vocabulary, and your app can reuse it:
 
 All durations collapse when the user prefers reduced motion. Tailwind v4 animates `scale`, `rotate`, and `translate` as separate properties, so name them (not `transform`) in custom transitions.
 
+### Scrollbars
+
+Scrollbars are thin and follow the theme. The styles live in the base layer, so utilities override them: `scrollbar-none` hides the scrollbar of an element that still scrolls, such as a row of chips swiped sideways.
+
 ### Localization
 
 Library strings live under the `uiVintage` namespace and are available in English, Italian, French, Spanish, German, Portuguese, Chinese, Japanese, and Russian. With `@nuxtjs/i18n` or Vue I18n configured, the runtime plugin merges them into your existing composer without replacing your messages.
