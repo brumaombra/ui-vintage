@@ -69,6 +69,6 @@ const headerStats = computed(() => [{ icon: News01Icon, value: props.totalPosts,
 		<LoadMoreButton v-if="props.hasMorePosts" :busy="props.isLoading" :text="t('uiVintage.blog.loadMoreWithNumbers', {
 			current: Math.min(props.currentPage * props.postsPerPage, props.totalPosts),
 			total: props.totalPosts
-		})" @load-more="emit('load-more')" class="mt-8" data-aos="blur-up" />
+		})" @load-more="emit('load-more')" data-aos="blur-up" />
 	</div>
 </template>

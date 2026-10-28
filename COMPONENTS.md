@@ -271,7 +271,7 @@ import { Kbd, KbdGroup } from '@brumaombra/ui-vintage/kbd';
 
 ### `@brumaombra/ui-vintage/load-more-button`
 
-Full-width "load more" button with a built-in busy state and localized labels.
+"Load more" button for the end of a list: full width on phones, centered from `md` up, with its own space above it (16px, 24px from `md`), a built-in busy state and localized labels. Place it right after the list, with no wrapper.
 
 ```ts
 import { LoadMoreButton } from '@brumaombra/ui-vintage/load-more-button';

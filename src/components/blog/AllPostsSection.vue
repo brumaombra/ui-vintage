@@ -55,7 +55,6 @@ const visiblePostsCount = computed(() => Math.min(props.posts.length, props.tota
 		<LoadMoreButton v-if="props.hasMorePosts"
 			:busy="props.isLoading"
 			:text="t('uiVintage.blog.loadMoreWithNumbers', { current: visiblePostsCount, total: props.totalPosts })"
-			@load-more="handleLoadMorePosts"
-			class="mt-8" />
+			@load-more="handleLoadMorePosts" />
 	</div>
 </template>

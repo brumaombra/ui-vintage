@@ -34,7 +34,8 @@ const handleClick = () => {
 </script>
 
 <template>
-	<div class="flex justify-center">
+	<!-- Its own space above, since it always sits under a list -->
+	<div class="mt-4 flex justify-center md:mt-6">
 		<!-- A single button for both states keeps keyboard focus on it while the next page loads -->
 		<Button variant="secondary" :class="['w-full md:w-auto', props.busy && 'cursor-wait']" :aria-disabled="props.busy || undefined" :aria-busy="props.busy || undefined" @click="handleClick">
 			<HugeiconsIcon :icon="props.busy ? RefreshIcon : ArrowDown01Icon" :class="['size-4', props.busy && 'animate-spin']" />

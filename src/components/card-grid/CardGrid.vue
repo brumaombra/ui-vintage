@@ -53,9 +53,8 @@ const handleLoadMore = () => {
 		</div>
 
 		<!-- Load more button (only under a grid, never under the loading or empty state) -->
-		<div v-if="!props.busy && props.items.length > 0 && (props.hasMore || props.loadMoreBusy)" class="flex justify-center mt-6">
-			<LoadMoreButton :busy="props.loadMoreBusy"
-				@load-more="handleLoadMore" />
-		</div>
+		<LoadMoreButton v-if="!props.busy && props.items.length > 0 && (props.hasMore || props.loadMoreBusy)"
+			:busy="props.loadMoreBusy"
+			@load-more="handleLoadMore" />
 	</div>
 </template>
