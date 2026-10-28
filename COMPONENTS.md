@@ -1521,9 +1521,10 @@ import type { CardGridGap } from '@brumaombra/ui-vintage/card-grid';
 | `emptyMessage` *(required)* | `string` |  |
 | `emptyIcon` | `HugeiconsIconDefinition` | `PackageIcon` |
 | `gap` | `CardGridGap` | `'default'` |
+| `skeletonCount` | `number` | `8` |
 
 - **Emits:** `load-more`.
-- **Slots:** `card`.
+- **Slots:** `card`, `skeleton`.
 
 #### Functions, constants, and types
 

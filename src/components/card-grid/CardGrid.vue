@@ -1,5 +1,6 @@
 <script setup lang="ts" generic="T extends { id: PropertyKey }">
 import PackageIcon from '@hugeicons/core-free-icons/PackageIcon';
+import { useI18n } from 'vue-i18n';
 import { EmptyStateCard } from '../empty-state-card';
 import { LoadMoreButton } from '../load-more-button';
 import { LoadingStateCard } from '../loading-state-card';
@@ -22,13 +23,15 @@ const props = withDefaults(defineProps<{
 	emptyMessage: string;
 	emptyIcon?: HugeiconsIconDefinition;
 	gap?: CardGridGap;
+	skeletonCount?: number; // Placeholder cards shown while busy, when the skeleton slot is given
 }>(), {
 	items: () => [],
 	busy: false,
 	loadMoreBusy: false,
 	hasMore: false,
 	emptyIcon: () => PackageIcon,
-	gap: 'default'
+	gap: 'default',
+	skeletonCount: 8
 });
 
 // Emits
@@ -39,7 +42,10 @@ const emits = defineEmits<{
 // Slots
 defineSlots<{
 	card(props: { item: T; key?: PropertyKey }): unknown;
+	skeleton?(): unknown; // One placeholder card, repeated in the grid while busy (the loading card otherwise)
 }>();
+
+const { t } = useI18n();
 
 // Handle load more
 const handleLoadMore = () => {
@@ -49,8 +55,12 @@ const handleLoadMore = () => {
 
 <template>
 	<div>
-		<!-- Busy state for initial loading -->
-		<LoadingStateCard v-if="props.busy" />
+		<!-- Busy state for initial loading: placeholder cards in the grid when given, the loading card otherwise -->
+		<div v-if="props.busy && $slots.skeleton" role="status" aria-busy="true" :class="['grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4', gapClasses[props.gap]]">
+			<span class="sr-only">{{ t('uiVintage.common.loading.title') }}</span>
+			<slot name="skeleton" v-for="index in props.skeletonCount" :key="index" />
+		</div>
+		<LoadingStateCard v-else-if="props.busy" />
 
 		<!-- Empty state -->
 		<EmptyStateCard v-else-if="props.items.length === 0"

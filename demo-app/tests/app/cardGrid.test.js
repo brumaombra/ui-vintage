@@ -11,7 +11,7 @@ const mountGrid = props => mountSuspended(CardGrid, {
 	slots: { card: ({ item }) => item.name }
 });
 
-// Card grid: the space between the cards
+// Card grid: the space between the cards, and the loading state
 describe('CardGrid', () => {
 	// Without a gap, the cards keep the default spacing (8px on phones, less than the page padding)
 	it('uses the default gap', async () => {
@@ -29,5 +29,25 @@ describe('CardGrid', () => {
 
 		const large = await mountGrid({ gap: 'lg' });
 		expect(large.find('.grid').classes()).toEqual(expect.arrayContaining(['gap-2.5', 'sm:gap-5', 'md:gap-8', 'xl:gap-6']));
+	});
+
+	// While busy, a skeleton slot fills the grid with placeholder cards in the same layout
+	it('shows placeholder cards while busy', async () => {
+		const wrapper = await mountSuspended(CardGrid, {
+			props: { items: [], busy: true, emptyMessage: 'Nothing here', skeletonCount: 3 },
+			slots: { card: ({ item }) => item.name, skeleton: () => 'Placeholder' }
+		});
+		const grid = wrapper.find('[role="status"]');
+		expect(grid.classes()).toEqual(expect.arrayContaining(['grid', 'gap-2']));
+		expect(grid.text().match(/Placeholder/g)).toHaveLength(3);
+		expect(wrapper.find('.animate-spin').exists()).toBe(false); // No loading card
+	});
+
+	// Without a skeleton slot, busy keeps the loading card
+	it('keeps the loading card without a skeleton', async () => {
+		const wrapper = await mountGrid({ busy: true });
+		expect(wrapper.find('[role="status"]').exists()).toBe(false);
+		expect(wrapper.find('.animate-spin').exists()).toBe(true);
+		expect(wrapper.text()).not.toContain('One');
 	});
 });
