@@ -2358,7 +2358,7 @@ type StepperStep = { title: string; description?: string; icon?: HugeiconsIconDe
 
 ### `@brumaombra/ui-vintage/tabs`
 
-Tabs with a sliding active indicator (horizontal or vertical) and animated panels.
+Tabs with a sliding active indicator (horizontal or vertical) and animated panels. The panels sit 12px below the list on phones and 24px from `md` up (16px from the side when vertical).
 
 ```ts
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@brumaombra/ui-vintage/tabs';

@@ -333,7 +333,7 @@ export const entries = {
 
 	'tabs': {
 		category: 'navigation',
-		description: 'Tabs with a sliding active indicator (horizontal or vertical) and animated panels.',
+		description: 'Tabs with a sliding active indicator (horizontal or vertical) and animated panels. The panels sit 12px below the list on phones and 24px from `md` up (16px from the side when vertical).',
 		example: `
 <Tabs default-value="overview">
     <TabsList>
