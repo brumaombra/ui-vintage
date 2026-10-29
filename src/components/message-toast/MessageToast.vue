@@ -202,10 +202,10 @@ onBeforeUnmount(() => {
 
 						<!-- Title and message -->
 						<div class="min-w-0 flex-1 self-center">
-							<p v-if="toast.title" class="m-0 text-sm font-semibold leading-5">
+							<p v-if="toast.title" class="m-0 text-[0.8125rem] font-semibold leading-5">
 								{{ toast.title }}
 							</p>
-							<p :class="cn('m-0 text-sm leading-5 wrap-break-word', toast.title && 'text-xs text-muted-foreground sm:text-[13px]')">
+							<p :class="cn('m-0 text-xs leading-5 wrap-break-word', toast.title && 'text-muted-foreground')">
 								{{ toast.message }}
 							</p>
 						</div>

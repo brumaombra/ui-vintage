@@ -3671,10 +3671,10 @@ import { SectionTitle } from '@brumaombra/ui-vintage/section-title';
 
 ### `@brumaombra/ui-vintage/theme-selector`
 
-Light, dark, and auto theme menu with a circular reveal (View Transitions API). `applyThemeWithTransition` switches themes from your own controls.
+Light, dark, and auto theme menu with a circular reveal (View Transitions API). `useTheme()` gives the theme shared by every control of the page and `setTheme` to change it from your own controls (a settings row, a command), so they all stay in sync.
 
 ```ts
-import { ThemeSelector, applyTheme, applyThemeWithTransition, getStoredTheme, isDarkTheme } from '@brumaombra/ui-vintage/theme-selector';
+import { ThemeSelector, applyTheme, applyThemeWithTransition, getStoredTheme, isDarkTheme, useTheme } from '@brumaombra/ui-vintage/theme-selector';
 import type { ThemeMode, ThemeTransitionOrigin } from '@brumaombra/ui-vintage/theme-selector';
 ```
 
@@ -3693,6 +3693,7 @@ function applyTheme(theme: ThemeMode)
 async function applyThemeWithTransition(theme: ThemeMode, origin?: ThemeTransitionOrigin | Element | null)
 function getStoredTheme(): ThemeMode
 function isDarkTheme(theme: ThemeMode)
+function useTheme()
 type ThemeMode = 'light' | 'dark' | 'auto'
 interface ThemeTransitionOrigin {
     x: number;

@@ -611,7 +611,7 @@ setBusy(false);`
 	},
 	'theme-selector': {
 		category: 'layout',
-		description: 'Light, dark, and auto theme menu with a circular reveal (View Transitions API). `applyThemeWithTransition` switches themes from your own controls.',
+		description: 'Light, dark, and auto theme menu with a circular reveal (View Transitions API). `useTheme()` gives the theme shared by every control of the page and `setTheme` to change it from your own controls (a settings row, a command), so they all stay in sync.',
 		example: `
 <ThemeSelector />`
 	},

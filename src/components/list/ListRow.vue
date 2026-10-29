@@ -68,12 +68,12 @@ const handleClick = () => {
 			</span>
 			<HugeiconsIcon v-else-if="props.icon" :icon="props.icon" :class="cn('size-4 shrink-0', !props.danger && 'text-muted-foreground')" />
 
-			<!-- Label -->
-			<label v-if="props.labelFor" :for="props.labelFor" class="min-w-0 flex-1 text-sm font-semibold">{{ props.label }}</label>
-			<span v-else class="min-w-0 flex-1 text-sm font-semibold">{{ props.label }}</span>
+			<!-- Label (a step smaller on phones, like the rows of the phone settings) -->
+			<label v-if="props.labelFor" :for="props.labelFor" class="min-w-0 flex-1 text-[0.8125rem] font-semibold md:text-sm">{{ props.label }}</label>
+			<span v-else class="min-w-0 flex-1 text-[0.8125rem] font-semibold md:text-sm">{{ props.label }}</span>
 
 			<!-- Value -->
-			<span v-if="props.value" class="max-w-[45%] truncate font-mono text-xs text-muted-foreground">{{ props.value }}</span>
+			<span v-if="props.value" class="max-w-[45%] truncate font-mono text-[0.6875rem] text-muted-foreground md:text-xs">{{ props.value }}</span>
 
 			<!-- Badge -->
 			<span v-if="props.badge > 0" class="flex h-5 min-w-5 items-center justify-center rounded-full bg-primary px-1.5 font-mono text-[0.625rem] font-bold text-primary-foreground">{{ props.badge }}</span>

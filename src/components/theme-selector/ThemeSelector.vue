@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, nextTick, onMounted, onUnmounted, ref } from 'vue';
+import { computed, nextTick, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import LaptopIcon from '@hugeicons/core-free-icons/LaptopIcon';
 import Moon01Icon from '@hugeicons/core-free-icons/Moon01Icon';
@@ -9,14 +9,13 @@ import { HugeiconsIcon } from '@hugeicons/vue';
 import { Button } from '../ui/button';
 import { Command, CommandGroup, CommandItem, CommandList } from '../ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
-import { applyTheme, applyThemeWithTransition, getStoredTheme, type ThemeMode } from './theme-transition';
+import type { ThemeMode } from './theme-transition';
+import { useTheme } from './use-theme';
 
 const { t } = useI18n();
+const { theme: currentTheme, startTheme, setTheme } = useTheme(); // Shared with every other theme control of the page
 const isOpen = ref(false);
-const currentTheme = ref<ThemeMode>('auto');
 const triggerRef = ref<InstanceType<typeof Button> | null>(null);
-let mediaQueryList: MediaQueryList | undefined;
-let handleSystemThemeChange: (() => void) | undefined;
 
 // Resolve the icon for each theme mode
 const getThemeIcon = (theme: string) => {
@@ -38,13 +37,12 @@ const themes = computed(() => [
 
 // Handle theme selection from the menu
 const handleSelectTheme = async (theme: ThemeMode) => {
-	currentTheme.value = theme;
 	isOpen.value = false;
 
 	// Reveal the new theme from the trigger button once the menu has closed
 	await nextTick();
 	const triggerElement = (triggerRef.value as { $el?: Element } | null)?.$el ?? null;
-	await applyThemeWithTransition(theme, triggerElement);
+	await setTheme(theme, triggerElement);
 };
 
 // Compute the icon for the currently selected theme
@@ -61,29 +59,9 @@ const themeOptions = computed(() => {
 	}));
 });
 
-// On component mounted
+// Read the saved theme once the page is in the browser (and follow the system preference while it is auto)
 onMounted(() => {
-	const savedTheme = getStoredTheme();
-	currentTheme.value = savedTheme;
-	applyTheme(savedTheme);
-	mediaQueryList = window.matchMedia('(prefers-color-scheme: dark)');
-
-	// Handler to update the theme
-	handleSystemThemeChange = () => {
-		if (currentTheme.value === 'auto') {
-			void applyThemeWithTransition('auto');
-		}
-	};
-
-	// Listen for changes in system theme preference
-	mediaQueryList.addEventListener('change', handleSystemThemeChange);
-});
-
-// Cleanup system preference listener
-onUnmounted(() => {
-	if (mediaQueryList && handleSystemThemeChange) {
-		mediaQueryList.removeEventListener('change', handleSystemThemeChange);
-	}
+	startTheme();
 });
 </script>
 
