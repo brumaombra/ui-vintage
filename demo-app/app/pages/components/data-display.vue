@@ -2,8 +2,12 @@
 import { computed, ref } from 'vue';
 import ChartLineData02Icon from '@hugeicons/core-free-icons/ChartLineData02Icon';
 import Delete02Icon from '@hugeicons/core-free-icons/Delete02Icon';
+import FavouriteIcon from '@hugeicons/core-free-icons/FavouriteIcon';
+import GlobeIcon from '@hugeicons/core-free-icons/GlobeIcon';
 import Invoice01Icon from '@hugeicons/core-free-icons/Invoice01Icon';
+import Mail01Icon from '@hugeicons/core-free-icons/Mail01Icon';
 import Money03Icon from '@hugeicons/core-free-icons/Money03Icon';
+import Notification03Icon from '@hugeicons/core-free-icons/Notification03Icon';
 import PackageIcon from '@hugeicons/core-free-icons/PackageIcon';
 import RefreshIcon from '@hugeicons/core-free-icons/RefreshIcon';
 import Rocket01Icon from '@hugeicons/core-free-icons/Rocket01Icon';
@@ -23,6 +27,7 @@ import { DataList, DataListItem, DataListLabel, DataListValue } from '@brumaombr
 import { DataTable } from '@brumaombra/ui-vintage/data-table';
 import type { DataTableColumn, DataTableSort } from '@brumaombra/ui-vintage/data-table';
 import { InfoCard } from '@brumaombra/ui-vintage/info-card';
+import { ListGroup, ListRow } from '@brumaombra/ui-vintage/list';
 import { Input } from '@brumaombra/ui-vintage/input';
 import { showMessageToast } from '@brumaombra/ui-vintage/message-toast';
 import { SimplePagination } from '@brumaombra/ui-vintage/pagination';
@@ -123,6 +128,7 @@ const chips = ref([
 // Progress and skeleton
 const uploadProgress = ref(35);
 const contentLoaded = ref(false);
+const listEmails = ref(true);
 const advanceProgress = () => {
 	uploadProgress.value = uploadProgress.value >= 100 ? 0 : Math.min(100, uploadProgress.value + 20 + Math.round(Math.random() * 15));
 };
@@ -153,6 +159,15 @@ const statsCode = `<SingleValueCard label="Revenue" :value="48290" :icon="Money0
 ]" />
 
 <AnimatedNumber :value="total" :duration="900" />`;
+
+const listCode = `<ListGroup title="Preferences" hint="Saved as soon as they change.">
+    <ListRow label="Favourites" :icon="FavouriteIcon" icon-tile to="/favourites" :badge="3" />
+    <ListRow label="Language" :icon="GlobeIcon" value="English" action @click="openLanguages" />
+    <ListRow label="Email notifications" :icon="Mail01Icon" label-for="emails">
+        <template #trailing><Switch id="emails" v-model="emails" /></template>
+    </ListRow>
+    <ListRow label="Delete account" :icon="Delete02Icon" action danger @click="confirmDelete" />
+</ListGroup>`;
 
 const avatarCode = `<Avatar size="lg" status="online">
     <AvatarImage src="/ada.jpg" />
@@ -336,10 +351,9 @@ const avatarCode = `<Avatar size="lg" status="online">
 					<Transition mode="out-in" enter-active-class="transition-[opacity,filter] duration-300" enter-from-class="opacity-0 blur-sm" leave-active-class="transition-opacity duration-150" leave-to-class="opacity-0">
 						<div v-if="!contentLoaded" key="skeleton" class="flex items-center gap-4 rounded border border-border p-4">
 							<Skeleton circle class="size-12" />
-							<div class="flex flex-1 flex-col gap-2">
-								<Skeleton class="h-4 w-2/3" />
-								<Skeleton class="h-3 w-full" />
-								<Skeleton class="h-3 w-4/5" />
+							<div class="flex flex-1 flex-col gap-1">
+								<span class="text-sm font-semibold"><Skeleton text class="w-2/3" /></span>
+								<span class="text-xs"><Skeleton text /><Skeleton text class="w-4/5" /></span>
 							</div>
 						</div>
 						<div v-else key="content" class="flex items-center gap-4 rounded border border-border p-4">
@@ -374,6 +388,25 @@ const avatarCode = `<Avatar size="lg" status="online">
 					<DataListValue>March 14, 2027</DataListValue>
 				</DataListItem>
 			</DataList>
+		</DemoSection>
+
+		<!-- List -->
+		<DemoSection id="list" title="List" badge="New" description="Grouped rows like the lists of the phone settings: links with a chevron, buttons with a value, rows holding a control, badges and destructive actions." :code="listCode">
+			<div class="flex max-w-lg flex-col gap-6">
+				<ListGroup title="Your activity">
+					<ListRow label="Favourites" :icon="FavouriteIcon" icon-tile to="/components/data-display#list" />
+					<ListRow label="Notifications" :icon="Notification03Icon" icon-tile to="/components/data-display#list" :badge="3" />
+				</ListGroup>
+				<ListGroup title="Preferences" hint="Saved as soon as they change.">
+					<ListRow label="Language" :icon="GlobeIcon" value="English" action @click="showMessageToast({ message: 'Opens the language picker', type: 'info' })" />
+					<ListRow label="Email notifications" :icon="Mail01Icon" label-for="demo-list-emails">
+						<template #trailing>
+							<Switch id="demo-list-emails" v-model="listEmails" />
+						</template>
+					</ListRow>
+					<ListRow label="Delete account" :icon="Delete02Icon" action danger @click="showMessageToast({ message: 'Asks for a confirmation', type: 'info' })" />
+				</ListGroup>
+			</div>
 		</DemoSection>
 	</div>
 </template>

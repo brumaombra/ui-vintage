@@ -88,6 +88,7 @@
 		"./landing-shell": "./src/components/landing/landing-shell/index.ts",
 		"./language-flag": "./src/components/language-flag/index.ts",
 		"./language-selector": "./src/components/language-selector/index.ts",
+		"./list": "./src/components/list/index.ts",
 		"./load-more-button": "./src/components/load-more-button/index.ts",
 		"./loading-state-card": "./src/components/loading-state-card/index.ts",
 		"./message-dialog": "./src/components/message-dialog/index.ts",

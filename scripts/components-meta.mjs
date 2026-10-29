@@ -258,6 +258,19 @@ export const entries = {
 		category: 'data',
 		description: 'Key-value rows for detail panels.'
 	},
+	'list': {
+		category: 'data',
+		description: 'Grouped list of rows, like the lists of the phone settings: a `ListGroup` (title, rows in one card, note) of `ListRow`s. A row is a link (`to`, localized), a button (`action`, emits `click`), or a plain row holding a control in its `trailing` slot (point `label-for` at its id); it shows an icon (plain, or in a tile with `icon-tile`), a value, a badge, and a chevron when it opens something. `danger` colors a destructive action.',
+		example: `
+<ListGroup title="Preferences" hint="Saved as soon as they change.">
+    <ListRow label="Favourites" :icon="FavouriteIcon" icon-tile to="/favourites" :badge="3" />
+    <ListRow label="Language" :icon="GlobeIcon" value="English" action @click="openLanguages" />
+    <ListRow label="Email notifications" :icon="Mail01Icon" label-for="emails">
+        <template #trailing><Switch id="emails" v-model="emails" /></template>
+    </ListRow>
+    <ListRow label="Delete account" :icon="Delete02Icon" action danger @click="confirmDelete" />
+</ListGroup>`
+	},
 	'single-value-card': {
 		category: 'data',
 		description: 'KPI card. Numeric values count up and tween on change; optional trend badge and description.',
@@ -314,7 +327,10 @@ export const entries = {
 	},
 	'skeleton': {
 		category: 'data',
-		description: 'Shimmering loading placeholder. Size and shape it with classes.'
+		description: 'Shimmering loading placeholder. Size and shape it with classes; `circle` for avatars, `text` for a line of text (an inline span as tall as the surrounding text, with half the corner radius, so it can sit in a paragraph and keeps its line height).',
+		example: `
+<p class="text-sm"><Skeleton text class="w-40" /></p>
+<Skeleton class="h-24" />`
 	},
 	'separator': {
 		category: 'data',

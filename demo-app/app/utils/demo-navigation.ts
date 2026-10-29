@@ -104,7 +104,8 @@ export const demoNavigation: DemoNavigationGroup[] = [{
 			{ id: 'avatar', title: 'Avatar', keywords: 'user profile group status' },
 			{ id: 'badges-chips', title: 'Badges & chips', keywords: 'tag label status' },
 			{ id: 'progress-skeleton', title: 'Progress & skeleton', keywords: 'loading bar placeholder' },
-			{ id: 'data-list', title: 'Data list', keywords: 'key value description' }
+			{ id: 'data-list', title: 'Data list', keywords: 'key value description' },
+			{ id: 'list', title: 'List', keywords: 'settings rows menu grouped' }
 		]
 	}, {
 		id: 'navigation',

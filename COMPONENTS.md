@@ -17,7 +17,7 @@ This file lists every public entry point of the package with its components, pro
 
 - **Actions:** [action-bar](#brumaombraui-vintageaction-bar), [button](#brumaombraui-vintagebutton), [dropdown-menu](#brumaombraui-vintagedropdown-menu), [kbd](#brumaombraui-vintagekbd), [load-more-button](#brumaombraui-vintageload-more-button), [support-button](#brumaombraui-vintagesupport-button), [text-link](#brumaombraui-vintagetext-link), [toggle-group](#brumaombraui-vintagetoggle-group)
 - **Forms:** [calendar](#brumaombraui-vintagecalendar), [checkbox](#brumaombraui-vintagecheckbox), [combobox](#brumaombraui-vintagecombobox), [date-picker](#brumaombraui-vintagedate-picker), [date-time-picker](#brumaombraui-vintagedate-time-picker), [field](#brumaombraui-vintagefield), [file-dropzone](#brumaombraui-vintagefile-dropzone), [input](#brumaombraui-vintageinput), [label](#brumaombraui-vintagelabel), [native-select](#brumaombraui-vintagenative-select), [number-field](#brumaombraui-vintagenumber-field), [pin-input](#brumaombraui-vintagepin-input), [radio-group](#brumaombraui-vintageradio-group), [select](#brumaombraui-vintageselect), [slider](#brumaombraui-vintageslider), [slider-form-component](#brumaombraui-vintageslider-form-component), [switch](#brumaombraui-vintageswitch), [switch-form-component](#brumaombraui-vintageswitch-form-component), [tags-input](#brumaombraui-vintagetags-input), [textarea](#brumaombraui-vintagetextarea), [time-picker](#brumaombraui-vintagetime-picker)
-- **Data display:** [animated-number](#brumaombraui-vintageanimated-number), [avatar](#brumaombraui-vintageavatar), [badge](#brumaombraui-vintagebadge), [card](#brumaombraui-vintagecard), [card-grid](#brumaombraui-vintagecard-grid), [chip](#brumaombraui-vintagechip), [data-list](#brumaombraui-vintagedata-list), [data-table](#brumaombraui-vintagedata-table), [info-card](#brumaombraui-vintageinfo-card), [progress](#brumaombraui-vintageprogress), [progress-component](#brumaombraui-vintageprogress-component), [scroll-area](#brumaombraui-vintagescroll-area), [separator](#brumaombraui-vintageseparator), [single-value-card](#brumaombraui-vintagesingle-value-card), [skeleton](#brumaombraui-vintageskeleton), [stat-strip](#brumaombraui-vintagestat-strip), [table](#brumaombraui-vintagetable)
+- **Data display:** [animated-number](#brumaombraui-vintageanimated-number), [avatar](#brumaombraui-vintageavatar), [badge](#brumaombraui-vintagebadge), [card](#brumaombraui-vintagecard), [card-grid](#brumaombraui-vintagecard-grid), [chip](#brumaombraui-vintagechip), [data-list](#brumaombraui-vintagedata-list), [data-table](#brumaombraui-vintagedata-table), [info-card](#brumaombraui-vintageinfo-card), [list](#brumaombraui-vintagelist), [progress](#brumaombraui-vintageprogress), [progress-component](#brumaombraui-vintageprogress-component), [scroll-area](#brumaombraui-vintagescroll-area), [separator](#brumaombraui-vintageseparator), [single-value-card](#brumaombraui-vintagesingle-value-card), [skeleton](#brumaombraui-vintageskeleton), [stat-strip](#brumaombraui-vintagestat-strip), [table](#brumaombraui-vintagetable)
 - **Navigation:** [accordion](#brumaombraui-vintageaccordion), [bottom-nav](#brumaombraui-vintagebottom-nav), [breadcrumb](#brumaombraui-vintagebreadcrumb), [collapsible](#brumaombraui-vintagecollapsible), [pagination](#brumaombraui-vintagepagination), [sidebar](#brumaombraui-vintagesidebar), [stepper](#brumaombraui-vintagestepper), [tabs](#brumaombraui-vintagetabs)
 - **Overlays:** [alert-dialog](#brumaombraui-vintagealert-dialog), [command](#brumaombraui-vintagecommand), [dialog](#brumaombraui-vintagedialog), [hover-card](#brumaombraui-vintagehover-card), [popover](#brumaombraui-vintagepopover), [sheet](#brumaombraui-vintagesheet), [tooltip](#brumaombraui-vintagetooltip)
 - **Feedback:** [alert](#brumaombraui-vintagealert), [busy](#brumaombraui-vintagebusy), [busy-indicator](#brumaombraui-vintagebusy-indicator), [confirm-dialog](#brumaombraui-vintageconfirm-dialog), [cookie-consent](#brumaombraui-vintagecookie-consent), [empty-state-card](#brumaombraui-vintageempty-state-card), [loading-state-card](#brumaombraui-vintageloading-state-card), [message-dialog](#brumaombraui-vintagemessage-dialog), [message-toast](#brumaombraui-vintagemessage-toast), [spinner](#brumaombraui-vintagespinner)
@@ -1676,6 +1676,55 @@ import { InfoCard } from '@brumaombra/ui-vintage/info-card';
 
 ---
 
+### `@brumaombra/ui-vintage/list`
+
+Grouped list of rows, like the lists of the phone settings: a `ListGroup` (title, rows in one card, note) of `ListRow`s. A row is a link (`to`, localized), a button (`action`, emits `click`), or a plain row holding a control in its `trailing` slot (point `label-for` at its id); it shows an icon (plain, or in a tile with `icon-tile`), a value, a badge, and a chevron when it opens something. `danger` colors a destructive action.
+
+```ts
+import { ListGroup, ListRow } from '@brumaombra/ui-vintage/list';
+```
+
+```vue
+<ListGroup title="Preferences" hint="Saved as soon as they change.">
+    <ListRow label="Favourites" :icon="FavouriteIcon" icon-tile to="/favourites" :badge="3" />
+    <ListRow label="Language" :icon="GlobeIcon" value="English" action @click="openLanguages" />
+    <ListRow label="Email notifications" :icon="Mail01Icon" label-for="emails">
+        <template #trailing><Switch id="emails" v-model="emails" /></template>
+    </ListRow>
+    <ListRow label="Delete account" :icon="Delete02Icon" action danger @click="confirmDelete" />
+</ListGroup>
+```
+
+#### `ListGroup`
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `title` | `string` |  |
+| `hint` | `string` |  |
+| `class` | `HTMLAttributes['class']` |  |
+
+- **Slots:** `default`.
+
+#### `ListRow`
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `label` *(required)* | `string` |  |
+| `icon` | `HugeiconsIconDefinition \| null` | `null` |
+| `iconTile` | `boolean` | `false` |
+| `value` | `string` | `''` |
+| `badge` | `number` | `0` |
+| `to` | `string` | `''` |
+| `action` | `boolean` | `false` |
+| `danger` | `boolean` | `false` |
+| `labelFor` | `string` | `''` |
+| `class` | `HTMLAttributes['class']` |  |
+
+- **Emits:** `click`.
+- **Slots:** `trailing`.
+
+---
+
 ### `@brumaombra/ui-vintage/progress`
 
 Progress bar (`v-model` 0 to `max`) with an `indeterminate` mode.
@@ -1784,10 +1833,15 @@ import { SingleValueCard } from '@brumaombra/ui-vintage/single-value-card';
 
 ### `@brumaombra/ui-vintage/skeleton`
 
-Shimmering loading placeholder. Size and shape it with classes.
+Shimmering loading placeholder. Size and shape it with classes; `circle` for avatars, `text` for a line of text (an inline span as tall as the surrounding text, with half the corner radius, so it can sit in a paragraph and keeps its line height).
 
 ```ts
 import { Skeleton } from '@brumaombra/ui-vintage/skeleton';
+```
+
+```vue
+<p class="text-sm"><Skeleton text class="w-40" /></p>
+<Skeleton class="h-24" />
 ```
 
 #### `Skeleton`
@@ -1795,6 +1849,7 @@ import { Skeleton } from '@brumaombra/ui-vintage/skeleton';
 | Prop | Type | Default |
 | --- | --- | --- |
 | `circle` | `boolean` | `false` |
+| `text` | `boolean` | `false` |
 | `class` | `HTMLAttributes['class']` |  |
 
 ---
