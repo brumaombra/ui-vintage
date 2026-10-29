@@ -309,9 +309,10 @@ export const entries = {
 	},
 	'badge': {
 		category: 'data',
-		description: 'Small status label in five tones, with an optional icon, `dot`, or pulsing `pulse` indicator.',
+		description: 'Small status label in five tones, with an optional icon, `dot`, or pulsing `pulse` indicator. `size="sm"` makes it smaller, `size="responsive"` only on phones.',
 		example: `
-<Badge text="Operational" color="green" pulse />`
+<Badge text="Operational" color="green" pulse />
+<Badge text="Yes" color="green" size="responsive" />`
 	},
 	'chip': {
 		category: 'data',

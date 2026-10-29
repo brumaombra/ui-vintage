@@ -14,14 +14,30 @@ const props = withDefaults(defineProps<{
 	dot?: boolean;
 	pulse?: boolean;
 	interactive?: boolean;
+	size?: 'default' | 'sm' | 'responsive'; // The small badge, or small on phones and default from tablets up
 	class?: HTMLAttributes['class'];
 }>(), {
 	icon: null,
 	color: 'gray',
 	dot: false,
 	pulse: false,
-	interactive: false
+	interactive: false,
+	size: 'default'
 });
+
+// Text, padding and gap of each size
+const sizeClasses = {
+	default: 'gap-1.5 px-2 text-xs',
+	sm: 'gap-1 px-1.5 text-[0.6875rem] leading-3.5',
+	responsive: 'gap-1 px-1.5 text-[0.6875rem] leading-3.5 md:gap-1.5 md:px-2 md:text-xs md:leading-4'
+};
+
+// Icon of each size
+const iconSizeClasses = {
+	default: 'size-3.5',
+	sm: 'size-3',
+	responsive: 'size-3 md:size-3.5'
+};
 
 // Surface of the badge: a tone, or for primary a neutral badge with dark text, whose dot and icon carry the brand orange (orange text on its tint is only 2.1:1)
 const colorClasses = computed(() => props.color === 'primary' ? 'border border-border bg-surface text-foreground' : getSurfaceToneClasses(props.color));
@@ -42,7 +58,7 @@ const interactiveClasses = computed(() => {
 </script>
 
 <template>
-	<span data-slot="badge" :class="cn('inline-flex w-fit items-center justify-center gap-1.5 whitespace-nowrap rounded border px-2 py-0.5 text-xs font-semibold transition-colors duration-150', colorClasses, interactiveClasses, props.class)">
+	<span data-slot="badge" :class="cn('inline-flex w-fit items-center justify-center whitespace-nowrap rounded border py-0.5 font-semibold transition-colors duration-150', sizeClasses[props.size], colorClasses, interactiveClasses, props.class)">
 		<!-- Status dot -->
 		<span v-if="props.dot || props.pulse" class="relative flex size-1.5 shrink-0">
 			<span v-if="props.pulse" :class="['absolute inset-0 animate-uv-ping-soft rounded-full', accentClass]" />
@@ -50,7 +66,7 @@ const interactiveClasses = computed(() => {
 		</span>
 
 		<!-- Icon -->
-		<HugeiconsIcon v-if="props.icon" :icon="props.icon" :class="['size-3.5 shrink-0', props.color === 'primary' && 'text-primary']" :stroke-width="1.8" />
+		<HugeiconsIcon v-if="props.icon" :icon="props.icon" :class="[iconSizeClasses[props.size], 'shrink-0', props.color === 'primary' && 'text-primary']" :stroke-width="1.8" />
 		{{ props.text }}
 	</span>
 </template>

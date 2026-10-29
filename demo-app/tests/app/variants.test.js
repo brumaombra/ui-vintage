@@ -132,6 +132,18 @@ describe('Text, inputs and badges', () => {
 		expect(still.classes()).not.toContain('hover:-translate-y-0.5');
 	});
 
+	// The small badge has smaller text everywhere, the responsive one only on phones
+	it('makes the text smaller with the size', async () => {
+		const normal = await mountSuspended(Badge, { props: { text: 'Yes' } });
+		expect(normal.classes()).toContain('text-xs');
+		const small = await mountSuspended(Badge, { props: { text: 'Yes', size: 'sm' } });
+		expect(small.classes()).toContain('text-[0.6875rem]');
+		expect(small.classes()).not.toContain('text-xs');
+		const responsive = await mountSuspended(Badge, { props: { text: 'Yes', size: 'responsive', icon: SearchIcon } });
+		expect(responsive.classes()).toEqual(expect.arrayContaining(['text-[0.6875rem]', 'md:text-xs']));
+		expect(responsive.find('svg').classes()).toEqual(expect.arrayContaining(['size-3', 'md:size-3.5']));
+	});
+
 	// Auto-colored initials always get the same tint for the same name
 	it('picks a stable tint from the name', async () => {
 		const mountAvatar = () => mountSuspended(Avatar, { slots: { default: () => h(AvatarFallback, { name: 'Giulia', color: 'auto' }) } });

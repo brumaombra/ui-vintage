@@ -1400,7 +1400,7 @@ function getInitials(name: string | null | undefined): string
 
 ### `@brumaombra/ui-vintage/badge`
 
-Small status label in five tones, with an optional icon, `dot`, or pulsing `pulse` indicator.
+Small status label in five tones, with an optional icon, `dot`, or pulsing `pulse` indicator. `size="sm"` makes it smaller, `size="responsive"` only on phones.
 
 ```ts
 import { Badge } from '@brumaombra/ui-vintage/badge';
@@ -1408,6 +1408,7 @@ import { Badge } from '@brumaombra/ui-vintage/badge';
 
 ```vue
 <Badge text="Operational" color="green" pulse />
+<Badge text="Yes" color="green" size="responsive" />
 ```
 
 #### `Badge`
@@ -1420,6 +1421,7 @@ import { Badge } from '@brumaombra/ui-vintage/badge';
 | `dot` | `boolean` | `false` |
 | `pulse` | `boolean` | `false` |
 | `interactive` | `boolean` | `false` |
+| `size` | `'default' \| 'sm' \| 'responsive'` | `'default'` |
 | `class` | `HTMLAttributes['class']` |  |
 
 ---
