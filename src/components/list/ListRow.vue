@@ -57,7 +57,8 @@ const handleClick = () => {
 			:to="props.to || undefined"
 			:type="props.action ? 'button' : undefined"
 			:class="cn(
-				'flex min-h-13 w-full items-center gap-3 px-4 py-2 text-left md:px-5',
+				'flex min-h-13 w-full items-center px-4 py-2 text-left md:px-5',
+				props.icon && !props.iconTile ? 'gap-2 md:gap-3' : 'gap-3', // A plain icon sits closer to its label on phones
 				isInteractive && 'cursor-pointer transition-colors hover:bg-accent focus-visible:bg-accent focus-visible:outline-none',
 				props.danger ? 'text-destructive' : 'text-foreground'
 			)"

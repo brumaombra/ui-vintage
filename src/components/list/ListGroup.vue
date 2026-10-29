@@ -23,7 +23,7 @@ const props = defineProps<{
 			</ul>
 		</Card>
 
-		<!-- Note -->
-		<p v-if="props.hint" class="mt-2 px-1 text-xs text-muted-foreground">{{ props.hint }}</p>
+		<!-- Note (a step smaller on phones, like the rows) -->
+		<p v-if="props.hint" class="mt-2 px-1 text-[0.6875rem] text-muted-foreground md:text-xs">{{ props.hint }}</p>
 	</section>
 </template>
