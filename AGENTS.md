@@ -25,7 +25,7 @@ Only build something new when no entry point fits, and compose it from library p
 
 ## 3. Follow the library conventions
 
-- Import from explicit subpaths: `import { Button } from '@brumaombra/ui-vintage/button'`. Never import from `@brumaombra/ui-vintage/src/...`.
+- Import from explicit subpaths: `import { Button } from '@brumaombra/ui-vintage/button'`. Never import from `@brumaombra/ui-vintage/src/...`. Write the path literally: the Nuxt module follows these imports to generate only the classes of the components the app uses, so a component reached another way (a computed path, a file under `src/`) renders without its styles.
 - Style with the semantic tokens (`bg-background`, `bg-card`, `bg-surface`, `bg-accent`, `bg-primary`, `text-foreground`, `text-muted-foreground`, `border-border`, `border-border-strong`, ...). They adapt to dark mode, so don't write `dark:` color variants or hard-coded colors for surfaces and text.
 - Customize components through their props and the `class` prop (merged with tailwind-merge) rather than wrapping them in extra styled elements.
 - Keep corners at `rounded` (the library's square look) and use `shadow-elevated-sm|md|lg|xl` for elevation, without glows or gradients. Every radius step resolves to the shared `--uv-radius` token, so change the token instead of passing other radii.
