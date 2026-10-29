@@ -520,9 +520,11 @@ await showMessageDialog({ type: 'success', message: 'Your account is verified.' 
 	},
 	'busy-indicator': {
 		category: 'feedback',
-		description: 'Global busy overlay controlled with `setBusy(show, options)`.',
+		description: 'Global busy overlay controlled with `setBusy(show, options)`. Call `configureBusyIndicator({ variant, mark })` once (e.g. in a client plugin) to cover the whole screen (`variant: \'fullscreen\'`) and show the app\'s own animated `mark` component instead of the spinner.',
 		exampleLang: 'ts',
 		example: `
+configureBusyIndicator({ variant: 'fullscreen', mark: AppLogoMark });
+
 setBusy(true, { label: 'Generating report...' });
 await generateReport();
 setBusy(false);`

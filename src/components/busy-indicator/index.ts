@@ -1,3 +1,3 @@
 export { default as BusyIndicator } from './BusyIndicator.vue';
-export { busyIndicatorState, setBusy } from './busy-indicator-state';
-export type { SetBusyOptions } from './busy-indicator-state';
+export { busyIndicatorConfig, busyIndicatorState, configureBusyIndicator, setBusy } from './busy-indicator-state';
+export type { BusyIndicatorConfig, SetBusyOptions } from './busy-indicator-state';

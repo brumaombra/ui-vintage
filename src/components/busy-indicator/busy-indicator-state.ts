@@ -1,4 +1,4 @@
-import { h, reactive, render, type HTMLAttributes } from 'vue';
+import { h, reactive, render, shallowReactive, type Component, type HTMLAttributes } from 'vue';
 import { getUiVintageRuntimeMessage } from '../../lib/i18n';
 
 export interface SetBusyOptions {
@@ -14,7 +14,23 @@ interface BusyIndicatorState {
 	overlayClass: HTMLAttributes['class'];
 }
 
+export interface BusyIndicatorConfig {
+	variant?: 'card' | 'fullscreen'; // A card over the dimmed page, or the whole screen
+	mark?: Component | null; // Shown above the label on the whole screen instead of the spinner (e.g. the app's animated logo; it is rendered outside the app, so it must not need its plugins)
+}
+
 const BUSY_INDICATOR_ROOT_ID = 'ui-vintage-busy-indicator-root';
+
+// How the busy indicator looks in this app (set once, e.g. in a plugin)
+export const busyIndicatorConfig = shallowReactive<Required<BusyIndicatorConfig>>({
+	variant: 'card',
+	mark: null
+});
+
+// Choose how the busy indicator looks
+export const configureBusyIndicator = (config: BusyIndicatorConfig) => {
+	Object.assign(busyIndicatorConfig, config);
+};
 
 let busyIndicatorMountPromise: Promise<void> | null = null;
 

@@ -2981,14 +2981,16 @@ import { Busy } from '@brumaombra/ui-vintage/busy';
 
 ### `@brumaombra/ui-vintage/busy-indicator`
 
-Global busy overlay controlled with `setBusy(show, options)`.
+Global busy overlay controlled with `setBusy(show, options)`. Call `configureBusyIndicator({ variant, mark })` once (e.g. in a client plugin) to cover the whole screen (`variant: 'fullscreen'`) and show the app's own animated `mark` component instead of the spinner.
 
 ```ts
-import { BusyIndicator, busyIndicatorState, setBusy } from '@brumaombra/ui-vintage/busy-indicator';
-import type { SetBusyOptions } from '@brumaombra/ui-vintage/busy-indicator';
+import { BusyIndicator, busyIndicatorConfig, busyIndicatorState, configureBusyIndicator, setBusy } from '@brumaombra/ui-vintage/busy-indicator';
+import type { BusyIndicatorConfig, SetBusyOptions } from '@brumaombra/ui-vintage/busy-indicator';
 ```
 
 ```ts
+configureBusyIndicator({ variant: 'fullscreen', mark: AppLogoMark });
+
 setBusy(true, { label: 'Generating report...' });
 await generateReport();
 setBusy(false);
@@ -3001,8 +3003,14 @@ setBusy(false);
 #### Functions, constants, and types
 
 ```ts
+const busyIndicatorConfig
 const busyIndicatorState: BusyIndicatorState
+function configureBusyIndicator(config: BusyIndicatorConfig)
 function setBusy(show: boolean, options: SetBusyOptions = {})
+interface BusyIndicatorConfig {
+    variant?: 'card' | 'fullscreen';
+    mark?: Component | null;
+}
 interface SetBusyOptions {
     label?: string;
     class?: HTMLAttributes['class'];
