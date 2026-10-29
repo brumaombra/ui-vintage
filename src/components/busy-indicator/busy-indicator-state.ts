@@ -1,10 +1,12 @@
-import { h, reactive, render, shallowReactive, type Component, type HTMLAttributes } from 'vue';
+import { h, markRaw, reactive, render, type Component, type HTMLAttributes } from 'vue';
 import { getUiVintageRuntimeMessage } from '../../lib/i18n';
 
 export interface SetBusyOptions {
 	label?: string;
 	class?: HTMLAttributes['class'];
 	overlayClass?: HTMLAttributes['class'];
+	variant?: 'card' | 'fullscreen'; // A card over the dimmed page, or the whole screen
+	mark?: Component | null; // Shown above the label on the whole screen instead of the spinner (e.g. the app's animated logo; it is rendered outside the app, so it must not need its plugins)
 }
 
 interface BusyIndicatorState {
@@ -12,25 +14,11 @@ interface BusyIndicatorState {
 	label: string;
 	class: HTMLAttributes['class'];
 	overlayClass: HTMLAttributes['class'];
-}
-
-export interface BusyIndicatorConfig {
-	variant?: 'card' | 'fullscreen'; // A card over the dimmed page, or the whole screen
-	mark?: Component | null; // Shown above the label on the whole screen instead of the spinner (e.g. the app's animated logo; it is rendered outside the app, so it must not need its plugins)
+	variant: 'card' | 'fullscreen';
+	mark: Component | null;
 }
 
 const BUSY_INDICATOR_ROOT_ID = 'ui-vintage-busy-indicator-root';
-
-// How the busy indicator looks in this app (set once, e.g. in a plugin)
-export const busyIndicatorConfig = shallowReactive<Required<BusyIndicatorConfig>>({
-	variant: 'card',
-	mark: null
-});
-
-// Choose how the busy indicator looks
-export const configureBusyIndicator = (config: BusyIndicatorConfig) => {
-	Object.assign(busyIndicatorConfig, config);
-};
 
 let busyIndicatorMountPromise: Promise<void> | null = null;
 
@@ -39,7 +27,9 @@ export const busyIndicatorState: BusyIndicatorState = reactive({
 	show: false,
 	label: getUiVintageRuntimeMessage('uiVintage.common.loading.title', 'Loading...'),
 	class: undefined,
-	overlayClass: undefined
+	overlayClass: undefined,
+	variant: 'card',
+	mark: null
 });
 
 // Mount the busy indicator once on demand
@@ -90,13 +80,15 @@ export const setBusy = (show: boolean, options: SetBusyOptions = {}) => {
 		busyIndicatorState.label = options.label ?? getUiVintageRuntimeMessage('uiVintage.common.loading.title', 'Loading...');
 		busyIndicatorState.class = options.class;
 		busyIndicatorState.overlayClass = options.overlayClass;
+		busyIndicatorState.variant = options.variant ?? 'card';
+		busyIndicatorState.mark = options.mark ? markRaw(options.mark) : null; // A component, not reactive data
 		void ensureBusyIndicatorMounted();
 	}
 
 	// Toggle the overlay visibility
 	busyIndicatorState.show = show;
 
-	// Reset transient styling after hiding
+	// Reset transient styling after hiding (the variant and the mark stay, so the whole screen can fade out)
 	if (!show) {
 		busyIndicatorState.class = undefined;
 		busyIndicatorState.overlayClass = undefined;

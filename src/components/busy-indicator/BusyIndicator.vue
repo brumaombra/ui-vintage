@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { Busy } from '../ui/busy';
 import { Spinner } from '../ui/spinner';
-import { busyIndicatorConfig, busyIndicatorState } from './busy-indicator-state';
+import { busyIndicatorState } from './busy-indicator-state';
 </script>
 
 <template>
 	<!-- Whole screen: the mark (or the spinner) and the label, over everything -->
-	<Transition v-if="busyIndicatorConfig.variant === 'fullscreen'" name="uv-busy-screen">
+	<Transition v-if="busyIndicatorState.variant === 'fullscreen'" name="uv-busy-screen">
 		<div v-if="busyIndicatorState.show" data-slot="busy-screen" role="status" aria-live="polite" aria-busy="true" :class="['fixed inset-0 z-[70] flex flex-col items-center justify-center gap-6 bg-background px-6 text-center', busyIndicatorState.overlayClass]">
-			<component :is="busyIndicatorConfig.mark" v-if="busyIndicatorConfig.mark" aria-hidden="true" />
+			<component :is="busyIndicatorState.mark" v-if="busyIndicatorState.mark" aria-hidden="true" />
 			<Spinner v-else size="xl" aria-hidden="true" class="text-primary" />
 			<span data-slot="busy-label" :class="['font-mono text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground', busyIndicatorState.class]">{{ busyIndicatorState.label }}</span>
 		</div>

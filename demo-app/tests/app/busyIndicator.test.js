@@ -1,6 +1,6 @@
 import { h, nextTick } from 'vue';
 import { afterEach, describe, expect, it } from 'vitest';
-import { configureBusyIndicator, setBusy } from '@brumaombra/ui-vintage/busy-indicator';
+import { setBusy } from '@brumaombra/ui-vintage/busy-indicator';
 
 // Wait until the lazily mounted indicator has rendered
 const waitForRender = async () => {
@@ -13,17 +13,15 @@ const waitForRender = async () => {
 
 // Global busy indicator: the default card, and the whole screen with the app's own mark
 describe('busy indicator', () => {
-	// Hide it and restore the default look after each test
+	// Hide it after each test
 	afterEach(async () => {
 		setBusy(false);
-		configureBusyIndicator({ variant: 'card', mark: null });
 		await nextTick();
 	});
 
 	// The whole screen shows the app's mark instead of the spinner, with the label
 	it('covers the whole screen with the configured mark', async () => {
-		configureBusyIndicator({ variant: 'fullscreen', mark: { render: () => h('svg', { 'data-testid': 'app-mark' }) } });
-		setBusy(true, { label: 'Creating...' });
+		setBusy(true, { label: 'Creating...', variant: 'fullscreen', mark: { render: () => h('svg', { 'data-testid': 'app-mark' }) } });
 		await waitForRender();
 		const screen = document.querySelector('[data-slot="busy-screen"]');
 		expect(screen).not.toBeNull();
@@ -35,16 +33,18 @@ describe('busy indicator', () => {
 
 	// Without a mark the whole screen falls back to the spinner
 	it('shows the spinner on the whole screen without a mark', async () => {
-		configureBusyIndicator({ variant: 'fullscreen' });
-		setBusy(true);
+		setBusy(true, { variant: 'fullscreen' });
 		await waitForRender();
 		const screen = document.querySelector('[data-slot="busy-screen"]');
 		expect(screen).not.toBeNull();
 		expect(screen.querySelector('[data-testid="app-mark"]')).toBeNull();
 	});
 
-	// The default stays the card over the page
-	it('keeps the card by default', async () => {
+	// Each call picks its look: after the whole screen, a call without options is the card again
+	it('goes back to the card without options', async () => {
+		setBusy(true, { variant: 'fullscreen' });
+		await waitForRender();
+		setBusy(false);
 		setBusy(true, { label: 'Saving...' });
 		await waitForRender();
 		expect(document.querySelector('[data-slot="busy-screen"]')).toBeNull();
