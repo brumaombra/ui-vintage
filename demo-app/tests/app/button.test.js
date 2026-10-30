@@ -60,6 +60,9 @@ describe('Button with count', () => {
 
 		// The badge is tucked into the corner: further out, it touched the button next to it
 		expect(wrapper.find('[data-slot="button-count"]').classes()).toEqual(expect.arrayContaining(['-top-1.5', '-right-1.5']));
+
+		// The badge is solid in the brand color, so apps can use it for any count (not only alerts)
+		expect(wrapper.find('[data-slot="button-count"]').classes()).toEqual(expect.arrayContaining(['bg-primary', 'text-primary-foreground']));
 	});
 
 	// Large counts are capped

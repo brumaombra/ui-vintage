@@ -4,7 +4,6 @@ import type { PrimitiveProps } from 'reka-ui';
 import { computed, type HTMLAttributes } from 'vue';
 import type { ButtonVariants } from '.';
 import { Primitive } from 'reka-ui';
-import { getSurfaceToneClasses } from '../../../lib/color-tokens';
 import { cn } from '../../../lib/utils';
 import { Spinner } from '../spinner';
 import { buttonVariants } from '.';
@@ -68,11 +67,9 @@ const linkAttributes = computed(() => {
 				<Spinner size="sm" />
 			</span>
 
-			<!-- Notification count: a soft badge on an opaque backing (so the tint never shows the button through), its digits trimmed to the cap height so they sit centered in any font; tucked into the corner, so it stays clear of a button next to it -->
-			<span v-if="hasCount" data-slot="button-count" class="pointer-events-none absolute -top-1.5 -right-1.5 z-10 flex rounded bg-background">
-				<span :class="cn('flex h-5 min-w-5 items-center justify-center rounded px-1 text-[0.6875rem] font-semibold leading-none tabular-nums', getSurfaceToneClasses('red'))">
-					<span class="[text-box:trim-both_cap_alphabetic]">{{ countText }}</span>
-				</span>
+			<!-- Notification count: a solid badge in the brand color, its digits trimmed to the cap height so they sit centered in any font; tucked into the corner, so it stays clear of a button next to it -->
+			<span v-if="hasCount" data-slot="button-count" class="pointer-events-none absolute -top-1.5 -right-1.5 z-10 flex h-5 min-w-5 items-center justify-center rounded bg-primary px-1 text-[0.6875rem] font-bold leading-none tabular-nums text-primary-foreground">
+				<span class="[text-box:trim-both_cap_alphabetic]">{{ countText }}</span>
 			</span>
 		</template>
 	</Primitive>
