@@ -577,7 +577,7 @@ setBusy(true, { label: 'Creating...', variant: 'fullscreen', mark: AppLogoMark }
 	},
 	'section-title': {
 		category: 'layout',
-		description: 'Section heading over a rule that starts with a primary segment, with an optional icon tile, description, and trailing action (the blog sections use it too). On phones the space below it matches the DashboardShell page padding.',
+		description: 'Slim section heading over a thin rule, with an optional icon inline before the title in the brand color, a description, and a trailing action (the blog sections use it too). On phones the space below it matches the DashboardShell page padding.',
 		example: `
 <SectionTitle title="Market FAQ" :icon="HelpCircleIcon" description="Everything about how this market works">
     <template #action>

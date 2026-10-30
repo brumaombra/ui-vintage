@@ -179,11 +179,12 @@ describe('SectionTitle', () => {
 		expect(wrapper.classes()).toContain('flex-col');
 	});
 
-	// The icon tile is solid, so the page grid does not show through it
-	it('draws the icon on a solid tile', async () => {
+	// The heading was a tile, a large title and a rule with an orange segment, too large on phones: now the icon sits inline in the brand color, over a thin rule
+	it('keeps the heading slim, with the icon inline', async () => {
 		const wrapper = await mountSuspended(SectionTitle, { props: { title: 'Sports', icon: SearchIcon } });
-		const tile = wrapper.find('svg').element.parentElement;
-		expect(tile.className).toContain('bg-[color-mix(in_oklab,var(--primary)_10%,var(--card))]');
+		expect(wrapper.find('h2 svg').classes()).toEqual(expect.arrayContaining(['size-4', 'text-primary']));
+		expect(wrapper.find('h2').classes()).toEqual(expect.arrayContaining(['text-base', 'md:text-lg']));
+		expect(wrapper.find('.bg-primary').exists()).toBe(false);
 	});
 
 	// Without a description the action stays on the title row, even on mobile
