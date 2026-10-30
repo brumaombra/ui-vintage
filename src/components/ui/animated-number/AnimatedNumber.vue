@@ -56,11 +56,12 @@ const animateTo = (target: number) => {
 	}
 
 	const from = displayValue.value;
-	const start = performance.now();
+	let start: number | null = null;
 	direction.value = target >= from ? 'up' : 'down';
 
-	// Advance one frame of the tween
+	// Advance one frame of the tween (it starts at the time of its first frame: a frame's time can be earlier than performance.now() when it was asked, and a negative progress made the curve dip below the starting value)
 	const step = (now: number) => {
+		if (start === null) start = now;
 		const progress = Math.min(1, (now - start) / props.duration);
 		displayValue.value = from + (target - from) * easeOutExpo(progress);
 		if (progress < 1) {
