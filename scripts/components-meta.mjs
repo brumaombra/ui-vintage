@@ -531,6 +531,27 @@ const confirmed = await showConfirmDialog({
 		example: `
 await showMessageDialog({ type: 'success', message: 'Your account is verified.' });`
 	},
+	'haptics': {
+		category: 'feedback',
+		description: 'Haptic feedback for taps that matter: `haptic(\'tap\' | \'success\' | \'error\')`, or `useHaptics()` in components. It vibrates on Android and plays the Taptic Engine tick of a hidden native switch on iOS 18 and later; it does nothing on desktop, on the server, before the first user interaction and when `setHapticsEnabled(false)`. Call it in the handler of the user\'s tap: iOS only plays the taps of a user action, so a feedback after an `await` (like `success()` once a request answers) may stay silent there, while Android still plays it. Use it sparingly (a prediction placed, a toggle), not on every button.',
+		exampleLang: 'ts',
+		example: `
+const { tap, success, error } = useHaptics();
+
+// Tap when the user presses, then tell the result (after the await, Android only)
+const handleSubmit = async () => {
+	tap();
+	const isSaved = await save();
+	if (isSaved) {
+		success();
+	} else {
+		error();
+	}
+};
+
+// Follow a setting of the user
+setHapticsEnabled(user.hapticsEnabled);`
+	},
 	'busy-indicator': {
 		category: 'feedback',
 		description: 'Global busy overlay controlled with `setBusy(show, options)`. By default a card over the dimmed page; `variant: \'fullscreen\'` covers the whole screen, showing the app\'s own animated `mark` component instead of the spinner.',

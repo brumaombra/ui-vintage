@@ -17,6 +17,7 @@ Before writing a custom component, check the catalog's contents list. Common map
 - Searchable select → `combobox` (`ComboboxSelect`); plain select → `select`.
 - Table with sorting or selection → `data-table`; KPI tiles → `single-value-card`; a compact row of numbers → `stat-strip`.
 - Confirmation → `showConfirmDialog` (`confirm-dialog`); notification → `showMessageToast` (`message-toast`); blocking load → `setBusy` (`busy-indicator`). These mount themselves, so don't add them to a template.
+- Haptic feedback → `haptic()` or `useHaptics()` (`haptics`), only for taps that matter (a toggle, an action that went through or failed), never on every button.
 - App layout with a sidebar → `dashboard-shell`; marketing or blog layout → `landing`; page title row → `page-header`.
 - Empty and loading placeholders → `empty-state-card`, `loading-state-card`, `skeleton`.
 - Blog pages with Nuxt Content → `blog` (`BlogHeaderSection`, `BlogPostHeader`, `PostsList`, `TableOfContents`, `BlogContentRenderer`, ...).

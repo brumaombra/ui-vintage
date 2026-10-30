@@ -76,6 +76,7 @@
 		"./error-page": "./src/components/error-page/index.ts",
 		"./field": "./src/components/ui/field/index.ts",
 		"./file-dropzone": "./src/components/ui/file-dropzone/index.ts",
+		"./haptics": "./src/lib/haptics.ts",
 		"./hover-card": "./src/components/ui/hover-card/index.ts",
 		"./info-card": "./src/components/info-card/index.ts",
 		"./inline-date-picker": "./src/components/ui/inline-date-picker/index.ts",

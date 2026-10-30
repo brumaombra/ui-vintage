@@ -20,7 +20,7 @@ This file lists every public entry point of the package with its components, pro
 - **Data display:** [animated-number](#brumaombraui-vintageanimated-number), [avatar](#brumaombraui-vintageavatar), [badge](#brumaombraui-vintagebadge), [card](#brumaombraui-vintagecard), [card-grid](#brumaombraui-vintagecard-grid), [chip](#brumaombraui-vintagechip), [data-list](#brumaombraui-vintagedata-list), [data-table](#brumaombraui-vintagedata-table), [info-card](#brumaombraui-vintageinfo-card), [list](#brumaombraui-vintagelist), [progress](#brumaombraui-vintageprogress), [progress-component](#brumaombraui-vintageprogress-component), [scroll-area](#brumaombraui-vintagescroll-area), [separator](#brumaombraui-vintageseparator), [single-value-card](#brumaombraui-vintagesingle-value-card), [skeleton](#brumaombraui-vintageskeleton), [stat-strip](#brumaombraui-vintagestat-strip), [table](#brumaombraui-vintagetable)
 - **Navigation:** [accordion](#brumaombraui-vintageaccordion), [bottom-nav](#brumaombraui-vintagebottom-nav), [breadcrumb](#brumaombraui-vintagebreadcrumb), [collapsible](#brumaombraui-vintagecollapsible), [pagination](#brumaombraui-vintagepagination), [sidebar](#brumaombraui-vintagesidebar), [stepper](#brumaombraui-vintagestepper), [tabs](#brumaombraui-vintagetabs)
 - **Overlays:** [alert-dialog](#brumaombraui-vintagealert-dialog), [command](#brumaombraui-vintagecommand), [dialog](#brumaombraui-vintagedialog), [hover-card](#brumaombraui-vintagehover-card), [popover](#brumaombraui-vintagepopover), [sheet](#brumaombraui-vintagesheet), [tooltip](#brumaombraui-vintagetooltip)
-- **Feedback:** [alert](#brumaombraui-vintagealert), [busy](#brumaombraui-vintagebusy), [busy-indicator](#brumaombraui-vintagebusy-indicator), [confirm-dialog](#brumaombraui-vintageconfirm-dialog), [cookie-consent](#brumaombraui-vintagecookie-consent), [empty-state-card](#brumaombraui-vintageempty-state-card), [loading-state-card](#brumaombraui-vintageloading-state-card), [message-dialog](#brumaombraui-vintagemessage-dialog), [message-toast](#brumaombraui-vintagemessage-toast), [spinner](#brumaombraui-vintagespinner)
+- **Feedback:** [alert](#brumaombraui-vintagealert), [busy](#brumaombraui-vintagebusy), [busy-indicator](#brumaombraui-vintagebusy-indicator), [confirm-dialog](#brumaombraui-vintageconfirm-dialog), [cookie-consent](#brumaombraui-vintagecookie-consent), [empty-state-card](#brumaombraui-vintageempty-state-card), [haptics](#brumaombraui-vintagehaptics), [loading-state-card](#brumaombraui-vintageloading-state-card), [message-dialog](#brumaombraui-vintagemessage-dialog), [message-toast](#brumaombraui-vintagemessage-toast), [spinner](#brumaombraui-vintagespinner)
 - **Layouts and app shell:** [background-grid](#brumaombraui-vintagebackground-grid), [dashboard-shell](#brumaombraui-vintagedashboard-shell), [error-page](#brumaombraui-vintageerror-page), [landing](#brumaombraui-vintagelanding), [landing-content](#brumaombraui-vintagelanding-content), [landing-footer](#brumaombraui-vintagelanding-footer), [landing-navbar](#brumaombraui-vintagelanding-navbar), [landing-shell](#brumaombraui-vintagelanding-shell), [language-flag](#brumaombraui-vintagelanguage-flag), [language-selector](#brumaombraui-vintagelanguage-selector), [page-header](#brumaombraui-vintagepage-header), [section-title](#brumaombraui-vintagesection-title), [theme-selector](#brumaombraui-vintagetheme-selector)
 - **Content and blog:** [blog](#brumaombraui-vintageblog), [content](#brumaombraui-vintagecontent)
 - **Utilities and types:** [common-types](#brumaombraui-vintagecommon-types), [utils](#brumaombraui-vintageutils)
@@ -3183,6 +3183,45 @@ import { EmptyStateCard } from '@brumaombra/ui-vintage/empty-state-card';
 | `level` | `HeadingLevel` | `3` |
 
 - **Slots:** `action`.
+
+---
+
+### `@brumaombra/ui-vintage/haptics`
+
+Haptic feedback for taps that matter: `haptic('tap' | 'success' | 'error')`, or `useHaptics()` in components. It vibrates on Android and plays the Taptic Engine tick of a hidden native switch on iOS 18 and later; it does nothing on desktop, on the server, before the first user interaction and when `setHapticsEnabled(false)`. Call it in the handler of the user's tap: iOS only plays the taps of a user action, so a feedback after an `await` (like `success()` once a request answers) may stay silent there, while Android still plays it. Use it sparingly (a prediction placed, a toggle), not on every button.
+
+```ts
+import { isHapticsSupported, setHapticsEnabled, haptic, useHaptics } from '@brumaombra/ui-vintage/haptics';
+import type { HapticPattern } from '@brumaombra/ui-vintage/haptics';
+```
+
+```ts
+const { tap, success, error } = useHaptics();
+
+// Tap when the user presses, then tell the result (after the await, Android only)
+const handleSubmit = async () => {
+	tap();
+	const isSaved = await save();
+	if (isSaved) {
+		success();
+	} else {
+		error();
+	}
+};
+
+// Follow a setting of the user
+setHapticsEnabled(user.hapticsEnabled);
+```
+
+#### Functions, constants, and types
+
+```ts
+type HapticPattern = 'tap' | 'success' | 'error'
+function isHapticsSupported()
+function setHapticsEnabled(isEnabled: boolean)
+function haptic(pattern: HapticPattern = 'tap')
+function useHaptics()
+```
 
 ---
 
