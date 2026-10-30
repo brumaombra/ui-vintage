@@ -57,6 +57,9 @@ describe('Button with count', () => {
 		const wrapper = await mountSuspended(Button, { props: { count: 4, size: 'icon' }, slots: { default: () => 'Bell' } });
 		expect(wrapper.find('[data-slot="button-count"]').text()).toBe('4');
 		expect(wrapper.find('[data-slot="button"]').classes()).toContain('overflow-visible');
+
+		// The badge is tucked into the corner: further out, it touched the button next to it
+		expect(wrapper.find('[data-slot="button-count"]').classes()).toEqual(expect.arrayContaining(['-top-1.5', '-right-1.5']));
 	});
 
 	// Large counts are capped
