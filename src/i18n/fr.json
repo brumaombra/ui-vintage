@@ -220,6 +220,10 @@
 				"description": "Un pourboire unique sur Ko-fi"
 			},
 			"newTab": "s'ouvre dans un nouvel onglet"
+		},
+		"timeWheel": {
+			"hours": "Heures",
+			"minutes": "Minutes"
 		}
 	}
 }

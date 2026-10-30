@@ -16,7 +16,7 @@ This file lists every public entry point of the package with its components, pro
 ## Contents
 
 - **Actions:** [action-bar](#brumaombraui-vintageaction-bar), [button](#brumaombraui-vintagebutton), [dropdown-menu](#brumaombraui-vintagedropdown-menu), [kbd](#brumaombraui-vintagekbd), [load-more-button](#brumaombraui-vintageload-more-button), [support-button](#brumaombraui-vintagesupport-button), [text-link](#brumaombraui-vintagetext-link), [toggle-group](#brumaombraui-vintagetoggle-group)
-- **Forms:** [calendar](#brumaombraui-vintagecalendar), [checkbox](#brumaombraui-vintagecheckbox), [combobox](#brumaombraui-vintagecombobox), [date-picker](#brumaombraui-vintagedate-picker), [date-time-picker](#brumaombraui-vintagedate-time-picker), [field](#brumaombraui-vintagefield), [file-dropzone](#brumaombraui-vintagefile-dropzone), [input](#brumaombraui-vintageinput), [label](#brumaombraui-vintagelabel), [native-select](#brumaombraui-vintagenative-select), [number-field](#brumaombraui-vintagenumber-field), [pin-input](#brumaombraui-vintagepin-input), [radio-group](#brumaombraui-vintageradio-group), [select](#brumaombraui-vintageselect), [slider](#brumaombraui-vintageslider), [slider-form-component](#brumaombraui-vintageslider-form-component), [switch](#brumaombraui-vintageswitch), [switch-form-component](#brumaombraui-vintageswitch-form-component), [tags-input](#brumaombraui-vintagetags-input), [textarea](#brumaombraui-vintagetextarea), [time-picker](#brumaombraui-vintagetime-picker)
+- **Forms:** [calendar](#brumaombraui-vintagecalendar), [checkbox](#brumaombraui-vintagecheckbox), [combobox](#brumaombraui-vintagecombobox), [date-picker](#brumaombraui-vintagedate-picker), [date-time-picker](#brumaombraui-vintagedate-time-picker), [field](#brumaombraui-vintagefield), [file-dropzone](#brumaombraui-vintagefile-dropzone), [inline-date-picker](#brumaombraui-vintageinline-date-picker), [input](#brumaombraui-vintageinput), [label](#brumaombraui-vintagelabel), [native-select](#brumaombraui-vintagenative-select), [number-field](#brumaombraui-vintagenumber-field), [pin-input](#brumaombraui-vintagepin-input), [radio-group](#brumaombraui-vintageradio-group), [select](#brumaombraui-vintageselect), [slider](#brumaombraui-vintageslider), [slider-form-component](#brumaombraui-vintageslider-form-component), [switch](#brumaombraui-vintageswitch), [switch-form-component](#brumaombraui-vintageswitch-form-component), [tags-input](#brumaombraui-vintagetags-input), [textarea](#brumaombraui-vintagetextarea), [time-picker](#brumaombraui-vintagetime-picker), [time-wheel](#brumaombraui-vintagetime-wheel)
 - **Data display:** [animated-number](#brumaombraui-vintageanimated-number), [avatar](#brumaombraui-vintageavatar), [badge](#brumaombraui-vintagebadge), [card](#brumaombraui-vintagecard), [card-grid](#brumaombraui-vintagecard-grid), [chip](#brumaombraui-vintagechip), [data-list](#brumaombraui-vintagedata-list), [data-table](#brumaombraui-vintagedata-table), [info-card](#brumaombraui-vintageinfo-card), [list](#brumaombraui-vintagelist), [progress](#brumaombraui-vintageprogress), [progress-component](#brumaombraui-vintageprogress-component), [scroll-area](#brumaombraui-vintagescroll-area), [separator](#brumaombraui-vintageseparator), [single-value-card](#brumaombraui-vintagesingle-value-card), [skeleton](#brumaombraui-vintageskeleton), [stat-strip](#brumaombraui-vintagestat-strip), [table](#brumaombraui-vintagetable)
 - **Navigation:** [accordion](#brumaombraui-vintageaccordion), [bottom-nav](#brumaombraui-vintagebottom-nav), [breadcrumb](#brumaombraui-vintagebreadcrumb), [collapsible](#brumaombraui-vintagecollapsible), [pagination](#brumaombraui-vintagepagination), [sidebar](#brumaombraui-vintagesidebar), [stepper](#brumaombraui-vintagestepper), [tabs](#brumaombraui-vintagetabs)
 - **Overlays:** [alert-dialog](#brumaombraui-vintagealert-dialog), [command](#brumaombraui-vintagecommand), [dialog](#brumaombraui-vintagedialog), [hover-card](#brumaombraui-vintagehover-card), [popover](#brumaombraui-vintagepopover), [sheet](#brumaombraui-vintagesheet), [tooltip](#brumaombraui-vintagetooltip)
@@ -418,7 +418,7 @@ Inputs, pickers, and form layout. Text-like controls share the `uv-field` focus 
 
 ### `@brumaombra/ui-vintage/calendar`
 
-Month calendar (Reka) working with `@internationalized/date` values. Usually used through `DatePicker`.
+Month calendar (Reka) working with `@internationalized/date` values. Usually used through `DatePicker` or `InlineDatePicker`; `fluid` makes the days fill the width, large enough to tap.
 
 ```ts
 import { Calendar, CalendarCell, CalendarCellTrigger, CalendarGrid, CalendarGridBody, CalendarGridHead, CalendarGridRow, CalendarHeadCell, CalendarHeader, CalendarHeading, CalendarNextButton, CalendarPrevButton } from '@brumaombra/ui-vintage/calendar';
@@ -432,6 +432,7 @@ import type { LayoutTypes } from '@brumaombra/ui-vintage/calendar';
 | `class` | `HTMLAttributes['class']` |  |
 | `layout` | `LayoutTypes` | `undefined` |
 | `yearRange` | `DateValue[]` |  |
+| `fluid` | `boolean` | `false` |
 
 - **Also accepts** all props of Reka `CalendarRootProps`.
 - **Emits:** all events of Reka `CalendarRootEmits`.
@@ -828,6 +829,32 @@ type FileRejection = { file: File; reason: FileRejectionReason }
 function formatFileSize(bytes: number): string
 function isFileAccepted(file: File, accept: string | undefined): boolean
 ```
+
+---
+
+### `@brumaombra/ui-vintage/inline-date-picker`
+
+Always open month calendar whose days fill the width, for sheets and cards. `v-model` is a JavaScript `Date` (midnight of the picked day) or `null`; `min-date` and `max-date` limit the days.
+
+```ts
+import { InlineDatePicker } from '@brumaombra/ui-vintage/inline-date-picker';
+```
+
+```vue
+<InlineDatePicker v-model="day" :min-date="new Date()" />
+```
+
+#### `InlineDatePicker`
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `modelValue` | `Date \| null` | `null` |
+| `minDate` | `Date \| null` | `null` |
+| `maxDate` | `Date \| null` | `null` |
+| `locale` | `string` | `undefined` |
+| `class` | `HTMLAttributes['class']` |  |
+
+- **Emits:** `update:modelValue` (payload: Date \| null).
 
 ---
 
@@ -1296,6 +1323,33 @@ import { TimePicker } from '@brumaombra/ui-vintage/time-picker';
 | `disabled` | `boolean` | `false` |
 | `class` | `HTMLAttributes['class']` |  |
 | `inputClass` | `HTMLAttributes['class']` |  |
+
+- **Emits:** `update:modelValue` (payload: string).
+
+---
+
+### `@brumaombra/ui-vintage/time-wheel`
+
+Hours and minutes on two scrolling wheels, picked by scrolling, tapping, or the arrow, page, home and end keys (each wheel is a spinbutton). `v-model` is an `HH:mm` string; `minute-step` sets the minutes offered (5 by default).
+
+```ts
+import { TimeWheel } from '@brumaombra/ui-vintage/time-wheel';
+```
+
+```vue
+<TimeWheel v-model="time" :minute-step="5" />
+```
+
+#### `TimeWheel`
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `modelValue` | `string` | `''` |
+| `minuteStep` | `number` | `5` |
+| `hourLabel` | `string` |  |
+| `minuteLabel` | `string` |  |
+| `disabled` | `boolean` | `false` |
+| `class` | `HTMLAttributes['class']` |  |
 
 - **Emits:** `update:modelValue` (payload: string).
 

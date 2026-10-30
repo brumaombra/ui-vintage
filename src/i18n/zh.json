@@ -220,6 +220,10 @@
 				"description": "在 Ko-fi 上一次性打赏"
 			},
 			"newTab": "在新标签页中打开"
+		},
+		"timeWheel": {
+			"hours": "小时",
+			"minutes": "分钟"
 		}
 	}
 }

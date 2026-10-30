@@ -220,6 +220,10 @@
 				"description": "One-time tip on Ko-fi"
 			},
 			"newTab": "opens in a new tab"
+		},
+		"timeWheel": {
+			"hours": "Hours",
+			"minutes": "Minutes"
 		}
 	}
 }

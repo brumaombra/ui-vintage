@@ -220,6 +220,10 @@
 				"description": "Ko-fi で一度だけチップ"
 			},
 			"newTab": "新しいタブで開きます"
+		},
+		"timeWheel": {
+			"hours": "時",
+			"minutes": "分"
 		}
 	}
 }

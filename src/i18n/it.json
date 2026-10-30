@@ -220,6 +220,10 @@
 				"description": "Una mancia su Ko-fi"
 			},
 			"newTab": "si apre in una nuova scheda"
+		},
+		"timeWheel": {
+			"hours": "Ore",
+			"minutes": "Minuti"
 		}
 	}
 }

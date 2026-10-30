@@ -78,6 +78,7 @@
 		"./file-dropzone": "./src/components/ui/file-dropzone/index.ts",
 		"./hover-card": "./src/components/ui/hover-card/index.ts",
 		"./info-card": "./src/components/info-card/index.ts",
+		"./inline-date-picker": "./src/components/ui/inline-date-picker/index.ts",
 		"./input": "./src/components/ui/input/index.ts",
 		"./kbd": "./src/components/ui/kbd/index.ts",
 		"./label": "./src/components/ui/label/index.ts",
@@ -125,6 +126,7 @@
 		"./textarea": "./src/components/ui/textarea/index.ts",
 		"./theme-selector": "./src/components/theme-selector/index.ts",
 		"./time-picker": "./src/components/ui/time-picker/index.ts",
+		"./time-wheel": "./src/components/ui/time-wheel/index.ts",
 		"./toggle-group": "./src/components/ui/toggle-group/index.ts",
 		"./tooltip": "./src/components/ui/tooltip/index.ts",
 		"./utils": "./src/lib/utils.ts"

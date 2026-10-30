@@ -220,6 +220,10 @@
 				"description": "Uma gorjeta única no Ko-fi"
 			},
 			"newTab": "abre num novo separador"
+		},
+		"timeWheel": {
+			"hours": "Horas",
+			"minutes": "Minutos"
 		}
 	}
 }

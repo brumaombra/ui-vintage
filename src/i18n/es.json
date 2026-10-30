@@ -220,6 +220,10 @@
 				"description": "Una propina única en Ko-fi"
 			},
 			"newTab": "se abre en una pestaña nueva"
+		},
+		"timeWheel": {
+			"hours": "Horas",
+			"minutes": "Minutos"
 		}
 	}
 }

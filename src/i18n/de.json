@@ -220,6 +220,10 @@
 				"description": "Einmaliges Trinkgeld auf Ko-fi"
 			},
 			"newTab": "öffnet sich in einem neuen Tab"
+		},
+		"timeWheel": {
+			"hours": "Stunden",
+			"minutes": "Minuten"
 		}
 	}
 }

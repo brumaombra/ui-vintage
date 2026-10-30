@@ -29,15 +29,17 @@ const props = withDefaults(defineProps<CalendarRootProps & {
 	class?: HTMLAttributes['class'];
 	layout?: LayoutTypes;
 	yearRange?: DateValue[];
+	fluid?: boolean; // Days that fill the width, large enough to tap (an always open calendar, in a sheet or a card)
 }>(), {
 	modelValue: undefined,
-	layout: undefined
+	layout: undefined,
+	fluid: false
 });
 
 // Emits
 const emits = defineEmits<CalendarRootEmits>();
 
-const delegatedProps = reactiveOmit(props, 'class', 'layout', 'placeholder');
+const delegatedProps = reactiveOmit(props, 'class', 'layout', 'placeholder', 'fluid');
 
 const placeholder = useVModel(props, 'placeholder', emits, {
 	passive: true,
@@ -81,6 +83,12 @@ const [DefineYearTemplate, ReuseYearTemplate] = createReusableTemplate<{
 }>();
 
 const forwarded = useForwardPropsEmits(delegatedProps, emits);
+
+// Month buttons of a fluid calendar: as tall as its header, without a box, so they sit beside the month instead of over the weekdays
+const fluidNavButtonClass = 'size-10 min-h-10 border-transparent bg-transparent shadow-none hover:bg-accent';
+
+// Days of a fluid calendar: as wide as their column, the numbers in monospace, today ringed, the days of the other months left out
+const fluidCellTriggerClass = 'h-10 w-full cursor-pointer font-mono text-sm tabular-nums data-outside-view:invisible data-disabled:cursor-default data-disabled:opacity-35 data-selected:font-bold [&[data-today]:not([data-selected])]:bg-transparent [&[data-today]:not([data-selected])]:font-bold [&[data-today]:not([data-selected])]:text-primary [&[data-today]:not([data-selected])]:ring-1 [&[data-today]:not([data-selected])]:ring-primary/60 [&[data-today]:not([data-selected])]:ring-inset';
 </script>
 
 <template>
@@ -131,12 +139,12 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 	</DefineYearTemplate>
 
 	<CalendarRoot v-slot="{ grid, weekDays, date }" v-bind="forwarded" v-model:placeholder="placeholder" :locale="resolvedLocale" data-slot="calendar" :class="cn('p-3', props.class)">
-		<CalendarHeader class="pt-0">
+		<CalendarHeader :class="cn('pt-0', props.fluid && 'h-10')">
 			<nav class="flex items-center gap-1 absolute top-0 inset-x-0 justify-between">
-				<CalendarPrevButton>
+				<CalendarPrevButton :class="props.fluid ? fluidNavButtonClass : undefined">
 					<slot name="calendar-prev-icon" />
 				</CalendarPrevButton>
-				<CalendarNextButton>
+				<CalendarNextButton :class="props.fluid ? fluidNavButtonClass : undefined">
 					<slot name="calendar-next-icon" />
 				</CalendarNextButton>
 			</nav>
@@ -178,9 +186,9 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 					</CalendarGridRow>
 				</CalendarGridHead>
 				<CalendarGridBody>
-					<CalendarGridRow v-for="(weekDates, index) in month.rows" :key="`weekDate-${index}`" class="mt-2 w-full">
+					<CalendarGridRow v-for="(weekDates, index) in month.rows" :key="`weekDate-${index}`" :class="cn('w-full', props.fluid ? 'mt-1 gap-1' : 'mt-2')">
 						<CalendarCell v-for="weekDate in weekDates" :key="weekDate.toString()" :date="weekDate">
-							<CalendarCellTrigger :day="weekDate" :month="month.value" />
+							<CalendarCellTrigger :day="weekDate" :month="month.value" :class="props.fluid ? fluidCellTriggerClass : undefined" />
 						</CalendarCell>
 					</CalendarGridRow>
 				</CalendarGridBody>

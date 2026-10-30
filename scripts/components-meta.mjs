@@ -197,7 +197,13 @@ export const entries = {
 	},
 	'calendar': {
 		category: 'forms',
-		description: 'Month calendar (Reka) working with `@internationalized/date` values. Usually used through `DatePicker`.'
+		description: 'Month calendar (Reka) working with `@internationalized/date` values. Usually used through `DatePicker` or `InlineDatePicker`; `fluid` makes the days fill the width, large enough to tap.'
+	},
+	'inline-date-picker': {
+		category: 'forms',
+		description: 'Always open month calendar whose days fill the width, for sheets and cards. `v-model` is a JavaScript `Date` (midnight of the picked day) or `null`; `min-date` and `max-date` limit the days.',
+		example: `
+<InlineDatePicker v-model="day" :min-date="new Date()" />`
 	},
 	'date-picker': {
 		category: 'forms',
@@ -210,6 +216,12 @@ export const entries = {
 	'time-picker': {
 		category: 'forms',
 		description: 'Time input with `v-model` as an `HH:mm` (or `HH:mm:ss`) string.'
+	},
+	'time-wheel': {
+		category: 'forms',
+		description: 'Hours and minutes on two scrolling wheels, picked by scrolling, tapping, or the arrow, page, home and end keys (each wheel is a spinbutton). `v-model` is an `HH:mm` string; `minute-step` sets the minutes offered (5 by default).',
+		example: `
+<TimeWheel v-model="time" :minute-step="5" />`
 	},
 	'file-dropzone': {
 		category: 'forms',
