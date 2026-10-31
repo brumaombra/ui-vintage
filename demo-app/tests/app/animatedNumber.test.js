@@ -14,16 +14,20 @@ describe('AnimatedNumber', () => {
 		vi.stubGlobal('cancelAnimationFrame', () => {});
 	};
 
-	// Play the frames at these times (in milliseconds), and read the digits shown after each
+	// Play the frames at these times (in milliseconds), then frames long after until nothing waits (other code can ask for frames too and take one of the times), and read the digits shown after each
 	const playFrames = async (wrapper, times) => {
 		const shown = [];
-		for (const time of times) {
-			const callback = frames.shift();
-			if (!callback) break;
-			callback(time);
+		const play = async time => {
+			frames.shift()(time);
 			await nextTick();
 			shown.push(wrapper.find('[aria-hidden="true"]').text());
+		};
+		for (const time of times) {
+			if (!frames.length) break;
+			await play(time);
 		}
+		const lateTime = times.at(-1) + 60000;
+		for (let guard = 0; frames.length && guard < 100; guard++) await play(lateTime);
 		return shown;
 	};
 
