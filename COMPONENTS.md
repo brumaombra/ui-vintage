@@ -19,7 +19,7 @@ This file lists every public entry point of the package with its components, pro
 - **Forms:** [calendar](#brumaombraui-vintagecalendar), [checkbox](#brumaombraui-vintagecheckbox), [combobox](#brumaombraui-vintagecombobox), [date-picker](#brumaombraui-vintagedate-picker), [date-time-picker](#brumaombraui-vintagedate-time-picker), [field](#brumaombraui-vintagefield), [file-dropzone](#brumaombraui-vintagefile-dropzone), [inline-date-picker](#brumaombraui-vintageinline-date-picker), [input](#brumaombraui-vintageinput), [label](#brumaombraui-vintagelabel), [native-select](#brumaombraui-vintagenative-select), [number-field](#brumaombraui-vintagenumber-field), [pin-input](#brumaombraui-vintagepin-input), [radio-group](#brumaombraui-vintageradio-group), [select](#brumaombraui-vintageselect), [slider](#brumaombraui-vintageslider), [slider-form-component](#brumaombraui-vintageslider-form-component), [switch](#brumaombraui-vintageswitch), [switch-form-component](#brumaombraui-vintageswitch-form-component), [tags-input](#brumaombraui-vintagetags-input), [textarea](#brumaombraui-vintagetextarea), [time-picker](#brumaombraui-vintagetime-picker), [time-wheel](#brumaombraui-vintagetime-wheel)
 - **Data display:** [animated-number](#brumaombraui-vintageanimated-number), [avatar](#brumaombraui-vintageavatar), [badge](#brumaombraui-vintagebadge), [card](#brumaombraui-vintagecard), [card-grid](#brumaombraui-vintagecard-grid), [chip](#brumaombraui-vintagechip), [data-list](#brumaombraui-vintagedata-list), [data-table](#brumaombraui-vintagedata-table), [info-card](#brumaombraui-vintageinfo-card), [list](#brumaombraui-vintagelist), [progress](#brumaombraui-vintageprogress), [progress-component](#brumaombraui-vintageprogress-component), [scroll-area](#brumaombraui-vintagescroll-area), [separator](#brumaombraui-vintageseparator), [single-value-card](#brumaombraui-vintagesingle-value-card), [skeleton](#brumaombraui-vintageskeleton), [stat-strip](#brumaombraui-vintagestat-strip), [table](#brumaombraui-vintagetable)
 - **Navigation:** [accordion](#brumaombraui-vintageaccordion), [bottom-nav](#brumaombraui-vintagebottom-nav), [breadcrumb](#brumaombraui-vintagebreadcrumb), [collapsible](#brumaombraui-vintagecollapsible), [pagination](#brumaombraui-vintagepagination), [sidebar](#brumaombraui-vintagesidebar), [stepper](#brumaombraui-vintagestepper), [tabs](#brumaombraui-vintagetabs)
-- **Overlays:** [alert-dialog](#brumaombraui-vintagealert-dialog), [command](#brumaombraui-vintagecommand), [dialog](#brumaombraui-vintagedialog), [hover-card](#brumaombraui-vintagehover-card), [popover](#brumaombraui-vintagepopover), [sheet](#brumaombraui-vintagesheet), [tooltip](#brumaombraui-vintagetooltip)
+- **Overlays:** [alert-dialog](#brumaombraui-vintagealert-dialog), [command](#brumaombraui-vintagecommand), [dialog](#brumaombraui-vintagedialog), [hover-card](#brumaombraui-vintagehover-card), [popover](#brumaombraui-vintagepopover), [responsive-dialog](#brumaombraui-vintageresponsive-dialog), [sheet](#brumaombraui-vintagesheet), [tooltip](#brumaombraui-vintagetooltip)
 - **Feedback:** [alert](#brumaombraui-vintagealert), [busy](#brumaombraui-vintagebusy), [busy-indicator](#brumaombraui-vintagebusy-indicator), [confirm-dialog](#brumaombraui-vintageconfirm-dialog), [cookie-consent](#brumaombraui-vintagecookie-consent), [empty-state-card](#brumaombraui-vintageempty-state-card), [haptics](#brumaombraui-vintagehaptics), [loading-state-card](#brumaombraui-vintageloading-state-card), [message-dialog](#brumaombraui-vintagemessage-dialog), [message-toast](#brumaombraui-vintagemessage-toast), [spinner](#brumaombraui-vintagespinner)
 - **Layouts and app shell:** [background-grid](#brumaombraui-vintagebackground-grid), [dashboard-shell](#brumaombraui-vintagedashboard-shell), [error-page](#brumaombraui-vintageerror-page), [landing](#brumaombraui-vintagelanding), [landing-content](#brumaombraui-vintagelanding-content), [landing-footer](#brumaombraui-vintagelanding-footer), [landing-navbar](#brumaombraui-vintagelanding-navbar), [landing-shell](#brumaombraui-vintagelanding-shell), [language-flag](#brumaombraui-vintagelanguage-flag), [language-selector](#brumaombraui-vintagelanguage-selector), [page-header](#brumaombraui-vintagepage-header), [section-title](#brumaombraui-vintagesection-title), [theme-selector](#brumaombraui-vintagetheme-selector)
 - **Content and blog:** [blog](#brumaombraui-vintageblog), [content](#brumaombraui-vintagecontent)
@@ -2859,6 +2859,51 @@ import { Popover, PopoverAnchor, PopoverContent, PopoverTrigger } from '@brumaom
 
 - **Also accepts** all props of Reka `PopoverTriggerProps`.
 - **Slots:** `default`.
+
+---
+
+### `@brumaombra/ui-vintage/responsive-dialog`
+
+One dialog for every screen: a sheet from the bottom on phones, and on larger screens a centered dialog (`desktop="dialog"`, the default, for short content) or a panel on the right (`desktop="panel"`, for long or scrolling content). It brings the header with the title and close, the content that scrolls and a `footer` slot that stays in view (put the main action first: it goes on top in the sheet and the panel, where the buttons are full width, and rightmost in the dialog). `v-model:open`; `size` sets the width of the dialog; the slots get the current `mode` (`sheet`, `dialog` or `panel`). The focus moves to the dialog, not its first field, so phones do not open the keyboard over it.
+
+```ts
+import { ResponsiveDialog } from '@brumaombra/ui-vintage/responsive-dialog';
+import type { ResponsiveDialogMode } from '@brumaombra/ui-vintage/responsive-dialog';
+```
+
+```vue
+<ResponsiveDialog v-model:open="open" title="Resolve market" description="Pick the final outcome.">
+    <Textarea v-model="notes" />
+    <template #footer>
+        <Button variant="primary" @click="resolve">Resolve</Button>
+    </template>
+</ResponsiveDialog>
+```
+
+#### `ResponsiveDialog`
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `open` | `boolean` | `false` |
+| `title` *(required)* | `string` |  |
+| `description` | `string` | `''` |
+| `hideDescription` | `boolean` | `false` |
+| `desktop` | `'dialog' \| 'panel'` | `'dialog'` |
+| `size` | `DialogSize` | `'sm'` |
+| `showCloseButton` | `boolean` | `true` |
+| `closeLabel` | `string` |  |
+| `class` | `HTMLAttributes['class']` |  |
+| `bodyClass` | `HTMLAttributes['class']` |  |
+| `footerClass` | `HTMLAttributes['class']` |  |
+
+- **Emits:** `update:open` (value: boolean).
+- **Slots:** `header-actions`, `default`, `footer`.
+
+#### Functions, constants, and types
+
+```ts
+type ResponsiveDialogMode = 'sheet' | 'dialog' | 'panel'
+```
 
 ---
 

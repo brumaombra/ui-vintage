@@ -16,6 +16,7 @@ Before writing a custom component, check the catalog's contents list. Common map
 
 - Searchable select → `combobox` (`ComboboxSelect`); plain select → `select`.
 - Table with sorting or selection → `data-table`; KPI tiles → `single-value-card`; a compact row of numbers → `stat-strip`.
+- A dialog or a drawer of your own (a form, a picker, a list) → `responsive-dialog`: a sheet from the bottom on phones, a centered dialog (or a side panel with `desktop="panel"`) on larger screens.
 - Confirmation → `showConfirmDialog` (`confirm-dialog`); notification → `showMessageToast` (`message-toast`); blocking load → `setBusy` (`busy-indicator`). These mount themselves, so don't add them to a template.
 - Haptic feedback → `haptic()` or `useHaptics()` (`haptics`), only for taps that matter (a toggle, an action that went through or failed), never on every button.
 - App layout with a sidebar → `dashboard-shell`; marketing or blog layout → `landing`; page title row → `page-header`.

@@ -22,6 +22,7 @@ import { Input } from '@brumaombra/ui-vintage/input';
 import { KbdGroup } from '@brumaombra/ui-vintage/kbd';
 import { showMessageToast } from '@brumaombra/ui-vintage/message-toast';
 import { Popover, PopoverContent, PopoverTrigger } from '@brumaombra/ui-vintage/popover';
+import { ResponsiveDialog } from '@brumaombra/ui-vintage/responsive-dialog';
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@brumaombra/ui-vintage/sheet';
 import { Switch } from '@brumaombra/ui-vintage/switch';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@brumaombra/ui-vintage/tooltip';
@@ -35,6 +36,7 @@ const profileName = ref('Satoshi Nakamoto');
 const profileHandle = ref('@satoshi');
 const emailNotifications = ref(true);
 const sheetSides = ['top', 'right', 'bottom', 'left'] as const;
+const responsiveDialogOpen = ref<'dialog' | 'panel' | null>(null); // The responsive dialog open in the demo, with its shape on larger screens
 
 // Save the profile form and close the dialog
 const handleSaveProfile = () => {
@@ -51,6 +53,13 @@ const dialogCode = `<Dialog>
         ...
     </DialogContent>
 </Dialog>`;
+
+const responsiveDialogCode = `<ResponsiveDialog v-model:open="open" title="Workspace settings" description="Phones get a sheet, larger screens a dialog.">
+    <Input v-model="name" />
+    <template #footer>
+        <Button variant="primary">Save</Button>
+    </template>
+</ResponsiveDialog>`;
 
 const sheetCode = `<Sheet>
     <SheetTrigger as-child><Button>Open</Button></SheetTrigger>
@@ -148,6 +157,24 @@ const sheetCode = `<Sheet>
 					</SheetFooter>
 				</SheetContent>
 			</Sheet>
+		</DemoSection>
+
+		<!-- Responsive dialog -->
+		<DemoSection id="responsive-dialog" title="Responsive dialog" badge="New" description="A sheet from the bottom on phones; on larger screens a centered dialog, or a panel on the right for long content. Resize the window to see it switch." :code="responsiveDialogCode" preview-class="flex flex-wrap items-center justify-center gap-3 py-12!">
+			<Button variant="secondary" @click="responsiveDialogOpen = 'dialog'">Dialog on desktop</Button>
+			<Button variant="secondary" @click="responsiveDialogOpen = 'panel'">Panel on desktop</Button>
+			<ResponsiveDialog :open="!!responsiveDialogOpen" :desktop="responsiveDialogOpen || 'dialog'" title="Workspace settings" description="Phones get a sheet from the bottom, larger screens a dialog or a side panel." @update:open="value => { if (!value) responsiveDialogOpen = null; }">
+				<FieldGroup>
+					<Field>
+						<FieldLabel for="responsive-dialog-name">Workspace name</FieldLabel>
+						<Input id="responsive-dialog-name" v-model="profileName" />
+					</Field>
+				</FieldGroup>
+				<template #footer>
+					<Button variant="primary" @click="responsiveDialogOpen = null">Save</Button>
+					<Button variant="secondary" @click="responsiveDialogOpen = null">Cancel</Button>
+				</template>
+			</ResponsiveDialog>
 		</DemoSection>
 
 		<!-- Popover and tooltip -->

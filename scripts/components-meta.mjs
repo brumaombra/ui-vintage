@@ -442,6 +442,17 @@ export const entries = {
 		category: 'overlays',
 		description: 'Modal that requires an explicit choice. For simple confirmations prefer `showConfirmDialog` from `confirm-dialog`.'
 	},
+	'responsive-dialog': {
+		category: 'overlays',
+		description: 'One dialog for every screen: a sheet from the bottom on phones, and on larger screens a centered dialog (`desktop="dialog"`, the default, for short content) or a panel on the right (`desktop="panel"`, for long or scrolling content). It brings the header with the title and close, the content that scrolls and a `footer` slot that stays in view (put the main action first: it goes on top in the sheet and the panel, where the buttons are full width, and rightmost in the dialog). `v-model:open`; `size` sets the width of the dialog; the slots get the current `mode` (`sheet`, `dialog` or `panel`). The focus moves to the dialog, not its first field, so phones do not open the keyboard over it.',
+		example: `
+<ResponsiveDialog v-model:open="open" title="Resolve market" description="Pick the final outcome.">
+    <Textarea v-model="notes" />
+    <template #footer>
+        <Button variant="primary" @click="resolve">Resolve</Button>
+    </template>
+</ResponsiveDialog>`
+	},
 	'sheet': {
 		category: 'overlays',
 		description: 'Side panel that slides in from `top`, `right`, `bottom`, or `left`.',
