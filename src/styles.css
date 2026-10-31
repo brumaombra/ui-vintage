@@ -8,6 +8,7 @@ html {
 	-moz-osx-font-smoothing: grayscale;
 	text-rendering: optimizeLegibility;
 	-webkit-tap-highlight-color: transparent;
+	word-spacing: var(--uv-word-spacing);
 }
 
 :root {
@@ -59,6 +60,9 @@ html {
 
 	/* The one corner radius of every component (cards, buttons, fields, badges...): change it here to restyle them all */
 	--uv-radius: 0.25rem;
+
+	/* Space between words: the monospace font gives a space the width of a letter, which reads too wide, so it is tightened everywhere (change it here, or override it in the app) */
+	--uv-word-spacing: -0.25em;
 
 	/*********************** Shadcn UI variables ***********************/
 
@@ -422,6 +426,14 @@ html {
 
 	body {
 		@apply bg-background text-foreground;
+	}
+
+	/* Code keeps the full spaces, so its columns stay aligned */
+	pre,
+	code,
+	kbd,
+	samp {
+		word-spacing: normal;
 	}
 
 	::selection {
