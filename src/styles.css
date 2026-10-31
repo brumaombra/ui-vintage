@@ -428,6 +428,11 @@ html {
 		@apply bg-background text-foreground;
 	}
 
+	/* No double-tap zoom, like a native app (pinch zoom stays, and so do the touch actions set by components, which win over this base layer) */
+	* {
+		touch-action: manipulation;
+	}
+
 	/* Code keeps the full spaces, so its columns stay aligned */
 	pre,
 	code,
@@ -570,5 +575,16 @@ body {
 
 	&::-webkit-scrollbar {
 		display: none;
+	}
+}
+
+/******************** Fields on phones ********************/
+
+/* Fields get 16px text on phones: Safari zooms the page in on a field with smaller text when it is tapped (important, to win over the text size utilities of fields) */
+@media (max-width: 639.98px) {
+	input:not([type="checkbox"], [type="radio"], [type="range"], [type="color"], [type="file"], [type="hidden"]),
+	textarea,
+	select {
+		font-size: 16px !important;
 	}
 }
