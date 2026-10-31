@@ -928,7 +928,7 @@ import { NativeSelect, NativeSelectOptGroup, NativeSelectOption } from '@brumaom
 
 ### `@brumaombra/ui-vintage/number-field`
 
-Numeric input with increment and decrement buttons, bounds, and `Intl` formatting (`format-options`).
+Numeric input with increment and decrement buttons, bounds, and `Intl` formatting (`format-options`). Each step of the buttons plays a light haptic tap on phones (`:haptic="false"` turns it off).
 
 ```ts
 import { NumberField } from '@brumaombra/ui-vintage/number-field';
@@ -946,6 +946,7 @@ import { NumberField } from '@brumaombra/ui-vintage/number-field';
 | `placeholder` | `string` |  |
 | `decrementLabel` | `string` |  |
 | `incrementLabel` | `string` |  |
+| `haptic` | `boolean` | `true` |
 | `class` | `HTMLAttributes['class']` |  |
 | `inputClass` | `HTMLAttributes['class']` |  |
 
@@ -1198,7 +1199,7 @@ import { SliderFormComponent } from '@brumaombra/ui-vintage/slider-form-componen
 
 ### `@brumaombra/ui-vintage/switch`
 
-On/off switch with `v-model` (boolean).
+On/off switch with `v-model` (boolean). Each flip plays a light haptic tap on phones (`:haptic="false"` turns it off).
 
 ```ts
 import { Switch } from '@brumaombra/ui-vintage/switch';
@@ -1206,7 +1207,11 @@ import { Switch } from '@brumaombra/ui-vintage/switch';
 
 #### `Switch`
 
-- **Props:** `class`.
+| Prop | Type | Default |
+| --- | --- | --- |
+| `haptic` | `boolean` | `true` |
+| `class` | `HTMLAttributes['class']` |  |
+
 - **Also accepts** all props of Reka `SwitchRootProps`.
 - **Emits:** all events of Reka `SwitchRootEmits`.
 - **Slots:** `thumb`.
@@ -1330,7 +1335,7 @@ import { TimePicker } from '@brumaombra/ui-vintage/time-picker';
 
 ### `@brumaombra/ui-vintage/time-wheel`
 
-Hours and minutes on two scrolling wheels, picked by scrolling, tapping, or the arrow, page, home and end keys (each wheel is a spinbutton). `v-model` is an `HH:mm` string; `minute-step` sets the minutes offered (5 by default).
+Hours and minutes on two scrolling wheels, picked by scrolling, tapping, or the arrow, page, home and end keys (each wheel is a spinbutton). `v-model` is an `HH:mm` string; `minute-step` sets the minutes offered (5 by default). Each value that reaches the band plays a light haptic tap on phones, while scrolling only on Android (`:haptic="false"` turns it off).
 
 ```ts
 import { TimeWheel } from '@brumaombra/ui-vintage/time-wheel';
@@ -1349,6 +1354,7 @@ import { TimeWheel } from '@brumaombra/ui-vintage/time-wheel';
 | `hourLabel` | `string` |  |
 | `minuteLabel` | `string` |  |
 | `disabled` | `boolean` | `false` |
+| `haptic` | `boolean` | `true` |
 | `class` | `HTMLAttributes['class']` |  |
 
 - **Emits:** `update:modelValue` (payload: string).
@@ -3188,7 +3194,7 @@ import { EmptyStateCard } from '@brumaombra/ui-vintage/empty-state-card';
 
 ### `@brumaombra/ui-vintage/haptics`
 
-Haptic feedback for taps that matter: `haptic('tap' | 'success' | 'error')`, or `useHaptics()` in components. It vibrates on Android and plays the Taptic Engine tick of a hidden native switch on iOS 18 and later; it does nothing on desktop, on the server, before the first user interaction and when `setHapticsEnabled(false)`. Call it in the handler of the user's tap: iOS only plays the taps of a user action, so a feedback after an `await` (like `success()` once a request answers) may stay silent there, while Android still plays it. Use it sparingly (a prediction placed, a toggle), not on every button.
+Haptic feedback for taps that matter: `haptic('tap' | 'success' | 'error')`, or `useHaptics()` in components. It vibrates on Android and plays the Taptic Engine tick of a hidden native switch on iOS 18 and later; it does nothing on desktop, on the server, before the first user interaction and when `setHapticsEnabled(false)`. Call it in the handler of the user's tap: iOS only plays the taps of a user action, so a feedback after an `await` (like `success()` once a request answers) may stay silent there, while Android still plays it. Use it sparingly (a prediction placed, a toggle), not on every button. `Switch`, `NumberField` and `TimeWheel` already play their own taps.
 
 ```ts
 import { isHapticsSupported, setHapticsEnabled, haptic, useHaptics } from '@brumaombra/ui-vintage/haptics';

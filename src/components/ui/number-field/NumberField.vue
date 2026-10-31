@@ -8,22 +8,26 @@ import PlusSignIcon from '@hugeicons/core-free-icons/PlusSignIcon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { NumberFieldDecrement, NumberFieldIncrement, NumberFieldInput, NumberFieldRoot, useForwardPropsEmits } from 'reka-ui';
 import { useI18n } from 'vue-i18n';
+import { haptic as playHaptic } from '../../../lib/haptics';
 import { cn } from '../../../lib/utils';
 import { useFieldControlId } from '../field/field-context';
 
-// Props
-const props = defineProps<NumberFieldRootProps & {
+// Props (haptic: a light tap on phones at each step of the - and + buttons)
+const props = withDefaults(defineProps<NumberFieldRootProps & {
 	placeholder?: string;
 	decrementLabel?: string;
 	incrementLabel?: string;
+	haptic?: boolean;
 	class?: HTMLAttributes['class'];
 	inputClass?: HTMLAttributes['class'];
-}>();
+}>(), {
+	haptic: true
+});
 
 // Emits
 const emits = defineEmits<NumberFieldRootEmits>();
 
-const delegatedProps = reactiveOmit(props, 'class', 'inputClass', 'placeholder', 'decrementLabel', 'incrementLabel');
+const delegatedProps = reactiveOmit(props, 'class', 'inputClass', 'placeholder', 'decrementLabel', 'incrementLabel', 'haptic');
 const forwarded = useForwardPropsEmits(delegatedProps, emits);
 
 const { t } = useI18n();
@@ -35,6 +39,25 @@ const ghostRef = ref<HTMLElement | null>(null);
 const ghostText = ref('');
 const lastValue = ref<number | null | undefined>(props.modelValue ?? props.defaultValue);
 let ghostAnimation: Animation | null = null;
+let isButtonPressed = false; // A - or + button is held, so the changes are its steps (not a typed value)
+
+// Note a press on the - or + button (caught before the button steps the value, and released anywhere on the page)
+const handlePointerDown = (event: PointerEvent) => {
+	if (!(event.target as HTMLElement | null)?.closest?.('[data-slot="number-field-decrement"], [data-slot="number-field-increment"]')) return;
+	isButtonPressed = true;
+	const release = () => {
+		isButtonPressed = false;
+		window.removeEventListener('pointerup', release);
+		window.removeEventListener('pointercancel', release);
+	};
+	window.addEventListener('pointerup', release);
+	window.addEventListener('pointercancel', release);
+};
+
+// Play the tap of a step of the buttons (the first one within the user's tap, so iOS plays it too; the ones of a held button are best effort there)
+const playStepHaptic = () => {
+	if (props.haptic && isButtonPressed) playHaptic('tap');
+};
 
 // Keep the reference value in sync with external model updates
 watch(() => props.modelValue, (value) => {
@@ -43,6 +66,7 @@ watch(() => props.modelValue, (value) => {
 
 // Slide the new digits in (and the old ones out) in the direction of the change
 const animateChange = async (value: number) => {
+	playStepHaptic();
 	const previous = lastValue.value;
 	lastValue.value = value;
 
@@ -89,7 +113,7 @@ const fieldControlId = useFieldControlId(() => props.id);
 		'uv-field flex h-13 w-full items-center gap-1 rounded border border-input bg-secondary px-1.5 text-foreground shadow-elevated-sm',
 		'data-disabled:cursor-not-allowed data-disabled:opacity-60 aria-invalid:animate-uv-shake',
 		props.class
-	)" @update:model-value="animateChange">
+	)" @update:model-value="animateChange" @pointerdown.capture="handlePointerDown">
 		<!-- Decrement button -->
 		<NumberFieldDecrement data-slot="number-field-decrement" :aria-label="resolvedDecrementLabel" :class="cn(
 			'inline-flex size-10 shrink-0 cursor-pointer items-center justify-center rounded text-muted-foreground outline-none',

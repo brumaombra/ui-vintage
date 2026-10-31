@@ -2,20 +2,23 @@
 import type { HTMLAttributes } from 'vue';
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { haptic as playHaptic } from '../../../lib/haptics';
 import { cn } from '../../../lib/utils';
 
-// Props (the time as "HH:MM", the minutes offered every minuteStep, plus the minute of the value when it is off the step)
+// Props (the time as "HH:MM", the minutes offered every minuteStep, plus the minute of the value when it is off the step; haptic: a light tap on phones at each value that reaches the band)
 const props = withDefaults(defineProps<{
 	modelValue?: string;
 	minuteStep?: number;
 	hourLabel?: string;
 	minuteLabel?: string;
 	disabled?: boolean;
+	haptic?: boolean;
 	class?: HTMLAttributes['class'];
 }>(), {
 	modelValue: '',
 	minuteStep: 5,
-	disabled: false
+	disabled: false,
+	haptic: true
 });
 
 // Emits
@@ -33,6 +36,12 @@ const hourColumn = ref<HTMLElement | null>(null);
 const minuteColumn = ref<HTMLElement | null>(null);
 let settleTimers: Record<'hour' | 'minute', ReturnType<typeof setTimeout> | null> = { hour: null, minute: null };
 let isScrollingInCode = false;
+const bandIndexes: Record<'hour' | 'minute', number> = { hour: -1, minute: -1 }; // Row of each column in the band, so a tap plays once per value scrolled through
+
+// Play the tap of a value reaching the band
+const playTick = () => {
+	if (props.haptic) playHaptic('tap');
+};
 
 // Parse a time ("18:05" -> { hour: 18, minute: 5 }), midnight when there is none
 const parseTime = (value: string) => {
@@ -74,14 +83,28 @@ const scrollToValue = (part: 'hour' | 'minute', behavior: ScrollBehavior = 'auto
 	const values = part === 'hour' ? hours : minutes.value;
 	const index = values.indexOf(part === 'hour' ? current.value.hour : current.value.minute);
 	if (!column || index < 0) return;
+	bandIndexes[part] = index;
 	isScrollingInCode = true;
 	column.scrollTo({ top: index * ROW_HEIGHT, behavior });
 	setTimeout(() => { isScrollingInCode = false; }, behavior === 'smooth' ? 400 : 50);
 };
 
-// Pick the value in the band once a column stops scrolling
+// Tick at each value that reaches the band, and pick the one in the band once a column stops scrolling
 const handleScroll = (part: 'hour' | 'minute') => {
 	if (isScrollingInCode || props.disabled) return;
+
+	// Tick when the band holds another value (Android only while the finger scrolls: iOS plays the taps of a tap, not of a scroll)
+	const scrolledColumn = part === 'hour' ? hourColumn.value : minuteColumn.value;
+	const scrolledValues = part === 'hour' ? hours : minutes.value;
+	if (scrolledColumn) {
+		const bandIndex = Math.min(scrolledValues.length - 1, Math.max(0, Math.round(scrolledColumn.scrollTop / ROW_HEIGHT)));
+		if (bandIndex !== bandIndexes[part]) {
+			bandIndexes[part] = bandIndex;
+			playTick();
+		}
+	}
+
+	// Pick the value once the scrolling stops
 	if (settleTimers[part]) clearTimeout(settleTimers[part]);
 	settleTimers[part] = setTimeout(() => {
 		const column = part === 'hour' ? hourColumn.value : minuteColumn.value;
@@ -95,6 +118,7 @@ const handleScroll = (part: 'hour' | 'minute') => {
 // Pick a value by tapping it
 const pickValue = (part: 'hour' | 'minute', value: number) => {
 	if (props.disabled) return;
+	if (value !== (part === 'hour' ? current.value.hour : current.value.minute)) playTick();
 	setPart(part, value);
 };
 
@@ -106,7 +130,9 @@ const handleKeydown = (part: 'hour' | 'minute', event: KeyboardEvent) => {
 	const moves: Record<string, number> = { ArrowUp: index - 1, ArrowDown: index + 1, PageUp: index - 3, PageDown: index + 3, Home: 0, End: values.length - 1 };
 	if (!(event.key in moves)) return;
 	event.preventDefault();
-	setPart(part, values[Math.min(values.length - 1, Math.max(0, moves[event.key]))]);
+	const next = values[Math.min(values.length - 1, Math.max(0, moves[event.key]))];
+	if (next !== values[index]) playTick();
+	setPart(part, next);
 };
 
 // Follow the value: a tap or a key scrolls smoothly, a value from outside jumps there

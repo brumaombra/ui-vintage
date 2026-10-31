@@ -170,7 +170,7 @@ export const entries = {
 	},
 	'switch': {
 		category: 'forms',
-		description: 'On/off switch with `v-model` (boolean).'
+		description: 'On/off switch with `v-model` (boolean). Each flip plays a light haptic tap on phones (`:haptic="false"` turns it off).'
 	},
 	'slider': {
 		category: 'forms',
@@ -178,7 +178,7 @@ export const entries = {
 	},
 	'number-field': {
 		category: 'forms',
-		description: 'Numeric input with increment and decrement buttons, bounds, and `Intl` formatting (`format-options`).',
+		description: 'Numeric input with increment and decrement buttons, bounds, and `Intl` formatting (`format-options`). Each step of the buttons plays a light haptic tap on phones (`:haptic="false"` turns it off).',
 		example: `
 <NumberField v-model="seats" :min="1" :max="50" />
 <NumberField v-model="price" :step="0.1" :format-options="{ style: 'currency', currency: 'EUR' }" />`
@@ -219,7 +219,7 @@ export const entries = {
 	},
 	'time-wheel': {
 		category: 'forms',
-		description: 'Hours and minutes on two scrolling wheels, picked by scrolling, tapping, or the arrow, page, home and end keys (each wheel is a spinbutton). `v-model` is an `HH:mm` string; `minute-step` sets the minutes offered (5 by default).',
+		description: 'Hours and minutes on two scrolling wheels, picked by scrolling, tapping, or the arrow, page, home and end keys (each wheel is a spinbutton). `v-model` is an `HH:mm` string; `minute-step` sets the minutes offered (5 by default). Each value that reaches the band plays a light haptic tap on phones, while scrolling only on Android (`:haptic="false"` turns it off).',
 		example: `
 <TimeWheel v-model="time" :minute-step="5" />`
 	},
@@ -533,7 +533,7 @@ await showMessageDialog({ type: 'success', message: 'Your account is verified.' 
 	},
 	'haptics': {
 		category: 'feedback',
-		description: 'Haptic feedback for taps that matter: `haptic(\'tap\' | \'success\' | \'error\')`, or `useHaptics()` in components. It vibrates on Android and plays the Taptic Engine tick of a hidden native switch on iOS 18 and later; it does nothing on desktop, on the server, before the first user interaction and when `setHapticsEnabled(false)`. Call it in the handler of the user\'s tap: iOS only plays the taps of a user action, so a feedback after an `await` (like `success()` once a request answers) may stay silent there, while Android still plays it. Use it sparingly (a prediction placed, a toggle), not on every button.',
+		description: 'Haptic feedback for taps that matter: `haptic(\'tap\' | \'success\' | \'error\')`, or `useHaptics()` in components. It vibrates on Android and plays the Taptic Engine tick of a hidden native switch on iOS 18 and later; it does nothing on desktop, on the server, before the first user interaction and when `setHapticsEnabled(false)`. Call it in the handler of the user\'s tap: iOS only plays the taps of a user action, so a feedback after an `await` (like `success()` once a request answers) may stay silent there, while Android still plays it. Use it sparingly (a prediction placed, a toggle), not on every button. `Switch`, `NumberField` and `TimeWheel` already play their own taps.',
 		exampleLang: 'ts',
 		example: `
 const { tap, success, error } = useHaptics();
