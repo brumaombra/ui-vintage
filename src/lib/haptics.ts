@@ -3,10 +3,10 @@ import { readonly, ref } from 'vue';
 // Kinds of haptic feedback: a light tap (toggles, steps), a success (an action that went through) and an error (an action refused)
 export type HapticPattern = 'tap' | 'success' | 'error';
 
-// Vibration of each pattern on Android, in milliseconds (vibrate, pause, vibrate...)
+// Vibration of each pattern on Android, in milliseconds (vibrate, pause, vibrate...): 25ms at least, since the rotating motors of many phones don't spin up in less and play nothing (10ms was felt only on linear motors)
 const VIBRATION_PATTERNS: Record<HapticPattern, number | number[]> = {
-	tap: 10,
-	success: [10, 60, 10],
+	tap: 25,
+	success: [25, 60, 25],
 	error: [30, 50, 30, 50, 30]
 };
 

@@ -51,7 +51,7 @@ describe('haptics', () => {
 		haptic('error');
 
 		// Expect a short tap, a double tap and a triple buzz
-		expect(vibrate.mock.calls).toEqual([[10], [[10, 60, 10]], [[30, 50, 30, 50, 30]]]);
+		expect(vibrate.mock.calls).toEqual([[25], [[25, 60, 25]], [[30, 50, 30, 50, 30]]]);
 	});
 
 	// Before the first tap Chrome ignores the vibration and logs a warning, so nothing is asked

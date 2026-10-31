@@ -27,7 +27,7 @@ describe('Switch haptic', () => {
 	it('taps when the user flips it', async () => {
 		const wrapper = await mountSuspended(Switch, { props: { modelValue: false } });
 		await wrapper.find('[data-slot="switch"]').trigger('click');
-		expect(vibrate.mock.calls).toEqual([[10]]);
+		expect(vibrate.mock.calls).toEqual([[25]]);
 	});
 
 	// A value set by the page is not a flip of the user
@@ -59,7 +59,7 @@ describe('NumberField haptic', () => {
 		await press(wrapper, 'number-field-increment');
 		await press(wrapper, 'number-field-decrement');
 		expect(wrapper.emitted('update:modelValue')).toEqual([[6], [4]]); // Not bound with v-model, so both steps start from 5
-		expect(vibrate.mock.calls).toEqual([[10], [10]]);
+		expect(vibrate.mock.calls).toEqual([[25], [25]]);
 	});
 
 	// A button at its bound changes nothing, so it stays still
