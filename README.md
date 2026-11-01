@@ -376,7 +376,8 @@ When the module is registered, it:
 2. Adds the published `src/` directory to Nuxt transpilation.
 3. Installs `@nuxt/image` when the app has not registered it.
 4. Registers the library i18n plugin, which merges the locale messages when Vue I18n is present.
-5. With `pwa` set, writes the service worker and the offline page as static files of the build, and registers the worker in production.
+5. On iPhone and iPad, adds `maximum-scale=1` to the viewport, so Safari doesn't zoom the page in when a field is tapped (people can still pinch to zoom). Fields keep their size on every device.
+6. With `pwa` set, writes the service worker and the offline page as static files of the build, and registers the worker in production.
 
 ### Only the classes the app uses
 

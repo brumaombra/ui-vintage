@@ -577,14 +577,3 @@ body {
 		display: none;
 	}
 }
-
-/******************** Fields on phones ********************/
-
-/* Fields get 16px text on phones: Safari zooms the page in on a field with smaller text when it is tapped (important, to win over the text size utilities of fields) */
-@media (max-width: 639.98px) {
-	input:not([type="checkbox"], [type="radio"], [type="range"], [type="color"], [type="file"], [type="hidden"]),
-	textarea,
-	select {
-		font-size: 16px !important;
-	}
-}

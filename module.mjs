@@ -248,6 +248,9 @@ export default defineNuxtModule({
 			src: resolver.resolve('src/runtime/ui-vintage-i18n-plugin.ts')
 		});
 
+		// Keep Safari from zooming the page in when a field is tapped (on iOS only, through the viewport, so fields keep their size everywhere)
+		addPlugin({ src: resolver.resolve('src/runtime/ios-field-zoom.client.ts'), mode: 'client' });
+
 		// Add the service worker and its offline page, when the app asks for them
 		if (options.pwa) {
 			await setupPwa({ options: options.pwa === true ? {} : options.pwa, nuxt });
