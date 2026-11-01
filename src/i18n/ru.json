@@ -60,6 +60,12 @@
 			"year": "Год",
 			"time": "Время"
 		},
+		"timePicker": {
+			"placeholder": "Выберите время"
+		},
+		"dateTimePicker": {
+			"placeholder": "Выберите дату и время"
+		},
 		"terminal": {
 			"title": "Терминал",
 			"copy": "Копировать команды",

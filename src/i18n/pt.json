@@ -60,6 +60,12 @@
 			"year": "Ano",
 			"time": "Hora"
 		},
+		"timePicker": {
+			"placeholder": "Escolhe uma hora"
+		},
+		"dateTimePicker": {
+			"placeholder": "Escolhe a data e a hora"
+		},
 		"terminal": {
 			"title": "Terminal",
 			"copy": "Copiar comandos",

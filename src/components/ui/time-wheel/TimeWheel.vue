@@ -166,7 +166,7 @@ const getValueClass = (selected: boolean) => cn('flex h-10 w-full shrink-0 curso
 		<div class="pointer-events-none absolute inset-x-2 top-1/2 h-10 -translate-y-1/2 rounded bg-primary/10 ring-1 ring-primary/40 ring-inset" aria-hidden="true"></div>
 
 		<!-- Hours -->
-		<div ref="hourColumn" data-slot="time-wheel-hours" role="spinbutton" :tabindex="props.disabled ? -1 : 0" :aria-label="resolvedHourLabel" :aria-valuenow="current.hour" aria-valuemin="0" aria-valuemax="23" :aria-valuetext="String(current.hour).padStart(2, '0')" :aria-disabled="props.disabled || undefined" class="uv-focus-ring relative h-40 w-20 snap-y snap-mandatory overflow-y-auto rounded scrollbar-none [mask-image:linear-gradient(transparent,black_30%,black_70%,transparent)]" @scroll="handleScroll('hour')" @keydown="handleKeydown('hour', $event)">
+		<div ref="hourColumn" data-slot="time-wheel-hours" role="spinbutton" :tabindex="props.disabled ? -1 : 0" :aria-label="resolvedHourLabel" :aria-valuenow="current.hour" aria-valuemin="0" aria-valuemax="23" :aria-valuetext="String(current.hour).padStart(2, '0')" :aria-disabled="props.disabled || undefined" class="relative h-40 w-20 snap-y snap-mandatory overflow-y-auto rounded scrollbar-none [mask-image:linear-gradient(transparent,black_30%,black_70%,transparent)]" @scroll="handleScroll('hour')" @keydown="handleKeydown('hour', $event)">
 			<div class="h-15" aria-hidden="true"></div>
 			<div v-for="hour in hours" :key="hour" :class="getValueClass(hour === current.hour)" :data-value="hour" aria-hidden="true" @click="pickValue('hour', hour)">{{ String(hour).padStart(2, '0') }}</div>
 			<div class="h-15" aria-hidden="true"></div>
@@ -175,7 +175,7 @@ const getValueClass = (selected: boolean) => cn('flex h-10 w-full shrink-0 curso
 		<span class="relative font-mono text-xl font-bold" aria-hidden="true">:</span>
 
 		<!-- Minutes -->
-		<div ref="minuteColumn" data-slot="time-wheel-minutes" role="spinbutton" :tabindex="props.disabled ? -1 : 0" :aria-label="resolvedMinuteLabel" :aria-valuenow="current.minute" aria-valuemin="0" aria-valuemax="59" :aria-valuetext="String(current.minute).padStart(2, '0')" :aria-disabled="props.disabled || undefined" class="uv-focus-ring relative h-40 w-20 snap-y snap-mandatory overflow-y-auto rounded scrollbar-none [mask-image:linear-gradient(transparent,black_30%,black_70%,transparent)]" @scroll="handleScroll('minute')" @keydown="handleKeydown('minute', $event)">
+		<div ref="minuteColumn" data-slot="time-wheel-minutes" role="spinbutton" :tabindex="props.disabled ? -1 : 0" :aria-label="resolvedMinuteLabel" :aria-valuenow="current.minute" aria-valuemin="0" aria-valuemax="59" :aria-valuetext="String(current.minute).padStart(2, '0')" :aria-disabled="props.disabled || undefined" class="relative h-40 w-20 snap-y snap-mandatory overflow-y-auto rounded scrollbar-none [mask-image:linear-gradient(transparent,black_30%,black_70%,transparent)]" @scroll="handleScroll('minute')" @keydown="handleKeydown('minute', $event)">
 			<div class="h-15" aria-hidden="true"></div>
 			<div v-for="minute in minutes" :key="minute" :class="getValueClass(minute === current.minute)" :data-value="minute" aria-hidden="true" @click="pickValue('minute', minute)">{{ String(minute).padStart(2, '0') }}</div>
 			<div class="h-15" aria-hidden="true"></div>

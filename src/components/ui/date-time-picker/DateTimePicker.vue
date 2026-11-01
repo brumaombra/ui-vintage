@@ -1,31 +1,32 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue';
-import { fromDate, getLocalTimeZone, toCalendarDate, } from '@internationalized/date';
-import type { DateValue } from 'reka-ui';
 import { computed, ref } from 'vue';
+import Calendar03Icon from '@hugeicons/core-free-icons/Calendar03Icon';
+import CheckmarkCircle02Icon from '@hugeicons/core-free-icons/CheckmarkCircle02Icon';
+import { HugeiconsIcon } from '@hugeicons/vue';
 import { useI18n } from 'vue-i18n';
-import { cn } from '../../../lib/utils';
-import { DatePicker } from '../date-picker';
-import { TimePicker } from '../time-picker';
+import { Button } from '../button';
+import PickerShell from '../date-picker/PickerShell.vue';
+import { InlineDatePicker } from '../inline-date-picker';
+import { TimeWheel } from '../time-wheel';
 
-// Props
+// Props (the date and time as a Date, between minDate and maxDate, the minutes offered every minuteStep)
 const props = withDefaults(defineProps<{
 	defaultValue?: Date | null;
 	modelValue?: Date | null;
 	minDate?: Date | null;
 	maxDate?: Date | null;
-	step?: string | number;
+	minuteStep?: number;
+	placeholder?: string;
 	disabled?: boolean;
-	datePlaceholder?: string;
 	class?: HTMLAttributes['class'];
-	datePickerClass?: HTMLAttributes['class'];
-	timePickerClass?: HTMLAttributes['class'];
-	datePickerContentClass?: HTMLAttributes['class'];
+	contentClass?: HTMLAttributes['class'];
 }>(), {
 	defaultValue: null,
+	modelValue: undefined,
 	minDate: null,
 	maxDate: null,
-	step: 60,
+	minuteStep: 5,
 	disabled: false
 });
 
@@ -34,140 +35,76 @@ const emits = defineEmits<{
 	(e: 'update:modelValue', payload: Date | null): void;
 }>();
 
-const localTimeZone = getLocalTimeZone();
+const { t, locale } = useI18n();
+const isOpen = ref(false);
 const internalValue = ref<Date | null>(props.defaultValue);
-const isControlled = computed(() => props.modelValue !== undefined);
 
+// The date and time picked (from v-model, or kept inside when the picker is used without it)
 const value = computed({
-	get: () =>
-		(isControlled.value ? props.modelValue : internalValue.value) ?? null,
-	set: (nextValue: Date | null) => {
-		const resolvedValue = clampDate(nextValue);
-
-		if (!isControlled.value) internalValue.value = resolvedValue;
-
-		emits('update:modelValue', resolvedValue);
-	},
+	get: () => (props.modelValue !== undefined ? props.modelValue : internalValue.value),
+	set: (next: Date | null) => {
+		internalValue.value = next;
+		emits('update:modelValue', next);
+	}
 });
 
-const toPickerDateValue = (
-	date: Date | null | undefined,
-): DateValue | undefined => {
-	if (!(date instanceof Date) || Number.isNaN(date.getTime()))
-		return undefined;
+// The pick while the picker is open, applied with confirm
+const draftDay = ref<Date | null>(null);
+const draftTime = ref('12:00');
 
-	return toCalendarDate(fromDate(date, localTimeZone));
-};
+// Write the time of a date ("18:05")
+const toTimeString = (date: Date) => `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
 
-const toTimeString = (date: Date | null | undefined) => {
-	if (!(date instanceof Date) || Number.isNaN(date.getTime())) return '';
-
-	return `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
-};
-
-const buildDate = (dateValue: DateValue | undefined, timeValue: string) => {
-	if (!dateValue) return null;
-
-	const [hours = '0', minutes = '0'] = (timeValue || '00:00').split(':');
-	const nextDate = new Date(
-		dateValue.year,
-		dateValue.month - 1,
-		dateValue.day,
-		Number(hours),
-		Number(minutes),
-		0,
-		0,
-	);
-
-	return Number.isNaN(nextDate.getTime()) ? null : nextDate;
-};
-
-const areSameCalendarDay = (
-	left: DateValue | undefined,
-	right: DateValue | undefined,
-) => {
-	if (!left || !right) return false;
-
-	return (
-		left.year === right.year &&
-		left.month === right.month &&
-		left.day === right.day
-	);
-};
-
-const clampDate = (date: Date | null) => {
-	if (!date) return null;
-
-	if (props.minDate && date.getTime() < props.minDate.getTime())
-		return new Date(props.minDate);
-
-	if (props.maxDate && date.getTime() > props.maxDate.getTime())
-		return new Date(props.maxDate);
-
-	return date;
-};
-
-const getFallbackDate = () =>
-	value.value ?? props.minDate ?? props.maxDate ?? new Date();
-
-const dateValue = computed({
-	get: () => toPickerDateValue(value.value),
-	set: (nextDateValue: DateValue | undefined) => {
-		if (!nextDateValue) {
-			value.value = null;
-			return;
-		}
-
-		const fallbackTime = toTimeString(
-			value.value ?? props.minDate ?? props.maxDate,
-		);
-		value.value = buildDate(nextDateValue, fallbackTime);
-	},
+// The day and the time of the pick as one date
+const draftDate = computed(() => {
+	if (!draftDay.value) return null;
+	const [hours, minutes] = draftTime.value.split(':').map(Number);
+	return new Date(draftDay.value.getFullYear(), draftDay.value.getMonth(), draftDay.value.getDate(), hours, minutes);
 });
 
-const timeValue = computed({
-	get: () => toTimeString(value.value),
-	set: (nextTimeValue: string) => {
-		value.value = buildDate(
-			toPickerDateValue(getFallbackDate()),
-			nextTimeValue || toTimeString(getFallbackDate()),
-		);
-	},
+// The pick can be applied once it has a day, inside the bounds
+const canConfirm = computed(() => {
+	if (!draftDate.value) return false;
+	if (props.minDate && draftDate.value < props.minDate) return false;
+	if (props.maxDate && draftDate.value > props.maxDate) return false;
+	return true;
 });
 
-const minDateValue = computed(() => toPickerDateValue(props.minDate));
-const maxDateValue = computed(() => toPickerDateValue(props.maxDate));
+// The value in words, in the language of the page
+const valueText = computed(() => (value.value ? value.value.toLocaleString(locale.value, { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : ''));
+const resolvedPlaceholder = computed(() => props.placeholder || t('uiVintage.dateTimePicker.placeholder'));
 
-const minTimeValue = computed(() => {
-	const selectedDate = dateValue.value;
-	const minimumDate = minDateValue.value;
+// Open on a copy of the value (or no day and noon), so closing without confirm changes nothing
+const handleOpen = (open: boolean) => {
+	if (open) {
+		draftDay.value = value.value ? new Date(value.value.getFullYear(), value.value.getMonth(), value.value.getDate()) : null;
+		draftTime.value = value.value ? toTimeString(value.value) : '12:00';
+	}
+	isOpen.value = open;
+};
 
-	return areSameCalendarDay(selectedDate, minimumDate)
-		? toTimeString(props.minDate)
-		: undefined;
-});
-
-const maxTimeValue = computed(() => {
-	const selectedDate = dateValue.value;
-	const maximumDate = maxDateValue.value;
-
-	return areSameCalendarDay(selectedDate, maximumDate)
-		? toTimeString(props.maxDate)
-		: undefined;
-});
-
-// The time input sits next to the date button, which takes the field label
-const { t } = useI18n();
+// Apply the pick
+const handleConfirm = () => {
+	if (!canConfirm.value) return;
+	value.value = draftDate.value;
+	isOpen.value = false;
+};
 </script>
 
 <template>
-	<div :class="cn('grid grid-cols-1 gap-3 md:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]', props.class,)">
-		<div>
-			<DatePicker v-model="dateValue" :disabled="props.disabled" :placeholder="props.datePlaceholder" :min-value="minDateValue" :max-value="maxDateValue" :class="cn('w-full', props.datePickerClass)" :content-class="props.datePickerContentClass" />
+	<PickerShell :open="isOpen" :value-text="valueText" :placeholder="resolvedPlaceholder" :title="resolvedPlaceholder" :icon="Calendar03Icon" :disabled="props.disabled" :class="props.class" :content-class="['md:w-auto', props.contentClass]" @update:open="handleOpen">
+		<!-- The day, then the time (side by side in the popover of larger screens) -->
+		<div class="flex flex-col gap-3 md:flex-row md:items-center">
+			<InlineDatePicker v-model="draftDay" :min-date="props.minDate" :max-date="props.maxDate" :locale="locale" class="md:w-72" />
+			<TimeWheel v-model="draftTime" :minute-step="props.minuteStep" class="md:shrink-0" />
 		</div>
 
-		<div>
-			<TimePicker v-model="timeValue" :aria-label="t('uiVintage.datePicker.time')" :disabled="props.disabled" :step="props.step" :min="minTimeValue" :max="maxTimeValue" :class="cn('w-full', props.timePickerClass)" />
-		</div>
-	</div>
+		<!-- Apply the pick -->
+		<template #footer>
+			<Button variant="primary" :disabled="!canConfirm" @click="handleConfirm">
+				<HugeiconsIcon :icon="CheckmarkCircle02Icon" class="size-4" aria-hidden="true" />
+				{{ t('uiVintage.buttons.confirm') }}
+			</Button>
+		</template>
+	</PickerShell>
 </template>

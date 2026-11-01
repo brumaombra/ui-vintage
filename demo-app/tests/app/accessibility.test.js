@@ -168,14 +168,15 @@ describe('Field', () => {
 		expect(wrapper.find('input').attributes('id')).toBe('email');
 	});
 
-	// The date button is named by the label plus its value, and the time input has its own name
-	it('names both parts of a date and time picker', async () => {
+	// The date and time picker is one field (the day and the time open together), named by the label plus its value
+	it('names the field of a date and time picker', async () => {
 		const wrapper = await mountSuspended({ render: () => h(Field, null, () => [h(FieldLabel, null, () => 'Meeting'), h(DateTimePicker)]) });
 		const label = wrapper.find('label');
 		const button = wrapper.find(`#${label.attributes('for')}`);
 		expect(button.element.tagName).toBe('BUTTON');
 		expect(button.attributes('aria-labelledby')).toBe(`${label.attributes('id')} ${button.attributes('id')}`);
-		expect(wrapper.find('input[type="time"]').attributes('aria-label')).toBe('Time');
+		expect(button.text()).toBe('Pick a date and time');
+		expect(wrapper.findAll('[data-slot="picker-field"]')).toHaveLength(1);
 	});
 });
 

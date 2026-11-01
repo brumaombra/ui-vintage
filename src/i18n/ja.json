@@ -60,6 +60,12 @@
 			"year": "年",
 			"time": "時刻"
 		},
+		"timePicker": {
+			"placeholder": "時刻を選択"
+		},
+		"dateTimePicker": {
+			"placeholder": "日時を選択"
+		},
 		"terminal": {
 			"title": "ターミナル",
 			"copy": "コマンドをコピー",

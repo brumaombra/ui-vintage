@@ -348,7 +348,7 @@ const dropzoneCode = `<FileDropzone v-model="files" accept="image/*,.pdf" :max-s
 		</DemoSection>
 
 		<!-- Date and time -->
-		<DemoSection id="date-time" title="Date & time" description="Calendar popovers with month and year navigation, plus native time inputs styled to match.">
+		<DemoSection id="date-time" title="Date & time" badge="Updated" description="Fields that open the always open calendar and the time wheels: a popover under the field on larger screens, a sheet from the bottom on phones.">
 			<div class="grid gap-6 md:grid-cols-3">
 				<Field>
 					<FieldLabel>Start date</FieldLabel>

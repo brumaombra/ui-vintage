@@ -207,15 +207,21 @@ export const entries = {
 	},
 	'date-picker': {
 		category: 'forms',
-		description: 'Date picker button with a calendar popover. `v-model` is a `DateValue` from `@internationalized/date`; labels follow the vue-i18n locale.'
+		description: 'A field that opens the always open calendar (`inline-date-picker`): in a popover under it on larger screens, in a sheet from the bottom on phones. Picking a day closes it. `v-model` is a JavaScript `Date` (midnight) or `null`; `min-date` and `max-date` bound the days; the date shows in the vue-i18n locale.',
+		example: `
+<DatePicker v-model="birthday" :max-date="new Date()" />`
 	},
 	'date-time-picker': {
 		category: 'forms',
-		description: 'Date and time picker pair. `v-model` is a JavaScript `Date` or `null`.'
+		description: 'A field that opens the calendar and the time wheels (`inline-date-picker` and `time-wheel`): in a popover on larger screens, in a sheet from the bottom on phones. The pick applies with confirm, which waits for a day inside `min-date` and `max-date`. `v-model` is a JavaScript `Date` or `null`; `minute-step` sets the minutes offered (5 by default).',
+		example: `
+<DateTimePicker v-model="closesAt" :min-date="new Date()" />`
 	},
 	'time-picker': {
 		category: 'forms',
-		description: 'Time input with `v-model` as an `HH:mm` (or `HH:mm:ss`) string.'
+		description: 'A field that opens the time wheels (`time-wheel`): in a popover on larger screens, in a sheet from the bottom on phones. `v-model` is an `HH:mm` string, set as the wheels turn (noon when the picker opens without a value); `minute-step` sets the minutes offered (5 by default).',
+		example: `
+<TimePicker v-model="reminder" :minute-step="15" />`
 	},
 	'time-wheel': {
 		category: 'forms',

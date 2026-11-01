@@ -60,6 +60,12 @@
 			"year": "年份",
 			"time": "时间"
 		},
+		"timePicker": {
+			"placeholder": "选择时间"
+		},
+		"dateTimePicker": {
+			"placeholder": "选择日期和时间"
+		},
 		"terminal": {
 			"title": "终端",
 			"copy": "复制命令",

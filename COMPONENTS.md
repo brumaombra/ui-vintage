@@ -650,35 +650,43 @@ type ComboboxSelectValue = string | number
 
 ### `@brumaombra/ui-vintage/date-picker`
 
-Date picker button with a calendar popover. `v-model` is a `DateValue` from `@internationalized/date`; labels follow the vue-i18n locale.
+A field that opens the always open calendar (`inline-date-picker`): in a popover under it on larger screens, in a sheet from the bottom on phones. Picking a day closes it. `v-model` is a JavaScript `Date` (midnight) or `null`; `min-date` and `max-date` bound the days; the date shows in the vue-i18n locale.
 
 ```ts
 import { DatePicker } from '@brumaombra/ui-vintage/date-picker';
+```
+
+```vue
+<DatePicker v-model="birthday" :max-date="new Date()" />
 ```
 
 #### `DatePicker`
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `defaultValue` | `DateValue` |  |
-| `modelValue` | `DateValue` |  |
-| `minValue` | `DateValue` |  |
-| `maxValue` | `DateValue` |  |
+| `defaultValue` | `Date \| null` | `null` |
+| `modelValue` | `Date \| null` | `undefined` |
+| `minDate` | `Date \| null` | `null` |
+| `maxDate` | `Date \| null` | `null` |
 | `placeholder` | `string` |  |
 | `disabled` | `boolean` | `false` |
 | `class` | `HTMLAttributes['class']` |  |
 | `contentClass` | `HTMLAttributes['class']` |  |
 
-- **Emits:** `update:modelValue` (payload: DateValue \| undefined).
+- **Emits:** `update:modelValue` (payload: Date \| null).
 
 ---
 
 ### `@brumaombra/ui-vintage/date-time-picker`
 
-Date and time picker pair. `v-model` is a JavaScript `Date` or `null`.
+A field that opens the calendar and the time wheels (`inline-date-picker` and `time-wheel`): in a popover on larger screens, in a sheet from the bottom on phones. The pick applies with confirm, which waits for a day inside `min-date` and `max-date`. `v-model` is a JavaScript `Date` or `null`; `minute-step` sets the minutes offered (5 by default).
 
 ```ts
 import { DateTimePicker } from '@brumaombra/ui-vintage/date-time-picker';
+```
+
+```vue
+<DateTimePicker v-model="closesAt" :min-date="new Date()" />
 ```
 
 #### `DateTimePicker`
@@ -686,16 +694,14 @@ import { DateTimePicker } from '@brumaombra/ui-vintage/date-time-picker';
 | Prop | Type | Default |
 | --- | --- | --- |
 | `defaultValue` | `Date \| null` | `null` |
-| `modelValue` | `Date \| null` |  |
+| `modelValue` | `Date \| null` | `undefined` |
 | `minDate` | `Date \| null` | `null` |
 | `maxDate` | `Date \| null` | `null` |
-| `step` | `string \| number` | `60` |
+| `minuteStep` | `number` | `5` |
+| `placeholder` | `string` |  |
 | `disabled` | `boolean` | `false` |
-| `datePlaceholder` | `string` |  |
 | `class` | `HTMLAttributes['class']` |  |
-| `datePickerClass` | `HTMLAttributes['class']` |  |
-| `timePickerClass` | `HTMLAttributes['class']` |  |
-| `datePickerContentClass` | `HTMLAttributes['class']` |  |
+| `contentClass` | `HTMLAttributes['class']` |  |
 
 - **Emits:** `update:modelValue` (payload: Date \| null).
 
@@ -1310,10 +1316,14 @@ import { Textarea } from '@brumaombra/ui-vintage/textarea';
 
 ### `@brumaombra/ui-vintage/time-picker`
 
-Time input with `v-model` as an `HH:mm` (or `HH:mm:ss`) string.
+A field that opens the time wheels (`time-wheel`): in a popover on larger screens, in a sheet from the bottom on phones. `v-model` is an `HH:mm` string, set as the wheels turn (noon when the picker opens without a value); `minute-step` sets the minutes offered (5 by default).
 
 ```ts
 import { TimePicker } from '@brumaombra/ui-vintage/time-picker';
+```
+
+```vue
+<TimePicker v-model="reminder" :minute-step="15" />
 ```
 
 #### `TimePicker`
@@ -1321,13 +1331,12 @@ import { TimePicker } from '@brumaombra/ui-vintage/time-picker';
 | Prop | Type | Default |
 | --- | --- | --- |
 | `defaultValue` | `string` | `''` |
-| `modelValue` | `string` |  |
-| `step` | `string \| number` | `60` |
-| `min` | `string` |  |
-| `max` | `string` |  |
+| `modelValue` | `string` | `undefined` |
+| `minuteStep` | `number` | `5` |
+| `placeholder` | `string` |  |
 | `disabled` | `boolean` | `false` |
 | `class` | `HTMLAttributes['class']` |  |
-| `inputClass` | `HTMLAttributes['class']` |  |
+| `contentClass` | `HTMLAttributes['class']` |  |
 
 - **Emits:** `update:modelValue` (payload: string).
 
