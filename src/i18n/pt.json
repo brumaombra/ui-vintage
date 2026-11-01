@@ -242,6 +242,13 @@
 				"offline": "Estás offline",
 				"online": "De novo online"
 			}
+		},
+		"legalDocument": {
+			"updated": "Última atualização: {date}",
+			"summary": "Em resumo",
+			"fullText": "O texto completo",
+			"expandAll": "Expandir tudo",
+			"collapseAll": "Recolher tudo"
 		}
 	}
 }

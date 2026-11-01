@@ -242,6 +242,13 @@
 				"offline": "オフラインです",
 				"online": "オンラインに戻りました"
 			}
+		},
+		"legalDocument": {
+			"updated": "最終更新日：{date}",
+			"summary": "要約",
+			"fullText": "全文",
+			"expandAll": "すべて開く",
+			"collapseAll": "すべて閉じる"
 		}
 	}
 }

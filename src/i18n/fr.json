@@ -242,6 +242,13 @@
 				"offline": "Vous êtes hors ligne",
 				"online": "De retour en ligne"
 			}
+		},
+		"legalDocument": {
+			"updated": "Dernière mise à jour : {date}",
+			"summary": "En bref",
+			"fullText": "Le texte complet",
+			"expandAll": "Tout déplier",
+			"collapseAll": "Tout replier"
 		}
 	}
 }

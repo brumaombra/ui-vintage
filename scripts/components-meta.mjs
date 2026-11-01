@@ -621,6 +621,10 @@ setBusy(true, { label: 'Creating...', variant: 'fullscreen', mark: AppLogoMark }
     <slot />
 </DashboardShell>`
 	},
+	'legal-document': {
+		category: 'layout',
+		description: 'A legal page (terms, privacy, cookies): the title and the date it last changed, "the short version" in a few plain points, then the full text in collapsible sections with an expand-all button. The collapsed text stays in the page, for search engines and the browser\'s search. A section has a `text`, `points` (`{ title, text }`), or both, and an optional `icon`.'
+	},
 	'page-header': {
 		category: 'layout',
 		description: 'Page title row with an optional actions slot, in three sizes.'

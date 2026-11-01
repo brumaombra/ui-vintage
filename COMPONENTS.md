@@ -21,7 +21,7 @@ This file lists every public entry point of the package with its components, pro
 - **Navigation:** [accordion](#brumaombraui-vintageaccordion), [bottom-nav](#brumaombraui-vintagebottom-nav), [breadcrumb](#brumaombraui-vintagebreadcrumb), [collapsible](#brumaombraui-vintagecollapsible), [pagination](#brumaombraui-vintagepagination), [sidebar](#brumaombraui-vintagesidebar), [stepper](#brumaombraui-vintagestepper), [tabs](#brumaombraui-vintagetabs)
 - **Overlays:** [alert-dialog](#brumaombraui-vintagealert-dialog), [command](#brumaombraui-vintagecommand), [dialog](#brumaombraui-vintagedialog), [hover-card](#brumaombraui-vintagehover-card), [popover](#brumaombraui-vintagepopover), [responsive-dialog](#brumaombraui-vintageresponsive-dialog), [sheet](#brumaombraui-vintagesheet), [tooltip](#brumaombraui-vintagetooltip)
 - **Feedback:** [alert](#brumaombraui-vintagealert), [busy](#brumaombraui-vintagebusy), [busy-indicator](#brumaombraui-vintagebusy-indicator), [confirm-dialog](#brumaombraui-vintageconfirm-dialog), [cookie-consent](#brumaombraui-vintagecookie-consent), [empty-state-card](#brumaombraui-vintageempty-state-card), [haptics](#brumaombraui-vintagehaptics), [loading-state-card](#brumaombraui-vintageloading-state-card), [message-dialog](#brumaombraui-vintagemessage-dialog), [message-toast](#brumaombraui-vintagemessage-toast), [spinner](#brumaombraui-vintagespinner)
-- **Layouts and app shell:** [background-grid](#brumaombraui-vintagebackground-grid), [dashboard-shell](#brumaombraui-vintagedashboard-shell), [error-page](#brumaombraui-vintageerror-page), [landing](#brumaombraui-vintagelanding), [landing-content](#brumaombraui-vintagelanding-content), [landing-footer](#brumaombraui-vintagelanding-footer), [landing-navbar](#brumaombraui-vintagelanding-navbar), [landing-shell](#brumaombraui-vintagelanding-shell), [language-flag](#brumaombraui-vintagelanguage-flag), [language-selector](#brumaombraui-vintagelanguage-selector), [page-header](#brumaombraui-vintagepage-header), [section-title](#brumaombraui-vintagesection-title), [theme-selector](#brumaombraui-vintagetheme-selector)
+- **Layouts and app shell:** [background-grid](#brumaombraui-vintagebackground-grid), [dashboard-shell](#brumaombraui-vintagedashboard-shell), [error-page](#brumaombraui-vintageerror-page), [landing](#brumaombraui-vintagelanding), [landing-content](#brumaombraui-vintagelanding-content), [landing-footer](#brumaombraui-vintagelanding-footer), [landing-navbar](#brumaombraui-vintagelanding-navbar), [landing-shell](#brumaombraui-vintagelanding-shell), [language-flag](#brumaombraui-vintagelanguage-flag), [language-selector](#brumaombraui-vintagelanguage-selector), [legal-document](#brumaombraui-vintagelegal-document), [page-header](#brumaombraui-vintagepage-header), [section-title](#brumaombraui-vintagesection-title), [theme-selector](#brumaombraui-vintagetheme-selector)
 - **Content and blog:** [blog](#brumaombraui-vintageblog), [content](#brumaombraui-vintagecontent)
 - **Utilities and types:** [common-types](#brumaombraui-vintagecommon-types), [utils](#brumaombraui-vintageutils)
 
@@ -3776,6 +3776,44 @@ import type { LanguageSelectorCode } from '@brumaombra/ui-vintage/language-selec
 
 ```ts
 type LanguageSelectorCode = string
+```
+
+---
+
+### `@brumaombra/ui-vintage/legal-document`
+
+A legal page (terms, privacy, cookies): the title and the date it last changed, "the short version" in a few plain points, then the full text in collapsible sections with an expand-all button. The collapsed text stays in the page, for search engines and the browser's search. A section has a `text`, `points` (`{ title, text }`), or both, and an optional `icon`.
+
+```ts
+import { LegalDocument } from '@brumaombra/ui-vintage/legal-document';
+import type { LegalDocumentPoint, LegalDocumentSection } from '@brumaombra/ui-vintage/legal-document';
+```
+
+#### `LegalDocument`
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `title` *(required)* | `string` |  |
+| `updated` | `string` | `''` |
+| `summary` | `string[]` | `[]` |
+| `sections` *(required)* | `LegalDocumentSection[]` |  |
+| `contactText` | `string` | `''` |
+| `contactEmail` | `string` | `''` |
+| `class` | `HTMLAttributes['class']` |  |
+
+#### Functions, constants, and types
+
+```ts
+interface LegalDocumentPoint {
+    title: string;
+    text: string;
+}
+interface LegalDocumentSection {
+    title: string;
+    text?: string;
+    points?: LegalDocumentPoint[];
+    icon?: HugeiconsIconDefinition;
+}
 ```
 
 ---

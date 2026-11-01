@@ -242,6 +242,13 @@
 				"offline": "你已离线",
 				"online": "已恢复在线"
 			}
+		},
+		"legalDocument": {
+			"updated": "最后更新：{date}",
+			"summary": "简要说明",
+			"fullText": "完整条款",
+			"expandAll": "全部展开",
+			"collapseAll": "全部收起"
 		}
 	}
 }

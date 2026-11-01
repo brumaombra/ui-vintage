@@ -242,6 +242,13 @@
 				"offline": "Du bist offline",
 				"online": "Wieder online"
 			}
+		},
+		"legalDocument": {
+			"updated": "Zuletzt aktualisiert: {date}",
+			"summary": "Kurz gesagt",
+			"fullText": "Der vollständige Text",
+			"expandAll": "Alle aufklappen",
+			"collapseAll": "Alle zuklappen"
 		}
 	}
 }

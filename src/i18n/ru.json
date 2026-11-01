@@ -242,6 +242,13 @@
 				"offline": "Нет подключения",
 				"online": "Снова в сети"
 			}
+		},
+		"legalDocument": {
+			"updated": "Последнее обновление: {date}",
+			"summary": "Коротко",
+			"fullText": "Полный текст",
+			"expandAll": "Развернуть всё",
+			"collapseAll": "Свернуть всё"
 		}
 	}
 }
