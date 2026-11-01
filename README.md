@@ -366,6 +366,31 @@ The module then writes a service worker (`/sw.js`) and an offline page (`/offlin
 
 It also shows a small pill at the top of the app when the connection drops ("You're offline", then "Back online" for a moment when it returns), so a page that can't load its data doesn't look empty for no reason. Set `offlineIndicator: false` to hide it.
 
+The same option makes the app feel native once installed (or published on the Play Store as a Trusted Web Activity):
+
+```ts
+pwa: {
+	name: 'Acme',
+	// The manifest, one per language (any text can be { en, it, ... }), linked in the language of the page
+	manifest: {
+		id: '/', // Never change it once people installed the app
+		description: { en: 'Notes for teams', it: 'Note per i team' },
+		startUrl: { en: '/home', it: '/it/home' },
+		themeColor: '#fafafa',
+		backgroundColor: '#fafafa',
+		icons: [{ src: '/icon-512.png', sizes: '512x512', type: 'image/png' }],
+		shortcuts: [{ name: { en: 'New note', it: 'Nuova nota' }, url: { en: '/new', it: '/it/new' }, icon: '/shortcuts/new.png' }], // 96x96 PNG
+		screenshots: [{ src: '/store/home.png', sizes: '1080x1920', formFactor: 'narrow', label: 'Home' }]
+	},
+	// The Android app (Trusted Web Activity): writes /.well-known/assetlinks.json, so it opens without the browser bar
+	android: { packageName: 'com.acme.app', sha256CertFingerprints: ['AB:CD:...'] }
+}
+```
+
+- **Back button** (every app): on touch screens, the back button of the phone (or the back swipe) closes the open dialog or sheet instead of leaving the page.
+- **Edge to edge** (with `pwa`): the viewport covers the whole screen (`viewport-fit=cover`), and the library components keep clear of the notch and the gesture bar with the safe areas. Set `edgeToEdge: false` if the app's own fixed elements don't use them yet.
+- **Touch details** (every app): a long press doesn't select the labels of controls or open the link menu on them, and the installed app doesn't bounce at the edges of the page.
+
 Every build gets its own cache, and the old ones are deleted when the new worker takes over. The manifest stays in the app (`public/manifest.webmanifest`). To remove the worker from every device, set `pwa: { name: 'Acme', selfDestroy: true }` and deploy: it deletes its caches and unregisters itself.
 
 ## How it works

@@ -173,3 +173,90 @@ export const buildOfflinePage = ({ name, logo, logoDark, font, texts }) => {
 </body>
 </html>`;
 };
+
+/**
+ * A text in one language, or in several ({ en: 'Search', it: 'Cerca' })
+ * @typedef {string | Record<string, string>} LocalizedText
+ */
+
+/**
+ * Options of the web app manifest (uiVintage.pwa.manifest)
+ * @typedef {object} ManifestOptions
+ * @property {LocalizedText} [shortName] Name under the icon on the home screen
+ * @property {LocalizedText} [description] What the app does
+ * @property {LocalizedText} [startUrl] Page the app opens on
+ * @property {string} [id] Identity of the installed app: never change it once people installed the app
+ * @property {string} [display] How the app opens ("standalone": its own window, without the browser bar)
+ * @property {string} [orientation] Lock the screen orientation of the installed app ("portrait"), when it must be locked
+ * @property {string} [themeColor] Color of the system bars of the installed app
+ * @property {string} [backgroundColor] Color of the splash screen
+ * @property {string[]} [categories] Store categories ("social", "games"...)
+ * @property {Array<{ src: string, sizes: string, type?: string, purpose?: string }>} icons Icons of the app (192 and 512 pixels, and a maskable one)
+ * @property {Array<{ name: LocalizedText, shortName?: LocalizedText, description?: LocalizedText, url: LocalizedText, icon: string }>} [shortcuts] Actions shown on a long press on the icon (icons: 96x96 PNG)
+ * @property {Array<{ src: string, sizes: string, formFactor?: 'narrow' | 'wide', label?: LocalizedText }>} [screenshots] Screens shown when installing the app (narrow: phones, wide: desktop)
+ * @property {string} [defaultLocale] Language of the main manifest (the others get a manifest of their own)
+ */
+
+// The text in a language: the text itself, the one of that language, or the one of the default language
+const pick = (text, language, fallback) => text === undefined || typeof text === 'string' ? text : text[language] ?? text[fallback];
+
+// The languages a set of manifest options has texts in
+const manifestLanguages = manifest => {
+	const texts = [manifest.shortName, manifest.description, manifest.startUrl, ...(manifest.shortcuts || []).flatMap(shortcut => [shortcut.name, shortcut.shortName, shortcut.description, shortcut.url]), ...(manifest.screenshots || []).map(screenshot => screenshot.label)];
+	return [...new Set(texts.flatMap(text => text && typeof text === 'object' ? Object.keys(text) : []))];
+};
+
+/**
+ * Write the manifest of the app in each of its languages (the installed app reads the one of the page it was installed from)
+ * @param {{ name: LocalizedText, scope: string, manifest: ManifestOptions }} options
+ * @returns {{ defaultLocale: string, manifests: Record<string, object> }}
+ */
+export const buildManifests = ({ name, scope, manifest }) => {
+	const languages = manifestLanguages({ ...manifest, shortName: manifest.shortName ?? name });
+	const defaultLocale = manifest.defaultLocale || (languages.includes('en') ? 'en' : languages[0]) || 'en';
+	const build = language => JSON.parse(JSON.stringify({
+		id: manifest.id || scope,
+		name: pick(name, language, defaultLocale),
+		short_name: pick(manifest.shortName ?? name, language, defaultLocale),
+		description: pick(manifest.description, language, defaultLocale),
+		lang: language,
+		start_url: pick(manifest.startUrl, language, defaultLocale) || scope,
+		scope,
+		display: manifest.display || 'standalone',
+		orientation: manifest.orientation,
+		theme_color: manifest.themeColor,
+		background_color: manifest.backgroundColor,
+		categories: manifest.categories,
+		launch_handler: { client_mode: ['navigate-existing', 'auto'] }, // Opening the app again (from its icon or a shortcut) reuses its window instead of stacking another one
+		icons: manifest.icons,
+		shortcuts: manifest.shortcuts?.map(shortcut => ({
+			name: pick(shortcut.name, language, defaultLocale),
+			short_name: pick(shortcut.shortName, language, defaultLocale),
+			description: pick(shortcut.description, language, defaultLocale),
+			url: pick(shortcut.url, language, defaultLocale),
+			icons: [{ src: shortcut.icon, sizes: '96x96', type: 'image/png' }]
+		})),
+		screenshots: manifest.screenshots?.map(screenshot => ({
+			src: screenshot.src,
+			sizes: screenshot.sizes,
+			type: 'image/png',
+			form_factor: screenshot.formFactor,
+			label: pick(screenshot.label, language, defaultLocale)
+		}))
+	}));
+	const allLanguages = [...new Set([defaultLocale, ...languages])];
+	return { defaultLocale, manifests: Object.fromEntries(allLanguages.map(language => [language, build(language)])) };
+};
+
+/**
+ * Write the Digital Asset Links of the Android app: the proof that the app and the site belong together, so the Android app (a Trusted Web Activity) opens the site without the browser bar
+ * @param {{ packageName: string, sha256CertFingerprints: string | string[] }} android
+ */
+export const buildAssetLinks = ({ packageName, sha256CertFingerprints }) => JSON.stringify([{
+	relation: ['delegate_permission/common.handle_all_urls'],
+	target: {
+		namespace: 'android_app',
+		package_name: packageName,
+		sha256_cert_fingerprints: [sha256CertFingerprints].flat()
+	}
+}], null, '\t');

@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { buildOfflinePage, buildServiceWorker } from '../../../src/runtime/pwa/builders.mjs';
+import { buildAssetLinks, buildManifests, buildOfflinePage, buildServiceWorker } from '../../../src/runtime/pwa/builders.mjs';
 
 // Options of a service worker for build "b2"
 const OPTIONS = { version: 'b2', precache: ['/offline.html', '/fonts/mono.woff2'], buildAssetsDir: '/_nuxt/', offlinePath: '/offline.html' };
@@ -159,5 +159,47 @@ describe('buildOfflinePage', () => {
 		const html = buildOfflinePage({ name: '</script><b>App</b>', texts });
 		expect(html).not.toContain('</script><b>');
 		expect(html).toContain('&lt;/script&gt;&lt;b&gt;App&lt;/b&gt;');
+	});
+});
+
+// The manifest of the app, one per language
+describe('buildManifests', () => {
+	const manifest = {
+		description: { en: 'Predict with friends', it: 'Prevedi con gli amici' },
+		startUrl: { en: '/markets', it: '/it/markets' },
+		themeColor: '#fafafa',
+		icons: [{ src: '/icon-192.png', sizes: '192x192', type: 'image/png' }],
+		shortcuts: [{ name: { en: 'Search', it: 'Cerca' }, url: { en: '/search', it: '/it/search' }, icon: '/shortcuts/search.png' }],
+		screenshots: [{ src: '/store/explore.png', sizes: '1080x1920', formFactor: 'narrow', label: { en: 'Explore', it: 'Esplora' } }]
+	};
+
+	// One manifest per language, the same identity, and each with its own texts and links
+	it('writes a manifest for each language', () => {
+		const { defaultLocale, manifests } = buildManifests({ name: 'KrowdCall', scope: '/', manifest });
+		expect(defaultLocale).toBe('en');
+		expect(Object.keys(manifests)).toEqual(['en', 'it']);
+		expect(manifests.it).toMatchObject({ id: '/', lang: 'it', description: 'Prevedi con gli amici', start_url: '/it/markets', display: 'standalone', theme_color: '#fafafa' });
+		expect(manifests.it.shortcuts).toEqual([{ name: 'Cerca', url: '/it/search', icons: [{ src: '/shortcuts/search.png', sizes: '96x96', type: 'image/png' }] }]);
+		expect(manifests.en.screenshots[0]).toEqual({ src: '/store/explore.png', sizes: '1080x1920', type: 'image/png', form_factor: 'narrow', label: 'Explore' });
+	});
+
+	// Opening the app again reuses its window, and options left out don't appear
+	it('reuses the window and leaves out what is not set', () => {
+		const { manifests } = buildManifests({ name: 'App', scope: '/', manifest: { icons: [] } });
+		expect(manifests.en.launch_handler).toEqual({ client_mode: ['navigate-existing', 'auto'] });
+		expect(manifests.en).not.toHaveProperty('orientation');
+		expect(manifests.en).not.toHaveProperty('shortcuts');
+		expect(manifests.en.start_url).toBe('/');
+	});
+});
+
+// The proof that the Android app and the site belong together
+describe('buildAssetLinks', () => {
+	// The package of the app and the fingerprint of its signing key, in the format Android checks
+	it('writes the asset links of the Android app', () => {
+		expect(JSON.parse(buildAssetLinks({ packageName: 'com.krowdcall.app', sha256CertFingerprints: 'AB:CD' }))).toEqual([{
+			relation: ['delegate_permission/common.handle_all_urls'],
+			target: { namespace: 'android_app', package_name: 'com.krowdcall.app', sha256_cert_fingerprints: ['AB:CD'] }
+		}]);
 	});
 });

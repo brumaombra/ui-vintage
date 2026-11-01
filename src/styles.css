@@ -444,6 +444,42 @@ html {
 	::selection {
 		background-color: color-mix(in oklab, var(--primary) 30%, transparent);
 	}
+
+	/* Controls behave like the ones of a native app: a long press doesn't select their label or open the link menu (the text of the page stays selectable) */
+	button,
+	summary,
+	label,
+	nav,
+	[role="button"],
+	[role="tab"],
+	[role="switch"],
+	[role="checkbox"],
+	[role="radio"],
+	[role="menuitem"],
+	[role="option"] {
+		-webkit-user-select: none;
+		user-select: none;
+		-webkit-touch-callout: none;
+	}
+
+	/* Notched phones in landscape: the page stays clear of the notch (0 unless the viewport covers the whole screen) */
+	body {
+		padding-left: env(safe-area-inset-left);
+		padding-right: env(safe-area-inset-right);
+	}
+
+	/* Installed app: no bounce at the edges of the page, and no save menu on a long press on an image, like a native app */
+	@media (display-mode: standalone) {
+		html,
+		body {
+			overscroll-behavior: none;
+		}
+
+		img,
+		svg {
+			-webkit-touch-callout: none;
+		}
+	}
 }
 
 body {

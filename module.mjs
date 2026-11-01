@@ -141,7 +141,7 @@ const moduleMountedFiles = [];
 
 // Write the service worker and the offline page as static files of the build (so they work for server and static apps alike), and register the service worker in the browser (production builds only)
 const setupPwa = async ({ options, nuxt }) => {
-	const { buildOfflinePage, buildServiceWorker } = await import(pathToFileURL(resolver.resolve('src/runtime/pwa/builders.mjs')).href);
+	const { buildAssetLinks, buildManifests, buildOfflinePage, buildServiceWorker } = await import(pathToFileURL(resolver.resolve('src/runtime/pwa/builders.mjs')).href);
 	const baseURL = nuxt.options.app.baseURL || '/';
 	const scope = baseURL.endsWith('/') ? baseURL : `${baseURL}/`;
 	const swPath = joinPath(baseURL, 'sw.js');
@@ -175,9 +175,42 @@ const setupPwa = async ({ options, nuxt }) => {
 	nuxt.options.routeRules[swPath] = { ...nuxt.options.routeRules[swPath], headers: { 'Cache-Control': 'no-cache', ...nuxt.options.routeRules[swPath]?.headers } };
 	nuxt.options.routeRules[offlinePath] = { ...nuxt.options.routeRules[offlinePath], headers: { 'Cache-Control': 'no-cache', 'X-Robots-Tag': 'noindex', ...nuxt.options.routeRules[offlinePath]?.headers } };
 
-	// What the plugin needs in the browser
+	// The manifest of the app, one per language (the installed app takes its name, shortcuts and screenshots from the page it was installed from)
+	let manifestConfig = null;
+	if (options.manifest) {
+		const { defaultLocale, manifests } = buildManifests({ name: options.name || 'App', scope, manifest: options.manifest });
+		for (const [language, manifest] of Object.entries(manifests)) {
+			addTemplate({
+				filename: `ui-vintage/pwa/${language === defaultLocale ? 'manifest.webmanifest' : `manifest.${language}.webmanifest`}`,
+				write: true,
+				getContents: () => JSON.stringify(manifest, null, '\t')
+			});
+		}
+		manifestConfig = { path: joinPath(baseURL, 'manifest.webmanifest'), defaultLocale, locales: Object.keys(manifests) };
+		addPlugin({ src: resolver.resolve('src/runtime/pwa/manifest-link.ts') });
+	}
+
+	// The proof that the Android app (a Trusted Web Activity) and the site belong together, so the app opens without the browser bar
+	if (options.android?.packageName) {
+		addTemplate({
+			filename: 'ui-vintage/pwa/.well-known/assetlinks.json',
+			write: true,
+			getContents: () => buildAssetLinks(options.android)
+		});
+	}
+
+	// Edge to edge: the page covers the whole screen, under the notch and the gesture bar, and the library components keep clear of them with the safe areas
+	if (options.edgeToEdge !== false) {
+		// Nuxt already turned the viewport of the config into a meta tag: change that tag
+		const meta = (nuxt.options.app.head.meta ||= []);
+		const viewport = meta.find(tag => tag?.name === 'viewport');
+		if (!viewport) meta.unshift({ name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover' });
+		else if (!String(viewport.content).includes('viewport-fit')) viewport.content = `${viewport.content}, viewport-fit=cover`;
+	}
+
+	// What the plugins need in the browser
 	const offlineIndicator = options.offlineIndicator !== false;
-	nuxt.options.runtimeConfig.public.uiVintagePwa = { enabled: !nuxt.options.dev, path: swPath, scope, selfDestroy, offlineIndicator };
+	nuxt.options.runtimeConfig.public.uiVintagePwa = { enabled: !nuxt.options.dev, path: swPath, scope, selfDestroy, offlineIndicator, manifest: manifestConfig };
 
 	// The connection pill gets its classes like an imported component
 	if (offlineIndicator) moduleMountedFiles.push(resolver.resolve('src/runtime/pwa/OfflineIndicator.vue'));
@@ -200,7 +233,7 @@ export default defineNuxtModule({
 	// Default options
 	defaults: {
 		scanAllComponents: false, // Let Tailwind scan every library file, instead of only the ones the app imports
-		pwa: false // Service worker, offline page and connection pill ({ name, logo, logoDark, font, precache, offlineIndicator, selfDestroy }, see setupPwa)
+		pwa: false // Installable app: service worker, offline page, connection pill, manifest and Android asset links ({ name, logo, logoDark, font, precache, offlineIndicator, manifest, android, edgeToEdge, selfDestroy }, see setupPwa)
 	},
 
 	// Module main function
@@ -247,6 +280,9 @@ export default defineNuxtModule({
 		addPlugin({
 			src: resolver.resolve('src/runtime/ui-vintage-i18n-plugin.ts')
 		});
+
+		// Close dialogs and sheets with the back button of the phone
+		addPlugin({ src: resolver.resolve('src/runtime/back-button.client.ts'), mode: 'client' });
 
 		// Keep Safari from zooming the page in when a field is tapped (on iOS only, through the viewport, so fields keep their size everywhere)
 		addPlugin({ src: resolver.resolve('src/runtime/ios-field-zoom.client.ts'), mode: 'client' });

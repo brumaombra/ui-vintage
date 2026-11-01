@@ -6,6 +6,7 @@ import { DialogClose, DialogContent, DialogDescription, DialogOverlay, DialogPor
 import Cancel01Icon from '@hugeicons/core-free-icons/Cancel01Icon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { useI18n } from 'vue-i18n';
+import { useBackButtonClose } from '../../../lib/back-button';
 import { cn } from '../../../lib/utils';
 import { Button } from '../button';
 import { dialogSizeClasses, type DialogSize } from '../dialog';
@@ -83,6 +84,9 @@ const handleOpenAutoFocus = (event: Event) => {
 const handleOpenChange = (value: boolean) => {
 	emits('update:open', value);
 };
+
+// The back button of the phone closes it, like in native apps
+useBackButtonClose({ open: () => props.open, close: () => handleOpenChange(false) });
 </script>
 
 <template>

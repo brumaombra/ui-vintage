@@ -2,7 +2,8 @@
 import type { AlertDialogContentEmits, AlertDialogContentProps } from 'reka-ui';
 import type { HTMLAttributes } from 'vue';
 import { reactiveOmit } from '@vueuse/core';
-import { AlertDialogContent, AlertDialogOverlay, AlertDialogPortal, useForwardPropsEmits } from 'reka-ui';
+import { AlertDialogContent, AlertDialogOverlay, AlertDialogPortal, injectDialogRootContext, useForwardPropsEmits } from 'reka-ui';
+import { useBackButtonClose } from '../../../lib/back-button';
 import { cn } from '../../../lib/utils';
 
 // Keep attrs on the dialog content element
@@ -21,6 +22,10 @@ const delegatedProps = reactiveOmit(props, 'class');
 
 // Forward props and emits
 const forwarded = useForwardPropsEmits(delegatedProps, emits);
+
+// The back button of the phone closes it, like in native apps
+const rootContext = injectDialogRootContext();
+useBackButtonClose({ open: rootContext.open, close: () => rootContext.onOpenChange(false) });
 </script>
 
 <template>

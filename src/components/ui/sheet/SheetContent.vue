@@ -2,7 +2,8 @@
 import type { DialogContentEmits, DialogContentProps } from 'reka-ui';
 import type { HTMLAttributes } from 'vue';
 import { reactiveOmit } from '@vueuse/core';
-import { DialogContent, DialogPortal, useForwardPropsEmits } from 'reka-ui';
+import { DialogContent, DialogPortal, injectDialogRootContext, useForwardPropsEmits } from 'reka-ui';
+import { useBackButtonClose } from '../../../lib/back-button';
 import { cn } from '../../../lib/utils';
 import SheetOverlay from './SheetOverlay.vue';
 
@@ -24,6 +25,10 @@ const emits = defineEmits<DialogContentEmits>();
 
 const delegatedProps = reactiveOmit(props, 'class', 'side');
 const forwarded = useForwardPropsEmits(delegatedProps, emits);
+
+// The back button of the phone closes it, like in native apps
+const rootContext = injectDialogRootContext();
+useBackButtonClose({ open: rootContext.open, close: () => rootContext.onOpenChange(false) });
 </script>
 
 <template>
