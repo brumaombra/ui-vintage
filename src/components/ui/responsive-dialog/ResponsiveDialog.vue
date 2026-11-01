@@ -112,7 +112,7 @@ useBackButtonClose({ open: () => props.open, close: () => handleOpenChange(false
 
 				<!-- Content -->
 				<div data-slot="responsive-dialog-body" :class="cn('min-h-0 flex-1 overflow-y-auto p-4', props.bodyClass)">
-					<DialogDescription v-if="props.description" data-slot="responsive-dialog-description" :class="props.hideDescription ? 'sr-only' : 'mb-4 text-sm text-muted-foreground'">{{ props.description }}</DialogDescription>
+					<DialogDescription v-if="props.description" data-slot="responsive-dialog-description" :class="props.hideDescription ? 'sr-only' : 'mb-4 text-xs leading-5 text-muted-foreground sm:text-sm'">{{ props.description }}</DialogDescription>
 					<slot :mode="mode" />
 				</div>
 

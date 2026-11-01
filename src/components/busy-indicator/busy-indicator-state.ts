@@ -1,5 +1,6 @@
 import { h, markRaw, reactive, render, type Component, type HTMLAttributes } from 'vue';
 import { getUiVintageRuntimeMessage } from '../../lib/i18n';
+import { preloadWhenIdle } from '../../lib/preload';
 
 export interface SetBusyOptions {
 	label?: string;
@@ -94,3 +95,6 @@ export const setBusy = (show: boolean, options: SetBusyOptions = {}) => {
 		busyIndicatorState.overlayClass = undefined;
 	}
 };
+
+// Load the component in the background once the page is idle, so it shows at once on first use
+preloadWhenIdle(() => import('./BusyIndicator.vue'));

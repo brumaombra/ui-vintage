@@ -1,5 +1,6 @@
 import { h, markRaw, reactive, render } from 'vue';
 import type { HugeiconsIconDefinition } from '../../lib/common-types';
+import { preloadWhenIdle } from '../../lib/preload';
 
 export type DialogMessageType = 'error' | 'success' | 'info' | 'warning';
 export type { HugeiconsIconDefinition };
@@ -164,3 +165,6 @@ export const showMessageDialog = (options: ShowMessageDialogOptions) => {
 		});
 	});
 };
+
+// Load the component in the background once the page is idle, so it shows at once on first use
+preloadWhenIdle(() => import('./MessageDialog.vue'));

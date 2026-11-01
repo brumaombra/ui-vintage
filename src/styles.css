@@ -8,7 +8,6 @@ html {
 	-moz-osx-font-smoothing: grayscale;
 	text-rendering: optimizeLegibility;
 	-webkit-tap-highlight-color: transparent;
-	word-spacing: var(--uv-word-spacing);
 }
 
 :root {
@@ -433,11 +432,22 @@ html {
 		touch-action: manipulation;
 	}
 
-	/* Code keeps the full spaces, so its columns stay aligned */
+	/* Tighter spaces between words (the monospace font's are wide), set on every element so each one computes them from its own size: set once on the page, every element inherited the 16px value, which ate most of the space in small text. Never less than a 4.5px gap (a monospace space is 0.6em wide), so very small text stays readable */
+	*,
+	::before,
+	::after {
+		word-spacing: max(var(--uv-word-spacing), 4.5px - 0.6em);
+	}
+
+	/* Code keeps the full spaces, so its columns stay aligned (the text inside it too) */
 	pre,
+	pre *,
 	code,
+	code *,
 	kbd,
-	samp {
+	kbd *,
+	samp,
+	samp * {
 		word-spacing: normal;
 	}
 

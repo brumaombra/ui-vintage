@@ -2,6 +2,7 @@ import { h, markRaw, reactive, render } from 'vue';
 import type { ButtonVariants } from '../ui/button';
 import type { HugeiconsIconDefinition } from '../../lib/common-types';
 import { getUiVintageRuntimeMessage } from '../../lib/i18n';
+import { preloadWhenIdle } from '../../lib/preload';
 
 export type DialogButtonVariant = NonNullable<ButtonVariants['variant']>;
 export type { HugeiconsIconDefinition };
@@ -200,3 +201,6 @@ export const showConfirmDialog = (options: ShowConfirmDialogOptions) => {
 		});
 	});
 };
+
+// Load the component in the background once the page is idle, so it shows at once on first use
+preloadWhenIdle(() => import('./ConfirmDialog.vue'));

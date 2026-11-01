@@ -1,5 +1,6 @@
 import { h, markRaw, reactive, render } from 'vue';
 import type { HugeiconsIconDefinition } from '../../lib/common-types';
+import { preloadWhenIdle } from '../../lib/preload';
 
 export type MessageToastType = 'success' | 'info' | 'warning' | 'error';
 
@@ -211,3 +212,6 @@ export const showMessageToast = (options: ShowMessageToastOptions) => {
 
 	return id;
 };
+
+// Load the component in the background once the page is idle, so it shows at once on first use
+preloadWhenIdle(() => import('./MessageToast.vue'));
