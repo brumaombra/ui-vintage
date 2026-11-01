@@ -3121,13 +3121,14 @@ setBusy(true, { label: 'Creating...', variant: 'fullscreen', mark: AppLogoMark }
 
 ```ts
 const busyIndicatorState: BusyIndicatorState
-function setBusy(show: boolean, options: SetBusyOptions = {})
+function setBusy(show: boolean, options: SetBusyOptions = {}): Promise<void>
 interface SetBusyOptions {
     label?: string;
     class?: HTMLAttributes['class'];
     overlayClass?: HTMLAttributes['class'];
     variant?: 'card' | 'fullscreen';
     mark?: Component | null;
+    minDuration?: number;
 }
 ```
 
