@@ -169,7 +169,7 @@ describe('buildManifests', () => {
 		startUrl: { en: '/markets', it: '/it/markets' },
 		themeColor: '#fafafa',
 		icons: [{ src: '/icon-192.png', sizes: '192x192', type: 'image/png' }],
-		shortcuts: [{ name: { en: 'Search', it: 'Cerca' }, url: { en: '/search', it: '/it/search' }, icon: '/shortcuts/search.png' }],
+		shortcuts: [{ name: { en: 'Search', it: 'Cerca' }, url: { en: '/search', it: '/it/search' }, icon: '/shortcuts/search.png', iconPurpose: 'maskable' }],
 		screenshots: [{ src: '/store/explore.png', sizes: '1080x1920', formFactor: 'narrow', label: { en: 'Explore', it: 'Esplora' } }]
 	};
 
@@ -179,7 +179,7 @@ describe('buildManifests', () => {
 		expect(defaultLocale).toBe('en');
 		expect(Object.keys(manifests)).toEqual(['en', 'it']);
 		expect(manifests.it).toMatchObject({ id: '/', lang: 'it', description: 'Prevedi con gli amici', start_url: '/it/markets', display: 'standalone', theme_color: '#fafafa' });
-		expect(manifests.it.shortcuts).toEqual([{ name: 'Cerca', url: '/it/search', icons: [{ src: '/shortcuts/search.png', sizes: '96x96', type: 'image/png' }] }]);
+		expect(manifests.it.shortcuts).toEqual([{ name: 'Cerca', url: '/it/search', icons: [{ src: '/shortcuts/search.png', sizes: '96x96', type: 'image/png', purpose: 'maskable' }] }]);
 		expect(manifests.en.screenshots[0]).toEqual({ src: '/store/explore.png', sizes: '1080x1920', type: 'image/png', form_factor: 'narrow', label: 'Explore' });
 	});
 

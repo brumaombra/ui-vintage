@@ -192,7 +192,7 @@ export const buildOfflinePage = ({ name, logo, logoDark, font, texts }) => {
  * @property {string} [backgroundColor] Color of the splash screen
  * @property {string[]} [categories] Store categories ("social", "games"...)
  * @property {Array<{ src: string, sizes: string, type?: string, purpose?: string }>} icons Icons of the app (192 and 512 pixels, and a maskable one)
- * @property {Array<{ name: LocalizedText, shortName?: LocalizedText, description?: LocalizedText, url: LocalizedText, icon: string }>} [shortcuts] Actions shown on a long press on the icon (icons: 96x96 PNG)
+ * @property {Array<{ name: LocalizedText, shortName?: LocalizedText, description?: LocalizedText, url: LocalizedText, icon: string, iconPurpose?: 'any' | 'maskable' }>} [shortcuts] Actions shown on a long press on the icon (icons: 96x96 PNG; maskable when they fill the whole square, so Android crops them to its shape)
  * @property {Array<{ src: string, sizes: string, formFactor?: 'narrow' | 'wide', label?: LocalizedText }>} [screenshots] Screens shown when installing the app (narrow: phones, wide: desktop)
  * @property {string} [defaultLocale] Language of the main manifest (the others get a manifest of their own)
  */
@@ -234,7 +234,7 @@ export const buildManifests = ({ name, scope, manifest }) => {
 			short_name: pick(shortcut.shortName, language, defaultLocale),
 			description: pick(shortcut.description, language, defaultLocale),
 			url: pick(shortcut.url, language, defaultLocale),
-			icons: [{ src: shortcut.icon, sizes: '96x96', type: 'image/png' }]
+			icons: [{ src: shortcut.icon, sizes: '96x96', type: 'image/png', purpose: shortcut.iconPurpose }]
 		})),
 		screenshots: manifest.screenshots?.map(screenshot => ({
 			src: screenshot.src,
