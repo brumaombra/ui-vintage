@@ -19,6 +19,7 @@ Before writing a custom component, check the catalog's contents list. Common map
 - A dialog or a drawer of your own (a form, a picker, a list) → `responsive-dialog`: a sheet from the bottom on phones, a centered dialog (or a side panel with `desktop="panel"`) on larger screens.
 - Confirmation → `showConfirmDialog` (`confirm-dialog`); notification → `showMessageToast` (`message-toast`); blocking load → `setBusy` (`busy-indicator`). These mount themselves, so don't add them to a template.
 - Haptic feedback → `haptic()` or `useHaptics()` (`haptics`), only for taps that matter (a toggle, an action that went through or failed), never on every button.
+- Installable app with an offline page → the module's `uiVintage.pwa` option (a service worker at `/sw.js`), never a separate PWA module.
 - App layout with a sidebar → `dashboard-shell`; marketing or blog layout → `landing`; page title row → `page-header`.
 - Empty and loading placeholders → `empty-state-card`, `loading-state-card`, `skeleton`.
 - Blog pages with Nuxt Content → `blog` (`BlogHeaderSection`, `BlogPostHeader`, `PostsList`, `TableOfContents`, `BlogContentRenderer`, ...).

@@ -119,6 +119,60 @@ const buildScopedStylesheet = usedFiles => {
 	return stylesheet.replace(ALL_SOURCES_DIRECTIVE, `/* Library files used by the app (found by the @brumaombra/ui-vintage module) */\n${sources}`);
 };
 
+/******************************** Service worker ********************************/
+
+// Join paths of the app without doubled slashes ("/" + "/sw.js" -> "/sw.js")
+const joinPath = (...parts) => `/${parts.join('/').split('/').filter(Boolean).join('/')}`;
+
+// Texts of the offline page in every language of the library
+const readOfflineTexts = () => {
+	const folder = resolver.resolve('src/i18n');
+	return Object.fromEntries(readdirSync(folder).filter(file => file.endsWith('.json')).map(file => [file.replace('.json', ''), JSON.parse(readFileSync(join(folder, file), 'utf8')).uiVintage.pwa.offline]));
+};
+
+// Write the service worker and the offline page as static files of the build (so they work for server and static apps alike), and register the service worker in the browser (production builds only)
+const setupPwa = async ({ options, nuxt }) => {
+	const { buildOfflinePage, buildServiceWorker } = await import(pathToFileURL(resolver.resolve('src/runtime/pwa/builders.mjs')).href);
+	const baseURL = nuxt.options.app.baseURL || '/';
+	const scope = baseURL.endsWith('/') ? baseURL : `${baseURL}/`;
+	const swPath = joinPath(baseURL, 'sw.js');
+	const offlinePath = joinPath(baseURL, 'offline.html');
+	const buildAssetsDir = `${joinPath(baseURL, nuxt.options.app.buildAssetsDir || '/_nuxt/')}/`;
+	const selfDestroy = Boolean(options.selfDestroy);
+
+	// Paths saved at install: the offline page, its logo and its font files, and the ones the app adds
+	const precache = [...new Set([offlinePath, options.logo, options.logoDark, options.font?.regular, options.font?.bold, ...(options.precache || [])].filter(Boolean))];
+
+	// The service worker of this build (the build id names its cache, so each build gets its own and the old one is deleted)
+	const serviceWorker = addTemplate({
+		filename: 'ui-vintage/pwa/sw.js',
+		write: true,
+		getContents: () => buildServiceWorker({ version: nuxt.options.buildId, precache, buildAssetsDir, offlinePath, selfDestroy })
+	});
+
+	// The offline page, in every language of the library
+	addTemplate({
+		filename: 'ui-vintage/pwa/offline.html',
+		write: true,
+		getContents: () => buildOfflinePage({ name: options.name || 'App', logo: options.logo, logoDark: options.logoDark, font: options.font, texts: readOfflineTexts() })
+	});
+
+	// Serve the folder of both files at the root of the app
+	nuxt.options.nitro.publicAssets ||= [];
+	nuxt.options.nitro.publicAssets.push({ dir: dirname(serviceWorker.dst), baseURL: '/', maxAge: 0 });
+
+	// Never kept by the browser or a CDN, so a new build is found at once (the rules the app already set for these paths come first)
+	nuxt.options.routeRules ||= {};
+	nuxt.options.routeRules[swPath] = { ...nuxt.options.routeRules[swPath], headers: { 'Cache-Control': 'no-cache', ...nuxt.options.routeRules[swPath]?.headers } };
+	nuxt.options.routeRules[offlinePath] = { ...nuxt.options.routeRules[offlinePath], headers: { 'Cache-Control': 'no-cache', 'X-Robots-Tag': 'noindex', ...nuxt.options.routeRules[offlinePath]?.headers } };
+
+	// What the plugin needs in the browser
+	nuxt.options.runtimeConfig.public.uiVintagePwa = { enabled: !nuxt.options.dev, path: swPath, scope, selfDestroy };
+
+	// The registration in the browser
+	addPlugin({ src: resolver.resolve('src/runtime/pwa/plugin.client.ts'), mode: 'client' });
+};
+
 export default defineNuxtModule({
 	// Module meta information
 	meta: {
@@ -132,7 +186,8 @@ export default defineNuxtModule({
 
 	// Default options
 	defaults: {
-		scanAllComponents: false // Let Tailwind scan every library file, instead of only the ones the app imports
+		scanAllComponents: false, // Let Tailwind scan every library file, instead of only the ones the app imports
+		pwa: false // Service worker and offline page ({ name, logo, font, precache, selfDestroy }, see setupPwa)
 	},
 
 	// Module main function
@@ -179,5 +234,10 @@ export default defineNuxtModule({
 		addPlugin({
 			src: resolver.resolve('src/runtime/ui-vintage-i18n-plugin.ts')
 		});
+
+		// Add the service worker and its offline page, when the app asks for them
+		if (options.pwa) {
+			await setupPwa({ options: options.pwa === true ? {} : options.pwa, nuxt });
+		}
 	}
 });

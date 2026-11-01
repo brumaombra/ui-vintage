@@ -230,6 +230,14 @@
 		"timeWheel": {
 			"hours": "Stunden",
 			"minutes": "Minuten"
+		},
+		"pwa": {
+			"offline": {
+				"title": "Du bist offline",
+				"message": "{name} braucht eine Internetverbindung. Prüfe deine Verbindung und versuche es erneut.",
+				"retry": "Erneut versuchen",
+				"note": "Die Seite lädt sich von selbst neu, sobald du wieder online bist."
+			}
 		}
 	}
 }

@@ -341,6 +341,31 @@ Scrollbars are thin and follow the theme. The styles live in the base layer, so 
 
 Library strings live under the `uiVintage` namespace and are available in English, Italian, French, Spanish, German, Portuguese, Chinese, Japanese, and Russian. With `@nuxtjs/i18n` or Vue I18n configured, the runtime plugin merges them into your existing composer without replacing your messages.
 
+### Installable app (service worker)
+
+Turn an app into an installable PWA with an offline page, with no extra dependencies. The option is off by default:
+
+```ts
+export default defineNuxtConfig({
+	uiVintage: {
+		pwa: {
+			name: 'Acme', // Shown on the offline page
+			logo: '/logo.svg', // Optional, with `logoDark` for the dark theme
+			font: { family: 'Inter', regular: '/fonts/inter.woff2', bold: '/fonts/inter-bold.woff2' }, // Optional, saved for the offline page
+			precache: ['/icons/icon-192.png'] // Optional, other files to keep on the device
+		}
+	}
+});
+```
+
+The module then writes a service worker (`/sw.js`) and an offline page (`/offline.html`) as static files of each build, so they work for server and static apps alike, and registers the worker in production builds (never in development). The worker:
+
+- loads pages from the network, and shows the offline page (in the language of the page, light or dark like the app) when there is no connection, reloading by itself once it's back;
+- keeps the built files (`/_nuxt/`, whose names change with every build) on the device, so the app opens faster;
+- leaves everything else alone: the API, live updates, other methods and other origins always go to the network, so data is never stale.
+
+Every build gets its own cache, and the old ones are deleted when the new worker takes over. The manifest stays in the app (`public/manifest.webmanifest`). To remove the worker from every device, set `pwa: { name: 'Acme', selfDestroy: true }` and deploy: it deletes its caches and unregisters itself.
+
 ## How it works
 
 When the module is registered, it:
@@ -349,6 +374,7 @@ When the module is registered, it:
 2. Adds the published `src/` directory to Nuxt transpilation.
 3. Installs `@nuxt/image` when the app has not registered it.
 4. Registers the library i18n plugin, which merges the locale messages when Vue I18n is present.
+5. With `pwa` set, writes the service worker and the offline page as static files of the build, and registers the worker in production.
 
 ### Only the classes the app uses
 
