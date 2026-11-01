@@ -237,6 +237,10 @@
 				"message": "{name} precisa de ligação à internet. Verifica a tua ligação e tenta novamente.",
 				"retry": "Tentar novamente",
 				"note": "A página volta a carregar sozinha quando voltares a estar online."
+			},
+			"status": {
+				"offline": "Estás offline",
+				"online": "De novo online"
 			}
 		}
 	}

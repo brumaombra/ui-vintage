@@ -83,7 +83,7 @@ const resolveLibraryImport = ({ specifier, importer }) => {
 };
 
 // Collect the library files the app uses: the entry points it imports, and every library file they import in turn
-const collectUsedLibraryFiles = appFolders => {
+const collectUsedLibraryFiles = (appFolders, extraEntries = []) => {
 	const usedFiles = new Set();
 
 	// Follow the imports of a file
@@ -95,6 +95,12 @@ const collectUsedLibraryFiles = appFolders => {
 			visit(libraryFile);
 		}
 	};
+
+	// Start from the library files the module mounts itself (the connection pill of the service worker, for example)
+	for (const entry of extraEntries) {
+		usedFiles.add(entry);
+		visit(entry);
+	}
 
 	// Start from every file of the app
 	for (const folder of appFolders) {
@@ -129,6 +135,9 @@ const readOfflineTexts = () => {
 	const folder = resolver.resolve('src/i18n');
 	return Object.fromEntries(readdirSync(folder).filter(file => file.endsWith('.json')).map(file => [file.replace('.json', ''), JSON.parse(readFileSync(join(folder, file), 'utf8')).uiVintage.pwa.offline]));
 };
+
+// Library files the module mounts on its own (no app imports them, so the style scanner starts from them too)
+const moduleMountedFiles = [];
 
 // Write the service worker and the offline page as static files of the build (so they work for server and static apps alike), and register the service worker in the browser (production builds only)
 const setupPwa = async ({ options, nuxt }) => {
@@ -167,7 +176,11 @@ const setupPwa = async ({ options, nuxt }) => {
 	nuxt.options.routeRules[offlinePath] = { ...nuxt.options.routeRules[offlinePath], headers: { 'Cache-Control': 'no-cache', 'X-Robots-Tag': 'noindex', ...nuxt.options.routeRules[offlinePath]?.headers } };
 
 	// What the plugin needs in the browser
-	nuxt.options.runtimeConfig.public.uiVintagePwa = { enabled: !nuxt.options.dev, path: swPath, scope, selfDestroy };
+	const offlineIndicator = options.offlineIndicator !== false;
+	nuxt.options.runtimeConfig.public.uiVintagePwa = { enabled: !nuxt.options.dev, path: swPath, scope, selfDestroy, offlineIndicator };
+
+	// The connection pill gets its classes like an imported component
+	if (offlineIndicator) moduleMountedFiles.push(resolver.resolve('src/runtime/pwa/OfflineIndicator.vue'));
 
 	// The registration in the browser
 	addPlugin({ src: resolver.resolve('src/runtime/pwa/plugin.client.ts'), mode: 'client' });
@@ -187,7 +200,7 @@ export default defineNuxtModule({
 	// Default options
 	defaults: {
 		scanAllComponents: false, // Let Tailwind scan every library file, instead of only the ones the app imports
-		pwa: false // Service worker and offline page ({ name, logo, font, precache, selfDestroy }, see setupPwa)
+		pwa: false // Service worker, offline page and connection pill ({ name, logo, logoDark, font, precache, offlineIndicator, selfDestroy }, see setupPwa)
 	},
 
 	// Module main function
@@ -202,7 +215,7 @@ export default defineNuxtModule({
 			const template = addTemplate({
 				filename: 'ui-vintage/style.css',
 				write: true,
-				getContents: () => buildScopedStylesheet(collectUsedLibraryFiles(appFolders))
+				getContents: () => buildScopedStylesheet(collectUsedLibraryFiles(appFolders, moduleMountedFiles))
 			});
 			appStylesPath = template.dst;
 

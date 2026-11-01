@@ -49,9 +49,9 @@ const BUILD_ASSETS = ${JSON.stringify(buildAssetsDir)};
 const BUILD_INFO = BUILD_ASSETS + 'builds/';
 const OFFLINE_PAGE = ${JSON.stringify(offlinePath)};
 
-// Save the offline page and its files, then take over at once
+// Save the offline page and its files (fresh from the server, never from the browser's own cache, which a CDN can tell to keep files longer), then take over at once
 self.addEventListener('install', event => {
-	event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(PRECACHE)).then(() => self.skipWaiting()));
+	event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(PRECACHE.map(path => new Request(path, { cache: 'reload' })))).then(() => self.skipWaiting()));
 });
 
 // Delete the caches of the other builds, then control the open pages

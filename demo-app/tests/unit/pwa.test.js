@@ -9,6 +9,7 @@ const ORIGIN = 'https://app.example';
 const runServiceWorker = ({ code, cachedNames = [], network = async () => new Response('from the network') }) => {
 	// Caches: name -> (path -> response)
 	const stores = new Map(cachedNames.map(name => [name, new Map()]));
+	const addedRequests = [];
 	const keyOf = request => new URL(typeof request === 'string' ? request : request.url, ORIGIN).pathname;
 	const openCache = name => {
 		if (!stores.has(name)) stores.set(name, new Map());
@@ -16,7 +17,7 @@ const runServiceWorker = ({ code, cachedNames = [], network = async () => new Re
 		return {
 			match: async request => store.get(keyOf(request))?.clone(),
 			put: async (request, response) => { store.set(keyOf(request), response); },
-			addAll: async paths => { for (const path of paths) store.set(path, new Response(`saved ${path}`)); }
+			addAll: async requests => { for (const request of requests) { addedRequests.push(request); store.set(keyOf(request), new Response(`saved ${keyOf(request)}`)); } }
 		};
 	};
 	const caches = {
@@ -36,7 +37,8 @@ const runServiceWorker = ({ code, cachedNames = [], network = async () => new Re
 		registration: { unregister: vi.fn() }
 	};
 	const fetch = vi.fn(network);
-	new Function('self', 'caches', 'fetch', code)(self, caches, fetch);
+	const Request = class { constructor(url, init = {}) { this.url = url; this.cache = init.cache || 'default'; } };
+	new Function('self', 'caches', 'fetch', 'Request', code)(self, caches, fetch, Request);
 
 	// Fire an event and wait for the work it hands over
 	const fire = async (type, extra = {}) => {
@@ -48,7 +50,7 @@ const runServiceWorker = ({ code, cachedNames = [], network = async () => new Re
 		return response === undefined ? undefined : await response;
 	};
 	const request = (path, { method = 'GET', mode = 'cors', origin = ORIGIN } = {}) => ({ request: { url: `${origin}${path}`, method, mode } });
-	return { self, stores, fetch, fire, request };
+	return { self, stores, addedRequests, fetch, fire, request };
 };
 
 // The service worker of the library: pages from the network with an offline page, built files from the cache, nothing else touched
@@ -59,6 +61,13 @@ describe('buildServiceWorker', () => {
 		await worker.fire('install');
 		expect([...worker.stores.get('uv-pwa-b2').keys()]).toEqual(['/offline.html', '/fonts/mono.woff2']);
 		expect(worker.self.skipWaiting).toHaveBeenCalled();
+	});
+
+	// The files are saved fresh from the server: the browser's own cache could hand over old copies (a CDN can tell it to keep them for a while)
+	it('saves the files fresh from the server, not from the browser cache', async () => {
+		const worker = runServiceWorker({ code: buildServiceWorker(OPTIONS) });
+		await worker.fire('install');
+		expect(worker.addedRequests.map(request => request.cache)).toEqual(['reload', 'reload']);
 	});
 
 	// Activation deletes the caches of the other builds, keeps the ones of anything else, and takes control of the open pages

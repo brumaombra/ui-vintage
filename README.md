@@ -364,6 +364,8 @@ The module then writes a service worker (`/sw.js`) and an offline page (`/offlin
 - keeps the built files (`/_nuxt/`, whose names change with every build) on the device, so the app opens faster;
 - leaves everything else alone: the API, live updates, other methods and other origins always go to the network, so data is never stale.
 
+It also shows a small pill at the top of the app when the connection drops ("You're offline", then "Back online" for a moment when it returns), so a page that can't load its data doesn't look empty for no reason. Set `offlineIndicator: false` to hide it.
+
 Every build gets its own cache, and the old ones are deleted when the new worker takes over. The manifest stays in the app (`public/manifest.webmanifest`). To remove the worker from every device, set `pwa: { name: 'Acme', selfDestroy: true }` and deploy: it deletes its caches and unregisters itself.
 
 ## How it works

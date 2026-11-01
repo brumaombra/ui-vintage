@@ -237,6 +237,10 @@
 				"message": "{name} needs a connection. Check your connection and try again.",
 				"retry": "Try again",
 				"note": "The page reloads by itself when you're back online."
+			},
+			"status": {
+				"offline": "You're offline",
+				"online": "Back online"
 			}
 		}
 	}

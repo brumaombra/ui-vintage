@@ -237,6 +237,10 @@
 				"message": "{name} braucht eine Internetverbindung. Prüfe deine Verbindung und versuche es erneut.",
 				"retry": "Erneut versuchen",
 				"note": "Die Seite lädt sich von selbst neu, sobald du wieder online bist."
+			},
+			"status": {
+				"offline": "Du bist offline",
+				"online": "Wieder online"
 			}
 		}
 	}
