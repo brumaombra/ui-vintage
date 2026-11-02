@@ -625,6 +625,10 @@ setBusy(true, { label: 'Creating...', variant: 'fullscreen', mark: AppLogoMark }
 		category: 'layout',
 		description: 'A legal page (terms, privacy, cookies): the title and the date it last changed, "the short version" in a few plain points, then the full text in collapsible sections with an expand-all button. The collapsed text stays in the page, for search engines and the browser\'s search. A section has a `text`, `points` (`{ title, text }`), or both, and an optional `icon`.'
 	},
+	'pull-to-refresh': {
+		category: 'navigation',
+		description: 'Pull down at the top of a page to reload its data, like a native app: wrap the page and pass a `refresh` function (awaited). It follows only a downward pull from the very top (sideways swipes like carousels are left alone), resists as it goes, gives a haptic at the threshold, and holds the indicator until the data is back (at least `min-duration`). Only in the installed app by default (`installed-only`), since a browser tab has its own. The default indicator is a spinner; pass your own in the `indicator` slot (it gets `progress`, 1 at the threshold, and `state`: `idle`, `pulling`, `ready` or `refreshing`).'
+	},
 	'page-header': {
 		category: 'layout',
 		description: 'Page title row with an optional actions slot, in three sizes.'

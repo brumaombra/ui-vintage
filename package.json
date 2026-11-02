@@ -104,6 +104,7 @@
 		"./popover": "./src/components/ui/popover/index.ts",
 		"./progress": "./src/components/ui/progress/index.ts",
 		"./progress-component": "./src/components/progress-component/index.ts",
+		"./pull-to-refresh": "./src/components/pull-to-refresh/index.ts",
 		"./radio-group": "./src/components/ui/radio-group/index.ts",
 		"./responsive-dialog": "./src/components/ui/responsive-dialog/index.ts",
 		"./scroll-area": "./src/components/ui/scroll-area/index.ts",

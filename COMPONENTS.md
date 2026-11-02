@@ -18,7 +18,7 @@ This file lists every public entry point of the package with its components, pro
 - **Actions:** [action-bar](#brumaombraui-vintageaction-bar), [button](#brumaombraui-vintagebutton), [dropdown-menu](#brumaombraui-vintagedropdown-menu), [kbd](#brumaombraui-vintagekbd), [load-more-button](#brumaombraui-vintageload-more-button), [support-button](#brumaombraui-vintagesupport-button), [text-link](#brumaombraui-vintagetext-link), [toggle-group](#brumaombraui-vintagetoggle-group)
 - **Forms:** [calendar](#brumaombraui-vintagecalendar), [checkbox](#brumaombraui-vintagecheckbox), [combobox](#brumaombraui-vintagecombobox), [date-picker](#brumaombraui-vintagedate-picker), [date-time-picker](#brumaombraui-vintagedate-time-picker), [field](#brumaombraui-vintagefield), [file-dropzone](#brumaombraui-vintagefile-dropzone), [inline-date-picker](#brumaombraui-vintageinline-date-picker), [input](#brumaombraui-vintageinput), [label](#brumaombraui-vintagelabel), [native-select](#brumaombraui-vintagenative-select), [number-field](#brumaombraui-vintagenumber-field), [pin-input](#brumaombraui-vintagepin-input), [radio-group](#brumaombraui-vintageradio-group), [select](#brumaombraui-vintageselect), [slider](#brumaombraui-vintageslider), [slider-form-component](#brumaombraui-vintageslider-form-component), [switch](#brumaombraui-vintageswitch), [switch-form-component](#brumaombraui-vintageswitch-form-component), [tags-input](#brumaombraui-vintagetags-input), [textarea](#brumaombraui-vintagetextarea), [time-picker](#brumaombraui-vintagetime-picker), [time-wheel](#brumaombraui-vintagetime-wheel)
 - **Data display:** [animated-number](#brumaombraui-vintageanimated-number), [avatar](#brumaombraui-vintageavatar), [badge](#brumaombraui-vintagebadge), [card](#brumaombraui-vintagecard), [card-grid](#brumaombraui-vintagecard-grid), [chip](#brumaombraui-vintagechip), [data-list](#brumaombraui-vintagedata-list), [data-table](#brumaombraui-vintagedata-table), [info-card](#brumaombraui-vintageinfo-card), [list](#brumaombraui-vintagelist), [progress](#brumaombraui-vintageprogress), [progress-component](#brumaombraui-vintageprogress-component), [scroll-area](#brumaombraui-vintagescroll-area), [separator](#brumaombraui-vintageseparator), [single-value-card](#brumaombraui-vintagesingle-value-card), [skeleton](#brumaombraui-vintageskeleton), [stat-strip](#brumaombraui-vintagestat-strip), [table](#brumaombraui-vintagetable)
-- **Navigation:** [accordion](#brumaombraui-vintageaccordion), [bottom-nav](#brumaombraui-vintagebottom-nav), [breadcrumb](#brumaombraui-vintagebreadcrumb), [collapsible](#brumaombraui-vintagecollapsible), [pagination](#brumaombraui-vintagepagination), [sidebar](#brumaombraui-vintagesidebar), [stepper](#brumaombraui-vintagestepper), [tabs](#brumaombraui-vintagetabs)
+- **Navigation:** [accordion](#brumaombraui-vintageaccordion), [bottom-nav](#brumaombraui-vintagebottom-nav), [breadcrumb](#brumaombraui-vintagebreadcrumb), [collapsible](#brumaombraui-vintagecollapsible), [pagination](#brumaombraui-vintagepagination), [pull-to-refresh](#brumaombraui-vintagepull-to-refresh), [sidebar](#brumaombraui-vintagesidebar), [stepper](#brumaombraui-vintagestepper), [tabs](#brumaombraui-vintagetabs)
 - **Overlays:** [alert-dialog](#brumaombraui-vintagealert-dialog), [command](#brumaombraui-vintagecommand), [dialog](#brumaombraui-vintagedialog), [hover-card](#brumaombraui-vintagehover-card), [popover](#brumaombraui-vintagepopover), [responsive-dialog](#brumaombraui-vintageresponsive-dialog), [sheet](#brumaombraui-vintagesheet), [tooltip](#brumaombraui-vintagetooltip)
 - **Feedback:** [alert](#brumaombraui-vintagealert), [busy](#brumaombraui-vintagebusy), [busy-indicator](#brumaombraui-vintagebusy-indicator), [confirm-dialog](#brumaombraui-vintageconfirm-dialog), [cookie-consent](#brumaombraui-vintagecookie-consent), [empty-state-card](#brumaombraui-vintageempty-state-card), [haptics](#brumaombraui-vintagehaptics), [loading-state-card](#brumaombraui-vintageloading-state-card), [message-dialog](#brumaombraui-vintagemessage-dialog), [message-toast](#brumaombraui-vintagemessage-toast), [spinner](#brumaombraui-vintagespinner)
 - **Layouts and app shell:** [background-grid](#brumaombraui-vintagebackground-grid), [dashboard-shell](#brumaombraui-vintagedashboard-shell), [error-page](#brumaombraui-vintageerror-page), [landing](#brumaombraui-vintagelanding), [landing-content](#brumaombraui-vintagelanding-content), [landing-footer](#brumaombraui-vintagelanding-footer), [landing-navbar](#brumaombraui-vintagelanding-navbar), [landing-shell](#brumaombraui-vintagelanding-shell), [language-flag](#brumaombraui-vintagelanguage-flag), [language-selector](#brumaombraui-vintagelanguage-selector), [legal-document](#brumaombraui-vintagelegal-document), [page-header](#brumaombraui-vintagepage-header), [section-title](#brumaombraui-vintagesection-title), [theme-selector](#brumaombraui-vintagetheme-selector)
@@ -2239,6 +2239,35 @@ import { Pagination, PaginationContent, PaginationEllipsis, PaginationFirst, Pag
 | `showEdges` | `boolean` | `true` |
 | `disabled` | `boolean` | `false` |
 | `class` | `HTMLAttributes['class']` |  |
+
+---
+
+### `@brumaombra/ui-vintage/pull-to-refresh`
+
+Pull down at the top of a page to reload its data, like a native app: wrap the page and pass a `refresh` function (awaited). It follows only a downward pull from the very top (sideways swipes like carousels are left alone), resists as it goes, gives a haptic at the threshold, and holds the indicator until the data is back (at least `min-duration`). Only in the installed app by default (`installed-only`), since a browser tab has its own. The default indicator is a spinner; pass your own in the `indicator` slot (it gets `progress`, 1 at the threshold, and `state`: `idle`, `pulling`, `ready` or `refreshing`).
+
+```ts
+import { PullToRefresh } from '@brumaombra/ui-vintage/pull-to-refresh';
+import type { PullToRefreshState } from '@brumaombra/ui-vintage/pull-to-refresh';
+```
+
+#### `PullToRefresh`
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `refresh` | `(() => Promise<unknown> \| unknown) \| null` | `null` |
+| `threshold` | `number` | `72` |
+| `minDuration` | `number` | `600` |
+| `installedOnly` | `boolean` | `true` |
+| `class` | `HTMLAttributes['class']` |  |
+
+- **Slots:** `indicator`, `default`.
+
+#### Functions, constants, and types
+
+```ts
+type PullToRefreshState = 'idle' | 'pulling' | 'ready' | 'refreshing'
+```
 
 ---
 
