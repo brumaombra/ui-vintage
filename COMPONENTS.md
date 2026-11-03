@@ -3733,7 +3733,7 @@ import { LandingShell } from '@brumaombra/ui-vintage/landing-shell';
 Flag icons for the supported locales.
 
 ```ts
-import { LanguageFlag, EnglishFlag, FrenchFlag, GermanFlag, ItalianFlag, ChineseFlag, JapaneseFlag, PortugueseFlag, RussianFlag, SpanishFlag } from '@brumaombra/ui-vintage/language-flag';
+import { LanguageFlag, EnglishFlag, FrenchFlag, GermanFlag, ItalianFlag, BrazilianFlag, ChineseFlag, JapaneseFlag, PortugueseFlag, RussianFlag, SpanishFlag } from '@brumaombra/ui-vintage/language-flag';
 import type { SupportedLanguageCode } from '@brumaombra/ui-vintage/language-flag';
 ```
 
@@ -3756,6 +3756,10 @@ import type { SupportedLanguageCode } from '@brumaombra/ui-vintage/language-flag
 - **Props:** none.
 
 #### `ItalianFlag`
+
+- **Props:** none.
+
+#### `BrazilianFlag`
 
 - **Props:** none.
 
