@@ -138,6 +138,8 @@ if (confirmed) {
 }
 ```
 
+Toasts show at the bottom of the screen. To move every toast of the app, set `uiVintage: { toast: { position: 'top' } }`, or `'responsive'` to show them at the top on phones (where the bottom has the navigation and the sheets) and at the bottom from tablets up.
+
 ### Build a layout
 
 Shells own the layout and responsive behavior; your app owns the navigation data and the content. Links take plain paths (`to: '/settings'`): the components render `NuxtLinkLocale`, which adds the current language prefix and navigates client-side, and leaves external URLs as they are:
@@ -390,6 +392,8 @@ pwa: {
 - **Back button** (every app): on touch screens, the back button of the phone (or the back swipe) closes the open dialog or sheet instead of leaving the page.
 - **Edge to edge** (with `pwa`): the viewport covers the whole screen (`viewport-fit=cover`), and the library components keep clear of the notch and the gesture bar with the safe areas. Set `edgeToEdge: false` if the app's own fixed elements don't use them yet.
 - **Touch details** (every app): a long press doesn't select the labels of controls or open the link menu on them, and the installed app doesn't bounce at the edges of the page.
+
+- **Push notifications** (with `pwa: { push: true }`, or `push: { icon, badge }`): the service worker shows the pushes the server sends, as JSON `{ title, body, url, tag }` (a tag replaces the earlier notification with the same tag), with the icon of the app (`logo` by default; use a PNG, Android doesn't show SVG icons) and an optional monochrome `badge` for the Android status bar. Tapping one opens its `url` in the open window of the app, or in a new one, and only pages of the app. Subscribing the browser and sending the pushes (VAPID) stay in the app.
 
 Every build gets its own cache, and the old ones are deleted when the new worker takes over. The manifest stays in the app (`public/manifest.webmanifest`). To remove the worker from every device, set `pwa: { name: 'Acme', selfDestroy: true }` and deploy: it deletes its caches and unregisters itself.
 

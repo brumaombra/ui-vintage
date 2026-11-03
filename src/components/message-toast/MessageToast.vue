@@ -8,7 +8,7 @@ import { computed, onBeforeUnmount, reactive, ref, watch } from 'vue';
 import { getUiVintageRuntimeMessage } from '../../lib/i18n';
 import { cn } from '../../lib/utils';
 import { closeMessageToast, messageToastState, pauseMessageToasts, resumeMessageToasts } from './message-toast-state';
-import type { MessageToastItem, MessageToastType } from './message-toast-state';
+import type { MessageToastItem, MessageToastPosition, MessageToastType } from './message-toast-state';
 
 const VISIBLE_TOASTS = 3;
 const STACK_OFFSET_PX = 12;
@@ -48,6 +48,23 @@ const progressClasses: Record<MessageToastType, string> = {
 };
 
 const toasts = computed(() => messageToastState.toasts);
+
+// Classes of each position: the edge of the screen, the edge the toasts hang from, and the direction the stack grows (-1 up, 1 down, read by the styles), switching at the breakpoint for the responsive one
+const positionClasses: Record<MessageToastPosition, { region: string; toast: string }> = {
+	bottom: {
+		region: 'bottom-3 [--uv-toast-direction:-1] sm:bottom-6',
+		toast: 'bottom-0 origin-bottom'
+	},
+	top: {
+		region: 'top-[calc(env(safe-area-inset-top)+0.75rem)] [--uv-toast-direction:1] sm:top-6',
+		toast: 'top-0 origin-top'
+	},
+	responsive: {
+		region: 'top-[calc(env(safe-area-inset-top)+0.75rem)] [--uv-toast-direction:1] sm:top-auto sm:bottom-6 sm:[--uv-toast-direction:-1]',
+		toast: 'top-0 origin-top sm:top-auto sm:bottom-0 sm:origin-bottom'
+	}
+};
+const position = computed(() => positionClasses[messageToastState.position] || positionClasses.bottom);
 const frontHeight = computed(() => (toasts.value[0] && heights.get(toasts.value[0].id)) || 0);
 
 // Height of the stack container so the hover area always matches what is visible
@@ -80,7 +97,7 @@ const getToastStyle = (toast: MessageToastItem, index: number) => {
 	return {
 		'--uv-toast-leave-x': `${(leaveDirection.get(toast.id) ?? 1) * 110}%`,
 		zIndex: String(100 - index),
-		translate: `${isSwiping ? swipe.deltaX : 0}px ${-offset}px`,
+		translate: `${isSwiping ? swipe.deltaX : 0}px calc(var(--uv-toast-direction) * ${offset}px)`, // The stack grows away from the edge it sits on (up from the bottom, down from the top)
 		scale: String(scale),
 		opacity: index >= VISIBLE_TOASTS ? '0' : isSwiping ? String(1 - Math.min(Math.abs(swipe.deltaX) / 240, 0.6)) : '1',
 		height: !expanded.value && index > 0 && frontHeight.value ? `${frontHeight.value}px` : undefined,
@@ -189,10 +206,11 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-	<section :aria-label="regionAriaLabel" class="pointer-events-none fixed inset-x-3 bottom-3 z-60 sm:inset-x-auto sm:right-6 sm:bottom-6 sm:w-[380px]">
+	<!-- Region of the toasts, on the edge the app chose (see setMessageToastPosition) -->
+	<section :aria-label="regionAriaLabel" :class="cn('pointer-events-none fixed inset-x-3 z-60 sm:inset-x-auto sm:right-6 sm:w-[380px]', position.region)">
 		<ol class="pointer-events-auto relative transition-[height] duration-300 ease-out-expo" :style="{ height: `${containerHeight}px` }" @mouseenter="handleEnter" @mouseleave="handleLeave" @focusin="handleEnter" @focusout="handleLeave">
 			<TransitionGroup name="uv-toast" @after-leave="handleAfterLeave">
-				<li v-for="(toast, index) in toasts" :key="toast.id" :data-toast-id="toast.id" :data-front="index === 0 ? '' : undefined" role="status" :aria-live="toast.type === 'error' || toast.type === 'warning' ? 'assertive' : 'polite'" aria-atomic="true" class="uv-toast absolute inset-x-0 bottom-0 origin-bottom touch-pan-y select-none overflow-hidden rounded border border-border bg-card text-card-foreground shadow-elevated-lg" :style="getToastStyle(toast, index)" @pointerdown="handlePointerDown($event, toast)" @pointermove="handlePointerMove" @pointerup="handlePointerUp" @pointercancel="handlePointerUp">
+				<li v-for="(toast, index) in toasts" :key="toast.id" :data-toast-id="toast.id" :data-front="index === 0 ? '' : undefined" role="status" :aria-live="toast.type === 'error' || toast.type === 'warning' ? 'assertive' : 'polite'" aria-atomic="true" :class="cn('uv-toast absolute inset-x-0 touch-pan-y select-none overflow-hidden rounded border border-border bg-card text-card-foreground shadow-elevated-lg', position.toast)" :style="getToastStyle(toast, index)" @pointerdown="handlePointerDown($event, toast)" @pointermove="handlePointerMove" @pointerup="handlePointerUp" @pointercancel="handlePointerUp">
 					<!-- Measured content -->
 					<div :ref="observeToast" :data-toast-id="toast.id" :class="cn('flex items-start gap-3 p-4 transition-opacity duration-200', !expanded && index > 0 && 'opacity-0')">
 						<!-- Leading type icon -->
@@ -244,7 +262,7 @@ onBeforeUnmount(() => {
 
 .uv-toast-enter-from {
 	opacity: 0 !important;
-	transform: translateY(110%) scale(0.92);
+	transform: translateY(calc(var(--uv-toast-direction, -1) * -110%)) scale(0.92); /* In from the edge the toasts sit on */
 }
 
 .uv-toast-leave-active {

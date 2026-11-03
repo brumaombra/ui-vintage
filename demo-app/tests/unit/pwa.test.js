@@ -6,7 +6,7 @@ const OPTIONS = { version: 'b2', precache: ['/offline.html', '/fonts/mono.woff2'
 const ORIGIN = 'https://app.example';
 
 // Run a generated service worker against a fake browser: its caches, the network and the events it listens to
-const runServiceWorker = ({ code, cachedNames = [], network = async () => new Response('from the network') }) => {
+const runServiceWorker = ({ code, cachedNames = [], network = async () => new Response('from the network'), windows = [{ url: `${ORIGIN}/markets`, navigate: vi.fn() }] }) => {
 	// Caches: name -> (path -> response)
 	const stores = new Map(cachedNames.map(name => [name, new Map()]));
 	const addedRequests = [];
@@ -33,8 +33,8 @@ const runServiceWorker = ({ code, cachedNames = [], network = async () => new Re
 		location: new URL(ORIGIN),
 		addEventListener: (type, listener) => { listeners[type] = listener; },
 		skipWaiting: vi.fn(),
-		clients: { claim: vi.fn(), matchAll: vi.fn(async () => [{ url: `${ORIGIN}/markets`, navigate: vi.fn() }]) },
-		registration: { unregister: vi.fn() }
+		clients: { claim: vi.fn(), matchAll: vi.fn(async () => windows), openWindow: vi.fn() },
+		registration: { unregister: vi.fn(), showNotification: vi.fn(async () => {}) }
 	};
 	const fetch = vi.fn(network);
 	const Request = class { constructor(url, init = {}) { this.url = url; this.cache = init.cache || 'default'; } };
@@ -119,6 +119,40 @@ describe('buildServiceWorker', () => {
 		const worker = runServiceWorker({ code: buildServiceWorker(OPTIONS) });
 		expect(await worker.fire('fetch', worker.request(path, options))).toBeUndefined();
 		expect(worker.fetch).not.toHaveBeenCalled();
+	});
+
+	// Push notifications: shown with the text, the page and the tag the server sent, with the icons of the app
+	it('shows the push notifications the server sends', async () => {
+		const worker = runServiceWorker({ code: buildServiceWorker({ ...OPTIONS, push: { icon: '/icon.png', badge: '/badge.png' } }) });
+		await worker.fire('push', { data: { json: () => ({ title: 'You called it!', body: 'Resolved YES', url: '/markets/1', tag: 'market-1' }) } });
+		expect(worker.self.registration.showNotification).toHaveBeenCalledWith('You called it!', { body: 'Resolved YES', data: { url: '/markets/1' }, tag: 'market-1', renotify: true, icon: '/icon.png', badge: '/badge.png' });
+	});
+
+	// Without the option there are no push handlers at all
+	it('ignores pushes unless asked', () => {
+		expect(buildServiceWorker(OPTIONS)).not.toContain("addEventListener('push'");
+	});
+
+	// A tapped notification opens its page in the open window of the app, or in a new one
+	it('opens the page of a tapped notification', async () => {
+		const open = { url: `${ORIGIN}/markets`, focus: vi.fn(async () => open), navigate: vi.fn(async () => open) };
+		const notification = { close: vi.fn(), data: { url: '/markets/1' } };
+		const worker = runServiceWorker({ code: buildServiceWorker({ ...OPTIONS, push: {} }), windows: [open] });
+		await worker.fire('notificationclick', { notification });
+		expect(notification.close).toHaveBeenCalled();
+		expect(open.navigate).toHaveBeenCalledWith(`${ORIGIN}/markets/1`);
+
+		// No window open: a new one
+		const fresh = runServiceWorker({ code: buildServiceWorker({ ...OPTIONS, push: {} }), windows: [] });
+		await fresh.fire('notificationclick', { notification });
+		expect(fresh.self.clients.openWindow).toHaveBeenCalledWith(`${ORIGIN}/markets/1`);
+	});
+
+	// A notification never opens a page of another site
+	it('only opens pages of the app', async () => {
+		const worker = runServiceWorker({ code: buildServiceWorker({ ...OPTIONS, push: {} }), windows: [] });
+		await worker.fire('notificationclick', { notification: { close: vi.fn(), data: { url: 'https://evil.example/' } } });
+		expect(worker.self.clients.openWindow).not.toHaveBeenCalled();
 	});
 
 	// The removal deletes its caches, unregisters, and reloads the pages so they run without it

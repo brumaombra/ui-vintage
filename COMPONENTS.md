@@ -3378,8 +3378,8 @@ interface ShowMessageDialogOptions {
 Stacked toasts (hover to expand and pause, swipe to dismiss) with titles and actions. `showMessageToast` returns an id for `closeMessageToast(id)`; `duration: 0` keeps a toast open.
 
 ```ts
-import { closeMessageToast, messageToastState, pauseMessageToasts, resumeMessageToasts, showMessageToast } from '@brumaombra/ui-vintage/message-toast';
-import type { MessageToastAction, MessageToastItem, MessageToastType, ShowMessageToastOptions } from '@brumaombra/ui-vintage/message-toast';
+import { closeMessageToast, MESSAGE_TOAST_POSITIONS, messageToastState, pauseMessageToasts, resumeMessageToasts, setMessageToastPosition, showMessageToast } from '@brumaombra/ui-vintage/message-toast';
+import type { MessageToastAction, MessageToastItem, MessageToastPosition, MessageToastType, ShowMessageToastOptions } from '@brumaombra/ui-vintage/message-toast';
 ```
 
 ```ts
@@ -3393,9 +3393,11 @@ closeMessageToast(id);
 
 ```ts
 function closeMessageToast(id?: number)
+const MESSAGE_TOAST_POSITIONS: MessageToastPosition[]
 const messageToastState: MessageToastState
 function pauseMessageToasts()
 function resumeMessageToasts()
+function setMessageToastPosition(position: MessageToastPosition)
 function showMessageToast(options: ShowMessageToastOptions)
 interface MessageToastAction {
     label: string;
@@ -3411,6 +3413,7 @@ interface MessageToastItem {
     dismissible: boolean;
     duration: number;
 }
+type MessageToastPosition = 'bottom' | 'top' | 'responsive'
 type MessageToastType = 'success' | 'info' | 'warning' | 'error'
 interface ShowMessageToastOptions {
     message: string;

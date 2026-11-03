@@ -8,6 +8,7 @@
  * @property {string} buildAssetsDir Folder of the built files, whose names change with every build ("/_nuxt/")
  * @property {string} offlinePath Page shown when a page can't load
  * @property {boolean} [selfDestroy] Remove the service worker and its caches from every device
+ * @property {{ icon?: string, badge?: string } | null} [push] Show the push notifications the server sends (their icon, and the small monochrome badge of the Android status bar)
  */
 
 /**
@@ -25,7 +26,7 @@ export const CACHE_PREFIX = 'uv-pwa-';
 
 // Write the service worker: pages from the network (the offline page when there is no connection), the built files from the cache (their names change with every build), and nothing else touched (the API and the live updates always come from the network)
 /** @param {ServiceWorkerOptions} options */
-export const buildServiceWorker = ({ version, precache, buildAssetsDir, offlinePath, selfDestroy = false }) => {
+export const buildServiceWorker = ({ version, precache, buildAssetsDir, offlinePath, selfDestroy = false, push = null }) => {
 	// Remove itself and its caches, and reload the pages it controlled so they run without it
 	if (selfDestroy) {
 		return `// Removes the service worker of the app and its caches
@@ -94,8 +95,40 @@ self.addEventListener('fetch', event => {
 	if (PRECACHE.includes(url.pathname)) {
 		event.respondWith(caches.match(request).then(cached => cached || fetch(request)));
 	}
-});`;
+});${push ? buildPushHandlers(push) : ''}`;
 };
+
+// Write the handlers of the push notifications: show the ones the server sends ({ title, body, url, tag } as JSON), and open their page when tapped (in the open window of the app, or a new one)
+/** @param {{ icon?: string, badge?: string }} push */
+const buildPushHandlers = ({ icon, badge }) => `
+
+// Show a push notification ({ title, body, url, tag }: the same tag replaces the earlier one, e.g. one per subject instead of a pile)
+const PUSH_ICON = ${JSON.stringify(icon || null)};
+const PUSH_BADGE = ${JSON.stringify(badge || null)};
+self.addEventListener('push', event => {
+	let data = {};
+	try {
+		data = event.data ? event.data.json() : {};
+	} catch {
+		data = { body: event.data ? event.data.text() : '' };
+	}
+	const options = { body: data.body || '', data: { url: data.url || '/' }, tag: data.tag || undefined, renotify: Boolean(data.tag) };
+	if (PUSH_ICON) options.icon = PUSH_ICON;
+	if (PUSH_BADGE) options.badge = PUSH_BADGE;
+	event.waitUntil(self.registration.showNotification(data.title || '', options));
+});
+
+// Open the page of a tapped notification: in a window of the app already open (focused, then sent there), or in a new one
+self.addEventListener('notificationclick', event => {
+	event.notification.close();
+	const target = new URL(event.notification.data?.url || '/', self.location.origin);
+	if (target.origin !== self.location.origin) return; // Only pages of the app
+	event.waitUntil(self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(windows => {
+		const open = windows.find(client => new URL(client.url).origin === target.origin);
+		if (open) return open.focus().then(client => (client || open).navigate(target.href)).catch(() => self.clients.openWindow(target.href)); // A window it doesn't control can't be sent elsewhere: a new one then
+		return self.clients.openWindow(target.href);
+	}));
+});`;
 
 // Escape a text for HTML
 /** @param {string} text */

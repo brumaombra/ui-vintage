@@ -4,6 +4,10 @@ import { preloadWhenIdle } from '../../lib/preload';
 
 export type MessageToastType = 'success' | 'info' | 'warning' | 'error';
 
+// Where the toasts show: at the bottom (the default), at the top, or responsive (at the top on phones, where the bottom has the navigation and the sheets, at the bottom from tablets up)
+export type MessageToastPosition = 'bottom' | 'top' | 'responsive';
+export const MESSAGE_TOAST_POSITIONS: MessageToastPosition[] = ['bottom', 'top', 'responsive'];
+
 export interface MessageToastAction {
 	label: string;
 	onClick: () => void | Promise<void>;
@@ -40,6 +44,7 @@ interface MessageToastState {
 	isOpen: boolean;
 	toasts: MessageToastItem[];
 	paused: boolean;
+	position: MessageToastPosition;
 }
 
 interface ToastTimer {
@@ -62,8 +67,14 @@ export const messageToastState: MessageToastState = reactive({
 	current: null,
 	isOpen: false,
 	toasts: [],
-	paused: false
+	paused: false,
+	position: 'bottom'
 });
+
+// Choose where every toast of the app shows (once, e.g. from the module option toast.position: one stack moves as one)
+export const setMessageToastPosition = (position: MessageToastPosition) => {
+	messageToastState.position = MESSAGE_TOAST_POSITIONS.includes(position) ? position : 'bottom';
+};
 
 // Keep the legacy single-toast fields in sync with the stack
 const syncLegacyState = () => {

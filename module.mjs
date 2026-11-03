@@ -156,7 +156,7 @@ const setupPwa = async ({ options, nuxt }) => {
 	const serviceWorker = addTemplate({
 		filename: 'ui-vintage/pwa/sw.js',
 		write: true,
-		getContents: () => buildServiceWorker({ version: nuxt.options.buildId, precache, buildAssetsDir, offlinePath, selfDestroy })
+		getContents: () => buildServiceWorker({ version: nuxt.options.buildId, precache, buildAssetsDir, offlinePath, selfDestroy, push: options.push ? { icon: options.push.icon || options.logo, badge: options.push.badge } : null })
 	});
 
 	// The offline page, in every language of the library
@@ -233,7 +233,8 @@ export default defineNuxtModule({
 	// Default options
 	defaults: {
 		scanAllComponents: false, // Let Tailwind scan every library file, instead of only the ones the app imports
-		pwa: false // Installable app: service worker, offline page, connection pill, manifest and Android asset links ({ name, logo, logoDark, font, precache, offlineIndicator, manifest, android, edgeToEdge, selfDestroy }, see setupPwa)
+		toast: {}, // Toasts of the app ({ position: 'bottom' | 'top' | 'responsive' }, 'bottom' by default; responsive = at the top on phones, at the bottom from tablets up)
+		pwa: false // Installable app: service worker, offline page, connection pill, manifest and Android asset links ({ name, logo, logoDark, font, precache, offlineIndicator, manifest, android, edgeToEdge, selfDestroy, push }, see setupPwa)
 	},
 
 	// Module main function
@@ -280,6 +281,10 @@ export default defineNuxtModule({
 		addPlugin({
 			src: resolver.resolve('src/runtime/ui-vintage-i18n-plugin.ts')
 		});
+
+		// Show the toasts where the app chose
+		nuxt.options.runtimeConfig.public.uiVintageToast = { position: options.toast?.position || 'bottom' };
+		addPlugin({ src: resolver.resolve('src/runtime/message-toast-position.client.ts'), mode: 'client' });
 
 		// Close dialogs and sheets with the back button of the phone
 		addPlugin({ src: resolver.resolve('src/runtime/back-button.client.ts'), mode: 'client' });

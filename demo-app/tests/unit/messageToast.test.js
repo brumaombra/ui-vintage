@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { closeMessageToast, messageToastState, pauseMessageToasts, resumeMessageToasts, showMessageToast } from '../../../src/components/message-toast/message-toast-state';
+import { closeMessageToast, messageToastState, pauseMessageToasts, resumeMessageToasts, setMessageToastPosition, showMessageToast } from '../../../src/components/message-toast/message-toast-state';
 
 // Wait for the toaster mount promise to settle
 const flushMount = () => new Promise(resolve => setTimeout(resolve, 0));
@@ -10,6 +10,14 @@ describe('message toast state', () => {
 		closeMessageToast();
 		vi.unstubAllGlobals();
 		vi.useRealTimers();
+	});
+
+	// The app picks where its toasts show, once; an unknown value falls back to the bottom
+	it('keeps the position the app chose', () => {
+		setMessageToastPosition('responsive');
+		expect(messageToastState.position).toBe('responsive');
+		setMessageToastPosition('middle');
+		expect(messageToastState.position).toBe('bottom');
 	});
 
 	// During server rendering nothing is stored in the state shared by every request
