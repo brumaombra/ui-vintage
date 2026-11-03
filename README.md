@@ -316,6 +316,8 @@ Both the instructions and the catalog update with the package, so you never need
 
 The stylesheet defines semantic tokens (`background`, `foreground`, `card`, `primary`, `muted`, `border`, and more) for both themes. Dark mode follows the `.dark` class on `<html>`; `ThemeSelector` sets it for you, with light, dark, and automatic modes. Extend the existing CSS custom properties in your app stylesheet instead of creating a second token system.
 
+The `standalone:` variant styles the installed app (opened from the home screen, or from the Play Store as a Trusted Web Activity) through `@media (display-mode: standalone)`, for example `standalone:hidden` on a footer that only belongs in the browser, or `standalone:h-dvh` on a screen that must fit without scrolling. It needs no script, so the page never flashes the browser look first.
+
 The module injects the stylesheet automatically. Import it explicitly only when you need to control the loading order (the import gets the same stylesheet the module injects, with the classes of the components the app uses):
 
 ```js
@@ -365,8 +367,6 @@ The module then writes a service worker (`/sw.js`) and an offline page (`/offlin
 - loads pages from the network, and shows the offline page (in the language of the page, light or dark like the app) when there is no connection, reloading by itself once it's back;
 - keeps the built files (`/_nuxt/`, whose names change with every build) on the device, so the app opens faster;
 - leaves everything else alone: the API, live updates, other methods and other origins always go to the network, so data is never stale.
-
-It also shows a small pill at the top of the app when the connection drops ("You're offline", then "Back online" for a moment when it returns), so a page that can't load its data doesn't look empty for no reason. Set `offlineIndicator: false` to hide it.
 
 The same option makes the app feel native once installed (or published on the Play Store as a Trusted Web Activity):
 

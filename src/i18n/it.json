@@ -237,10 +237,6 @@
 				"message": "{name} ha bisogno di una connessione. Controlla la connessione e riprova.",
 				"retry": "Riprova",
 				"note": "La pagina si ricarica da sola quando torni online."
-			},
-			"status": {
-				"offline": "Sei offline",
-				"online": "Di nuovo online"
 			}
 		},
 		"legalDocument": {

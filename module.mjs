@@ -209,11 +209,7 @@ const setupPwa = async ({ options, nuxt }) => {
 	}
 
 	// What the plugins need in the browser
-	const offlineIndicator = options.offlineIndicator !== false;
-	nuxt.options.runtimeConfig.public.uiVintagePwa = { enabled: !nuxt.options.dev, path: swPath, scope, selfDestroy, offlineIndicator, manifest: manifestConfig };
-
-	// The connection pill gets its classes like an imported component
-	if (offlineIndicator) moduleMountedFiles.push(resolver.resolve('src/runtime/pwa/OfflineIndicator.vue'));
+	nuxt.options.runtimeConfig.public.uiVintagePwa = { enabled: !nuxt.options.dev, path: swPath, scope, selfDestroy, manifest: manifestConfig };
 
 	// The registration in the browser
 	addPlugin({ src: resolver.resolve('src/runtime/pwa/plugin.client.ts'), mode: 'client' });
@@ -234,7 +230,7 @@ export default defineNuxtModule({
 	defaults: {
 		scanAllComponents: false, // Let Tailwind scan every library file, instead of only the ones the app imports
 		toast: {}, // Toasts of the app ({ position: 'bottom' | 'top' | 'responsive' }, 'bottom' by default; responsive = at the top on phones, at the bottom from tablets up)
-		pwa: false // Installable app: service worker, offline page, connection pill, manifest and Android asset links ({ name, logo, logoDark, font, precache, offlineIndicator, manifest, android, edgeToEdge, selfDestroy, push }, see setupPwa)
+		pwa: false // Installable app: service worker, offline page, manifest and Android asset links ({ name, logo, logoDark, font, precache, manifest, android, edgeToEdge, selfDestroy, push }, see setupPwa)
 	},
 
 	// Module main function

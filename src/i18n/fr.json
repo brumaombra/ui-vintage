@@ -237,10 +237,6 @@
 				"message": "{name} a besoin d'une connexion. Vérifiez votre connexion et réessayez.",
 				"retry": "Réessayer",
 				"note": "La page se recharge toute seule dès que la connexion revient."
-			},
-			"status": {
-				"offline": "Vous êtes hors ligne",
-				"online": "De retour en ligne"
 			}
 		},
 		"legalDocument": {

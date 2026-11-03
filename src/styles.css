@@ -1,5 +1,8 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
+
+/* Installed app (opened from the home screen, or from the Play Store as a Trusted Web Activity), e.g. standalone:hidden for what only belongs in the browser */
+@custom-variant standalone (@media (display-mode: standalone));
 @source "./**/*.{ts,vue}";
 
 html {
