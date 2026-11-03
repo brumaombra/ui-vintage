@@ -5,14 +5,14 @@
 			"more": "Mais",
 			"home": "Início",
 			"empty": {
-				"title": "Ainda nao ha nada aqui",
-				"description": "Nao ha conteudo para mostrar neste momento."
+				"title": "Ainda não há nada aqui",
+				"description": "Não há conteúdo para mostrar no momento."
 			},
 			"loading": {
 				"title": "Carregando...",
-				"description": "Aguarde um momento enquanto carregamos o conteudo."
+				"description": "Aguarde um momento enquanto carregamos o conteúdo."
 			},
-			"logo": "Logótipo de {name}"
+			"logo": "Logotipo de {name}"
 		},
 		"buttons": {
 			"remove": "Remover",
@@ -34,7 +34,7 @@
 		"theme": {
 			"light": "Claro",
 			"dark": "Escuro",
-			"auto": "Automatico",
+			"auto": "Automático",
 			"title": "Escolher tema",
 			"ariaLabel": "Seletor de tema"
 		},
@@ -61,10 +61,10 @@
 			"time": "Hora"
 		},
 		"timePicker": {
-			"placeholder": "Escolhe uma hora"
+			"placeholder": "Escolha um horário"
 		},
 		"dateTimePicker": {
-			"placeholder": "Escolhe a data e a hora"
+			"placeholder": "Escolha a data e o horário"
 		},
 		"terminal": {
 			"title": "Terminal",
@@ -72,9 +72,9 @@
 			"copied": "Comandos copiados"
 		},
 		"code": {
-			"title": "Codigo",
-			"copy": "Copiar codigo",
-			"copied": "Codigo copiado",
+			"title": "Código",
+			"copy": "Copiar código",
+			"copied": "Código copiado",
 			"position": "Ln {line}, Col {column}",
 			"plainText": "Texto simples"
 		},
@@ -89,11 +89,11 @@
 			"goToPost": "Ir para o artigo",
 			"new": "Novo",
 			"inShort": "Em resumo",
-			"tableOfContents": "Indice",
-			"tableOfContentsDescription": "Ir para uma secao deste artigo",
-			"tableOfContentsSections": "{count} secao | {count} secoes",
-			"openTableOfContents": "Abrir indice",
-			"closeTableOfContents": "Fechar indice",
+			"tableOfContents": "Índice",
+			"tableOfContentsDescription": "Ir para uma seção deste artigo",
+			"tableOfContentsSections": "{count} seção | {count} seções",
+			"openTableOfContents": "Abrir índice",
+			"closeTableOfContents": "Fechar índice",
 			"loadMoreWithNumbers": "Carregar mais ({current}/{total})",
 			"author": "Autor",
 			"publishedDate": "Publicado",
@@ -102,29 +102,29 @@
 			"readingTimeValue": "{minutes} min",
 			"category": "Categoria",
 			"breadcrumbBlog": "Blog",
-			"carouselNavigation": "Navegacao do carrossel",
+			"carouselNavigation": "Navegação do carrossel",
 			"goToSlide": "Ir para o slide {index}",
 			"previousSlide": "Slide anterior",
-			"nextSlide": "Proximo slide",
+			"nextSlide": "Próximo slide",
 			"faq": {
 				"title": "Perguntas frequentes",
-				"description": "Encontre respostas rapidas para as perguntas mais comuns sobre este tema."
+				"description": "Encontre respostas rápidas para as perguntas mais comuns sobre este tema."
 			},
 			"share": {
-				"facebook": "Partilhar no Facebook",
-				"x": "Partilhar no X",
-				"whatsapp": "Partilhar no WhatsApp",
-				"linkedin": "Partilhar no LinkedIn",
-				"telegram": "Partilhar no Telegram",
+				"facebook": "Compartilhar no Facebook",
+				"x": "Compartilhar no X",
+				"whatsapp": "Compartilhar no WhatsApp",
+				"linkedin": "Compartilhar no LinkedIn",
+				"telegram": "Compartilhar no Telegram",
 				"copy": "Copiar link",
 				"copied": "Link copiado"
 			},
 			"latestPosts": "Publicações recentes",
 			"latestPostsDescription": "Uma seleção de artigos escolhidos pela redação.",
 			"categories": "Categorias",
-			"categoriesDescription": "Vá direto aos temas que lhe interessam.",
+			"categoriesDescription": "Vá direto aos temas que interessam a você.",
 			"tags": "Tags",
-			"tagsDescription": "Fios menores que atravessam as categorias.",
+			"tagsDescription": "Temas menores que atravessam as categorias.",
 			"allPosts": "Todas as publicações",
 			"allPostsDescription": "Tudo o que publicamos, do mais recente ao mais antigo.",
 			"viewAll": "Ver tudo",
@@ -155,7 +155,7 @@
 			"confirm": "Confirmar",
 			"error": "Erro",
 			"success": "Sucesso",
-			"info": "Informacao",
+			"info": "Informação",
 			"warning": "Aviso"
 		},
 		"toast": {
@@ -225,7 +225,7 @@
 				"title": "Pague-me um café",
 				"description": "Uma gorjeta única no Ko-fi"
 			},
-			"newTab": "abre num novo separador"
+			"newTab": "abre em uma nova aba"
 		},
 		"timeWheel": {
 			"hours": "Horas",
@@ -233,10 +233,10 @@
 		},
 		"pwa": {
 			"offline": {
-				"title": "Estás offline",
-				"message": "{name} precisa de ligação à internet. Verifica a tua ligação e tenta novamente.",
+				"title": "Você está offline",
+				"message": "{name} precisa de conexão com a internet. Verifique sua conexão e tente novamente.",
 				"retry": "Tentar novamente",
-				"note": "A página volta a carregar sozinha quando voltares a estar online."
+				"note": "A página recarrega sozinha quando você voltar a ficar online."
 			}
 		},
 		"legalDocument": {
