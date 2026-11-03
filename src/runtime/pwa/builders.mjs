@@ -226,7 +226,7 @@ export const buildOfflinePage = ({ name, logo, logoDark, font, texts }) => {
  * @property {string[]} [categories] Store categories ("social", "games"...)
  * @property {Array<{ src: string, sizes: string, type?: string, purpose?: string }>} icons Icons of the app (192 and 512 pixels, and a maskable one)
  * @property {Array<{ name: LocalizedText, shortName?: LocalizedText, description?: LocalizedText, url: LocalizedText, icon: string, iconPurpose?: 'any' | 'maskable' }>} [shortcuts] Actions shown on a long press on the icon (icons: 96x96 PNG; maskable when they fill the whole square, so Android crops them to its shape)
- * @property {Array<{ src: string, sizes: string, formFactor?: 'narrow' | 'wide', label?: LocalizedText }>} [screenshots] Screens shown when installing the app (narrow: phones, wide: desktop)
+ * @property {Array<{ src: LocalizedText, sizes: string, formFactor?: 'narrow' | 'wide', label?: LocalizedText }>} [screenshots] Screens shown when installing the app (narrow: phones, wide: desktop; src is one image, or one per language)
  * @property {string} [defaultLocale] Language of the main manifest (the others get a manifest of their own)
  */
 
@@ -235,7 +235,7 @@ const pick = (text, language, fallback) => text === undefined || typeof text ===
 
 // The languages a set of manifest options has texts in
 const manifestLanguages = manifest => {
-	const texts = [manifest.shortName, manifest.description, manifest.startUrl, ...(manifest.shortcuts || []).flatMap(shortcut => [shortcut.name, shortcut.shortName, shortcut.description, shortcut.url]), ...(manifest.screenshots || []).map(screenshot => screenshot.label)];
+	const texts = [manifest.shortName, manifest.description, manifest.startUrl, ...(manifest.shortcuts || []).flatMap(shortcut => [shortcut.name, shortcut.shortName, shortcut.description, shortcut.url]), ...(manifest.screenshots || []).flatMap(screenshot => [screenshot.src, screenshot.label])];
 	return [...new Set(texts.flatMap(text => text && typeof text === 'object' ? Object.keys(text) : []))];
 };
 
@@ -270,7 +270,7 @@ export const buildManifests = ({ name, scope, manifest }) => {
 			icons: [{ src: shortcut.icon, sizes: '96x96', type: 'image/png', purpose: shortcut.iconPurpose }]
 		})),
 		screenshots: manifest.screenshots?.map(screenshot => ({
-			src: screenshot.src,
+			src: pick(screenshot.src, language, defaultLocale), // A screenshot of the app in each language, or one for all
 			sizes: screenshot.sizes,
 			type: 'image/png',
 			form_factor: screenshot.formFactor,

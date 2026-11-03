@@ -382,7 +382,7 @@ pwa: {
 		backgroundColor: '#fafafa',
 		icons: [{ src: '/icon-512.png', sizes: '512x512', type: 'image/png' }],
 		shortcuts: [{ name: { en: 'New note', it: 'Nuova nota' }, url: { en: '/new', it: '/it/new' }, icon: '/shortcuts/new.png', iconPurpose: 'maskable' }], // 96x96 PNG (maskable: fills the square, Android crops it)
-		screenshots: [{ src: '/store/home.png', sizes: '1080x1920', formFactor: 'narrow', label: 'Home' }]
+		screenshots: [{ src: { en: '/store/en/home.png', it: '/store/it/home.png' }, sizes: '1080x1920', formFactor: 'narrow', label: { en: 'Home', it: 'Home' } }] // One image for every language, or one per language
 	},
 	// The Android app (Trusted Web Activity): writes /.well-known/assetlinks.json, so it opens without the browser bar
 	android: { packageName: 'com.acme.app', sha256CertFingerprints: ['AB:CD:...'] }

@@ -217,6 +217,15 @@ describe('buildManifests', () => {
 		expect(manifests.en.screenshots[0]).toEqual({ src: '/store/explore.png', sizes: '1080x1920', type: 'image/png', form_factor: 'narrow', label: 'Explore' });
 	});
 
+	// A screenshot can be one image per language: each manifest lists the one of its language, and a language with only an image still gets its manifest
+	it('picks the screenshot of each language', () => {
+		const screenshots = [{ src: { en: '/store/en/explore.png', it: '/store/it/explore.png', es: '/store/es/explore.png' }, sizes: '1080x1920', formFactor: 'narrow', label: { en: 'Explore', it: 'Esplora' } }];
+		const { manifests } = buildManifests({ name: 'KrowdCall', scope: '/', manifest: { ...manifest, screenshots } });
+		expect(Object.keys(manifests)).toEqual(['en', 'it', 'es']);
+		expect(manifests.it.screenshots[0]).toMatchObject({ src: '/store/it/explore.png', label: 'Esplora' });
+		expect(manifests.es.screenshots[0]).toMatchObject({ src: '/store/es/explore.png', label: 'Explore' });
+	});
+
 	// Opening the app again reuses its window, and options left out don't appear
 	it('reuses the window and leaves out what is not set', () => {
 		const { manifests } = buildManifests({ name: 'App', scope: '/', manifest: { icons: [] } });
