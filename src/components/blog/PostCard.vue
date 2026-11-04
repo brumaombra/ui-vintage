@@ -43,7 +43,7 @@ const props = withDefaults(defineProps<{
 			</h2>
 
 			<!-- Post description -->
-			<p class="line-clamp-3 grow text-xs leading-relaxed text-muted-foreground md:text-[0.8125rem]">
+			<p class="line-clamp-3 grow text-xs leading-relaxed text-muted-foreground">
 				{{ props.description }}
 			</p>
 		</div>

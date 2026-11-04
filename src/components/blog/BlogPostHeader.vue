@@ -112,7 +112,9 @@ const detailLabelClasses = 'text-[11px] font-semibold tracking-wider text-muted-
 		</Breadcrumb>
 
 		<!-- Title and lede, closed by a rule with a primary segment -->
-		<div class="relative mt-8 border-b border-border pb-8">
+		<div class="relative mt-8 border-b border-transparent pb-8">
+			<!-- The line under the title, drawn in from the left with the rest of the header (a plain border showed it on the empty page before anything else came in) -->
+			<span aria-hidden="true" :class="['absolute inset-x-0 -bottom-px h-px origin-left bg-border', enter('animate-uv-grow-x')]" :style="props.animated ? { animationDelay: '300ms' } : undefined" />
 			<span aria-hidden="true" :class="['absolute -bottom-px left-0 h-0.5 w-20 origin-left bg-primary', enter('animate-uv-grow-x')]" :style="props.animated ? { animationDelay: '500ms' } : undefined" />
 
 			<!-- Title (each word rises in) -->
