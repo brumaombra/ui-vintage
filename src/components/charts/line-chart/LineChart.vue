@@ -5,6 +5,9 @@ import { computed, onMounted, ref, useId } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { cn } from '../../../lib/utils';
 
+// Charts live in src/components/charts, each with its own entry point (the module only generates the classes of the files an app imports, so one entry for every chart would ship them all).
+// The scales, ticks and pointer handling below are written for this chart only: move them to charts/shared once a second chart type shows what they really have in common
+
 // A point of the chart: a timestamp (milliseconds) and its value
 export type LineChartPoint = [number, number];
 
