@@ -100,6 +100,7 @@ export const demoNavigation: DemoNavigationGroup[] = [{
 		sections: [
 			{ id: 'data-table', title: 'Data table', keywords: 'sort select rows grid' },
 			{ id: 'stats', title: 'Stats & numbers', keywords: 'single value card animated number kpi' },
+			{ id: 'line-chart', title: 'Line chart', keywords: 'chart graph svg history trend time series' },
 			{ id: 'cards', title: 'Cards', keywords: 'interactive surface info card' },
 			{ id: 'avatar', title: 'Avatar', keywords: 'user profile group status' },
 			{ id: 'badges-chips', title: 'Badges & chips', keywords: 'tag label status' },

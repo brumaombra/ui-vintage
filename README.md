@@ -278,7 +278,7 @@ Every screenshot comes from the [demo app](#demo-app), and each one follows your
 | --- | --- |
 | **Actions** | `button`, `dropdown-menu`, `kbd`, `load-more-button`, `text-link`, `toggle-group` |
 | **Forms** | `calendar`, `checkbox`, `combobox`, `date-picker`, `date-time-picker`, `field`, `file-dropzone`, `input`, `label`, `native-select`, `number-field`, `pin-input`, `radio-group`, `select`, `slider`, `slider-form-component`, `switch`, `switch-form-component`, `tags-input`, `textarea`, `time-picker` |
-| **Data display** | `animated-number`, `avatar`, `badge`, `card`, `card-grid`, `chip`, `data-list`, `data-table`, `info-card`, `progress`, `progress-component`, `scroll-area`, `separator`, `single-value-card`, `skeleton`, `stat-strip`, `table` |
+| **Data display** | `animated-number`, `avatar`, `badge`, `card`, `card-grid`, `chip`, `data-list`, `data-table`, `info-card`, `line-chart`, `progress`, `progress-component`, `scroll-area`, `separator`, `single-value-card`, `skeleton`, `stat-strip`, `table` |
 | **Navigation** | `accordion`, `breadcrumb`, `collapsible`, `pagination`, `sidebar`, `stepper`, `tabs` |
 | **Overlays** | `alert-dialog`, `command`, `dialog`, `hover-card`, `popover`, `sheet`, `tooltip` |
 | **Feedback** | `alert`, `busy`, `busy-indicator`, `confirm-dialog`, `cookie-consent`, `empty-state-card`, `loading-state-card`, `message-dialog`, `message-toast`, `spinner` |

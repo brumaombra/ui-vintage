@@ -17,7 +17,7 @@ This file lists every public entry point of the package with its components, pro
 
 - **Actions:** [action-bar](#brumaombraui-vintageaction-bar), [button](#brumaombraui-vintagebutton), [dropdown-menu](#brumaombraui-vintagedropdown-menu), [kbd](#brumaombraui-vintagekbd), [load-more-button](#brumaombraui-vintageload-more-button), [support-button](#brumaombraui-vintagesupport-button), [text-link](#brumaombraui-vintagetext-link), [toggle-group](#brumaombraui-vintagetoggle-group)
 - **Forms:** [calendar](#brumaombraui-vintagecalendar), [checkbox](#brumaombraui-vintagecheckbox), [combobox](#brumaombraui-vintagecombobox), [date-picker](#brumaombraui-vintagedate-picker), [date-time-picker](#brumaombraui-vintagedate-time-picker), [field](#brumaombraui-vintagefield), [file-dropzone](#brumaombraui-vintagefile-dropzone), [inline-date-picker](#brumaombraui-vintageinline-date-picker), [input](#brumaombraui-vintageinput), [label](#brumaombraui-vintagelabel), [native-select](#brumaombraui-vintagenative-select), [number-field](#brumaombraui-vintagenumber-field), [pin-input](#brumaombraui-vintagepin-input), [radio-group](#brumaombraui-vintageradio-group), [select](#brumaombraui-vintageselect), [slider](#brumaombraui-vintageslider), [slider-form-component](#brumaombraui-vintageslider-form-component), [switch](#brumaombraui-vintageswitch), [switch-form-component](#brumaombraui-vintageswitch-form-component), [tags-input](#brumaombraui-vintagetags-input), [textarea](#brumaombraui-vintagetextarea), [time-picker](#brumaombraui-vintagetime-picker), [time-wheel](#brumaombraui-vintagetime-wheel)
-- **Data display:** [animated-number](#brumaombraui-vintageanimated-number), [avatar](#brumaombraui-vintageavatar), [badge](#brumaombraui-vintagebadge), [card](#brumaombraui-vintagecard), [card-grid](#brumaombraui-vintagecard-grid), [chip](#brumaombraui-vintagechip), [data-list](#brumaombraui-vintagedata-list), [data-table](#brumaombraui-vintagedata-table), [info-card](#brumaombraui-vintageinfo-card), [list](#brumaombraui-vintagelist), [progress](#brumaombraui-vintageprogress), [progress-component](#brumaombraui-vintageprogress-component), [scroll-area](#brumaombraui-vintagescroll-area), [separator](#brumaombraui-vintageseparator), [single-value-card](#brumaombraui-vintagesingle-value-card), [skeleton](#brumaombraui-vintageskeleton), [stat-strip](#brumaombraui-vintagestat-strip), [table](#brumaombraui-vintagetable)
+- **Data display:** [animated-number](#brumaombraui-vintageanimated-number), [avatar](#brumaombraui-vintageavatar), [badge](#brumaombraui-vintagebadge), [card](#brumaombraui-vintagecard), [card-grid](#brumaombraui-vintagecard-grid), [chip](#brumaombraui-vintagechip), [data-list](#brumaombraui-vintagedata-list), [data-table](#brumaombraui-vintagedata-table), [info-card](#brumaombraui-vintageinfo-card), [line-chart](#brumaombraui-vintageline-chart), [list](#brumaombraui-vintagelist), [progress](#brumaombraui-vintageprogress), [progress-component](#brumaombraui-vintageprogress-component), [scroll-area](#brumaombraui-vintagescroll-area), [separator](#brumaombraui-vintageseparator), [single-value-card](#brumaombraui-vintagesingle-value-card), [skeleton](#brumaombraui-vintageskeleton), [stat-strip](#brumaombraui-vintagestat-strip), [table](#brumaombraui-vintagetable)
 - **Navigation:** [accordion](#brumaombraui-vintageaccordion), [bottom-nav](#brumaombraui-vintagebottom-nav), [breadcrumb](#brumaombraui-vintagebreadcrumb), [collapsible](#brumaombraui-vintagecollapsible), [pagination](#brumaombraui-vintagepagination), [pull-to-refresh](#brumaombraui-vintagepull-to-refresh), [sidebar](#brumaombraui-vintagesidebar), [stepper](#brumaombraui-vintagestepper), [tabs](#brumaombraui-vintagetabs)
 - **Overlays:** [alert-dialog](#brumaombraui-vintagealert-dialog), [command](#brumaombraui-vintagecommand), [dialog](#brumaombraui-vintagedialog), [hover-card](#brumaombraui-vintagehover-card), [popover](#brumaombraui-vintagepopover), [responsive-dialog](#brumaombraui-vintageresponsive-dialog), [sheet](#brumaombraui-vintagesheet), [tooltip](#brumaombraui-vintagetooltip)
 - **Feedback:** [alert](#brumaombraui-vintagealert), [busy](#brumaombraui-vintagebusy), [busy-indicator](#brumaombraui-vintagebusy-indicator), [confirm-dialog](#brumaombraui-vintageconfirm-dialog), [cookie-consent](#brumaombraui-vintagecookie-consent), [empty-state-card](#brumaombraui-vintageempty-state-card), [haptics](#brumaombraui-vintagehaptics), [loading-state-card](#brumaombraui-vintageloading-state-card), [message-dialog](#brumaombraui-vintagemessage-dialog), [message-toast](#brumaombraui-vintagemessage-toast), [spinner](#brumaombraui-vintagespinner)
@@ -1744,6 +1744,53 @@ import { InfoCard } from '@brumaombra/ui-vintage/info-card';
 | `class` | `HTMLAttributes['class']` |  |
 
 - **Slots:** `right`.
+
+---
+
+### `@brumaombra/ui-vintage/line-chart`
+
+Line chart of a value over time, drawn in SVG (no charting library). Straight or stepped line with a gradient fill, a dashed grid with value labels, time labels that fit the width, an optional reference line, and a live dot on the last point. Hover, drag with a finger, or use the arrow keys to show a tooltip; replace it with the `tooltip` slot. Give it a height with `class` (`h-72` by default).
+
+```ts
+import { LineChart } from '@brumaombra/ui-vintage/line-chart';
+import type { LineChartPoint } from '@brumaombra/ui-vintage/line-chart';
+```
+
+```vue
+<LineChart :data="history" curve="step" :min="0" :max="100" :y-ticks="[0, 25, 50, 75, 100]" :reference-line="50"
+    :format-y="value => `${Math.round(value)}%`" aria-label="Chance of yes over time" class="h-64 md:h-80">
+    <template #tooltip="{ point }">
+        <p>{{ point[1] }}%</p>
+    </template>
+</LineChart>
+```
+
+#### `LineChart`
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `data` *(required)* | `LineChartPoint[]` |  |
+| `curve` | `'linear' \| 'step'` | `'linear'` |
+| `min` | `number` |  |
+| `max` | `number` |  |
+| `yTicks` | `number[]` |  |
+| `referenceLine` | `number` |  |
+| `showLastPoint` | `boolean` | `true` |
+| `fill` | `boolean` | `true` |
+| `formatX` | `(timestamp: number) => string` |  |
+| `formatY` | `(value: number) => string` |  |
+| `formatTooltipX` | `(timestamp: number) => string` |  |
+| `locale` | `string` |  |
+| `ariaLabel` | `string` |  |
+| `class` | `HTMLAttributes['class']` |  |
+
+- **Slots:** `tooltip`.
+
+#### Functions, constants, and types
+
+```ts
+type LineChartPoint = [number, number]
+```
 
 ---
 

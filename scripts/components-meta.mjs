@@ -289,6 +289,17 @@ export const entries = {
     <ListRow label="Delete account" :icon="Delete02Icon" action danger @click="confirmDelete" />
 </ListGroup>`
 	},
+	'line-chart': {
+		category: 'data',
+		description: 'Line chart of a value over time, drawn in SVG (no charting library). Straight or stepped line with a gradient fill, a dashed grid with value labels, time labels that fit the width, an optional reference line, and a live dot on the last point. Hover, drag with a finger, or use the arrow keys to show a tooltip; replace it with the `tooltip` slot. Give it a height with `class` (`h-72` by default).',
+		example: `
+<LineChart :data="history" curve="step" :min="0" :max="100" :y-ticks="[0, 25, 50, 75, 100]" :reference-line="50"
+    :format-y="value => \`\${Math.round(value)}%\`" aria-label="Chance of yes over time" class="h-64 md:h-80">
+    <template #tooltip="{ point }">
+        <p>{{ point[1] }}%</p>
+    </template>
+</LineChart>`
+	},
 	'single-value-card': {
 		category: 'data',
 		description: 'KPI card. Numeric values count up and tween on change; optional trend badge and description.',

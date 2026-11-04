@@ -27,6 +27,8 @@ import { DataList, DataListItem, DataListLabel, DataListValue } from '@brumaombr
 import { DataTable } from '@brumaombra/ui-vintage/data-table';
 import type { DataTableColumn, DataTableSort } from '@brumaombra/ui-vintage/data-table';
 import { InfoCard } from '@brumaombra/ui-vintage/info-card';
+import { LineChart } from '@brumaombra/ui-vintage/line-chart';
+import type { LineChartPoint } from '@brumaombra/ui-vintage/line-chart';
 import { ListGroup, ListRow } from '@brumaombra/ui-vintage/list';
 import { Input } from '@brumaombra/ui-vintage/input';
 import { showMessageToast } from '@brumaombra/ui-vintage/message-toast';
@@ -160,6 +162,40 @@ const statsCode = `<SingleValueCard label="Revenue" :value="48290" :icon="Money0
 
 <AnimatedNumber :value="total" :duration="900" />`;
 
+// Line charts: a stepped chance (each trade moves it, it holds until the next one) and a smooth daily total, both from a seeded walk so they look the same on every load
+const DAY = 24 * 60 * 60 * 1000;
+const chartStart = Date.UTC(2026, 9, 1);
+const seededWalk = ({ count, start, spread, seed, minimum = -Infinity, maximum = Infinity }: { count: number; start: number; spread: number; seed: number; minimum?: number; maximum?: number }) => {
+	let value = start;
+	let state = seed;
+	return Array.from({ length: count }, () => {
+		state = (state * 16807) % 2147483647;
+		value = Math.min(maximum, Math.max(minimum, value + ((state / 2147483647) - 0.5) * spread));
+		return value;
+	});
+};
+const chanceHistory = ref<LineChartPoint[]>(seededWalk({ count: 40, start: 50, spread: 12, seed: 7, minimum: 3, maximum: 97 }).map((value, index) => [chartStart + index * DAY * 0.8, Math.round(value * 10) / 10]));
+const revenueHistory = ref<LineChartPoint[]>(seededWalk({ count: 30, start: 1600, spread: 420, seed: 11, minimum: 400 }).map((value, index) => [chartStart + index * DAY, Math.round(value)]));
+const formatPercent = (value: number) => `${Math.round(value)}%`;
+const formatEuro = (value: number) => new Intl.NumberFormat('en', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(value);
+
+// Add a point to the chance chart, one step after the last one
+const addChancePoint = () => {
+	const [lastTime, lastValue] = chanceHistory.value[chanceHistory.value.length - 1];
+	const nextValue = Math.min(97, Math.max(3, lastValue + (Math.random() - 0.5) * 16));
+	chanceHistory.value = [...chanceHistory.value, [lastTime + DAY * 0.8, Math.round(nextValue * 10) / 10]];
+};
+
+const lineChartCode = `<LineChart :data="history" curve="step" :min="0" :max="100" :y-ticks="[0, 25, 50, 75, 100]"
+    :reference-line="50" :format-y="value => \`\${Math.round(value)}%\`" aria-label="Chance over time" class="h-64 md:h-80">
+    <!-- Optional: your own tooltip -->
+    <template #tooltip="{ point }">
+        <div class="rounded border border-border bg-card px-3 py-2 shadow-elevated-md">{{ point[1] }}%</div>
+    </template>
+</LineChart>
+
+<LineChart :data="revenue" :format-y="formatEuro" :show-last-point="false" class="h-56" />`;
+
 const listCode = `<ListGroup title="Preferences" hint="Saved as soon as they change.">
     <ListRow label="Favourites" :icon="FavouriteIcon" icon-tile to="/favourites" :badge="3" />
     <ListRow label="Language" :icon="GlobeIcon" value="English" action @click="openLanguages" />
@@ -257,6 +293,32 @@ const avatarCode = `<Avatar size="lg" status="online">
 						Randomize values
 					</Button>
 				</div>
+			</div>
+		</DemoSection>
+
+		<!-- Line chart -->
+		<DemoSection id="line-chart" title="Line chart" badge="New" description="A value over time, drawn in SVG with no charting library. Stepped or straight line, gradient fill, grid and labels that fit the width, a reference line and a live dot on the last point. Hover, drag with a finger, or focus it and use the arrow keys." :code="lineChartCode">
+			<div class="flex flex-col gap-6">
+				<Card padding="none">
+					<div class="flex items-center justify-between gap-3 border-b border-border px-5 py-4">
+						<CardTitle>Chance of yes</CardTitle>
+						<Button variant="secondary" size="sm" @click="addChancePoint">
+							<HugeiconsIcon :icon="ChartLineData02Icon" />
+							Add a trade
+						</Button>
+					</div>
+					<div class="p-3 md:p-5">
+						<LineChart :data="chanceHistory" curve="step" :min="0" :max="100" :y-ticks="[0, 25, 50, 75, 100]" :reference-line="50" :format-y="formatPercent" aria-label="Chance of yes over time" class="h-64 md:h-80" />
+					</div>
+				</Card>
+				<Card padding="none">
+					<div class="border-b border-border px-5 py-4">
+						<CardTitle>Daily revenue</CardTitle>
+					</div>
+					<div class="p-3 md:p-5">
+						<LineChart :data="revenueHistory" :format-y="formatEuro" :show-last-point="false" aria-label="Daily revenue over 30 days" class="h-56" />
+					</div>
+				</Card>
 			</div>
 		</DemoSection>
 

@@ -91,6 +91,7 @@
 		"./language-flag": "./src/components/language-flag/index.ts",
 		"./language-selector": "./src/components/language-selector/index.ts",
 		"./legal-document": "./src/components/legal-document/index.ts",
+		"./line-chart": "./src/components/ui/line-chart/index.ts",
 		"./list": "./src/components/list/index.ts",
 		"./load-more-button": "./src/components/load-more-button/index.ts",
 		"./loading-state-card": "./src/components/loading-state-card/index.ts",
