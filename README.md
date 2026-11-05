@@ -48,17 +48,8 @@ UI Vintage is a Nuxt 4 module and component library for dashboards, forms, landi
 - **Explicit imports.** Every component lives behind its own subpath, such as `@brumaombra/ui-vintage/button`. Nothing is auto-registered, so your dependencies stay obvious and tree-shakeable.
 - **Accessible by default.** Interactive primitives are built on [Reka UI](https://reka-ui.com), with keyboard support, focus management, and ARIA wiring included.
 - **Motion that respects people.** Springs are pure CSS `linear()` easings, and every animation collapses when the user prefers reduced motion.
-
-## Features
-
-- **Nuxt 4 module** that injects the stylesheet, transpiles the source, installs `@nuxt/image` when needed, and merges the library locale messages into Vue I18n.
-- **Shared design tokens** for colors, borders, and elevation, with light, dark, and automatic themes and a circular View Transitions reveal when switching.
-- **Primitives on Reka UI:** select, combobox, dialog, sheet, popover, tooltip, tabs, stepper, slider, calendar, date and time pickers, PIN input, tags input, and more.
-- **Composite building blocks:** dashboard and landing shells, page headers, stat cards and stat strips, data tables with animated sorting, card grids with empty and loading states.
-- **Promise-based flows:** `showConfirmDialog`, `showMessageDialog`, stacked and swipeable `showMessageToast`, and a shared busy overlay with `setBusy`.
-- **A complete blog** for Nuxt Content: hero header, featured carousel, post header, table of contents, share sidebar, FAQ, reading progress, and VS Code-style code blocks.
-- **Localization** in English, Italian, French, Spanish, German, Portuguese, Chinese, Japanese, and Russian.
-- **Ready for AI coding agents:** a generated component catalog ([`COMPONENTS.md`](COMPONENTS.md)) and agent instructions ([`AGENTS.md`](AGENTS.md)) ship inside the package.
+- **More than primitives.** Promise-based dialogs and toasts, dashboard and landing shells, data tables, a complete Nuxt Content blog, 9 locales, and an installable app with an offline page.
+- **Ready for AI coding agents.** A generated component catalog ([`COMPONENTS.md`](COMPONENTS.md)) and agent instructions ([`AGENTS.md`](AGENTS.md)) ship inside the package.
 
 ## Installation
 
@@ -141,34 +132,6 @@ if (confirmed) {
 }
 ```
 
-Toasts show at the bottom of the screen. To move every toast of the app, set `uiVintage: { toast: { position: 'top' } }`, or `'responsive'` to show them at the top on phones (where the bottom has the navigation and the sheets) and at the bottom from tablets up.
-
-### Build a layout
-
-Shells own the layout and responsive behavior; your app owns the navigation data and the content. Links take plain paths (`to: '/settings'`): the components render `NuxtLinkLocale`, which adds the current language prefix and navigates client-side, and leaves external URLs as they are:
-
-```vue
-<script setup>
-import { DashboardShell } from '@brumaombra/ui-vintage/dashboard-shell';
-
-// Sidebar sections and their links
-const sidebarSections = [{
-    id: 'workspace',
-    label: 'Workspace',
-    items: [
-        { id: 'overview', label: 'Overview', to: '/', active: true },
-        { id: 'settings', label: 'Settings', to: '/settings' }
-    ]
-}];
-</script>
-
-<template>
-    <DashboardShell app-name="Acme" app-logo="/logo.svg" app-logo-dark="/logo-dark.svg" :sidebar-sections="sidebarSections">
-        <slot />
-    </DashboardShell>
-</template>
-```
-
 <a id="showcase"></a>
 ## Showcase
 
@@ -210,22 +173,6 @@ Every screenshot comes from the [demo app](#demo-app), and each one follows your
     <tr>
         <td width="50%" valign="top">
             <picture>
-                <source media="(prefers-color-scheme: dark)" srcset="docs/images/navigation-dark.webp">
-                <img alt="Horizontal and vertical tabs above horizontal and vertical steppers" src="docs/images/navigation-light.webp" width="100%">
-            </picture>
-            <p align="center"><b>Navigation</b><br><sub>Tabs with a gliding indicator and horizontal or vertical steppers</sub></p>
-        </td>
-        <td width="50%" valign="top">
-            <picture>
-                <source media="(prefers-color-scheme: dark)" srcset="docs/images/alerts-dark.webp">
-                <img alt="Alerts in neutral, success, warning, and error tones" src="docs/images/alerts-light.webp" width="100%">
-            </picture>
-            <p align="center"><b>Alerts</b><br><sub>Tone surfaces for neutral, success, warning, and error messages</sub></p>
-        </td>
-    </tr>
-    <tr>
-        <td width="50%" valign="top">
-            <picture>
                 <source media="(prefers-color-scheme: dark)" srcset="docs/images/toasts-dark.webp">
                 <img alt="A stack of success, info, and warning toasts fanned out in the corner" src="docs/images/toasts-light.webp" width="100%">
             </picture>
@@ -237,22 +184,6 @@ Every screenshot comes from the [demo app](#demo-app), and each one follows your
                 <img alt="A destructive confirm dialog asking to delete three invoices" src="docs/images/dialog-light.webp" width="100%">
             </picture>
             <p align="center"><b>Confirm dialog</b><br><sub>Promise-based dialogs with async handlers</sub></p>
-        </td>
-    </tr>
-    <tr>
-        <td width="50%" valign="top">
-            <picture>
-                <source media="(prefers-color-scheme: dark)" srcset="docs/images/palette-dark.webp">
-                <img alt="The command palette searching the demo sections" src="docs/images/palette-light.webp" width="100%">
-            </picture>
-            <p align="center"><b>Command palette</b><br><sub>Searchable command menu with keyboard navigation</sub></p>
-        </td>
-        <td width="50%" valign="top">
-            <picture>
-                <source media="(prefers-color-scheme: dark)" srcset="docs/images/live-preview-dark.webp">
-                <img alt="A small dashboard built only with UI Vintage: stat cards, goals, and activity" src="docs/images/live-preview-light.webp" width="100%">
-            </picture>
-            <p align="center"><b>Built with UI Vintage</b><br><sub>A small dashboard made only from library components</sub></p>
         </td>
     </tr>
     <tr>
@@ -340,65 +271,13 @@ Every component uses the same small vocabulary, and your app can reuse it:
 
 All durations collapse when the user prefers reduced motion. Tailwind v4 animates `scale`, `rotate`, and `translate` as separate properties, so name them (not `transform`) in custom transitions.
 
-### Scrollbars
-
-Scrollbars are thin and follow the theme. The styles live in the base layer, so utilities override them: `scrollbar-none` hides the scrollbar of an element that still scrolls, such as a row of chips swiped sideways.
-
 ### Localization
 
 Library strings live under the `uiVintage` namespace and are available in English, Italian, French, Spanish, German, Portuguese, Chinese, Japanese, and Russian. With `@nuxtjs/i18n` or Vue I18n configured, the runtime plugin merges them into your existing composer without replacing your messages.
 
-### Installable app (service worker)
+### Installable app
 
-Turn an app into an installable PWA with an offline page, with no extra dependencies. The option is off by default:
-
-```ts
-export default defineNuxtConfig({
-	uiVintage: {
-		pwa: {
-			name: 'Acme', // Shown on the offline page
-			logo: '/logo.svg', // Optional, with `logoDark` for the dark theme
-			font: { family: 'Inter', regular: '/fonts/inter.woff2', bold: '/fonts/inter-bold.woff2' }, // Optional, saved for the offline page
-			precache: ['/icons/icon-192.png'] // Optional, other files to keep on the device
-		}
-	}
-});
-```
-
-The module then writes a service worker (`/sw.js`) and an offline page (`/offline.html`) as static files of each build, so they work for server and static apps alike, and registers the worker in production builds (never in development). The worker:
-
-- loads pages from the network, and shows the offline page (in the language of the page, light or dark like the app) when there is no connection, reloading by itself once it's back;
-- keeps the built files (`/_nuxt/`, whose names change with every build) on the device, so the app opens faster;
-- leaves everything else alone: the API, live updates, other methods and other origins always go to the network, so data is never stale.
-
-The same option makes the app feel native once installed (or published on the Play Store as a Trusted Web Activity):
-
-```ts
-pwa: {
-	name: 'Acme',
-	// The manifest, one per language (any text can be { en, it, ... }), linked in the language of the page
-	manifest: {
-		id: '/', // Never change it once people installed the app
-		description: { en: 'Notes for teams', it: 'Note per i team' },
-		startUrl: { en: '/home', it: '/it/home' },
-		themeColor: '#fafafa',
-		backgroundColor: '#fafafa',
-		icons: [{ src: '/icon-512.png', sizes: '512x512', type: 'image/png' }],
-		shortcuts: [{ name: { en: 'New note', it: 'Nuova nota' }, url: { en: '/new', it: '/it/new' }, icon: '/shortcuts/new.png', iconPurpose: 'maskable' }], // 96x96 PNG (maskable: fills the square, Android crops it)
-		screenshots: [{ src: { en: '/store/en/home.png', it: '/store/it/home.png' }, sizes: '1080x1920', formFactor: 'narrow', label: { en: 'Home', it: 'Home' } }] // One image for every language, or one per language
-	},
-	// The Android app (Trusted Web Activity): writes /.well-known/assetlinks.json, so it opens without the browser bar
-	android: { packageName: 'com.acme.app', sha256CertFingerprints: ['AB:CD:...'] }
-}
-```
-
-- **Back button** (every app): on touch screens, the back button of the phone (or the back swipe) closes the open dialog or sheet instead of leaving the page.
-- **Edge to edge** (with `pwa`): the viewport covers the whole screen (`viewport-fit=cover`), and the library components keep clear of the notch and the gesture bar with the safe areas. Set `edgeToEdge: false` if the app's own fixed elements don't use them yet.
-- **Touch details** (every app): a long press doesn't select the labels of controls or open the link menu on them, and the installed app doesn't bounce at the edges of the page.
-
-- **Push notifications** (with `pwa: { push: true }`, or `push: { icon, badge }`): the service worker shows the pushes the server sends, as JSON `{ title, body, url, tag }` (a tag replaces the earlier notification with the same tag), with the icon of the app (`logo` by default; use a PNG, Android doesn't show SVG icons) and an optional monochrome `badge` for the Android status bar. Tapping one opens its `url` in the open window of the app, or in a new one, and only pages of the app. Subscribing the browser and sending the pushes (VAPID) stay in the app.
-
-Every build gets its own cache, and the old ones are deleted when the new worker takes over. The manifest stays in the app (`public/manifest.webmanifest`). To remove the worker from every device, set `pwa: { name: 'Acme', selfDestroy: true }` and deploy: it deletes its caches and unregisters itself.
+Set `uiVintage: { pwa: { name: 'Acme' } }` to make the app installable, with a service worker, an offline page, a manifest per language, push notifications, and the Android app (Trusted Web Activity), with no extra dependencies. See [`docs/pwa.md`](docs/pwa.md) for every option.
 
 ## How it works
 
@@ -413,32 +292,7 @@ When the module is registered, it:
 
 ### Only the classes the app uses
 
-`src/styles.css` tells Tailwind to scan every library file, so an app would ship the classes of components it never imports. The module avoids that: on every build, it reads the app's files (and those of its layers), follows each `@brumaombra/ui-vintage/...` import through the library, and writes `.nuxt/ui-vintage/style.css` with one `@source` for each file it reached instead. Both the injected stylesheet and an explicit `@import '@brumaombra/ui-vintage/style.css'` point to it. In development, the list follows the app's imports as they change.
-
-On the apps that use the library, this cuts the CSS by 12% to 59% (the fewer components an app imports, the more it saves), with the same computed styles on every page.
-
-Only components imported from a public subpath with a literal path are found. To scan the whole library as before (for example, while debugging a missing class), set:
-
-```ts
-export default defineNuxtConfig({
-	uiVintage: {
-		scanAllComponents: true
-	}
-});
-```
-
-The module does not auto-register components. Always import from a public subpath; files under `src/components/` are implementation details and may change between versions.
-
-```text
-src/
-  components/   Public components and UI primitives
-  i18n/         Library locale messages
-  lib/          Shared helpers and token utilities
-  runtime/      Nuxt runtime plugin
-  styles.css    Design tokens, motion, and component styles
-module.mjs      Nuxt module entry point
-demo-app/       Private showcase app (not published)
-```
+On every build, the module follows the app's `@brumaombra/ui-vintage/...` imports through the library and tells Tailwind to scan only the files it reached, which cuts the CSS by 12% to 59% on the apps that use it. Only literal imports from a public subpath are found; set `uiVintage: { scanAllComponents: true }` to scan the whole library (for example, while debugging a missing class). Files under `src/components/` are implementation details and may change between versions.
 
 <a id="demo-app"></a>
 ## Demo app
@@ -458,9 +312,7 @@ npm --prefix demo-app run build
 
 ## Development
 
-The tests live in `demo-app/tests`: `unit` covers the helpers, the dialog and toast state, theme storage, and the locale files in plain Node, while `app` mounts the components inside the demo Nuxt app with `@nuxt/test-utils`.
-
-There is no build step: the published files are `module.mjs`, `src/`, `COMPONENTS.md`, and `AGENTS.md`. When a version tag is pushed, the GitHub Actions workflow runs the type check, the catalog check, and the tests, and publishes to npm only if they pass. Before opening a pull request or publishing, run the same checks locally:
+There is no build step: the published files are `module.mjs`, `src/`, `COMPONENTS.md`, and `AGENTS.md`. Before opening a pull request, run the checks the release workflow runs:
 
 ```bash
 # Type-check the published TypeScript and Vue source
