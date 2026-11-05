@@ -7,7 +7,10 @@
     </picture>
 </a>
 
-<p><b>84 explicit entry points</b> · <b>light and dark themes</b> · <b>9 built-in locales</b> · <b>accessible primitives on Reka UI</b></p>
+<br>
+<br>
+
+<p><b>Light and dark themes</b> · <b>9 built-in locales</b> · <b>accessible primitives on Reka UI</b></p>
 
 <p>
     <a href="https://www.npmjs.com/package/@brumaombra/ui-vintage"><img alt="npm version" src="https://img.shields.io/npm/v/@brumaombra/ui-vintage?style=flat-square&color=F7931E&label=npm"></a>
@@ -272,7 +275,7 @@ Every screenshot comes from the [demo app](#demo-app), and each one follows your
 
 ## Components
 
-84 entry points, grouped as in the catalog. Each name is also its import subpath, for example `@brumaombra/ui-vintage/data-table`.
+Every entry point, grouped as in the catalog. Each name is also its import subpath, for example `@brumaombra/ui-vintage/data-table`.
 
 | Category | Entry points |
 | --- | --- |
