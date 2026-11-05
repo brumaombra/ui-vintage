@@ -180,9 +180,8 @@
 		"vue-i18n": "11.4.13",
 		"vue-tsc": "2.2.10"
 	},
-	"overrides": {
-		"archiver-utils": {
-			"glob": "13.0.6"
-		}
+	"allowScripts": {
+		"esbuild": true,
+		"vue-demi": true
 	}
 }
