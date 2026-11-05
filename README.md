@@ -250,6 +250,14 @@ Both the instructions and the catalog update with the package, so you never need
 
 The stylesheet defines semantic tokens (`background`, `foreground`, `card`, `primary`, `muted`, `border`, and more) for both themes. Dark mode follows the `.dark` class on `<html>`; `ThemeSelector` sets it for you, with light, dark, and automatic modes. Extend the existing CSS custom properties in your app stylesheet instead of creating a second token system.
 
+The whole page uses one font, the `--font-mono` token (the system monospace by default), so `font-mono` elements match the text. Set your own once, in any stylesheet of the app:
+
+```css
+:root {
+    --font-mono: 'JetBrains Mono', monospace;
+}
+```
+
 ### Brand color
 
 The brand color (buttons, focus rings, selected states, the sidebar) comes from six tokens, so an app can replace the default orange in its own stylesheet, for both themes:

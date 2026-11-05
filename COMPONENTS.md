@@ -2609,6 +2609,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@brumaombra/ui-vintage
 
 | Prop | Type | Default |
 | --- | --- | --- |
+| `size` | `'default' \| 'sm'` | `'default'` |
 | `class` | `HTMLAttributes['class']` |  |
 | `indicatorClass` | `HTMLAttributes['class']` |  |
 

@@ -1,6 +1,6 @@
 @import "./fonts.css";
 
 /* The UI Vintage stylesheet (Tailwind + theme tokens) is injected by the Nuxt module */
-body {
-	font-family: 'JetBrains Mono', monospace;
+:root {
+	--font-mono: 'JetBrains Mono', monospace; /* The font of the page and of font-mono */
 }

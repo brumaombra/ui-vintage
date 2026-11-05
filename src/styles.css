@@ -5,8 +5,13 @@
 @custom-variant standalone (@media (display-mode: standalone));
 @source "./**/*.{ts,vue}";
 
+/* The font of the whole page is the mono token, so the text and every font-mono element (values, counters, the calendar) match; an app sets its own font once, with :root { --font-mono: 'JetBrains Mono', monospace; } in any of its stylesheets (it overrides the theme layer) */
+@theme {
+	--font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+}
+
 html {
-	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+	font-family: var(--font-mono);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-rendering: optimizeLegibility;

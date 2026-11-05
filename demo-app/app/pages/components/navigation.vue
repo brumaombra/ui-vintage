@@ -46,6 +46,14 @@ const tabsCode = `<Tabs default-value="overview">
         <TabsTrigger value="analytics">Analytics</TabsTrigger>
     </TabsList>
     <TabsContent value="overview">...</TabsContent>
+</Tabs>
+
+<!-- Compact tabs, as small as a small toggle group -->
+<Tabs default-value="activity">
+    <TabsList size="sm">
+        <TabsTrigger value="activity">Activity</TabsTrigger>
+        <TabsTrigger value="holders">Holders</TabsTrigger>
+    </TabsList>
 </Tabs>`;
 
 const stepperCode = `<SimpleStepper v-model="step" :steps="[
@@ -64,31 +72,43 @@ const paginationCode = `<SimplePagination v-model:page="page" :total="240" :item
 		<!-- Tabs -->
 		<DemoSection id="tabs" title="Tabs" badge="Updated" description="The active indicator slides between triggers with a spring and follows layout changes. Panels fade up on switch." :code="tabsCode">
 			<div class="grid gap-8 xl:grid-cols-[1fr_auto]">
-				<Tabs default-value="overview" class="min-w-0">
-					<TabsList class="max-w-full overflow-x-auto">
-						<TabsTrigger value="overview">
-							<HugeiconsIcon :icon="Home01Icon" />
-							Overview
-						</TabsTrigger>
-						<TabsTrigger value="analytics">
-							<HugeiconsIcon :icon="ChartLineData02Icon" />
-							Analytics
-						</TabsTrigger>
-						<TabsTrigger value="settings">
-							<HugeiconsIcon :icon="Settings02Icon" />
-							Settings
-						</TabsTrigger>
-					</TabsList>
-					<TabsContent value="overview" variant="boxed">
-						<p class="text-xs leading-6 text-muted-foreground sm:text-sm">Overview panel. Switch tabs to watch the indicator glide and the panel rise in.</p>
-					</TabsContent>
-					<TabsContent value="analytics" variant="boxed">
-						<p class="text-xs leading-6 text-muted-foreground sm:text-sm">Analytics panel. 12,480 visits this week, up 18% from last week.</p>
-					</TabsContent>
-					<TabsContent value="settings" variant="boxed">
-						<p class="text-xs leading-6 text-muted-foreground sm:text-sm">Settings panel. Tweak notifications, members, and integrations.</p>
-					</TabsContent>
-				</Tabs>
+				<div class="min-w-0">
+					<!-- Tabs with icons and panels -->
+					<Tabs default-value="overview" class="min-w-0">
+						<TabsList class="max-w-full overflow-x-auto">
+							<TabsTrigger value="overview">
+								<HugeiconsIcon :icon="Home01Icon" />
+								Overview
+							</TabsTrigger>
+							<TabsTrigger value="analytics">
+								<HugeiconsIcon :icon="ChartLineData02Icon" />
+								Analytics
+							</TabsTrigger>
+							<TabsTrigger value="settings">
+								<HugeiconsIcon :icon="Settings02Icon" />
+								Settings
+							</TabsTrigger>
+						</TabsList>
+						<TabsContent value="overview" variant="boxed">
+							<p class="text-xs leading-6 text-muted-foreground sm:text-sm">Overview panel. Switch tabs to watch the indicator glide and the panel rise in.</p>
+						</TabsContent>
+						<TabsContent value="analytics" variant="boxed">
+							<p class="text-xs leading-6 text-muted-foreground sm:text-sm">Analytics panel. 12,480 visits this week, up 18% from last week.</p>
+						</TabsContent>
+						<TabsContent value="settings" variant="boxed">
+							<p class="text-xs leading-6 text-muted-foreground sm:text-sm">Settings panel. Tweak notifications, members, and integrations.</p>
+						</TabsContent>
+					</Tabs>
+
+					<!-- Compact tabs -->
+					<Tabs default-value="activity" class="mt-6">
+						<TabsList size="sm">
+							<TabsTrigger value="activity">Activity</TabsTrigger>
+							<TabsTrigger value="holders">Holders</TabsTrigger>
+							<TabsTrigger value="rules">Rules</TabsTrigger>
+						</TabsList>
+					</Tabs>
+				</div>
 
 				<!-- Vertical tabs -->
 				<Tabs default-value="profile" orientation="vertical">

@@ -5,17 +5,20 @@ import { reactiveOmit } from '@vueuse/core';
 import { TabsIndicator, TabsList } from 'reka-ui';
 import { cn } from '../../../lib/utils';
 
-// Props
-const props = defineProps<TabsListProps & {
+// Props (size: sm for compact tabs, as small as a small toggle group, read by the triggers through the data-size of the list)
+const props = withDefaults(defineProps<TabsListProps & {
+	size?: 'default' | 'sm';
 	class?: HTMLAttributes['class'];
 	indicatorClass?: HTMLAttributes['class'];
-}>();
+}>(), {
+	size: 'default'
+});
 
-const delegatedProps = reactiveOmit(props, 'class', 'indicatorClass');
+const delegatedProps = reactiveOmit(props, 'class', 'indicatorClass', 'size');
 </script>
 
 <template>
-	<TabsList data-slot="tabs-list" v-bind="delegatedProps" :class="cn(
+	<TabsList data-slot="tabs-list" :data-size="props.size" v-bind="delegatedProps" :class="cn(
 		'group/tabs-list relative isolate inline-flex h-auto w-fit items-center justify-center gap-1 rounded border border-border bg-card p-1 text-card-foreground shadow-elevated-sm aria-[orientation=vertical]:flex-col aria-[orientation=vertical]:items-stretch',
 		props.class
 	)">

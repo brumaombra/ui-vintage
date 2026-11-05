@@ -20,6 +20,7 @@ const forwardedProps = useForwardProps(delegatedProps);
 		'[transition:color_150ms,background-color_150ms,scale_300ms_var(--ease-spring)] hover:text-foreground active:scale-[0.97] focus-visible:ring-[3px] focus-visible:ring-ring/45 disabled:pointer-events-none disabled:opacity-50',
 		'data-[state=active]:text-primary-foreground data-[state=inactive]:hover:bg-accent/60 group-aria-[orientation=vertical]/tabs-list:justify-start',
 		'[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*=\'size-\'])]:size-4',
+		'group-data-[size=sm]/tabs-list:min-h-7 group-data-[size=sm]/tabs-list:px-2.5 group-data-[size=sm]/tabs-list:py-0 group-data-[size=sm]/tabs-list:text-xs sm:group-data-[size=sm]/tabs-list:text-sm', // Compact tabs (the size of the list)
 		props.class
 	)" v-bind="forwardedProps">
 		<slot />

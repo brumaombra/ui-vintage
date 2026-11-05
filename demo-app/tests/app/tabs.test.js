@@ -31,3 +31,15 @@ describe('Tabs panel animation', () => {
 		expect(panel.classes()).toContain('data-[state=active]:animate-uv-fade-up');
 	});
 });
+
+// Compact tabs: the list carries the size, and its triggers shrink through it
+describe('Tabs size', () => {
+	// Default tabs keep the regular size, sm tabs shrink
+	it('marks the list with its size', async () => {
+		const wrapper = await mountTabs();
+		expect(wrapper.find('[data-slot="tabs-list"]').attributes('data-size')).toBe('default');
+		const small = await mountSuspended(Tabs, { props: { modelValue: 'first' }, slots: { default: () => h(TabsList, { size: 'sm' }, () => h(TabsTrigger, { value: 'first' }, () => 'First')) } });
+		expect(small.find('[data-slot="tabs-list"]').attributes('data-size')).toBe('sm');
+		expect(small.find('[data-slot="tabs-trigger"]').classes()).toContain('group-data-[size=sm]/tabs-list:min-h-7');
+	});
+});
