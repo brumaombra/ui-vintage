@@ -19,7 +19,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 
 <template>
 	<RadioGroupRoot v-slot="slotProps" data-slot="radio-group" v-bind="forwarded" :class="cn(
-		'grid gap-3 aria-[orientation=horizontal]:flex aria-[orientation=horizontal]:flex-wrap aria-[orientation=horizontal]:items-center aria-[orientation=horizontal]:gap-x-5',
+		'grid gap-3 has-[>[data-slot=radio-group-card]]:gap-2 aria-[orientation=horizontal]:flex aria-[orientation=horizontal]:flex-wrap aria-[orientation=horizontal]:items-center aria-[orientation=horizontal]:gap-x-5',
 		props.class
 	)">
 		<slot v-bind="slotProps" />

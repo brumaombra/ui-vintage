@@ -24,6 +24,7 @@ import { Label } from '@brumaombra/ui-vintage/label';
 import { showMessageToast } from '@brumaombra/ui-vintage/message-toast';
 import { NumberField } from '@brumaombra/ui-vintage/number-field';
 import { PinInput } from '@brumaombra/ui-vintage/pin-input';
+import { LanguageFlag } from '@brumaombra/ui-vintage/language-flag';
 import { RadioGroup, RadioGroupCard, RadioGroupItem } from '@brumaombra/ui-vintage/radio-group';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectItemContent, SelectLabel, SelectTrigger, SelectValueContent } from '@brumaombra/ui-vintage/select';
 import { Slider } from '@brumaombra/ui-vintage/slider';
@@ -73,6 +74,7 @@ const allNotifications = computed(() => {
 	return values.every(Boolean) ? true : values.some(Boolean) ? 'indeterminate' : false;
 });
 const plan = ref('pro');
+const cardLanguage = ref('it');
 const shipping = ref('standard');
 
 // Toggle all notification checkboxes at once
@@ -131,6 +133,13 @@ const checkboxCode = `<Checkbox v-model="accept" />
 
 <RadioGroup v-model="plan">
     <RadioGroupCard value="pro" label="Pro" description="For growing teams" :icon="Rocket01Icon" />
+</RadioGroup>
+
+<!-- The icon slot draws your own visual instead of the icon tile -->
+<RadioGroup v-model="language">
+    <RadioGroupCard value="it" label="Italiano">
+        <template #icon><LanguageFlag code="it" /></template>
+    </RadioGroupCard>
 </RadioGroup>`;
 
 const numberCode = `<NumberField v-model="seats" :min="1" :max="50" />
@@ -283,6 +292,13 @@ const dropzoneCode = `<FileDropzone v-model="files" accept="image/*,.pdf" :max-s
 					<RadioGroupCard value="starter" label="Starter" description="1 project · Community support" :icon="StarIcon" />
 					<RadioGroupCard value="pro" label="Pro · €49/mo" description="Unlimited projects · Priority support" :icon="Rocket01Icon" />
 					<RadioGroupCard value="enterprise" label="Enterprise" description="SSO, audit logs, dedicated manager" :icon="Building03Icon" />
+				</RadioGroup>
+
+				<!-- Card radios with their own visual (the icon slot), like a language picker -->
+				<RadioGroup v-model="cardLanguage">
+					<RadioGroupCard v-for="code in ['en', 'it']" :key="code" :value="code" :label="code === 'en' ? 'English' : 'Italiano'">
+						<template #icon><LanguageFlag :code="code" /></template>
+					</RadioGroupCard>
 				</RadioGroup>
 			</div>
 		</DemoSection>

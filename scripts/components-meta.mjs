@@ -161,7 +161,7 @@ export const entries = {
 	},
 	'radio-group': {
 		category: 'forms',
-		description: 'Radio group with plain items or selectable `RadioGroupCard` rows (icon, label, description).',
+		description: 'Radio group with plain items or selectable `RadioGroupCard` rows (icon, label, description). The `icon` slot of a card replaces its icon tile with your own visual, such as a `LanguageFlag` or a logo, and a list of cards sits closer together than plain radios.',
 		example: `
 <RadioGroup v-model="plan">
     <RadioGroupCard value="pro" label="Pro" description="Unlimited projects" :icon="Rocket01Icon" />

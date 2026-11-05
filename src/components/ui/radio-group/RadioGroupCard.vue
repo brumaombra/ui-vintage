@@ -27,8 +27,11 @@ const props = defineProps<{
 		'disabled:cursor-not-allowed disabled:opacity-60 disabled:active:scale-100',
 		props.class
 	)">
-		<!-- Icon -->
-		<span v-if="props.icon" class="flex size-9 shrink-0 items-center justify-center rounded border border-border bg-surface text-muted-foreground transition-colors duration-150 group-data-[state=checked]/radio-card:border-primary/40 group-data-[state=checked]/radio-card:bg-primary/10 group-data-[state=checked]/radio-card:text-primary">
+		<!-- Leading visual: the app's own through the icon slot (a flag, a logo), or the icon prop in a tile -->
+		<span v-if="$slots.icon" class="flex shrink-0 items-center">
+			<slot name="icon" />
+		</span>
+		<span v-else-if="props.icon" class="flex size-9 shrink-0 items-center justify-center rounded border border-border bg-surface text-muted-foreground transition-colors duration-150 group-data-[state=checked]/radio-card:border-primary/40 group-data-[state=checked]/radio-card:bg-primary/10 group-data-[state=checked]/radio-card:text-primary">
 			<HugeiconsIcon :icon="props.icon" class="size-4.5" />
 		</span>
 

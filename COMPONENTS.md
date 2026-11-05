@@ -997,7 +997,7 @@ import { PinInput, PinInputInput } from '@brumaombra/ui-vintage/pin-input';
 
 ### `@brumaombra/ui-vintage/radio-group`
 
-Radio group with plain items or selectable `RadioGroupCard` rows (icon, label, description).
+Radio group with plain items or selectable `RadioGroupCard` rows (icon, label, description). The `icon` slot of a card replaces its icon tile with your own visual, such as a `LanguageFlag` or a logo, and a list of cards sits closer together than plain radios.
 
 ```ts
 import { RadioGroup, RadioGroupItem, RadioGroupCard } from '@brumaombra/ui-vintage/radio-group';
@@ -1036,7 +1036,7 @@ import { RadioGroup, RadioGroupItem, RadioGroupCard } from '@brumaombra/ui-vinta
 | `id` | `string` |  |
 | `class` | `HTMLAttributes['class']` |  |
 
-- **Slots:** `label`, `description`.
+- **Slots:** `icon`, `label`, `description`.
 
 ---
 
