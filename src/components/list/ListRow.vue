@@ -94,7 +94,7 @@ const handleClick = () => {
 		</component>
 
 		<!-- Content under the label line, the full width of the row (a slider, a field, a meter), outside the link or button of the row -->
-		<div v-if="$slots.default" class="px-4 pb-4 pt-1 md:px-5">
+		<div v-if="$slots.default" class="px-4 pb-3.5 md:px-5">
 			<slot />
 		</div>
 	</li>
