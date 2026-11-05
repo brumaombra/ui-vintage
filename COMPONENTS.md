@@ -997,7 +997,7 @@ import { PinInput, PinInputInput } from '@brumaombra/ui-vintage/pin-input';
 
 ### `@brumaombra/ui-vintage/radio-group`
 
-Radio group with plain items or selectable `RadioGroupCard` rows (icon, label, description). The `icon` slot of a card replaces its icon tile with your own visual, such as a `LanguageFlag` or a logo, and a list of cards sits closer together than plain radios.
+Radio group with plain items or selectable `RadioGroupCard` rows (icon, label, description). The `icon` slot of a card replaces its icon tile with your own visual, centered in the same 36px (a `LanguageFlag` with `size="lg"`, or a 32px logo), and a list of cards sits closer together than plain radios.
 
 ```ts
 import { RadioGroup, RadioGroupItem, RadioGroupCard } from '@brumaombra/ui-vintage/radio-group';
@@ -2918,7 +2918,7 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from '@brumaombra/ui-vi
 
 ### `@brumaombra/ui-vintage/option-picker-dialog`
 
-Pick one option from a list: a `ResponsiveDialog` (a sheet from the bottom on phones, a dialog on larger screens) holding a `RadioGroup` of `RadioGroupCard`s, the current one checked. Use it whenever an app picks a single item from a list, typically from a `ListRow` that shows the current value with `action`. `v-model` is the picked value and `v-model:open` shows it; `options` are `{ value, label, description?, icon?, disabled? }`. A tap on an option picks it and closes the picker, while the arrow keys change the pick and keep it open. The `icon` slot (it gets the `option`) draws your own visual instead of the icon tile, such as a `LanguageFlag` or a logo.
+Pick one option from a list: a `ResponsiveDialog` (a sheet from the bottom on phones, a dialog on larger screens) holding a `RadioGroup` of `RadioGroupCard`s, the current one checked. Use it whenever an app picks a single item from a list, typically from a `ListRow` that shows the current value with `action`. `v-model` is the picked value and `v-model:open` shows it; `options` are `{ value, label, description?, icon?, disabled? }`. A tap on an option picks it and closes the picker, while the arrow keys change the pick and keep it open. The `icon` slot (it gets the `option`) draws your own visual instead of the icon tile, centered in the same 36px so every card keeps its height: a `LanguageFlag` with `size="lg"`, or a 32px logo (`size-8`).
 
 ```ts
 import { OptionPickerDialog } from '@brumaombra/ui-vintage/option-picker-dialog';
@@ -2928,7 +2928,7 @@ import type { OptionPickerOption, OptionPickerValue } from '@brumaombra/ui-vinta
 ```vue
 <ListRow label="Language" :icon="GlobeIcon" :value="languageName" action @click="languageOpen = true" />
 <OptionPickerDialog v-model:open="languageOpen" v-model="language" title="Language" :options="languages">
-    <template #icon="{ option }"><LanguageFlag :code="option.value" /></template>
+    <template #icon="{ option }"><LanguageFlag :code="option.value" size="lg" /></template>
 </OptionPickerDialog>
 ```
 
@@ -3823,7 +3823,7 @@ import { LandingShell } from '@brumaombra/ui-vintage/landing-shell';
 
 ### `@brumaombra/ui-vintage/language-flag`
 
-Flag icons for the supported locales.
+Flag icons for the supported locales. `size` is `md` (next to a label, the default) or `lg` (32px wide, for the 36px space of an icon tile, like the cards of `OptionPickerDialog`).
 
 ```ts
 import { LanguageFlag, EnglishFlag, FrenchFlag, GermanFlag, ItalianFlag, BrazilianFlag, ChineseFlag, JapaneseFlag, PortugueseFlag, RussianFlag, SpanishFlag } from '@brumaombra/ui-vintage/language-flag';
@@ -3835,46 +3835,67 @@ import type { SupportedLanguageCode } from '@brumaombra/ui-vintage/language-flag
 | Prop | Type | Default |
 | --- | --- | --- |
 | `code` | `SupportedLanguageCode` | `'en'` |
+| `size` | `'md' \| 'lg'` | `'md'` |
 
 #### `EnglishFlag`
 
-- **Props:** none.
+| Prop | Type | Default |
+| --- | --- | --- |
+| `size` | `'md' \| 'lg'` | `'md'` |
 
 #### `FrenchFlag`
 
-- **Props:** none.
+| Prop | Type | Default |
+| --- | --- | --- |
+| `size` | `'md' \| 'lg'` | `'md'` |
 
 #### `GermanFlag`
 
-- **Props:** none.
+| Prop | Type | Default |
+| --- | --- | --- |
+| `size` | `'md' \| 'lg'` | `'md'` |
 
 #### `ItalianFlag`
 
-- **Props:** none.
+| Prop | Type | Default |
+| --- | --- | --- |
+| `size` | `'md' \| 'lg'` | `'md'` |
 
 #### `BrazilianFlag`
 
-- **Props:** none.
+| Prop | Type | Default |
+| --- | --- | --- |
+| `size` | `'md' \| 'lg'` | `'md'` |
 
 #### `ChineseFlag`
 
-- **Props:** none.
+| Prop | Type | Default |
+| --- | --- | --- |
+| `size` | `'md' \| 'lg'` | `'md'` |
 
 #### `JapaneseFlag`
 
-- **Props:** none.
+| Prop | Type | Default |
+| --- | --- | --- |
+| `size` | `'md' \| 'lg'` | `'md'` |
 
 #### `PortugueseFlag`
 
-- **Props:** none.
+| Prop | Type | Default |
+| --- | --- | --- |
+| `size` | `'md' \| 'lg'` | `'md'` |
 
 #### `RussianFlag`
 
-- **Props:** none.
+| Prop | Type | Default |
+| --- | --- | --- |
+| `size` | `'md' \| 'lg'` | `'md'` |
 
 #### `SpanishFlag`
 
-- **Props:** none.
+| Prop | Type | Default |
+| --- | --- | --- |
+| `size` | `'md' \| 'lg'` | `'md'` |
 
 #### Functions, constants, and types
 

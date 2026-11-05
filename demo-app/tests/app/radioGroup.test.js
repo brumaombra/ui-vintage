@@ -21,7 +21,8 @@ describe('RadioGroupCard', () => {
 			slots: { default: () => h(RadioGroupCard, { value: 'it', label: 'Italiano', icon: StarIcon }, { icon: () => h('img', { alt: 'Flag', src: '/it.svg' }) }) }
 		});
 		expect(wrapper.find('img[alt="Flag"]').exists()).toBe(true);
-		expect(wrapper.find('[data-slot="radio-group-card"] .size-9').exists()).toBe(false);
+		expect(wrapper.find('img[alt="Flag"]').element.parentElement.classList.contains('size-9')).toBe(true); // The same 36px as the tile, so every card has the same height
+		expect(wrapper.find('[data-slot="radio-group-card"] svg').exists()).toBe(false); // The icon prop's tile isn't drawn
 		expect(wrapper.text()).toContain('Italiano');
 	});
 
@@ -45,5 +46,19 @@ describe('RadioGroup', () => {
 		const classes = wrapper.find('[data-slot="radio-group"]').classes();
 		expect(classes).toContain('gap-3');
 		expect(classes).toContain('has-[>[data-slot=radio-group-card]]:gap-2');
+	});
+});
+
+// Flags come in two sizes: next to a label, or in the space of an icon tile
+describe('LanguageFlag', () => {
+	// The large flag is 32px wide, the default one stays as it was
+	it('draws the large size for icon tiles', async () => {
+		const { LanguageFlag } = await import('@brumaombra/ui-vintage/language-flag');
+		const large = await mountSuspended(LanguageFlag, { props: { code: 'it', size: 'lg' } });
+		await new Promise(resolve => setTimeout(resolve, 50)); // The flag is loaded on demand
+		expect(large.find('svg').classes()).toEqual(expect.arrayContaining(['w-8', 'h-6']));
+		const regular = await mountSuspended(LanguageFlag, { props: { code: 'it' } });
+		await new Promise(resolve => setTimeout(resolve, 50));
+		expect(regular.find('svg').classes()).toContain('h-4');
 	});
 });

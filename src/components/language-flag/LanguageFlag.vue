@@ -39,8 +39,10 @@ const getAsyncFlagComponent = (code: SupportedLanguageCode) => {
 // Props
 const props = withDefaults(defineProps<{
 	code?: SupportedLanguageCode;
+	size?: 'md' | 'lg'; // md next to a label, lg in the 36px space of an icon tile (the cards of a picker)
 }>(), {
-	code: 'en'
+	code: 'en',
+	size: 'md'
 });
 
 // Get the appropriate flag component based on the code prop
@@ -51,5 +53,5 @@ const flagComponent = computed(() => {
 </script>
 
 <template>
-	<component :is="flagComponent" v-bind="$attrs" />
+	<component :is="flagComponent" v-bind="$attrs" :size="props.size" />
 </template>

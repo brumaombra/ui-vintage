@@ -82,7 +82,7 @@ const dialogCode = `<Dialog>
 const optionPickerCode = `<ListRow label="Language" :icon="GlobeIcon" :value="languageName" action @click="languageOpen = true" />
 
 <OptionPickerDialog v-model:open="languageOpen" v-model="language" title="Language" :options="languages">
-    <template #icon="{ option }"><LanguageFlag :code="option.value" /></template>
+    <template #icon="{ option }"><LanguageFlag :code="option.value" size="lg" /></template>
 </OptionPickerDialog>`;
 
 const responsiveDialogCode = `<ResponsiveDialog v-model:open="open" title="Workspace settings" description="Phones get a sheet, larger screens a dialog.">
@@ -215,7 +215,7 @@ const sheetCode = `<Sheet>
 				<ListRow label="Theme" :icon="PaintBoardIcon" :value="pickerThemeName" action @click="openPicker = 'theme'" />
 			</ListGroup>
 			<OptionPickerDialog :open="openPicker === 'language'" v-model="pickerLanguage" title="Language" :options="pickerLanguages" @update:open="open => { if (!open) openPicker = null; }">
-				<template #icon="{ option }"><LanguageFlag :code="String(option.value)" /></template>
+				<template #icon="{ option }"><LanguageFlag :code="String(option.value)" size="lg" /></template>
 			</OptionPickerDialog>
 			<OptionPickerDialog :open="openPicker === 'theme'" v-model="pickerTheme" title="Theme" :options="pickerThemes" @update:open="open => { if (!open) openPicker = null; }" />
 		</DemoSection>

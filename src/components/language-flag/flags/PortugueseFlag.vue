@@ -1,5 +1,14 @@
+<script setup lang="ts">
+// Props (size: md next to a label, lg in the 36px space of an icon tile, like the cards of a picker)
+const props = withDefaults(defineProps<{
+	size?: 'md' | 'lg';
+}>(), {
+	size: 'md'
+});
+</script>
+
 <template>
-	<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-[1.35rem] shrink-0 rounded-[2px]" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 640 480" aria-hidden="true" focusable="false">
+	<svg xmlns="http://www.w3.org/2000/svg" :class="props.size === 'lg' ? 'h-6 w-8 shrink-0 rounded-[3px]' : 'h-4 w-[1.35rem] shrink-0 rounded-[2px]'" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 640 480" aria-hidden="true" focusable="false">
 		<path fill="red" d="M256 0h384v480H256z" />
 		<path fill="#060" d="M0 0h256v480H0z" />
 		<g fill="#ff0" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".6">

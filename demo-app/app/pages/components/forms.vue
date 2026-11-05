@@ -138,7 +138,7 @@ const checkboxCode = `<Checkbox v-model="accept" />
 <!-- The icon slot draws your own visual instead of the icon tile -->
 <RadioGroup v-model="language">
     <RadioGroupCard value="it" label="Italiano">
-        <template #icon><LanguageFlag code="it" /></template>
+        <template #icon><LanguageFlag code="it" size="lg" /></template>
     </RadioGroupCard>
 </RadioGroup>`;
 
@@ -297,7 +297,7 @@ const dropzoneCode = `<FileDropzone v-model="files" accept="image/*,.pdf" :max-s
 				<!-- Card radios with their own visual (the icon slot), like a language picker -->
 				<RadioGroup v-model="cardLanguage">
 					<RadioGroupCard v-for="code in ['en', 'it']" :key="code" :value="code" :label="code === 'en' ? 'English' : 'Italiano'">
-						<template #icon><LanguageFlag :code="code" /></template>
+						<template #icon><LanguageFlag :code="code" size="lg" /></template>
 					</RadioGroupCard>
 				</RadioGroup>
 			</div>
