@@ -79,6 +79,15 @@ describe('OptionPickerDialog', () => {
 		expect(wrapper.emitted('update:open')).toEqual([[false]]);
 	});
 
+	// Booleans work as values, false included (a public or private choice)
+	it('picks boolean values, false included', async () => {
+		await mountPicker({ options: [{ value: false, label: 'Public' }, { value: true, label: 'Private' }], modelValue: false });
+		expect(cardOf('Public').getAttribute('data-state')).toBe('checked');
+		cardOf('Private').click();
+		await flushPromises();
+		expect(wrapper.emitted('update:modelValue')).toEqual([[true]]);
+	});
+
 	// The icon slot draws the app's own visual instead of the icon tile, with the option it belongs to
 	it('draws the icon slot for every option', async () => {
 		await mountPicker({}, { icon: ({ option }) => h('img', { alt: `flag-${option.value}` }) });

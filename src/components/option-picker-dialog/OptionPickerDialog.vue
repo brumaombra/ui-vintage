@@ -1,13 +1,16 @@
 <script setup lang="ts">
-import type { AcceptableValue } from 'reka-ui';
+import { computed } from 'vue';
 import { useEventListener } from '@vueuse/core';
 import type { HugeiconsIconDefinition } from '../../lib/common-types';
 import { RadioGroup, RadioGroupCard } from '../ui/radio-group';
 import { ResponsiveDialog } from '../ui/responsive-dialog';
 
+// Value of an option: any value the app compares with ===, booleans and null included
+export type OptionPickerValue = string | number | boolean | null;
+
 // One option of the picker
 export interface OptionPickerOption {
-	value: AcceptableValue;
+	value: OptionPickerValue;
 	label: string;
 	description?: string;
 	icon?: HugeiconsIconDefinition;
@@ -20,7 +23,7 @@ const props = withDefaults(defineProps<{
 	title: string;
 	description?: string;
 	options: OptionPickerOption[];
-	modelValue?: AcceptableValue;
+	modelValue?: OptionPickerValue;
 }>(), {
 	open: false,
 	description: '',
@@ -30,7 +33,7 @@ const props = withDefaults(defineProps<{
 // Emits
 const emits = defineEmits<{
 	'update:open': [open: boolean];
-	'update:modelValue': [value: AcceptableValue];
+	'update:modelValue': [value: OptionPickerValue];
 }>();
 
 // Slots (icon: your own visual for an option instead of its icon tile, such as a flag or a logo)
@@ -42,9 +45,16 @@ defineSlots<{
 const ARROW_KEYS = new Set(['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight']);
 let isArrowKeyPressed = false;
 
+// The radio group works on the position of the options, so their values can be of any type (a false value would read as no pick otherwise)
+const checkedPosition = computed(() => {
+	const position = props.options.findIndex(option => option.value === props.modelValue);
+	return position >= 0 ? String(position) : undefined;
+});
+
 // Pick an option as soon as it's checked (by a tap, the space key or the arrow keys)
-const handleChange = (value: AcceptableValue) => {
-	if (value !== props.modelValue) emits('update:modelValue', value);
+const handleChange = (position: unknown) => {
+	const option = props.options[Number(position)];
+	if (option && option.value !== props.modelValue) emits('update:modelValue', option.value);
 };
 
 // Note when an arrow key is held, until it's released (the same window in which the radio group clicks)
@@ -65,10 +75,10 @@ const handleOptionClick = () => {
 <template>
 	<ResponsiveDialog :open="props.open" :title="props.title" :description="props.description" @update:open="open => emits('update:open', open)">
 		<!-- The options as radio cards, the current one checked (a sheet on phones, a dialog on larger screens) -->
-		<RadioGroup :model-value="props.modelValue" :aria-label="props.title" @update:model-value="handleChange">
-			<RadioGroupCard v-for="option in props.options"
-				:key="String(option.value)"
-				:value="option.value"
+		<RadioGroup :model-value="checkedPosition" :aria-label="props.title" @update:model-value="handleChange">
+			<RadioGroupCard v-for="(option, position) in props.options"
+				:key="String(position)"
+				:value="String(position)"
 				:label="option.label"
 				:description="option.description"
 				:icon="option.icon"

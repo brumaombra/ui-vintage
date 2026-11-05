@@ -2922,7 +2922,7 @@ Pick one option from a list: a `ResponsiveDialog` (a sheet from the bottom on ph
 
 ```ts
 import { OptionPickerDialog } from '@brumaombra/ui-vintage/option-picker-dialog';
-import type { OptionPickerOption } from '@brumaombra/ui-vintage/option-picker-dialog';
+import type { OptionPickerOption, OptionPickerValue } from '@brumaombra/ui-vintage/option-picker-dialog';
 ```
 
 ```vue
@@ -2940,21 +2940,22 @@ import type { OptionPickerOption } from '@brumaombra/ui-vintage/option-picker-di
 | `title` *(required)* | `string` |  |
 | `description` | `string` | `''` |
 | `options` *(required)* | `OptionPickerOption[]` |  |
-| `modelValue` | `AcceptableValue` | `undefined` |
+| `modelValue` | `OptionPickerValue` | `undefined` |
 
-- **Emits:** `update:open` (open: boolean), `update:modelValue` (value: AcceptableValue).
+- **Emits:** `update:open` (open: boolean), `update:modelValue` (value: OptionPickerValue).
 - **Slots:** `icon`.
 
 #### Functions, constants, and types
 
 ```ts
 interface OptionPickerOption {
-    value: AcceptableValue;
+    value: OptionPickerValue;
     label: string;
     description?: string;
     icon?: HugeiconsIconDefinition;
     disabled?: boolean;
 }
+type OptionPickerValue = string | number | boolean | null
 ```
 
 ---
