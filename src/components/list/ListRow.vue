@@ -7,12 +7,14 @@ import { HugeiconsIcon } from '@hugeicons/vue';
 import { cn } from '../../lib/utils';
 import type { HugeiconsIconDefinition } from '../../lib/common-types';
 
-// Props (a row is a link with `to`, a button with `action`, or a plain row holding its own control in the trailing slot)
+// Props (a row is a link with `to`, a button with `action`, or a plain row holding its own control in the trailing slot or under its label in the default slot)
 const props = withDefaults(defineProps<{
 	label: string;
+	description?: string; // A second line under the label
 	icon?: HugeiconsIconDefinition | null;
 	iconTile?: boolean; // The icon in a tinted tile (pages), or plain (settings)
 	value?: string; // Current value, on the right
+	wrapValue?: boolean; // Let a long value (an address, a name) wrap instead of being cut off
 	badge?: number; // Count on the right (e.g. unread items)
 	to?: string; // Localized path of the page it opens
 	action?: boolean; // A button: it emits click
@@ -20,9 +22,11 @@ const props = withDefaults(defineProps<{
 	labelFor?: string; // Id of the control in the trailing slot, so a tap on the label reaches it
 	class?: HTMLAttributes['class'];
 }>(), {
+	description: '',
 	icon: null,
 	iconTile: false,
 	value: '',
+	wrapValue: false,
 	badge: 0,
 	to: '',
 	action: false,
@@ -69,12 +73,15 @@ const handleClick = () => {
 			</span>
 			<HugeiconsIcon v-else-if="props.icon" :icon="props.icon" :class="cn('size-4 shrink-0', !props.danger && 'text-muted-foreground')" />
 
-			<!-- Label (a step smaller on phones, like the rows of the phone settings) -->
-			<label v-if="props.labelFor" :for="props.labelFor" class="min-w-0 flex-1 text-[0.8125rem] font-semibold md:text-sm">{{ props.label }}</label>
-			<span v-else class="min-w-0 flex-1 text-[0.8125rem] font-semibold md:text-sm">{{ props.label }}</span>
+			<!-- Label and description (a step smaller on phones, like the rows of the phone settings) -->
+			<span class="flex min-w-0 flex-1 flex-col gap-0.5">
+				<label v-if="props.labelFor" :for="props.labelFor" class="text-[0.8125rem] font-semibold md:text-sm">{{ props.label }}</label>
+				<span v-else class="text-[0.8125rem] font-semibold md:text-sm">{{ props.label }}</span>
+				<span v-if="props.description" :class="cn('text-[0.6875rem] md:text-xs', !props.danger && 'text-muted-foreground')">{{ props.description }}</span>
+			</span>
 
-			<!-- Value -->
-			<span v-if="props.value" class="max-w-[45%] truncate font-mono text-[0.6875rem] text-muted-foreground md:text-xs">{{ props.value }}</span>
+			<!-- Value (cut off at 45% of the row, or wrapped when it must show whole) -->
+			<span v-if="props.value" :class="cn('font-mono text-[0.6875rem] text-muted-foreground md:text-xs', props.wrapValue ? 'min-w-0 max-w-[60%] text-right wrap-anywhere' : 'max-w-[45%] truncate')">{{ props.value }}</span>
 
 			<!-- Badge -->
 			<span v-if="props.badge > 0" class="flex h-5 min-w-5 items-center justify-center rounded-full bg-primary px-1.5 font-mono text-[0.625rem] font-bold text-primary-foreground">{{ props.badge }}</span>
@@ -85,5 +92,10 @@ const handleClick = () => {
 			<!-- Chevron of the rows that open something -->
 			<HugeiconsIcon v-if="isInteractive && !props.danger" :icon="ArrowRight01Icon" class="size-4 shrink-0 text-muted-foreground" />
 		</component>
+
+		<!-- Content under the label line, the full width of the row (a slider, a field, a meter), outside the link or button of the row -->
+		<div v-if="$slots.default" class="-mt-1 px-4 pb-3 md:px-5">
+			<slot />
+		</div>
 	</li>
 </template>

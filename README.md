@@ -250,6 +250,23 @@ Both the instructions and the catalog update with the package, so you never need
 
 The stylesheet defines semantic tokens (`background`, `foreground`, `card`, `primary`, `muted`, `border`, and more) for both themes. Dark mode follows the `.dark` class on `<html>`; `ThemeSelector` sets it for you, with light, dark, and automatic modes. Extend the existing CSS custom properties in your app stylesheet instead of creating a second token system.
 
+### Brand color
+
+The brand color (buttons, focus rings, selected states, the sidebar) comes from six tokens, so an app can replace the default orange in its own stylesheet, for both themes:
+
+```css
+:root {
+	--uv-primary-light: #c62d3a;
+	--uv-primary-hover-light: #ad2230;
+	--uv-primary-foreground-light: #ffffff; /* Text on the brand color */
+	--uv-primary-dark: #ef5b67;
+	--uv-primary-hover-dark: #f47d86;
+	--uv-primary-foreground-dark: #260609;
+}
+```
+
+The library's defaults have zero specificity, so these win whatever the order of the style sheets. To change the color at runtime (a theme per customer, per mode, per selected item), set the same tokens under an attribute of `<html>`, such as `:root[data-brand='teal'] { … }`, and switch the attribute. Keep the foreground readable on the brand color in both themes.
+
 The `standalone:` variant styles the installed app (opened from the home screen, or from the Play Store as a Trusted Web Activity) through `@media (display-mode: standalone)`, for example `standalone:hidden` on a footer that only belongs in the browser, or `standalone:h-dvh` on a screen that must fit without scrolling. It needs no script, so the page never flashes the browser look first.
 
 The module injects the stylesheet automatically. Import it explicitly only when you need to control the loading order (the import gets the same stylesheet the module injects, with the classes of the components the app uses):

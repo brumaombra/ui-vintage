@@ -16,6 +16,8 @@ import ShieldUserIcon from '@hugeicons/core-free-icons/ShieldUserIcon';
 import Table01Icon from '@hugeicons/core-free-icons/Table01Icon';
 import UserGroupIcon from '@hugeicons/core-free-icons/UserGroupIcon';
 import ZapIcon from '@hugeicons/core-free-icons/ZapIcon';
+import Sun03Icon from '@hugeicons/core-free-icons/Sun03Icon';
+import Link04Icon from '@hugeicons/core-free-icons/Link04Icon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { AnimatedNumber } from '@brumaombra/ui-vintage/animated-number';
 import { Avatar, AvatarFallback, AvatarGroup, AvatarImage } from '@brumaombra/ui-vintage/avatar';
@@ -30,6 +32,7 @@ import { InfoCard } from '@brumaombra/ui-vintage/info-card';
 import { LineChart } from '@brumaombra/ui-vintage/line-chart';
 import type { LineChartPoint } from '@brumaombra/ui-vintage/line-chart';
 import { ListGroup, ListRow } from '@brumaombra/ui-vintage/list';
+import { Slider } from '@brumaombra/ui-vintage/slider';
 import { Input } from '@brumaombra/ui-vintage/input';
 import { showMessageToast } from '@brumaombra/ui-vintage/message-toast';
 import { SimplePagination } from '@brumaombra/ui-vintage/pagination';
@@ -131,6 +134,7 @@ const chips = ref([
 const uploadProgress = ref(35);
 const contentLoaded = ref(false);
 const listEmails = ref(true);
+const listBrightness = ref([60]);
 const advanceProgress = () => {
 	uploadProgress.value = uploadProgress.value >= 100 ? 0 : Math.min(100, uploadProgress.value + 20 + Math.round(Math.random() * 15));
 };
@@ -203,6 +207,15 @@ const listCode = `<ListGroup title="Preferences" hint="Saved as soon as they cha
         <template #trailing><Switch id="emails" v-model="emails" /></template>
     </ListRow>
     <ListRow label="Delete account" :icon="Delete02Icon" action danger @click="confirmDelete" />
+</ListGroup>
+
+<!-- A description, a value that wraps, and content under the label (a slider) -->
+<ListGroup title="Device">
+    <ListRow label="Rotate all scenes" description="One after the other" :icon="RepeatIcon" action @click="pick" />
+    <ListRow label="Hostname" :icon="Link04Icon" value="gizmo-reolink-switch.local" wrap-value />
+    <ListRow label="Brightness" :icon="Sun03Icon" :value="\`\${brightness[0]}%\`">
+        <Slider v-model="brightness" thumb-label="Brightness" />
+    </ListRow>
 </ListGroup>`;
 
 const avatarCode = `<Avatar size="lg" status="online">
@@ -467,6 +480,15 @@ const avatarCode = `<Avatar size="lg" status="online">
 						</template>
 					</ListRow>
 					<ListRow label="Delete account" :icon="Delete02Icon" action danger @click="showMessageToast({ message: 'Asks for a confirmation', type: 'info' })" />
+				</ListGroup>
+
+				<!-- A description, a value that wraps, and content under the label -->
+				<ListGroup title="Device" hint="A row can hold a slider, a field or a meter under its label.">
+					<ListRow label="Rotate all scenes" description="One after the other, every 20 seconds" :icon="ZapIcon" action @click="showMessageToast({ message: 'Opens the scene picker', type: 'info' })" />
+					<ListRow label="Hostname" :icon="Link04Icon" value="gizmo-reolink-switch.local" wrap-value />
+					<ListRow label="Brightness" :icon="Sun03Icon" :value="`${listBrightness[0]}%`">
+						<Slider v-model="listBrightness" thumb-label="Brightness" />
+					</ListRow>
 				</ListGroup>
 			</div>
 		</DemoSection>

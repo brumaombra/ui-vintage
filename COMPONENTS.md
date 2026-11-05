@@ -1796,7 +1796,7 @@ type LineChartPoint = [number, number]
 
 ### `@brumaombra/ui-vintage/list`
 
-Grouped list of rows, like the lists of the phone settings: a `ListGroup` (title, rows in one card, note) of `ListRow`s. A row is a link (`to`, localized), a button (`action`, emits `click`), or a plain row holding a control in its `trailing` slot (point `label-for` at its id); it shows an icon (plain, or in a tile with `icon-tile`), a value, a badge, and a chevron when it opens something. `danger` colors a destructive action.
+Grouped list of rows, like the lists of the phone settings: a `ListGroup` (title, rows in one card, note) of `ListRow`s. A row is a link (`to`, localized), a button (`action`, emits `click`), or a plain row holding a control in its `trailing` slot (point `label-for` at its id); it shows an icon (plain, or in a tile with `icon-tile`), a `description` under the label, a value (cut off, or whole with `wrap-value`), a badge, and a chevron when it opens something. Its default slot holds content under the label line, the full width of the row (a `Slider`, an `Input`, a `Progress`), outside the link or button of the row. `danger` colors a destructive action.
 
 ```ts
 import { ListGroup, ListRow } from '@brumaombra/ui-vintage/list';
@@ -1828,9 +1828,11 @@ import { ListGroup, ListRow } from '@brumaombra/ui-vintage/list';
 | Prop | Type | Default |
 | --- | --- | --- |
 | `label` *(required)* | `string` |  |
+| `description` | `string` | `''` |
 | `icon` | `HugeiconsIconDefinition \| null` | `null` |
 | `iconTile` | `boolean` | `false` |
 | `value` | `string` | `''` |
+| `wrapValue` | `boolean` | `false` |
 | `badge` | `number` | `0` |
 | `to` | `string` | `''` |
 | `action` | `boolean` | `false` |
@@ -1839,7 +1841,7 @@ import { ListGroup, ListRow } from '@brumaombra/ui-vintage/list';
 | `class` | `HTMLAttributes['class']` |  |
 
 - **Emits:** `click`.
-- **Slots:** `trailing`.
+- **Slots:** `trailing`, `default`.
 
 ---
 

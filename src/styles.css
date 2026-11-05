@@ -13,6 +13,18 @@ html {
 	-webkit-tap-highlight-color: transparent;
 }
 
+/*********************** Brand color ***********************/
+
+/* The brand color of the app (buttons, focus rings, the selected states, the sidebar), in light and dark mode: an app sets these tokens in its own stylesheet to replace the default orange. :where() keeps the defaults at zero specificity, so the app's values win whatever the order of the style sheets */
+:where(:root) {
+	--uv-primary-light: #f7931a;
+	--uv-primary-hover-light: #df8112;
+	--uv-primary-foreground-light: var(--text-primary-light); /* Text on the brand color */
+	--uv-primary-dark: #f7a23c;
+	--uv-primary-hover-dark: #ffb55b;
+	--uv-primary-foreground-dark: #1b1307;
+}
+
 :root {
 	color-scheme: light;
 
@@ -32,12 +44,12 @@ html {
 	--text-secondary-light: #606976; /* 4.9:1 on the selected background (#66707d was 4.4:1) and 5.6:1 on white */
 	--text-secondary-dark: #97a2b2;
 
-	--button-primary-light: #f7931a;
-	--button-primary-hover-light: #df8112;
-	--button-primary-dark: #f7a23c;
-	--button-primary-hover-dark: #ffb55b;
-	--button-primary-foreground-light: var(--text-primary-light);
-	--button-primary-foreground-dark: #1b1307;
+	--button-primary-light: var(--uv-primary-light);
+	--button-primary-hover-light: var(--uv-primary-hover-light);
+	--button-primary-dark: var(--uv-primary-dark);
+	--button-primary-hover-dark: var(--uv-primary-hover-dark);
+	--button-primary-foreground-light: var(--uv-primary-foreground-light);
+	--button-primary-foreground-dark: var(--uv-primary-foreground-dark);
 	--button-secondary-light: #ffffff;
 	--button-secondary-dark: #171c23;
 

@@ -50,6 +50,43 @@ describe('ListGroup and ListRow', () => {
 		expect(wrapper.find('button').classes()).toContain('text-destructive');
 		expect(wrapper.find('svg').exists()).toBe(false);
 	});
+
+	// A description adds a second line under the label
+	it('shows a description under the label', async () => {
+		const wrapper = await mountSuspended(ListRow, { props: { label: 'Rotate all scenes', description: 'One after the other' } });
+		expect(wrapper.text()).toContain('Rotate all scenes');
+		expect(wrapper.text()).toContain('One after the other');
+	});
+
+	// A long value is cut off by default, and wraps when it must show whole (an address, a name)
+	it('cuts a long value off, or wraps it', async () => {
+		const value = 'gizmo-reolink-switch.local';
+		const cut = await mountSuspended(ListRow, { props: { label: 'Hostname', value } });
+		const cutValue = cut.findAll('span').find(span => span.text() === value);
+		expect(cutValue.classes()).toContain('truncate');
+
+		const wrapped = await mountSuspended(ListRow, { props: { label: 'Hostname', value, wrapValue: true } });
+		const wrappedValue = wrapped.findAll('span').find(span => span.text() === value);
+		expect(wrappedValue.classes()).toContain('wrap-anywhere');
+		expect(wrappedValue.classes()).not.toContain('truncate');
+	});
+
+	// Content under the label (a slider, a field) sits outside the button of the row, so a tap on it never opens the row
+	it('puts the default slot under the row, outside its button', async () => {
+		const wrapper = await mountSuspended(ListRow, {
+			props: { label: 'Brightness', value: '60%', action: true },
+			slots: { default: () => h('input', { type: 'range', id: 'brightness' }) }
+		});
+		expect(wrapper.find('button input').exists()).toBe(false);
+		expect(wrapper.find('li').element.children).toHaveLength(2); // The row, then the content
+		expect(wrapper.find('li').element.lastElementChild.querySelector('input[type="range"]')).not.toBeNull();
+	});
+
+	// A row without content has no empty space under it
+	it('adds no content block without the default slot', async () => {
+		const wrapper = await mountSuspended(ListRow, { props: { label: 'Theme' } });
+		expect(wrapper.find('li').element.children).toHaveLength(1); // Only the row itself (a plain row is a div too)
+	});
 });
 
 // Skeleton: a text line can sit inside a paragraph, with a smaller corner than the blocks
