@@ -99,6 +99,7 @@
 		"./message-toast": "./src/components/message-toast/index.ts",
 		"./native-select": "./src/components/ui/native-select/index.ts",
 		"./number-field": "./src/components/ui/number-field/index.ts",
+		"./option-picker-dialog": "./src/components/option-picker-dialog/index.ts",
 		"./page-header": "./src/components/page-header/index.ts",
 		"./pagination": "./src/components/ui/pagination/index.ts",
 		"./pin-input": "./src/components/ui/pin-input/index.ts",

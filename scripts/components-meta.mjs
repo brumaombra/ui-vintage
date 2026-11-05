@@ -692,6 +692,15 @@ setBusy(true, { label: 'Creating...', variant: 'fullscreen', mark: AppLogoMark }
 		category: 'layout',
 		description: 'Language menu with flags. Pass the locale codes; handle `select` to call `setLocale`.'
 	},
+	'option-picker-dialog': {
+		category: 'overlays',
+		description: 'Pick one option from a list: a `ResponsiveDialog` (a sheet from the bottom on phones, a dialog on larger screens) holding a `RadioGroup` of `RadioGroupCard`s, the current one checked. Use it whenever an app picks a single item from a list, typically from a `ListRow` that shows the current value with `action`. `v-model` is the picked value and `v-model:open` shows it; `options` are `{ value, label, description?, icon?, disabled? }`. A tap on an option picks it and closes the picker, while the arrow keys change the pick and keep it open. The `icon` slot (it gets the `option`) draws your own visual instead of the icon tile, such as a `LanguageFlag` or a logo.',
+		example: `
+<ListRow label="Language" :icon="GlobeIcon" :value="languageName" action @click="languageOpen = true" />
+<OptionPickerDialog v-model:open="languageOpen" v-model="language" title="Language" :options="languages">
+    <template #icon="{ option }"><LanguageFlag :code="option.value" /></template>
+</OptionPickerDialog>`
+	},
 	'language-flag': {
 		category: 'layout',
 		description: 'Flag icons for the supported locales.'

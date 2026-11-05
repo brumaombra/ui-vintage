@@ -19,7 +19,7 @@ This file lists every public entry point of the package with its components, pro
 - **Forms:** [calendar](#brumaombraui-vintagecalendar), [checkbox](#brumaombraui-vintagecheckbox), [combobox](#brumaombraui-vintagecombobox), [date-picker](#brumaombraui-vintagedate-picker), [date-time-picker](#brumaombraui-vintagedate-time-picker), [field](#brumaombraui-vintagefield), [file-dropzone](#brumaombraui-vintagefile-dropzone), [inline-date-picker](#brumaombraui-vintageinline-date-picker), [input](#brumaombraui-vintageinput), [label](#brumaombraui-vintagelabel), [native-select](#brumaombraui-vintagenative-select), [number-field](#brumaombraui-vintagenumber-field), [pin-input](#brumaombraui-vintagepin-input), [radio-group](#brumaombraui-vintageradio-group), [select](#brumaombraui-vintageselect), [slider](#brumaombraui-vintageslider), [slider-form-component](#brumaombraui-vintageslider-form-component), [switch](#brumaombraui-vintageswitch), [switch-form-component](#brumaombraui-vintageswitch-form-component), [tags-input](#brumaombraui-vintagetags-input), [textarea](#brumaombraui-vintagetextarea), [time-picker](#brumaombraui-vintagetime-picker), [time-wheel](#brumaombraui-vintagetime-wheel)
 - **Data display:** [animated-number](#brumaombraui-vintageanimated-number), [avatar](#brumaombraui-vintageavatar), [badge](#brumaombraui-vintagebadge), [card](#brumaombraui-vintagecard), [card-grid](#brumaombraui-vintagecard-grid), [chip](#brumaombraui-vintagechip), [data-list](#brumaombraui-vintagedata-list), [data-table](#brumaombraui-vintagedata-table), [info-card](#brumaombraui-vintageinfo-card), [line-chart](#brumaombraui-vintageline-chart), [list](#brumaombraui-vintagelist), [progress](#brumaombraui-vintageprogress), [progress-component](#brumaombraui-vintageprogress-component), [scroll-area](#brumaombraui-vintagescroll-area), [separator](#brumaombraui-vintageseparator), [single-value-card](#brumaombraui-vintagesingle-value-card), [skeleton](#brumaombraui-vintageskeleton), [stat-strip](#brumaombraui-vintagestat-strip), [table](#brumaombraui-vintagetable)
 - **Navigation:** [accordion](#brumaombraui-vintageaccordion), [bottom-nav](#brumaombraui-vintagebottom-nav), [breadcrumb](#brumaombraui-vintagebreadcrumb), [collapsible](#brumaombraui-vintagecollapsible), [pagination](#brumaombraui-vintagepagination), [pull-to-refresh](#brumaombraui-vintagepull-to-refresh), [sidebar](#brumaombraui-vintagesidebar), [stepper](#brumaombraui-vintagestepper), [tabs](#brumaombraui-vintagetabs)
-- **Overlays:** [alert-dialog](#brumaombraui-vintagealert-dialog), [command](#brumaombraui-vintagecommand), [dialog](#brumaombraui-vintagedialog), [hover-card](#brumaombraui-vintagehover-card), [popover](#brumaombraui-vintagepopover), [responsive-dialog](#brumaombraui-vintageresponsive-dialog), [sheet](#brumaombraui-vintagesheet), [tooltip](#brumaombraui-vintagetooltip)
+- **Overlays:** [alert-dialog](#brumaombraui-vintagealert-dialog), [command](#brumaombraui-vintagecommand), [dialog](#brumaombraui-vintagedialog), [hover-card](#brumaombraui-vintagehover-card), [option-picker-dialog](#brumaombraui-vintageoption-picker-dialog), [popover](#brumaombraui-vintagepopover), [responsive-dialog](#brumaombraui-vintageresponsive-dialog), [sheet](#brumaombraui-vintagesheet), [tooltip](#brumaombraui-vintagetooltip)
 - **Feedback:** [alert](#brumaombraui-vintagealert), [busy](#brumaombraui-vintagebusy), [busy-indicator](#brumaombraui-vintagebusy-indicator), [confirm-dialog](#brumaombraui-vintageconfirm-dialog), [cookie-consent](#brumaombraui-vintagecookie-consent), [empty-state-card](#brumaombraui-vintageempty-state-card), [haptics](#brumaombraui-vintagehaptics), [loading-state-card](#brumaombraui-vintageloading-state-card), [message-dialog](#brumaombraui-vintagemessage-dialog), [message-toast](#brumaombraui-vintagemessage-toast), [spinner](#brumaombraui-vintagespinner)
 - **Layouts and app shell:** [background-grid](#brumaombraui-vintagebackground-grid), [dashboard-shell](#brumaombraui-vintagedashboard-shell), [error-page](#brumaombraui-vintageerror-page), [landing](#brumaombraui-vintagelanding), [landing-content](#brumaombraui-vintagelanding-content), [landing-footer](#brumaombraui-vintagelanding-footer), [landing-navbar](#brumaombraui-vintagelanding-navbar), [landing-shell](#brumaombraui-vintagelanding-shell), [language-flag](#brumaombraui-vintagelanguage-flag), [language-selector](#brumaombraui-vintagelanguage-selector), [legal-document](#brumaombraui-vintagelegal-document), [page-header](#brumaombraui-vintagepage-header), [section-title](#brumaombraui-vintagesection-title), [theme-selector](#brumaombraui-vintagetheme-selector)
 - **Content and blog:** [blog](#brumaombraui-vintageblog), [content](#brumaombraui-vintagecontent)
@@ -2913,6 +2913,49 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from '@brumaombra/ui-vi
 
 - **Also accepts** all props of Reka `HoverCardTriggerProps`.
 - **Slots:** `default`.
+
+---
+
+### `@brumaombra/ui-vintage/option-picker-dialog`
+
+Pick one option from a list: a `ResponsiveDialog` (a sheet from the bottom on phones, a dialog on larger screens) holding a `RadioGroup` of `RadioGroupCard`s, the current one checked. Use it whenever an app picks a single item from a list, typically from a `ListRow` that shows the current value with `action`. `v-model` is the picked value and `v-model:open` shows it; `options` are `{ value, label, description?, icon?, disabled? }`. A tap on an option picks it and closes the picker, while the arrow keys change the pick and keep it open. The `icon` slot (it gets the `option`) draws your own visual instead of the icon tile, such as a `LanguageFlag` or a logo.
+
+```ts
+import { OptionPickerDialog } from '@brumaombra/ui-vintage/option-picker-dialog';
+import type { OptionPickerOption } from '@brumaombra/ui-vintage/option-picker-dialog';
+```
+
+```vue
+<ListRow label="Language" :icon="GlobeIcon" :value="languageName" action @click="languageOpen = true" />
+<OptionPickerDialog v-model:open="languageOpen" v-model="language" title="Language" :options="languages">
+    <template #icon="{ option }"><LanguageFlag :code="option.value" /></template>
+</OptionPickerDialog>
+```
+
+#### `OptionPickerDialog`
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `open` | `boolean` | `false` |
+| `title` *(required)* | `string` |  |
+| `description` | `string` | `''` |
+| `options` *(required)* | `OptionPickerOption[]` |  |
+| `modelValue` | `AcceptableValue` | `undefined` |
+
+- **Emits:** `update:open` (open: boolean), `update:modelValue` (value: AcceptableValue).
+- **Slots:** `icon`.
+
+#### Functions, constants, and types
+
+```ts
+interface OptionPickerOption {
+    value: AcceptableValue;
+    label: string;
+    description?: string;
+    icon?: HugeiconsIconDefinition;
+    disabled?: boolean;
+}
+```
 
 ---
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import Calendar03Icon from '@hugeicons/core-free-icons/Calendar03Icon';
 import CommandIcon from '@hugeicons/core-free-icons/CommandIcon';
 import Delete02Icon from '@hugeicons/core-free-icons/Delete02Icon';
@@ -23,6 +23,14 @@ import { KbdGroup } from '@brumaombra/ui-vintage/kbd';
 import { showMessageToast } from '@brumaombra/ui-vintage/message-toast';
 import { Popover, PopoverContent, PopoverTrigger } from '@brumaombra/ui-vintage/popover';
 import { ResponsiveDialog } from '@brumaombra/ui-vintage/responsive-dialog';
+import { LanguageFlag } from '@brumaombra/ui-vintage/language-flag';
+import { ListGroup, ListRow } from '@brumaombra/ui-vintage/list';
+import { OptionPickerDialog } from '@brumaombra/ui-vintage/option-picker-dialog';
+import GlobeIcon from '@hugeicons/core-free-icons/GlobeIcon';
+import PaintBoardIcon from '@hugeicons/core-free-icons/PaintBoardIcon';
+import Sun03Icon from '@hugeicons/core-free-icons/Sun03Icon';
+import Moon02Icon from '@hugeicons/core-free-icons/Moon02Icon';
+import ComputerIcon from '@hugeicons/core-free-icons/ComputerIcon';
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@brumaombra/ui-vintage/sheet';
 import { Switch } from '@brumaombra/ui-vintage/switch';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@brumaombra/ui-vintage/tooltip';
@@ -37,6 +45,23 @@ const profileHandle = ref('@satoshi');
 const emailNotifications = ref(true);
 const sheetSides = ['top', 'right', 'bottom', 'left'] as const;
 const responsiveDialogOpen = ref<'dialog' | 'panel' | null>(null); // The responsive dialog open in the demo, with its shape on larger screens
+
+// Option pickers of the demo: a language with flags, and a theme with icons
+const openPicker = ref<'language' | 'theme' | null>(null);
+const pickerLanguage = ref('it');
+const pickerTheme = ref('system');
+const pickerLanguages = [
+	{ value: 'en', label: 'English' },
+	{ value: 'it', label: 'Italiano' },
+	{ value: 'fr', label: 'Français' }
+];
+const pickerThemes = [
+	{ value: 'light', label: 'Light', icon: Sun03Icon },
+	{ value: 'dark', label: 'Dark', icon: Moon02Icon },
+	{ value: 'system', label: 'System', description: 'Follows the device', icon: ComputerIcon }
+];
+const pickerLanguageName = computed(() => pickerLanguages.find(option => option.value === pickerLanguage.value)?.label || '');
+const pickerThemeName = computed(() => pickerThemes.find(option => option.value === pickerTheme.value)?.label || '');
 
 // Save the profile form and close the dialog
 const handleSaveProfile = () => {
@@ -53,6 +78,12 @@ const dialogCode = `<Dialog>
         ...
     </DialogContent>
 </Dialog>`;
+
+const optionPickerCode = `<ListRow label="Language" :icon="GlobeIcon" :value="languageName" action @click="languageOpen = true" />
+
+<OptionPickerDialog v-model:open="languageOpen" v-model="language" title="Language" :options="languages">
+    <template #icon="{ option }"><LanguageFlag :code="option.value" /></template>
+</OptionPickerDialog>`;
 
 const responsiveDialogCode = `<ResponsiveDialog v-model:open="open" title="Workspace settings" description="Phones get a sheet, larger screens a dialog.">
     <Input v-model="name" />
@@ -175,6 +206,18 @@ const sheetCode = `<Sheet>
 					<Button variant="secondary" @click="responsiveDialogOpen = null">Cancel</Button>
 				</template>
 			</ResponsiveDialog>
+		</DemoSection>
+
+		<!-- Option picker -->
+		<DemoSection id="option-picker" title="Option picker" badge="New" description="Pick one option from a list, from the row that shows the current value: radio cards in a sheet on phones, in a dialog on larger screens. A tap picks and closes; the arrow keys change the pick and keep it open." :code="optionPickerCode">
+			<ListGroup title="Preferences" class="mx-auto w-full max-w-md">
+				<ListRow label="Language" :icon="GlobeIcon" :value="pickerLanguageName" action @click="openPicker = 'language'" />
+				<ListRow label="Theme" :icon="PaintBoardIcon" :value="pickerThemeName" action @click="openPicker = 'theme'" />
+			</ListGroup>
+			<OptionPickerDialog :open="openPicker === 'language'" v-model="pickerLanguage" title="Language" :options="pickerLanguages" @update:open="open => { if (!open) openPicker = null; }">
+				<template #icon="{ option }"><LanguageFlag :code="String(option.value)" /></template>
+			</OptionPickerDialog>
+			<OptionPickerDialog :open="openPicker === 'theme'" v-model="pickerTheme" title="Theme" :options="pickerThemes" @update:open="open => { if (!open) openPicker = null; }" />
 		</DemoSection>
 
 		<!-- Popover and tooltip -->
