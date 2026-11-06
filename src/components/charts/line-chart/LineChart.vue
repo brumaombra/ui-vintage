@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue';
 import { onClickOutside, useElementSize } from '@vueuse/core';
-import { computed, onMounted, ref, useId } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref, useId, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { cn } from '../../../lib/utils';
 
@@ -26,11 +26,14 @@ const props = withDefaults(defineProps<{
 	formatTooltipX?: (timestamp: number) => string;
 	locale?: string;
 	ariaLabel?: string;
+	animate?: boolean;
+	redrawKey?: string | number;
 	class?: HTMLAttributes['class'];
 }>(), {
 	curve: 'linear',
 	showLastPoint: true,
-	fill: true
+	fill: true,
+	animate: true
 });
 
 // The drawing space of the paths: the SVG stretches it to the size of the plot, so nothing has to be measured to draw (the strokes keep their width with vector-effect)
@@ -39,13 +42,31 @@ const VIEW_SIZE = 1000;
 // More points than this are thinned to one per bucket before drawing (a long history has far more points than pixels)
 const MAX_POINTS = 1500;
 
+// The animation: the line draws itself from left to right, and on a new redrawKey the old one fades out first (it waits for the new data at most FADE_WAIT_MS)
+const DRAW_MS = 900;
+const FADE_OUT_MS = 200;
+const FADE_WAIT_MS = 1500;
+
+// Rendered on the server: the chart is already in the page, so it shows at once instead of drawing again after hydration
+const isServer = typeof window === 'undefined';
+
 const { locale: appLocale } = useI18n();
 const resolvedLocale = computed(() => props.locale || appLocale.value || 'en');
-const gradientId = `uv-line-chart-${useId()}`;
+const chartId = useId();
+const gradientId = `uv-line-chart-${chartId}`;
+const clipId = `uv-line-chart-clip-${chartId}`;
+const rootRef = ref<HTMLElement | null>(null);
 const plotRef = ref<HTMLElement | null>(null);
 const { width: plotWidth } = useElementSize(plotRef);
 const isMounted = ref(false);
 const activeIndex = ref<number | null>(null);
+const drawProgress = ref(1); // How much of the line is drawn, from 0 to 1 (the server and a chart without animation draw it all)
+const isFadedOut = ref(false); // The old line, faded out while a new redrawKey waits for its data
+const labelsVisible = ref(true); // The labels fade in with the first drawing
+let drawFrame: number | null = null;
+let fadeTimer: ReturnType<typeof setTimeout> | null = null;
+let waitingForData = false;
+let fadeStartedAt = 0;
 
 // The points in time order, thinned when there are too many (the last point of each bucket, so a step chart keeps its levels)
 const points = computed<LineChartPoint[]>(() => {
@@ -203,17 +224,81 @@ const handleKeydown = (event: KeyboardEvent) => {
 	activeIndex.value = Math.min(last, Math.max(0, current + moves[event.key]));
 };
 
-// The time labels wait for the browser: dates depend on the time zone of the visitor, which the server doesn't know
+// Whether to animate: asked for, possible, and not turned off by the visitor (reduce motion)
+const canAnimate = () => props.animate && typeof requestAnimationFrame !== 'undefined' && !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+
+// Stop a drawing or a fade in progress
+const stopAnimation = () => {
+	if (drawFrame !== null) cancelAnimationFrame(drawFrame);
+	if (fadeTimer !== null) clearTimeout(fadeTimer);
+	drawFrame = null;
+	fadeTimer = null;
+};
+
+// Draw the line from left to right, with a decelerating curve (it starts at the time of its first frame)
+const drawLine = () => {
+	stopAnimation();
+	isFadedOut.value = false;
+	labelsVisible.value = true;
+	if (!canAnimate() || !points.value.length) {
+		drawProgress.value = 1;
+		return;
+	}
+	drawProgress.value = 0;
+	let start: number | null = null;
+	const step = (now: number) => {
+		if (start === null) start = now;
+		const progress = Math.min(1, (now - start) / DRAW_MS);
+		drawProgress.value = 1 - Math.pow(1 - progress, 3);
+		drawFrame = progress < 1 ? requestAnimationFrame(step) : null;
+	};
+	drawFrame = requestAnimationFrame(step);
+};
+
+// A new redrawKey (for example another period): the old line fades out, and the new one draws once its data arrives (or after FADE_WAIT_MS, if the data doesn't change)
+watch(() => props.redrawKey, () => {
+	if (!isMounted.value || !canAnimate()) return;
+	stopAnimation();
+	isFadedOut.value = true;
+	waitingForData = true;
+	fadeStartedAt = performance.now();
+	fadeTimer = setTimeout(() => {
+		waitingForData = false;
+		drawLine();
+	}, FADE_WAIT_MS);
+});
+
+// New data: drawn again after a new redrawKey (once the old line has faded out), and the first time a chart that started empty gets some; any other update (a new point, a live refresh) changes the line in place
+watch(points, (current, previous) => {
+	if (!isMounted.value) return;
+	if (waitingForData) {
+		waitingForData = false;
+		if (fadeTimer !== null) clearTimeout(fadeTimer);
+		fadeTimer = setTimeout(drawLine, Math.max(0, FADE_OUT_MS - (performance.now() - fadeStartedAt)));
+		return;
+	}
+	if (!previous.length && current.length) drawLine();
+});
+
+// The time labels wait for the browser (dates depend on the time zone of the visitor, which the server doesn't know); a chart created in the browser draws itself, one rendered on the server is already in the page
 onMounted(() => {
 	isMounted.value = true;
+	const renderedOnServer = rootRef.value?.hasAttribute('data-server-rendered');
+	rootRef.value?.removeAttribute('data-server-rendered');
+	if (renderedOnServer || !canAnimate()) return;
+	labelsVisible.value = false;
+	requestAnimationFrame(() => drawLine());
 });
+
+// Stop the animation with the chart
+onBeforeUnmount(stopAnimation);
 </script>
 
 <template>
 	<!-- Chart: value labels on the left, the plot, and time labels below -->
-	<div data-slot="line-chart" role="figure" :aria-label="props.ariaLabel" :class="cn('grid h-72 w-full grid-cols-[auto_minmax(0,1fr)] grid-rows-[minmax(0,1fr)_auto] pt-2 text-xs text-muted-foreground tabular-nums', props.class)">
-		<!-- Value labels (an invisible copy of the widest one gives the column its width) -->
-		<div class="relative pr-2 text-right" aria-hidden="true">
+	<div ref="rootRef" data-slot="line-chart" role="figure" :aria-label="props.ariaLabel" :data-server-rendered="isServer ? '' : undefined" data-allow-mismatch="attribute" :class="cn('grid h-72 w-full grid-cols-[auto_minmax(0,1fr)] grid-rows-[minmax(0,1fr)_auto] pt-2 text-xs text-muted-foreground tabular-nums', props.class)">
+		<!-- Value labels (an invisible copy of the widest one gives the column its width), fading in with the first drawing -->
+		<div :class="cn('relative pr-2 text-right transition-opacity duration-500 ease-out-expo', !labelsVisible && 'opacity-0')" aria-hidden="true">
 			<span class="invisible block h-0 overflow-hidden">{{ widestYLabel }}</span>
 			<span v-for="value in gridValues" :key="value" class="absolute right-2 -translate-y-1/2 whitespace-nowrap" :style="{ top: `${(1 - yRatio(value)) * 100}%` }">{{ formatYValue(value) }}</span>
 		</div>
@@ -226,6 +311,11 @@ onMounted(() => {
 						<stop offset="0" stop-color="currentColor" stop-opacity="0.32" />
 						<stop offset="1" stop-color="currentColor" stop-opacity="0.02" />
 					</linearGradient>
+
+					<!-- How much of the line is drawn (the drawing reveals it from left to right; a little room around it, so the stroke isn't cut at the edges) -->
+					<clipPath :id="clipId" clipPathUnits="userSpaceOnUse">
+						<rect x="-20" y="-20" :width="drawProgress * (VIEW_SIZE + 40)" :height="VIEW_SIZE + 40" />
+					</clipPath>
 				</defs>
 
 				<!-- Grid -->
@@ -234,35 +324,47 @@ onMounted(() => {
 				<!-- Reference line (e.g. 50%), stronger than the grid -->
 				<line v-if="props.referenceLine !== undefined && props.referenceLine >= yRange.low && props.referenceLine <= yRange.high" data-slot="line-chart-reference" x1="0" :x2="VIEW_SIZE" :y1="viewY(props.referenceLine)" :y2="viewY(props.referenceLine)" class="stroke-muted-foreground/60" stroke-dasharray="2 3" vector-effect="non-scaling-stroke" />
 
-				<!-- Area and line -->
-				<path v-if="props.fill && areaPath" :d="areaPath" :fill="`url(#${gradientId})`" />
-				<path v-if="linePath" data-slot="line-chart-line" :d="linePath" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" vector-effect="non-scaling-stroke" />
+				<!-- Area and line: revealed by the drawing (the area fills in behind the line), faded out while a new redrawKey waits for its data -->
+				<g data-slot="line-chart-series" :data-state="isFadedOut ? 'faded' : drawProgress < 1 ? 'drawing' : 'drawn'" :clip-path="`url(#${clipId})`" :class="cn('transition-opacity duration-200 ease-out', isFadedOut && 'opacity-0')">
+					<path v-if="props.fill && areaPath" :d="areaPath" :fill="`url(#${gradientId})`" :opacity="drawProgress" />
+					<path v-if="linePath" data-slot="line-chart-line" :d="linePath" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" vector-effect="non-scaling-stroke" />
+				</g>
 			</svg>
 
-			<!-- Live dot on the last point -->
-			<span v-if="props.showLastPoint && lastPosition" data-slot="line-chart-last-point" class="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2" :style="{ left: `${lastPosition.left}%`, top: `${lastPosition.top}%` }" aria-hidden="true">
+			<!-- Live dot on the last point (it appears once the line has reached it) -->
+			<span v-if="props.showLastPoint && lastPosition" data-slot="line-chart-last-point" :class="cn('pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300', (drawProgress < 1 || isFadedOut) && 'opacity-0')" :style="{ left: `${lastPosition.left}%`, top: `${lastPosition.top}%` }" aria-hidden="true">
 				<span class="absolute inset-0 rounded-full bg-primary/40 motion-safe:animate-ping" />
 				<span class="relative block size-2 rounded-full bg-primary" />
 			</span>
 
-			<!-- Hovered point: guide line, dot, and tooltip -->
-			<template v-if="activePoint && activePosition">
-				<span class="pointer-events-none absolute inset-y-0 border-l border-dashed border-foreground/35" :style="{ left: `${activePosition.left}%` }" aria-hidden="true" />
-				<span data-slot="line-chart-active-point" class="pointer-events-none absolute size-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-primary bg-card" :style="{ left: `${activePosition.left}%`, top: `${activePosition.top}%` }" aria-hidden="true" />
-				<div data-slot="line-chart-tooltip" role="status" :class="cn('pointer-events-none absolute z-10 -translate-y-1/2', tooltipOnLeft ? '-translate-x-full pr-3' : 'pl-3')" :style="{ left: `${activePosition.left}%`, top: `${Math.min(80, Math.max(20, activePosition.top))}%` }">
-					<slot name="tooltip" :point="activePoint" :index="activeIndex">
-						<div class="min-w-28 rounded border border-border bg-card px-3 py-2 text-card-foreground shadow-elevated-md">
-							<p class="text-[0.6875rem] text-muted-foreground">{{ formatTooltipXValue(activePoint[0]) }}</p>
-							<p class="mt-0.5 text-sm font-semibold tabular-nums">{{ formatYValue(activePoint[1]) }}</p>
-						</div>
-					</slot>
+			<!-- Hovered point: guide line and dot, fading in and out, gliding from point to point -->
+			<Transition enter-from-class="opacity-0" enter-active-class="transition-opacity duration-150" leave-active-class="transition-opacity duration-150" leave-to-class="opacity-0">
+				<div v-if="activePoint && activePosition" class="pointer-events-none absolute inset-0" aria-hidden="true">
+					<span class="absolute inset-y-0 border-l border-dashed border-foreground/35 transition-[left] duration-150 ease-out-expo" :style="{ left: `${activePosition.left}%` }" />
+					<span data-slot="line-chart-active-point" class="absolute size-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-primary bg-card transition-[left,top] duration-150 ease-out-expo" :style="{ left: `${activePosition.left}%`, top: `${activePosition.top}%` }" />
 				</div>
-			</template>
+			</Transition>
+
+			<!-- Tooltip: fades out, glides from point to point, and its card fades in rising a little each time it appears -->
+			<Transition leave-active-class="transition-opacity duration-150" leave-to-class="opacity-0">
+				<div v-if="activePoint && activePosition" data-slot="line-chart-tooltip" role="status" :class="cn('pointer-events-none absolute z-10 -translate-y-1/2 transition-[left,top] duration-150 ease-out-expo', tooltipOnLeft ? '-translate-x-full pr-3' : 'pl-3')" :style="{ left: `${activePosition.left}%`, top: `${Math.min(80, Math.max(20, activePosition.top))}%` }">
+					<Transition appear enter-from-class="translate-y-1.5 scale-95 opacity-0" enter-active-class="transition-[opacity,translate,scale] duration-200 ease-out-expo">
+						<div :class="tooltipOnLeft ? 'origin-right' : 'origin-left'">
+							<slot name="tooltip" :point="activePoint" :index="activeIndex">
+								<div class="min-w-28 rounded border border-border bg-card px-3 py-2 text-card-foreground shadow-elevated-md">
+									<p class="text-[0.6875rem] text-muted-foreground">{{ formatTooltipXValue(activePoint[0]) }}</p>
+									<p class="mt-0.5 text-sm font-semibold tabular-nums">{{ formatYValue(activePoint[1]) }}</p>
+								</div>
+							</slot>
+						</div>
+					</Transition>
+				</div>
+			</Transition>
 		</div>
 
-		<!-- Time labels (the first and last one aligned to the edges of the plot) -->
+		<!-- Time labels (the first and last one aligned to the edges of the plot), fading in with the line and out with it on a new redrawKey -->
 		<div />
-		<div class="relative h-6" aria-hidden="true">
+		<div :class="cn('relative h-6 transition-opacity duration-500 ease-out-expo', (!labelsVisible || isFadedOut) && 'opacity-0 duration-200')" aria-hidden="true">
 			<template v-if="isMounted">
 				<span v-for="(tick, index) in xTicks" :key="tick.ratio" :class="cn('absolute top-1.5 whitespace-nowrap', index === 0 ? '' : index === xTicks.length - 1 ? '-translate-x-full' : '-translate-x-1/2')" :style="{ left: `${tick.ratio * 100}%` }">{{ tick.label }}</span>
 			</template>

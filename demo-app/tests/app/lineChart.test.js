@@ -128,4 +128,41 @@ describe('LineChart', () => {
 		wrapper = await mountSuspended(LineChart, { props: { data: [[start, 30]], min: 0, max: 100 } });
 		expect(wrapper.find('[data-slot="line-chart-line"]').attributes('d')).toBe('M 0 700 H 1000');
 	});
+
+	// The line draws itself from left to right when the chart appears (the clip grows with the drawing)
+	it('draws the line in', async () => {
+		wrapper = await mountSuspended(LineChart, { props: { data: history, min: 0, max: 100 } });
+		await new Promise(resolve => setTimeout(resolve, 1200));
+		expect(wrapper.find('[data-slot="line-chart-series"]').attributes('data-state')).toBe('drawn');
+		expect(Number(wrapper.find('clipPath rect').attributes('width'))).toBeCloseTo(1040);
+	});
+
+	// A new redrawKey fades the old line out, and draws the new one once its data arrives
+	it('draws again on a new redrawKey', async () => {
+		wrapper = await mountSuspended(LineChart, { props: { data: history, min: 0, max: 100, redrawKey: 'all' } });
+		await new Promise(resolve => setTimeout(resolve, 1200));
+		await wrapper.setProps({ redrawKey: '30d' });
+		expect(wrapper.find('[data-slot="line-chart-series"]').attributes('data-state')).toBe('faded');
+		await wrapper.setProps({ data: history.slice(1) });
+		await new Promise(resolve => setTimeout(resolve, 260));
+		expect(wrapper.find('[data-slot="line-chart-series"]').attributes('data-state')).toBe('drawing');
+		await new Promise(resolve => setTimeout(resolve, 1000));
+		expect(wrapper.find('[data-slot="line-chart-series"]').attributes('data-state')).toBe('drawn');
+	});
+
+	// Live updates without a new redrawKey change the line in place, without drawing it again
+	it('updates in place without a new redrawKey', async () => {
+		wrapper = await mountSuspended(LineChart, { props: { data: history, min: 0, max: 100, redrawKey: 'all' } });
+		await new Promise(resolve => setTimeout(resolve, 1200));
+		await wrapper.setProps({ data: [...history, [start + 4 * DAY, 70]] });
+		expect(wrapper.find('[data-slot="line-chart-series"]').attributes('data-state')).toBe('drawn');
+	});
+
+	// Without animation (the animate prop, or reduce motion), the chart shows at once
+	it('shows at once without animation', async () => {
+		wrapper = await mountSuspended(LineChart, { props: { data: history, min: 0, max: 100, animate: false, redrawKey: 'all' } });
+		expect(wrapper.find('[data-slot="line-chart-series"]').attributes('data-state')).toBe('drawn');
+		await wrapper.setProps({ redrawKey: '30d' });
+		expect(wrapper.find('[data-slot="line-chart-series"]').attributes('data-state')).toBe('drawn');
+	});
 });

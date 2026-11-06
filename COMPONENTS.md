@@ -1750,7 +1750,7 @@ import { InfoCard } from '@brumaombra/ui-vintage/info-card';
 
 ### `@brumaombra/ui-vintage/line-chart`
 
-Line chart of a value over time, drawn in SVG (no charting library). Straight or stepped line with a gradient fill, a dashed grid with value labels, time labels that fit the width, an optional reference line, and a live dot on the last point. Hover, drag with a finger, or use the arrow keys to show a tooltip; replace it with the `tooltip` slot. Give it a height with `class` (`h-72` by default).
+Line chart of a value over time, drawn in SVG (no charting library). Straight or stepped line with a gradient fill, a dashed grid with value labels, time labels that fit the width, an optional reference line, and a live dot on the last point. Hover, drag with a finger, or use the arrow keys to show a tooltip, which fades in and glides from point to point; replace it with the `tooltip` slot. The line draws itself from left to right when the chart appears, and again when `redrawKey` changes (pass the selected period): other data updates, like live ones, change it in place. `animate: false` (or reduce motion) shows it at once. Give it a height with `class` (`h-72` by default).
 
 ```ts
 import { LineChart } from '@brumaombra/ui-vintage/line-chart';
@@ -1758,7 +1758,7 @@ import type { LineChartPoint } from '@brumaombra/ui-vintage/line-chart';
 ```
 
 ```vue
-<LineChart :data="history" curve="step" :min="0" :max="100" :y-ticks="[0, 25, 50, 75, 100]" :reference-line="50"
+<LineChart :data="history" :redraw-key="period" curve="step" :min="0" :max="100" :y-ticks="[0, 25, 50, 75, 100]" :reference-line="50"
     :format-y="value => `${Math.round(value)}%`" aria-label="Chance of yes over time" class="h-64 md:h-80">
     <template #tooltip="{ point }">
         <p>{{ point[1] }}%</p>
@@ -1783,6 +1783,8 @@ import type { LineChartPoint } from '@brumaombra/ui-vintage/line-chart';
 | `formatTooltipX` | `(timestamp: number) => string` |  |
 | `locale` | `string` |  |
 | `ariaLabel` | `string` |  |
+| `animate` | `boolean` | `true` |
+| `redrawKey` | `string \| number` |  |
 | `class` | `HTMLAttributes['class']` |  |
 
 - **Slots:** `tooltip`.

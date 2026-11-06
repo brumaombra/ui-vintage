@@ -42,6 +42,7 @@ import { SingleValueCard } from '@brumaombra/ui-vintage/single-value-card';
 import { StatStrip } from '@brumaombra/ui-vintage/stat-strip';
 import { Skeleton } from '@brumaombra/ui-vintage/skeleton';
 import { Switch } from '@brumaombra/ui-vintage/switch';
+import { ToggleGroup, ToggleGroupItem } from '@brumaombra/ui-vintage/toggle-group';
 import DemoPageHeader from '~/components/demo/DemoPageHeader.vue';
 import DemoSection from '~/components/demo/DemoSection.vue';
 
@@ -183,6 +184,13 @@ const revenueHistory = ref<LineChartPoint[]>(seededWalk({ count: 30, start: 1600
 const formatPercent = (value: number) => `${Math.round(value)}%`;
 const formatEuro = (value: number) => new Intl.NumberFormat('en', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(value);
 
+// The period of the chance chart: a new period draws the line again (its redrawKey), a new trade only adds a step
+const chancePeriod = ref('all');
+const visibleChanceHistory = computed(() => chancePeriod.value === 'all' ? chanceHistory.value : chanceHistory.value.slice(-Math.round(chanceHistory.value.length / 3)));
+const selectChancePeriod = (period: unknown) => {
+	if (typeof period === 'string' && period) chancePeriod.value = period;
+};
+
 // Add a point to the chance chart, one step after the last one
 const addChancePoint = () => {
 	const [lastTime, lastValue] = chanceHistory.value[chanceHistory.value.length - 1];
@@ -190,7 +198,8 @@ const addChancePoint = () => {
 	chanceHistory.value = [...chanceHistory.value, [lastTime + DAY * 0.8, Math.round(nextValue * 10) / 10]];
 };
 
-const lineChartCode = `<LineChart :data="history" curve="step" :min="0" :max="100" :y-ticks="[0, 25, 50, 75, 100]"
+const lineChartCode = `<!-- The line draws itself when the chart appears, and again when redrawKey changes (a new period); other data updates change it in place -->
+<LineChart :data="history" :redraw-key="period" curve="step" :min="0" :max="100" :y-ticks="[0, 25, 50, 75, 100]"
     :reference-line="50" :format-y="value => \`\${Math.round(value)}%\`" aria-label="Chance over time" class="h-64 md:h-80">
     <!-- Optional: your own tooltip -->
     <template #tooltip="{ point }">
@@ -310,18 +319,24 @@ const avatarCode = `<Avatar size="lg" status="online">
 		</DemoSection>
 
 		<!-- Line chart -->
-		<DemoSection id="line-chart" title="Line chart" badge="New" description="A value over time, drawn in SVG with no charting library. Stepped or straight line, gradient fill, grid and labels that fit the width, a reference line and a live dot on the last point. Hover, drag with a finger, or focus it and use the arrow keys." :code="lineChartCode">
+		<DemoSection id="line-chart" title="Line chart" badge="New" description="A value over time, drawn in SVG with no charting library. Stepped or straight line, gradient fill, grid and labels that fit the width, a reference line and a live dot on the last point. The line draws itself in, and again on a new period. Hover, drag with a finger, or focus it and use the arrow keys." :code="lineChartCode">
 			<div class="flex flex-col gap-6">
 				<Card padding="none">
-					<div class="flex items-center justify-between gap-3 border-b border-border px-5 py-4">
+					<div class="flex flex-wrap items-center justify-between gap-3 border-b border-border px-5 py-4">
 						<CardTitle>Chance of yes</CardTitle>
-						<Button variant="secondary" size="sm" @click="addChancePoint">
-							<HugeiconsIcon :icon="ChartLineData02Icon" />
-							Add a trade
-						</Button>
+						<div class="flex items-center gap-2">
+							<ToggleGroup :model-value="chancePeriod" type="single" highlight size="sm" @update:model-value="selectChancePeriod">
+								<ToggleGroupItem value="recent">Recent</ToggleGroupItem>
+								<ToggleGroupItem value="all">All</ToggleGroupItem>
+							</ToggleGroup>
+							<Button variant="secondary" size="sm" @click="addChancePoint">
+								<HugeiconsIcon :icon="ChartLineData02Icon" />
+								Add a trade
+							</Button>
+						</div>
 					</div>
 					<div class="p-3 md:p-5">
-						<LineChart :data="chanceHistory" curve="step" :min="0" :max="100" :y-ticks="[0, 25, 50, 75, 100]" :reference-line="50" :format-y="formatPercent" aria-label="Chance of yes over time" class="h-64 md:h-80" />
+						<LineChart :data="visibleChanceHistory" :redraw-key="chancePeriod" curve="step" :min="0" :max="100" :y-ticks="[0, 25, 50, 75, 100]" :reference-line="50" :format-y="formatPercent" aria-label="Chance of yes over time" class="h-64 md:h-80" />
 					</div>
 				</Card>
 				<Card padding="none">
