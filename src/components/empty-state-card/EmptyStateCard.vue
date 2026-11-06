@@ -13,15 +13,20 @@ const props = withDefaults(defineProps<{
 	description?: string;
 	titleKey?: string;
 	descriptionKey?: string;
+	/** @default 3 */
+	headingLevel?: HeadingLevel;
+	/** @deprecated Use headingLevel, the same name in every component */
 	level?: HeadingLevel;
 }>(), {
 	icon: () => PackageIcon,
 	title: '',
 	description: '',
 	titleKey: '',
-	descriptionKey: '',
-	level: 3
+	descriptionKey: ''
 });
+
+// The heading tag: headingLevel, or the deprecated level, h3 by default
+const headingTag = computed(() => `h${props.headingLevel ?? props.level ?? 3}`);
 
 const { t } = useI18n();
 const hasCustomCopy = computed(() => Boolean(props.title || props.description || props.titleKey || props.descriptionKey));
@@ -48,7 +53,7 @@ const resolvedDescription = computed(() => props.description
 			</div>
 
 			<!-- Title -->
-			<component :is="`h${props.level}`"
+			<component :is="headingTag"
 				v-if="resolvedTitle"
 				class="text-sm font-semibold text-foreground md:text-base">
 				{{ resolvedTitle }}

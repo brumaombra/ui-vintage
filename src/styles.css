@@ -101,8 +101,8 @@ html {
 	--muted-foreground: var(--text-secondary-light);
 	--accent: var(--bg-selected-light);
 	--accent-foreground: var(--text-primary-light);
-	/* 4.8:1 on the surface background, so small red text meets WCAG AA (0.577 was 4.5:1 there) */
-	--destructive: oklch(0.56 0.232 27.325);
+	/* 6:1 on white and 4.8:1 on its own tint (the NO side of a market, the error badges), so small red text meets WCAG AA there too, like the success green (0.56 was 4.2:1 on the tint) */
+	--destructive: oklch(0.51 0.232 27.325);
 	/* 5.8:1 on white and 5:1 on its own tint, so small success text meets WCAG AA (green-600 is only 3.3:1) */
 	--success: oklch(0.49 0.15 150.07);
 	--warning: oklch(0.705 0.17 62.5);

@@ -34,6 +34,9 @@ const props = withDefaults(defineProps<{
 	authorLink?: string;
 	year?: number;
 	showBottomBar?: boolean;
+	/** @default 2 */
+	headingLevel?: HeadingLevel;
+	/** @deprecated Use headingLevel, the same name in every component */
 	level?: HeadingLevel;
 	class?: HTMLAttributes['class'];
 	containerClass?: HTMLAttributes['class'];
@@ -47,9 +50,11 @@ const props = withDefaults(defineProps<{
 	authorName: '',
 	authorLink: '',
 	year: () => new Date().getFullYear(),
-	showBottomBar: true,
-	level: 2
+	showBottomBar: true
 });
+
+// The heading tag: headingLevel, or the deprecated level, h2 by default
+const headingTag = computed(() => `h${props.headingLevel ?? props.level ?? 2}`);
 
 const { t } = useI18n();
 const logoAlt = computed(() => props.appName ? t('uiVintage.common.logo', { name: props.appName }) : t('uiVintage.common.home'));
@@ -95,7 +100,7 @@ const hasDarkLogo = computed(() => darkLogo.value !== lightLogo.value);
 				<div v-if="hasSingleSection" :class="cn('min-w-0 md:flex md:justify-end', props.sectionsClass)">
 					<div class="md:text-right">
 						<!-- Section title -->
-						<component :is="`h${props.level}`" class="mb-4 font-semibold text-foreground">
+						<component :is="headingTag" class="mb-4 font-semibold text-foreground">
 							{{ props.sections[0]?.title }}
 						</component>
 
@@ -114,7 +119,7 @@ const hasDarkLogo = computed(() => darkLogo.value !== lightLogo.value);
 				<div v-else class="flex flex-col gap-8 md:max-w-[60%] md:flex-row md:flex-wrap md:justify-end md:gap-16">
 					<div v-for="section in props.sections" :key="section.id" :class="cn('min-w-28', props.sectionsClass)">
 						<!-- Section title -->
-						<component :is="`h${props.level}`" class="mb-4 font-semibold text-foreground">
+						<component :is="headingTag" class="mb-4 font-semibold text-foreground">
 							{{ section.title }}
 						</component>
 

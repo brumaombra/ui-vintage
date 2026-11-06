@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { Comment, Text, computed, useSlots, type VNode } from 'vue';
+import type { HeadingLevel } from '../../lib/common-types';
 
 // Props
 const props = withDefaults(defineProps<{
 	title: string;
-	headingLevel?: number;
+	headingLevel?: HeadingLevel;
 	size?: 'small' | 'medium' | 'large';
 }>(), {
 	headingLevel: 1,
@@ -45,7 +46,7 @@ const getSizeClasses = (size: string) => {
 <template>
 	<div class="flex flex-col gap-3 mb-6 sm:flex-row sm:justify-between sm:items-center sm:min-h-12 sm:gap-0">
 		<!-- Title -->
-		<component :is="`h${headingLevel}`" :class="getSizeClasses(props.size)">{{ props.title }}</component>
+		<component :is="`h${props.headingLevel}`" :class="getSizeClasses(props.size)">{{ props.title }}</component>
 
 		<!-- Right section -->
 		<div v-if="hasSlotContent" class="w-full sm:w-auto">

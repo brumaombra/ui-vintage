@@ -171,11 +171,18 @@ const readProps = (source) => {
 		const name = member.name.getText(memberSource.sourceFile).replace(/['"]/g, '');
 		if (seen.has(name)) continue;
 		seen.add(name);
+		// JSDoc tags of the prop: @deprecated marks an old name, @default gives a default set outside withDefaults (such as a deprecated alias that falls back to it)
+		const tags = ts.getJSDocTags(member);
+		const tagText = tagName => {
+			const tag = tags.find(item => item.tagName.text === tagName);
+			return tag ? oneLine(ts.getTextOfJSDocComment(tag.comment) ?? '') : null;
+		};
 		props.push({
 			name,
 			type: member.type ? member.type.getText(memberSource.sourceFile) : 'unknown',
 			required: !member.questionToken,
-			default: defaults.get(name) ?? ''
+			default: defaults.get(name) ?? tagText('default') ?? '',
+			deprecated: tagText('deprecated')
 		});
 	}
 	return { props, extendsTypes };
@@ -319,7 +326,7 @@ const renderComponent = (name, file) => {
     } else if (props.length) {
         lines.push('| Prop | Type | Default |', '| --- | --- | --- |');
         for (const prop of props) {
-            lines.push(`| \`${prop.name}\`${prop.required ? ' *(required)*' : ''} | \`${cell(prop.type)}\` | ${prop.default ? `\`${cell(prop.default)}\`` : ''} |`);
+            lines.push(`| \`${prop.name}\`${prop.required ? ' *(required)*' : ''}${prop.deprecated !== null ? ` *(deprecated${prop.deprecated ? `: ${cell(prop.deprecated)}` : ''})*` : ''} | \`${cell(prop.type)}\` | ${prop.default ? `\`${cell(prop.default)}\`` : ''} |`);
         }
         lines.push('');
     }

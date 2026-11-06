@@ -1565,7 +1565,8 @@ import { Card, CardAction, CardContent, CardText, CardDescription, CardFooter, C
 | Prop | Type | Default |
 | --- | --- | --- |
 | `class` | `HTMLAttributes['class']` |  |
-| `level` | `HeadingLevel` | `3` |
+| `headingLevel` | `HeadingLevel` | `3` |
+| `level` *(deprecated: Use headingLevel, the same name in every component)* | `HeadingLevel` |  |
 | `icon` | `HugeiconsIconDefinition \| null` | `null` |
 
 - **Slots:** `default`.
@@ -3364,7 +3365,8 @@ import { EmptyStateCard } from '@brumaombra/ui-vintage/empty-state-card';
 | `description` | `string` | `''` |
 | `titleKey` | `string` | `''` |
 | `descriptionKey` | `string` | `''` |
-| `level` | `HeadingLevel` | `3` |
+| `headingLevel` | `HeadingLevel` | `3` |
+| `level` *(deprecated: Use headingLevel, the same name in every component)* | `HeadingLevel` |  |
 
 - **Slots:** `action`.
 
@@ -3424,7 +3426,8 @@ import { LoadingStateCard } from '@brumaombra/ui-vintage/loading-state-card';
 | `icon` | `HugeiconsIconDefinition` | `Loading03Icon` |
 | `title` | `string` | `''` |
 | `description` | `string` | `''` |
-| `level` | `HeadingLevel` | `3` |
+| `headingLevel` | `HeadingLevel` | `3` |
+| `level` *(deprecated: Use headingLevel, the same name in every component)* | `HeadingLevel` |  |
 
 - **Slots:** `default`.
 
@@ -3684,7 +3687,8 @@ import type { LandingFooterLink, LandingFooterSection } from '@brumaombra/ui-vin
 | `authorLink` | `string` | `''` |
 | `year` | `number` | `new Date().getFullYear()` |
 | `showBottomBar` | `boolean` | `true` |
-| `level` | `HeadingLevel` | `2` |
+| `headingLevel` | `HeadingLevel` | `2` |
+| `level` *(deprecated: Use headingLevel, the same name in every component)* | `HeadingLevel` |  |
 | `class` | `HTMLAttributes['class']` |  |
 | `containerClass` | `HTMLAttributes['class']` |  |
 | `brandClass` | `HTMLAttributes['class']` |  |
@@ -3748,7 +3752,8 @@ import type { LandingFooterLink, LandingFooterSection } from '@brumaombra/ui-vin
 | `authorLink` | `string` | `''` |
 | `year` | `number` | `new Date().getFullYear()` |
 | `showBottomBar` | `boolean` | `true` |
-| `level` | `HeadingLevel` | `2` |
+| `headingLevel` | `HeadingLevel` | `2` |
+| `level` *(deprecated: Use headingLevel, the same name in every component)* | `HeadingLevel` |  |
 | `class` | `HTMLAttributes['class']` |  |
 | `containerClass` | `HTMLAttributes['class']` |  |
 | `brandClass` | `HTMLAttributes['class']` |  |
@@ -3983,7 +3988,7 @@ import { PageHeader } from '@brumaombra/ui-vintage/page-header';
 | Prop | Type | Default |
 | --- | --- | --- |
 | `title` *(required)* | `string` |  |
-| `headingLevel` | `number` | `1` |
+| `headingLevel` | `HeadingLevel` | `1` |
 | `size` | `'small' \| 'medium' \| 'large'` | `'large'` |
 
 - **Slots:** `default`.

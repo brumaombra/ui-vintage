@@ -11,13 +11,18 @@ const props = withDefaults(defineProps<{
 	icon?: HugeiconsIconDefinition;
 	title?: string;
 	description?: string;
+	/** @default 3 */
+	headingLevel?: HeadingLevel;
+	/** @deprecated Use headingLevel, the same name in every component */
 	level?: HeadingLevel;
 }>(), {
 	icon: () => Loading03Icon,
 	title: '',
-	description: '',
-	level: 3
+	description: ''
 });
+
+// The heading tag: headingLevel, or the deprecated level, h3 by default
+const headingTag = computed(() => `h${props.headingLevel ?? props.level ?? 3}`);
 
 const { t } = useI18n();
 const resolvedTitle = computed(() => props.title || t('uiVintage.common.loading.title'));
@@ -33,7 +38,7 @@ const resolvedDescription = computed(() => props.description || t('uiVintage.com
 			</div>
 
 			<!-- Title -->
-			<component :is="`h${props.level}`"
+			<component :is="headingTag"
 				v-if="resolvedTitle"
 				class="text-sm font-semibold text-foreground md:text-base">
 				{{ resolvedTitle }}
