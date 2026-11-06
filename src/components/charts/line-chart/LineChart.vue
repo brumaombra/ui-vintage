@@ -297,8 +297,8 @@ onBeforeUnmount(stopAnimation);
 <template>
 	<!-- Chart: value labels on the left, the plot, and time labels below -->
 	<div ref="rootRef" data-slot="line-chart" role="figure" :aria-label="props.ariaLabel" :data-server-rendered="isServer ? '' : undefined" data-allow-mismatch="attribute" :class="cn('grid h-72 w-full grid-cols-[auto_minmax(0,1fr)] grid-rows-[minmax(0,1fr)_auto] pt-2 text-xs text-muted-foreground tabular-nums', props.class)">
-		<!-- Value labels (an invisible copy of the widest one gives the column its width), fading in with the first drawing -->
-		<div :class="cn('relative pr-2 text-right transition-opacity duration-500 ease-out-expo', !labelsVisible && 'opacity-0')" aria-hidden="true">
+		<!-- Value labels (an invisible copy of the widest one gives the column its width), hidden at once and fading in with the first drawing -->
+		<div :class="cn('relative pr-2 text-right', labelsVisible ? 'transition-opacity duration-500 ease-out-expo' : 'opacity-0')" aria-hidden="true">
 			<span class="invisible block h-0 overflow-hidden">{{ widestYLabel }}</span>
 			<span v-for="value in gridValues" :key="value" class="absolute right-2 -translate-y-1/2 whitespace-nowrap" :style="{ top: `${(1 - yRatio(value)) * 100}%` }">{{ formatYValue(value) }}</span>
 		</div>
@@ -331,8 +331,8 @@ onBeforeUnmount(stopAnimation);
 				</g>
 			</svg>
 
-			<!-- Live dot on the last point (it appears once the line has reached it) -->
-			<span v-if="props.showLastPoint && lastPosition" data-slot="line-chart-last-point" :class="cn('pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300', (drawProgress < 1 || isFadedOut) && 'opacity-0')" :style="{ left: `${lastPosition.left}%`, top: `${lastPosition.top}%` }" aria-hidden="true">
+			<!-- Live dot on the last point (it hides at once and fades in once the line has reached it) -->
+			<span v-if="props.showLastPoint && lastPosition" data-slot="line-chart-last-point" :class="cn('pointer-events-none absolute -translate-x-1/2 -translate-y-1/2', drawProgress < 1 || isFadedOut ? 'opacity-0' : 'transition-opacity duration-300')" :style="{ left: `${lastPosition.left}%`, top: `${lastPosition.top}%` }" aria-hidden="true">
 				<span class="absolute inset-0 rounded-full bg-primary/40 motion-safe:animate-ping" />
 				<span class="relative block size-2 rounded-full bg-primary" />
 			</span>
