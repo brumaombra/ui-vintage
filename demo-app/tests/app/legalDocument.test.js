@@ -52,4 +52,15 @@ describe('LegalDocument', () => {
 		const wrapper = await mountSuspended(LegalDocument, { props });
 		expect(wrapper.find('a[href="mailto:contact@example.com"]').text()).toBe('contact@example.com');
 	});
+
+	// Small orange text was 2.2:1 on the light background: the summary label and the email are dark, and the orange stays on a line and an underline
+	it('keeps the summary label and the email in the text color', async () => {
+		const wrapper = await mountSuspended(LegalDocument, { props });
+		const label = wrapper.find('[data-slot="legal-document-summary"] h2');
+		const email = wrapper.find('a[href="mailto:contact@example.com"]');
+		expect(label.classes()).toContain('text-foreground');
+		expect(label.find('span[aria-hidden="true"]').classes()).toContain('bg-primary');
+		expect(email.classes()).toEqual(expect.arrayContaining(['text-foreground', 'decoration-primary']));
+		expect(email.classes()).not.toContain('text-primary');
+	});
 });

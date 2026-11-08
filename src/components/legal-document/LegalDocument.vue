@@ -71,7 +71,8 @@ const toggleAll = () => {
 
 		<!-- The short version -->
 		<Card v-if="props.summary.length" data-slot="legal-document-summary" padding="none" elevation="sm" class="border-primary/40 bg-primary/5 p-5 md:p-6">
-			<h2 class="text-xs font-bold uppercase tracking-wider text-primary">{{ t('uiVintage.legalDocument.summary') }}</h2>
+			<!-- The label in the text color with an orange line, like the landing labels (orange text is only 2.2:1 on the light background) -->
+			<h2 class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-foreground"><span aria-hidden="true" class="h-px w-6 shrink-0 bg-primary" />{{ t('uiVintage.legalDocument.summary') }}</h2>
 			<ul class="mt-3 space-y-2.5">
 				<li v-for="point in props.summary" :key="point" class="flex items-start gap-2.5 text-xs leading-relaxed text-foreground md:text-sm">
 					<HugeiconsIcon :icon="CheckmarkCircle02Icon" class="mt-0.5 size-4 shrink-0 text-primary" aria-hidden="true" />
@@ -106,7 +107,8 @@ const toggleAll = () => {
 		<!-- Contact -->
 		<p v-if="props.contactEmail" class="pt-2 text-center text-xs text-muted-foreground">
 			{{ props.contactText }}
-			<a :href="`mailto:${props.contactEmail}`" class="font-semibold text-primary underline-offset-4 hover:underline">{{ props.contactEmail }}</a>
+			<!-- Dark with an orange underline, which thickens on hover -->
+			<a :href="`mailto:${props.contactEmail}`" class="font-semibold text-foreground underline decoration-primary decoration-2 underline-offset-4 transition-[text-decoration-thickness] hover:decoration-[3px]">{{ props.contactEmail }}</a>
 		</p>
 	</div>
 </template>
