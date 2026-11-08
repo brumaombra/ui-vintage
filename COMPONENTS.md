@@ -22,7 +22,7 @@ This file lists every public entry point of the package with its components, pro
 - **Overlays:** [alert-dialog](#brumaombraui-vintagealert-dialog), [command](#brumaombraui-vintagecommand), [dialog](#brumaombraui-vintagedialog), [hover-card](#brumaombraui-vintagehover-card), [option-picker-dialog](#brumaombraui-vintageoption-picker-dialog), [popover](#brumaombraui-vintagepopover), [responsive-dialog](#brumaombraui-vintageresponsive-dialog), [sheet](#brumaombraui-vintagesheet), [tooltip](#brumaombraui-vintagetooltip)
 - **Feedback:** [alert](#brumaombraui-vintagealert), [busy](#brumaombraui-vintagebusy), [busy-indicator](#brumaombraui-vintagebusy-indicator), [confirm-dialog](#brumaombraui-vintageconfirm-dialog), [cookie-consent](#brumaombraui-vintagecookie-consent), [empty-state-card](#brumaombraui-vintageempty-state-card), [haptics](#brumaombraui-vintagehaptics), [loading-state-card](#brumaombraui-vintageloading-state-card), [message-dialog](#brumaombraui-vintagemessage-dialog), [message-toast](#brumaombraui-vintagemessage-toast), [spinner](#brumaombraui-vintagespinner)
 - **Layouts and app shell:** [background-grid](#brumaombraui-vintagebackground-grid), [dashboard-shell](#brumaombraui-vintagedashboard-shell), [error-page](#brumaombraui-vintageerror-page), [landing](#brumaombraui-vintagelanding), [landing-content](#brumaombraui-vintagelanding-content), [landing-footer](#brumaombraui-vintagelanding-footer), [landing-navbar](#brumaombraui-vintagelanding-navbar), [landing-shell](#brumaombraui-vintagelanding-shell), [language-flag](#brumaombraui-vintagelanguage-flag), [language-selector](#brumaombraui-vintagelanguage-selector), [legal-document](#brumaombraui-vintagelegal-document), [page-header](#brumaombraui-vintagepage-header), [section-title](#brumaombraui-vintagesection-title), [theme-selector](#brumaombraui-vintagetheme-selector)
-- **Content and blog:** [blog](#brumaombraui-vintageblog), [content](#brumaombraui-vintagecontent)
+- **Content and blog:** [blog](#brumaombraui-vintageblog), [content](#brumaombraui-vintagecontent), [title-highlight](#brumaombraui-vintagetitle-highlight)
 - **Utilities and types:** [common-types](#brumaombraui-vintagecommon-types), [utils](#brumaombraui-vintageutils)
 
 ## Actions
@@ -4405,6 +4405,32 @@ import { Terminal, CodeBlock, ProsePre, BlogList, BlogTable, Flow, ProseHr, Pros
 | Prop | Type | Default |
 | --- | --- | --- |
 | `author` | `string` | `''` |
+
+- **Slots:** `default`.
+
+---
+
+### `@brumaombra/ui-vintage/title-highlight`
+
+Highlighted words of a title: the text keeps its color and a bold hand-drawn underline carries the brand orange (orange text is only 2.2:1 on a light background). With `drawDelay` the underline draws itself in that long after the words scroll into view; without it, it is simply there. Without JavaScript or with reduced motion it is shown drawn. `size="sm"` for body text.
+
+```ts
+import { TitleHighlight } from '@brumaombra/ui-vintage/title-highlight';
+```
+
+```vue
+<h2 class="text-3xl font-bold">
+    How it <TitleHighlight draw-delay="300ms">works</TitleHighlight>
+</h2>
+```
+
+#### `TitleHighlight`
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `drawDelay` | `string` | `''` |
+| `size` | `'sm' \| 'md'` | `'md'` |
+| `class` | `HTMLAttributes['class']` |  |
 
 - **Slots:** `default`.
 

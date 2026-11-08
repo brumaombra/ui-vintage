@@ -133,6 +133,7 @@
 		"./theme-selector": "./src/components/theme-selector/index.ts",
 		"./time-picker": "./src/components/ui/time-picker/index.ts",
 		"./time-wheel": "./src/components/ui/time-wheel/index.ts",
+		"./title-highlight": "./src/components/title-highlight/index.ts",
 		"./toggle-group": "./src/components/ui/toggle-group/index.ts",
 		"./tooltip": "./src/components/ui/tooltip/index.ts",
 		"./utils": "./src/lib/utils.ts"

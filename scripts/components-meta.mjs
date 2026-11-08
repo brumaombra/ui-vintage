@@ -644,6 +644,14 @@ setBusy(true, { label: 'Creating...', variant: 'fullscreen', mark: AppLogoMark }
 		category: 'layout',
 		description: 'Page title row with an optional actions slot, in three sizes.'
 	},
+	'title-highlight': {
+		category: 'content',
+		description: 'Highlighted words of a title: the text keeps its color and a bold hand-drawn underline carries the brand orange (orange text is only 2.2:1 on a light background). With `drawDelay` the underline draws itself in that long after the words scroll into view; without it, it is simply there. Without JavaScript or with reduced motion it is shown drawn. `size="sm"` for body text.',
+		example: `
+<h2 class="text-3xl font-bold">
+    How it <TitleHighlight draw-delay="300ms">works</TitleHighlight>
+</h2>`
+	},
 	'section-title': {
 		category: 'layout',
 		description: 'Slim section heading over a thin rule, with an optional icon inline before the title in the brand color, a description, and a trailing action (the blog sections use it too). On phones the space below it matches the DashboardShell page padding.',

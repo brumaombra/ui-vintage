@@ -8,6 +8,7 @@ import type { ToneColor } from '../../lib/color-tokens';
 import { cn } from '../../lib/utils';
 import { Badge } from '../ui/badge';
 import { StatStrip } from '../stat-strip';
+import { TitleHighlight } from '../title-highlight';
 
 // Props
 const props = withDefaults(defineProps<{
@@ -109,12 +110,8 @@ const underlineDelay = computed(() => `${beforeWords.value.length * 55 + 600}ms`
 			<template v-for="(word, index) in beforeWords" :key="`before-${word}-${index}`">
 				<span class="inline-block animate-uv-word-in" :style="{ animationDelay: wordDelay(index) }">{{ word }}</span>{{ wordGap(index) }}
 			</template>
-			<!-- The text and the underline sit on one line so no stray space ends up inside the highlight -->
-			<!-- The word stays in the text color and the bold underline carries the brand orange (orange text is only 2.2:1 on the light background) -->
-			<span v-if="titleParts.highlight" class="relative inline-block animate-uv-word-in" :style="{ animationDelay: highlightDelay }">{{ titleParts.highlight }}<svg class="absolute -bottom-2.5 left-0 h-4 w-full text-primary" viewBox="0 0 200 12" fill="none" preserveAspectRatio="none" aria-hidden="true">
-					<path d="M2 9C40 3 80 2 198 7" stroke="currentColor" stroke-width="6" stroke-linecap="round" pathLength="1" class="animate-uv-draw [stroke-dasharray:1_2]" :style="{ animationDelay: underlineDelay }" />
-				</svg>
-			</span>
+			<!-- The highlighted words rise in as one block, then their underline draws itself in -->
+			<TitleHighlight v-if="titleParts.highlight" class="animate-uv-word-in" :style="{ animationDelay: highlightDelay }" :draw-delay="underlineDelay">{{ titleParts.highlight }}</TitleHighlight>
 			<template v-for="(word, index) in afterWords" :key="`after-${word}-${index}`">
 				{{ index === 0 && !/^\s/.test(titleParts.after) ? '' : ' ' }}<span class="inline-block animate-uv-word-in" :style="{ animationDelay: afterDelay(index) }">{{ word }}</span>
 			</template>

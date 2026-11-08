@@ -6,6 +6,7 @@ import { HugeiconsIcon } from '@hugeicons/vue';
 import { Button } from '@brumaombra/ui-vintage/button';
 import { Card } from '@brumaombra/ui-vintage/card';
 import { showMessageToast } from '@brumaombra/ui-vintage/message-toast';
+import { TitleHighlight } from '@brumaombra/ui-vintage/title-highlight';
 import DemoPageHeader from '~/components/demo/DemoPageHeader.vue';
 import DemoSection from '~/components/demo/DemoSection.vue';
 
@@ -53,6 +54,14 @@ const handleCopy = async (name: string) => {
 	await navigator.clipboard?.writeText(`var(--${name})`);
 	showMessageToast({ message: `Copied var(--${name})`, type: 'success', duration: 1800 });
 };
+
+// Usage of the title highlight
+const highlightCode = `<h2 class="text-3xl font-bold">
+	How it <TitleHighlight draw-delay="300ms">works</TitleHighlight>
+</h2>
+
+<!-- Under body text -->
+<p>Software developer &amp; <TitleHighlight size="sm">maker</TitleHighlight></p>`;
 
 const motionCode = `<!-- Easing utilities -->
 <div class="transition-transform duration-300 ease-spring hover:scale-105" />
@@ -117,6 +126,14 @@ const motionCode = `<!-- Easing utilities -->
 					<span :class="entry.utility">The vintage terminal hums at 60fps</span>
 					<span class="text-[11px] text-muted-foreground">{{ entry.label }}</span>
 				</div>
+			</div>
+		</DemoSection>
+
+		<!-- Title highlight -->
+		<DemoSection id="title-highlight" title="Title highlight" badge="New" description="The brand orange as a bold hand-drawn underline, never as text color. It draws itself in when it scrolls into view, and is simply there without JavaScript or with reduced motion." :code="highlightCode">
+			<div class="space-y-6">
+				<h3 class="text-3xl font-bold text-foreground">How it <TitleHighlight draw-delay="300ms">works</TitleHighlight></h3>
+				<p class="text-base text-muted-foreground">Software developer &amp; <TitleHighlight size="sm" class="text-foreground">maker</TitleHighlight></p>
 			</div>
 		</DemoSection>
 	</div>
