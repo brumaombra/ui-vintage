@@ -4,6 +4,7 @@ import { useI18n } from 'vue-i18n';
 import ArrowRight01Icon from '@hugeicons/core-free-icons/ArrowRight01Icon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Card } from '../ui/card';
+import type { HeadingLevel } from '../../lib/common-types';
 
 const { t } = useI18n();
 
@@ -13,11 +14,14 @@ const props = withDefaults(defineProps<{
 	category?: string;
 	title?: string;
 	description?: string;
+	/** @default 2 */
+	headingLevel?: HeadingLevel; // 3 when the cards sit under a section title
 }>(), {
 	image: '',
 	category: '',
 	title: '',
-	description: ''
+	description: '',
+	headingLevel: 2
 });
 </script>
 
@@ -38,9 +42,9 @@ const props = withDefaults(defineProps<{
 
 			<!-- Post title -->
 			<!-- On hover the orange underline draws in from the left and wipes out to the right (line after line on a two-line title) -->
-			<h2 class="line-clamp-2 text-sm leading-snug font-semibold text-foreground md:text-base">
+			<component :is="`h${props.headingLevel}`" class="line-clamp-2 text-sm leading-snug font-semibold text-foreground md:text-base">
 				<span class="bg-linear-to-r from-primary to-primary bg-[length:0%_2px] bg-[position:100%_100%] bg-no-repeat transition-[background-size] duration-500 ease-out-expo group-hover/post:bg-[length:100%_2px] group-hover/post:bg-[position:0_100%]">{{ props.title }}</span>
-			</h2>
+			</component>
 
 			<!-- Post description -->
 			<p class="line-clamp-3 grow text-xs leading-relaxed text-muted-foreground">

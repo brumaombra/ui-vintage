@@ -81,6 +81,24 @@ describe('LineChart', () => {
 		expect(wrapper.find('[data-slot="line-chart-tooltip"]').exists()).toBe(false);
 	});
 
+	// The tooltip goes right of a point on the left half and left of one on the right half
+	it('puts the tooltip on the side with room', async () => {
+		wrapper = await mountSuspended(LineChart, { props: { data: history, min: 0, max: 100 } });
+		await press(wrapper, 'Home');
+		expect(wrapper.find('[data-slot="line-chart-tooltip"]').attributes('data-side')).toBe('right');
+		await press(wrapper, 'End');
+		expect(wrapper.find('[data-slot="line-chart-tooltip"]').attributes('data-side')).toBe('left');
+	});
+
+	// A chart of a few minutes repeated the same time under the axis ("02:46 PM 02:46 PM 02:47 PM")
+	it('never repeats a time label', async () => {
+		const minutes = [[start, 50], [start + 40 * 1000, 55], [start + 100 * 1000, 60]];
+		wrapper = await mountSuspended(LineChart, { props: { data: minutes, min: 0, max: 100, locale: 'en-US' } });
+		const labels = wrapper.findAll('[data-slot="line-chart-x-labels"] span').map(label => label.text());
+		expect(labels.length).toBeGreaterThan(0);
+		expect(new Set(labels).size).toBe(labels.length);
+	});
+
 	// A finger "leaves" as soon as it lifts: the tooltip of a tap stays, the mouse leaving hides it
 	it('keeps the tooltip after a tap', async () => {
 		wrapper = await mountSuspended(LineChart, { props: { data: history, min: 0, max: 100 } });

@@ -83,10 +83,8 @@ const handleOpenChange = (open: boolean) => {
 							{{ resolvedTitle }}
 						</AlertDialogTitle>
 
-						<!-- Message -->
-						<AlertDialogDescription>
-							{{ currentDialog.options.message }}
-						</AlertDialogDescription>
+						<!-- Message (keeping its line breaks, like a creator's notes written on several lines) -->
+						<AlertDialogDescription class="whitespace-pre-line">{{ currentDialog.options.message }}</AlertDialogDescription>
 					</AlertDialogHeader>
 				</div>
 			</div>

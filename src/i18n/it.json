@@ -85,7 +85,7 @@
 		},
 		"blog": {
 			"readingProgress": "Avanzamento della lettura",
-			"readMore": "Leggi di piu",
+			"readMore": "Leggi di più",
 			"goToPost": "Vai all'articolo",
 			"new": "Novità",
 			"inShort": "In breve",
@@ -108,7 +108,7 @@
 			"nextSlide": "Slide successiva",
 			"faq": {
 				"title": "Domande frequenti",
-				"description": "Trova risposte rapide alle domande piu comuni su questo argomento."
+				"description": "Trova risposte rapide alle domande più comuni su questo argomento."
 			},
 			"share": {
 				"facebook": "Condividi su Facebook",

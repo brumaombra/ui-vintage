@@ -98,6 +98,7 @@ const postTags = computed(() => ((props.post.tags as string[] | undefined) || []
 						:category="relatedPost.categoryText"
 						:title="relatedPost.title"
 						:description="relatedPost.description"
+						:heading-level="3"
 						class="h-full" />
 				</NuxtLinkLocale>
 			</div>

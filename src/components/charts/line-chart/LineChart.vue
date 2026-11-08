@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue';
 import { onClickOutside, useElementSize } from '@vueuse/core';
-import { computed, onBeforeUnmount, onMounted, ref, useId, watch } from 'vue';
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, useId, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { cn } from '../../../lib/utils';
 
@@ -152,10 +152,13 @@ const formatTooltipXValue = (timestamp: number) => props.formatTooltipX ? props.
 const xTicks = computed(() => {
 	if (points.value.length < 2) return [];
 	const count = Math.max(2, Math.min(6, Math.floor((plotWidth.value || 600) / 95)));
-	return Array.from({ length: count }, (_, index) => {
+	const ticks = Array.from({ length: count }, (_, index) => {
 		const ratio = index / (count - 1);
 		return { ratio, label: formatXValue(xRange.value.first + ratio * (xRange.value.last - xRange.value.first)) };
 	});
+
+	// Leave out a label that reads like the one before it (a chart of a few minutes repeated the same time)
+	return ticks.filter((tick, index) => index === 0 || tick.label !== ticks[index - 1].label);
 });
 
 // The widest value label, which sizes the column of the labels
@@ -167,8 +170,29 @@ const activePoint = computed(() => activeIndex.value === null ? null : points.va
 // Where the active point is, in percent of the plot
 const activePosition = computed(() => activePoint.value ? { left: xRatio(activePoint.value[0]) * 100, top: (1 - yRatio(activePoint.value[1])) * 100 } : null);
 
-// The tooltip goes right of the point, or left of it on the right half of the plot
-const tooltipOnLeft = computed(() => (activePosition.value?.left ?? 0) > 55);
+// Space between the point and the tooltip card, in pixels (the pl-3 / pr-3 of the tooltip)
+const TOOLTIP_GAP = 12;
+
+// The width of the tooltip card, measured each time it moves to a point (about its default width before)
+const tooltipCardRef = ref<HTMLElement | null>(null);
+const tooltipWidth = ref(144);
+watch(activeIndex, async () => {
+	await nextTick();
+	if (tooltipCardRef.value) tooltipWidth.value = tooltipCardRef.value.offsetWidth;
+});
+
+// Where the tooltip goes: right of the point, or left of it on the right half of the plot; the other side when that one has no room, and over the point, kept inside the plot, when neither has (a narrow phone cut it off)
+const tooltipPlacement = computed(() => {
+	if (!activePosition.value) return null;
+	const width = plotWidth.value || 600;
+	const point = (activePosition.value.left / 100) * width;
+	const fitsRight = point + TOOLTIP_GAP + tooltipWidth.value <= width;
+	const fitsLeft = point - TOOLTIP_GAP - tooltipWidth.value >= 0;
+	const prefersLeft = activePosition.value.left > 55;
+	if (prefersLeft ? fitsLeft : !fitsRight && fitsLeft) return { side: 'left', left: point };
+	if (fitsRight) return { side: 'right', left: point };
+	return { side: 'over', left: Math.min(Math.max(point - tooltipWidth.value / 2, 0), Math.max(width - tooltipWidth.value, 0)) };
+});
 
 // The last point, marked with a live dot
 const lastPosition = computed(() => {
@@ -347,9 +371,9 @@ onBeforeUnmount(stopAnimation);
 
 			<!-- Tooltip: fades out, glides from point to point, and its card fades in rising a little each time it appears -->
 			<Transition leave-active-class="transition-opacity duration-150" leave-to-class="opacity-0">
-				<div v-if="activePoint && activePosition" data-slot="line-chart-tooltip" role="status" :class="cn('pointer-events-none absolute z-10 -translate-y-1/2 transition-[left,top] duration-150 ease-out-expo', tooltipOnLeft ? '-translate-x-full pr-3' : 'pl-3')" :style="{ left: `${activePosition.left}%`, top: `${Math.min(80, Math.max(20, activePosition.top))}%` }">
+				<div v-if="activePoint && activePosition && tooltipPlacement" data-slot="line-chart-tooltip" :data-side="tooltipPlacement.side" role="status" :class="cn('pointer-events-none absolute z-10 -translate-y-1/2 transition-[left,top] duration-150 ease-out-expo', tooltipPlacement.side === 'left' && '-translate-x-full pr-3', tooltipPlacement.side === 'right' && 'pl-3')" :style="{ left: `${tooltipPlacement.left}px`, top: `${Math.min(80, Math.max(20, activePosition.top))}%` }">
 					<Transition appear enter-from-class="translate-y-1.5 scale-95 opacity-0" enter-active-class="transition-[opacity,translate,scale] duration-200 ease-out-expo">
-						<div :class="tooltipOnLeft ? 'origin-right' : 'origin-left'">
+						<div ref="tooltipCardRef" :class="tooltipPlacement.side === 'left' ? 'origin-right' : tooltipPlacement.side === 'right' ? 'origin-left' : 'origin-center'">
 							<slot name="tooltip" :point="activePoint" :index="activeIndex">
 								<div class="min-w-28 rounded border border-border bg-card px-3 py-2 text-card-foreground shadow-elevated-md">
 									<p class="text-[0.6875rem] text-muted-foreground">{{ formatTooltipXValue(activePoint[0]) }}</p>
@@ -364,7 +388,7 @@ onBeforeUnmount(stopAnimation);
 
 		<!-- Time labels (the first and last one aligned to the edges of the plot), fading in with the line and out with it on a new redrawKey -->
 		<div />
-		<div :class="cn('relative h-6 transition-opacity duration-500 ease-out-expo', (!labelsVisible || isFadedOut) && 'opacity-0 duration-200')" aria-hidden="true">
+		<div data-slot="line-chart-x-labels" :class="cn('relative h-6 transition-opacity duration-500 ease-out-expo', (!labelsVisible || isFadedOut) && 'opacity-0 duration-200')" aria-hidden="true">
 			<template v-if="isMounted">
 				<span v-for="(tick, index) in xTicks" :key="tick.ratio" :class="cn('absolute top-1.5 whitespace-nowrap', index === 0 ? '' : index === xTicks.length - 1 ? '-translate-x-full' : '-translate-x-1/2')" :style="{ left: `${tick.ratio * 100}%` }">{{ tick.label }}</span>
 			</template>

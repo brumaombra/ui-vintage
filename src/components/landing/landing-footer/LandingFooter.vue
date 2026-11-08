@@ -107,7 +107,7 @@ const hasDarkLogo = computed(() => darkLogo.value !== lightLogo.value);
 						<!-- Section links -->
 						<ul class="space-y-3 text-xs sm:text-sm">
 							<li v-for="link in props.sections[0]?.links" :key="link.id">
-								<NuxtLinkLocale v-bind="getLinkProps(link)" class="bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_1px] bg-left-bottom bg-no-repeat text-muted-foreground transition-[color,background-size] duration-300 ease-out-expo hover:bg-[length:100%_1px] hover:text-primary">
+								<NuxtLinkLocale v-bind="getLinkProps(link)" class="bg-[linear-gradient(var(--primary),var(--primary))] bg-[length:0%_2px] bg-left-bottom bg-no-repeat text-muted-foreground transition-[color,background-size] duration-300 ease-out-expo hover:bg-[length:100%_2px] hover:text-foreground">
 									{{ link.label }}
 								</NuxtLinkLocale>
 							</li>
@@ -126,7 +126,7 @@ const hasDarkLogo = computed(() => darkLogo.value !== lightLogo.value);
 						<!-- Section links -->
 						<ul class="space-y-3 text-xs sm:text-sm">
 							<li v-for="link in section.links" :key="link.id">
-								<NuxtLinkLocale v-bind="getLinkProps(link)" class="bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_1px] bg-left-bottom bg-no-repeat text-muted-foreground transition-[color,background-size] duration-300 ease-out-expo hover:bg-[length:100%_1px] hover:text-primary">
+								<NuxtLinkLocale v-bind="getLinkProps(link)" class="bg-[linear-gradient(var(--primary),var(--primary))] bg-[length:0%_2px] bg-left-bottom bg-no-repeat text-muted-foreground transition-[color,background-size] duration-300 ease-out-expo hover:bg-[length:100%_2px] hover:text-foreground">
 									{{ link.label }}
 								</NuxtLinkLocale>
 							</li>

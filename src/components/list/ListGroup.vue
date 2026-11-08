@@ -1,20 +1,25 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue';
+import type { HeadingLevel } from '../../lib/common-types';
 import { Card } from '../ui/card';
 import { cn } from '../../lib/utils';
 
 // Props
-const props = defineProps<{
+const props = withDefaults(defineProps<{
 	title?: string;
 	hint?: string; // Short note under the group
+	/** @default 2 */
+	headingLevel?: HeadingLevel; // Of the title: 3 when the group sits under a section title
 	class?: HTMLAttributes['class'];
-}>();
+}>(), {
+	headingLevel: 2
+});
 </script>
 
 <template>
 	<section data-slot="list-group" :class="cn(props.class)">
 		<!-- A group of rows, like the lists of the phone settings: the title, the rows in one card, then a note -->
-		<h2 v-if="props.title" class="mb-2 px-1 text-[0.625rem] font-bold uppercase tracking-[0.14em] text-muted-foreground">{{ props.title }}</h2>
+		<component :is="`h${props.headingLevel}`" v-if="props.title" class="mb-2 px-1 text-[0.625rem] font-bold uppercase tracking-[0.14em] text-muted-foreground">{{ props.title }}</component>
 
 		<!-- Rows -->
 		<Card padding="none">

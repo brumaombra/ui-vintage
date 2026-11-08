@@ -1822,6 +1822,7 @@ import { ListGroup, ListRow } from '@brumaombra/ui-vintage/list';
 | --- | --- | --- |
 | `title` | `string` |  |
 | `hint` | `string` |  |
+| `headingLevel` | `HeadingLevel` | `2` |
 | `class` | `HTMLAttributes['class']` |  |
 
 - **Slots:** `default`.
@@ -4198,12 +4199,14 @@ import type { BlogPostData, BlogCategoryData, BlogTagData } from '@brumaombra/ui
 | `category` | `string` | `''` |
 | `title` | `string` | `''` |
 | `description` | `string` | `''` |
+| `headingLevel` | `HeadingLevel` | `2` |
 
 #### `PostsList`
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `posts` | `Array<{ path: string; title: string; description?: string; image?: string; categoryText?: string; categoryPath?: string }>` | `[]` |
+| `headingLevel` | `HeadingLevel` | `2` |
 
 #### `SocialShareSidebar`
 

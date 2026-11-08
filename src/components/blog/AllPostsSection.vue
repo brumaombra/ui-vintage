@@ -48,8 +48,8 @@ const visiblePostsCount = computed(() => Math.min(props.posts.length, props.tota
 
 <template>
 	<div>
-		<!-- Blog posts grid -->
-		<PostsList :posts="props.posts" />
+		<!-- Blog posts grid (under the "All posts" title, so the post titles are one level below it) -->
+		<PostsList :posts="props.posts" :heading-level="3" />
 
 		<!-- Load more button -->
 		<LoadMoreButton v-if="props.hasMorePosts"
