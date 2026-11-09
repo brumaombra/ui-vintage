@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<{
 <template>
 	<div v-if="props.tags.length" class="flex flex-wrap gap-2">
 		<!-- Tag chip -->
-		<span v-for="(tag, index) in props.tags" :key="tag.slug" data-aos="blur-up" :data-aos-delay="Math.min(index * 40, 400)" class="inline-flex">
+		<span v-for="tag in props.tags" :key="tag.slug" data-aos="blur-up" class="inline-flex">
 			<NuxtLinkLocale :to="`${props.blogPath}/tags/${tag.slug}`" class="group/tag inline-flex items-stretch overflow-hidden rounded border border-border text-xs shadow-elevated-sm outline-none transition-[translate,border-color,box-shadow] duration-300 ease-out-expo hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-elevated-md focus-visible:ring-[3px] focus-visible:ring-ring/45 sm:text-sm">
 				<!-- Name -->
 				<span class="inline-flex items-center gap-1.5 bg-card px-3 py-1.5 font-medium text-foreground transition-colors duration-150 group-hover/tag:bg-[color-mix(in_oklab,var(--primary)_10%,var(--card))]">

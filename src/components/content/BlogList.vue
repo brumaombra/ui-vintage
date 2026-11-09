@@ -34,7 +34,7 @@ const formatNumber = (index: number) => {
 	<div class="not-prose my-6 sm:my-8">
 		<Card data-aos="blur-up" class="gap-0! py-0! overflow-hidden">
 			<ul class="divide-y divide-border">
-				<li v-for="(item, index) in props.items" :key="index" data-aos="blur-up" :data-aos-delay="100 + index * 80" class="flex items-start gap-3 px-4 py-3.5 text-xs leading-relaxed text-foreground sm:px-5 md:text-sm">
+				<li v-for="(item, index) in props.items" :key="index" data-aos="blur-up" class="flex items-start gap-3 px-4 py-3.5 text-xs leading-relaxed text-foreground sm:px-5 md:text-sm">
 					<!-- Marker -->
 					<span aria-hidden="true" :class="getMarkerClasses()">
 						<HugeiconsIcon v-if="props.variant === 'checkmark'" :icon="Tick02Icon" :stroke-width="2.5" class="size-3" />

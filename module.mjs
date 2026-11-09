@@ -285,6 +285,9 @@ export default defineNuxtModule({
 		// Close dialogs and sheets with the back button of the phone
 		addPlugin({ src: resolver.resolve('src/runtime/back-button.client.ts'), mode: 'client' });
 
+		// Reveal the scroll-animated elements (AOS) that appear together in their on-screen order, top to bottom and left to right
+		addPlugin({ src: resolver.resolve('src/runtime/reveal-order.client.ts'), mode: 'client' });
+
 		// Keep Safari from zooming the page in when a field is tapped (on iOS only, through the viewport, so fields keep their size everywhere)
 		addPlugin({ src: resolver.resolve('src/runtime/ios-field-zoom.client.ts'), mode: 'client' });
 

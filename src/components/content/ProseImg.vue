@@ -48,7 +48,7 @@ const boxStyle = computed(() => {
 		:width="props.width"
 		:height="props.height"
 		format="avif"
-		quality="40"
+		quality="60"
 		:sizes="{ 480: '480px', 1536: '896px' }"
 		loading="lazy"
 		decoding="async"

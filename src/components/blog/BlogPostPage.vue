@@ -93,7 +93,7 @@ const postTags = computed(() => ((props.post.tags as string[] | undefined) || []
 		<section v-if="props.relatedPosts.length" class="mt-12 md:mt-16">
 			<BlogSectionTitle :title="t('uiVintage.blog.readAlso')" />
 			<div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-				<NuxtLinkLocale v-for="(relatedPost, index) in props.relatedPosts" :key="relatedPost.path" :to="relatedPost.path" data-aos="blur-up" :data-aos-delay="(index % 2) * 90" class="block h-full rounded outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45">
+				<NuxtLinkLocale v-for="relatedPost in props.relatedPosts" :key="relatedPost.path" :to="relatedPost.path" data-aos="blur-up" class="block h-full rounded outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45">
 					<PostCard :image="relatedPost.image"
 						:category="relatedPost.categoryText"
 						:title="relatedPost.title"
@@ -112,7 +112,7 @@ const postTags = computed(() => ((props.post.tags as string[] | undefined) || []
 				</template>
 			</BlogSectionTitle>
 			<div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-				<NuxtLinkLocale v-for="(category, index) in props.relatedCategories" :key="category.slug" :to="`/blog/categories/${category.slug}`" data-aos="blur-up" :data-aos-delay="(index % 2) * 90" class="block h-full rounded outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45">
+				<NuxtLinkLocale v-for="category in props.relatedCategories" :key="category.slug" :to="`/blog/categories/${category.slug}`" data-aos="blur-up" class="block h-full rounded outline-none focus-visible:ring-[3px] focus-visible:ring-ring/45">
 					<CategoryCard :name="category.name"
 						:image="category.image"
 						:count="category.count" />
