@@ -52,7 +52,7 @@ const boxStyle = computed(() => {
 		:sizes="{ 480: '480px', 1536: '896px' }"
 		loading="lazy"
 		decoding="async"
-		data-aos="fade-up"
+		data-aos="blur-up"
 		:style="boxStyle"
 		class="mx-auto my-6 block max-w-full rounded sm:my-8" />
 </template>
