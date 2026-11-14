@@ -29,10 +29,13 @@ const loadNuxtKit = async () => {
 	throw new Error('Unable to resolve @nuxt/kit for @brumaombra/ui-vintage. Install the package dependencies or add Nuxt to the consuming app.');
 };
 
+// Write a path with forward slashes, as Nuxt Kit does (on Windows, node:path gives backslashes, and the two forms of the same path never match)
+const toPosixPath = path => path.replaceAll('\\', '/');
+
 const { addPlugin, addTemplate, createResolver, defineNuxtModule, hasNuxtModule, installModule, updateTemplates } = await loadNuxtKit();
 const { version, exports: packageExports } = moduleRequire('./package.json');
 const resolver = createResolver(import.meta.url);
-const sourceRoot = resolver.resolve('src');
+const sourceRoot = toPosixPath(resolver.resolve('src'));
 const stylesPath = resolver.resolve('src/styles.css');
 
 /******************************** Tailwind sources ********************************/
@@ -59,7 +62,7 @@ const listFiles = ({ folder, pattern }) => {
 
 	// Walk the folder, skipping the generated and installed ones
 	return readdirSync(folder, { withFileTypes: true }).flatMap(entry => {
-		const path = join(folder, entry.name);
+		const path = toPosixPath(join(folder, entry.name));
 		if (entry.isDirectory()) return IGNORED_FOLDERS.has(entry.name) ? [] : listFiles({ folder: path, pattern });
 		return pattern.test(entry.name) ? [path] : [];
 	});
@@ -71,14 +74,14 @@ const resolveLibraryImport = ({ specifier, importer }) => {
 	let target = null;
 	if (specifier.startsWith(`${PACKAGE_NAME}/`)) {
 		const entryFile = packageExports[`.${specifier.slice(PACKAGE_NAME.length)}`];
-		target = typeof entryFile === 'string' ? resolver.resolve(entryFile) : null;
+		target = typeof entryFile === 'string' ? toPosixPath(resolver.resolve(entryFile)) : null;
 	} else if (specifier.startsWith('.') && importer.startsWith(sourceRoot)) {
-		target = resolve(dirname(importer), specifier);
+		target = toPosixPath(resolve(dirname(importer), specifier));
 	}
 
 	// Keep only the files of the library sources (with the extensions an import can leave out)
 	if (!target || !target.startsWith(sourceRoot)) return null;
-	const candidates = [target, `${target}.ts`, `${target}.js`, join(target, 'index.ts'), join(target, 'index.js')];
+	const candidates = [target, `${target}.ts`, `${target}.js`, `${target}/index.ts`, `${target}/index.js`];
 	return candidates.find(candidate => existsSync(candidate) && statSync(candidate).isFile()) || null;
 };
 
@@ -121,7 +124,7 @@ const buildScopedStylesheet = usedFiles => {
 	}
 
 	// Replace it with the used files (absolute paths, since the stylesheet is written to the build folder of the app)
-	const sources = usedFiles.map(file => `@source "${file.replaceAll('\\', '/')}";`).join('\n');
+	const sources = usedFiles.map(file => `@source "${file}";`).join('\n');
 	return stylesheet.replace(ALL_SOURCES_DIRECTIVE, `/* Library files used by the app (found by the @brumaombra/ui-vintage module) */\n${sources}`);
 };
 
