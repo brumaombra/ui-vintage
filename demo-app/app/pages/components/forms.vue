@@ -3,6 +3,7 @@ import { computed, ref } from 'vue';
 import Building03Icon from '@hugeicons/core-free-icons/Building03Icon';
 import CodeIcon from '@hugeicons/core-free-icons/CodeIcon';
 import CreditCardIcon from '@hugeicons/core-free-icons/CreditCardIcon';
+import Database01Icon from '@hugeicons/core-free-icons/Database01Icon';
 import Globe02Icon from '@hugeicons/core-free-icons/Globe02Icon';
 import InputTextIcon from '@hugeicons/core-free-icons/InputTextIcon';
 import Mail01Icon from '@hugeicons/core-free-icons/Mail01Icon';
@@ -12,7 +13,8 @@ import StarIcon from '@hugeicons/core-free-icons/StarIcon';
 import ZapIcon from '@hugeicons/core-free-icons/ZapIcon';
 import { HugeiconsIcon } from '@hugeicons/vue';
 import { Button } from '@brumaombra/ui-vintage/button';
-import { Checkbox } from '@brumaombra/ui-vintage/checkbox';
+import { Avatar, AvatarFallback } from '@brumaombra/ui-vintage/avatar';
+import { Checkbox, CheckboxCard, CheckboxGroup } from '@brumaombra/ui-vintage/checkbox';
 import { ComboboxSelect } from '@brumaombra/ui-vintage/combobox';
 import { DatePicker } from '@brumaombra/ui-vintage/date-picker';
 import { DateTimePicker } from '@brumaombra/ui-vintage/date-time-picker';
@@ -76,6 +78,13 @@ const allNotifications = computed(() => {
 const plan = ref('pro');
 const cardLanguage = ref('it');
 const shipping = ref('standard');
+const addons = ref(['backups']);
+const invitedFriends = ref(['chiara', 'sofia']);
+const friends = [
+	{ value: 'chiara', label: 'chiara', description: 'Friday dinner crew' },
+	{ value: 'sofia', label: 'sofia', description: 'Lisbon friends' },
+	{ value: 'anna', label: 'anna', description: 'Already invited', disabled: true }
+];
 
 // Toggle all notification checkboxes at once
 const toggleAllNotifications = () => {
@@ -140,7 +149,20 @@ const checkboxCode = `<Checkbox v-model="accept" />
     <RadioGroupCard value="it" label="Italiano">
         <template #icon><LanguageFlag code="it" size="lg" /></template>
     </RadioGroupCard>
-</RadioGroup>`;
+</RadioGroup>
+
+<!-- Card checkboxes: v-model is the array of checked values -->
+<CheckboxGroup v-model="addons">
+    <CheckboxCard value="backups" label="Daily backups" description="Kept for 30 days" :icon="Database01Icon" />
+    <CheckboxCard value="sso" label="Single sign-on" description="SAML and OIDC" :icon="ShieldUserIcon" disabled />
+</CheckboxGroup>
+
+<!-- The icon slot draws your own visual, like an avatar -->
+<CheckboxGroup v-model="invitedFriends">
+    <CheckboxCard value="chiara" label="chiara" description="Friday dinner crew">
+        <template #icon><Avatar shape="square" size="sm"><AvatarFallback name="chiara" /></Avatar></template>
+    </CheckboxCard>
+</CheckboxGroup>`;
 
 const numberCode = `<NumberField v-model="seats" :min="1" :max="50" />
 <NumberField v-model="price" :step="0.1" :format-options="{ style: 'currency', currency: 'EUR' }" />`;
@@ -247,7 +269,7 @@ const dropzoneCode = `<FileDropzone v-model="files" accept="image/*,.pdf" :max-s
 		</DemoSection>
 
 		<!-- Checkbox and radio -->
-		<DemoSection id="checkbox-radio" title="Checkbox & radio" badge="New" description="Check marks draw themselves, the indeterminate dash sweeps in, and radio dots bounce. Card radios take a primary outline and tint when selected." :code="checkboxCode">
+		<DemoSection id="checkbox-radio" title="Checkbox & radio" badge="New" description="Check marks draw themselves, the indeterminate dash sweeps in, and radio dots bounce. Card radios and card checkboxes take a primary outline and tint when selected." :code="checkboxCode">
 			<div class="grid gap-8 lg:grid-cols-2">
 				<div class="flex flex-col gap-5">
 					<!-- Terms -->
@@ -295,11 +317,27 @@ const dropzoneCode = `<FileDropzone v-model="files" accept="image/*,.pdf" :max-s
 				</RadioGroup>
 
 				<!-- Card radios with their own visual (the icon slot), like a language picker -->
-				<RadioGroup v-model="cardLanguage">
+				<RadioGroup v-model="cardLanguage" class="self-start">
 					<RadioGroupCard v-for="code in ['en', 'it']" :key="code" :value="code" :label="code === 'en' ? 'English' : 'Italiano'">
 						<template #icon><LanguageFlag :code="code" size="lg" /></template>
 					</RadioGroupCard>
 				</RadioGroup>
+
+				<!-- Card checkboxes: pick several, the whole card toggles -->
+				<CheckboxGroup v-model="addons" class="self-start">
+					<CheckboxCard value="backups" label="Daily backups" description="Kept for 30 days" :icon="Database01Icon" />
+					<CheckboxCard value="alerts" label="Uptime alerts" description="Email and push, every minute" :icon="Mail01Icon" />
+					<CheckboxCard value="sso" label="Single sign-on" description="Available on Enterprise" :icon="ShieldUserIcon" disabled />
+				</CheckboxGroup>
+
+				<!-- Card checkboxes with their own visual (the icon slot), like a friend picker -->
+				<CheckboxGroup v-model="invitedFriends">
+					<CheckboxCard v-for="friend in friends" :key="friend.value" :value="friend.value" :label="friend.label" :description="friend.description" :disabled="friend.disabled">
+						<template #icon>
+							<Avatar shape="square" size="sm"><AvatarFallback :name="friend.label" /></Avatar>
+						</template>
+					</CheckboxCard>
+				</CheckboxGroup>
 			</div>
 		</DemoSection>
 
