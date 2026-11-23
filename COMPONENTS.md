@@ -513,15 +513,20 @@ type LayoutTypes = | 'month-and-year' | 'month-only' | 'year-only' | undefined
 
 ### `@brumaombra/ui-vintage/checkbox`
 
-Checkbox with a self-drawing check mark. `v-model` accepts `true`, `false`, or `'indeterminate'`.
+Checkbox with a self-drawing check mark. `v-model` accepts `true`, `false`, or `'indeterminate'`. To pick several items from a list, use `CheckboxCard` rows (icon, label, description, the checkbox on the right; a tap anywhere on the card toggles it) inside a `CheckboxGroup`, whose `v-model` is the array of checked `value`s. A `CheckboxCard` on its own takes a boolean `v-model`. The `icon` slot of a card replaces its icon tile with your own visual, centered in the same 36px (an `Avatar` with `size="sm"`, a `LanguageFlag` with `size="lg"`, or a 32px logo), and a list of cards sits closer together than plain checkboxes.
 
 ```ts
-import { Checkbox } from '@brumaombra/ui-vintage/checkbox';
+import { Checkbox, CheckboxCard, CheckboxGroup } from '@brumaombra/ui-vintage/checkbox';
 ```
 
 ```vue
 <Checkbox id="terms" v-model="accepted" />
 <Label for="terms">I accept the terms</Label>
+
+<CheckboxGroup v-model="addons">
+    <CheckboxCard value="backups" label="Daily backups" description="Kept for 30 days" :icon="Database01Icon" />
+    <CheckboxCard value="sso" label="Single sign-on" description="Enterprise only" disabled />
+</CheckboxGroup>
 ```
 
 #### `Checkbox`
@@ -529,6 +534,26 @@ import { Checkbox } from '@brumaombra/ui-vintage/checkbox';
 - **Props:** `class`.
 - **Also accepts** all props of Reka `CheckboxRootProps`.
 - **Emits:** all events of Reka `CheckboxRootEmits`.
+- **Slots:** `default`.
+
+#### `CheckboxCard`
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `label` *(required)* | `string` |  |
+| `description` | `string` |  |
+| `icon` | `HugeiconsIconDefinition` |  |
+| `class` | `HTMLAttributes['class']` |  |
+
+- **Also accepts** all props of Reka `CheckboxRootProps`.
+- **Emits:** all events of Reka `CheckboxRootEmits`.
+- **Slots:** `icon`, `label`, `description`.
+
+#### `CheckboxGroup`
+
+- **Props:** `class`.
+- **Also accepts** all props of Reka `CheckboxGroupRootProps`.
+- **Emits:** all events of Reka `CheckboxGroupRootEmits`.
 - **Slots:** `default`.
 
 ---
