@@ -129,7 +129,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo '//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}' >> "$NPM_CONFIG_USERCONFIG"
+          printf '\n%s\n' '//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}' >> "$NPM_CONFIG_USERCONFIG" # On its own line: setup-node writes the file without a final newline
           if npm view "@brumaombra/ui-vintage@${{ steps.release.outputs.version }}" version --registry=https://npm.pkg.github.com > /dev/null 2>&1; then
             echo "Version ${{ steps.release.outputs.version }} is already on GitHub Packages, skipping it."
           else
