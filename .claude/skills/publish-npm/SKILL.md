@@ -1,11 +1,13 @@
 ---
 name: publish-npm
-description: Release @brumaombra/ui-vintage to npm. Use when the user asks to publish, release, cut a version, bump the version, tag a release, or check that the package is ready to publish.
+description: Release @brumaombra/ui-vintage to npm and GitHub Packages. Use when the user asks to publish, release, cut a version, bump the version, tag a release, or check that the package is ready to publish.
 ---
 
-# Publishing @brumaombra/ui-vintage to npm
+# Publishing @brumaombra/ui-vintage to npm and GitHub Packages
 
-Publishing is irreversible (a published version can never be reused) and pushing a version tag triggers it automatically. Confirm the version and get the user's explicit go-ahead before running `npm version` or pushing tags.
+Every release goes to two registries: npm, for anyone, and GitHub Packages, for the Nuxt apps of the same account. Their `.npmrc` sends the whole `@brumaombra` scope to GitHub Packages (where the private packages of the account live), so they can only install this library from there.
+
+Publishing is irreversible (a published version can never be reused on either registry) and pushing a version tag triggers it automatically. Confirm the version and get the user's explicit go-ahead before running `npm version` or pushing tags.
 
 ## Package positioning
 
@@ -24,7 +26,7 @@ This package is published under the npm scope `@brumaombra/ui-vintage` instead o
 - It avoids awkward name collisions in the global namespace.
 - It is easier to recognize as a package you own.
 
-Keep the `name` field in `package.json` aligned with that scoped package name.
+Keep the `name` field in `package.json` aligned with that scoped package name. GitHub Packages also needs the scope to match the GitHub account that owns the repository (`brumaombra`), and links the package to the repository through the `repository` field, so keep both as they are.
 
 ## 1. Check the release is ready
 
@@ -79,11 +81,11 @@ Then run the `Test and publish npm package` workflow on the release branch (GitH
 The GitHub Actions workflow in `.github/workflows/publish-npm.yml` runs when you push a tag like `v0.1.1`, or when it is started by hand (see the manual run above). It has two jobs:
 
 1. `test`: installs the library and the demo app with `npm ci`, runs `npm run typecheck`, checks that `COMPONENTS.md` is up to date with `npm run docs:components:check`, and runs `npm test`
-2. `publish` (only after `test` passes): installs with `npm ci`, verifies the tag matches `package.json` (or, for a manual run, that the version is new), inspects the tarball with `npm pack --dry-run`, publishes to npm, pushes the version tag (manual runs only), and creates a GitHub Release
+2. `publish` (only after `test` passes): installs with `npm ci`, verifies the tag matches `package.json` (or, for a manual run, that the version is new), inspects the tarball with `npm pack --dry-run`, publishes to GitHub Packages (skipped when that version is already there), publishes to npm, pushes the version tag (manual runs only), and creates a GitHub Release
 
-For trusted publishing, configure npm to trust this GitHub repository before using the workflow.
+For trusted publishing, configure npm to trust this GitHub repository before using the workflow. GitHub Packages needs no setup: the job publishes with the workflow's own `GITHUB_TOKEN` (`packages: write`).
 
-After pushing, follow the run with `gh run watch` (or `gh run list --workflow publish-npm.yml`) and report the result. If the workflow fails before the publish step, fix the cause, then delete and recreate the tag on the fixed commit (`git tag -d vX.Y.Z`, `git push origin :refs/tags/vX.Y.Z`); if it failed after publishing, the version is already on npm and the next release needs a new version number.
+After pushing, follow the run with `gh run watch` (or `gh run list --workflow publish-npm.yml`) and report the result. If the workflow fails before the publish step, fix the cause, then delete and recreate the tag on the fixed commit (`git tag -d vX.Y.Z`, `git push origin :refs/tags/vX.Y.Z`); if it failed after publishing to npm, the version is already there and the next release needs a new version number. If it failed between the two publishes (the version is on GitHub Packages but not on npm yet), fix the cause and re-run the failed job (Actions > the run > Re-run failed jobs): it skips GitHub Packages and publishes to npm. Don't start a new manual run for a tag-push release, because it stops on the existing tag.
 
 ## 5. Align the other branches
 
