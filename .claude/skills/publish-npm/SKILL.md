@@ -74,7 +74,7 @@ git commit -am "X.Y.Z"
 git push
 ```
 
-Then run the `Test and publish npm package` workflow on the release branch (GitHub: Actions > Run workflow, or the GitHub API `workflow_dispatch`). It reads the version from `package.json`, refuses to run if the `vX.Y.Z` tag or the npm version already exists, and pushes the tag itself once the package is published.
+Then run the `Test and publish npm package` workflow on `develop` (GitHub: Actions > Run workflow, or the GitHub API `workflow_dispatch`). It reads the version from `package.json`, refuses to run if the `vX.Y.Z` tag or the npm version already exists, and pushes the tag itself once the package is published.
 
 ## 4. Automatic publish flow
 
@@ -89,13 +89,9 @@ After pushing, follow the run with `gh run watch` (or `gh run list --workflow pu
 
 ## 5. Align the other branches
 
-Releases are cut from `feature`. Once the workflow has published successfully, bring `develop`, `test` and `main` up to the released commit, then return to `feature`:
+Releases are cut from `develop`: changes reach it through pull requests (the version bump included), and the release runs there. Once the workflow has published successfully, bring `test` and `main` up to the released commit, then return to `develop`:
 
 ```bash
-git checkout develop
-git merge feature
-git push
-
 git checkout test
 git merge develop
 git push
@@ -104,13 +100,13 @@ git checkout main
 git merge test
 git push
 
-git checkout feature
+git checkout develop
 ```
 
-- Only run this after the publish succeeded, so `develop`, `test` and `main` never point at an unreleased version.
+- Only run this after the publish succeeded, so `test` and `main` never point at an unreleased version.
 - Pushing `test` and `main` deploys the demo app (see below). Push `test` first and check its preview before pushing `main`.
 - Stop and ask the user if a merge has conflicts or a push is rejected. Never force-push, and never resolve conflicts on `main` without the user's approval.
-- Finish with `git status` and `git branch -v` to confirm all four branches point at the release commit and the working tree is back on `feature`.
+- Finish with `git status` and `git branch -v` to confirm all three branches point at the release commit and the working tree is back on `develop`.
 
 ## 6. Demo app deploys
 
@@ -119,8 +115,8 @@ The demo app (`demo-app/`) is hosted on Cloudflare Pages (project `ui-vintage`) 
 - **`test`**: preview deploy, at `https://test.ui-vintage.pages.dev`
 - **`main`**: production deploy, at `https://ui-vintage.brumaombra.com`
 
-Pushes to `feature` and `develop` deploy nothing. Any push to `test` or `main` deploys, not just releases, so don't push them unless you mean to update the demo.
+Pushes to `develop` and to task branches deploy nothing. Any push to `test` or `main` deploys, not just releases, so don't push them unless you mean to update the demo.
 
 The project builds from the root directory `demo-app` with `npm ci --prefix .. && npm run generate` (the demo links the library from the repo root through `file:..`, so the root dependencies are needed too), publishes `dist`, and uses `NODE_VERSION=24.21.0`.
 
-After pushing `test` or `main`, check that the deploy succeeded, either on the project's Deployments page in the Cloudflare dashboard or by opening the URL above. If a build fails, read its build log, fix the cause on `feature`, and bring the fix through the branches again. The demo build prerenders every page, so `npm --prefix demo-app run generate` locally reproduces most build failures.
+After pushing `test` or `main`, check that the deploy succeeded, either on the project's Deployments page in the Cloudflare dashboard or by opening the URL above. If a build fails, read its build log, fix the cause on a task branch, merge it into `develop` through a pull request, and bring the fix through the branches again. The demo build prerenders every page, so `npm --prefix demo-app run generate` locally reproduces most build failures.
