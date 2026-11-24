@@ -1,11 +1,13 @@
 ---
 name: publish-npm
-description: Release @brumaombra/ui-vintage to npm. Use when the user asks to publish, release, cut a version, bump the version, tag a release, or check that the package is ready to publish.
+description: Release @brumaombra/ui-vintage to npm and GitHub Packages. Use when the user asks to publish, release, cut a version, bump the version, tag a release, or check that the package is ready to publish.
 ---
 
-# Publishing @brumaombra/ui-vintage to npm
+# Publishing @brumaombra/ui-vintage to npm and GitHub Packages
 
-Publishing is irreversible (a published version can never be reused) and pushing a version tag triggers it automatically. Confirm the version and get the user's explicit go-ahead before running `npm version` or pushing tags.
+Every release goes to two registries: npm, for anyone, and GitHub Packages, for the Nuxt apps of the same account. Their `.npmrc` sends the whole `@brumaombra` scope to GitHub Packages (where the private packages of the account live), so they can only install this library from there.
+
+Publishing is irreversible (a published version can never be reused on either registry) and pushing a version tag triggers it automatically. Confirm the version and get the user's explicit go-ahead before running `npm version` or pushing tags.
 
 ## Package positioning
 
@@ -24,7 +26,7 @@ This package is published under the npm scope `@brumaombra/ui-vintage` instead o
 - It avoids awkward name collisions in the global namespace.
 - It is easier to recognize as a package you own.
 
-Keep the `name` field in `package.json` aligned with that scoped package name.
+Keep the `name` field in `package.json` aligned with that scoped package name. GitHub Packages also needs the scope to match the GitHub account that owns the repository (`brumaombra`), and links the package to the repository through the `repository` field, so keep both as they are.
 
 ## 1. Check the release is ready
 
@@ -72,28 +74,24 @@ git commit -am "X.Y.Z"
 git push
 ```
 
-Then run the `Test and publish npm package` workflow on the release branch (GitHub: Actions > Run workflow, or the GitHub API `workflow_dispatch`). It reads the version from `package.json`, refuses to run if the `vX.Y.Z` tag or the npm version already exists, and pushes the tag itself once the package is published.
+Then run the `Test and publish npm package` workflow on `develop` (GitHub: Actions > Run workflow, or the GitHub API `workflow_dispatch`). It reads the version from `package.json`, refuses to run if the `vX.Y.Z` tag or the npm version already exists, and pushes the tag itself once the package is published.
 
 ## 4. Automatic publish flow
 
 The GitHub Actions workflow in `.github/workflows/publish-npm.yml` runs when you push a tag like `v0.1.1`, or when it is started by hand (see the manual run above). It has two jobs:
 
 1. `test`: installs the library and the demo app with `npm ci`, runs `npm run typecheck`, checks that `COMPONENTS.md` is up to date with `npm run docs:components:check`, and runs `npm test`
-2. `publish` (only after `test` passes): installs with `npm ci`, verifies the tag matches `package.json` (or, for a manual run, that the version is new), inspects the tarball with `npm pack --dry-run`, publishes to npm, pushes the version tag (manual runs only), and creates a GitHub Release
+2. `publish` (only after `test` passes): installs with `npm ci`, verifies the tag matches `package.json` (or, for a manual run, that the version is new), inspects the tarball with `npm pack --dry-run`, publishes to GitHub Packages (skipped when that version is already there), publishes to npm, pushes the version tag (manual runs only), and creates a GitHub Release
 
-For trusted publishing, configure npm to trust this GitHub repository before using the workflow.
+For trusted publishing, configure npm to trust this GitHub repository before using the workflow. GitHub Packages needs no setup: the job publishes with the workflow's own `GITHUB_TOKEN` (`packages: write`).
 
-After pushing, follow the run with `gh run watch` (or `gh run list --workflow publish-npm.yml`) and report the result. If the workflow fails before the publish step, fix the cause, then delete and recreate the tag on the fixed commit (`git tag -d vX.Y.Z`, `git push origin :refs/tags/vX.Y.Z`); if it failed after publishing, the version is already on npm and the next release needs a new version number.
+After pushing, follow the run with `gh run watch` (or `gh run list --workflow publish-npm.yml`) and report the result. If the workflow fails before the publish step, fix the cause, then delete and recreate the tag on the fixed commit (`git tag -d vX.Y.Z`, `git push origin :refs/tags/vX.Y.Z`); if it failed after publishing to npm, the version is already there and the next release needs a new version number. If it failed between the two publishes (the version is on GitHub Packages but not on npm yet), fix the cause and re-run the failed job (Actions > the run > Re-run failed jobs): it skips GitHub Packages and publishes to npm. Don't start a new manual run for a tag-push release, because it stops on the existing tag.
 
 ## 5. Align the other branches
 
-Releases are cut from `feature`. Once the workflow has published successfully, bring `develop`, `test` and `main` up to the released commit, then return to `feature`:
+Releases are cut from `develop`: changes reach it through pull requests (the version bump included), and the release runs there. Once the workflow has published successfully, bring `test` and `main` up to the released commit, then return to `develop`:
 
 ```bash
-git checkout develop
-git merge feature
-git push
-
 git checkout test
 git merge develop
 git push
@@ -102,13 +100,13 @@ git checkout main
 git merge test
 git push
 
-git checkout feature
+git checkout develop
 ```
 
-- Only run this after the publish succeeded, so `develop`, `test` and `main` never point at an unreleased version.
+- Only run this after the publish succeeded, so `test` and `main` never point at an unreleased version.
 - Pushing `test` and `main` deploys the demo app (see below). Push `test` first and check its preview before pushing `main`.
 - Stop and ask the user if a merge has conflicts or a push is rejected. Never force-push, and never resolve conflicts on `main` without the user's approval.
-- Finish with `git status` and `git branch -v` to confirm all four branches point at the release commit and the working tree is back on `feature`.
+- Finish with `git status` and `git branch -v` to confirm all three branches point at the release commit and the working tree is back on `develop`.
 
 ## 6. Demo app deploys
 
@@ -117,8 +115,8 @@ The demo app (`demo-app/`) is hosted on Cloudflare Pages (project `ui-vintage`) 
 - **`test`**: preview deploy, at `https://test.ui-vintage.pages.dev`
 - **`main`**: production deploy, at `https://ui-vintage.brumaombra.com`
 
-Pushes to `feature` and `develop` deploy nothing. Any push to `test` or `main` deploys, not just releases, so don't push them unless you mean to update the demo.
+Pushes to `develop` and to task branches deploy nothing. Any push to `test` or `main` deploys, not just releases, so don't push them unless you mean to update the demo.
 
 The project builds from the root directory `demo-app` with `npm ci --prefix .. && npm run generate` (the demo links the library from the repo root through `file:..`, so the root dependencies are needed too), publishes `dist`, and uses `NODE_VERSION=24.21.0`.
 
-After pushing `test` or `main`, check that the deploy succeeded, either on the project's Deployments page in the Cloudflare dashboard or by opening the URL above. If a build fails, read its build log, fix the cause on `feature`, and bring the fix through the branches again. The demo build prerenders every page, so `npm --prefix demo-app run generate` locally reproduces most build failures.
+After pushing `test` or `main`, check that the deploy succeeded, either on the project's Deployments page in the Cloudflare dashboard or by opening the URL above. If a build fails, read its build log, fix the cause on a task branch, merge it into `develop` through a pull request, and bring the fix through the branches again. The demo build prerenders every page, so `npm --prefix demo-app run generate` locally reproduces most build failures.
