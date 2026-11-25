@@ -54,42 +54,44 @@ Always release a **patch** version (`0.8.0` → `0.8.1`), whatever the changes a
 
 State the version you are about to release (for example "0.8.1, patch") and wait for the user to confirm it.
 
-## 3. Manual release flow
+## 3. Release flow
+
+Changes reach `develop` only through pull requests, the version bump included: never commit or push to `develop` directly. `test` and `main` are different: they get normal merges, without pull requests (see step 5).
+
+### Bump the version in a pull request
+
+From a branch made from the latest `develop`:
 
 ```bash
 npm pack --dry-run
-npm version patch
-git push --follow-tags
-```
-
-`npm version` updates `package.json` and `package-lock.json`, commits them, and creates the `vX.Y.Z` tag. Replace `patch` only if the user asked for `minor` or `major`. `git push --follow-tags` pushes the commit and the tag, which starts the automatic publish flow below.
-
-### Without pushing a tag (manual run)
-
-Where tags can't be pushed (for example from a cloud session, whose git access only allows branch pushes), commit the version without a tag and start the workflow by hand:
-
-```bash
 npm version patch --no-git-tag-version
 git commit -am "X.Y.Z"
-git push
+git push -u origin <branch>
 ```
 
-Then run the `Test and publish npm package` workflow on `develop` (GitHub: Actions > Run workflow, or the GitHub API `workflow_dispatch`). It reads the version from `package.json`, refuses to run if the `vX.Y.Z` tag or the npm version already exists, and pushes the tag itself once the package is published.
+`npm version` updates `package.json` and `package-lock.json`. Replace `patch` only if the user asked for `minor` or `major`. Open a pull request into `develop` with the bump, and merge it once the user has confirmed the version (step 2). If the merge through GitHub fails, retry it or tell the user: don't merge it locally and push to `develop`.
+
+### Publish the merged version
+
+Then start the publish flow on the merged `develop`, in one of two ways:
+
+- **Push the tag:** tag the merge commit of `develop` (`git tag vX.Y.Z <commit>`, then `git push origin vX.Y.Z`). The tag starts the automatic publish flow below.
+- **Run the workflow by hand:** where tags can't be pushed (for example from a cloud session, whose git access only allows branch pushes), run the `Test and publish npm package` workflow on `develop` (GitHub: Actions > Run workflow, or the GitHub API `workflow_dispatch`). It reads the version from `package.json`, refuses to run if the `vX.Y.Z` tag or the npm version already exists, and pushes the tag itself once the package is published.
 
 ## 4. Automatic publish flow
 
-The GitHub Actions workflow in `.github/workflows/publish-npm.yml` runs when you push a tag like `v0.1.1`, or when it is started by hand (see the manual run above). It has two jobs:
+The GitHub Actions workflow in `.github/workflows/publish-npm.yml` runs when you push a tag like `v0.1.1`, or when it is started by hand (see the release flow above). It has two jobs:
 
 1. `test`: installs the library and the demo app with `npm ci`, runs `npm run typecheck`, checks that `COMPONENTS.md` is up to date with `npm run docs:components:check`, and runs `npm test`
 2. `publish` (only after `test` passes): installs with `npm ci`, verifies the tag matches `package.json` (or, for a manual run, that the version is new), inspects the tarball with `npm pack --dry-run`, publishes to GitHub Packages (skipped when that version is already there), publishes to npm, pushes the version tag (manual runs only), and creates a GitHub Release
 
 For trusted publishing, configure npm to trust this GitHub repository before using the workflow. GitHub Packages needs no setup: the job publishes with the workflow's own `GITHUB_TOKEN` (`packages: write`).
 
-After pushing, follow the run with `gh run watch` (or `gh run list --workflow publish-npm.yml`) and report the result. If the workflow fails before the publish step, fix the cause, then delete and recreate the tag on the fixed commit (`git tag -d vX.Y.Z`, `git push origin :refs/tags/vX.Y.Z`); if it failed after publishing to npm, the version is already there and the next release needs a new version number. If it failed between the two publishes (the version is on GitHub Packages but not on npm yet), fix the cause and re-run the failed job (Actions > the run > Re-run failed jobs): it skips GitHub Packages and publishes to npm. Don't start a new manual run for a tag-push release, because it stops on the existing tag.
+After pushing, follow the run with `gh run watch` (or `gh run list --workflow publish-npm.yml`) and report the result. If the workflow fails before the publish step, fix the cause in a pull request into `develop`, then delete and recreate the tag on the fixed commit (`git tag -d vX.Y.Z`, `git push origin :refs/tags/vX.Y.Z`), or run the workflow again; if it failed after publishing to npm, the version is already there and the next release needs a new version number. If it failed between the two publishes (the version is on GitHub Packages but not on npm yet), fix the cause and re-run the failed job (Actions > the run > Re-run failed jobs): it skips GitHub Packages and publishes to npm. Don't start a new manual run for a tag-push release, because it stops on the existing tag.
 
 ## 5. Align the other branches
 
-Releases are cut from `develop`: changes reach it through pull requests (the version bump included), and the release runs there. Once the workflow has published successfully, bring `test` and `main` up to the released commit, then return to `develop`:
+Releases are cut from `develop`: changes reach it through pull requests (the version bump included), and the release runs there. Once the workflow has published successfully, bring `test` and `main` up to the released commit with normal merges (pull requests are only for `develop`: `test` and `main` never get one), then return to `develop`:
 
 ```bash
 git checkout test
@@ -119,4 +121,4 @@ Pushes to `develop` and to task branches deploy nothing. Any push to `test` or `
 
 The project builds from the root directory `demo-app` with `npm ci --prefix .. && npm run generate` (the demo links the library from the repo root through `file:..`, so the root dependencies are needed too), publishes `dist`, and uses `NODE_VERSION=24.21.0`.
 
-After pushing `test` or `main`, check that the deploy succeeded, either on the project's Deployments page in the Cloudflare dashboard or by opening the URL above. If a build fails, read its build log, fix the cause on a task branch, merge it into `develop` through a pull request, and bring the fix through the branches again. The demo build prerenders every page, so `npm --prefix demo-app run generate` locally reproduces most build failures.
+After pushing `test` or `main`, check that the deploy succeeded, either on the project's Deployments page in the Cloudflare dashboard or by opening the URL above. If a build fails, read its build log, fix the cause on a task branch, merge it into `develop` through a pull request, and bring the fix through the branches again with normal merges. The demo build prerenders every page, so `npm --prefix demo-app run generate` locally reproduces most build failures.
