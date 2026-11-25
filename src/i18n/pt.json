@@ -231,14 +231,6 @@
 			"hours": "Horas",
 			"minutes": "Minutos"
 		},
-		"pwa": {
-			"offline": {
-				"title": "Você está offline",
-				"message": "{name} precisa de conexão com a internet. Verifique sua conexão e tente novamente.",
-				"retry": "Tentar novamente",
-				"note": "A página recarrega sozinha quando você voltar a ficar online."
-			}
-		},
 		"legalDocument": {
 			"updated": "Última atualização: {date}",
 			"summary": "Em resumo",

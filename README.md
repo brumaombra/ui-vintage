@@ -300,10 +300,6 @@ All durations collapse when the user prefers reduced motion. Tailwind v4 animate
 
 Library strings live under the `uiVintage` namespace and are available in English, Italian, French, Spanish, German, Portuguese, Chinese, Japanese, and Russian. With `@nuxtjs/i18n` or Vue I18n configured, the runtime plugin merges them into your existing composer without replacing your messages.
 
-### Installable app
-
-Set `uiVintage: { pwa: { name: 'Acme' } }` to make the app installable, with a service worker, an offline page, a manifest per language, push notifications, and the Android app (Trusted Web Activity), with no extra dependencies. See [`docs/pwa.md`](docs/pwa.md) for every option.
-
 ## How it works
 
 When the module is registered, it:
@@ -313,7 +309,6 @@ When the module is registered, it:
 3. Installs `@nuxt/image` when the app has not registered it.
 4. Registers the library i18n plugin, which merges the locale messages when Vue I18n is present.
 5. On iPhone and iPad, adds `maximum-scale=1` to the viewport, so Safari doesn't zoom the page in when a field is tapped (people can still pinch to zoom). Fields keep their size on every device.
-6. With `pwa` set, writes the service worker and the offline page as static files of the build, and registers the worker in production.
 
 ### Only the classes the app uses
 

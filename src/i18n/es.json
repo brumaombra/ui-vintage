@@ -231,14 +231,6 @@
 			"hours": "Horas",
 			"minutes": "Minutos"
 		},
-		"pwa": {
-			"offline": {
-				"title": "Estás sin conexión",
-				"message": "{name} necesita conexión. Revisa tu conexión e inténtalo de nuevo.",
-				"retry": "Reintentar",
-				"note": "La página se recarga sola cuando vuelves a tener conexión."
-			}
-		},
 		"legalDocument": {
 			"updated": "Última actualización: {date}",
 			"summary": "En resumen",

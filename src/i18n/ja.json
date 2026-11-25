@@ -231,14 +231,6 @@
 			"hours": "時",
 			"minutes": "分"
 		},
-		"pwa": {
-			"offline": {
-				"title": "オフラインです",
-				"message": "{name}を使うにはインターネット接続が必要です。接続を確認して、もう一度お試しください。",
-				"retry": "再試行",
-				"note": "接続が戻ると、ページは自動で再読み込みされます。"
-			}
-		},
 		"legalDocument": {
 			"updated": "最終更新日：{date}",
 			"summary": "要約",

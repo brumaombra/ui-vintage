@@ -231,14 +231,6 @@
 			"hours": "Heures",
 			"minutes": "Minutes"
 		},
-		"pwa": {
-			"offline": {
-				"title": "Vous êtes hors ligne",
-				"message": "{name} a besoin d'une connexion. Vérifiez votre connexion et réessayez.",
-				"retry": "Réessayer",
-				"note": "La page se recharge toute seule dès que la connexion revient."
-			}
-		},
 		"legalDocument": {
 			"updated": "Dernière mise à jour : {date}",
 			"summary": "En bref",
