@@ -128,95 +128,8 @@ const buildScopedStylesheet = usedFiles => {
 	return stylesheet.replace(ALL_SOURCES_DIRECTIVE, `/* Library files used by the app (found by the @brumaombra/ui-vintage module) */\n${sources}`);
 };
 
-/******************************** Service worker ********************************/
-
-// Join paths of the app without doubled slashes ("/" + "/sw.js" -> "/sw.js")
-const joinPath = (...parts) => `/${parts.join('/').split('/').filter(Boolean).join('/')}`;
-
-// Texts of the offline page in every language of the library
-const readOfflineTexts = () => {
-	const folder = resolver.resolve('src/i18n');
-	return Object.fromEntries(readdirSync(folder).filter(file => file.endsWith('.json')).map(file => [file.replace('.json', ''), JSON.parse(readFileSync(join(folder, file), 'utf8')).uiVintage.pwa.offline]));
-};
-
 // Library files the module mounts on its own (no app imports them, so the style scanner starts from them too)
 const moduleMountedFiles = [];
-
-// Write the service worker and the offline page as static files of the build (so they work for server and static apps alike), and register the service worker in the browser (production builds only)
-const setupPwa = async ({ options, nuxt }) => {
-	const { buildAssetLinks, buildManifests, buildOfflinePage, buildServiceWorker } = await import(pathToFileURL(resolver.resolve('src/runtime/pwa/builders.mjs')).href);
-	const baseURL = nuxt.options.app.baseURL || '/';
-	const scope = baseURL.endsWith('/') ? baseURL : `${baseURL}/`;
-	const swPath = joinPath(baseURL, 'sw.js');
-	const offlinePath = joinPath(baseURL, 'offline.html');
-	const buildAssetsDir = `${joinPath(baseURL, nuxt.options.app.buildAssetsDir || '/_nuxt/')}/`;
-	const selfDestroy = Boolean(options.selfDestroy);
-
-	// Paths saved at install: the offline page, its logo and its font files, and the ones the app adds
-	const precache = [...new Set([offlinePath, options.logo, options.logoDark, options.font?.regular, options.font?.bold, ...(options.precache || [])].filter(Boolean))];
-
-	// The service worker of this build (the build id names its cache, so each build gets its own and the old one is deleted)
-	const serviceWorker = addTemplate({
-		filename: 'ui-vintage/pwa/sw.js',
-		write: true,
-		getContents: () => buildServiceWorker({ version: nuxt.options.buildId, precache, buildAssetsDir, offlinePath, selfDestroy, push: options.push ? { icon: options.push.icon || options.logo, badge: options.push.badge } : null })
-	});
-
-	// The offline page, in every language of the library
-	addTemplate({
-		filename: 'ui-vintage/pwa/offline.html',
-		write: true,
-		getContents: () => buildOfflinePage({ name: options.name || 'App', logo: options.logo, logoDark: options.logoDark, font: options.font, texts: readOfflineTexts() })
-	});
-
-	// Serve the folder of both files at the root of the app
-	nuxt.options.nitro.publicAssets ||= [];
-	nuxt.options.nitro.publicAssets.push({ dir: dirname(serviceWorker.dst), baseURL: '/', maxAge: 0 });
-
-	// Never kept by the browser or a CDN, so a new build is found at once (the rules the app already set for these paths come first)
-	nuxt.options.routeRules ||= {};
-	nuxt.options.routeRules[swPath] = { ...nuxt.options.routeRules[swPath], headers: { 'Cache-Control': 'no-cache', ...nuxt.options.routeRules[swPath]?.headers } };
-	nuxt.options.routeRules[offlinePath] = { ...nuxt.options.routeRules[offlinePath], headers: { 'Cache-Control': 'no-cache', 'X-Robots-Tag': 'noindex', ...nuxt.options.routeRules[offlinePath]?.headers } };
-
-	// The manifest of the app, one per language (the installed app takes its name, shortcuts and screenshots from the page it was installed from)
-	let manifestConfig = null;
-	if (options.manifest) {
-		const { defaultLocale, manifests } = buildManifests({ name: options.name || 'App', scope, manifest: options.manifest });
-		for (const [language, manifest] of Object.entries(manifests)) {
-			addTemplate({
-				filename: `ui-vintage/pwa/${language === defaultLocale ? 'manifest.webmanifest' : `manifest.${language}.webmanifest`}`,
-				write: true,
-				getContents: () => JSON.stringify(manifest, null, '\t')
-			});
-		}
-		manifestConfig = { path: joinPath(baseURL, 'manifest.webmanifest'), defaultLocale, locales: Object.keys(manifests) };
-		addPlugin({ src: resolver.resolve('src/runtime/pwa/manifest-link.ts') });
-	}
-
-	// The proof that the Android app (a Trusted Web Activity) and the site belong together, so the app opens without the browser bar
-	if (options.android?.packageName) {
-		addTemplate({
-			filename: 'ui-vintage/pwa/.well-known/assetlinks.json',
-			write: true,
-			getContents: () => buildAssetLinks(options.android)
-		});
-	}
-
-	// Edge to edge: the page covers the whole screen, under the notch and the gesture bar, and the library components keep clear of them with the safe areas
-	if (options.edgeToEdge !== false) {
-		// Nuxt already turned the viewport of the config into a meta tag: change that tag
-		const meta = (nuxt.options.app.head.meta ||= []);
-		const viewport = meta.find(tag => tag?.name === 'viewport');
-		if (!viewport) meta.unshift({ name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover' });
-		else if (!String(viewport.content).includes('viewport-fit')) viewport.content = `${viewport.content}, viewport-fit=cover`;
-	}
-
-	// What the plugins need in the browser
-	nuxt.options.runtimeConfig.public.uiVintagePwa = { enabled: !nuxt.options.dev, path: swPath, scope, selfDestroy, manifest: manifestConfig };
-
-	// The registration in the browser
-	addPlugin({ src: resolver.resolve('src/runtime/pwa/plugin.client.ts'), mode: 'client' });
-};
 
 export default defineNuxtModule({
 	// Module meta information
@@ -232,8 +145,7 @@ export default defineNuxtModule({
 	// Default options
 	defaults: {
 		scanAllComponents: false, // Let Tailwind scan every library file, instead of only the ones the app imports
-		toast: {}, // Toasts of the app ({ position: 'bottom' | 'top' | 'responsive' }, 'bottom' by default; responsive = at the top on phones, at the bottom from tablets up)
-		pwa: false // Installable app: service worker, offline page, manifest and Android asset links ({ name, logo, logoDark, font, precache, manifest, android, edgeToEdge, selfDestroy, push }, see setupPwa)
+		toast: {} // Toasts of the app ({ position: 'bottom' | 'top' | 'responsive' }, 'bottom' by default; responsive = at the top on phones, at the bottom from tablets up)
 	},
 
 	// Module main function
@@ -293,10 +205,5 @@ export default defineNuxtModule({
 
 		// Keep Safari from zooming the page in when a field is tapped (on iOS only, through the viewport, so fields keep their size everywhere)
 		addPlugin({ src: resolver.resolve('src/runtime/ios-field-zoom.client.ts'), mode: 'client' });
-
-		// Add the service worker and its offline page, when the app asks for them
-		if (options.pwa) {
-			await setupPwa({ options: options.pwa === true ? {} : options.pwa, nuxt });
-		}
 	}
 });
