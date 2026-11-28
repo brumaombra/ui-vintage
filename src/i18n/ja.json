@@ -58,7 +58,14 @@
 			"placeholder": "日付を選択",
 			"month": "月",
 			"year": "年",
-			"time": "時刻"
+			"time": "時刻",
+			"chooseMonthAndYear": "年と月を選択（{month}）",
+			"chooseYear": "年を選択",
+			"showDays": "日付に戻る",
+			"previousYears": "前の年",
+			"nextYears": "次の年",
+			"previousYear": "前年",
+			"nextYear": "翌年"
 		},
 		"timePicker": {
 			"placeholder": "時刻を選択"

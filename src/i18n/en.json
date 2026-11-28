@@ -58,7 +58,14 @@
 			"placeholder": "Pick a date",
 			"month": "Month",
 			"year": "Year",
-			"time": "Time"
+			"time": "Time",
+			"chooseMonthAndYear": "Choose month and year ({month})",
+			"chooseYear": "Choose year",
+			"showDays": "Back to the days",
+			"previousYears": "Previous years",
+			"nextYears": "Next years",
+			"previousYear": "Previous year",
+			"nextYear": "Next year"
 		},
 		"timePicker": {
 			"placeholder": "Pick a time"

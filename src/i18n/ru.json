@@ -58,7 +58,14 @@
 			"placeholder": "Выберите дату",
 			"month": "Месяц",
 			"year": "Год",
-			"time": "Время"
+			"time": "Время",
+			"chooseMonthAndYear": "Выбрать месяц и год ({month})",
+			"chooseYear": "Выбрать год",
+			"showDays": "Вернуться к дням",
+			"previousYears": "Предыдущие годы",
+			"nextYears": "Следующие годы",
+			"previousYear": "Предыдущий год",
+			"nextYear": "Следующий год"
 		},
 		"timePicker": {
 			"placeholder": "Выберите время"

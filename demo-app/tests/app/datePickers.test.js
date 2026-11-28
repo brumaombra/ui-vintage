@@ -71,4 +71,81 @@ describe('InlineDatePicker', () => {
 		expect(findDay(wrapper, 9).attributes('data-disabled')).toBeDefined();
 		expect(findDay(wrapper, 10).attributes('data-disabled')).toBeUndefined();
 	});
+
+	// Find a cell of the year or month grid by its text
+	const findCell = (wrapper, kind, text) => wrapper.findAll(`[data-slot="inline-date-picker-${kind}"]`).find(cell => cell.text() === text);
+
+	// A day years ahead used to take one tap per month: the title opens the years, then the months
+	it('jumps to another year and month from the title', async () => {
+		// Open the year grid from the title of November 2026
+		const wrapper = await mountSuspended(InlineDatePicker, { props: { modelValue: new Date(2026, 10, 6), minDate: new Date(2026, 10, 1), locale: 'en' } });
+		expect(wrapper.find('[data-slot="inline-date-picker-title"]').text()).toBe('November 2026');
+		await wrapper.find('[data-slot="inline-date-picker-title"]').trigger('click');
+
+		// Expect the page to start at the minimum's year, with the year shown picked
+		const years = wrapper.findAll('[data-slot="inline-date-picker-year"]').map(cell => cell.text());
+		expect(years).toEqual(Array.from({ length: 12 }, (_, index) => String(2026 + index)));
+		expect(findCell(wrapper, 'year', '2026').attributes('data-current')).toBeDefined();
+
+		// Go to the next page, and pick 2041
+		await wrapper.findAll('[data-slot="inline-date-picker-grid"] nav button')[1].trigger('click');
+		await findCell(wrapper, 'year', '2041').trigger('click');
+
+		// Pick March in the month grid
+		expect(wrapper.find('[data-slot="inline-date-picker"]').attributes('data-view')).toBe('months');
+		await findCell(wrapper, 'month', 'Mar').trigger('click');
+
+		// Expect the days of March 2041, and a picked day there to come back as a Date
+		expect(wrapper.find('[data-slot="inline-date-picker"]').attributes('data-view')).toBe('days');
+		expect(wrapper.find('[data-slot="inline-date-picker-title"]').text()).toBe('March 2041');
+		await findDay(wrapper, 15).trigger('click');
+		const picked = wrapper.emitted('update:modelValue').at(-1)[0];
+		expect([picked.getFullYear(), picked.getMonth(), picked.getDate()]).toEqual([2041, 2, 15]);
+	});
+
+	// The years and months outside the limits can't be picked, and the arrows stop at them
+	it('disables the years and months outside the limits', async () => {
+		// Open the year grid of a calendar limited from November 2026 to February 2028
+		const wrapper = await mountSuspended(InlineDatePicker, { props: { modelValue: new Date(2026, 10, 20), minDate: new Date(2026, 10, 10), maxDate: new Date(2028, 1, 15), locale: 'en' } });
+		await wrapper.find('[data-slot="inline-date-picker-title"]').trigger('click');
+
+		// Expect only 2026 to 2028 to be enabled, and no page before or after
+		expect(findCell(wrapper, 'year', '2028').attributes('disabled')).toBeUndefined();
+		expect(findCell(wrapper, 'year', '2029').attributes('disabled')).toBeDefined();
+		const [previousButton, nextButton] = wrapper.findAll('[data-slot="inline-date-picker-grid"] nav button');
+		expect(previousButton.attributes('disabled')).toBeDefined();
+		expect(nextButton.attributes('disabled')).toBeDefined();
+
+		// Expect only January and February of 2028 to be enabled
+		await findCell(wrapper, 'year', '2028').trigger('click');
+		expect(findCell(wrapper, 'month', 'Feb').attributes('disabled')).toBeUndefined();
+		expect(findCell(wrapper, 'month', 'Mar').attributes('disabled')).toBeDefined();
+
+		// Expect the month kept from November to move inside the limit (February)
+		expect(findCell(wrapper, 'month', 'Feb').attributes('data-current')).toBeDefined();
+	});
+
+	// Without a minimum (a birthday), the page ends at the maximum's year
+	it('ends the first page at the maximum without a minimum', async () => {
+		// Open the year grid of a calendar that stops at the end of 2026
+		const wrapper = await mountSuspended(InlineDatePicker, { props: { modelValue: new Date(2000, 5, 1), maxDate: new Date(2026, 11, 31), locale: 'en' } });
+		await wrapper.find('[data-slot="inline-date-picker-title"]').trigger('click');
+
+		// Expect the page of 2000 to line up with 2026 as a last year (1991 to 2002)
+		const years = wrapper.findAll('[data-slot="inline-date-picker-year"]').map(cell => cell.text());
+		expect(years[0]).toBe('1991');
+		expect(years.at(-1)).toBe('2002');
+	});
+
+	// A day picked from outside (a quick pick) brings the days back
+	it('shows the days again when the value changes from outside', async () => {
+		// Open the year grid, then set another day
+		const wrapper = await mountSuspended(InlineDatePicker, { props: { modelValue: new Date(2026, 10, 6), locale: 'en' } });
+		await wrapper.find('[data-slot="inline-date-picker-title"]').trigger('click');
+		await wrapper.setProps({ modelValue: new Date(2026, 11, 31) });
+
+		// Expect the days of December 2026
+		expect(wrapper.find('[data-slot="inline-date-picker"]').attributes('data-view')).toBe('days');
+		expect(wrapper.find('[data-slot="inline-date-picker-title"]').text()).toBe('December 2026');
+	});
 });
