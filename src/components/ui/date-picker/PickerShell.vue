@@ -36,6 +36,12 @@ const fieldControlId = useFieldControlId();
 const fieldLabelId = useFieldLabelId();
 const labelledBy = computed(() => (fieldLabelId.value && fieldControlId.value ? `${fieldLabelId.value} ${fieldControlId.value}` : undefined));
 
+// The text of the field: the value is written in the visitor's time zone and clock, which the server doesn't know, so the server and the first render keep its place with a blank (a value written on the server didn't match the browser, and the page failed to hydrate)
+const fieldText = computed(() => {
+	if (!props.valueText) return props.placeholder;
+	return isMounted.value ? props.valueText : '\u00a0';
+});
+
 // Classes of the field
 const fieldClass = computed(() => cn('h-13 w-full justify-start text-left font-normal enabled:active:scale-100', !props.valueText && 'text-muted-foreground', props.class));
 
@@ -56,7 +62,7 @@ onMounted(() => {
 		<PopoverTrigger as-child>
 			<Button :id="fieldControlId" data-slot="picker-field" :aria-labelledby="labelledBy" variant="secondary" :disabled="props.disabled" :class="fieldClass">
 				<HugeiconsIcon :icon="props.icon" class="size-4 shrink-0" aria-hidden="true" />
-				<span class="truncate">{{ props.valueText || props.placeholder }}</span>
+				<span class="truncate">{{ fieldText }}</span>
 			</Button>
 		</PopoverTrigger>
 		<PopoverContent data-slot="picker-content" align="start" :class="cn('max-h-(--reka-popover-content-available-height) w-80 overflow-y-auto p-3', props.contentClass)">
@@ -71,7 +77,7 @@ onMounted(() => {
 	<template v-else>
 		<Button :id="fieldControlId" data-slot="picker-field" :aria-labelledby="labelledBy" aria-haspopup="dialog" :aria-expanded="props.open" variant="secondary" :disabled="props.disabled" :class="fieldClass" @click="setOpen(true)">
 			<HugeiconsIcon :icon="props.icon" class="size-4 shrink-0" aria-hidden="true" />
-			<span class="truncate">{{ props.valueText || props.placeholder }}</span>
+			<span class="truncate">{{ fieldText }}</span>
 		</Button>
 		<ResponsiveDialog :open="props.open" :title="props.title" :body-class="props.contentClass" @update:open="setOpen">
 			<slot />
