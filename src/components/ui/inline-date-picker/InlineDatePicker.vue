@@ -186,7 +186,7 @@ const cellClass = cn(buttonVariants({ variant: 'ghost' }), 'h-12 w-full font-mon
 					</button>
 				</nav>
 				<button type="button" data-slot="inline-date-picker-title" :class="cn(titleButtonClass, 'relative font-mono tabular-nums')" :aria-label="view === 'years' ? t('uiVintage.datePicker.showDays') : t('uiVintage.datePicker.chooseYear')" @click="view === 'years' ? openDays() : openYears()">
-					<span aria-live="polite">{{ view === 'years' ? `${pageYears[0]} – ${pageYears[YEARS_PER_PAGE - 1]}` : placeholder.year }}</span>
+					<span>{{ view === 'years' ? `${pageYears[0]} – ${pageYears[YEARS_PER_PAGE - 1]}` : placeholder.year }}</span>
 					<HugeiconsIcon :icon="ArrowDown01Icon" :class="cn('size-4 text-muted-foreground transition-[rotate] duration-200', view === 'years' && 'rotate-180')" />
 				</button>
 			</div>
@@ -209,7 +209,7 @@ const cellClass = cn(buttonVariants({ variant: 'ghost' }), 'h-12 w-full font-mon
 		<Calendar v-else :model-value="calendarValue" :placeholder="placeholder" :min-value="minValue" :max-value="maxValue" :locale="props.locale" fluid weekday-format="narrow" class="p-0" @update:model-value="handlePick" @update:placeholder="value => placeholder = value">
 			<template #calendar-heading="{ date }">
 				<button type="button" data-slot="inline-date-picker-title" :class="cn(titleButtonClass, 'relative z-10')" :aria-label="t('uiVintage.datePicker.chooseMonthAndYear', { month: formatTitle(date) })" @click="openYears">
-					<span aria-live="polite">{{ formatTitle(date) }}</span>
+					<span>{{ formatTitle(date) }}</span>
 					<HugeiconsIcon :icon="ArrowDown01Icon" class="size-4 text-muted-foreground" />
 				</button>
 			</template>
