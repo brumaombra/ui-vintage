@@ -865,7 +865,7 @@ function isFileAccepted(file: File, accept: string | undefined): boolean
 
 ### `@brumaombra/ui-vintage/inline-date-picker`
 
-Always open month calendar whose days fill the width, for sheets and cards. `v-model` is a JavaScript `Date` (midnight of the picked day) or `null`; `min-date` and `max-date` limit the days.
+Always open month calendar whose days fill the width, for sheets and cards. `v-model` is a JavaScript `Date` (midnight of the picked day) or `null`; `min-date` and `max-date` limit the days. Tapping the month title opens a grid of years (12 per page), then of months, to jump far ahead or back without paging month by month.
 
 ```ts
 import { InlineDatePicker } from '@brumaombra/ui-vintage/inline-date-picker';

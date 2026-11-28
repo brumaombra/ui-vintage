@@ -58,7 +58,14 @@
 			"placeholder": "选择日期",
 			"month": "月份",
 			"year": "年份",
-			"time": "时间"
+			"time": "时间",
+			"chooseMonthAndYear": "选择年月（{month}）",
+			"chooseYear": "选择年份",
+			"showDays": "返回日期",
+			"previousYears": "上一页年份",
+			"nextYears": "下一页年份",
+			"previousYear": "上一年",
+			"nextYear": "下一年"
 		},
 		"timePicker": {
 			"placeholder": "选择时间"

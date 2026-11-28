@@ -58,7 +58,14 @@
 			"placeholder": "Selecione uma data",
 			"month": "Mês",
 			"year": "Ano",
-			"time": "Hora"
+			"time": "Hora",
+			"chooseMonthAndYear": "Escolher mês e ano ({month})",
+			"chooseYear": "Escolher ano",
+			"showDays": "Voltar aos dias",
+			"previousYears": "Anos anteriores",
+			"nextYears": "Próximos anos",
+			"previousYear": "Ano anterior",
+			"nextYear": "Próximo ano"
 		},
 		"timePicker": {
 			"placeholder": "Escolha um horário"

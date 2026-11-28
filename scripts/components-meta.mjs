@@ -206,7 +206,7 @@ export const entries = {
 	},
 	'inline-date-picker': {
 		category: 'forms',
-		description: 'Always open month calendar whose days fill the width, for sheets and cards. `v-model` is a JavaScript `Date` (midnight of the picked day) or `null`; `min-date` and `max-date` limit the days.',
+		description: 'Always open month calendar whose days fill the width, for sheets and cards. `v-model` is a JavaScript `Date` (midnight of the picked day) or `null`; `min-date` and `max-date` limit the days. Tapping the month title opens a grid of years (12 per page), then of months, to jump far ahead or back without paging month by month.',
 		example: `
 <InlineDatePicker v-model="day" :min-date="new Date()" />`
 	},
